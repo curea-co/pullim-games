@@ -1,135 +1,78 @@
 // 풀림 게임즈 통합 네비게이션 설정.
 //
-// pullim-study-demo `nav-config.ts` 패턴 차용 — 단일 nav 진실원.
-// V0.4 시점: 풀림 게임즈만 활성, 6개 다른 도메인은 잠금.
-// 사이드바·breadcrumb·(향후) 검색이 모두 이 파일을 참조.
+// `2026-05-08_nav-ia-restructure.md` §4-5 따름.
+// 4 최상위 메뉴 (홈 / 게임 허브 / 관리 / 소개하기).
+// children 펼침 폐기 — 게임 진입은 /games (게임 허브) 안에서 처리.
+// 풀림 패밀리 잠금 도메인 (스튜디오·스토어·플래너 등) 제거 — V2 SSO 시점에 별도 plan.
 
 import {
   Home,
-  Wrench,
-  Library,
-  CalendarClock,
-  BookOpen,
-  GraduationCap,
-  Sparkles,
   Gamepad2,
+  Settings,
+  BookOpen,
   type LucideIcon,
 } from "lucide-react";
 import { games } from "@/lib/games/registry";
-
-export type NavSubItem = {
-  href: string;
-  label: string;
-  icon?: LucideIcon;
-  badge?: number | string;
-  description?: string;
-  locked?: boolean;
-};
 
 export type NavItem = {
   href: string;
   label: string;
   icon: LucideIcon;
   badge?: number | string;
+  /** 활성 표시 prefix (예: "/games" 가 활성이면 "/games/[id]" 도 활성) */
   matchPrefix?: string[];
-  locked?: boolean;
   description?: string;
-  children?: NavSubItem[];
 };
 
 export type NavGroup = {
   label: string;
-  caption?: string;
   items: NavItem[];
 };
 
 export type Role = "student";
 
-/** 사이드바 최상단 — 항상 노출 */
-export const studentHomeItem: NavItem = {
-  href: "/",
-  label: "홈",
-  icon: Home,
-  description: "오늘의 추천 + 게임 진입",
-};
-
-/** 풀림 게임즈 children — registry 에서 자동 발견된 10개 게임 */
-const gamesSection: NavSubItem[] = games.map((g) => ({
-  href: `/games/${g.meta.id}`,
-  label: g.meta.title,
-  icon: g.meta.icon,
-  description: g.meta.tagline,
-  locked: g.meta.status !== "available",
-}));
-
-/** 7 도메인 — 게임즈만 활성, 나머지는 V0.5+ 잠금 */
+/** 4 최상위 메뉴 */
 export const studentDomains: NavItem[] = [
   {
     href: "/",
-    label: "풀림 게임즈",
+    label: "홈",
+    icon: Home,
+    description: "대시보드 — 진행한 게임 / 성공·실패 통계",
+  },
+  {
+    href: "/games",
+    label: "게임 허브",
     icon: Gamepad2,
-    description: "푸는 게 곧 배우는 거예요",
+    description: "모든 게임 모음 + 나만의 게임",
     matchPrefix: ["/games"],
-    children: gamesSection,
   },
   {
-    href: "/studio",
-    label: "풀림 스튜디오",
-    icon: Wrench,
-    description: "문항·강의 콘텐츠 제작 (준비 중)",
-    locked: true,
+    href: "/manage",
+    label: "관리",
+    icon: Settings,
+    description: "과목·교육과정·콘텐츠 커스텀",
+    matchPrefix: ["/manage"],
   },
   {
-    href: "/store",
-    label: "풀림 스토어",
-    icon: Library,
-    description: "검증된 학습 콘텐츠 마켓플레이스 (준비 중)",
-    locked: true,
-  },
-  {
-    href: "/planner",
-    label: "풀림 플래너",
-    icon: CalendarClock,
-    description: "AI 시간 블록 학습 계획 (준비 중)",
-    locked: true,
-  },
-  {
-    href: "/q",
-    label: "풀림 Q",
+    href: "/about",
+    label: "소개하기",
     icon: BookOpen,
-    description: "풀이·분석·복습·AI 대화 통합 (준비 중)",
-    locked: true,
-  },
-  {
-    href: "/classbot",
-    label: "풀림 클래스봇",
-    icon: GraduationCap,
-    description: "교사가 만든 AI 학습 교실 (준비 중)",
-    locked: true,
-  },
-  {
-    href: "/library",
-    label: "풀림 라이브러리",
-    icon: Sparkles,
-    description: "강의·이해용 시청각 자료 (준비 중)",
-    locked: true,
+    description: "풀림 게임즈 소개",
   },
 ];
 
-/** 호환용 — buildBreadcrumb / findActiveSection 등이 단일 그룹 구조 기대 */
-export const studentNav: NavGroup[] = [
-  { label: "", items: [studentHomeItem, ...studentDomains] },
-];
+/** 호환용 그룹 구조 */
+export const studentNav: NavGroup[] = [{ label: "", items: studentDomains }];
 
 export function navForRole(_role: Role): NavGroup[] {
   return studentNav;
 }
 
 /**
- * pathname → 활성 NavItem (children 가 있는 도메인 중 가장 잘 매칭되는 항목).
- * 사이드바가 children 펼치는 기준.
+ * pathname → 활성 NavItem.
+ * matchPrefix 가 있으면 그 prefix 도 매칭. 가장 긴 prefix 우선.
  */
-export function findActiveSection(
+export function findActiveNav(
   pathname: string,
   role: Role,
 ): NavItem | undefined {
@@ -138,8 +81,6 @@ export function findActiveSection(
   let bestLen = -1;
   for (const group of nav) {
     for (const item of group.items) {
-      if (!item.children) continue;
-      // matchPrefix 가 있으면 그 prefix 도 후보
       const candidates = [item.href, ...(item.matchPrefix ?? [])];
       for (const cand of candidates) {
         const matches =
@@ -155,7 +96,7 @@ export function findActiveSection(
   return best;
 }
 
-/** 라우트 → breadcrumb */
+/** 라우트 → breadcrumb. 게임 플레이는 게임 메타에서 제목 가져옴. */
 export function buildBreadcrumb(
   pathname: string,
   role: Role,
@@ -165,43 +106,19 @@ export function buildBreadcrumb(
 
   if (pathname === root.href) return trail;
 
-  // 활성 도메인 찾기
-  const active = findActiveSection(pathname, role);
-  if (!active) {
-    // 도메인 children 매칭 못하면 — 잠금 페이지 등 — 도메인만 추가 시도
-    const nav = navForRole(role);
-    for (const group of nav) {
-      for (const item of group.items) {
-        if (item.href === pathname) {
-          trail.push({ label: item.label });
-          return trail;
-        }
-      }
-    }
-    return trail;
-  }
+  const active = findActiveNav(pathname, role);
+  if (!active) return trail;
 
   if (active.href !== root.href) {
     trail.push({ label: active.label, href: active.href });
   }
 
-  // children 매칭
-  if (active.children) {
-    let bestSub: NavSubItem | undefined;
-    let bestLen = -1;
-    for (const sub of active.children) {
-      if (
-        pathname === sub.href ||
-        pathname.startsWith(sub.href + "/")
-      ) {
-        if (sub.href.length > bestLen) {
-          bestSub = sub;
-          bestLen = sub.href.length;
-        }
-      }
-    }
-    if (bestSub) {
-      trail.push({ label: bestSub.label });
+  // 게임 플레이 페이지: /games/<id> → registry 에서 제목 lookup
+  if (active.href === "/games" && pathname.startsWith("/games/")) {
+    const gameId = pathname.replace("/games/", "").split("/")[0];
+    if (gameId) {
+      const game = games.find((g) => g.meta.id === gameId);
+      trail.push({ label: game?.meta.title ?? gameId });
     }
   }
 
