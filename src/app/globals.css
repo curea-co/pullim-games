@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Pretendard Variable — CDN 임포트. SPEC §08.2 강제. */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg-primary text-type-primary font-sans antialiased;
+    font-feature-settings: "tnum"; /* 진행도/숫자 안정 정렬 */
+  }
+
+  /* 터치 영역 시각 보조 — 디버그 시 쓸 수 있도록 비활성 상태로 */
+  /* button, [role="button"] { outline: 1px dashed red; } */
+
+  /* 포커스 링 — SPEC §08.10 */
+  :focus-visible {
+    @apply outline-2 outline-accent-positive;
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* SPEC §08.2 — tabular-nums 강제 */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* prefers-reduced-motion: reduce 시 ambient float 정지 (Framer Motion에서 별도 처리) */
+}
