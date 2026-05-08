@@ -13,7 +13,7 @@ const manifest: GameManifest = {
     unit: "화학I",
     tagline: "양변의 원자 수를 맞추면 반응식이 결합돼요",
     estimatedMinutes: 3,
-    status: "coming-soon",
+    status: "available",
     icon: FlaskConical,
     mechanic: "manipulation",
     retrievalDepth: "deep",
