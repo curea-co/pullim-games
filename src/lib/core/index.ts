@@ -9,3 +9,4 @@
 export * from "./schema";
 export * from "./fingerprint";
 export * from "./fsrs";
+export * from "./ast";
