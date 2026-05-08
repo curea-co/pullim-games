@@ -1,9 +1,9 @@
 "use client";
 
-// 게임 허브 뷰 전환 토글 — `2026-05-08_game-hub.md` §4.5.
+// 게임 허브 뷰 전환 토글 — shadcn ToggleGroup.
 
 import { Grid3x3, LayoutGrid, List, Table } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export type GameHubView = "grid" | "list" | "table" | "thumbnail";
 
@@ -25,33 +25,27 @@ interface Props {
 
 export function ViewToggle({ value, onChange }: Props) {
   return (
-    <div
-      role="tablist"
+    <ToggleGroup
+      type="single"
+      value={value}
+      onValueChange={(v) => v && onChange(v as GameHubView)}
       aria-label="뷰 전환"
       className="inline-flex items-center gap-0.5 rounded-button border border-border-hairline bg-bg-block p-0.5"
     >
       {OPTIONS.map((opt) => {
         const Icon = opt.icon;
-        const isActive = value === opt.value;
         return (
-          <button
+          <ToggleGroupItem
             key={opt.value}
-            role="tab"
-            aria-selected={isActive}
+            value={opt.value}
             aria-label={opt.label}
             title={opt.label}
-            onClick={() => onChange(opt.value)}
-            className={cn(
-              "inline-flex h-8 w-8 items-center justify-center rounded-button transition-colors",
-              isActive
-                ? "bg-accent-positive/10 text-accent-positive"
-                : "text-type-secondary hover:text-type-primary",
-            )}
+            className="h-8 w-8 min-w-0 rounded-button text-type-secondary hover:bg-pullim-slate-100 hover:text-type-primary data-[state=on]:bg-accent-positive/10 data-[state=on]:text-accent-positive"
           >
-            <Icon className="h-4 w-4" strokeWidth={isActive ? 2.4 : 2} />
-          </button>
+            <Icon className="h-4 w-4" strokeWidth={2} />
+          </ToggleGroupItem>
         );
       })}
-    </div>
+    </ToggleGroup>
   );
 }
