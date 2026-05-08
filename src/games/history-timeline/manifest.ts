@@ -13,7 +13,7 @@ const manifest: GameManifest = {
     unit: "근대사",
     tagline: "사건을 시간 순으로 놓으면 인과가 그려져요",
     estimatedMinutes: 2,
-    status: "coming-soon",
+    status: "available",
     icon: Clock,
     mechanic: "sorting",
     retrievalDepth: "medium",
