@@ -1,7 +1,7 @@
-// 홈 대시보드 KPI 카드.
-// `2026-05-08_home-dashboard.md` §6.1 따름.
+// 홈 대시보드 KPI 카드. shadcn Card.
 
 import type { LucideIcon } from "lucide-react";
+import { Card } from "@/components/ui/card";
 
 interface Props {
   label: string;
@@ -12,7 +12,7 @@ interface Props {
 
 export function StatCard({ label, value, helper, icon: Icon }: Props) {
   return (
-    <article className="flex flex-col gap-2 rounded-block border border-border-hairline bg-bg-block p-4">
+    <Card className="flex flex-col gap-2 rounded-block border-border-hairline bg-bg-block p-4 shadow-none">
       <header className="flex items-center gap-2">
         {Icon && (
           <span
@@ -28,6 +28,6 @@ export function StatCard({ label, value, helper, icon: Icon }: Props) {
       {helper && (
         <p className="text-helper tabular text-type-secondary">{helper}</p>
       )}
-    </article>
+    </Card>
   );
 }

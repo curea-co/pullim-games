@@ -1,7 +1,6 @@
 "use client";
 
-// /manage/curriculum — 교육과정 트리 CRUD.
-// 단순화: 과목 선택 후 단원·차시 트리 (depth 무제한) — drag 정렬은 V0.6+, 위/아래 화살표.
+// /manage/curriculum — 교육과정 트리 CRUD. shadcn 컴포넌트.
 
 import { useEffect, useState } from "react";
 import {
@@ -20,6 +19,10 @@ import {
   type CustomCurriculum,
   type CustomSubject,
 } from "@/lib/core";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { cn } from "@/lib/utils";
 
 interface CurriculumNode extends CustomCurriculum {
@@ -37,7 +40,6 @@ function buildTree(items: CustomCurriculum[]): CurriculumNode[] {
       roots.push(node);
     }
   }
-  // sort by order
   function sortRec(arr: CurriculumNode[]) {
     arr.sort((a, b) => a.order - b.order);
     for (const a of arr) sortRec(a.children);
@@ -52,7 +54,7 @@ export default function CurriculumPage() {
   const [items, setItems] = useState<CustomCurriculum[]>([]);
   const [editing, setEditing] = useState<{
     parentId?: string;
-    item: CustomCurriculum | null; // null = new under parentId
+    item: CustomCurriculum | null;
   } | null>(null);
   const [name, setName] = useState("");
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
@@ -141,41 +143,42 @@ export default function CurriculumPage() {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* 과목 선택 */}
-      <div className="flex flex-wrap gap-1.5">
+      <ToggleGroup
+        type="single"
+        value={activeSubjectId ?? ""}
+        onValueChange={(v) => v && setActiveSubjectId(v)}
+        aria-label="과목"
+        className="flex-wrap justify-start gap-1.5"
+      >
         {subjects.map((s) => (
-          <button
+          <ToggleGroupItem
             key={s.id}
-            type="button"
-            onClick={() => setActiveSubjectId(s.id)}
-            className={cn(
-              "rounded-button border px-3 py-1.5 text-helper transition-colors",
-              activeSubjectId === s.id
-                ? "border-type-primary bg-accent-positive/10 font-medium text-type-primary"
-                : "border-border-hairline bg-bg-block text-type-secondary hover:text-type-primary",
-            )}
+            value={s.id}
+            className="h-8 min-w-0 rounded-button border border-border-hairline bg-bg-block px-3 text-helper font-normal text-type-secondary hover:bg-accent-positive/5 hover:text-type-primary data-[state=on]:border-type-primary data-[state=on]:bg-accent-positive/10 data-[state=on]:font-medium data-[state=on]:text-type-primary"
           >
             {s.name}
-          </button>
+          </ToggleGroupItem>
         ))}
-      </div>
+      </ToggleGroup>
 
       <header className="flex items-center justify-between">
         <p className="text-helper text-type-secondary">
           {subjectItems.length}개 단원
         </p>
-        <button
+        <Button
           type="button"
+          variant="outline"
+          size="sm"
           onClick={() => startNew(undefined)}
-          className="inline-flex items-center gap-1.5 rounded-button border border-type-primary bg-bg-block px-3 py-2 text-helper font-medium text-type-primary hover:bg-accent-positive/10"
+          className="gap-1.5 rounded-button border-type-primary bg-bg-block text-helper font-medium text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
         >
           <Plus className="h-3.5 w-3.5" />
           최상위 단원 추가
-        </button>
+        </Button>
       </header>
 
       {editing && (
-        <section className="rounded-block border border-type-primary bg-bg-block p-4">
+        <Card className="rounded-block border-type-primary bg-bg-block p-4 shadow-none">
           <h2 className="text-label font-bold text-type-primary">
             {editing.item ? "단원 수정" : "단원 추가"}
             {editing.parentId && (
@@ -184,33 +187,37 @@ export default function CurriculumPage() {
               </span>
             )}
           </h2>
-          <input
+          <Input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="예: 1단원, 1차시, 어법"
             autoFocus
             autoComplete="off"
-            className="mt-3 w-full rounded-button border border-border-hairline bg-bg-block px-3 py-2 text-body text-type-primary placeholder:text-type-secondary/60 focus:border-type-primary focus:outline-none"
+            className="mt-3 rounded-button border-border-hairline bg-bg-block text-body text-type-primary"
           />
           <div className="mt-3 flex justify-end gap-2">
-            <button
+            <Button
               type="button"
+              variant="outline"
+              size="sm"
               onClick={cancel}
-              className="rounded-button border border-border-hairline bg-bg-block px-3 py-2 text-helper text-type-secondary hover:text-type-primary"
+              className="rounded-button border-border-hairline bg-bg-block text-helper text-type-secondary hover:text-type-primary"
             >
               취소
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
+              variant="outline"
+              size="sm"
               onClick={commit}
               disabled={!name.trim()}
-              className="rounded-button border border-type-primary bg-bg-block px-3 py-2 text-helper font-medium text-type-primary hover:bg-accent-positive/10 disabled:opacity-50"
+              className="rounded-button border-type-primary bg-bg-block text-helper font-medium text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
             >
               저장
-            </button>
+            </Button>
           </div>
-        </section>
+        </Card>
       )}
 
       {tree.length === 0 ? (
@@ -263,14 +270,16 @@ function TreeNodes({
         const isOpen = expanded.has(node.id);
         return (
           <li key={node.id}>
-            <div className="flex items-center gap-2 rounded-block border border-border-hairline bg-bg-block px-3 py-2">
-              <button
+            <Card className="flex items-center gap-2 rounded-block border-border-hairline bg-bg-block px-3 py-2 shadow-none">
+              <Button
                 type="button"
+                variant="ghost"
+                size="icon"
                 onClick={() => onToggle(node.id)}
                 aria-label={isOpen ? "접기" : "펼치기"}
                 disabled={!hasChildren}
                 className={cn(
-                  "inline-flex h-6 w-6 items-center justify-center rounded-button text-type-secondary",
+                  "h-6 w-6 rounded-button text-type-secondary",
                   hasChildren
                     ? "hover:bg-pullim-slate-100"
                     : "opacity-30",
@@ -281,35 +290,41 @@ function TreeNodes({
                 ) : (
                   <ChevronRight className="h-3.5 w-3.5" />
                 )}
-              </button>
+              </Button>
               <span className="flex-1 text-label text-type-primary">
                 {node.name}
               </span>
-              <button
+              <Button
                 type="button"
+                variant="ghost"
+                size="icon"
                 onClick={() => onAddChild(node.id)}
                 aria-label="하위 단원 추가"
-                className="inline-flex h-7 w-7 items-center justify-center rounded-button text-type-secondary hover:bg-pullim-slate-100 hover:text-type-primary"
+                className="h-7 w-7 rounded-button text-type-secondary hover:bg-pullim-slate-100 hover:text-type-primary"
               >
                 <Plus className="h-3.5 w-3.5" />
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
+                variant="ghost"
+                size="icon"
                 onClick={() => onEdit(node)}
                 aria-label="수정"
-                className="inline-flex h-7 w-7 items-center justify-center rounded-button text-type-secondary hover:bg-pullim-slate-100 hover:text-type-primary"
+                className="h-7 w-7 rounded-button text-type-secondary hover:bg-pullim-slate-100 hover:text-type-primary"
               >
                 <Pencil className="h-3.5 w-3.5" />
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
+                variant="ghost"
+                size="icon"
                 onClick={() => onDelete(node.id)}
                 aria-label="삭제"
-                className="inline-flex h-7 w-7 items-center justify-center rounded-button text-type-secondary hover:bg-accent-negative/10 hover:text-accent-negative"
+                className="h-7 w-7 rounded-button text-type-secondary hover:bg-accent-negative/10 hover:text-accent-negative"
               >
                 <Trash2 className="h-3.5 w-3.5" />
-              </button>
-            </div>
+              </Button>
+            </Card>
             {hasChildren && isOpen && (
               <div className="mt-1.5">
                 <TreeNodes
