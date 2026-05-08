@@ -13,7 +13,7 @@ const manifest: GameManifest = {
     unit: "한자/어휘",
     tagline: "타이핑하면 한자가 한 획씩 나타나요",
     estimatedMinutes: 2,
-    status: "coming-soon",
+    status: "available",
     icon: Type,
     mechanic: "typing",
     retrievalDepth: "medium",
