@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { games } from "@/lib/games/registry";
 import type { GameMechanic } from "@/lib/games/types";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 const PRINCIPLES = [
   {
@@ -104,13 +106,16 @@ export default function AboutPage() {
           <br />
           외재 보상 없이 학습 효과 자체로 끌리는 풀림 게임즈입니다.
         </p>
-        <Link
-          href="/games"
-          className="group mt-2 inline-flex w-fit items-center gap-2 rounded-button border border-type-primary bg-bg-block px-5 py-3 text-body text-type-primary transition-colors hover:bg-accent-positive/10"
+        <Button
+          asChild
+          variant="outline"
+          className="group mt-2 w-fit gap-2 rounded-button border-type-primary bg-bg-block px-5 py-3 text-body text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
         >
-          게임 허브로
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </Link>
+          <Link href="/games">
+            게임 허브로
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </Button>
       </section>
 
       {/* 6 핵심 원칙 */}
@@ -126,22 +131,23 @@ export default function AboutPage() {
         </header>
         <ul className="grid grid-cols-1 gap-3 md:grid-cols-2">
           {PRINCIPLES.map((p) => (
-            <li
-              key={p.title}
-              className="flex items-start gap-3 rounded-block border border-border-hairline bg-bg-block p-4"
-            >
-              <span
-                aria-hidden="true"
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-button bg-accent-positive/10 text-accent-positive"
-              >
-                <p.icon className="h-5 w-5" strokeWidth={2} />
-              </span>
-              <div>
-                <h3 className="text-base font-bold text-type-primary">
-                  {p.title}
-                </h3>
-                <p className="mt-1 text-helper text-type-secondary">{p.body}</p>
-              </div>
+            <li key={p.title}>
+              <Card className="flex items-start gap-3 rounded-block border-border-hairline bg-bg-block p-4 shadow-none">
+                <span
+                  aria-hidden="true"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-button bg-accent-positive/10 text-accent-positive"
+                >
+                  <p.icon className="h-5 w-5" strokeWidth={2} />
+                </span>
+                <div>
+                  <h3 className="text-base font-bold text-type-primary">
+                    {p.title}
+                  </h3>
+                  <p className="mt-1 text-helper text-type-secondary">
+                    {p.body}
+                  </p>
+                </div>
+              </Card>
             </li>
           ))}
         </ul>
@@ -159,39 +165,42 @@ export default function AboutPage() {
         </header>
         <ul className="flex flex-col gap-3">
           {byMechanic.map((m) => (
-            <li
-              key={m.key}
-              className="rounded-block border border-border-hairline bg-bg-block p-4"
-            >
-              <h3 className="text-base font-bold text-type-primary">
-                {m.label}
-              </h3>
-              <p className="mt-1 text-helper text-type-secondary">{m.wow}</p>
-              {m.games.length > 0 && (
-                <ul className="mt-3 flex flex-wrap gap-2">
-                  {m.games.map((g) => {
-                    const Icon = g.meta.icon;
-                    return (
-                      <li key={g.meta.id}>
-                        <Link
-                          href={`/games/${g.meta.id}`}
-                          className="inline-flex items-center gap-1.5 rounded-button border border-border-hairline bg-bg-primary px-3 py-1.5 text-helper text-type-primary hover:border-type-primary"
-                        >
-                          <Icon className="h-3.5 w-3.5" strokeWidth={2} />
-                          {g.meta.title}
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
+            <li key={m.key}>
+              <Card className="rounded-block border-border-hairline bg-bg-block p-4 shadow-none">
+                <h3 className="text-base font-bold text-type-primary">
+                  {m.label}
+                </h3>
+                <p className="mt-1 text-helper text-type-secondary">{m.wow}</p>
+                {m.games.length > 0 && (
+                  <ul className="mt-3 flex flex-wrap gap-2">
+                    {m.games.map((g) => {
+                      const Icon = g.meta.icon;
+                      return (
+                        <li key={g.meta.id}>
+                          <Button
+                            asChild
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5 rounded-button border-border-hairline bg-bg-primary text-helper font-normal text-type-primary hover:border-type-primary hover:bg-bg-primary hover:text-type-primary"
+                          >
+                            <Link href={`/games/${g.meta.id}`}>
+                              <Icon className="h-3.5 w-3.5" strokeWidth={2} />
+                              {g.meta.title}
+                            </Link>
+                          </Button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </Card>
             </li>
           ))}
         </ul>
       </section>
 
       {/* 학습 백본 */}
-      <section className="rounded-block border border-border-hairline bg-bg-block p-5">
+      <Card className="rounded-block border-border-hairline bg-bg-block p-5 shadow-none">
         <h2 className="text-xl font-bold tracking-tight text-type-primary">
           학습 백본
         </h2>
@@ -203,17 +212,20 @@ export default function AboutPage() {
           데이터는 모두 사용자 디바이스에만 저장돼요. 회원가입 없이 익명
           fingerprint 로 학습 진도를 이어가요.
         </p>
-      </section>
+      </Card>
 
       {/* 마지막 CTA */}
       <section className="flex flex-col gap-2">
-        <Link
-          href="/games"
-          className="group inline-flex items-center justify-between rounded-block border border-type-primary bg-bg-block px-5 py-4 text-body text-type-primary transition-colors hover:bg-accent-positive/10"
+        <Button
+          asChild
+          variant="outline"
+          className="group h-auto justify-between rounded-block border-type-primary bg-bg-block px-5 py-4 text-body text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
         >
-          <span>지금 시작하기</span>
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </Link>
+          <Link href="/games">
+            <span>지금 시작하기</span>
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </Button>
       </section>
     </main>
   );
