@@ -5,22 +5,28 @@
 - **메커닉**: typing (타이핑, 출력형)
 - **retrieval 깊이**: medium (중간, 출력형)
 - **세션 길이**: 약 2분
-- **상태**: `coming-soon` (V2 라인업)
+- **상태**: `available`
+
+## 시작하기
+
+1. **이 디렉토리만 작업하세요.** `src/lib/core/` 변경이 필요하면 별도 PR.
+2. `npm run dev` → `http://localhost:3000/games/vocab-typing` 에서 확인.
+3. 테스트: `npm test -- src/games/vocab-typing/`
 
 ## 핵심 명제
 
-뜻풀이가 화면 상단에 떠 있고, 학생이 키보드로 정답 어휘를 입력하면 입력한 글자가 한 획씩(한자면 부수 단위) 손글씨처럼 나타난다. **출력 (recall)** 형 retrieval — 인식 단계를 넘어선 깊이.
+뜻풀이가 화면 상단에 떠 있고, 학생이 키보드로 정답 어휘를 한글 음으로 입력한다. 입력한 글자가 letter-fade-in 으로 나타남. **출력 (recall)** 형 retrieval — 인식 단계를 넘어선 깊이.
 
-> **wow 모먼트**: "내가 친 글자가 손글씨로 나타나니까 내가 적은 게 진짜 같아"
+> **wow 모먼트**: "내가 친 글자가 부드럽게 떠올라 — 정답을 내가 적었다는 감각"
 
-## V2 본격 구현 시 작업 범위
+## 구현 현황
 
-- [ ] 입력 인터랙션 — 모바일 IME 호환 + 한자 입력 처리 (1차는 한글로 시작, V3+ 한자 직접 입력)
-- [ ] 한 획씩 stroke 애니메이션 (한자) 또는 letter-fade-in (한글)
-- [ ] 5장 카드 sample (아래 §콘텐츠 후보 참조)
-- [ ] FSRS 통합 — 같은 어휘를 다른 게임에서 다른 형식으로 재출현 (단일 백본 효과 검증 핵심)
-- [ ] 정답 판정 — 정확 일치 + 동의어 허용 옵션 (V3)
-- [ ] 입력 도우미 — 첫 글자 힌트 (Hint button, FSRS Again 처리)
+- [x] 모바일 IME 호환 텍스트 입력 (autoComplete/autoCapitalize/autoCorrect off)
+- [x] AnimatePresence + popLayout letter-fade-in (한 글자씩)
+- [x] 5장 카드: 모순/묵묵부답/일거양득/절치부심/천편일률
+- [x] 정답 시 한자 표기 (pronunciation) 부드럽게 노출
+- [x] FSRS 통합 — strict 일치 정답 판정 (한글 음만, V3+ 한자 직접 입력 검토)
+- [x] 힌트 버튼 — 첫 글자 공개 시 FSRS rating 'good' → 'hard' 패널티
 
 ## 콘텐츠 후보 (V2 작업 시 5장 우선)
 
