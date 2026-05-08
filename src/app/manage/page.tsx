@@ -8,12 +8,17 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Folder, Layers } from "lucide-react";
 import { loadCounts, type CustomCounts } from "@/lib/core";
 import { StatCard } from "@/components/dashboard/StatCard";
+import { DataPortability } from "@/components/manage/DataPortability";
 
 export default function ManageHomePage() {
   const [counts, setCounts] = useState<CustomCounts | null>(null);
 
-  useEffect(() => {
+  function refresh() {
     setCounts(loadCounts());
+  }
+
+  useEffect(() => {
+    refresh();
   }, []);
 
   if (!counts) {
@@ -75,6 +80,8 @@ export default function ManageHomePage() {
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </section>
+
+      <DataPortability onAfterImport={refresh} />
 
       {isEmpty && (
         <section

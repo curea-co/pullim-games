@@ -139,12 +139,18 @@ export function GameHubPage() {
     ? buildProgressLookup(stats.perGame)
     : undefined;
 
-  const filtered = useMemo(
-    () => applyFilter(games, filter, progressLookup),
-    [filter, progressLookup],
+  // 메인 그리드는 official 만 (custom 은 CustomGamesSection 분리)
+  const officialGames = useMemo(
+    () => games.filter((g) => (g.meta.kind ?? "official") === "official"),
+    [],
   );
 
-  const subjectOptions = deriveSubjectOptions(games);
+  const filtered = useMemo(
+    () => applyFilter(officialGames, filter, progressLookup),
+    [officialGames, filter, progressLookup],
+  );
+
+  const subjectOptions = deriveSubjectOptions(officialGames);
   const appliedCount = countApplied(filter);
 
   return (
@@ -158,7 +164,7 @@ export function GameHubPage() {
             오늘은 어떤 게임으로 시작할까요?
           </h1>
           <p className="mt-1.5 text-label text-type-secondary tabular">
-            {games.length}개 중 {filtered.length}개 노출
+            {officialGames.length}개 중 {filtered.length}개 노출
             {appliedCount > 0 && ` · 필터 ${appliedCount}개 적용`}
           </p>
         </div>
