@@ -1,34 +1,53 @@
 "use client";
 
-// 인수분해 블록 분리 — V0.1 재설계.
-// SPEC §03 §3.4 인터랙션 + §04 사용자 경험 + §08 디자인 시스템 준수.
+// 인수분해 블록 분리 — V0.2: 5문제 시퀀스 + 완료 화면.
+// SPEC §03 M5 (5문제 카드 시퀀스), §04.4 인터랙션 상태 매트릭스.
 //
-// 인터랙션 phase:
-//   idle       — 정적 표시, 블록을 끌 수 있음
-//   dragging   — 사용자가 어떤 블록이든 위로 끌고 있음 (드롭 존 jade 활성, 미리보기 노출)
-//   extracting — 임계(50px) 통과한 후 변형 애니메이션 (220ms)
-//   done       — factored form 표시, "다음 →" 활성
+// Phase 흐름:
+//   idle → dragging → extracting → done → (다음 카드 또는 completed)
+//   completed: 5문제 완료 화면 ("한 번 더" / "다른 게임" / "오늘은 끝")
 
 import { Fragment, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
 import { TermBlock } from "./components/TermBlock";
 import { DropZone } from "./components/DropZone";
-import { extractCommonFactor, assertAllTermsHaveCommonPart } from "./logic/transform";
-import { getNextCard } from "./content";
+import {
+  assertAllTermsHaveCommonPart,
+  extractCommonFactor,
+} from "./logic/transform";
+import { getCardSequence } from "./content";
+import type { Term as UiTerm } from "./logic/types";
 
-type Phase = "idle" | "dragging" | "extracting" | "done";
+type Phase = "idle" | "dragging" | "extracting" | "done" | "completed";
 
 const DRAG_THRESHOLD_PX = 50;
 
 export default function FactorizationGame() {
-  const [card] = useState(() => getNextCard());
-  // 카드 데이터 검증 — 모든 항이 공통인수 part 보유
-  assertAllTermsHaveCommonPart(card.problem.terms);
-
+  const [cards] = useState(() => getCardSequence());
+  const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
-  // 드래그 중 가장 큰 (위로 끄는 방향) Y 변위. 임계 통과 시 드롭 존 활성.
   const [dragMagnitude, setDragMagnitude] = useState(0);
+
+  const card = cards[cardIndex];
+  const isLastCard = cardIndex === cards.length - 1;
+
+  if (phase === "completed") {
+    return (
+      <CompletionScreen
+        totalCards={cards.length}
+        onRetry={() => {
+          setCardIndex(0);
+          setPhase("idle");
+        }}
+      />
+    );
+  }
+
+  if (!card) return null;
+
+  // 카드 데이터 검증 (silent miscompute 차단)
+  assertAllTermsHaveCommonPart(card.problem.terms);
 
   const factored = extractCommonFactor(
     card.problem.terms,
@@ -36,7 +55,6 @@ export default function FactorizationGame() {
   );
 
   const handleDragMove = (offsetY: number) => {
-    // 위로 끄는 동작 (offsetY 음수)을 양수로 변환해 추적
     const upward = Math.max(0, -offsetY);
     setDragMagnitude(upward);
     if (phase === "idle" && upward > 8) {
@@ -56,11 +74,22 @@ export default function FactorizationGame() {
     setDragMagnitude(0);
   };
 
+  const handleNext = () => {
+    if (isLastCard) {
+      setPhase("completed");
+    } else {
+      setCardIndex(cardIndex + 1);
+      setPhase("idle");
+    }
+  };
+
   return (
     <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-8">
-      {/* 상단: 진행도 + 메뉴 (SPEC §04.1) */}
+      {/* 상단: 진행도 + 메뉴 */}
       <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>1 / 1</span>
+        <span>
+          {cardIndex + 1} / {cards.length}
+        </span>
         <Link
           href="/"
           aria-label="메인으로"
@@ -75,11 +104,10 @@ export default function FactorizationGame() {
 
       {/* 메인 영역 */}
       <section className="mt-10 flex flex-1 flex-col items-center justify-center gap-8">
-        {/* 다항식 표현 — 변형 전/후 cross-fade */}
         <AnimatePresence mode="wait">
           {phase !== "done" ? (
             <BeforeView
-              key="before"
+              key={`${cardIndex}-before`}
               terms={card.problem.terms}
               draggable={phase !== "extracting"}
               onDragMove={handleDragMove}
@@ -88,14 +116,13 @@ export default function FactorizationGame() {
             />
           ) : (
             <AfterView
-              key="after"
+              key={`${cardIndex}-after`}
               factor={factored.factor}
               remainders={factored.remainders}
             />
           )}
         </AnimatePresence>
 
-        {/* 드롭 존 — done 이전 항상 표시, 드래그 중에만 jade 강조 */}
         {phase !== "done" && (
           <DropZone
             active={phase === "dragging"}
@@ -109,12 +136,13 @@ export default function FactorizationGame() {
       {/* 액션 영역 */}
       <footer className="mt-8">
         {phase === "done" ? (
-          <Link
-            href="/"
+          <button
+            type="button"
+            onClick={handleNext}
             className="block w-full rounded-button border border-type-primary bg-bg-block px-4 py-3 text-center text-body text-type-primary transition-colors hover:bg-accent-positive/10"
           >
-            다음 →
-          </Link>
+            {isLastCard ? "마치기 →" : "다음 →"}
+          </button>
         ) : (
           <button
             type="button"
@@ -126,26 +154,27 @@ export default function FactorizationGame() {
         )}
       </footer>
 
-      {/* 인터랙션 음성/스크린리더 힌트 */}
       <span className="sr-only" aria-live="polite">
-        {phase === "idle" && "블록을 위로 끌어 공통인수를 빼내세요"}
+        {phase === "idle" && `${cardIndex + 1}번 문제. 블록을 위로 끌어 공통인수를 빼내세요`}
         {phase === "dragging" && "드롭 존이 활성화됐어요. 놓으면 변형됩니다."}
         {phase === "extracting" && "변형 중"}
-        {phase === "done" && "공통인수를 끌어냈어요"}
+        {phase === "done" &&
+          (isLastCard
+            ? "마지막 문제 완료. 마치기를 누르세요."
+            : "다음 문제로 가세요.")}
       </span>
     </main>
   );
 }
 
 interface BeforeViewProps {
-  terms: ReturnType<typeof getNextCard>["problem"]["terms"];
+  terms: UiTerm[];
   draggable: boolean;
   onDragMove: (offsetY: number) => void;
   onDragEnd: (info: PanInfo) => void;
   transforming: boolean;
 }
 
-/** 변형 전: 항 블록들이 + 로 연결됨. */
 function BeforeView({
   terms,
   draggable,
@@ -159,10 +188,7 @@ function BeforeView({
       initial={{ opacity: 0, y: 6 }}
       animate={
         transforming
-          ? {
-              opacity: 0.4,
-              scale: 0.92,
-            }
+          ? { opacity: 0.4, scale: 0.92 }
           : { opacity: 1, scale: 1, y: 0 }
       }
       exit={{ opacity: 0, scale: 0.9 }}
@@ -192,10 +218,9 @@ function BeforeView({
 
 interface AfterViewProps {
   factor: { id: string; text: string };
-  remainders: ReturnType<typeof getNextCard>["problem"]["terms"];
+  remainders: UiTerm[];
 }
 
-/** 변형 후: factor · ( remainder1 + remainder2 ). 새 블록 구성 + jade glow → fade. */
 function AfterView({ factor, remainders }: AfterViewProps) {
   return (
     <motion.div
@@ -216,15 +241,12 @@ function AfterView({ factor, remainders }: AfterViewProps) {
         boxShadow: { duration: 0.6, ease: "easeOut", delay: 0.18 },
       }}
     >
-      {/* 추출된 공통인수 */}
       <span className="rounded-sm bg-accent-positive/15 px-1 py-0.5 text-display tabular text-type-primary">
         {factor.text}
       </span>
-      {/* 곱셈 표시 */}
       <span aria-hidden="true" className="text-display text-type-secondary">
         ·
       </span>
-      {/* 괄호 내부: 남은 항들이 + 로 연결 */}
       <span className="text-display tabular text-type-primary">(</span>
       {remainders.map((r, idx) => (
         <Fragment key={r.id}>
@@ -243,5 +265,62 @@ function AfterView({ factor, remainders }: AfterViewProps) {
       ))}
       <span className="text-display tabular text-type-primary">)</span>
     </motion.div>
+  );
+}
+
+interface CompletionScreenProps {
+  totalCards: number;
+  onRetry: () => void;
+}
+
+/** 5문제 완료 화면 — SPEC §03.3 IA + §07 microcopy 준수.
+ *  3개 액션 동등 비중. 폭죽/이모지 X. */
+function CompletionScreen({ totalCards, onRetry }: CompletionScreenProps) {
+  return (
+    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-10">
+      <section className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
+        <motion.h1
+          className="text-display text-type-primary"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: "spring", stiffness: 280, damping: 24 }}
+        >
+          오늘 푼 {totalCards}문제,
+          <br />
+          머리에 박혔어요.
+        </motion.h1>
+
+        <motion.p
+          className="text-body text-type-secondary"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.15, duration: 0.3 }}
+        >
+          내일 또 봐요.
+        </motion.p>
+      </section>
+
+      <footer className="flex flex-col gap-3">
+        <button
+          type="button"
+          onClick={onRetry}
+          className="w-full rounded-button border border-type-primary bg-bg-block px-4 py-3 text-body text-type-primary transition-colors hover:bg-accent-positive/10"
+        >
+          한 번 더 풀어볼까요
+        </button>
+        <Link
+          href="/"
+          className="block w-full rounded-button border border-border-hairline bg-bg-block px-4 py-3 text-center text-body text-type-primary transition-colors hover:bg-bg-primary"
+        >
+          다른 게임
+        </Link>
+        <Link
+          href="/"
+          className="block w-full px-4 py-3 text-center text-body text-type-secondary hover:text-type-primary"
+        >
+          오늘은 끝
+        </Link>
+      </footer>
+    </main>
   );
 }
