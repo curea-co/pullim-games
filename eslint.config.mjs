@@ -34,6 +34,7 @@ export default tseslint.config(
                 "@/lib/core/event/*",
                 "@/lib/core/ast/*",
                 "@/lib/core/recommendation/*",
+                "@/lib/core/dashboard/*",
               ],
               message:
                 "lib/core 내부 경로 직접 import 금지. `@/lib/core` barrel 사용. (Plan R §5.4)",
