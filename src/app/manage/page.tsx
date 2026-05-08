@@ -1,50 +1,116 @@
-// /manage — 관리 (placeholder, V0.5 management plan 이 본격 구현).
+"use client";
 
+// /manage — 관리 홈 (대시보드).
+// `2026-05-08_management.md` §5.2 따름.
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Settings } from "lucide-react";
+import { ArrowRight, BookOpen, Folder, Layers } from "lucide-react";
+import { loadCounts, type CustomCounts } from "@/lib/core";
+import { StatCard } from "@/components/dashboard/StatCard";
 
-export default function ManagePage() {
+export default function ManageHomePage() {
+  const [counts, setCounts] = useState<CustomCounts | null>(null);
+
+  useEffect(() => {
+    setCounts(loadCounts());
+  }, []);
+
+  if (!counts) {
+    return (
+      <div className="flex flex-col gap-3">
+        {[0, 1, 2].map((i) => (
+          <div
+            key={i}
+            className="h-24 animate-pulse rounded-block border border-border-hairline bg-bg-block"
+          />
+        ))}
+      </div>
+    );
+  }
+
+  const isEmpty = counts.subjects === 0 && counts.cards === 0;
+
   return (
-    <main className="flex flex-col gap-6 px-4 py-6 md:px-6 md:py-8">
-      <header>
-        <p className="text-xs font-bold uppercase tracking-wider text-type-secondary">
-          관리
-        </p>
-        <h1 className="mt-1 text-2xl font-bold leading-tight tracking-tight text-type-primary">
-          내 학습 콘텐츠 만들기
-        </h1>
-        <p className="mt-1.5 text-label text-type-secondary">
-          내가 가진 문제·본문으로 나만의 게임 카드를 만들어요
-        </p>
-      </header>
-
-      <section className="rounded-block border border-border-hairline bg-bg-block p-6">
-        <div className="flex items-start gap-3">
-          <span
-            aria-hidden="true"
-            className="flex h-9 w-9 items-center justify-center rounded-button bg-accent-positive/10 text-accent-positive"
-          >
-            <Settings className="h-5 w-5" strokeWidth={2} />
-          </span>
-          <div className="flex-1">
-            <h2 className="text-base font-bold text-type-primary">
-              관리 페이지 준비 중
-            </h2>
-            <p className="mt-1 text-helper text-type-secondary">
-              과목과 교육과정을 만들고, 4지선다·빈칸·타이핑·매칭 카드를 텍스트로
-              입력해 나만의 게임을 만들 수 있어요. 지금은 기본 게임을 풀어주세요.
-            </p>
-          </div>
-        </div>
+    <div className="flex flex-col gap-6">
+      <section
+        aria-label="관리 통계"
+        className="grid grid-cols-3 gap-3"
+      >
+        <StatCard
+          icon={Folder}
+          label="과목"
+          value={counts.subjects}
+          helper="내가 만든"
+        />
+        <StatCard icon={Layers} label="단원" value={counts.curriculum} />
+        <StatCard
+          icon={BookOpen}
+          label="카드"
+          value={counts.cards}
+          helper={
+            counts.cards > 0
+              ? `객관식 ${counts.cardsByKind["multiple-choice"]} · 빈칸 ${counts.cardsByKind.blank} · 타이핑 ${counts.cardsByKind.typing} · 매칭 ${counts.cardsByKind["word-match"]}`
+              : "아직 없어요"
+          }
+        />
       </section>
 
-      <Link
-        href="/games"
-        className="group inline-flex items-center justify-between rounded-block border border-type-primary bg-bg-block px-5 py-4 text-body text-type-primary transition-colors hover:bg-accent-positive/10"
+      <section
+        aria-label="빠른 진입"
+        className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"
       >
-        <span>기본 게임 보러가기</span>
-        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-      </Link>
-    </main>
+        <Link
+          href="/manage/content"
+          className="group flex items-center justify-between rounded-block border border-type-primary bg-bg-block px-5 py-4 text-body text-type-primary transition-colors hover:bg-accent-positive/10"
+        >
+          <span>+ 카드 추가</span>
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+        <Link
+          href="/manage/custom-games"
+          className="group flex items-center justify-between rounded-block border border-border-hairline bg-bg-block px-5 py-4 text-body text-type-primary transition-colors hover:border-type-primary"
+        >
+          <span>내 게임 보기</span>
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </Link>
+      </section>
+
+      {isEmpty && (
+        <section
+          aria-label="시작 가이드"
+          className="rounded-block border border-border-hairline bg-bg-block p-5"
+        >
+          <h2 className="text-base font-bold text-type-primary">
+            첫 카드까지 4단계
+          </h2>
+          <ol className="mt-3 flex flex-col gap-2 text-helper text-type-secondary">
+            <li>
+              <span className="font-bold text-type-primary">1. 과목</span>{" "}
+              만들기 (예: 수능 영어, 내 한국사)
+            </li>
+            <li>
+              <span className="font-bold text-type-primary">2. 단원</span>{" "}
+              만들기 (예: 1단원, 1차시)
+            </li>
+            <li>
+              <span className="font-bold text-type-primary">3. 카드</span>{" "}
+              입력 (객관식·빈칸·타이핑·매칭 중 골라서)
+            </li>
+            <li>
+              <span className="font-bold text-type-primary">4. 게임 풀기</span>{" "}
+              — 게임 허브의 "나만의 게임" 또는 관리 → 내 게임에서
+            </li>
+          </ol>
+          <Link
+            href="/manage/subjects"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-button border border-type-primary bg-bg-block px-3 py-2 text-helper font-medium text-type-primary hover:bg-accent-positive/10"
+          >
+            과목 만들기
+            <ArrowRight className="h-3 w-3" />
+          </Link>
+        </section>
+      )}
+    </div>
   );
 }
