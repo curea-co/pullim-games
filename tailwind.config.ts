@@ -27,6 +27,35 @@ const config: Config = {
           positive: "#00D4A1", // 정답 glow, 드롭존 활성 — 글자 사용 금지
           negative: "#F87171", // 오답 절제
         },
+        // SaaS shell 팔레트 — pullim-study-demo 차용.
+        // 사이드바·헤더·breadcrumb·잠금 표시 등 SaaS UI chrome 에서만 사용.
+        // 게임 안 (정답/오답 등) 에는 쓰지 말 것 — accent.* 사용.
+        "pullim-slate": {
+          50: "#F8FAFC",
+          100: "#F1F5F9",
+          200: "#E2E8F0",
+          300: "#CBD5E1",
+          400: "#94A3B8",
+          500: "#64748B",
+          600: "#475569",
+          700: "#334155",
+          800: "#1E293B",
+          900: "#0F172A",
+        },
+        "pullim-blue": {
+          50: "#EFF6FF",
+          100: "#DBEAFE",
+          200: "#BFDBFE",
+          300: "#93C5FD",
+          500: "#3B82F6",
+          600: "#2563EB",
+          700: "#1D4ED8",
+        },
+        "pullim-danger": "#EF4444",
+        // shadcn 호환 별칭 — shell 컴포넌트가 bg-card / text-foreground 사용.
+        card: "#FFFFFF",
+        foreground: "#0F172A",
+        background: "#FBFAF8",
       },
       fontFamily: {
         // Pretendard Variable — 한국어 가독성. system-ui/Inter/Roboto 금지.
@@ -58,6 +87,7 @@ const config: Config = {
         block: "0 1px 0 rgba(0,0,0,0.04)",
         dragging: "0 8px 24px rgba(0,0,0,0.12)",
         glow: "0 0 24px rgba(0,212,161,0.4)",
+        "pullim-sm": "0 1px 2px rgba(15, 23, 42, 0.08)",
       },
       transitionTimingFunction: {
         // SPEC §08.6 motion — spring은 Framer Motion에서 처리
