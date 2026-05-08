@@ -1,17 +1,19 @@
-// math-graph-shift 카드 스키마 stub — V3 본격 구현 시 보강.
+// math-graph-shift 카드 스키마 — y = a(x - h)^2 + k 변형 (V3 1차 이차함수만).
 
 import { z } from "zod";
 import { CardBaseSchema } from "@/lib/core";
 
 export const GraphShiftProblemSchema = z.object({
-  /** 시작 함수식. 예: "y = x^2". */
+  /** 시작 함수 표시용 텍스트. 예: "y = x²". */
   startEquation: z.string().min(1),
-  /** 목표 함수식. 예: "y = (x - 2)^2 + 3". */
+  /** 목표 함수 표시용 텍스트. 예: "y = (x - 2)² + 3". */
   targetEquation: z.string().min(1),
-  /** 허용 변형 종류. */
-  allowedTransforms: z.array(
-    z.enum(["translate-x", "translate-y", "scale-x", "scale-y", "reflect"]),
-  ),
+  /** 정답 a (계수). */
+  targetA: z.number(),
+  /** 정답 h (가로 평행이동). */
+  targetH: z.number(),
+  /** 정답 k (세로 평행이동). */
+  targetK: z.number(),
 });
 
 export const GraphShiftCardSchema = CardBaseSchema.extend({

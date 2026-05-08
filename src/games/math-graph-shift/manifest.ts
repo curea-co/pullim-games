@@ -13,7 +13,7 @@ const manifest: GameManifest = {
     unit: "함수",
     tagline: "그래프를 끌면 식이 실시간으로 변해요",
     estimatedMinutes: 3,
-    status: "coming-soon",
+    status: "available",
     icon: TrendingUp,
     mechanic: "manipulation",
     retrievalDepth: "deep",
