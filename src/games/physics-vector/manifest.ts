@@ -13,7 +13,7 @@ const manifest: GameManifest = {
     unit: "물리I",
     tagline: "두 화살표를 잡으면 합벡터가 그려져요",
     estimatedMinutes: 3,
-    status: "coming-soon",
+    status: "available",
     icon: Move,
     mechanic: "manipulation",
     retrievalDepth: "deep",
