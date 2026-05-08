@@ -10,3 +10,5 @@ export * from "./schema";
 export * from "./fingerprint";
 export * from "./fsrs";
 export * from "./ast";
+export * from "./storage";
+export * from "./event";
