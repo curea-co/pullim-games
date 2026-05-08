@@ -77,3 +77,20 @@ export interface CustomDataExport {
   curriculum: CustomCurriculum[];
   cards: CustomCard[];
 }
+
+// ── Draft 타입 (id/subjectId/curriculumId/createdAt/updatedAt 제외) ──
+// Mode A (curriculum seed converter) 와 Mode B (LLM tool-use response) 둘 다 이 타입을 만듦.
+// 저장 직전 user-chosen subject/curriculum + id/timestamps 를 붙여 CustomCard 로 승격.
+
+type DraftStripKeys = "id" | "subjectId" | "curriculumId" | "createdAt" | "updatedAt";
+
+export type MultipleChoiceDraft = Omit<CustomMultipleChoiceCard, DraftStripKeys>;
+export type BlankDraft = Omit<CustomBlankCard, DraftStripKeys>;
+export type TypingDraft = Omit<CustomTypingCard, DraftStripKeys>;
+export type WordMatchDraft = Omit<CustomWordMatchCard, DraftStripKeys>;
+
+export type CustomCardDraft =
+  | MultipleChoiceDraft
+  | BlankDraft
+  | TypingDraft
+  | WordMatchDraft;

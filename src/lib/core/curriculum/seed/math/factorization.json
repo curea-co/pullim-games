@@ -1,0 +1,122 @@
+{
+  "subjectId": "math",
+  "subjectName": "수학",
+  "unitId": "factorization",
+  "unitName": "인수분해",
+  "vocabulary": [
+    { "term": "인수", "meaning": "어떤 식을 곱셈으로 나타냈을 때 곱해진 각 식", "pronunciation": "因數" },
+    { "term": "인수분해", "meaning": "한 다항식을 두 개 이상의 인수의 곱으로 나타내는 일", "pronunciation": "因數分解" },
+    { "term": "공통인수", "meaning": "여러 항에 공통으로 들어 있는 인수", "pronunciation": "共通因數" },
+    { "term": "완전제곱식", "meaning": "어떤 식의 제곱으로 나타낼 수 있는 식 (예: x²+2x+1=(x+1)²)" },
+    { "term": "차의 제곱 공식", "meaning": "a²-b²=(a+b)(a-b) 형태의 인수분해 공식" },
+    { "term": "합의 제곱 공식", "meaning": "a²+2ab+b²=(a+b)² 형태의 인수분해 공식" },
+    { "term": "근의 공식", "meaning": "이차방정식 ax²+bx+c=0 의 해를 구하는 공식" },
+    { "term": "판별식", "meaning": "이차방정식의 근의 종류를 판별하는 식 b²-4ac" },
+    { "term": "이차식", "meaning": "차수가 2인 다항식" },
+    { "term": "다항식", "meaning": "여러 항으로 이루어진 식" },
+    { "term": "치환", "meaning": "복잡한 식을 간단한 문자로 바꿔서 푸는 방법" },
+    { "term": "인수정리", "meaning": "다항식 P(x) 가 (x-a) 를 인수로 가지면 P(a)=0 이라는 정리" }
+  ],
+  "pairs": [
+    { "left": "x²-1", "right": "(x+1)(x-1)" },
+    { "left": "x²+2x+1", "right": "(x+1)²" },
+    { "left": "x²-4x+4", "right": "(x-2)²" },
+    { "left": "x²+5x+6", "right": "(x+2)(x+3)" },
+    { "left": "x²-x-6", "right": "(x-3)(x+2)" },
+    { "left": "x²-9", "right": "(x+3)(x-3)" },
+    { "left": "2x+4", "right": "2(x+2)" },
+    { "left": "x²+6x+9", "right": "(x+3)²" },
+    { "left": "x²-7x+12", "right": "(x-3)(x-4)" },
+    { "left": "3x²+6x", "right": "3x(x+2)" },
+    { "left": "x²-25", "right": "(x+5)(x-5)" },
+    { "left": "x²+8x+16", "right": "(x+4)²" }
+  ],
+  "quizzes": [
+    {
+      "question": "x²-9 의 인수분해 결과는?",
+      "choices": ["(x+3)(x-3)", "(x-3)²", "(x+3)²", "x(x-9)"],
+      "correctIndex": 0,
+      "rationale": "차의 제곱 공식 a²-b²=(a+b)(a-b) 적용 (a=x, b=3)"
+    },
+    {
+      "question": "x²+10x+25 의 인수분해 결과는?",
+      "choices": ["(x+5)²", "(x+5)(x-5)", "(x-5)²", "(x+10)(x+15)"],
+      "correctIndex": 0,
+      "rationale": "합의 제곱 공식 a²+2ab+b²=(a+b)² 적용 (a=x, b=5)"
+    },
+    {
+      "question": "2x²+4x 의 공통인수는?",
+      "choices": ["2x", "x", "2", "x²"],
+      "correctIndex": 0,
+      "rationale": "두 항 2x²=2x·x, 4x=2x·2 의 공통인수는 2x"
+    },
+    {
+      "question": "x²+5x+6 의 인수분해 결과는?",
+      "choices": ["(x+2)(x+3)", "(x+1)(x+6)", "(x-2)(x-3)", "(x+5)(x+6)"],
+      "correctIndex": 0,
+      "rationale": "곱이 6, 합이 5인 두 수는 2와 3"
+    },
+    {
+      "question": "x²-x-12 의 인수분해 결과는?",
+      "choices": ["(x-4)(x+3)", "(x+4)(x-3)", "(x-2)(x-6)", "(x+6)(x-2)"],
+      "correctIndex": 0,
+      "rationale": "곱이 -12, 합이 -1인 두 수는 -4와 3"
+    },
+    {
+      "question": "다음 중 완전제곱식이 아닌 것은?",
+      "choices": ["x²+x+1", "x²+2x+1", "x²-4x+4", "x²+6x+9"],
+      "correctIndex": 0,
+      "rationale": "x²+x+1 은 b²-4ac=1-4=-3 < 0 이므로 완전제곱식 아님"
+    },
+    {
+      "question": "x³-1 의 인수분해 결과는?",
+      "choices": ["(x-1)(x²+x+1)", "(x-1)³", "(x+1)(x²-x+1)", "(x-1)(x+1)²"],
+      "correctIndex": 0,
+      "rationale": "세제곱 차의 공식 a³-b³=(a-b)(a²+ab+b²)"
+    },
+    {
+      "question": "공통인수로 묶을 수 있는 식은?",
+      "choices": ["6x²+9x", "x²+x+1", "x²-1", "(x+1)²"],
+      "correctIndex": 0,
+      "rationale": "6x²+9x = 3x(2x+3), 공통인수 3x"
+    }
+  ],
+  "passages": [
+    {
+      "passage": "x²+5x+6 을 인수분해하면 두 일차식의 곱으로 나타낼 수 있어요. 곱이 6, 합이 5인 두 수를 찾으면 ___ 이에요.",
+      "answer": "(x+2)(x+3)",
+      "distractors": ["(x+1)(x+6)", "(x-2)(x-3)", "(x+5)(x+6)"],
+      "rationale": "곱이 6, 합이 5인 두 정수는 2와 3"
+    },
+    {
+      "passage": "차의 제곱 공식은 a²-b² = ___ 형태로 인수분해돼요.",
+      "answer": "(a+b)(a-b)",
+      "distractors": ["(a-b)²", "(a+b)²", "a(b-a)"],
+      "rationale": "차의 제곱 공식의 정의"
+    },
+    {
+      "passage": "다항식 2x²+4x 에서 공통인수를 묶어내면 ___ 가 돼요.",
+      "answer": "2x(x+2)",
+      "distractors": ["x(2x+4)", "2(x²+2x)", "2x(2x+1)"],
+      "rationale": "두 항의 공통인수 2x 를 밖으로 묶음"
+    },
+    {
+      "passage": "이차식 x²+6x+9 는 완전제곱식이고, 이를 인수분해하면 ___ 가 돼요.",
+      "answer": "(x+3)²",
+      "distractors": ["(x+6)²", "(x+3)(x+6)", "(x-3)²"],
+      "rationale": "a²+2ab+b² 형태 (a=x, b=3) 의 합의 제곱"
+    },
+    {
+      "passage": "x²-7x+12 에서 곱이 12, 합이 -7 인 두 수를 찾으면 ___ 이에요.",
+      "answer": "(x-3)(x-4)",
+      "distractors": ["(x+3)(x+4)", "(x-2)(x-6)", "(x+6)(x-2)"],
+      "rationale": "곱이 12, 합이 -7인 두 정수는 -3, -4"
+    },
+    {
+      "passage": "이차방정식 ax²+bx+c=0 에서 ___ 가 0보다 크면 서로 다른 두 실근을 가져요.",
+      "answer": "b²-4ac",
+      "distractors": ["b²+4ac", "4ac-b²", "ax²+c"],
+      "rationale": "판별식 b²-4ac > 0 이면 두 실근"
+    }
+  ]
+}

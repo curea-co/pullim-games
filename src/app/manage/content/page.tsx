@@ -1,55 +1,53 @@
 "use client";
 
-// /manage/content — 자료 일괄 입력 (`2026-05-08_management-redesign.md` 본격 구현).
-// 사용자는 카드를 직접 만들지 않고 자료(원본 텍스트) 를 붙여넣음 → 시스템이 카드로 자동 변환.
+// /manage/content — 자동 생성 (Mode A: 교육과정 / Mode B: 자료).
+// `2026-05-08_management-auto-generation.md` 본격 구현.
+// 사용자는 형식을 학습할 필요 없음. picker 또는 자유 paste 만.
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
+  listSeedSubjects,
   loadCards,
   loadCurriculum,
   loadSubjects,
   newId,
   saveCard,
-  parseTypingSource,
-  parseMatchingSource,
-  parseMultipleChoiceSource,
-  parseBlankSource,
   type CustomBlankCard,
   type CustomCard,
+  type CustomCardDraft,
   type CustomCardKind,
   type CustomCurriculum,
   type CustomMultipleChoiceCard,
   type CustomSubject,
   type CustomTypingCard,
   type CustomWordMatchCard,
-  type ParseError,
+  type SeedSubjectMeta,
 } from "@/lib/core";
 import { MechanicPicker } from "@/components/manage/MechanicPicker";
 import { SubjectCurriculumPicker } from "@/components/manage/SubjectCurriculumPicker";
 import {
-  EXAMPLES,
-  SourceFormatGuide,
-} from "@/components/manage/bulk/SourceFormatGuide";
-import { BulkSourceInput } from "@/components/manage/bulk/BulkSourceInput";
+  ModeToggle,
+  type GenerateMode,
+} from "@/components/manage/auto/ModeToggle";
+import { CurriculumPicker } from "@/components/manage/auto/CurriculumPicker";
+import { RawMaterialInput } from "@/components/manage/auto/RawMaterialInput";
+import { GenerateButton } from "@/components/manage/auto/GenerateButton";
+import { GenerationProgress } from "@/components/manage/auto/GenerationProgress";
 import {
   PreviewCard,
   type PreviewDraft,
 } from "@/components/manage/bulk/PreviewCard";
+import {
+  generateFromCurriculumAction,
+  generateFromSourceAction,
+} from "./actions";
 
 const KIND_LABEL: Record<CustomCardKind, string> = {
   "multiple-choice": "객관식",
   blank: "빈칸",
   typing: "타이핑",
   "word-match": "매칭",
-};
-
-const PLACEHOLDER: Record<CustomCardKind, string> = {
-  "multiple-choice":
-    "Q: 질문\nA) 보기 1\nB) 보기 2\nC) 보기 3\nD) 보기 4\n정답: B",
-  blank: "본문에 [정답|오답1|오답2|오답3] 마커",
-  typing: "정답::뜻",
-  "word-match": "왼쪽::오른쪽",
 };
 
 interface PreviewItem {
@@ -59,37 +57,37 @@ interface PreviewItem {
   editing: boolean;
 }
 
-function parseFor(
-  kind: CustomCardKind,
-  source: string,
-): { drafts: PreviewDraft[]; errors: ParseError[] } {
-  if (kind === "typing") {
-    const r = parseTypingSource(source);
-    return { drafts: r.cards as PreviewDraft[], errors: r.errors };
-  }
-  if (kind === "word-match") {
-    const r = parseMatchingSource(source);
-    return { drafts: r.cards as PreviewDraft[], errors: r.errors };
-  }
-  if (kind === "multiple-choice") {
-    const r = parseMultipleChoiceSource(source);
-    return { drafts: r.cards as PreviewDraft[], errors: r.errors };
-  }
-  const r = parseBlankSource(source);
-  return { drafts: r.cards as PreviewDraft[], errors: r.errors };
-}
+type GenState =
+  | { kind: "idle" }
+  | { kind: "loading" }
+  | { kind: "error"; message: string };
 
 export default function ContentPage() {
+  // 사용자 (저장 대상) 데이터
   const [subjects, setSubjects] = useState<CustomSubject[]>([]);
   const [curriculum, setCurriculum] = useState<CustomCurriculum[]>([]);
   const [savedCards, setSavedCards] = useState<CustomCard[]>([]);
+
+  // 폼 상태
   const [kind, setKind] = useState<CustomCardKind | null>(null);
-  const [subjectId, setSubjectId] = useState<string | null>(null);
-  const [curriculumId, setCurriculumId] = useState<string | null>(null);
-  const [source, setSource] = useState("");
+  const [saveSubjectId, setSaveSubjectId] = useState<string | null>(null);
+  const [saveCurriculumId, setSaveCurriculumId] = useState<string | null>(null);
+  const [mode, setMode] = useState<GenerateMode>("curriculum");
+  const [seedSubjectId, setSeedSubjectId] = useState<string | null>(null);
+  const [seedUnitId, setSeedUnitId] = useState<string | null>(null);
+  const [sourceText, setSourceText] = useState("");
+  const [count, setCount] = useState(10);
+
+  // 결과 상태
+  const [genState, setGenState] = useState<GenState>({ kind: "idle" });
   const [previews, setPreviews] = useState<PreviewItem[]>([]);
-  const [errors, setErrors] = useState<ParseError[]>([]);
   const [toast, setToast] = useState<string | null>(null);
+
+  // 카탈로그
+  const seedCatalog = useMemo<SeedSubjectMeta[]>(
+    () => listSeedSubjects(),
+    [],
+  );
 
   useEffect(() => {
     setSubjects(loadSubjects());
@@ -103,80 +101,109 @@ export default function ContentPage() {
 
   function selectKind(k: CustomCardKind) {
     setKind(k);
-    setSource("");
+    setSourceText("");
     setPreviews([]);
-    setErrors([]);
+    setGenState({ kind: "idle" });
   }
 
-  function handleSourceChange(next: string) {
-    setSource(next);
+  async function handleGenerate() {
     if (!kind) return;
-    const { drafts, errors: errs } = parseFor(kind, next);
+    setGenState({ kind: "loading" });
+    setPreviews([]);
+
+    let result;
+    if (mode === "curriculum") {
+      if (!seedSubjectId || !seedUnitId) {
+        setGenState({ kind: "error", message: "과목과 단원을 골라주세요." });
+        return;
+      }
+      result = await generateFromCurriculumAction({
+        kind,
+        subjectId: seedSubjectId,
+        unitId: seedUnitId,
+        count,
+      });
+    } else {
+      if (!sourceText.trim()) {
+        setGenState({
+          kind: "error",
+          message: "자료를 붙여넣어 주세요.",
+        });
+        return;
+      }
+      result = await generateFromSourceAction({
+        kind,
+        sourceText,
+        count,
+      });
+    }
+
+    if (!result.ok || !result.drafts) {
+      setGenState({
+        kind: "error",
+        message: result.error ?? "자동 생성에 실패했어요.",
+      });
+      return;
+    }
     setPreviews(
-      drafts.map((d) => ({
+      result.drafts.map((d) => ({
         uid: newId(),
-        draft: d,
+        draft: d as PreviewDraft,
         selected: true,
         editing: false,
       })),
     );
-    setErrors(errs);
-  }
-
-  function fillExample() {
-    if (!kind) return;
-    handleSourceChange(EXAMPLES[kind]);
+    setGenState({ kind: "idle" });
   }
 
   function commitAll() {
-    if (!kind || !subjectId || !curriculumId) return;
+    if (!kind || !saveSubjectId || !saveCurriculumId) return;
     const selected = previews.filter((p) => p.selected);
     if (selected.length === 0) return;
     const now = new Date().toISOString();
     let savedCount = 0;
     for (const item of selected) {
-      const d = item.draft;
+      const d = item.draft as CustomCardDraft;
       const base = {
         id: newId(),
-        subjectId,
-        curriculumId,
-        difficulty: 3 as 1 | 2 | 3 | 4 | 5,
+        subjectId: saveSubjectId,
+        curriculumId: saveCurriculumId,
+        difficulty: d.difficulty ?? 3,
         createdAt: now,
         updatedAt: now,
       };
       let card: CustomCard | undefined;
-      if (kind === "multiple-choice") {
+      if (d.kind === "multiple-choice") {
         card = {
           ...base,
           kind: "multiple-choice",
-          question: String(d.question ?? "").trim(),
-          choices: (d.choices as string[]).map((c) => c.trim()),
-          correctIndex: d.correctIndex as number,
+          question: d.question.trim(),
+          choices: d.choices.map((c) => c.trim()),
+          correctIndex: d.correctIndex,
+          hint: d.hint?.trim(),
         } as CustomMultipleChoiceCard;
-      } else if (kind === "blank") {
+      } else if (d.kind === "blank") {
         card = {
           ...base,
           kind: "blank",
-          passage: String(d.passage ?? "").trim(),
-          choices: (d.choices as string[]).map((c) => c.trim()),
-          correctIndex: d.correctIndex as number,
-          rationale: d.rationale ? String(d.rationale).trim() : undefined,
+          passage: d.passage.trim(),
+          choices: d.choices.map((c) => c.trim()),
+          correctIndex: d.correctIndex,
+          rationale: d.rationale?.trim(),
         } as CustomBlankCard;
-      } else if (kind === "typing") {
+      } else if (d.kind === "typing") {
         card = {
           ...base,
           kind: "typing",
-          answer: String(d.answer ?? "").trim(),
-          meaning: String(d.meaning ?? "").trim(),
-          pronunciation: d.pronunciation
-            ? String(d.pronunciation).trim()
-            : undefined,
+          answer: d.answer.trim(),
+          meaning: d.meaning.trim(),
+          pronunciation: d.pronunciation?.trim(),
         } as CustomTypingCard;
       } else {
         card = {
           ...base,
           kind: "word-match",
-          pairs: (d.pairs as { left: string; right: string }[]).map((p) => ({
+          pairs: d.pairs.map((p) => ({
             left: p.left.trim(),
             right: p.right.trim(),
           })),
@@ -186,9 +213,8 @@ export default function ContentPage() {
       savedCount += 1;
     }
     refreshSaved();
-    setSource("");
     setPreviews([]);
-    setErrors([]);
+    setSourceText("");
     setToast(
       `${savedCount}장 저장됐어요. 게임 허브의 "나만의 게임" 또는 관리 → 내 게임에서 풀 수 있어요`,
     );
@@ -235,7 +261,7 @@ export default function ContentPage() {
           먼저 과목을 만들어주세요
         </h2>
         <p className="mt-2 text-helper text-type-secondary">
-          관리 → 과목에서 첫 과목을 만든 뒤 자료를 입력할 수 있어요.
+          만든 카드가 저장될 폴더(과목·단원) 가 필요해요.
         </p>
         <Link
           href="/manage/subjects"
@@ -247,14 +273,22 @@ export default function ContentPage() {
     );
   }
 
+  const canGenerate =
+    kind !== null &&
+    saveSubjectId !== null &&
+    saveCurriculumId !== null &&
+    (mode === "curriculum"
+      ? seedSubjectId !== null && seedUnitId !== null
+      : sourceText.trim().length > 0);
+
   return (
     <div className="flex flex-col gap-5">
       <section>
         <h2 className="text-label font-bold text-type-primary">
-          1. 메커닉 고르기
+          1. 게임 타입 고르기
         </h2>
         <p className="mt-1 text-helper text-type-secondary">
-          자료 형식이 메커닉마다 달라요. 텍스트만으로 만드는 4 메커닉.
+          만들고 싶은 게임 4종 중 하나를 선택하세요.
         </p>
         <div className="mt-3">
           <MechanicPicker value={kind} onChange={selectKind} />
@@ -263,55 +297,74 @@ export default function ContentPage() {
 
       {kind && (
         <section>
-          <h2 className="text-label font-bold text-type-primary">2. 과목·단원</h2>
+          <h2 className="text-label font-bold text-type-primary">
+            2. 어디에 저장할까요?
+          </h2>
+          <p className="mt-1 text-helper text-type-secondary">
+            만든 카드가 들어갈 과목·단원을 골라주세요.
+          </p>
           <div className="mt-3">
             <SubjectCurriculumPicker
               subjects={subjects}
               curriculum={curriculum}
-              subjectId={subjectId}
-              curriculumId={curriculumId}
+              subjectId={saveSubjectId}
+              curriculumId={saveCurriculumId}
               onSubjectChange={(id) => {
-                setSubjectId(id);
-                setCurriculumId(null);
+                setSaveSubjectId(id);
+                setSaveCurriculumId(null);
               }}
-              onCurriculumChange={(id) => setCurriculumId(id)}
+              onCurriculumChange={(id) => setSaveCurriculumId(id)}
             />
           </div>
         </section>
       )}
 
-      {kind && subjectId && curriculumId && (
+      {kind && saveSubjectId && saveCurriculumId && (
         <section className="flex flex-col gap-3">
           <header>
             <h2 className="text-label font-bold text-type-primary">
-              3. 자료 붙여넣기 — {KIND_LABEL[kind]}
+              3. 자료 가져오기 — {KIND_LABEL[kind]}
             </h2>
             <p className="mt-1 text-helper text-type-secondary">
-              형식대로 입력하면 카드가 자동으로 만들어져요.
+              교육과정에서 가져오거나, 직접 붙여넣어 AI 가 자동으로 카드를 만들어요.
             </p>
           </header>
-          <SourceFormatGuide kind={kind} onFillExample={fillExample} />
-          <BulkSourceInput
-            value={source}
-            onChange={handleSourceChange}
-            placeholder={PLACEHOLDER[kind]}
+          <ModeToggle value={mode} onChange={setMode} />
+
+          {mode === "curriculum" ? (
+            <CurriculumPicker
+              catalog={seedCatalog}
+              subjectId={seedSubjectId}
+              unitId={seedUnitId}
+              onSubjectChange={(id) => {
+                setSeedSubjectId(id);
+                setSeedUnitId(null);
+              }}
+              onUnitChange={(id) => setSeedUnitId(id)}
+            />
+          ) : (
+            <RawMaterialInput value={sourceText} onChange={setSourceText} />
+          )}
+
+          <GenerateButton
+            count={count}
+            onCountChange={setCount}
+            onGenerate={handleGenerate}
+            disabled={!canGenerate}
+            loading={genState.kind === "loading"}
           />
-          {errors.length > 0 && (
-            <div
-              role="alert"
-              className="rounded-block border border-accent-negative bg-accent-negative/10 p-3 text-helper text-type-primary"
-            >
-              <p className="font-bold">파싱 오류 {errors.length}개</p>
-              <ul className="mt-1.5 flex flex-col gap-0.5">
-                {errors.slice(0, 5).map((e, i) => (
-                  <li key={i} className="tabular">
-                    {e.line > 0 ? `라인 ${e.line}: ` : ""}
-                    {e.message}
-                  </li>
-                ))}
-                {errors.length > 5 && <li>...외 {errors.length - 5}개</li>}
-              </ul>
-            </div>
+
+          {genState.kind === "loading" && (
+            <GenerationProgress state={{ kind: "loading" }} />
+          )}
+          {genState.kind === "error" && (
+            <GenerationProgress
+              state={{
+                kind: "error",
+                message: genState.message,
+                onRetry: handleGenerate,
+              }}
+            />
           )}
 
           {previews.length > 0 && (
