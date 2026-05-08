@@ -1,32 +1,64 @@
 "use client";
 
-// 인수분해 블록 분리 — V0.1: Card 1 단일 카드 vertical slice.
-// 사용자가 다항식 블록을 가로로 50px 이상 끌면 → 변형 트리거 → factored form 으로 morph.
-// V0.2: 카드 5장 시퀀스, FSRS 통합, 이벤트 로깅, AST 일반 변환.
+// 인수분해 블록 분리 — V0.1 재설계.
+// SPEC §03 §3.4 인터랙션 + §04 사용자 경험 + §08 디자인 시스템 준수.
+//
+// 인터랙션 phase:
+//   idle       — 정적 표시, 블록을 끌 수 있음
+//   dragging   — 사용자가 어떤 블록이든 위로 끌고 있음 (드롭 존 jade 활성, 미리보기 노출)
+//   extracting — 임계(50px) 통과한 후 변형 애니메이션 (220ms)
+//   done       — factored form 표시, "다음 →" 활성
 
 import { Fragment, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type PanInfo } from "framer-motion";
+import { TermBlock } from "./components/TermBlock";
+import { DropZone } from "./components/DropZone";
+import { extractCommonFactor, assertAllTermsHaveCommonPart } from "./logic/transform";
 import { getNextCard } from "./content";
 
-type Phase = "before" | "transforming" | "after";
+type Phase = "idle" | "dragging" | "extracting" | "done";
 
 const DRAG_THRESHOLD_PX = 50;
 
 export default function FactorizationGame() {
   const [card] = useState(() => getNextCard());
-  const [phase, setPhase] = useState<Phase>("before");
+  // 카드 데이터 검증 — 모든 항이 공통인수 part 보유
+  assertAllTermsHaveCommonPart(card.problem.terms);
 
-  const triggerExtract = () => {
-    if (phase !== "before") return;
-    setPhase("transforming");
-    // 220ms spring 변형 후 "after" 상태로 — SPEC §08.6 motion 토큰
-    setTimeout(() => setPhase("after"), 240);
+  const [phase, setPhase] = useState<Phase>("idle");
+  // 드래그 중 가장 큰 (위로 끄는 방향) Y 변위. 임계 통과 시 드롭 존 활성.
+  const [dragMagnitude, setDragMagnitude] = useState(0);
+
+  const factored = extractCommonFactor(
+    card.problem.terms,
+    card.problem.commonFactor,
+  );
+
+  const handleDragMove = (offsetY: number) => {
+    // 위로 끄는 동작 (offsetY 음수)을 양수로 변환해 추적
+    const upward = Math.max(0, -offsetY);
+    setDragMagnitude(upward);
+    if (phase === "idle" && upward > 8) {
+      setPhase("dragging");
+    } else if (phase === "dragging" && upward < 4) {
+      setPhase("idle");
+    }
+  };
+
+  const handleDragEnd = (_info: PanInfo) => {
+    if (dragMagnitude > DRAG_THRESHOLD_PX) {
+      setPhase("extracting");
+      setTimeout(() => setPhase("done"), 240);
+    } else {
+      setPhase("idle");
+    }
+    setDragMagnitude(0);
   };
 
   return (
     <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-8">
-      {/* 상단: 진행도 + 종료 (SPEC §04.1) */}
+      {/* 상단: 진행도 + 메뉴 (SPEC §04.1) */}
       <header className="flex items-center justify-between text-label tabular text-type-secondary">
         <span>1 / 1</span>
         <Link
@@ -42,37 +74,41 @@ export default function FactorizationGame() {
       <p className="mt-6 text-body text-type-secondary">{card.hint}</p>
 
       {/* 메인 영역 */}
-      <section className="mt-12 flex flex-1 flex-col items-center justify-center gap-10">
+      <section className="mt-10 flex flex-1 flex-col items-center justify-center gap-8">
+        {/* 다항식 표현 — 변형 전/후 cross-fade */}
         <AnimatePresence mode="wait">
-          {phase !== "after" ? (
-            <BeforeBlocks
+          {phase !== "done" ? (
+            <BeforeView
               key="before"
-              polynomial={card.problem.polynomial}
-              transforming={phase === "transforming"}
-              onExtract={triggerExtract}
+              terms={card.problem.terms}
+              draggable={phase !== "extracting"}
+              onDragMove={handleDragMove}
+              onDragEnd={handleDragEnd}
+              transforming={phase === "extracting"}
             />
           ) : (
-            <AfterDisplay
+            <AfterView
               key="after"
-              factoredForm={card.problem.factoredForm}
+              factor={factored.factor}
+              remainders={factored.remainders}
             />
           )}
         </AnimatePresence>
 
-        {/* 인터랙션 힌트 — phase에 따라 변경 */}
-        <p
-          className="text-helper text-type-secondary transition-opacity"
-          aria-live="polite"
-        >
-          {phase === "before" && "블록을 옆으로 끌어 보세요"}
-          {phase === "transforming" && " "}
-          {phase === "after" && "공통인수를 끌어냈어요"}
-        </p>
+        {/* 드롭 존 — done 이전 항상 표시, 드래그 중에만 jade 강조 */}
+        {phase !== "done" && (
+          <DropZone
+            active={phase === "dragging"}
+            previewText={
+              phase === "dragging" ? card.problem.factoredForm : undefined
+            }
+          />
+        )}
       </section>
 
-      {/* 액션: "다음 →" — 정답 후만 활성 */}
+      {/* 액션 영역 */}
       <footer className="mt-8">
-        {phase === "after" ? (
+        {phase === "done" ? (
           <Link
             href="/"
             className="block w-full rounded-button border border-type-primary bg-bg-block px-4 py-3 text-center text-body text-type-primary transition-colors hover:bg-accent-positive/10"
@@ -89,98 +125,81 @@ export default function FactorizationGame() {
           </button>
         )}
       </footer>
+
+      {/* 인터랙션 음성/스크린리더 힌트 */}
+      <span className="sr-only" aria-live="polite">
+        {phase === "idle" && "블록을 위로 끌어 공통인수를 빼내세요"}
+        {phase === "dragging" && "드롭 존이 활성화됐어요. 놓으면 변형됩니다."}
+        {phase === "extracting" && "변형 중"}
+        {phase === "done" && "공통인수를 끌어냈어요"}
+      </span>
     </main>
   );
 }
 
-/**
- * 변형 전: 다항식이 블록들로 표시. 각 블록을 가로로 끌 수 있음.
- * "2x + 4" → ["2x", "4"] 두 블록.
- */
-function BeforeBlocks({
-  polynomial,
-  transforming,
-  onExtract,
-}: {
-  polynomial: string;
+interface BeforeViewProps {
+  terms: ReturnType<typeof getNextCard>["problem"]["terms"];
+  draggable: boolean;
+  onDragMove: (offsetY: number) => void;
+  onDragEnd: (info: PanInfo) => void;
   transforming: boolean;
-  onExtract: () => void;
-}) {
-  // V0.1 단순 split — `+` 만 처리. V0.2에서 AST 파서로 대체.
-  const parts = polynomial.split(/\s*\+\s*/).map((p) => p.trim());
+}
 
+/** 변형 전: 항 블록들이 + 로 연결됨. */
+function BeforeView({
+  terms,
+  draggable,
+  onDragMove,
+  onDragEnd,
+  transforming,
+}: BeforeViewProps) {
   return (
     <motion.div
-      className="flex items-center gap-3 text-display tabular text-type-primary"
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.92 }}
+      className="flex items-center gap-3"
+      initial={{ opacity: 0, y: 6 }}
+      animate={
+        transforming
+          ? {
+              opacity: 0.4,
+              scale: 0.92,
+            }
+          : { opacity: 1, scale: 1, y: 0 }
+      }
+      exit={{ opacity: 0, scale: 0.9 }}
       transition={{ type: "spring", stiffness: 280, damping: 24 }}
     >
-      {parts.map((part, idx) => (
-        <Fragment key={`${part}-${idx}`}>
+      {terms.map((term, idx) => (
+        <Fragment key={term.id}>
           {idx > 0 && (
-            <span aria-hidden="true" className="text-type-secondary">
+            <span
+              aria-hidden="true"
+              className="text-display text-type-secondary"
+            >
               +
             </span>
           )}
-          <DraggableBlock onExtract={onExtract} transforming={transforming}>
-            {part}
-          </DraggableBlock>
+          <TermBlock
+            term={term}
+            draggable={draggable}
+            onDragMove={onDragMove}
+            onDragEnd={onDragEnd}
+          />
         </Fragment>
       ))}
     </motion.div>
   );
 }
 
-/** 가로 드래그 가능한 다항식 블록. 50px 이상 이동 시 onExtract 호출. */
-function DraggableBlock({
-  children,
-  onExtract,
-  transforming,
-}: {
-  children: React.ReactNode;
-  onExtract: () => void;
-  transforming: boolean;
-}) {
-  return (
-    <motion.div
-      className="touch-none cursor-grab select-none rounded-block border border-border-hairline bg-bg-block px-6 py-4 active:cursor-grabbing"
-      drag={transforming ? false : "x"}
-      dragConstraints={{ left: -80, right: 80 }}
-      dragElastic={0.3}
-      dragSnapToOrigin
-      whileHover={{ scale: 1.02 }}
-      whileDrag={{
-        scale: 1.05,
-        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-      }}
-      onDragEnd={(_, info) => {
-        if (Math.abs(info.offset.x) > DRAG_THRESHOLD_PX) {
-          onExtract();
-        }
-      }}
-      animate={
-        transforming
-          ? {
-              scale: 0.9,
-              opacity: 0.4,
-              boxShadow: "0 0 24px rgba(0,212,161,0.4)",
-            }
-          : { scale: 1, opacity: 1 }
-      }
-      transition={{ type: "spring", stiffness: 280, damping: 24 }}
-    >
-      {children}
-    </motion.div>
-  );
+interface AfterViewProps {
+  factor: { id: string; text: string };
+  remainders: ReturnType<typeof getNextCard>["problem"]["terms"];
 }
 
-/** 변형 후: factored form 표시 + jade glow → fade. */
-function AfterDisplay({ factoredForm }: { factoredForm: string }) {
+/** 변형 후: factor · ( remainder1 + remainder2 ). 새 블록 구성 + jade glow → fade. */
+function AfterView({ factor, remainders }: AfterViewProps) {
   return (
     <motion.div
-      className="rounded-block border border-border-hairline bg-bg-block px-8 py-5 text-display tabular text-type-primary"
+      className="flex items-center gap-2 rounded-block border border-border-hairline bg-bg-block px-5 py-3.5"
       initial={{
         opacity: 0,
         scale: 0.92,
@@ -197,7 +216,32 @@ function AfterDisplay({ factoredForm }: { factoredForm: string }) {
         boxShadow: { duration: 0.6, ease: "easeOut", delay: 0.18 },
       }}
     >
-      {factoredForm}
+      {/* 추출된 공통인수 */}
+      <span className="rounded-sm bg-accent-positive/15 px-1 py-0.5 text-display tabular text-type-primary">
+        {factor.text}
+      </span>
+      {/* 곱셈 표시 */}
+      <span aria-hidden="true" className="text-display text-type-secondary">
+        ·
+      </span>
+      {/* 괄호 내부: 남은 항들이 + 로 연결 */}
+      <span className="text-display tabular text-type-primary">(</span>
+      {remainders.map((r, idx) => (
+        <Fragment key={r.id}>
+          {idx > 0 && (
+            <span
+              aria-hidden="true"
+              className="text-display text-type-secondary"
+            >
+              +
+            </span>
+          )}
+          <span className="text-display tabular text-type-primary">
+            {r.parts.map((p) => p.text).join("")}
+          </span>
+        </Fragment>
+      ))}
+      <span className="text-display tabular text-type-primary">)</span>
     </motion.div>
   );
 }
