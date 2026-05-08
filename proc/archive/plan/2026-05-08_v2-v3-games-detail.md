@@ -1,21 +1,22 @@
 # V2/V3 신규 7개 게임 상세 설계 기획서
 
 - **작성일**: 2026-05-08
-- **상태**: DRAFT (검토 후 SPEC 03/06 + 각 게임 V2/V3 본격 구현 PR 시 참조)
+- **상태**: ✅ COMPLETED (2026-05-08, V2 4개 + V3 3개 본격 구현 완료, 검증 기준 7/7 통과 — archive 대상)
 - **목적**: V1.5 까지 활성된 3개 게임에 더해 V2/V3 라인업 7개를 stub manifest 로 추가하고, 각 게임의 wow 모먼트·카드 풀 sample·본격 구현 시 작업 범위를 한 문서로 정리한다.
-- **결론 한 줄**: **10개 게임 = 5종 메커닉 × 5과목 매트릭스를 채웠다. V2 4개 (history-timeline, english-word-match, chemistry-balance, vocab-typing) → V3 3개 (math-graph-shift, english-blank, physics-vector) 순서로 본격 구현. 각 게임의 wow 모먼트는 메커닉 결이 같아도 시각 차별화로 분리한다.**
+- **결론 한 줄**: **10개 게임 = 5종 메커닉 × 5과목 매트릭스를 채웠다. V2 4개 (history-timeline, english-word-match, chemistry-balance, vocab-typing) → V3 3개 (math-graph-shift, english-blank, physics-vector) 순서로 본격 구현 완료. 각 게임의 wow 모먼트는 메커닉 결이 같아도 시각 차별화로 분리됨.**
 
 ---
 
 ## 1. 배경 및 현재 상태
 
-### 1.1 현재 라인업 (2026-05-08 시점)
+### 1.1 현재 라인업 (2026-05-08 본격 구현 후 시점)
 
-- 활성 (`status: 'available'`): 3개
-  - `factorization` (수학 / 인수분해 / manipulation / deep / 5m) — V1
-  - `math-quick-quiz` (수학 / 전 단원 / multiple-choice / shallow / 30s) — V1.5
-  - `english-order` (영어 / 어법 / sorting / medium / 2m) — V1.5
-- coming-soon: 7개 (이번 stub 추가)
+- 활성 (`status: 'available'`): **10개** (10/10 매트릭스 완성)
+  - V1: `factorization` (수학 / 인수분해 / manipulation / deep / 5m)
+  - V1.5: `math-quick-quiz`, `english-order`
+  - V2: `history-timeline`, `english-word-match`, `chemistry-balance`, `vocab-typing`
+  - V3: `math-graph-shift`, `english-blank`, `physics-vector`
+- coming-soon: 0개
 
 ### 1.2 stub 추가의 의미
 
@@ -38,20 +39,21 @@
 
 각 게임은 README 에 기본 정보가 있고, 본 §2 는 **메커닉 결 차별화 + 본격 구현 시 핵심 결정** 에 집중한다.
 
-### 2.1 history-timeline (사회 / 근대사 / sorting / medium / 2m / V2)
+### 2.1 history-timeline (사회 / 근대사 / sorting / medium / 2m / V2) ✅
 
-**핵심 명제**: 사건 카드 5개를 시간 순으로 슬롯에 놓으면 인과 연결선이 자동으로 그어진다.
+**핵심 명제**: 사건 카드 5개를 시간 순으로 슬롯에 놓는다. 정답 시 jade glow + 연도 표시.
 
 **english-order 와의 sorting 결 차별화**:
 - english-order: 단어 토큰을 슬롯에 끼워 영어 어순 만들기 — **공간(좌→우 어순)** 정렬
-- history-timeline: 사건 카드를 시간 축에 놓기 — **시간(과거→현재)** 정렬, 추가로 인과 연결선 SVG
+- history-timeline: 사건 카드를 시간 축에 놓기 — **시간(과거→현재)** 세로 정렬
 
-본격 구현 시 핵심 결정:
-- 인과 연결선을 정답 시 자동 그릴지, 학생이 직접 그릴지 → **자동** (학습 효과 우선, 부담 최소)
-- 사건 카드 표시 정보 → 사건명 + 연도 (학생이 연도 보고 정렬할 수 있게). 연도 가림 모드는 V3+
-- 시간 축 시각 — 가로 (모바일에서는 세로 검토)
+**본격 구현 결과**:
+- 사건 카드 표시: 사건명만 (정답 시 연도 jade로 노출) — 학습 부담 최소화
+- 시간 축 시각: 세로 (위→아래 = 과거→현재) — 모바일 친화
+- 같은 연도 사건은 콘텐츠 작성자가 problem.events 배열에 인과 순으로 입력
+- ⚠️ **인과 연결선 SVG 생략** — V3+ 확장 검토. 현재는 정답 시 jade glow + 연도 동시 표시로 단순화
 
-### 2.2 english-word-match (영어 / 수능 어휘 / matching / shallow / 1m / V2)
+### 2.2 english-word-match (영어 / 수능 어휘 / matching / shallow / 1m / V2) ✅
 
 **핵심 명제**: 영단어 5개 + 한국어 의미 5개 무작위 배치, 짝 맞추면 두 카드 결합.
 
@@ -59,12 +61,14 @@
 - math-quick-quiz: 4지선다 — **인식·선택**
 - english-word-match: 짝 맞추기 — **인식·짝짓기**, 결합 애니메이션이 wow 모먼트
 
-본격 구현 시 핵심 결정:
-- 매칭 인터랙션 패턴 → **2-탭 선택** (첫 탭: highlight, 둘째 탭: 매칭 시도). 드래그는 V3+
-- 셔플 — deterministic seed 로 테스트 안정성 확보 (english-order 패턴 차용)
-- 같은 카드 풀 다회차 노출 시 셔플 시드 변경 (FSRS 와 무관, UI 변동성)
+**본격 구현 결과**:
+- 매칭 인터랙션: 2-탭 선택 (첫 탭: highlight, 둘째 탭: 매칭 시도) ✅
+- 셔플: deterministic seed (english-order 패턴 차용, 좌·우 컬럼 다른 seed) ✅
+- 결합 애니메이션: AnimatePresence + scale 0.85 + fade-out ✅
+- 오답 시 두 카드 동시 shake + 600ms 후 selection reset ✅
+- FSRS rating: wrongCount 0=good / 1-2=hard / 3+=again
 
-### 2.3 chemistry-balance (과학 / 화학I / manipulation / deep / 3m / V2)
+### 2.3 chemistry-balance (과학 / 화학I / manipulation / deep / 3m / V2) ✅
 
 **핵심 명제**: 좌변·우변 분자 앞 계수를 +/- 조작, 양변 원자 수 균형되면 반응식 결합.
 
@@ -76,14 +80,17 @@
 
 각자 시각 패러다임이 달라 같은 manipulation 결이지만 wow 모먼트 시각이 모두 다르다.
 
-본격 구현 시 핵심 결정:
-- 계수 입력 — +/- 버튼 vs 숫자 입력 → **+/- 버튼** (모바일 친화, 1~10 범위)
-- 양변 원자 수 카운터 — 항상 표시 vs 균형 시만 → **항상 표시** (학생이 균형 추적해야 학습됨)
-- 화학식 표기 — 첨자 (HTML `<sub>`) vs 평문 → V2 시작은 평문 (`H2O`), V3+ 첨자
+**본격 구현 결과**:
+- 계수 입력: +/- 버튼 (1~9 범위) — 모바일 친화 ✅
+- 양변 원자 수 카운터 항상 표시 — 균형 시 jade 강조 ✅
+- 화학식 표기: 평문 (`H2O`) — 첨자는 V3+ 검토
+- [logic/parse.ts](../../src/games/chemistry-balance/logic/parse.ts) 정규식 파서 + 10개 단위 테스트 (`/([A-Z][a-z]?)(\d*)/g`)
+- "균형 확인" 버튼 명시 검증 — 정답 = 정답 계수 정확 일치 (교과서식 최소정수계수)
+- FSRS rating: wrongCount 0=good / 1=hard / 2+=again
 
-### 2.4 vocab-typing (국어 / 한자·어휘 / typing / medium / 2m / V2)
+### 2.4 vocab-typing (국어 / 한자·어휘 / typing / medium / 2m / V2) ✅
 
-**핵심 명제**: 뜻풀이 표시, 학생이 정답 어휘 타이핑, 입력한 글자가 손글씨처럼 한 획씩 나타남.
+**핵심 명제**: 뜻풀이 표시, 학생이 정답 어휘를 한글 음으로 타이핑, 입력한 글자가 letter-fade-in으로 나타남.
 
 **4종 retrieval 결과 비교**:
 - multiple-choice: 인식
@@ -94,14 +101,18 @@
 
 V2 라인업에서 typing 결을 vocab-typing 으로 채워 모든 메커닉 결을 한 번씩 검증.
 
-본격 구현 시 핵심 결정:
-- 입력 도메인 — 한글 vs 한자 → **V2 한글 음 입력**, V3+ 한자 직접 입력 검토 (모바일 IME 부담)
-- 정답 판정 — strict 일치 vs 동의어 허용 → **strict**, 힌트 버튼으로 보조
-- 손글씨 stroke 애니메이션 — V2 1차 letter-fade, V3 한 획씩 stroke (SVG path 데이터 필요)
+**본격 구현 결과**:
+- 입력 도메인: 한글 음 입력 — V3+ 한자 직접 입력 검토 ✅
+- 정답 판정: strict 일치 (trim 후) — 힌트 버튼으로 보조 ✅
+- letter-fade-in: AnimatePresence + popLayout + 한 글자씩 18ms ✅
+- 모바일 IME 호환: autoComplete/autoCapitalize/autoCorrect 모두 off ✅
+- 정답 시 한자 표기 (pronunciation) 부드럽게 노출 — 학습 보강
+- 힌트 버튼: 첫 글자 공개 시 FSRS rating `good` → `hard` 패널티
+- ⚠️ **stroke 애니메이션 생략** — V3+ 확장 (한 획씩 SVG path 데이터 필요)
 
-### 2.5 math-graph-shift (수학 / 함수 / manipulation / deep / 3m / V3)
+### 2.5 math-graph-shift (수학 / 함수 / manipulation / deep / 3m / V3) ✅
 
-**핵심 명제**: 좌표평면 그래프를 손가락으로 끌면 함수식이 실시간으로 변형. 목표 그래프 윤곽으로 끌면 정답.
+**핵심 명제**: 좌표평면에 시작 함수와 목표 곡선이 그려짐. 학생이 a, h, k 슬라이더로 `y = a(x-h)² + k` 의 a, h, k 를 조정해 목표 곡선과 일치시킴.
 
 **factorization 와의 수학 manipulation 결 차별화**:
 - factorization: 다항식 항 블록 — **이산 토큰 조작**
@@ -109,14 +120,19 @@ V2 라인업에서 typing 결을 vocab-typing 으로 채워 모든 메커닉 결
 
 수학 카테고리 안에서도 manipulation 결이 두 개. 시각 패러다임 자체가 달라 학생이 헷갈리지 않음.
 
-본격 구현 시 핵심 결정:
-- 변형 종류 — 평행이동 / 확대 / 반사 → **셋 다 지원**, 단 카드별 1~2개로 제한 (난이도 조절)
-- 정밀도 — 픽셀 단위 vs snap → **0.5 단위 snap** (모바일 터치 정확도 한계)
-- 식 평가 엔진 — mathjs 활용 (이미 의존성 있음, factorization 과 같은 lib)
+**본격 구현 결과**:
+- 변형 종류: 평행이동 (h, k) + 확대 (a) + 반사 (a 음수) — 셋 다 지원 ✅
+- ⚠️ **인터랙션: 슬라이더 (+/-)** — 드래그 X. 모바일 터치 정확도 트레이드오프로 슬라이더 채택. V4+ 검토
+- ⚠️ **정밀도: 1 단위 step** — 0.5 step은 V4+ 검토 (현재 5장 카드는 모두 정수 정답)
+- ⚠️ **식 평가: 직접 평가** — mathjs 불필요로 단순화 (이차함수만 다루므로)
+- SVG 좌표평면: x ∈ [-5, 5], y ∈ [-3, 9]
+- 학생 곡선 (jade) + 목표 곡선 (점선) 동시 표시, 정답 시 점선 사라짐
+- 현재 식 텍스트 실시간 표시 (`y = (x - 2)² + 3` 형태로 부호 처리)
+- FSRS rating: wrongCount 0=good / 1=hard / 2+=again
 
-### 2.6 english-blank (영어 / 수능 빈칸 / multiple-choice / deep / 3m / V3)
+### 2.6 english-blank (영어 / 수능 빈칸 / multiple-choice / deep / 3m / V3) ✅
 
-**핵심 명제**: 짧은 본문 + 빈칸, 4지선다. 정답 시 본문 흐름이 강물처럼 시각화.
+**핵심 명제**: 짧은 본문 + 빈칸, 4지선다. 정답 시 본문 빈칸에 정답 단어 jade 삽입.
 
 **math-quick-quiz 와의 multiple-choice 결 차별화**:
 - math-quick-quiz: shallow / 30초 / 단답 — **인식**
@@ -124,15 +140,17 @@ V2 라인업에서 typing 결을 vocab-typing 으로 채워 모든 메커닉 결
 
 같은 multiple-choice 결인데 retrieval 깊이가 다르다 (shallow vs deep). 같은 메커닉이라도 콘텐츠 형식이 깊이를 결정한다는 research §3.4 사례.
 
-본격 구현 시 핵심 결정:
-- 본문 길이 — 80~120 단어 (수능 빈칸 표준 1단락)
-- 본문 출처 — 자체 paraphrase (저작권). EBS 학습용 수정·번안
-- 흐름 시각화 — 정답 keyword 간 SVG path animation, 220ms 이내 (proc/spec/08 §8.6)
-- 오답 시 rationale — 한 줄 해설로 학습 보완 (객관식이라 retrieval 자체는 약함, 해설로 보강)
+**본격 구현 결과**:
+- 본문 길이: 80~120 단어 (수능 빈칸 표준 1단락) — 5장 모두 자체 작성 ✅
+- 본문 출처: 자체 작성 (저작권 회피) — EBS·교과서 직접 인용 X ✅
+- 정답 시: 본문 ___ 자리에 정답 단어 jade 삽입 (background bg-accent-positive/20) ✅
+- 오답 시: 본문 shake + 정답 보기 jade 강조 + 한국어 rationale (한 줄 해설) 표시 ✅
+- ⚠️ **흐름 시각화 SVG 생략** — V4+ 검토. 현재는 jade 삽입으로 단순화
+- FSRS: 정답=good, 오답=again (객관식 인식형이라 단순)
 
-### 2.7 physics-vector (과학 / 물리I / manipulation / deep / 3m / V3)
+### 2.7 physics-vector (과학 / 물리I / manipulation / deep / 3m / V3) ✅
 
-**핵심 명제**: 두 화살표를 잡아 끌면 평행사변형 보조선 + 합벡터 도출.
+**핵심 명제**: 두 입력 벡터가 화면에 표시되고, 학생이 합벡터 (rx, ry) 성분을 +/- 슬라이더로 조정. 평행사변형 보조선이 학생 합벡터 끝점 기준으로 자동 표시.
 
 **chemistry-balance 와의 과학 manipulation 결 차별화**:
 - chemistry-balance: 분자 + 계수 — **이산 조정**
@@ -140,10 +158,16 @@ V2 라인업에서 typing 결을 vocab-typing 으로 채워 모든 메커닉 결
 
 과학 카테고리 안에서 retrieval 깊이도 둘 다 deep, 메커닉도 manipulation. 차별점은 **공간 차원** (1D 계수 vs 2D 벡터).
 
-본격 구현 시 핵심 결정:
-- 합성 방법 — 평행사변형 vs 머리-꼬리 → **둘 다 토글** (V3 후반)
-- 단위 표시 — 크기만 (예: "5N") vs 정식 SI → V3 시작은 크기, V4+ 정식
-- 분해 (역방향) — V3 시작은 합성만, V3 후반 검토
+**본격 구현 결과**:
+- 합성 방법: 평행사변형 보조선 자동 (학생 합벡터 끝점 기준 점선) ✅
+- ⚠️ **인터랙션: 슬라이더 (+/-)** — 드래그 X (math-graph-shift 와 같은 트레이드오프)
+- SVG 좌표평면: x ∈ [-5, 6], y ∈ [-3, 5] + 격자 + 축
+- arrow marker SVG defs (input/student/correct 3종)
+- 정답 윤곽 점선 → 일치 시 학생 화살표만 jade
+- ⚠️ **단위 표기 생략** — V4+ 검토 (현재는 (rx, ry) 성분만)
+- ⚠️ **분해 (역방향) 생략** — V4+ 검토
+- ⚠️ **3 벡터 합성 생략** — schema는 max(3) 지원, V3 1차는 2 벡터만
+- FSRS rating: wrongCount 0=good / 1=hard / 2+=again
 
 ---
 
@@ -304,15 +328,20 @@ V2 4개 출시 후, V3 진입 전 검증:
 
 ---
 
-## 8. 검증 기준 (이번 stub 추가 완료 시)
+## 8. 검증 기준 ✅ 7/7 (stub + 본격 구현 완료)
 
 - [x] `npm run gen:registry` 가 10개 게임을 alphabetical 발견
 - [x] typecheck 통과 (모든 manifest 가 `GameManifest` 타입 만족)
 - [x] lint 통과 (no-restricted-imports 규칙 위반 0)
-- [x] test 70/70 통과 (lib/core 단위 테스트 + factorization 게임 테스트, 신규 게임은 빈 content 라 테스트 없음)
+- [x] test 80/80 통과 (lib/core + factorization + chemistry-balance/parse 10개 추가)
 - [x] 메인페이지 코드 변경 없이 10개 카드 노출 + 필터 2축 자동 활성
-- [x] coming-soon 7개 라우트는 404, 메인페이지 카드는 잠금 아이콘
-- [ ] V2 첫 게임 본격 구현 시 lib/core 수정 0 (Plan R 검증 기준 재실증, V2 작업 시 확인)
+- [x] **(stub 시점)** coming-soon 7개 라우트는 404, 메인페이지 카드는 잠금 아이콘
+- [x] **V2/V3 7개 본격 구현 시 lib/core 수정 0** — Plan R §11 검증 기준 #1 재실증.
+  - history-timeline (a55a973), english-word-match (e37c025), chemistry-balance (cdf...),
+  - vocab-typing (62a75e3), math-graph-shift (170ae47), english-blank (1332237),
+  - physics-vector (7064b50) 7개 커밋 모두 `src/games/<id>/` 디렉토리만 변경
+- [x] prod build 통과 — 10개 라우트 모두 사전 렌더 (`/games/[gameId]` SSG)
+- [x] dev HTTP 200 — 모든 10개 게임 라우트 응답 + "10개의 게임이 준비됐어요" 메시지
 
 ---
 
@@ -338,10 +367,34 @@ V2 4개 출시 후, V3 진입 전 검증:
 
 ---
 
-## 11. 다음 단계
+## 11. 다음 단계 ✅ 종료
 
-1. 이 기획서 검토
-2. 결정 대기 5개 항목 확정
-3. SPEC `06-콘텐츠-데이터.md` `§6.1` 에 V2/V3 7개 게임 카드 후보 5장씩 추가
-4. SPEC `10-개발-로드맵.md` 에 V2 4개 / V3 3개 phase 명시
-5. V2 첫 게임 (권장: history-timeline) 본격 구현 PR 진입
+1. ✅ 이 기획서 검토 + 결정 대기 5개 항목 확정 (모두 권장안 채택)
+2. ✅ V2 4개 본격 구현 (history-timeline → english-word-match → chemistry-balance → vocab-typing)
+3. ✅ V3 3개 본격 구현 (math-graph-shift → english-blank → physics-vector)
+4. ⏭️ SPEC `06-콘텐츠-데이터.md` `§6.1` 에 V2/V3 7개 게임 카드 후보 5장씩 갱신 (콘텐츠 큐레이션 시점에)
+5. ⏭️ SPEC `10-개발-로드맵.md` 에 V2/V3 phase 완료 마킹
+
+---
+
+## 완료 메모 (2026-05-08)
+
+**총 commit 9개** (78d4f21 → 7064b50):
+- 78d4f21 chore(plan): parallel-game-architecture 완료 + archive 이동
+- 68db5dd feat: V2/V3 7개 게임 stub + 라인업 plan
+- a55a973 feat(history-timeline): V2 sorting · 한국 근현대사
+- e37c025 feat(english-word-match): V2 matching · 수능 어휘
+- cdf... feat(chemistry-balance): V2 manipulation · 화학I 반응식
+- 62a75e3 feat(vocab-typing): V2 typing · 한자성어 한글 음 입력
+- 170ae47 feat(math-graph-shift): V3 manipulation · 이차함수 변형
+- 1332237 feat(english-blank): V3 multiple-choice · 수능 빈칸 추론
+- 7064b50 feat(physics-vector): V3 manipulation · 벡터 합성
+
+**핵심 단순화 결정 (V4+ 확장 후보)**:
+- history-timeline: 인과 연결선 SVG → 정답 시 jade glow + 연도 표시로 단순화
+- vocab-typing: 한 획씩 stroke 애니메이션 → letter-fade-in 으로 단순화
+- math-graph-shift: 드래그 인터랙션 → 슬라이더 (+/-) 로 단순화 (모바일 정확도 트레이드오프)
+- english-blank: 본문 흐름 SVG → 정답 단어 빈칸 jade 삽입으로 단순화
+- physics-vector: 드래그 인터랙션 → 슬라이더 (+/-) 로 단순화
+
+**본 기획서는 `proc/archive/plan/` 으로 이동 — V4+ 확장 검토 시 참조.**

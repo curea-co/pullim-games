@@ -1,7 +1,7 @@
 # 게임 라인업 + 필터링 기획서
 
 - **작성일**: 2026-05-08
-- **상태**: DRAFT (검토 후 SPEC 03/04/06/08 반영)
+- **상태**: ✅ COMPLETED (2026-05-08, Phase F1~F5 모두 구현 완료, 결정 대기 5개 모두 권장안 채택 — archive 대상)
 - **목적**: V1.5 ~ V3 까지 게임 라인업 정의 + 메인페이지 필터링 UX 설계. 모든 게임이 단일 FSRS 백본 ((B) 아키텍처) 위에서 동작.
 - **결론 한 줄**: **10개 게임을 5종 메커닉 × 5과목 매트릭스로 배치하고, 메인페이지 필터는 게임 5개 미만일 때 비활성·6~9개일 때 과목 칩 1축·10개 이상일 때 과목+메커닉 2축으로 단계적 활성화. 상단에 FSRS 기반 "오늘의 추천" 카드 1개 항상 노출.**
 
@@ -262,39 +262,39 @@ V2부터는 "처음이라면 — 인수분해 블록 분리" 고정 또는 "오�
 
 ## 9. 마이그레이션 플랜
 
-### Phase F1 — GameMeta 확장 + 기존 게임 보강 (0.5일)
+### Phase F1 — GameMeta 확장 + 기존 게임 보강 (0.5일) ✅
 
-- [ ] `src/lib/games/types.ts` 에 `mechanic`, `retrievalDepth` 필드 추가
-- [ ] `factorization`, `coming-soon-demo` manifest 에 신규 필드 추가
-- [ ] `npm run gen:registry` + typecheck 통과
+- [x] `src/lib/games/types.ts` 에 `mechanic`, `retrievalDepth` 필드 추가
+- [x] 기존 게임 manifest 에 신규 필드 추가
+- [x] `npm run gen:registry` + typecheck 통과
 
-### Phase F2 — V1.5 두 번째·세 번째 게임 stub 추가 (1일)
+### Phase F2 — V1.5 두 번째·세 번째 게임 추가 (1일) ✅
 
-- [ ] `math-quick-quiz` manifest + placeholder component (status='coming-soon' 으로 시작, 본격 구현은 별도 PR)
-- [ ] `english-order` manifest + placeholder component
-- [ ] 메인페이지에 카드 5개 (factorization active + 4 coming-soon) 표시
-- [ ] 필터는 아직 활성 X (게임 수 1-5)
+- [x] `math-quick-quiz` manifest + 본격 구현 (status='available', 4지선다)
+- [x] `english-order` manifest + 본격 구현 (sorting, click-to-fill)
+- [x] V1.5 → V2/V3 stub 7개 추가 → 본격 구현까지 완료 (V2 4개 + V3 3개)
+- [x] 메인페이지 카드 10개 표시
 
-### Phase F3 — 필터 UX (V2 진입 시점, 게임 6개+) (1.5일)
+### Phase F3 — 필터 UX (V2 진입 시점, 게임 6개+) (1.5일) ✅
 
-- [ ] `src/components/FilterChips/` 새 컴포넌트 (가로 스크롤 칩)
-- [ ] URL 쿼리 파라미터 동기화 (`useSearchParams`)
-- [ ] 메인페이지 게임 그리드를 필터링된 결과로 렌더
-- [ ] 빈 결과 UI + "전체 보기" fallback
+- [x] [src/components/FilterChips/](../../src/components/FilterChips/) 새 컴포넌트 (가로 스크롤 칩)
+- [x] URL 쿼리 파라미터 동기화 (`useSearchParams`)
+- [x] 메인페이지 게임 그리드를 필터링된 결과로 렌더
+- [x] 빈 결과 UI + "전체 보기" fallback ("이 조합으로는 게임이 없어요")
 
-### Phase F4 — "오늘의 추천" 카드 (FSRS 통합 후) (1일)
+### Phase F4 — "오늘의 추천" 카드 (FSRS 통합 후) (1일) ✅
 
-- [ ] FSRS 통합 (Phase 1 본 작업의 하위 lane)
-- [ ] `src/lib/core/recommendation/today.ts` 추천 알고리즘 (lib/core 내부, 게임은 read-only 사용)
-- [ ] 메인페이지 상단에 추천 카드 1개 항상 렌더 (콜드 스타트도 factorization 고정으로 처리)
+- [x] FSRS 통합 (Phase 1 본 작업)
+- [x] [src/lib/core/recommendation/today.ts](../../src/lib/core/recommendation/today.ts) 추천 알고리즘
+- [x] 메인페이지 상단에 [RecommendationCard](../../src/components/RecommendationCard/) 1개 항상 렌더 (콜드 스타트 = factorization 고정)
 
-### Phase F5 — V3 메커닉 축 추가 (게임 10개+ 시점) (0.5일)
+### Phase F5 — V3 메커닉 축 추가 (게임 10개+ 시점) (0.5일) ✅
 
-- [ ] FilterChips 두 줄 모드 활성화
-- [ ] 메커닉 칩 ("전체 / 조작 / 정렬 / 매칭 / 객관식 / 타이핑")
-- [ ] 두 축 AND 필터링 (예: 수학 + 조작)
+- [x] FilterChips 두 줄 모드 자동 활성화 (게임 수 ≥ FILTER_THRESHOLD_MECHANIC=10 임계)
+- [x] 메커닉 칩 ("전체 / 조작 / 정렬 / 매칭 / 객관식 / 타이핑") — `MECHANIC_OPTIONS` 정의됨
+- [x] 두 축 AND 필터링 (예: 수학 + 조작) — `applyFilter(games, { subject, mechanic })`
 
-**총 소요:** 4.5일. F1+F2 는 V1.5 출시 전, F3+F4 는 V2 출시 전, F5 는 V3.
+**실제 소요: 1일 (AI 가속, V1.5/V2/V3 모두 같은 날 본격 구현 완료).**
 
 ---
 
@@ -311,18 +311,13 @@ V2부터는 "처음이라면 — 인수분해 블록 분리" 고정 또는 "오�
 
 ---
 
-## 11. 결정 대기 항목 (검토 후 SPEC 반영 전 확정 필요)
+## 11. 결정 대기 항목 ✅ 5/5 모두 권장안 채택
 
-1. **게임 라인업 10개 우선순위 동의?**
-   - V1.5 첫 추가: `math-quick-quiz` + `english-order` 권장. 다른 후보 (`history-timeline`, `english-word-match` 등)로 바꿀 수 있음.
-2. **필터 칩 활성 임계?**
-   - 권장: 1-5개 비활성 / 6-9개 1축 / 10+ 2축. 다른 임계(예: 항상 칩 표시) 가능.
-3. **콜드 스타트 추천 정책?**
-   - 권장: 항상 `factorization` 고정. 다른 옵션: 회전 / 인기순(자제 권장).
-4. **추천 카드의 시각 강도?**
-   - 권장: 일반 카드보다 약간 큼 + 라벨만. 강한 강조 (그라데이션, 별 아이콘) 회피.
-5. **다중 선택 필터?**
-   - 권장: V2까지 단일 선택만. V3 검토.
+1. ✅ **게임 라인업 10개 우선순위 동의** — V1.5 (math-quick-quiz + english-order) → V2 (history-timeline, english-word-match, chemistry-balance, vocab-typing) → V3 (math-graph-shift, english-blank, physics-vector) 순서 그대로 진행.
+2. ✅ **필터 칩 활성 임계** — 1-5 비활성 / 6-9 과목 1축 / 10+ 과목+메커닉 2축. [src/lib/games/filter.ts:10-11](../../src/lib/games/filter.ts) 임계 상수.
+3. ✅ **콜드 스타트 추천 정책** — 항상 `factorization` 고정. [src/lib/core/recommendation/today.ts](../../src/lib/core/recommendation/today.ts) 구현됨.
+4. ✅ **추천 카드의 시각 강도** — 일반 카드보다 약간 큼 + 라벨만 ("오늘의 추천"). 강한 강조 회피.
+5. ✅ **다중 선택 필터** — V2까지 단일 선택만 채택 (V3+ 재검토).
 
 ---
 
@@ -337,9 +332,17 @@ V2부터는 "처음이라면 — 인수분해 블록 분리" 고정 또는 "오�
 
 ---
 
-## 13. 다음 단계
+## 13. 다음 단계 ✅ 종료
 
-1. 이 기획서 검토
-2. 결정 대기 5개 항목 확정
-3. SPEC 반영 (위 §12 5개 문서 갱신)
-4. Phase F1 시작 (GameMeta 확장 — 30분 작업)
+1. ✅ 이 기획서 검토 + 결정 대기 5개 항목 확정 (모두 권장안 채택)
+2. ✅ Phase F1~F5 모두 완료
+3. ⏭️ SPEC §12 5개 문서 갱신은 콘텐츠 큐레이션 시점에 (V2/V3 카드 5장씩 SPEC §6.1 반영)
+
+---
+
+## 완료 메모 (2026-05-08)
+
+- 10/10 게임 매트릭스 (5종 메커닉 × 5과목) 모두 활성
+- 메인페이지: "오늘의 추천" 카드 + 과목 칩 (5종) + 메커닉 칩 (6종 = 전체 + 5종) + 활성 게임 그리드
+- FSRS 단일 백본 위에 다중 게임 모드가 모두 작동
+- 본 기획서는 `proc/archive/plan/` 으로 이동 — 향후 V4+ 라인업 추가 시 임계 (FILTER_THRESHOLD_*) 와 단계적 활성 정책 참조
