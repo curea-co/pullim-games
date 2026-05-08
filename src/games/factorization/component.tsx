@@ -1,13 +1,13 @@
 "use client";
 
-// 인수분해 블록 분리 — V0.2: 5문제 시퀀스 + 완료 화면.
+// 인수분해 블록 분리 — V0.3: FSRS 우선순위 큐 + 이벤트 로깅 + localStorage 영속.
 // SPEC §03 M5 (5문제 카드 시퀀스), §04.4 인터랙션 상태 매트릭스.
 //
 // Phase 흐름:
 //   idle → dragging → extracting → done → (다음 카드 또는 completed)
 //   completed: 5문제 완료 화면 ("한 번 더" / "다른 게임" / "오늘은 끝")
 
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
 import { TermBlock } from "./components/TermBlock";
@@ -18,16 +18,60 @@ import {
 } from "./logic/transform";
 import { getCardSequence } from "./content";
 import type { Term as UiTerm } from "./logic/types";
+import {
+  loadAllSrsStates,
+  loadSrsState,
+  logEvent,
+  reviewCard,
+  saveSrsState,
+  selectNextCards,
+  type CardSrsState,
+} from "@/lib/core";
+
+const GAME_ID = "factorization";
 
 type Phase = "idle" | "dragging" | "extracting" | "done" | "completed";
 
 const DRAG_THRESHOLD_PX = 50;
 
 export default function FactorizationGame() {
-  const [cards] = useState(() => getCardSequence());
+  // 카드 시퀀스 — FSRS 우선순위 큐로 정렬, 클라이언트 마운트 후 결정.
+  // SSR 단계에선 in-order, 클라이언트에서 localStorage 읽고 재정렬.
+  const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
   const [dragMagnitude, setDragMagnitude] = useState(0);
+  const dragStartLoggedRef = useRef(false);
+
+  // 클라이언트 마운트 시: FSRS 큐 정렬 + session-start 이벤트
+  useEffect(() => {
+    const all = loadAllSrsStates(GAME_ID);
+    const allCards = getCardSequence();
+    if (all.size > 0) {
+      // SRS 상태 있는 카드만 우선순위로, 새 카드는 후반부에
+      const withSrs = allCards.map((c) => ({
+        card: c,
+        srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
+      }));
+      const ordered = selectNextCards(withSrs, allCards.length).map(
+        (x) => x.card,
+      );
+      setCards(ordered);
+    }
+    void logEvent({
+      gameId: GAME_ID,
+      cardId: null,
+      action: "session-start",
+    });
+    return () => {
+      void logEvent({
+        gameId: GAME_ID,
+        cardId: null,
+        action: "session-end",
+      });
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
@@ -39,6 +83,12 @@ export default function FactorizationGame() {
         onRetry={() => {
           setCardIndex(0);
           setPhase("idle");
+          void logEvent({
+            gameId: GAME_ID,
+            cardId: null,
+            action: "session-start",
+            payload: { retry: true },
+          });
         }}
       />
     );
@@ -59,19 +109,52 @@ export default function FactorizationGame() {
     setDragMagnitude(upward);
     if (phase === "idle" && upward > 8) {
       setPhase("dragging");
+      if (!dragStartLoggedRef.current) {
+        dragStartLoggedRef.current = true;
+        void logEvent({
+          gameId: GAME_ID,
+          cardId: card.id,
+          action: "drag-start",
+        });
+      }
     } else if (phase === "dragging" && upward < 4) {
       setPhase("idle");
     }
   };
 
   const handleDragEnd = (_info: PanInfo) => {
-    if (dragMagnitude > DRAG_THRESHOLD_PX) {
+    const success = dragMagnitude > DRAG_THRESHOLD_PX;
+    void logEvent({
+      gameId: GAME_ID,
+      cardId: card.id,
+      action: "drag-end",
+      payload: { success, magnitude: Math.round(dragMagnitude) },
+    });
+    if (success) {
       setPhase("extracting");
-      setTimeout(() => setPhase("done"), 240);
+      setTimeout(() => {
+        setPhase("done");
+        // FSRS state 갱신 + 영속화
+        const prev: CardSrsState = loadSrsState(GAME_ID, card.id);
+        const next = reviewCard(prev, "good");
+        saveSrsState(GAME_ID, card.id, next);
+        void logEvent({
+          gameId: GAME_ID,
+          cardId: card.id,
+          action: "transform",
+          payload: { reviewCount: next.reviewCount },
+        });
+        void logEvent({
+          gameId: GAME_ID,
+          cardId: card.id,
+          action: "submit",
+        });
+      }, 240);
     } else {
       setPhase("idle");
     }
     setDragMagnitude(0);
+    dragStartLoggedRef.current = false;
   };
 
   const handleNext = () => {
@@ -80,6 +163,7 @@ export default function FactorizationGame() {
     } else {
       setCardIndex(cardIndex + 1);
       setPhase("idle");
+      dragStartLoggedRef.current = false;
     }
   };
 
