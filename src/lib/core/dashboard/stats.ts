@@ -1,9 +1,7 @@
 // 사용자 학습 진행 통계.
-// `2026-05-08_home-dashboard.md` §4 따름.
-//
-// localStorage FSRS state 만으로 통계 계산. 이벤트 인프라 추가 X.
-// 모든 게임 manifest 순회 → loadAllSrsStates → 합산.
+// `2026-05-08_home-dashboard-redesign.md` §5 따름 (PerGameStat 보강).
 
+import type { LucideIcon } from "lucide-react";
 import { games } from "@/lib/games/registry";
 import { loadAllSrsStates } from "../storage/srs";
 
@@ -13,10 +11,17 @@ export interface PerGameStat {
   cardsTouched: number;
   cardsTotal: number;
   attempts: number;
+  /** 정답 횟수 (성공) — UI 큰 숫자. */
   correct: number;
+  /** 오답 횟수 (실패) = lapses 합. UI 큰 숫자. */
+  failed: number;
   /** 0~1, attempts 0 이면 0 */
   accuracy: number;
   lastReviewAt?: Date;
+  /** 게임 분류 — 홈/허브 분리 표시. */
+  kind: "official" | "custom";
+  /** lucide 아이콘. */
+  icon: LucideIcon;
 }
 
 export interface DashboardStats {
@@ -82,7 +87,6 @@ export async function computeDashboardStats(
     let lastReviewAt: Date | undefined;
 
     for (const state of states.values()) {
-      // 한 번이라도 본 적 있나
       if (state.reviewCount > 0) {
         cardsTouched += 1;
         attempts += state.fsrsCard.reps;
@@ -98,7 +102,6 @@ export async function computeDashboardStats(
         }
       }
 
-      // due 24h 이내
       const due = state.fsrsCard.due;
       if (due && due.getTime() - now.getTime() <= TWENTY_FOUR_HOURS_MS) {
         dueSoonCount += 1;
@@ -115,8 +118,11 @@ export async function computeDashboardStats(
       cardsTotal,
       attempts,
       correct,
+      failed: lapses,
       accuracy: attempts > 0 ? correct / attempts : 0,
       lastReviewAt,
+      kind: g.meta.kind ?? "official",
+      icon: g.meta.icon,
     });
 
     totalAttempts += attempts;
