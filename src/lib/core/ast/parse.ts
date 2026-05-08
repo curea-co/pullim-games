@@ -39,7 +39,6 @@ function tokenizeTerms(normalized: string): string[] {
   let cursor = 0;
   // 첫 글자가 부호가 아니면 + 를 prefix
   while (cursor < normalized.length) {
-    const ch = normalized[cursor]!;
     let end = cursor + 1;
     while (end < normalized.length) {
       const nextCh = normalized[end]!;

@@ -5,7 +5,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { getCardSequence } from "./content";
 import {
   loadAllSrsStates,
@@ -51,7 +51,6 @@ export default function MathQuickQuiz() {
         action: "session-end",
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const card = cards[cardIndex];

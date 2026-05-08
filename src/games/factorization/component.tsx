@@ -70,7 +70,6 @@ export default function FactorizationGame() {
         action: "session-end",
       });
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const card = cards[cardIndex];
