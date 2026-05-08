@@ -13,7 +13,7 @@ const manifest: GameManifest = {
     unit: "수능 어휘",
     tagline: "의미가 맞는 짝을 찾으면 카드가 결합돼요",
     estimatedMinutes: 1,
-    status: "coming-soon",
+    status: "available",
     icon: Link2,
     mechanic: "matching",
     retrievalDepth: "shallow",
