@@ -13,7 +13,7 @@ const manifest: GameManifest = {
     unit: "어법·어순",
     tagline: "단어가 자석처럼 정답 자리에 붙어요",
     estimatedMinutes: 2,
-    status: "coming-soon",
+    status: "available",
     icon: ListOrdered,
     mechanic: "sorting",
     retrievalDepth: "medium",
