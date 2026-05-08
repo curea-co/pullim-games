@@ -2,36 +2,39 @@
 
 - **gameId**: `factorization`
 - **과목 · 단원**: 수학 / 고1 다항식 (공통인수, ax² + bx + c, 삼차차, 치환)
-- **상태**: `available` (placeholder — 본격 구현은 V1 Phase 1 Lane B)
+- **상태**: `available`
 - **출처 명세**: [proc/spec/03 §3.1 M4](../../../proc/spec/03-핵심-기능.md), [proc/spec/06 §6.1](../../../proc/spec/06-콘텐츠-데이터.md)
 
 ## 시작하기
 
 1. **이 디렉토리만 작업하세요.** `src/lib/core/` 변경이 필요하면 별도 PR.
 2. `npm run dev` → `http://localhost:3000/games/factorization` 에서 확인.
-3. 테스트: `npm test -- src/games/factorization/` (Phase 1 셋업 후)
+3. 테스트: `npm test -- src/games/factorization/`
 
 ## 의존성
 
-- `@/lib/core` (barrel) — FSRS 엔진, 익명 fingerprint, 공통 schema
-- `mathjs` — 다항식 AST 파싱
+- `@/lib/core` (barrel) — FSRS 엔진, 익명 fingerprint, 공통 schema, AST 파서
 - `framer-motion` — spring 변형 애니메이션
 
 ## 디렉토리
 
 ```
 factorization/
-  manifest.ts         # ✅ 자동 발견 대상 (수정 시 npm run gen:registry)
-  component.tsx       # 게임 entry (server/client 경계 명시)
-  components/         # 이 게임 전용 sub-component (Phase 1)
-    MathBlock.tsx
-    DropZone.tsx
-  state/              # 게임 전용 Zustand 스토어 (Phase 1)
-  logic/              # 순수함수 — AST 변형, 정답 판정 (Phase 1)
-    transform.ts      # property-based test 강제
-    checkAnswer.ts    # equivalent form 매칭, REGRESSION 강제
-  content/cards/      # 5장 카드 JSON (Phase 1)
-  tests/              # 게임 전용 테스트 (Phase 1)
+  manifest.ts                    # ✅ 자동 발견 대상 (수정 시 npm run gen:registry)
+  schema.ts                      # 게임 전용 카드 스키마
+  component.tsx                  # 게임 entry — 5-phase 상태 머신
+  components/
+    TermBlock.tsx                # 항 블록 (드래그 가능)
+    DropZone.tsx                 # 공통인수 드롭 존
+  logic/                         # 순수함수
+    types.ts
+    transform.ts                 # extractCommonFactor (UI Term 단위)
+    checkAnswer.ts               # arePolynomialsEqual + deriveAnswer
+    checkAnswer.test.ts
+    buildCard.ts                 # 다항식 문자열 → FactorizationCard
+    buildCard.test.ts
+  content/
+    index.ts                     # 5장 카드 (V0.1)
 ```
 
 ## 핵심 명제

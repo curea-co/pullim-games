@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   validate:
-    name: validate (typecheck + lint + tests)
+    name: validate (typecheck + lint + registry sync)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -41,11 +41,93 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Test
-        run: npm test
+  # Plan R §9.1 — 변경된 파일을 분석해 영향 받는 게임 ID 와 core 여부 추출.
+  # PR: 변경된 게임만 / push to main: 전체 게임 강제.
+  detect-changes:
+    name: detect changes (path filter)
+    runs-on: ubuntu-latest
+    outputs:
+      games: ${{ steps.resolve.outputs.games }}
+      core_changed: ${{ steps.resolve.outputs.core_changed }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - id: filter
+        uses: dorny/paths-filter@v3
+        with:
+          list-files: shell
+          filters: |
+            core:
+              - 'src/lib/core/**'
+              - 'src/lib/games/**'
+              - 'scripts/**'
+              - 'package.json'
+              - 'package-lock.json'
+              - 'tsconfig.json'
+              - 'vitest.config.ts'
+            games:
+              - added|modified: 'src/games/**'
+
+      - id: resolve
+        env:
+          EVENT: ${{ github.event_name }}
+          CORE: ${{ steps.filter.outputs.core }}
+          GAME_FILES: ${{ steps.filter.outputs.games_files }}
+        run: |
+          set -euo pipefail
+          ALL_GAMES=$(ls src/games | sort | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          if [ "$EVENT" = "push" ] || [ "$CORE" = "true" ]; then
+            echo "core_changed=true" >> "$GITHUB_OUTPUT"
+            echo "games=$ALL_GAMES" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          IDS=$(echo "$GAME_FILES" | tr ' ' '\n' | awk -F/ 'NF>=3 && $1=="src" && $2=="games" {print $3}' | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          if [ "$IDS" = "[]" ] || [ -z "$IDS" ]; then
+            IDS='[]'
+          fi
+          echo "core_changed=false" >> "$GITHUB_OUTPUT"
+          echo "games=$IDS" >> "$GITHUB_OUTPUT"
+
+  test-core:
+    name: test (lib/core)
+    needs: detect-changes
+    if: needs.detect-changes.outputs.core_changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run gen:registry
+      - run: npx vitest run src/lib/core
+
+  test-game:
+    name: test (game)
+    needs: detect-changes
+    if: needs.detect-changes.outputs.games != '[]'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        game: ${{ fromJSON(needs.detect-changes.outputs.games) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm run gen:registry
+      # 테스트가 없는 게임은 vitest 가 exit 1 — passWithNoTests 로 허용.
+      - run: npx vitest run --passWithNoTests src/games/${{ matrix.game }}
 
   build:
     name: build (Next.js)
+    needs: validate
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -55,7 +137,3 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-
-  # Plan R §9.1 path-filtered game-level tests (V0.4 활성)
-  # 게임이 늘어나면 lib/core 변경 시에만 풀 매트릭스, 게임만 변경 시 해당 게임만 실행.
-  # 현재 게임 수 적어 풀 빌드가 빠르므로 별도 매트릭스 미활성.

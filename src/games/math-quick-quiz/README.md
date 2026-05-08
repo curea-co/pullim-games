@@ -5,7 +5,13 @@
 - **메커닉**: multiple-choice (4지선다)
 - **retrieval 깊이**: shallow (얕음, 인식형)
 - **세션 길이**: 약 1분 (30초~1분)
-- **상태**: `coming-soon` (V1.5 출시 후보)
+- **상태**: `available`
+
+## 시작하기
+
+1. **이 디렉토리만 작업하세요.** `src/lib/core/` 변경이 필요하면 별도 PR.
+2. `npm run dev` → `http://localhost:3000/games/math-quick-quiz` 에서 확인.
+3. 테스트: `npm test -- src/games/math-quick-quiz/`
 
 ## 핵심 명제
 
@@ -13,13 +19,12 @@
 
 상세: [proc/plan/2026-05-08_game-lineup-and-filtering.md §5](../../../proc/plan/2026-05-08_game-lineup-and-filtering.md)
 
-## V1.5 본격 구현 시 작업 범위
+## 구현 현황
 
-- [ ] 4지선다 UI 컴포넌트 (`src/games/math-quick-quiz/components/QuizChoice.tsx`)
-- [ ] 5장 카드 JSON (`content/cards/`) — 고1 인수분해·이차방정식·함수 기초 단답
-- [ ] 정답 판정 — 단순 equality (객관식이라 AST 변형 X)
-- [ ] FSRS 통합 — 같은 카드 풀 공유 (단일 백본 원칙)
-- [ ] 세션 시간 표시 (선택, 압박감 X 톤)
+- [x] 4지선다 UI (`component.tsx` 4-button grid)
+- [x] 5장 카드 (`content/index.ts`) — 고1 전 단원 단답
+- [x] 정답 판정 — 단순 equality
+- [x] FSRS 통합 — `@/lib/core/fsrs` 공유 백본
 
 ## 주의
 

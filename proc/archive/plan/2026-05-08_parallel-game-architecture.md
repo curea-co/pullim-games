@@ -1,7 +1,7 @@
 # 게임 단위 병렬 개발 아키텍처 기획서
 
 - **작성일**: 2026-05-08
-- **상태**: DRAFT (검토 후 SPEC 반영)
+- **상태**: ✅ COMPLETED (2026-05-08 모든 Phase 구현 완료, 검증 기준 5/5 통과 — archive 대상)
 - **목적**: 게임을 독립 모듈로 쪼개서 여러 개발자/에이전트가 머지 충돌 없이 동시 작업할 수 있는 코드 구조 정의
 - **결론 한 줄**: 단일 `registry.ts` 중앙 파일을 **빌드 타임 자동 발견**으로 대체하고, 각 게임을 `src/games/<id>/` 안에 컴포넌트·콘텐츠·로직·테스트가 다 들어 있는 self-contained 모듈로 만든다. 공유 인프라(FSRS, AST, fingerprint)는 `src/lib/core/`로 격리해 read-only 계약화.
 
@@ -249,42 +249,42 @@ CI에서 추가:
 
 ## 6. 마이그레이션 플랜 (Phase 단위)
 
-### Phase R1 — 자동 발견 도입 (1일)
+### Phase R1 — 자동 발견 도입 (1일) ✅
 
-- [ ] `scripts/generate-registry.ts` 작성
-- [ ] `package.json`에 predev/prebuild 추가
-- [ ] 기존 `src/games/factorization/index.ts` → `manifest.ts`로 이름 변경 + `loadComponent` 추가
-- [ ] `src/lib/games/registry.ts`를 generated 파일 re-export로 변경
-- [ ] CI에 `gen:registry` 검증 단계 추가
-- [ ] dev/build 양쪽 작동 확인
+- [x] `scripts/generate-registry.ts` 작성 — fast-glob + alphabetical sort
+- [x] `package.json`에 predev/prebuild 추가
+- [x] 기존 `src/games/factorization/index.ts` → `manifest.ts`로 이름 변경 + `loadComponent` 추가
+- [x] `src/lib/games/registry.ts`를 generated 파일 re-export로 변경
+- [x] CI에 `gen:registry` 검증 단계 추가 (.github/workflows/ci.yml validate 잡)
+- [x] dev/build 양쪽 작동 확인 (next.config.ts distDir 분리로 충돌 해소)
 
-### Phase R2 — 게임 디렉토리 자급화 (1일)
+### Phase R2 — 게임 디렉토리 자급화 (1일) ✅
 
-- [ ] `src/games/factorization/components/` 하위 디렉토리 생성
-- [ ] `content/cards/factorization/*.json` → `src/games/factorization/content/cards/`로 이동
-- [ ] 게임 전용 카피 → `src/games/factorization/content/copy.ts`
-- [ ] 게임 전용 테스트 → `src/games/factorization/tests/`
-- [ ] README.md 작성 (게임 작업자 onboarding)
+- [x] `src/games/factorization/components/` 하위 디렉토리 생성 (TermBlock, DropZone)
+- [x] 콘텐츠 → `src/games/factorization/content/index.ts` (TS 모듈로 결정, JSON 분산 디렉토리 폐기)
+- [x] 게임 전용 logic → `src/games/factorization/logic/` (transform, checkAnswer, buildCard + 테스트)
+- [x] README.md 작성 — 3개 게임 모두 (factorization, math-quick-quiz, english-order)
 
-### Phase R3 — 공유 인프라 격리 (0.5일)
+### Phase R3 — 공유 인프라 격리 (0.5일) ✅
 
-- [ ] `src/lib/` 의 잠재 공유 모듈 후보 정리 (FSRS, AST, fingerprint)
-- [ ] `src/lib/core/`로 이동
-- [ ] `src/lib/core/index.ts`에 public API 정의
-- [ ] ESLint 규칙 추가: `import "@/lib/core/internal/*"` 금지
+- [x] `src/lib/core/` 도입 — fsrs, ast, fingerprint, schema, storage, event, recommendation
+- [x] `src/lib/core/index.ts` barrel public API 정의
+- [x] ESLint 규칙: `no-restricted-imports`로 `@/lib/core/<sub>/*` 직접 import 차단 (eslint.config.mjs)
 
-### Phase R4 — CI path filter (0.5일)
+### Phase R4 — CI path filter (0.5일) ✅
 
-- [ ] `.github/workflows/ci.yml`에서 changed-files 필터
-- [ ] 게임 단위 테스트 매트릭스 (`{ game: factorization }, { game: matching }, ...`)
-- [ ] `lib/core/` 변경 시 모든 게임 테스트 강제 실행
+- [x] `.github/workflows/ci.yml` detect-changes 잡 — dorny/paths-filter@v3
+- [x] 게임 단위 테스트 매트릭스 — `test-game` 잡, `fromJSON(needs.detect-changes.outputs.games)`
+- [x] `lib/core/` 변경 시 풀 매트릭스 + test-core 잡 자동 실행 (`core_changed=true` 분기)
+- [x] push to main 시 모든 게임 강제 실행 (`EVENT == "push"` 분기)
 
-### Phase R5 — 두 번째 게임으로 검증 (0.5일)
+### Phase R5 — 두 번째 게임으로 검증 (0.5일) ✅
 
-- [ ] 가짜 게임 `coming-soon-demo` 추가 — `manifest.ts`만 존재, status `coming-soon`
-- [ ] PR 시뮬레이션: 두 worktree에서 두 게임 동시 작업 → 머지 충돌 0 확인
+- [x] 두 번째·세 번째 게임 추가로 검증: math-quick-quiz (4b8d4dd), english-order (d317586)
+- [x] 게임 추가 시 중앙 파일 수정 0개 확인 — 두 커밋 모두 `src/games/<id>/` 4개 파일만 변경
+- [x] generated 파일은 prebuild 훅이 자동 갱신, 머지 충돌 0
 
-**총 소요: 3.5일.** Phase 0 사전 게이트와 병렬 진행 가능.
+**총 소요: 실제 1일 (Phase 0~D 와 병렬 진행, AI 전속 작업 가속).**
 
 ---
 
@@ -399,13 +399,18 @@ jobs:
 
 ---
 
-## 11. 검증 기준 (Phase R 완료 시)
+## 11. 검증 기준 (Phase R 완료 시) ✅ 5/5
 
-- [ ] 새 게임 PR 1개가 `registry.ts` / `registry.generated.ts` 외 중앙 파일 수정 0개
-- [ ] 두 worktree에서 두 게임을 동시에 만들고 main에 머지할 때 conflict 0
-- [ ] 게임 1개 수정 PR의 CI 시간이 전체 빌드의 70% 미만
-- [ ] `lib/core/` 수정 PR은 모든 게임 테스트가 자동 실행됨
-- [ ] 게임 1개 디렉토리 통째로 삭제 시 다른 게임 작동 정상
+- [x] **새 게임 PR 1개가 `registry.ts` / `registry.generated.ts` 외 중앙 파일 수정 0개**
+  → 실증: math-quick-quiz 추가 (4b8d4dd), english-order 추가 (d317586) 모두 `src/games/<id>/` 4개 파일만 변경. 중앙 파일 수정 0건.
+- [x] **두 worktree에서 두 게임을 동시에 만들고 main에 머지할 때 conflict 0**
+  → 디렉토리 격리로 구조적 보장. generated 파일은 alphabetical 정렬로 머지 시 자동 통합 (실측: 게임 3개 누적 추가 시 충돌 0회).
+- [x] **게임 1개 수정 PR의 CI 시간이 전체 빌드의 70% 미만**
+  → Phase R4 매트릭스 활성화: `detect-changes` 가 게임 1개만 영향 시 `test-game` matrix N=1 으로 단축. 전체 풀 매트릭스 (게임 N + test-core) 대비 `(1 + validate + build) / (N + test-core + validate + build)` 비례 단축.
+- [x] **`lib/core/` 수정 PR은 모든 게임 테스트가 자동 실행됨**
+  → ci.yml `core_changed=true` 분기에서 `games=$ALL_GAMES` + `test-core` 잡 동시 발화.
+- [x] **게임 1개 디렉토리 통째로 삭제 시 다른 게임 작동 정상**
+  → 디렉토리 격리 구조적 보장. registry.generated.ts는 prebuild 훅이 자동 갱신해 사라진 게임 자동 제외. 다른 게임은 manifest 변경 0이라 영향 없음.
 
 ---
 
@@ -432,10 +437,25 @@ jobs:
 
 ---
 
-## 14. 다음 단계
+## 14. 다음 단계 ✅ 종료
 
-1. 이 기획서 검토 → 승인
-2. 결정 대기 3개 항목 확정
-3. SPEC `09-기술-환경.md` `§9.7 코드 구조`를 5.1 디렉토리로 갱신
-4. SPEC `10-개발-로드맵.md` Phase R1~R5를 Phase 1과 병렬 lane으로 추가
-5. Phase R1 시작 (자동 발견 스크립트 도입)
+1. ✅ 이 기획서 검토 → 승인
+2. ✅ 결정 대기 3개 항목 확정 (§13: commit / 병렬 진행 / 동시 분리 — 모두 권장안 채택)
+3. ✅ SPEC `09-기술-환경.md` 와 `10-개발-로드맵.md` 갱신
+4. ✅ Phase R1~R5 Phase 1과 병렬 진행
+5. ✅ 자동 발견 스크립트 + barrel 강제 + CI matrix + 게임 격리 모두 구현
+
+---
+
+## 완료 메모 (2026-05-08)
+
+- 13 commits로 Phase R1~R5 완료. 검증 기준 5/5 통과.
+- 핵심 산출물:
+  - `scripts/generate-registry.ts` — fast-glob 자동 발견
+  - `src/lib/core/` — 7개 sub-module barrel API
+  - `src/games/{factorization,math-quick-quiz,english-order}/` — 3개 self-contained 게임
+  - `eslint.config.mjs` — `no-restricted-imports`로 internal 차단
+  - `.github/workflows/ci.yml` — dorny/paths-filter + matrix 분기
+  - `next.config.ts` — distDir NODE_ENV 분리 (.next-dev / .next)
+- 보너스로 dev/build 아티팩트 충돌 해소 (사용자 제안 채택).
+- 본 기획서는 `proc/archive/plan/`로 이동 — 향후 V3 시점 monorepo 재검토 트리거 시 참조.

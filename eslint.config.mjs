@@ -8,6 +8,7 @@ export default tseslint.config(
   {
     ignores: [
       ".next/**",
+      ".next-dev/**", // dev distDir (next.config.ts NODE_ENV 분기)
       "node_modules/**",
       "src/lib/games/registry.generated.ts", // auto-generated
       "next-env.d.ts",
