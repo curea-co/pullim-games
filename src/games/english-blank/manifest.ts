@@ -13,7 +13,7 @@ const manifest: GameManifest = {
     unit: "수능 빈칸",
     tagline: "정답을 고르면 글의 흐름이 이어져요",
     estimatedMinutes: 3,
-    status: "coming-soon",
+    status: "available",
     icon: Pencil,
     mechanic: "multiple-choice",
     retrievalDepth: "deep",
