@@ -1,0 +1,12 @@
+{
+  "id": "card-001",
+  "type": "factorization-block",
+  "unit": "고1-인수분해-공통인수",
+  "difficultySeed": 1,
+  "hint": "공통인수를 찾아 끌어내세요",
+  "problem": {
+    "polynomial": "2x + 4",
+    "factoredForm": "2(x + 2)",
+    "commonFactor": "2"
+  }
+}
