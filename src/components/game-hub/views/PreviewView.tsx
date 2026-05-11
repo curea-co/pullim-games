@@ -7,6 +7,7 @@ import { Lock } from "lucide-react";
 import type { GameManifest } from "@/lib/games/types";
 import type { ProgressLookup } from "@/lib/games/filter";
 import { Card } from "@/components/ui/card";
+import { PreviewMock } from "@/components/game-hub/preview-mocks";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -90,37 +91,26 @@ interface PreviewMediaProps {
 }
 
 function PreviewMedia({ meta, isAvailable }: PreviewMediaProps) {
-  const Icon = meta.icon;
-  // V1 자산 누락 시: state 로 추적 X — img onError 로 fallback 노출.
-  // 단순화: 이미지 경로 있으면 시도, 실패 시 background fallback 이 노출됨.
+  // 자산 우선: previewImagePath 가 있으면 그게 mock 위에 덮임.
+  // 자산 없거나 로드 실패 시 mock 이 노출됨.
   return (
     <div
       className={cn(
-        "relative aspect-[16/10] w-full overflow-hidden border-b border-border-hairline bg-pullim-slate-100",
-        !isAvailable && "grayscale",
+        "relative aspect-[16/10] w-full overflow-hidden border-b border-border-hairline bg-pullim-slate-50",
       )}
     >
-      {/* fallback 레이어 — 항상 깔리고, 이미지 로드 성공 시 위에 덮임 */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-pullim-slate-500">
-        <span
-          aria-hidden="true"
-          className="flex h-12 w-12 items-center justify-center rounded-button bg-bg-block text-type-secondary shadow-block"
-        >
-          <Icon className="h-6 w-6" strokeWidth={2} />
-        </span>
-        <p className="text-[10px] font-bold uppercase tracking-wider">
-          미리보기 준비 중
-        </p>
-      </div>
+      <PreviewMock meta={meta} locked={!isAvailable} />
       {meta.previewImagePath && (
         <img
           src={meta.previewImagePath}
           alt=""
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-105"
+          className={cn(
+            "absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-105",
+            !isAvailable && "grayscale",
+          )}
           onError={(e) => {
-            // 자산 누락 → 이미지 숨김, 아래 fallback 만 노출
             e.currentTarget.style.display = "none";
           }}
         />
