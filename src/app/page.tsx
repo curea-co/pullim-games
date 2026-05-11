@@ -1,20 +1,19 @@
 "use client";
 
 // / — 홈 대시보드.
-// `2026-05-08_home-dashboard.md` 따름.
-//
-// CSR only — localStorage 기반 통계. SSR skeleton → hydration 후 실제 콘텐츠.
-// visibility 동기화로 게임 플레이 후 복귀 시 통계 갱신.
+// `2026-05-08_home-dashboard-redesign.md` 따름.
+// 사용자 의도 = "어떤 게임을 얼마나 성공했고 얼마나 실패했고 몇 개 진행했는지".
+// 게임 단위 카드에 성공·실패 절댓값을 큰 숫자로 노출.
 
 import { Suspense, useEffect, useState } from "react";
-import { Layers, Target, TrendingUp } from "lucide-react";
+import { CheckCircle2, XCircle } from "lucide-react";
 import { computeDashboardStats, type DashboardStats } from "@/lib/core";
 import { StatCard } from "@/components/dashboard/StatCard";
-import { GameProgressRow } from "@/components/dashboard/GameProgressRow";
+import { GameStatCard } from "@/components/dashboard/GameStatCard";
+import { UntouchedGamesGrid } from "@/components/dashboard/UntouchedGamesGrid";
 import { EmptyDashboard } from "@/components/dashboard/EmptyDashboard";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { RecommendationCard } from "@/components/RecommendationCard";
-import { SectionHeading } from "@/components/SectionHeading";
 
 function greeting(now: Date): string {
   const h = now.getHours();
@@ -38,9 +37,7 @@ export default function HomePage() {
     setHello(greeting(new Date()));
 
     function onVisibility() {
-      if (document.visibilityState === "visible") {
-        load();
-      }
+      if (document.visibilityState === "visible") load();
     }
     document.addEventListener("visibilitychange", onVisibility);
     return () => {
@@ -60,7 +57,7 @@ export default function HomePage() {
         </h1>
         {stats && stats.gamesPlayed > 0 && (
           <p className="mt-1.5 text-label text-type-secondary tabular">
-            {stats.gamesPlayed}개 게임에서 {stats.totalAttempts}장 풀었어요
+            {stats.gamesPlayed}개 게임을 만났어요
           </p>
         )}
       </header>
@@ -77,77 +74,65 @@ export default function HomePage() {
 }
 
 function Dashboard({ stats }: { stats: DashboardStats }) {
-  const accuracyPct = Math.round(stats.accuracy * 100);
-  const playedStats = stats.perGame.filter((p) => p.cardsTouched > 0);
+  // 풀어본 게임 — attempts 내림차순 (가장 많이 푼 게임이 위)
+  const playedStats = stats.perGame
+    .filter((p) => p.cardsTouched > 0)
+    .sort((a, b) => b.attempts - a.attempts);
+  // 미진행 게임
+  const untouched = stats.perGame.filter((p) => p.cardsTouched === 0);
 
   return (
     <>
-      {/* KPI 3-card */}
-      <section
-        aria-label="핵심 지표"
-        className="grid grid-cols-3 gap-3"
-      >
+      {/* KPI 2-card — 성공·실패 절댓값 */}
+      <section aria-label="핵심 지표" className="grid grid-cols-2 gap-3">
         <StatCard
-          icon={Layers}
-          label="진행한 게임"
-          value={stats.gamesPlayed}
-          helper={`전체 ${stats.perGame.length}개 중`}
-        />
-        <StatCard
-          icon={Target}
-          label="정답률"
-          value={`${accuracyPct}%`}
+          icon={CheckCircle2}
+          label="성공"
+          value={`${stats.totalCorrect}번`}
           helper={
-            stats.totalAttempts > 0
-              ? `${stats.totalCorrect}/${stats.totalAttempts}장`
-              : "아직 없어요"
+            stats.todayAttempts > 0
+              ? `오늘 ${stats.todayAttempts}장 풀었어요`
+              : "오늘은 아직 시작 전"
           }
         />
         <StatCard
-          icon={TrendingUp}
-          label="오늘 풀이"
-          value={stats.todayAttempts}
+          icon={XCircle}
+          label="실패"
+          value={`${stats.totalLapses}번`}
           helper={
             stats.dueSoonCount > 0
-              ? `곧 만날 ${stats.dueSoonCount}장`
-              : "오늘 새 카드"
+              ? `곧 다시 만날 ${stats.dueSoonCount}장`
+              : "다시 만날 카드 없음"
           }
         />
       </section>
 
-      {/* 오늘의 추천 */}
-      <Suspense fallback={null}>
-        <RecommendationCard />
-      </Suspense>
-
-      {/* 게임별 진행 */}
-      <section aria-label="게임별 진행">
-        <SectionHeading
-          title="게임별 진행"
-          description={`${playedStats.length}개 풀어봤어요`}
-        />
-        <ul className="flex flex-col gap-2">
+      {/* 게임별 성과 */}
+      <section aria-label="게임별 성과" className="flex flex-col gap-3">
+        <header>
+          <h2 className="text-label font-bold text-type-primary">
+            게임별 성과
+          </h2>
+          <p className="text-helper text-type-secondary">
+            {playedStats.length}개 게임을 풀어봤어요
+          </p>
+        </header>
+        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {playedStats.map((p) => (
             <li key={p.gameId}>
-              <GameProgressRow stat={p} />
+              <GameStatCard stat={p} />
             </li>
           ))}
         </ul>
       </section>
 
-      {/* 더 풀어볼 게임 안내 */}
-      {playedStats.length < stats.perGame.length && (
-        <section
-          aria-label="안내"
-          className="rounded-block border border-border-hairline bg-bg-block p-4 text-helper text-type-secondary"
-        >
-          아직 만나지 못한 게임이{" "}
-          <span className="font-bold text-type-primary tabular">
-            {stats.perGame.length - playedStats.length}개
-          </span>
-          {" "}있어요. 게임 허브에서 만나볼 수 있어요.
-        </section>
-      )}
+      {/* 미진행 게임 그리드 */}
+      <UntouchedGamesGrid games={untouched} />
+
+      {/* 오늘의 추천 — 화면 하단 */}
+      <Suspense fallback={null}>
+        <RecommendationCard />
+      </Suspense>
 
       {/* 외재 보상 회피 안내 — 작게 */}
       <p className="text-helper text-type-secondary">
