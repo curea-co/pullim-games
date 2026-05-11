@@ -13,7 +13,7 @@ const manifest: GameManifest = {
     unit: "고1 전 단원",
     tagline: "30초, 5문제, 손가락만 빠르면 돼요",
     estimatedMinutes: 1,
-    status: "coming-soon",
+    status: "available",
     icon: Zap,
     mechanic: "multiple-choice",
     retrievalDepth: "shallow",

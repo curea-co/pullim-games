@@ -6,10 +6,12 @@
     "build": "next build",
     "dev": "next dev",
     "gen:registry": "tsx scripts/generate-registry.ts",
-    "lint": "next lint",
+    "lint": "eslint .",
     "predev": "npm run gen:registry",
     "prebuild": "npm run gen:registry",
     "start": "next start",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -27,13 +29,20 @@
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.2",
+    "@typescript-eslint/parser": "^8.59.2",
+    "@vitest/coverage-v8": "^4.1.5",
     "autoprefixer": "^10.4.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "^15.0.0",
+    "eslint-plugin-import": "^2.32.0",
+    "fast-check": "^4.7.0",
     "fast-glob": "^3.3.3",
     "postcss": "^8.4.0",
     "tailwindcss": "^3.4.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.59.2",
+    "vitest": "^4.1.5"
   }
 }
