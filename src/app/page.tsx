@@ -47,7 +47,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="flex flex-col gap-6 px-4 py-6 md:px-6 md:py-8">
+    <main className="mx-auto flex w-full max-w-[720px] flex-col gap-6 px-4 py-6 md:px-6 md:py-8">
       <header>
         <p className="text-xs font-bold uppercase tracking-wider text-type-secondary">
           홈
