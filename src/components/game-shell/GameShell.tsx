@@ -1,6 +1,7 @@
 // 게임 공통 wrapper — 14 게임의 main 레이아웃 통일.
 // `proc/plan/2026-05-11_game-cta-layout.md` §3 따름.
 // `proc/plan/2026-05-11_layout-overhaul.md` F3=B — aside prop 미지정이면 split 도 lg+ 단일 컬럼.
+// `proc/plan/2026-05-11_game-shell-right-area.md` — aside slot (chemistry-balance pilot).
 //
 // 핵심:
 // - 부모(AppShell 본문 스크롤 영역) 의 100% 높이를 채우도록 `min-h-full`.
@@ -23,6 +24,21 @@ interface GameShellProps {
   cta: ReactNode;
 
   /**
+   * lg+ split 시 우측 영역의 header 와 cta 사이에 렌더되는 보조 콘텐츠.
+   * 가이드 텍스트 / 힌트 버튼 / 풀이 단계 시각화 등 게임마다 자유.
+   *
+   * 동작:
+   * - split variant + lg+ : 우측 가운데 슬롯 (flex-1 로 남는 공간 차지)
+   * - split variant + 모바일(~md) : 미노출 (모바일은 메뉴 ≡ 또는 content 안에서 별도로)
+   * - 미지정 시 : split 도 lg+ 에서 단일 컬럼 폴백 (빈 우측 컬럼 회피)
+   * - stack / match variant : 무시 (좌우 분할 자체가 없음)
+   *
+   * 권장 패턴 (`plan §3.3` 참조):
+   *   aside={<p className="text-helper text-type-secondary">계수를 조정해 양변 원자 수를 맞춰주세요</p>}
+   */
+  aside?: ReactNode;
+
+  /**
    * 레이아웃 변형:
    * - "split" : 모바일 세로 stack / lg+ 좌우 분할 (다수 게임 기본).
    *   ↳ aside prop 미지정이면 lg+ 에서도 단일 컬럼 (빈 우측 컬럼 회피).
@@ -36,22 +52,16 @@ interface GameShellProps {
 
   /** 접근성용 sr-only live region. */
   liveRegion?: ReactNode;
-
-  /**
-   * lg+ 에서 우측 컬럼에 노출할 콘텐츠 (예: 진행 요약, 힌트, 예시).
-   * 미지정 시 split 변형도 단일 컬럼으로 폴백. 게임이 의도해서 채울 때만 분할.
-   */
-  aside?: ReactNode;
 }
 
 export function GameShell({
   header,
   content,
   cta,
+  aside,
   variant = "split",
   splitRatio = "3fr 2fr",
   liveRegion,
-  aside,
 }: GameShellProps) {
   if (variant === "split" && aside) {
     return (
@@ -72,7 +82,9 @@ export function GameShell({
         </section>
         <aside className="mt-6 flex flex-col gap-6 lg:order-2 lg:mt-0 lg:justify-between">
           <div className="hidden lg:block">{header}</div>
-          <div className="hidden lg:block">{aside}</div>
+          <div className="hidden lg:flex lg:flex-1 lg:flex-col lg:gap-3">
+            {aside}
+          </div>
           <div>{cta}</div>
         </aside>
         {liveRegion}

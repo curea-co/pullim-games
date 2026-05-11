@@ -355,7 +355,7 @@ Phase 2~3 디자인 검토에 시간 걸린다면 Phase 1 만 머지하고 추�
 - [x] 완료 화면 `py-10` 보존 (콘텐츠 짧음, 시각 호흡 유지) — 11 파일 grep 확인
 - [x] `bun run lint` · `bun run typecheck` 통과
 - [x] PR #11 생성 + dev 머지 (commit 85350e0)
-- [ ] **plan 누락 발견** — [src/app/games/[gameId]/not-found.tsx:7](src/app/games/[gameId]/not-found.tsx#L7) 의 `min-h-dvh` 가 §4 변경 대상 표에서 빠져 미수정. 사용자 보고 버그(게임 진입 CTA)와 무관 (미등록 gameId 진입 시 페이지) 하지만 동일 viewport 패턴. **후속 fix PR 필요.**
+- [x] **plan 누락 발견 + fix** — [src/app/games/[gameId]/not-found.tsx:7](src/app/games/[gameId]/not-found.tsx#L7) `min-h-dvh → min-h-full` (PR [#15](https://github.com/curea-co/pullim-games/pull/15) MERGED, commit aaf0de1). 사용자 보고 버그(게임 진입 CTA)와 무관 (미등록 gameId 진입 시 페이지) 하지만 동일 viewport 패턴 → 정합성 확보.
 - [ ] Playwright 자동 검증 스크립트 84 케이스 (§5.1) 도입 — 별 후속 작업, 미완
 
 ### Phase 2 — GameShell wrapper + stack/match (PR [#12](https://github.com/curea-co/pullim-games/pull/12) — MERGED)
@@ -393,10 +393,10 @@ Phase 2~3 디자인 검토에 시간 걸린다면 Phase 1 만 머지하고 추�
 
 - [x] 3 PR 모두 dev 머지 (사용자 머지 완료 — 2026-05-11)
 - [x] **자가 검증** (이 문서 §8 작업 항목 vs 실제 코드 상태 grep · build) — 누락 1건 (not-found.tsx) 식별
+- [x] not-found.tsx fix 후속 PR (PR #15 머지 완료)
 - [ ] dev → main 머지 + 배포 검증
-- [ ] not-found.tsx fix 후속 PR (Phase 1 plan 누락 보정)
-- [ ] (선택) Phase 3 디자인 회귀 수동 검증
-- [ ] 본 plan → `proc/archive/plan/2026-05-11_game-cta-layout.md` 로 이동
+- [ ] Phase 3 디자인 회귀 수동 검증 — 우측 영역 콘텐츠 충실화로 후속 plan [2026-05-11_game-shell-right-area.md](2026-05-11_game-shell-right-area.md) 에 흡수됨
+- [ ] 본 plan → `proc/archive/plan/2026-05-11_game-cta-layout.md` 로 이동 (후속 plan 완료 시 동반 archive)
 
 ## 9. 산출물
 
