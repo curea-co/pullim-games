@@ -46,6 +46,15 @@ export interface GameMeta {
   /** 'available' = 플레이 가능. 'coming-soon' = 카드 비활성. */
   status: "available" | "coming-soon";
 
+  /**
+   * 게임 출처 분류 (M5 추가):
+   *   'official' = 풀림 게임즈 기본 제공 (factorization, math-quick-quiz 등)
+   *   'custom'   = 사용자 콘텐츠 기반 (custom-* 게임)
+   * 게임 허브에서 별도 영역으로 분리 (CustomGamesSection).
+   * 미지정 시 'official' 로 간주 (기존 manifest 호환).
+   */
+  kind?: "official" | "custom";
+
   /** 게임별 OG 카드 경로 (V2 — V1은 공통 OG 사용 가능) */
   ogImagePath?: string;
 }

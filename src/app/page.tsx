@@ -1,129 +1,158 @@
-// / 메인페이지 — 게임 picker.
-// V0.3: 추천 카드 (FSRS 기반) + 필터 칩 (게임 수 임계 도달 시 활성).
-// SPEC §03.3 IA + Plan F §7.
+"use client";
 
-import { Suspense } from "react";
-import { GameCard } from "@/components/GameCard";
-import { SectionHeading } from "@/components/SectionHeading";
-import { InfoNote } from "@/components/InfoNote";
+// / — 홈 대시보드.
+// `2026-05-08_home-dashboard.md` 따름.
+//
+// CSR only — localStorage 기반 통계. SSR skeleton → hydration 후 실제 콘텐츠.
+// visibility 동기화로 게임 플레이 후 복귀 시 통계 갱신.
+
+import { Suspense, useEffect, useState } from "react";
+import { Layers, Target, TrendingUp } from "lucide-react";
+import { computeDashboardStats, type DashboardStats } from "@/lib/core";
+import { StatCard } from "@/components/dashboard/StatCard";
+import { GameProgressRow } from "@/components/dashboard/GameProgressRow";
+import { EmptyDashboard } from "@/components/dashboard/EmptyDashboard";
+import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { RecommendationCard } from "@/components/RecommendationCard";
-import { FilterChips } from "@/components/FilterChips";
-import { games } from "@/lib/games/registry";
-import {
-  applyFilter,
-  deriveSubjectOptions,
-  FILTER_THRESHOLD_MECHANIC,
-  FILTER_THRESHOLD_SUBJECT,
-  MECHANIC_OPTIONS,
-} from "@/lib/games/filter";
+import { SectionHeading } from "@/components/SectionHeading";
 
-interface SearchParams {
-  subject?: string;
-  mechanic?: string;
+function greeting(now: Date): string {
+  const h = now.getHours();
+  if (h >= 6 && h < 11) return "좋은 아침이에요";
+  if (h >= 11 && h < 18) return "오늘 한 번 풀어볼까요";
+  if (h >= 18 && h < 24) return "오늘도 수고했어요";
+  return "늦은 시간 풀이도 좋아요";
 }
 
-interface HomePageProps {
-  searchParams: Promise<SearchParams>;
-}
+export default function HomePage() {
+  const [stats, setStats] = useState<DashboardStats | null>(null);
+  const [hello, setHello] = useState<string>("");
 
-export default async function HomePage({ searchParams }: HomePageProps) {
-  const params = await searchParams;
+  useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      const s = await computeDashboardStats();
+      if (!cancelled) setStats(s);
+    }
+    load();
+    setHello(greeting(new Date()));
 
-  // 필터 활성 임계 (Plan F §7.2)
-  const totalGameCount = games.length;
-  const subjectFilterActive = totalGameCount >= FILTER_THRESHOLD_SUBJECT;
-  const mechanicFilterActive = totalGameCount >= FILTER_THRESHOLD_MECHANIC;
-
-  const filtered = applyFilter(games, {
-    subject: subjectFilterActive ? params.subject : undefined,
-    mechanic: mechanicFilterActive ? params.mechanic : undefined,
-  });
-
-  const available = filtered.filter((g) => g.meta.status === "available");
-  const comingSoon = filtered.filter((g) => g.meta.status === "coming-soon");
-
-  const hasAnyAvailableInRegistry = games.some(
-    (g) => g.meta.status === "available",
-  );
+    function onVisibility() {
+      if (document.visibilityState === "visible") {
+        load();
+      }
+    }
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => {
+      cancelled = true;
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
+  }, []);
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[640px] flex-col gap-6 px-6 py-10">
+    <main className="flex flex-col gap-6 px-4 py-6 md:px-6 md:py-8">
       <header>
         <p className="text-xs font-bold uppercase tracking-wider text-type-secondary">
-          풀림 게임즈
+          홈
         </p>
         <h1 className="mt-1 text-2xl font-bold leading-tight tracking-tight text-type-primary">
-          푸는 게 곧 배우는 거예요.
+          {hello || "안녕하세요"}
         </h1>
-        <p className="mt-1.5 text-label text-type-secondary">
-          오늘은 어떤 게임으로 시작할까요?
-        </p>
+        {stats && stats.gamesPlayed > 0 && (
+          <p className="mt-1.5 text-label text-type-secondary tabular">
+            {stats.gamesPlayed}개 게임에서 {stats.totalAttempts}장 풀었어요
+          </p>
+        )}
       </header>
 
-      {/* 오늘의 추천 카드 — 활성 게임 1개 이상 있을 때만 */}
-      {hasAnyAvailableInRegistry && (
-        <Suspense fallback={null}>
-          <RecommendationCard />
-        </Suspense>
+      {!stats ? (
+        <DashboardSkeleton />
+      ) : stats.gamesPlayed === 0 ? (
+        <EmptyDashboard />
+      ) : (
+        <Dashboard stats={stats} />
       )}
+    </main>
+  );
+}
 
-      {/* 필터 칩 — 임계 도달 시 활성 */}
-      {subjectFilterActive && (
-        <Suspense fallback={null}>
-          <FilterChips
-            paramKey="subject"
-            options={deriveSubjectOptions(games)}
-            ariaLabel="과목 필터"
-          />
-        </Suspense>
-      )}
-      {mechanicFilterActive && (
-        <Suspense fallback={null}>
-          <FilterChips
-            paramKey="mechanic"
-            options={MECHANIC_OPTIONS}
-            ariaLabel="메커닉 필터"
-          />
-        </Suspense>
-      )}
+function Dashboard({ stats }: { stats: DashboardStats }) {
+  const accuracyPct = Math.round(stats.accuracy * 100);
+  const playedStats = stats.perGame.filter((p) => p.cardsTouched > 0);
 
-      {/* 활성 게임 그리드 */}
-      <section>
-        <SectionHeading
-          title="플레이할 수 있는 게임"
-          description={`${available.length}개의 게임이 준비됐어요`}
+  return (
+    <>
+      {/* KPI 3-card */}
+      <section
+        aria-label="핵심 지표"
+        className="grid grid-cols-3 gap-3"
+      >
+        <StatCard
+          icon={Layers}
+          label="진행한 게임"
+          value={stats.gamesPlayed}
+          helper={`전체 ${stats.perGame.length}개 중`}
         />
-        {available.length === 0 ? (
-          <p className="rounded-block border border-border-hairline bg-bg-block p-5 text-label text-type-secondary">
-            이 조합으로는 게임이 없어요.
-          </p>
-        ) : (
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            {available.map((g) => (
-              <GameCard key={g.meta.id} meta={g.meta} />
-            ))}
-          </div>
-        )}
+        <StatCard
+          icon={Target}
+          label="정답률"
+          value={`${accuracyPct}%`}
+          helper={
+            stats.totalAttempts > 0
+              ? `${stats.totalCorrect}/${stats.totalAttempts}장`
+              : "아직 없어요"
+          }
+        />
+        <StatCard
+          icon={TrendingUp}
+          label="오늘 풀이"
+          value={stats.todayAttempts}
+          helper={
+            stats.dueSoonCount > 0
+              ? `곧 만날 ${stats.dueSoonCount}장`
+              : "오늘 새 카드"
+          }
+        />
       </section>
 
-      {comingSoon.length > 0 && (
-        <section>
-          <SectionHeading
-            title="곧 만나요"
-            description={`준비 중인 ${comingSoon.length}개`}
-          />
-          <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
-            {comingSoon.map((g) => (
-              <GameCard key={g.meta.id} meta={g.meta} />
-            ))}
-          </div>
+      {/* 오늘의 추천 */}
+      <Suspense fallback={null}>
+        <RecommendationCard />
+      </Suspense>
+
+      {/* 게임별 진행 */}
+      <section aria-label="게임별 진행">
+        <SectionHeading
+          title="게임별 진행"
+          description={`${playedStats.length}개 풀어봤어요`}
+        />
+        <ul className="flex flex-col gap-2">
+          {playedStats.map((p) => (
+            <li key={p.gameId}>
+              <GameProgressRow stat={p} />
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 더 풀어볼 게임 안내 */}
+      {playedStats.length < stats.perGame.length && (
+        <section
+          aria-label="안내"
+          className="rounded-block border border-border-hairline bg-bg-block p-4 text-helper text-type-secondary"
+        >
+          아직 만나지 못한 게임이{" "}
+          <span className="font-bold text-type-primary tabular">
+            {stats.perGame.length - playedStats.length}개
+          </span>
+          {" "}있어요. 게임 허브에서 만나볼 수 있어요.
         </section>
       )}
 
-      <InfoNote label="학습 데이터">
-        어떤 게임을 풀어도 같은 카드 풀에 쌓여요. 1주 후, 그 개념을 더 단단하게
-        다시 만나요.
-      </InfoNote>
-    </main>
+      {/* 외재 보상 회피 안내 — 작게 */}
+      <p className="text-helper text-type-secondary">
+        풀림 게임즈는 점수·랭크·뱃지 없이 진행 자체를 보여드려요.
+      </p>
+    </>
   );
 }
