@@ -14,6 +14,7 @@ import {
   type Recommendation,
 } from "@/lib/core";
 import { games } from "@/lib/games/registry";
+import { Card } from "@/components/ui/card";
 
 const FALLBACK_GAME_ID = "factorization";
 
@@ -46,7 +47,7 @@ export function RecommendationCard() {
       className="block rounded-block focus-visible:outline-2 focus-visible:outline-accent-positive"
       aria-label={`오늘의 추천 — ${game.meta.title}, ${recommendation.reasonText}`}
     >
-      <article className="group relative flex flex-col gap-3 rounded-block border border-type-primary bg-bg-block p-6 transition-shadow hover:shadow-block">
+      <Card className="group relative flex flex-col gap-3 rounded-block border-type-primary bg-bg-block p-6 shadow-none transition-shadow hover:shadow-block">
         <div className="flex items-center justify-between">
           <span className="text-xs font-bold uppercase tracking-wider text-type-secondary">
             오늘의 추천
@@ -72,7 +73,7 @@ export function RecommendationCard() {
             </p>
           </div>
         </div>
-      </article>
+      </Card>
     </Link>
   );
 }

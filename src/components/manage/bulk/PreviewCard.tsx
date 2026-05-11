@@ -1,13 +1,19 @@
 "use client";
 
-// 변환 결과 카드 미리보기 — 체크박스 + 인라인 편집 + 삭제.
+// 변환 결과 카드 미리보기 — shadcn Card + Checkbox + Button + RadioGroup.
 
 import { Pencil, Trash2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Textarea } from "@/components/ui/textarea";
 import type { CustomCardKind } from "@/lib/core";
 import { cn } from "@/lib/utils";
 
 export type PreviewDraft = {
-  // partial 카드 — kind 별로 필요한 필드 집합
   [k: string]: unknown;
 };
 
@@ -43,23 +49,22 @@ export function PreviewCard({
 }: Props) {
   const summary = renderSummary(kind, draft);
   return (
-    <article
+    <Card
       className={cn(
-        "rounded-block border bg-bg-block p-3 transition-colors",
+        "rounded-block border bg-bg-block p-3 shadow-none transition-colors",
         selected
           ? "border-type-primary"
           : "border-border-hairline opacity-60",
       )}
     >
       <header className="flex items-start gap-2">
-        <input
-          type="checkbox"
+        <Checkbox
           checked={selected}
-          onChange={onToggleSelect}
+          onCheckedChange={onToggleSelect}
           aria-label="이 카드 선택"
-          className="mt-1 h-4 w-4 shrink-0 accent-accent-positive"
+          className="mt-1 h-4 w-4 shrink-0 border-border-hairline data-[state=checked]:border-accent-positive data-[state=checked]:bg-accent-positive data-[state=checked]:text-bg-block"
         />
-        <div className="flex-1 min-w-0">
+        <div className="min-w-0 flex-1">
           <span className="text-[10px] font-bold uppercase tracking-wider text-type-secondary">
             {KIND_LABEL[kind]}
           </span>
@@ -70,22 +75,26 @@ export function PreviewCard({
           )}
         </div>
         <div className="flex shrink-0 gap-1">
-          <button
+          <Button
             type="button"
+            variant="ghost"
+            size="icon"
             onClick={editing ? onCancelEdit : onStartEdit}
             aria-label="수정"
-            className="inline-flex h-7 w-7 items-center justify-center rounded-button text-type-secondary hover:bg-pullim-slate-100 hover:text-type-primary"
+            className="h-7 w-7 rounded-button text-type-secondary hover:bg-pullim-slate-100 hover:text-type-primary"
           >
             <Pencil className="h-3.5 w-3.5" />
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
+            variant="ghost"
+            size="icon"
             onClick={onDelete}
             aria-label="삭제"
-            className="inline-flex h-7 w-7 items-center justify-center rounded-button text-type-secondary hover:bg-accent-negative/10 hover:text-accent-negative"
+            className="h-7 w-7 rounded-button text-type-secondary hover:bg-accent-negative/10 hover:text-accent-negative"
           >
             <Trash2 className="h-3.5 w-3.5" />
-          </button>
+          </Button>
         </div>
       </header>
 
@@ -97,7 +106,7 @@ export function PreviewCard({
           onCancel={onCancelEdit}
         />
       )}
-    </article>
+    </Card>
   );
 }
 
@@ -106,7 +115,9 @@ function renderSummary(kind: CustomCardKind, d: PreviewDraft): string {
     return `Q: ${d.question ?? ""} → 정답 ${
       ["A", "B", "C", "D"][d.correctIndex as number] ?? "?"
     }) ${
-      Array.isArray(d.choices) ? (d.choices as string[])[d.correctIndex as number] : ""
+      Array.isArray(d.choices)
+        ? (d.choices as string[])[d.correctIndex as number]
+        : ""
     }`;
   }
   if (kind === "blank") {
@@ -120,7 +131,11 @@ function renderSummary(kind: CustomCardKind, d: PreviewDraft): string {
     const pairs = Array.isArray(d.pairs)
       ? (d.pairs as { left: string; right: string }[])
       : [];
-    return `${pairs.length} 짝${pairs.length > 0 ? ` · 예: ${pairs[0]!.left} ↔ ${pairs[0]!.right}` : ""}`;
+    return `${pairs.length} 짝${
+      pairs.length > 0
+        ? ` · 예: ${pairs[0]!.left} ↔ ${pairs[0]!.right}`
+        : ""
+    }`;
   }
   return "";
 }
@@ -133,24 +148,22 @@ interface InlineEditorProps {
 }
 
 function InlineEditor({ kind, draft, onSave, onCancel }: InlineEditorProps) {
-  // 단순 JSON 편집 form — 메커닉별 풀 form 은 폐기. 사용자가 수정해야 할 필드만 노출.
-  // typing / multiple-choice 는 텍스트 input, blank/word-match 는 textarea.
   if (kind === "typing") {
     return (
       <div className="mt-3 flex flex-col gap-2">
-        <input
+        <Input
           type="text"
           value={String(draft.answer ?? "")}
           onChange={(e) => onSave({ ...draft, answer: e.target.value })}
           placeholder="정답"
-          className="rounded-button border border-border-hairline bg-bg-block px-3 py-1.5 text-helper text-type-primary"
+          className="rounded-button border-border-hairline bg-bg-block text-helper text-type-primary"
         />
-        <input
+        <Input
           type="text"
           value={String(draft.meaning ?? "")}
           onChange={(e) => onSave({ ...draft, meaning: e.target.value })}
           placeholder="뜻"
-          className="rounded-button border border-border-hairline bg-bg-block px-3 py-1.5 text-helper text-type-primary"
+          className="rounded-button border-border-hairline bg-bg-block text-helper text-type-primary"
         />
         <DoneRow onCancel={onCancel} />
       </div>
@@ -161,35 +174,43 @@ function InlineEditor({ kind, draft, onSave, onCancel }: InlineEditorProps) {
     const correctIndex = (draft.correctIndex as number) ?? 0;
     return (
       <div className="mt-3 flex flex-col gap-2">
-        <input
+        <Input
           type="text"
           value={String(draft.question ?? "")}
           onChange={(e) => onSave({ ...draft, question: e.target.value })}
           placeholder="질문"
-          className="rounded-button border border-border-hairline bg-bg-block px-3 py-1.5 text-helper text-type-primary"
+          className="rounded-button border-border-hairline bg-bg-block text-helper text-type-primary"
         />
-        {choices.map((c, i) => (
-          <label key={i} className="flex items-center gap-2">
-            <input
-              type="radio"
-              checked={correctIndex === i}
-              onChange={() => onSave({ ...draft, correctIndex: i })}
-              aria-label={`보기 ${i + 1} 정답`}
-              className="h-3.5 w-3.5 accent-accent-positive"
-            />
-            <input
-              type="text"
-              value={c}
-              onChange={(e) => {
-                const next = [...choices];
-                next[i] = e.target.value;
-                onSave({ ...draft, choices: next });
-              }}
-              placeholder={`보기 ${i + 1}`}
-              className="flex-1 rounded-button border border-border-hairline bg-bg-block px-3 py-1.5 text-helper text-type-primary"
-            />
-          </label>
-        ))}
+        <RadioGroup
+          value={String(correctIndex)}
+          onValueChange={(v) => onSave({ ...draft, correctIndex: Number(v) })}
+          className="flex flex-col gap-2"
+        >
+          {choices.map((c, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <RadioGroupItem
+                value={String(i)}
+                id={`choice-${i}`}
+                aria-label={`보기 ${i + 1} 정답`}
+                className="h-3.5 w-3.5 border-border-hairline text-accent-positive"
+              />
+              <Label htmlFor={`choice-${i}`} className="sr-only">
+                보기 {i + 1} 정답
+              </Label>
+              <Input
+                type="text"
+                value={c}
+                onChange={(e) => {
+                  const next = [...choices];
+                  next[i] = e.target.value;
+                  onSave({ ...draft, choices: next });
+                }}
+                placeholder={`보기 ${i + 1}`}
+                className="flex-1 rounded-button border-border-hairline bg-bg-block text-helper text-type-primary"
+              />
+            </div>
+          ))}
+        </RadioGroup>
         <DoneRow onCancel={onCancel} />
       </div>
     );
@@ -198,15 +219,15 @@ function InlineEditor({ kind, draft, onSave, onCancel }: InlineEditorProps) {
     const choices = (draft.choices as string[]) ?? ["", "", "", ""];
     return (
       <div className="mt-3 flex flex-col gap-2">
-        <textarea
+        <Textarea
           value={String(draft.passage ?? "")}
           onChange={(e) => onSave({ ...draft, passage: e.target.value })}
           rows={3}
           placeholder="본문 (___ 자리에 빈칸)"
-          className="rounded-button border border-border-hairline bg-bg-block px-3 py-1.5 text-helper text-type-primary"
+          className="rounded-button border-border-hairline bg-bg-block text-helper text-type-primary"
         />
         {choices.map((c, i) => (
-          <input
+          <Input
             key={i}
             type="text"
             value={c}
@@ -216,14 +237,14 @@ function InlineEditor({ kind, draft, onSave, onCancel }: InlineEditorProps) {
               onSave({ ...draft, choices: next });
             }}
             placeholder={i === 0 ? "정답" : `오답 ${i}`}
-            className="rounded-button border border-border-hairline bg-bg-block px-3 py-1.5 text-helper text-type-primary"
+            className="rounded-button border-border-hairline bg-bg-block text-helper text-type-primary"
           />
         ))}
         <DoneRow onCancel={onCancel} />
       </div>
     );
   }
-  // word-match: 짝 리스트 inline
+  // word-match
   const pairs = ((draft.pairs as { left: string; right: string }[]) ?? []).map(
     (p) => ({ ...p }),
   );
@@ -231,7 +252,7 @@ function InlineEditor({ kind, draft, onSave, onCancel }: InlineEditorProps) {
     <div className="mt-3 flex flex-col gap-1.5">
       {pairs.map((p, i) => (
         <div key={i} className="flex items-center gap-1.5">
-          <input
+          <Input
             type="text"
             value={p.left}
             onChange={(e) => {
@@ -240,10 +261,12 @@ function InlineEditor({ kind, draft, onSave, onCancel }: InlineEditorProps) {
               );
               onSave({ ...draft, pairs: next });
             }}
-            className="flex-1 rounded-button border border-border-hairline bg-bg-block px-2 py-1 text-helper text-type-primary"
+            className="h-8 flex-1 rounded-button border-border-hairline bg-bg-block px-2 text-helper text-type-primary"
           />
-          <span aria-hidden="true" className="text-type-secondary">↔</span>
-          <input
+          <span aria-hidden="true" className="text-type-secondary">
+            ↔
+          </span>
+          <Input
             type="text"
             value={p.right}
             onChange={(e) => {
@@ -252,7 +275,7 @@ function InlineEditor({ kind, draft, onSave, onCancel }: InlineEditorProps) {
               );
               onSave({ ...draft, pairs: next });
             }}
-            className="flex-1 rounded-button border border-border-hairline bg-bg-block px-2 py-1 text-helper text-type-primary"
+            className="h-8 flex-1 rounded-button border-border-hairline bg-bg-block px-2 text-helper text-type-primary"
           />
         </div>
       ))}
@@ -264,13 +287,15 @@ function InlineEditor({ kind, draft, onSave, onCancel }: InlineEditorProps) {
 function DoneRow({ onCancel }: { onCancel: () => void }) {
   return (
     <div className="flex justify-end">
-      <button
+      <Button
         type="button"
+        variant="outline"
+        size="sm"
         onClick={onCancel}
-        className="rounded-button border border-border-hairline bg-bg-block px-2.5 py-1 text-helper text-type-secondary hover:text-type-primary"
+        className="rounded-button border-border-hairline bg-bg-block text-helper text-type-secondary hover:text-type-primary"
       >
         편집 끝
-      </button>
+      </Button>
     </div>
   );
 }

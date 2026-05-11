@@ -1,13 +1,18 @@
 "use client";
 
-// 나만의 게임 영역 — `2026-05-08_game-hub.md` §7.
-// kind='custom' 게임 목록 + 카드 수 표시. 빈 카드면 disabled-like 안내.
+// 나만의 게임 영역. shadcn Card.
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { games } from "@/lib/games/registry";
-import { loadCounts, type CustomCounts, type CustomCardKind } from "@/lib/core";
+import {
+  loadCounts,
+  type CustomCounts,
+  type CustomCardKind,
+} from "@/lib/core";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 const KIND_BY_GAME_ID: Record<string, CustomCardKind> = {
   "custom-multiple-choice": "multiple-choice",
@@ -27,9 +32,9 @@ export function CustomGamesSection() {
   const totalCustomCards = counts ? counts.cards : 0;
 
   return (
-    <section
+    <Card
       aria-label="나만의 게임"
-      className="flex flex-col gap-3 rounded-block border border-dashed border-border-hairline bg-bg-block p-4"
+      className="flex flex-col gap-3 rounded-block border-dashed border-border-hairline bg-bg-block p-4 shadow-none"
     >
       <header className="flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -76,42 +81,45 @@ export function CustomGamesSection() {
             const isPlayable = cardCount > 0;
             return (
               <li key={g.meta.id}>
-                <Link
-                  href={`/games/${g.meta.id}`}
-                  className={`group flex items-center gap-2 rounded-block border bg-bg-primary px-3 py-2.5 transition-colors ${
-                    isPlayable
-                      ? "border-border-hairline hover:border-type-primary/30"
-                      : "border-border-hairline opacity-65"
-                  }`}
-                >
-                  <span
-                    aria-hidden="true"
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-button ${
+                <Link href={`/games/${g.meta.id}`} className="group block">
+                  <Card
+                    className={cn(
+                      "flex items-center gap-2 rounded-block bg-bg-primary px-3 py-2.5 shadow-none transition-colors",
                       isPlayable
-                        ? "bg-accent-positive/10 text-accent-positive"
-                        : "bg-pullim-slate-100 text-pullim-slate-500"
-                    }`}
+                        ? "border-border-hairline group-hover:border-type-primary/30"
+                        : "border-border-hairline opacity-65",
+                    )}
                   >
-                    <Icon className="h-3.5 w-3.5" strokeWidth={2} />
-                  </span>
-                  <div className="flex-1 min-w-0">
-                    <p className="truncate text-helper font-bold text-type-primary">
-                      {g.meta.title}
-                    </p>
-                    <p className="text-[10px] tabular text-type-secondary">
-                      {cardCount}장 카드
-                    </p>
-                  </div>
-                  <ArrowRight
-                    className="h-3 w-3 shrink-0 text-type-secondary/40"
-                    aria-hidden="true"
-                  />
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "flex h-7 w-7 shrink-0 items-center justify-center rounded-button",
+                        isPlayable
+                          ? "bg-accent-positive/10 text-accent-positive"
+                          : "bg-pullim-slate-100 text-pullim-slate-500",
+                      )}
+                    >
+                      <Icon className="h-3.5 w-3.5" strokeWidth={2} />
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-helper font-bold text-type-primary">
+                        {g.meta.title}
+                      </p>
+                      <p className="text-[10px] tabular text-type-secondary">
+                        {cardCount}장 카드
+                      </p>
+                    </div>
+                    <ArrowRight
+                      className="h-3 w-3 shrink-0 text-type-secondary/40"
+                      aria-hidden="true"
+                    />
+                  </Card>
                 </Link>
               </li>
             );
           })}
         </ul>
       )}
-    </section>
+    </Card>
   );
 }

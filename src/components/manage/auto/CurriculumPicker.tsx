@@ -1,8 +1,15 @@
 "use client";
 
-// 내장 교육과정 카탈로그에서 과목 → 단원 cascade.
-// localStorage 의 사용자 과목/단원 (CustomSubject) 와는 별도. 이건 자동 생성 SOURCE.
+// 내장 교육과정 카탈로그에서 과목 → 단원 cascade. shadcn Select.
 
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import type { SeedSubjectMeta } from "@/lib/core";
 
 interface Props {
@@ -22,48 +29,52 @@ export function CurriculumPicker({
 }: Props) {
   const subject = catalog.find((s) => s.subjectId === subjectId);
   const units = subject?.units ?? [];
+  const noUnits = !!subjectId && units.length === 0;
 
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-      <label className="flex flex-col gap-1.5">
-        <span className="text-helper text-type-secondary">과목</span>
-        <select
-          value={subjectId ?? ""}
-          onChange={(e) => onSubjectChange(e.target.value)}
-          className="rounded-button border border-border-hairline bg-bg-block px-3 py-2 text-body text-type-primary focus:border-type-primary focus:outline-none"
-        >
-          <option value="" disabled>
-            선택해주세요
-          </option>
-          {catalog.map((s) => (
-            <option key={s.subjectId} value={s.subjectId}>
-              {s.subjectName}
-            </option>
-          ))}
-        </select>
-      </label>
-      <label className="flex flex-col gap-1.5">
-        <span className="text-helper text-type-secondary">단원</span>
-        <select
+      <div className="flex flex-col gap-1.5">
+        <Label className="text-helper text-type-secondary">과목</Label>
+        <Select value={subjectId ?? ""} onValueChange={onSubjectChange}>
+          <SelectTrigger className="rounded-button border-border-hairline bg-bg-block text-body text-type-primary">
+            <SelectValue placeholder="선택해주세요" />
+          </SelectTrigger>
+          <SelectContent>
+            {catalog.map((s) => (
+              <SelectItem key={s.subjectId} value={s.subjectId}>
+                {s.subjectName}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <Label className="text-helper text-type-secondary">단원</Label>
+        <Select
           value={unitId ?? ""}
-          onChange={(e) => onUnitChange(e.target.value)}
-          disabled={!subjectId || units.length === 0}
-          className="rounded-button border border-border-hairline bg-bg-block px-3 py-2 text-body text-type-primary focus:border-type-primary focus:outline-none disabled:opacity-50"
+          onValueChange={onUnitChange}
+          disabled={!subjectId || noUnits}
         >
-          <option value="" disabled>
-            {!subjectId
-              ? "과목을 먼저 골라주세요"
-              : units.length === 0
-                ? "준비 중인 과목이에요"
-                : "선택해주세요"}
-          </option>
-          {units.map((u) => (
-            <option key={u.unitId} value={u.unitId}>
-              {u.unitName}
-            </option>
-          ))}
-        </select>
-      </label>
+          <SelectTrigger className="rounded-button border-border-hairline bg-bg-block text-body text-type-primary disabled:opacity-50">
+            <SelectValue
+              placeholder={
+                !subjectId
+                  ? "과목을 먼저 골라주세요"
+                  : noUnits
+                    ? "준비 중인 과목이에요"
+                    : "선택해주세요"
+              }
+            />
+          </SelectTrigger>
+          <SelectContent>
+            {units.map((u) => (
+              <SelectItem key={u.unitId} value={u.unitId}>
+                {u.unitName}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
     </div>
   );
 }

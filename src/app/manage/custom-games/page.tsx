@@ -1,12 +1,19 @@
 "use client";
 
-// /manage/custom-games — 나만의 게임 (메커닉별 카드 + 풀기 CTA).
+// /manage/custom-games — 나만의 게임 (메커닉별 카드 + 풀기 CTA). shadcn.
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
-import { loadCounts, type CustomCounts, type CustomCardKind } from "@/lib/core";
+import {
+  loadCounts,
+  type CustomCounts,
+  type CustomCardKind,
+} from "@/lib/core";
 import { games } from "@/lib/games/registry";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 const KIND_TO_GAME_ID: Record<CustomCardKind, string> = {
   "multiple-choice": "custom-multiple-choice",
@@ -44,7 +51,7 @@ export default function CustomGamesPage() {
 
   if (counts.cards === 0) {
     return (
-      <div className="rounded-block border border-dashed border-border-hairline bg-bg-block p-8 text-center">
+      <Card className="rounded-block border-dashed border-border-hairline bg-bg-block p-8 text-center shadow-none">
         <span
           aria-hidden="true"
           className="mx-auto flex h-10 w-10 items-center justify-center rounded-button bg-accent-positive/10 text-accent-positive"
@@ -57,14 +64,18 @@ export default function CustomGamesPage() {
         <p className="mt-2 text-helper text-type-secondary">
           관리 → 콘텐츠에서 첫 카드를 만들어 보세요.
         </p>
-        <Link
-          href="/manage/content"
-          className="mt-4 inline-flex items-center gap-1.5 rounded-button border border-type-primary bg-bg-block px-3 py-2 text-helper font-medium text-type-primary hover:bg-accent-positive/10"
+        <Button
+          asChild
+          variant="outline"
+          size="sm"
+          className="mt-4 gap-1.5 rounded-button border-type-primary bg-bg-block text-helper font-medium text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
         >
-          카드 만들기
-          <ArrowRight className="h-3 w-3" />
-        </Link>
-      </div>
+          <Link href="/manage/content">
+            카드 만들기
+            <ArrowRight className="h-3 w-3" />
+          </Link>
+        </Button>
+      </Card>
     );
   }
 
@@ -83,21 +94,22 @@ export default function CustomGamesPage() {
         const Icon = game.meta.icon;
         const isPlayable = cardCount > 0;
         return (
-          <div
+          <Card
             key={kind}
-            className="flex items-center gap-3 rounded-block border border-border-hairline bg-bg-block px-4 py-3"
+            className="flex items-center gap-3 rounded-block border-border-hairline bg-bg-block px-4 py-3 shadow-none"
           >
             <span
               aria-hidden="true"
-              className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-button ${
+              className={cn(
+                "flex h-10 w-10 shrink-0 items-center justify-center rounded-button",
                 isPlayable
                   ? "bg-accent-positive/10 text-accent-positive"
-                  : "bg-pullim-slate-100 text-pullim-slate-500"
-              }`}
+                  : "bg-pullim-slate-100 text-pullim-slate-500",
+              )}
             >
               <Icon className="h-5 w-5" strokeWidth={2} />
             </span>
-            <div className="flex-1 min-w-0">
+            <div className="min-w-0 flex-1">
               <p className="text-label font-bold text-type-primary">
                 {KIND_LABEL[kind]}
               </p>
@@ -106,18 +118,22 @@ export default function CustomGamesPage() {
               </p>
             </div>
             {isPlayable ? (
-              <Link
-                href={`/games/${gameId}`}
-                className="inline-flex items-center gap-1 rounded-button border border-type-primary bg-bg-block px-3 py-1.5 text-helper font-medium text-type-primary hover:bg-accent-positive/10"
+              <Button
+                asChild
+                variant="outline"
+                size="sm"
+                className="gap-1 rounded-button border-type-primary bg-bg-block text-helper font-medium text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
               >
-                풀기 <ArrowRight className="h-3 w-3" />
-              </Link>
+                <Link href={`/games/${gameId}`}>
+                  풀기 <ArrowRight className="h-3 w-3" />
+                </Link>
+              </Button>
             ) : (
               <span className="text-helper text-type-secondary">
                 카드 없음
               </span>
             )}
-          </div>
+          </Card>
         );
       })}
     </div>

@@ -1,7 +1,6 @@
 "use client";
 
 // /manage — 관리 홈 (대시보드).
-// `2026-05-08_management.md` §5.2 따름.
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -9,6 +8,8 @@ import { ArrowRight, BookOpen, Folder, Layers } from "lucide-react";
 import { loadCounts, type CustomCounts } from "@/lib/core";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { DataPortability } from "@/components/manage/DataPortability";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 export default function ManageHomePage() {
   const [counts, setCounts] = useState<CustomCounts | null>(null);
@@ -38,10 +39,7 @@ export default function ManageHomePage() {
 
   return (
     <div className="flex flex-col gap-6">
-      <section
-        aria-label="관리 통계"
-        className="grid grid-cols-3 gap-3"
-      >
+      <section aria-label="관리 통계" className="grid grid-cols-3 gap-3">
         <StatCard
           icon={Folder}
           label="과목"
@@ -65,28 +63,34 @@ export default function ManageHomePage() {
         aria-label="빠른 진입"
         className="grid grid-cols-1 gap-2.5 sm:grid-cols-2"
       >
-        <Link
-          href="/manage/content"
-          className="group flex items-center justify-between rounded-block border border-type-primary bg-bg-block px-5 py-4 text-body text-type-primary transition-colors hover:bg-accent-positive/10"
+        <Button
+          asChild
+          variant="outline"
+          className="group h-auto justify-between rounded-block border-type-primary bg-bg-block px-5 py-4 text-body text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
         >
-          <span>+ 카드 추가</span>
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </Link>
-        <Link
-          href="/manage/custom-games"
-          className="group flex items-center justify-between rounded-block border border-border-hairline bg-bg-block px-5 py-4 text-body text-type-primary transition-colors hover:border-type-primary"
+          <Link href="/manage/content">
+            <span>+ 카드 추가</span>
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </Button>
+        <Button
+          asChild
+          variant="outline"
+          className="group h-auto justify-between rounded-block border-border-hairline bg-bg-block px-5 py-4 text-body text-type-primary hover:border-type-primary hover:bg-bg-block hover:text-type-primary"
         >
-          <span>내 게임 보기</span>
-          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-        </Link>
+          <Link href="/manage/custom-games">
+            <span>내 게임 보기</span>
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </Button>
       </section>
 
       <DataPortability onAfterImport={refresh} />
 
       {isEmpty && (
-        <section
+        <Card
           aria-label="시작 가이드"
-          className="rounded-block border border-border-hairline bg-bg-block p-5"
+          className="rounded-block border-border-hairline bg-bg-block p-5 shadow-none"
         >
           <h2 className="text-base font-bold text-type-primary">
             첫 카드까지 4단계
@@ -109,14 +113,18 @@ export default function ManageHomePage() {
               — 게임 허브의 "나만의 게임" 또는 관리 → 내 게임에서
             </li>
           </ol>
-          <Link
-            href="/manage/subjects"
-            className="mt-4 inline-flex items-center gap-1.5 rounded-button border border-type-primary bg-bg-block px-3 py-2 text-helper font-medium text-type-primary hover:bg-accent-positive/10"
+          <Button
+            asChild
+            variant="outline"
+            size="sm"
+            className="mt-4 gap-1.5 rounded-button border-type-primary bg-bg-block text-helper font-medium text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
           >
-            과목 만들기
-            <ArrowRight className="h-3 w-3" />
-          </Link>
-        </section>
+            <Link href="/manage/subjects">
+              과목 만들기
+              <ArrowRight className="h-3 w-3" />
+            </Link>
+          </Button>
+        </Card>
       )}
     </div>
   );

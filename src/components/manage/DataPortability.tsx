@@ -1,7 +1,6 @@
 "use client";
 
-// 데이터 내보내기 / 가져오기 — `2026-05-08_management.md` §4.7 / Phase M6.
-// JSON 파일 download + file input upload.
+// 데이터 내보내기 / 가져오기 — JSON 파일 download + upload. shadcn 컴포넌트.
 
 import { useRef, useState } from "react";
 import { Download, Upload } from "lucide-react";
@@ -10,6 +9,8 @@ import {
   importCustomData,
   type CustomDataExport,
 } from "@/lib/core";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 interface Props {
   onAfterImport?: () => void;
@@ -42,7 +43,10 @@ export function DataPortability({ onAfterImport }: Props) {
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
-      notify("ok", "데이터를 내보냈어요. 다른 디바이스에서 가져오기로 복원할 수 있어요.");
+      notify(
+        "ok",
+        "데이터를 내보냈어요. 다른 디바이스에서 가져오기로 복원할 수 있어요.",
+      );
     } catch (e) {
       notify(
         "error",
@@ -57,11 +61,10 @@ export function DataPortability({ onAfterImport }: Props) {
 
   function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
-    e.target.value = ""; // reset
+    e.target.value = "";
     if (!file) return;
     const reader = new FileReader();
-    reader.onerror = () =>
-      notify("error", "파일을 읽는 중 오류가 생겼어요.");
+    reader.onerror = () => notify("error", "파일을 읽는 중 오류가 생겼어요.");
     reader.onload = () => {
       try {
         const text = String(reader.result ?? "");
@@ -85,34 +88,38 @@ export function DataPortability({ onAfterImport }: Props) {
   }
 
   return (
-    <section
+    <Card
       aria-label="데이터 백업"
-      className="flex flex-col gap-3 rounded-block border border-border-hairline bg-bg-block p-4"
+      className="flex flex-col gap-3 rounded-block border-border-hairline bg-bg-block p-4 shadow-none"
     >
       <header>
         <h2 className="text-label font-bold text-type-primary">데이터 백업</h2>
         <p className="mt-1 text-helper text-type-secondary">
-          내 콘텐츠를 JSON 파일로 내보내거나 다른 디바이스에서 가져와요.
-          서버 동기화는 V2 풀림 SSO 시점에.
+          내 콘텐츠를 JSON 파일로 내보내거나 다른 디바이스에서 가져와요. 서버
+          동기화는 V2 풀림 SSO 시점에.
         </p>
       </header>
       <div className="flex flex-wrap gap-2">
-        <button
+        <Button
           type="button"
+          variant="outline"
+          size="sm"
           onClick={handleExport}
-          className="inline-flex items-center gap-1.5 rounded-button border border-border-hairline bg-bg-primary px-3 py-2 text-helper font-medium text-type-primary hover:border-type-primary"
+          className="gap-1.5 rounded-button border-border-hairline bg-bg-primary text-helper font-medium text-type-primary hover:border-type-primary hover:bg-bg-primary hover:text-type-primary"
         >
           <Download className="h-3.5 w-3.5" />
           내보내기 (JSON)
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
+          variant="outline"
+          size="sm"
           onClick={handleImportClick}
-          className="inline-flex items-center gap-1.5 rounded-button border border-border-hairline bg-bg-primary px-3 py-2 text-helper font-medium text-type-primary hover:border-type-primary"
+          className="gap-1.5 rounded-button border-border-hairline bg-bg-primary text-helper font-medium text-type-primary hover:border-type-primary hover:bg-bg-primary hover:text-type-primary"
         >
           <Upload className="h-3.5 w-3.5" />
           가져오기 (JSON)
-        </button>
+        </Button>
         <input
           ref={fileInputRef}
           type="file"
@@ -134,6 +141,6 @@ export function DataPortability({ onAfterImport }: Props) {
           {message.text}
         </p>
       )}
-    </section>
+    </Card>
   );
 }

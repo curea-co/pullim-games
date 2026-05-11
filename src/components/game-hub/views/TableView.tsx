@@ -5,6 +5,7 @@ import { ArrowRight, Lock } from "lucide-react";
 import type { GameManifest } from "@/lib/games/types";
 import type { ProgressLookup } from "@/lib/games/filter";
 import type { PerGameStat } from "@/lib/core";
+import { Button } from "@/components/ui/button";
 
 interface Props {
   games: GameManifest[];
@@ -84,13 +85,17 @@ export function TableView({ games, perGame }: Props) {
                 </td>
                 <td className="whitespace-nowrap px-3 py-2.5 text-right">
                   {isAvailable ? (
-                    <Link
-                      href={`/games/${g.meta.id}`}
-                      className="inline-flex items-center gap-1 rounded-button border border-type-primary bg-bg-block px-2.5 py-1 text-helper font-medium text-type-primary hover:bg-accent-positive/10"
+                    <Button
+                      asChild
+                      variant="outline"
+                      size="sm"
                       aria-label={`${g.meta.title} 시작`}
+                      className="h-7 gap-1 rounded-button border-type-primary bg-bg-block px-2.5 text-helper font-medium text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
                     >
-                      시작 <ArrowRight className="h-3 w-3" />
-                    </Link>
+                      <Link href={`/games/${g.meta.id}`}>
+                        시작 <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    </Button>
                   ) : (
                     <span className="inline-flex items-center gap-1 text-type-secondary/60">
                       <Lock className="h-3 w-3" /> 잠금

@@ -1,6 +1,6 @@
 "use client";
 
-// 메커닉 선택 — 4 카드 (객관식·빈칸·타이핑·매칭).
+// 메커닉 선택 — 4 카드 (객관식·빈칸·타이핑·매칭). shadcn ToggleGroup 사용.
 
 import {
   Pencil,
@@ -9,8 +9,8 @@ import {
   Link2,
   type LucideIcon,
 } from "lucide-react";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import type { CustomCardKind } from "@/lib/core";
-import { cn } from "@/lib/utils";
 
 const OPTIONS: Array<{
   kind: CustomCardKind;
@@ -46,32 +46,26 @@ interface Props {
 
 export function MechanicPicker({ value, onChange }: Props) {
   return (
-    <div className="grid grid-cols-2 gap-2">
+    <ToggleGroup
+      type="single"
+      value={value ?? ""}
+      onValueChange={(v) => v && onChange(v as CustomCardKind)}
+      aria-label="게임 메커닉"
+      className="grid grid-cols-2 gap-2"
+    >
       {OPTIONS.map((opt) => {
         const Icon = opt.icon;
-        const isActive = value === opt.kind;
         return (
-          <button
+          <ToggleGroupItem
             key={opt.kind}
-            type="button"
-            onClick={() => onChange(opt.kind)}
-            aria-pressed={isActive}
-            className={cn(
-              "flex flex-col items-start gap-1 rounded-block border bg-bg-block p-3 text-left transition-colors",
-              isActive
-                ? "border-type-primary bg-accent-positive/5"
-                : "border-border-hairline hover:border-type-primary/30",
-            )}
+            value={opt.kind}
+            aria-label={opt.label}
+            className="flex h-auto flex-col items-start gap-1 rounded-block border border-border-hairline bg-bg-block p-3 text-left text-type-primary transition-colors hover:border-type-primary/30 hover:bg-bg-block hover:text-type-primary data-[state=on]:border-type-primary data-[state=on]:bg-accent-positive/5"
           >
             <span className="flex items-center gap-2">
               <span
                 aria-hidden="true"
-                className={cn(
-                  "flex h-7 w-7 items-center justify-center rounded-button",
-                  isActive
-                    ? "bg-accent-positive/10 text-accent-positive"
-                    : "bg-pullim-slate-100 text-pullim-slate-600",
-                )}
+                className="flex h-7 w-7 items-center justify-center rounded-button bg-pullim-slate-100 text-pullim-slate-600 group-data-[state=on]:bg-accent-positive/10 group-data-[state=on]:text-accent-positive"
               >
                 <Icon className="h-4 w-4" strokeWidth={2} />
               </span>
@@ -79,10 +73,12 @@ export function MechanicPicker({ value, onChange }: Props) {
                 {opt.label}
               </span>
             </span>
-            <span className="text-helper text-type-secondary">{opt.desc}</span>
-          </button>
+            <span className="text-helper font-normal text-type-secondary">
+              {opt.desc}
+            </span>
+          </ToggleGroupItem>
         );
       })}
-    </div>
+    </ToggleGroup>
   );
 }
