@@ -17,6 +17,7 @@ const manifest: GameManifest = {
     icon: FlaskConical,
     mechanic: "manipulation",
     retrievalDepth: "deep",
+    previewImagePath: "/previews/chemistry-balance.png",
   },
   loadComponent: () => import("./component"),
 };

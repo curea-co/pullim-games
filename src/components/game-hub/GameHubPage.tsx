@@ -20,6 +20,7 @@ import {
 import { ViewToggle, type GameHubView } from "./ViewToggle";
 import { GridView } from "./views/GridView";
 import { ListView } from "./views/ListView";
+import { PreviewView } from "./views/PreviewView";
 import { TableView } from "./views/TableView";
 import { ThumbnailView } from "./views/ThumbnailView";
 import { FilterContents } from "./FilterContents";
@@ -28,7 +29,13 @@ import { CustomGamesSection } from "./CustomGamesSection";
 import { RecommendationCard } from "@/components/RecommendationCard";
 
 const VIEW_STORAGE_KEY = "pullim-games:hub:view";
-const VALID_VIEWS: GameHubView[] = ["grid", "list", "table", "thumbnail"];
+const VALID_VIEWS: GameHubView[] = [
+  "grid",
+  "list",
+  "table",
+  "thumbnail",
+  "preview",
+];
 
 function parseView(raw: string | null): GameHubView {
   return VALID_VIEWS.includes(raw as GameHubView)
@@ -252,5 +259,7 @@ function ResultView({ view, games, progress, perGame }: ResultViewProps) {
       return <TableView games={games} progress={progress} perGame={perGame} />;
     case "thumbnail":
       return <ThumbnailView games={games} progress={progress} />;
+    case "preview":
+      return <PreviewView games={games} progress={progress} />;
   }
 }

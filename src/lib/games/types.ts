@@ -57,6 +57,14 @@ export interface GameMeta {
 
   /** 게임별 OG 카드 경로 (V2 — V1은 공통 OG 사용 가능) */
   ogImagePath?: string;
+
+  /**
+   * 게임 허브 미리보기 자산 (V1 옵션 A — 5번째 view "미리보기").
+   * public/ 기준 경로. 권장: 640×400 (16:10) PNG/WebP, 100KB 이내.
+   * 누락 시 PreviewView 가 fallback (아이콘 + "미리보기 준비 중") 렌더.
+   * proc/archive/plan/2026-05-11_game-preview.md §3.1.
+   */
+  previewImagePath?: string;
 }
 
 /**

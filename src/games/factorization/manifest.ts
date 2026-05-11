@@ -16,6 +16,7 @@ const manifest: GameManifest = {
     icon: Variable,
     mechanic: "manipulation",
     retrievalDepth: "deep",
+    previewImagePath: "/previews/factorization.png",
   },
   // 동적 import — Next.js 가 게임별 청크 분할 처리.
   loadComponent: () => import("./component"),

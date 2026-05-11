@@ -17,6 +17,7 @@ const manifest: GameManifest = {
     icon: CircleDot,
     mechanic: "multiple-choice",
     retrievalDepth: "shallow",
+    previewImagePath: "/previews/custom-multiple-choice.png",
   },
   loadComponent: () => import("./component"),
 };

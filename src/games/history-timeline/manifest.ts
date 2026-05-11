@@ -17,6 +17,7 @@ const manifest: GameManifest = {
     icon: Clock,
     mechanic: "sorting",
     retrievalDepth: "medium",
+    previewImagePath: "/previews/history-timeline.png",
   },
   loadComponent: () => import("./component"),
 };

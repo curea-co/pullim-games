@@ -17,6 +17,7 @@ const manifest: GameManifest = {
     icon: TrendingUp,
     mechanic: "manipulation",
     retrievalDepth: "deep",
+    previewImagePath: "/previews/math-graph-shift.png",
   },
   loadComponent: () => import("./component"),
 };

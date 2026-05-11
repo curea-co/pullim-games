@@ -2,10 +2,15 @@
 
 // 게임 허브 뷰 전환 토글 — shadcn ToggleGroup.
 
-import { Grid3x3, LayoutGrid, List, Table } from "lucide-react";
+import { Grid3x3, Image as ImageIcon, LayoutGrid, List, Table } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-export type GameHubView = "grid" | "list" | "table" | "thumbnail";
+export type GameHubView =
+  | "grid"
+  | "list"
+  | "table"
+  | "thumbnail"
+  | "preview";
 
 const OPTIONS: Array<{
   value: GameHubView;
@@ -16,6 +21,7 @@ const OPTIONS: Array<{
   { value: "list", label: "리스트", icon: List },
   { value: "table", label: "테이블", icon: Table },
   { value: "thumbnail", label: "썸네일", icon: LayoutGrid },
+  { value: "preview", label: "미리보기", icon: ImageIcon },
 ];
 
 interface Props {

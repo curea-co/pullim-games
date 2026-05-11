@@ -17,6 +17,7 @@ const manifest: GameManifest = {
     icon: Move,
     mechanic: "manipulation",
     retrievalDepth: "deep",
+    previewImagePath: "/previews/physics-vector.png",
   },
   loadComponent: () => import("./component"),
 };

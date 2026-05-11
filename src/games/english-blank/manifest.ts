@@ -17,6 +17,7 @@ const manifest: GameManifest = {
     icon: Pencil,
     mechanic: "multiple-choice",
     retrievalDepth: "deep",
+    previewImagePath: "/previews/english-blank.png",
   },
   loadComponent: () => import("./component"),
 };
