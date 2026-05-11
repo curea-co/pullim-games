@@ -7,6 +7,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { GameShell } from "@/components/game-shell";
 import { getCardSequence } from "./content";
 import {
   loadAllSrsStates,
@@ -173,30 +174,34 @@ export default function MathGraphShiftGame() {
   const currentEq = `y = ${aStr}${hStr}²${kStr}`;
 
   return (
-    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-6">
-      <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>
-          {cardIndex + 1} / {cards.length}
-        </span>
-        <Link
-          href="/"
-          aria-label="메인으로"
-          className="rounded-button px-2 py-1 hover:text-type-primary"
-        >
-          ≡
-        </Link>
-      </header>
+    <GameShell
+      variant="split"
+      header={
+        <div className="flex items-center justify-between text-label tabular text-type-secondary">
+          <span>
+            {cardIndex + 1} / {cards.length}
+          </span>
+          <Link
+            href="/"
+            aria-label="메인으로"
+            className="rounded-button px-2 py-1 hover:text-type-primary"
+          >
+            ≡
+          </Link>
+        </div>
+      }
+      content={
+        <>
+          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
+          <h1 className="mt-2 text-display text-type-primary">
+            {card.problem.startEquation} → {card.problem.targetEquation}
+          </h1>
+          {card.hint && (
+            <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
 
-      <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
-      <h1 className="mt-2 text-display text-type-primary">
-        {card.problem.startEquation} → {card.problem.targetEquation}
-      </h1>
-      {card.hint && (
-        <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
-      )}
-
-      {/* SVG 좌표평면 */}
-      <motion.section
+          {/* SVG 좌표평면 */}
+          <motion.div
         className="mx-auto mt-6"
         animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
         transition={{ duration: 0.36 }}
@@ -258,14 +263,14 @@ export default function MathGraphShiftGame() {
             strokeWidth={2.5}
           />
         </svg>
-      </motion.section>
+      </motion.div>
 
       <p className="mt-3 text-center text-label tabular text-type-primary">
         지금: <span className="font-bold">{currentEq}</span>
       </p>
 
       {/* 컨트롤 */}
-      <section className="mt-4 flex flex-col gap-2">
+      <div className="mt-4 flex flex-col gap-2">
         <Slider
           label="a (계수)"
           value={a}
@@ -293,16 +298,17 @@ export default function MathGraphShiftGame() {
           onInc={() => bump(setK, k, +1, HK_MIN, HK_MAX, "k")}
           disabled={phase !== "playing"}
         />
-      </section>
+      </div>
 
       {wrongCount > 0 && phase !== "correct" && (
         <p className="mt-2 text-center text-helper tabular text-type-secondary">
           오답 {wrongCount}회
         </p>
       )}
-
-      <footer className="mt-auto pt-4">
-        {phase === "correct" ? (
+        </>
+      }
+      cta={
+        phase === "correct" ? (
           <button
             type="button"
             onClick={handleNext}
@@ -319,15 +325,16 @@ export default function MathGraphShiftGame() {
           >
             확인
           </button>
-        )}
-      </footer>
-
-      <span className="sr-only" aria-live="polite">
-        {phase === "playing" && `현재 식: ${currentEq}`}
-        {phase === "wrong" && "그래프가 일치하지 않아요"}
-        {phase === "correct" && "정답이에요. 그래프가 일치했어요"}
-      </span>
-    </main>
+        )
+      }
+      liveRegion={
+        <span className="sr-only" aria-live="polite">
+          {phase === "playing" && `현재 식: ${currentEq}`}
+          {phase === "wrong" && "그래프가 일치하지 않아요"}
+          {phase === "correct" && "정답이에요. 그래프가 일치했어요"}
+        </span>
+      }
+    />
   );
 }
 

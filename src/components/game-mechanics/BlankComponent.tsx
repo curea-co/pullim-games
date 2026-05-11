@@ -6,6 +6,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { GameShell } from "@/components/game-shell";
 import {
   loadAllSrsStates,
   loadSrsState,
@@ -170,65 +171,70 @@ export function BlankComponent({
   const isCorrect = picked === card.problem.correctIndex;
 
   return (
-    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-6">
-      <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>
-          {cardIndex + 1} / {cards.length}
-        </span>
-        <Link
-          href={homeHref}
-          aria-label="메인으로"
-          className="rounded-button px-2 py-1 hover:text-type-primary"
-        >
-          ≡
-        </Link>
-      </header>
+    <GameShell
+      variant="split"
+      header={
+        <div className="flex items-center justify-between text-label tabular text-type-secondary">
+          <span>
+            {cardIndex + 1} / {cards.length}
+          </span>
+          <Link
+            href={homeHref}
+            aria-label="메인으로"
+            className="rounded-button px-2 py-1 hover:text-type-primary"
+          >
+            ≡
+          </Link>
+        </div>
+      }
+      content={
+        <>
+          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
+          <h1 className="mt-2 text-label text-type-secondary">빈칸에 알맞은 말은?</h1>
 
-      <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
-      <h1 className="mt-2 text-label text-type-secondary">빈칸에 알맞은 말은?</h1>
+          <motion.div
+            className="mt-3 rounded-block border border-border-hairline bg-bg-block p-4 text-body leading-relaxed text-type-primary"
+            animate={
+              phase === "feedback" && !isCorrect
+                ? { x: [0, -4, 4, -4, 4, 0] }
+                : { x: 0 }
+            }
+            transition={{ duration: 0.32 }}
+          >
+            {passageNodes}
+          </motion.div>
 
-      <motion.section
-        className="mt-3 rounded-block border border-border-hairline bg-bg-block p-4 text-body leading-relaxed text-type-primary"
-        animate={
-          phase === "feedback" && !isCorrect
-            ? { x: [0, -4, 4, -4, 4, 0] }
-            : { x: 0 }
-        }
-        transition={{ duration: 0.32 }}
-      >
-        {passageNodes}
-      </motion.section>
+          {card.hint && phase === "playing" && (
+            <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
 
-      {card.hint && phase === "playing" && (
-        <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
-      )}
+          <div className="mt-4 flex flex-col gap-2">
+            {card.problem.choices.map((choice, idx) => (
+              <ChoiceButton
+                key={`${cardIndex}-${idx}`}
+                label={choice}
+                picked={picked === idx}
+                correct={idx === card.problem.correctIndex}
+                phase={phase}
+                onClick={() => handlePick(idx)}
+              />
+            ))}
+          </div>
 
-      <section className="mt-4 flex flex-col gap-2">
-        {card.problem.choices.map((choice, idx) => (
-          <ChoiceButton
-            key={`${cardIndex}-${idx}`}
-            label={choice}
-            picked={picked === idx}
-            correct={idx === card.problem.correctIndex}
-            phase={phase}
-            onClick={() => handlePick(idx)}
-          />
-        ))}
-      </section>
-
-      {phase === "feedback" && card.problem.rationale && (
-        <motion.p
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15 }}
-          className="mt-3 rounded-block border border-border-hairline bg-bg-primary p-3 text-helper leading-relaxed text-type-secondary"
-        >
-          해설 · {card.problem.rationale}
-        </motion.p>
-      )}
-
-      <footer className="mt-auto pt-4">
-        {phase === "feedback" ? (
+          {phase === "feedback" && card.problem.rationale && (
+            <motion.p
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 }}
+              className="mt-3 rounded-block border border-border-hairline bg-bg-primary p-3 text-helper leading-relaxed text-type-secondary"
+            >
+              해설 · {card.problem.rationale}
+            </motion.p>
+          )}
+        </>
+      }
+      cta={
+        phase === "feedback" ? (
           <button
             type="button"
             onClick={handleNext}
@@ -244,15 +250,16 @@ export function BlankComponent({
           >
             보기를 골라주세요
           </button>
-        )}
-      </footer>
-
-      <span className="sr-only" aria-live="polite">
-        {phase === "playing" && "보기를 골라주세요"}
-        {phase === "feedback" &&
-          (isCorrect ? "정답이에요" : "정답은 다른 보기였어요")}
-      </span>
-    </main>
+        )
+      }
+      liveRegion={
+        <span className="sr-only" aria-live="polite">
+          {phase === "playing" && "보기를 골라주세요"}
+          {phase === "feedback" &&
+            (isCorrect ? "정답이에요" : "정답은 다른 보기였어요")}
+        </span>
+      }
+    />
   );
 }
 
