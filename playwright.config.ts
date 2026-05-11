@@ -7,7 +7,7 @@
 
 import { defineConfig, devices } from "@playwright/test";
 
-const PORT = 3000;
+const PORT = 3033;
 const baseURL = `http://localhost:${PORT}`;
 
 export default defineConfig({
@@ -25,7 +25,7 @@ export default defineConfig({
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
   ],
   webServer: {
-    command: "npm run build && npm run start",
+    command: "bun run build && bun run start",
     url: baseURL,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,

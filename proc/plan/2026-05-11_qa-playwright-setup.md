@@ -101,15 +101,15 @@ export default defineConfig({
   workers: process.env.CI ? 4 : undefined,
   reporter: process.env.CI ? "github" : "list",
   use: {
-    baseURL: "http://localhost:3000",
+    baseURL: "http://localhost:3033",
     trace: "retain-on-failure",
   },
   projects: [
     { name: "chromium", use: { ...devices["Desktop Chrome"] } },
   ],
   webServer: {
-    command: "npm run build && npm run start",
-    url: "http://localhost:3000",
+    command: "bun run build && bun run start",
+    url: "http://localhost:3033",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
   },
@@ -233,19 +233,18 @@ e2e:
   runs-on: ubuntu-latest
   steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
+    - uses: oven-sh/setup-bun@v2
       with:
-        node-version: "22"
-        cache: npm
-    - run: npm ci
-    - run: npm run gen:registry
+        bun-version: latest
+    - run: bun install --frozen-lockfile
+    - run: bun run gen:registry
     - name: Cache Playwright browsers
       uses: actions/cache@v4
       with:
         path: ~/.cache/ms-playwright
-        key: pw-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
-    - run: npx playwright install --with-deps chromium
-    - run: npm run test:e2e
+        key: pw-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+    - run: bunx playwright install --with-deps chromium
+    - run: bun run test:e2e
     - if: failure()
       uses: actions/upload-artifact@v4
       with:
@@ -346,7 +345,7 @@ JIT 컴파일 변경 시 클래스명 변할 가능성.
 → `actions/cache@v4` 로 package-lock.json 해시 키. CI 첫 통합 시 한 번만 무거움.
 
 **위험 6 — production build 시간**
-`npm run build` + `npm run start` 가 e2e job 안에서 다시 도는 비효율. build job 산출물 재사용 가능.
+`bun run build` + `bun run start` 가 e2e job 안에서 다시 도는 비효율. build job 산출물 재사용 가능.
 → Phase 1 은 단순함을 위해 e2e 안에서 다시 build. Phase 2 에서 artifact 공유 최적화.
 
 ## 9. 작업 항목 / 진행
@@ -354,12 +353,12 @@ JIT 컴파일 변경 시 클래스명 변할 가능성.
 ### Phase 1 — 셋업 + CTA visibility
 
 - [x] feature 브랜치 `feat/e2e-playwright-setup`
-- [x] `npm install -D @playwright/test` + `npx playwright install chromium` (로컬). CI 는 `--with-deps`.
+- [x] `bun add -D @playwright/test` + `bunx playwright install chromium` (로컬). CI 는 `--with-deps`.
 - [x] `playwright.config.ts` 작성 (§4.2)
 - [x] `e2e/helpers/games.ts` — 10 official 게임 메타 (custom 제외)
 - [x] `e2e/helpers/viewports.ts` — 6 viewport + `strictCta` 분기 메타
 - [x] `e2e/viewport.spec.ts` — page 200 + CTA visibility + console error + strictCta 분기
-- [x] 로컬 `npm run test:e2e` — **60/60 green (21.1초)**
+- [x] 로컬 `bun run test:e2e` — **60/60 green (21.1초)**
 - [x] `package.json` script 추가 (`test:e2e`, `test:e2e:ui`)
 - [x] `.gitignore` — `playwright-report/`, `test-results/`, `playwright/.cache` 추가
 - [x] `.github/workflows/ci.yml` — `e2e` job 추가 (validate 후, build 와 병렬), Playwright 버전 기반 browser 캐시, 실패 시 report artifact 업로드 (retention 7일)

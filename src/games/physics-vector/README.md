@@ -10,8 +10,8 @@
 ## 시작하기
 
 1. **이 디렉토리만 작업하세요.** `src/lib/core/` 변경이 필요하면 별도 PR.
-2. `npm run dev` → `http://localhost:3000/games/physics-vector` 에서 확인.
-3. 테스트: `npm test -- src/games/physics-vector/`
+2. `bun run dev` → `http://localhost:3033/games/physics-vector` 에서 확인.
+3. 테스트: `bun run test -- src/games/physics-vector/`
 
 ## 핵심 명제
 
