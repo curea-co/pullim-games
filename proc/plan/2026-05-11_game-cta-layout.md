@@ -342,11 +342,66 @@ Phase 2~3 디자인 검토에 시간 걸린다면 Phase 1 만 머지하고 추�
 
 각 phase 가 독립 머지 가능 → 위험 분산 + 빠른 사용자 가치 전달.
 
-## 8. 산출물
+## 8. 작업 항목 / 진행
+
+### Phase 1 — viewport fix (PR [#11](https://github.com/curea-co/pullim-games/pull/11))
+
+- [x] feature 브랜치 `fix/game-cta-layout-phase1` 생성
+- [x] AppShell children wrapper 에 `h-[calc(100%-2.25rem)]` 보강 — [src/components/shell/app-shell.tsx](src/components/shell/app-shell.tsx)
+- [x] 14 게임 main 클래스 일괄 수정 (`min-h-dvh → min-h-full`, `py-8 → py-6`) — sed 처리, 26 occurrences across 11 files
+  - 자체 게임 7종: factorization, math-graph-shift, physics-vector, chemistry-balance, history-timeline, english-order, english-word-match
+  - mechanics 4종 (mechanic 호출 게임 자동 적용): BlankComponent, QuickQuizComponent, TypingComponent, WordMatchComponent
+- [x] 완료 화면 `py-10` 보존 (콘텐츠 짧음, 시각 호흡 유지)
+- [x] `bun run lint` · `bun run typecheck` 통과
+- [x] PR #11 생성
+- [ ] PR #11 dev 머지
+- [ ] Playwright 자동 검증 84 케이스 (별 후속 작업 — 본 plan §5.1 의 스크립트 도입)
+
+### Phase 2 — GameShell wrapper + stack/match (PR [#12](https://github.com/curea-co/pullim-games/pull/12))
+
+- [x] feature 브랜치 `feat/game-shell-wrapper` 생성 (Phase 1 위에 stack)
+- [x] `src/components/game-shell/GameShell.tsx` 신규 — `header / content / cta / liveRegion + variant` 인터페이스
+- [x] `src/components/game-shell/index.ts` re-export
+- [x] factorization → `variant="stack"` 전환
+- [x] english-word-match → `variant="match"` 전환
+- [x] WordMatchComponent (mechanics) → `variant="match"` 전환 (custom-word-match 자동 적용)
+- [x] `bun run typecheck` · `lint` · `build` 통과
+- [x] PR #12 생성
+- [ ] PR #12 dev 머지 (Phase 1 머지 후)
+
+### Phase 3 — split variant 11 게임 (PR [#13](https://github.com/curea-co/pullim-games/pull/13))
+
+- [x] feature 브랜치 `feat/game-shell-split-layout` 생성 (Phase 2 위에 stack)
+- [x] 자체 게임 5종 `variant="split"` 전환
+  - [x] math-graph-shift
+  - [x] physics-vector
+  - [x] chemistry-balance
+  - [x] history-timeline
+  - [x] english-order
+- [x] mechanics 3종 `variant="split"` 전환 (호출 게임 6 자동 적용)
+  - [x] QuickQuizComponent → math-quick-quiz, custom-multiple-choice
+  - [x] BlankComponent → english-blank, custom-blank
+  - [x] TypingComponent → vocab-typing, custom-typing
+- [x] `bun run typecheck` · `lint` · `build` 통과 (26 static pages 정상)
+- [x] PR #13 생성
+- [ ] PR #13 dev 머지 (Phase 2 머지 후)
+- [ ] **디자인 회귀 검증** (수동) — §5.3 체크리스트 + §5.2 좌우 분할 시각
+  - [ ] 게임별 우측 영역 콘텐츠 적합성 (빈 공간 / 가독성)
+  - [ ] 1023→1024px breakpoint 점프 jarring 여부
+  - [ ] 필요 시 게임별 `splitRatio` override 또는 minimal split 조정
+
+### 마무리
+
+- [ ] 3개 PR 모두 dev 머지 완료
+- [ ] dev → main 머지 + 배포 검증
+- [ ] 본 plan → `proc/archive/plan/2026-05-11_game-cta-layout.md` 로 이동
+
+## 9. 산출물
 
 - `src/components/game-shell/GameShell.tsx` (Phase 2 신규)
 - `src/components/game-shell/index.ts`
-- `src/games/*/Component.tsx` × 14 (Phase 1 클래스 수정 → Phase 2~3 wrapper 호출)
+- `src/games/*/component.tsx` × 7 (Phase 1 클래스 수정 → Phase 2~3 wrapper 호출)
+- `src/components/game-mechanics/*` × 4 (Phase 1 클래스 → Phase 2~3 wrapper 호출 — 호출 게임 7종 자동 적용)
 - `src/components/shell/app-shell.tsx` — children wrapper 1줄 (Phase 1)
-- `scripts/qa/check-game-cta-visibility.spec.ts` (Phase 1 도입, Phase 3 확장)
+- `scripts/qa/check-game-cta-visibility.spec.ts` (도입 보류 — 별 후속 작업)
 - 본 plan → 완료 후 `proc/archive/plan/2026-05-11_game-cta-layout.md` archive
