@@ -65,12 +65,15 @@ function NavRow({ item, isActive, onNavigate, compact }: NavRowProps) {
           "group flex items-center gap-2 rounded-lg text-sm font-medium transition-colors",
           compact ? "h-11 w-full justify-center" : "min-h-11 px-2 py-2",
           isActive
-            ? "bg-pullim-blue-50 text-pullim-blue-700"
+            ? "bg-accent-positive/10 font-semibold text-pullim-slate-900"
             : "text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900",
         )}
       >
         <Icon
-          className={cn("h-4 w-4 shrink-0", isActive && "stroke-[2.4]")}
+          className={cn(
+            "h-4 w-4 shrink-0",
+            isActive && "stroke-[2.4] text-accent-positive",
+          )}
         />
         {!compact && (
           <>
