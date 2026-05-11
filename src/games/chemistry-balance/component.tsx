@@ -7,6 +7,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { GameShell } from "@/components/game-shell";
 import { getCardSequence } from "./content";
 import { allElements, isBalanced, sumSide } from "./logic/parse";
 import {
@@ -176,28 +177,32 @@ export default function ChemistryBalanceGame() {
   }
 
   return (
-    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-6">
-      <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>
-          {cardIndex + 1} / {cards.length}
-        </span>
-        <Link
-          href="/"
-          aria-label="메인으로"
-          className="rounded-button px-2 py-1 hover:text-type-primary"
-        >
-          ≡
-        </Link>
-      </header>
+    <GameShell
+      variant="split"
+      header={
+        <div className="flex items-center justify-between text-label tabular text-type-secondary">
+          <span>
+            {cardIndex + 1} / {cards.length}
+          </span>
+          <Link
+            href="/"
+            aria-label="메인으로"
+            className="rounded-button px-2 py-1 hover:text-type-primary"
+          >
+            ≡
+          </Link>
+        </div>
+      }
+      content={
+        <>
+          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
+          <h1 className="mt-2 text-display text-type-primary">반응식의 균형을 맞춰주세요</h1>
+          {card.hint && (
+            <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
 
-      <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
-      <h1 className="mt-2 text-display text-type-primary">반응식의 균형을 맞춰주세요</h1>
-      {card.hint && (
-        <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
-      )}
-
-      {/* 원자 카운터 */}
-      <section className="mt-6 grid grid-cols-2 gap-3">
+          {/* 원자 카운터 */}
+          <div className="mt-6 grid grid-cols-2 gap-3">
         <div className="rounded-block border border-border-hairline bg-bg-block p-3">
           <p className="text-helper text-type-secondary">왼쪽 원자 수</p>
           <ul className="mt-1 flex flex-wrap gap-x-3 gap-y-1 text-label tabular text-type-primary">
@@ -228,10 +233,10 @@ export default function ChemistryBalanceGame() {
             })}
           </ul>
         </div>
-      </section>
+      </div>
 
       {/* 반응식 */}
-      <motion.section
+      <motion.div
         className="mt-6 flex flex-1 flex-col items-center justify-center gap-3"
         animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
         transition={{ duration: 0.36 }}
@@ -266,10 +271,11 @@ export default function ChemistryBalanceGame() {
             오답 {wrongCount}회
           </p>
         )}
-      </motion.section>
-
-      <footer className="mt-6">
-        {phase === "correct" ? (
+      </motion.div>
+        </>
+      }
+      cta={
+        phase === "correct" ? (
           <button
             type="button"
             onClick={handleNext}
@@ -286,15 +292,16 @@ export default function ChemistryBalanceGame() {
           >
             균형 확인
           </button>
-        )}
-      </footer>
-
-      <span className="sr-only" aria-live="polite">
-        {phase === "playing" && "계수를 조정해 양변 원자 수를 맞춰주세요"}
-        {phase === "wrong" && "균형이 맞지 않아요. 다시 해보세요."}
-        {phase === "correct" && "반응식이 균형됐어요"}
-      </span>
-    </main>
+        )
+      }
+      liveRegion={
+        <span className="sr-only" aria-live="polite">
+          {phase === "playing" && "계수를 조정해 양변 원자 수를 맞춰주세요"}
+          {phase === "wrong" && "균형이 맞지 않아요. 다시 해보세요."}
+          {phase === "correct" && "반응식이 균형됐어요"}
+        </span>
+      }
+    />
   );
 }
 

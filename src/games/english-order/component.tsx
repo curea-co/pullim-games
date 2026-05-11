@@ -6,6 +6,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { GameShell } from "@/components/game-shell";
 import { getCardSequence } from "./content";
 import {
   loadAllSrsStates,
@@ -193,34 +194,38 @@ export default function EnglishOrderGame() {
   }
 
   return (
-    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-6">
-      <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>
-          {cardIndex + 1} / {cards.length}
-        </span>
-        <Link
-          href="/"
-          aria-label="메인으로"
-          className="rounded-button px-2 py-1 hover:text-type-primary"
-        >
-          ≡
-        </Link>
-      </header>
+    <GameShell
+      variant="split"
+      header={
+        <div className="flex items-center justify-between text-label tabular text-type-secondary">
+          <span>
+            {cardIndex + 1} / {cards.length}
+          </span>
+          <Link
+            href="/"
+            aria-label="메인으로"
+            className="rounded-button px-2 py-1 hover:text-type-primary"
+          >
+            ≡
+          </Link>
+        </div>
+      }
+      content={
+        <>
+          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
+          <h1 className="mt-2 text-display text-type-primary">{card.problem.korean}</h1>
+          {card.hint && (
+            <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
 
-      <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
-      <h1 className="mt-2 text-display text-type-primary">{card.problem.korean}</h1>
-      {card.hint && (
-        <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
-      )}
-
-      {/* Slots — 영어 어순 자리 */}
-      <motion.section
-        className="mt-8 flex flex-wrap items-center gap-2"
-        animate={
-          phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }
-        }
-        transition={{ duration: 0.36 }}
-      >
+          {/* Slots — 영어 어순 자리 */}
+          <motion.div
+            className="mt-8 flex flex-wrap items-center gap-2"
+            animate={
+              phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }
+            }
+            transition={{ duration: 0.36 }}
+          >
         {slots.map((wordId, slotIdx) => {
           const word = wordId
             ? poolWords.find((pw) => pw.id === wordId)?.text
@@ -243,10 +248,10 @@ export default function EnglishOrderGame() {
             </button>
           );
         })}
-      </motion.section>
+      </motion.div>
 
       {/* Pool — 셔플된 단어 풀 */}
-      <section className="mt-6 flex flex-1 flex-wrap items-start content-start gap-2">
+      <div className="mt-6 flex flex-1 flex-wrap items-start content-start gap-2">
         {availablePool.map((pw) => (
           <motion.button
             key={pw.id}
@@ -261,10 +266,11 @@ export default function EnglishOrderGame() {
             {pw.text}
           </motion.button>
         ))}
-      </section>
-
-      <footer className="mt-6">
-        {phase === "correct" ? (
+      </div>
+        </>
+      }
+      cta={
+        phase === "correct" ? (
           <button
             type="button"
             onClick={handleNext}
@@ -280,15 +286,16 @@ export default function EnglishOrderGame() {
           >
             다음 →
           </button>
-        )}
-      </footer>
-
-      <span className="sr-only" aria-live="polite">
-        {phase === "playing" && "단어를 골라 어순을 맞춰주세요"}
-        {phase === "wrong" && "어순이 틀렸어요. 다시 해보세요."}
-        {phase === "correct" && "정답이에요"}
-      </span>
-    </main>
+        )
+      }
+      liveRegion={
+        <span className="sr-only" aria-live="polite">
+          {phase === "playing" && "단어를 골라 어순을 맞춰주세요"}
+          {phase === "wrong" && "어순이 틀렸어요. 다시 해보세요."}
+          {phase === "correct" && "정답이에요"}
+        </span>
+      }
+    />
   );
 }
 
