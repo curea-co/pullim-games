@@ -37,3 +37,7 @@ yarn-error.log*
 # IDE
 .idea
 .vscode
+
+# work artifacts (design inputs/outputs, not committed)
+/input
+/output
