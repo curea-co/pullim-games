@@ -6,6 +6,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { GameShell } from "@/components/game-shell";
 import {
   loadAllSrsStates,
   loadSrsState,
@@ -245,31 +246,35 @@ export function WordMatchComponent({
   const allMatched = matched.size === card.problem.pairs.length;
 
   return (
-    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-6">
-      <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>
-          {cardIndex + 1} / {cards.length}
-        </span>
-        <Link
-          href={homeHref}
-          aria-label="메인으로"
-          className="rounded-button px-2 py-1 hover:text-type-primary"
-        >
-          ≡
-        </Link>
-      </header>
+    <GameShell
+      variant="match"
+      header={
+        <div className="flex items-center justify-between text-label tabular text-type-secondary">
+          <span>
+            {cardIndex + 1} / {cards.length}
+          </span>
+          <Link
+            href={homeHref}
+            aria-label="메인으로"
+            className="rounded-button px-2 py-1 hover:text-type-primary"
+          >
+            ≡
+          </Link>
+        </div>
+      }
+      content={
+        <>
+          <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
+          <h1 className="mt-2 text-display text-type-primary">짝을 맞춰주세요</h1>
+          {card.hint && (
+            <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
+          <p className="mt-2 text-helper tabular text-type-secondary">
+            매칭 {matched.size} / {card.problem.pairs.length}
+            {wrongCount > 0 && ` · 오답 ${wrongCount}`}
+          </p>
 
-      <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
-      <h1 className="mt-2 text-display text-type-primary">짝을 맞춰주세요</h1>
-      {card.hint && (
-        <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
-      )}
-      <p className="mt-2 text-helper tabular text-type-secondary">
-        매칭 {matched.size} / {card.problem.pairs.length}
-        {wrongCount > 0 && ` · 오답 ${wrongCount}`}
-      </p>
-
-      <section className="mt-6 grid flex-1 grid-cols-2 gap-3">
+          <div className="mt-6 grid flex-1 grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
           <AnimatePresence>
             {leftItems
@@ -333,10 +338,11 @@ export function WordMatchComponent({
               ))}
           </AnimatePresence>
         </div>
-      </section>
-
-      <footer className="mt-6">
-        {allMatched ? (
+          </div>
+        </>
+      }
+      cta={
+        allMatched ? (
           <button
             type="button"
             onClick={handleNext}
@@ -352,13 +358,14 @@ export function WordMatchComponent({
           >
             다음 →
           </button>
-        )}
-      </footer>
-
-      <span className="sr-only" aria-live="polite">
-        {allMatched ? "모든 짝이 맞았어요" : "짝을 골라 매칭해주세요"}
-      </span>
-    </main>
+        )
+      }
+      liveRegion={
+        <span className="sr-only" aria-live="polite">
+          {allMatched ? "모든 짝이 맞았어요" : "짝을 골라 매칭해주세요"}
+        </span>
+      }
+    />
   );
 }
 
