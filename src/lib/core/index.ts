@@ -15,3 +15,4 @@ export * from "./event";
 export * from "./recommendation";
 export * from "./dashboard";
 export * from "./custom";
+export * from "./curriculum";
