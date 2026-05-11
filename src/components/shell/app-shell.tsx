@@ -43,8 +43,8 @@ export function AppShell({ role, children }: Props) {
             </div>
           </div>
 
-          {/* 페이지 콘텐츠 */}
-          <div className={CONTENT_MAX}>{children}</div>
+          {/* 페이지 콘텐츠 — sticky breadcrumb(h-9 = 36px) 빼고 정확한 사용 가능 높이 전달 */}
+          <div className={`${CONTENT_MAX} h-[calc(100%-2.25rem)]`}>{children}</div>
         </div>
       </div>
     </div>

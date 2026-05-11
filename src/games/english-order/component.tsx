@@ -193,7 +193,7 @@ export default function EnglishOrderGame() {
   }
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-8">
+    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-6">
       <header className="flex items-center justify-between text-label tabular text-type-secondary">
         <span>
           {cardIndex + 1} / {cards.length}
@@ -299,7 +299,7 @@ interface CompletionScreenProps {
 
 function CompletionScreen({ totalCards, onRetry }: CompletionScreenProps) {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-10">
+    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-10">
       <section className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
         <motion.h1
           className="text-display text-type-primary"

@@ -74,7 +74,7 @@ export function BlankComponent({
 
   if (cards.length === 0) {
     return (
-      <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
+      <main className="mx-auto flex min-h-full max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
         <h1 className="text-display text-type-primary">
           {emptyMessage?.title ?? "아직 풀 카드가 없어요."}
         </h1>
@@ -170,7 +170,7 @@ export function BlankComponent({
   const isCorrect = picked === card.problem.correctIndex;
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-8">
+    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-6">
       <header className="flex items-center justify-between text-label tabular text-type-secondary">
         <span>
           {cardIndex + 1} / {cards.length}
@@ -311,7 +311,7 @@ function CompletionScreen({
   onRetry,
 }: CompletionScreenProps) {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-10">
+    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-10">
       <section className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
         <motion.h1
           className="text-display text-type-primary"
