@@ -16,6 +16,7 @@ const manifest: GameManifest = {
     icon: Link2,
     mechanic: "matching",
     retrievalDepth: "shallow",
+    previewImagePath: "/previews/custom-word-match.png",
   },
   loadComponent: () => import("./component"),
 };

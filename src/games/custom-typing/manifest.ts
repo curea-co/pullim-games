@@ -16,6 +16,7 @@ const manifest: GameManifest = {
     icon: Type,
     mechanic: "typing",
     retrievalDepth: "medium",
+    previewImagePath: "/previews/custom-typing.png",
   },
   loadComponent: () => import("./component"),
 };

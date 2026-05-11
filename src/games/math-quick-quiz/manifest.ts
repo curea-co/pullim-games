@@ -17,6 +17,7 @@ const manifest: GameManifest = {
     icon: Zap,
     mechanic: "multiple-choice",
     retrievalDepth: "shallow",
+    previewImagePath: "/previews/math-quick-quiz.png",
   },
   loadComponent: () => import("./component"),
 };

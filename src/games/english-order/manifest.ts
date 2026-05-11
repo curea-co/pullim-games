@@ -17,6 +17,7 @@ const manifest: GameManifest = {
     icon: ListOrdered,
     mechanic: "sorting",
     retrievalDepth: "medium",
+    previewImagePath: "/previews/english-order.png",
   },
   loadComponent: () => import("./component"),
 };
