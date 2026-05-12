@@ -50,7 +50,8 @@ export function AppShell({ role, children, variant }: Props) {
     return (
       <div className="flex h-screen flex-col bg-pullim-slate-50">
         <AppHeader role={role} variant="game" />
-        <div className="flex-1 overflow-y-auto">{children}</div>
+        {/* GameShell 자체 스크롤 — content section 안에서 overflow. CTA viewport-in 보장. */}
+        <div className="flex-1 overflow-hidden">{children}</div>
       </div>
     );
   }

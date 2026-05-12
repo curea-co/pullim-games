@@ -267,16 +267,7 @@ export default function ChemistryBalanceGame() {
           ))}
         </div>
       </motion.div>
-          {wrongCount > 0 && phase !== "correct" && (
-            <p className="mt-2 text-center text-helper tabular text-type-secondary lg:hidden">
-              오답 {wrongCount}회
-            </p>
-          )}
-        </>
-      }
-      aside={
-        <>
-          <p className="text-helper text-type-secondary" aria-hidden="true">
+          <p className="mt-3 text-center text-helper text-type-secondary" aria-hidden="true">
             {phase === "wrong"
               ? "균형이 맞지 않아요. 다시 해보세요."
               : phase === "correct"
@@ -284,7 +275,7 @@ export default function ChemistryBalanceGame() {
                 : "계수를 조정해 양변 원자 수를 맞춰주세요"}
           </p>
           {wrongCount > 0 && phase !== "correct" && (
-            <p className="text-helper tabular text-type-secondary">
+            <p className="mt-2 text-center text-helper tabular text-type-secondary">
               오답 {wrongCount}회
             </p>
           )}
