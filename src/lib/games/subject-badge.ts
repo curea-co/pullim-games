@@ -4,12 +4,12 @@
 // 정적 매핑 — tailwind JIT purge 가 dynamic className 잡지 못해 명시적 클래스만 사용.
 
 const SUBJECT_BADGE: Record<string, string> = {
-  국어: "bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200/60",
-  영어: "bg-pullim-blue-50 text-pullim-blue-700 ring-1 ring-pullim-blue-200",
-  수학: "bg-violet-50 text-violet-700 ring-1 ring-violet-200/60",
-  과학: "bg-cyan-50 text-cyan-700 ring-1 ring-cyan-200/60",
-  사회: "bg-amber-50 text-amber-700 ring-1 ring-amber-200/60",
-  "내 콘텐츠": "bg-pullim-slate-100 text-pullim-slate-700 ring-1 ring-pullim-slate-200",
+  국어: "bg-emerald-100 text-emerald-700 ring-1 ring-emerald-300",
+  영어: "bg-pullim-blue-100 text-pullim-blue-700 ring-1 ring-pullim-blue-300",
+  수학: "bg-violet-100 text-violet-700 ring-1 ring-violet-300",
+  과학: "bg-cyan-100 text-cyan-700 ring-1 ring-cyan-300",
+  사회: "bg-amber-100 text-amber-700 ring-1 ring-amber-300",
+  "내 콘텐츠": "bg-pullim-slate-200 text-pullim-slate-700 ring-1 ring-pullim-slate-300",
 };
 
 export function subjectBadgeClass(subject: string): string {
