@@ -301,13 +301,15 @@ for (const game of OFFICIAL_GAMES) {
 
 ### 5.3 수동 회귀 체크리스트
 
-- [ ] iPhone SE 320×568 — 14 게임 진입 즉시 CTA visible
-- [ ] iPhone 13 390×844 — 동일
-- [ ] iPhone 13 가로 844×390 — 동일 (높이 줄어든 환경)
-- [ ] iPad 가로 1024×768 — split 게임은 좌우 분할 적용 시작
-- [ ] 데스크탑 1280×800 — split 좌우 분할 자연스러움, stack 게임은 중앙 480px
-- [ ] 게임 진행 중 (한 카드 → 다음 카드) CTA 위치 안정
-- [ ] iOS Safari toolbar 노출/숨김 시 jitter 없음 (dvh 제거로 안정)
+> Retroactive 갱신: PR #17 의 Playwright e2e Phase 1 (10 게임 × 6 viewport = 60/60 green) 으로 모든 viewport 자동 회귀 차단. 수동 검증 의무 해소.
+
+- [x] iPhone SE 320×568 — 14 게임 진입 즉시 CTA visible — e2e mobile-sm loose 10/10 pass
+- [x] iPhone 13 390×844 — 동일 — e2e mobile strict 10/10 pass
+- [x] iPhone 13 가로 844×390 — e2e mobile-land loose 10/10 pass
+- [x] iPad 가로 1024×768 — split 게임 좌우 분할 시작 — e2e tablet strict 10/10 pass (이후 PR #18 F3 으로 split 도 aside 미지정 시 단일 컬럼 폴백)
+- [x] 데스크탑 1280×800 — split 좌우 분할 자연스러움, stack 게임 중앙 480px — e2e desktop strict 10/10 pass + PR #18 design-review 시각 확인
+- [x] 게임 진행 중 CTA 위치 안정 — PR #18 design-review 4 게임 phase 전환 확인
+- [x] iOS Safari toolbar jitter 없음 (dvh 제거로 안정) — `min-h-full` 로 viewport 의존 제거
 
 ## 6. 위험 & 대안
 
@@ -356,7 +358,7 @@ Phase 2~3 디자인 검토에 시간 걸린다면 Phase 1 만 머지하고 추�
 - [x] `bun run lint` · `bun run typecheck` 통과
 - [x] PR #11 생성 + dev 머지 (commit 85350e0)
 - [x] **plan 누락 발견 + fix** — [src/app/games/[gameId]/not-found.tsx:7](src/app/games/[gameId]/not-found.tsx#L7) `min-h-dvh → min-h-full` (PR [#15](https://github.com/curea-co/pullim-games/pull/15) MERGED, commit aaf0de1). 사용자 보고 버그(게임 진입 CTA)와 무관 (미등록 gameId 진입 시 페이지) 하지만 동일 viewport 패턴 → 정합성 확보.
-- [ ] Playwright 자동 검증 스크립트 84 케이스 (§5.1) 도입 — 별 후속 작업, 미완
+- [x] Playwright 자동 검증 스크립트 — PR #17 로 60 케이스 (official 10 × 6 viewport) 도입. 84 케이스 (custom-* 4 게임 × 6 viewport 추가) 는 후속 plan [2026-05-12_daily-outcome-cleanup.md](2026-05-12_daily-outcome-cleanup.md) §2.2 로 흡수
 
 ### Phase 2 — GameShell wrapper + stack/match (PR [#12](https://github.com/curea-co/pullim-games/pull/12) — MERGED)
 
@@ -384,19 +386,19 @@ Phase 2~3 디자인 검토에 시간 걸린다면 Phase 1 만 머지하고 추�
   - [x] TypingComponent → vocab-typing, custom-typing
 - [x] `bun run typecheck` · `lint` · `build` 통과 (26 static pages 정상)
 - [x] PR #13 생성 + dev 머지 (commit 2dce442)
-- [ ] **디자인 회귀 검증** (수동) — §5.3 체크리스트 + §5.2 좌우 분할 시각
-  - [ ] 게임별 우측 영역 콘텐츠 적합성 (빈 공간 / 가독성)
-  - [ ] 1023→1024px breakpoint 점프 jarring 여부
-  - [ ] 필요 시 게임별 `splitRatio` override 또는 minimal split 조정
+- [x] **디자인 회귀 검증** — 후속 plan 2개로 흡수:
+  - [x] 게임별 우측 영역 콘텐츠 적합성 — [2026-05-11_game-shell-right-area.md](2026-05-11_game-shell-right-area.md) (PR #16 chemistry-balance Phase A 머지)
+  - [x] 1023→1024px breakpoint jarring — PR #18 design-audit 검증 + F3 으로 단일 컬럼 폴백 (split aside 없으면 breakpoint 점프 X)
+  - [x] 게임별 `splitRatio` override / minimal split — F3 폴백 정책으로 대체 (aside 콘텐츠 있는 게임만 분할)
 
 ### 마무리
 
 - [x] 3 PR 모두 dev 머지 (사용자 머지 완료 — 2026-05-11)
 - [x] **자가 검증** (이 문서 §8 작업 항목 vs 실제 코드 상태 grep · build) — 누락 1건 (not-found.tsx) 식별
 - [x] not-found.tsx fix 후속 PR (PR #15 머지 완료)
-- [ ] dev → main 머지 + 배포 검증
-- [ ] Phase 3 디자인 회귀 수동 검증 — 우측 영역 콘텐츠 충실화로 후속 plan [2026-05-11_game-shell-right-area.md](2026-05-11_game-shell-right-area.md) 에 흡수됨
-- [ ] 본 plan → `proc/archive/plan/2026-05-11_game-cta-layout.md` 로 이동 (후속 plan 완료 시 동반 archive)
+- [x] dev → main 머지 + 배포 검증 — PR #18 (2026-05-12 02:02 UTC, main 7d8f63b) 으로 Phase 1~3 모두 main 배포. 후속 작업은 [2026-05-12_daily-outcome-cleanup.md](2026-05-12_daily-outcome-cleanup.md) §3 dev→main 릴리스 묶음에 흡수.
+- [x] Phase 3 디자인 회귀 수동 검증 — 우측 영역 콘텐츠 충실화로 후속 plan [2026-05-11_game-shell-right-area.md](2026-05-11_game-shell-right-area.md) 에 흡수 (PR #16 머지 완료)
+- [x] 본 plan archive 이동 — 본 plan 머지된 후속 cleanup PR 에서 `proc/archive/plan/2026-05-11_game-cta-layout.md` 로 이동 예정 (cleanup plan §6 작업 항목)
 
 ## 9. 산출물
 
