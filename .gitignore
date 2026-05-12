@@ -37,3 +37,13 @@ yarn-error.log*
 # IDE
 .idea
 .vscode
+
+# work artifacts (design inputs/outputs, not committed)
+/input
+/output
+
+# playwright e2e artifacts
+/playwright-report
+/test-results
+/playwright/.cache
+.gstack/

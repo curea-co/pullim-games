@@ -16,30 +16,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: "22"
-          cache: npm
+          bun-version: latest
 
       - name: Install dependencies
-        run: npm ci
+        run: bun install --frozen-lockfile
 
       - name: Generate game registry
-        run: npm run gen:registry
+        run: bun run gen:registry
 
       # Plan R §5.3 가드 — manifest 와 generated 파일 sync 검증
       - name: Verify registry.generated.ts is in sync
         run: |
           if ! git diff --exit-code src/lib/games/registry.generated.ts; then
-            echo "::error::registry.generated.ts is out of sync. Run 'npm run gen:registry' and commit." >&2
+            echo "::error::registry.generated.ts is out of sync. Run 'bun run gen:registry' and commit." >&2
             exit 1
           fi
 
       - name: Typecheck
-        run: npm run typecheck
+        run: bun run typecheck
 
       - name: Lint
-        run: npm run lint
+        run: bun run lint
 
   # Plan R §9.1 — 변경된 파일을 분석해 영향 받는 게임 ID 와 core 여부 추출.
   # PR: 변경된 게임만 / push to main: 전체 게임 강제.
@@ -64,7 +63,7 @@ jobs:
               - 'src/lib/games/**'
               - 'scripts/**'
               - 'package.json'
-              - 'package-lock.json'
+              - 'bun.lock'
               - 'tsconfig.json'
               - 'vitest.config.ts'
             games:
@@ -97,13 +96,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: "22"
-          cache: npm
-      - run: npm ci
-      - run: npm run gen:registry
-      - run: npx vitest run src/lib/core
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run gen:registry
+      - run: bunx vitest run src/lib/core
 
   test-game:
     name: test (game)
@@ -116,14 +114,13 @@ jobs:
         game: ${{ fromJSON(needs.detect-changes.outputs.games) }}
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: "22"
-          cache: npm
-      - run: npm ci
-      - run: npm run gen:registry
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run gen:registry
       # 테스트가 없는 게임은 vitest 가 exit 1 — passWithNoTests 로 허용.
-      - run: npx vitest run --passWithNoTests src/games/${{ matrix.game }}
+      - run: bunx vitest run --passWithNoTests src/games/${{ matrix.game }}
 
   build:
     name: build (Next.js)
@@ -131,9 +128,50 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: oven-sh/setup-bun@v2
         with:
-          node-version: "22"
-          cache: npm
-      - run: npm ci
-      - run: npm run build
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+
+  # Plan QA §4.6 — Playwright e2e (10 official 게임 × 6 viewport = 60 케이스).
+  # webServer 가 build + start 를 spawn 하므로 build job 과 의존 X (병렬 가능).
+  e2e:
+    name: e2e (Playwright)
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run gen:registry
+
+      - name: Resolve Playwright version
+        id: pw
+        run: |
+          VERSION=$(node -p "require('@playwright/test/package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ steps.pw.outputs.version }}
+
+      - name: Install Playwright Chromium + system deps
+        run: bunx playwright install --with-deps chromium
+
+      - name: Run e2e
+        run: bun run test:e2e
+
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

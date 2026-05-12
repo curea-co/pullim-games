@@ -1,3 +1,5 @@
+"use client";
+
 // 통합 앱 shell — pullim-study-demo AppShell 패턴 차용.
 //
 // 반응형:
@@ -6,21 +8,53 @@
 // - 데스크탑 (lg+): 헤더 + 사이드바 (전체) + 본문
 //
 // 콘텐츠 폭: max 1280px (4K·울트라와이드 과확장 방지).
+//
+// variant:
+// - "default": 위 기본 레이아웃
+// - "game": 게임 페이지 minimal chrome — 사이드바 미렌더, 헤더 minimal, breadcrumb 제거
+//
+// 자동 분기: `/games/<id>` 경로면 game variant. 다른 곳에서 override 필요 시 prop 우선.
+// 근거: proc/plan/2026-05-11_layout-overhaul.md F2=B.
 
 import type { ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { AppHeader } from "./app-header";
 import { AppSidebar } from "./app-sidebar";
 import { Breadcrumb } from "./breadcrumb";
 import type { Role } from "./nav-config";
 
+export type AppShellVariant = "default" | "game";
+
 interface Props {
   role: Role;
   children: ReactNode;
+  /** 명시 override. 미지정 시 pathname 기반 자동 분기. */
+  variant?: AppShellVariant;
 }
 
 const CONTENT_MAX = "mx-auto w-full max-w-[1280px]";
 
-export function AppShell({ role, children }: Props) {
+function detectVariant(pathname: string): AppShellVariant {
+  // /games/<id> 는 game mode. /games 자체(허브)는 default.
+  // 정규식 대신 split 으로 안전 — pathname.split('/') = ["", "games", "<id>", ...]
+  const segments = pathname.split("/").filter(Boolean);
+  if (segments[0] === "games" && segments.length >= 2) return "game";
+  return "default";
+}
+
+export function AppShell({ role, children, variant }: Props) {
+  const pathname = usePathname();
+  const mode = variant ?? detectVariant(pathname);
+
+  if (mode === "game") {
+    return (
+      <div className="flex h-screen flex-col bg-pullim-slate-50">
+        <AppHeader role={role} variant="game" />
+        <div className="flex-1 overflow-y-auto">{children}</div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex h-screen flex-col bg-pullim-slate-50">
       <AppHeader role={role} />
@@ -43,8 +77,8 @@ export function AppShell({ role, children }: Props) {
             </div>
           </div>
 
-          {/* 페이지 콘텐츠 */}
-          <div className={CONTENT_MAX}>{children}</div>
+          {/* 페이지 콘텐츠 — sticky breadcrumb(h-9 = 36px) 빼고 정확한 사용 가능 높이 전달 */}
+          <div className={`${CONTENT_MAX} h-[calc(100%-2.25rem)]`}>{children}</div>
         </div>
       </div>
     </div>

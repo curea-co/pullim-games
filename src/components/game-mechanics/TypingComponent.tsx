@@ -6,6 +6,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { GameShell } from "@/components/game-shell";
 import {
   loadAllSrsStates,
   loadSrsState,
@@ -85,7 +86,7 @@ export function TypingComponent({
 
   if (cards.length === 0) {
     return (
-      <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
+      <main className="mx-auto flex min-h-full max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
         <h1 className="text-display text-type-primary">
           {emptyMessage?.title ?? "아직 풀 카드가 없어요."}
         </h1>
@@ -190,38 +191,42 @@ export function TypingComponent({
   const firstLetter = card.problem.answer.charAt(0);
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-8">
-      <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>
-          {cardIndex + 1} / {cards.length}
-        </span>
-        <Link
-          href={homeHref}
-          aria-label="메인으로"
-          className="rounded-button px-2 py-1 hover:text-type-primary"
-        >
-          ≡
-        </Link>
-      </header>
+    <GameShell
+      variant="split"
+      header={
+        <div className="flex items-center justify-between text-label tabular text-type-secondary">
+          <span>
+            {cardIndex + 1} / {cards.length}
+          </span>
+          <Link
+            href={homeHref}
+            aria-label="메인으로"
+            className="rounded-button px-2 py-1 hover:text-type-primary"
+          >
+            ≡
+          </Link>
+        </div>
+      }
+      content={
+        <>
+          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
+          <h1 className="mt-2 text-display text-type-primary leading-snug">
+            {card.problem.meaning}
+          </h1>
+          {card.hint && !hintUsed && (
+            <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
+          {hintUsed && (
+            <p className="mt-2 text-helper text-type-secondary">
+              첫 글자 · <span className="text-type-primary">{firstLetter}</span>...
+            </p>
+          )}
 
-      <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
-      <h1 className="mt-2 text-display text-type-primary leading-snug">
-        {card.problem.meaning}
-      </h1>
-      {card.hint && !hintUsed && (
-        <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
-      )}
-      {hintUsed && (
-        <p className="mt-2 text-helper text-type-secondary">
-          첫 글자 · <span className="text-type-primary">{firstLetter}</span>...
-        </p>
-      )}
-
-      <motion.section
-        className="mt-8 flex flex-1 flex-col items-center justify-center gap-4"
-        animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
-        transition={{ duration: 0.36 }}
-      >
+          <motion.div
+            className="mt-8 flex flex-1 flex-col items-center justify-center gap-4"
+            animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
+            transition={{ duration: 0.36 }}
+          >
         <div className="flex min-h-[3rem] items-center gap-1.5">
           <AnimatePresence mode="popLayout">
             {[...input].map((ch, i) => (
@@ -291,10 +296,11 @@ export function TypingComponent({
             <span className="tabular">오답 {wrongCount}회</span>
           )}
         </div>
-      </motion.section>
-
-      <footer className="mt-6">
-        {phase === "correct" ? (
+      </motion.div>
+        </>
+      }
+      cta={
+        phase === "correct" ? (
           <button
             type="button"
             onClick={handleNext}
@@ -311,15 +317,16 @@ export function TypingComponent({
           >
             확인
           </button>
-        )}
-      </footer>
-
-      <span className="sr-only" aria-live="polite">
-        {phase === "playing" && "입력해주세요"}
-        {phase === "wrong" && "정답이 아니에요. 다시 해보세요."}
-        {phase === "correct" && "정답이에요"}
-      </span>
-    </main>
+        )
+      }
+      liveRegion={
+        <span className="sr-only" aria-live="polite">
+          {phase === "playing" && "입력해주세요"}
+          {phase === "wrong" && "정답이 아니에요. 다시 해보세요."}
+          {phase === "correct" && "정답이에요"}
+        </span>
+      }
+    />
   );
 }
 
@@ -337,7 +344,7 @@ function CompletionScreen({
   onRetry,
 }: CompletionScreenProps) {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-10">
+    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-10">
       <section className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
         <motion.h1
           className="text-display text-type-primary"

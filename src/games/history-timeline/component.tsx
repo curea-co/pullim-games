@@ -7,6 +7,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { GameShell } from "@/components/game-shell";
 import { getCardSequence } from "./content";
 import {
   loadAllSrsStates,
@@ -182,35 +183,39 @@ export default function HistoryTimelineGame() {
   }
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-8">
-      <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>
-          {cardIndex + 1} / {cards.length}
-        </span>
-        <Link
-          href="/"
-          aria-label="메인으로"
-          className="rounded-button px-2 py-1 hover:text-type-primary"
-        >
-          ≡
-        </Link>
-      </header>
+    <GameShell
+      variant="split"
+      header={
+        <div className="flex items-center justify-between text-label tabular text-type-secondary">
+          <span>
+            {cardIndex + 1} / {cards.length}
+          </span>
+          <Link
+            href="/"
+            aria-label="메인으로"
+            className="rounded-button px-2 py-1 hover:text-type-primary"
+          >
+            ≡
+          </Link>
+        </div>
+      }
+      content={
+        <>
+          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
+          <h1 className="mt-2 text-display text-type-primary">{card.problem.era}</h1>
+          <p className="mt-2 text-label text-type-secondary">
+            사건을 시간 순으로 놓아주세요
+          </p>
+          {card.hint && (
+            <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
 
-      <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
-      <h1 className="mt-2 text-display text-type-primary">{card.problem.era}</h1>
-      <p className="mt-2 text-label text-type-secondary">
-        사건을 시간 순으로 놓아주세요
-      </p>
-      {card.hint && (
-        <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
-      )}
-
-      {/* Slots — 시간축 (위→아래 = 과거→현재) */}
-      <motion.section
-        className="mt-6 flex flex-col gap-2"
-        animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
-        transition={{ duration: 0.36 }}
-      >
+          {/* Slots — 시간축 (위→아래 = 과거→현재) */}
+          <motion.div
+            className="mt-6 flex flex-col gap-2"
+            animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
+            transition={{ duration: 0.36 }}
+          >
         {slots.map((eventId, slotIdx) => {
           const ev = eventId
             ? poolEvents.find((pe) => pe.id === eventId)
@@ -243,10 +248,10 @@ export default function HistoryTimelineGame() {
             </button>
           );
         })}
-      </motion.section>
+      </motion.div>
 
       {/* Pool — 셔플된 사건 풀 */}
-      <section className="mt-6 flex flex-1 flex-wrap items-start content-start gap-2">
+      <div className="mt-6 flex flex-1 flex-wrap items-start content-start gap-2">
         {availablePool.map((pe) => (
           <motion.button
             key={pe.id}
@@ -261,10 +266,11 @@ export default function HistoryTimelineGame() {
             {pe.title}
           </motion.button>
         ))}
-      </section>
-
-      <footer className="mt-6">
-        {phase === "correct" ? (
+      </div>
+        </>
+      }
+      cta={
+        phase === "correct" ? (
           <button
             type="button"
             onClick={handleNext}
@@ -280,15 +286,16 @@ export default function HistoryTimelineGame() {
           >
             다음 →
           </button>
-        )}
-      </footer>
-
-      <span className="sr-only" aria-live="polite">
-        {phase === "playing" && "사건을 시간 순으로 놓아주세요"}
-        {phase === "wrong" && "순서가 틀렸어요. 다시 해보세요."}
-        {phase === "correct" && "정답이에요"}
-      </span>
-    </main>
+        )
+      }
+      liveRegion={
+        <span className="sr-only" aria-live="polite">
+          {phase === "playing" && "사건을 시간 순으로 놓아주세요"}
+          {phase === "wrong" && "순서가 틀렸어요. 다시 해보세요."}
+          {phase === "correct" && "정답이에요"}
+        </span>
+      }
+    />
   );
 }
 
@@ -299,7 +306,7 @@ interface CompletionScreenProps {
 
 function CompletionScreen({ totalCards, onRetry }: CompletionScreenProps) {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-10">
+    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-10">
       <section className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
         <motion.h1
           className="text-display text-type-primary"

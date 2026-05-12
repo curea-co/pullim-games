@@ -8,6 +8,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { GameShell } from "@/components/game-shell";
 import {
   loadAllSrsStates,
   loadSrsState,
@@ -78,7 +79,7 @@ export function QuickQuizComponent({
   // 빈 카드 풀
   if (cards.length === 0) {
     return (
-      <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
+      <main className="mx-auto flex min-h-full max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
         <h1 className="text-display text-type-primary">
           {emptyMessage?.title ?? "아직 풀 카드가 없어요."}
         </h1>
@@ -156,43 +157,48 @@ export function QuickQuizComponent({
   };
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-8">
-      <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>
-          {cardIndex + 1} / {cards.length}
-        </span>
-        <Link
-          href={homeHref}
-          aria-label="메인으로"
-          className="rounded-button px-2 py-1 hover:text-type-primary"
-        >
-          ≡
-        </Link>
-      </header>
+    <GameShell
+      variant="split"
+      header={
+        <div className="flex items-center justify-between text-label tabular text-type-secondary">
+          <span>
+            {cardIndex + 1} / {cards.length}
+          </span>
+          <Link
+            href={homeHref}
+            aria-label="메인으로"
+            className="rounded-button px-2 py-1 hover:text-type-primary"
+          >
+            ≡
+          </Link>
+        </div>
+      }
+      content={
+        <>
+          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
+          <h1 className="mt-2 text-display text-type-primary">
+            {card.problem.question}
+          </h1>
+          {card.hint && (
+            <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
 
-      <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
-      <h1 className="mt-2 text-display text-type-primary">
-        {card.problem.question}
-      </h1>
-      {card.hint && (
-        <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
-      )}
-
-      <section className="mt-8 flex flex-1 flex-col gap-3">
-        {card.problem.choices.map((choice, idx) => (
-          <ChoiceButton
-            key={`${cardIndex}-${idx}`}
-            label={choice}
-            picked={picked === idx}
-            correct={idx === card.problem.correctIndex}
-            phase={phase}
-            onClick={() => handlePick(idx)}
-          />
-        ))}
-      </section>
-
-      <footer className="mt-6">
-        {phase === "feedback" ? (
+          <div className="mt-8 flex flex-1 flex-col gap-3">
+            {card.problem.choices.map((choice, idx) => (
+              <ChoiceButton
+                key={`${cardIndex}-${idx}`}
+                label={choice}
+                picked={picked === idx}
+                correct={idx === card.problem.correctIndex}
+                phase={phase}
+                onClick={() => handlePick(idx)}
+              />
+            ))}
+          </div>
+        </>
+      }
+      cta={
+        phase === "feedback" ? (
           <button
             type="button"
             onClick={handleNext}
@@ -208,17 +214,18 @@ export function QuickQuizComponent({
           >
             다음 →
           </button>
-        )}
-      </footer>
-
-      <span className="sr-only" aria-live="polite">
-        {phase === "idle" && "선택지를 골라주세요"}
-        {phase === "feedback" &&
-          (picked === card.problem.correctIndex
-            ? "정답이에요"
-            : "정답은 다른 보기였어요")}
-      </span>
-    </main>
+        )
+      }
+      liveRegion={
+        <span className="sr-only" aria-live="polite">
+          {phase === "idle" && "선택지를 골라주세요"}
+          {phase === "feedback" &&
+            (picked === card.problem.correctIndex
+              ? "정답이에요"
+              : "정답은 다른 보기였어요")}
+        </span>
+      }
+    />
   );
 }
 
@@ -284,7 +291,7 @@ function CompletionScreen({
   onRetry,
 }: CompletionScreenProps) {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-10">
+    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-10">
       <section className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
         <motion.h1
           className="text-display text-type-primary"

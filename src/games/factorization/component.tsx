@@ -10,6 +10,7 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
+import { GameShell } from "@/components/game-shell";
 import { TermBlock } from "./components/TermBlock";
 import { DropZone } from "./components/DropZone";
 import {
@@ -167,58 +168,58 @@ export default function FactorizationGame() {
   };
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-8">
-      {/* 상단: 진행도 + 메뉴 */}
-      <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>
-          {cardIndex + 1} / {cards.length}
-        </span>
-        <Link
-          href="/"
-          aria-label="메인으로"
-          className="rounded-button px-2 py-1 hover:text-type-primary"
-        >
-          ≡
-        </Link>
-      </header>
+    <GameShell
+      variant="stack"
+      header={
+        <div className="flex items-center justify-between text-label tabular text-type-secondary">
+          <span>
+            {cardIndex + 1} / {cards.length}
+          </span>
+          <Link
+            href="/"
+            aria-label="메인으로"
+            className="rounded-button px-2 py-1 hover:text-type-primary"
+          >
+            ≡
+          </Link>
+        </div>
+      }
+      content={
+        <>
+          <p className="mt-6 text-body text-type-secondary">{card.hint}</p>
+          <div className="mt-10 flex flex-1 flex-col items-center justify-center gap-8">
+            <AnimatePresence mode="wait">
+              {phase !== "done" ? (
+                <BeforeView
+                  key={`${cardIndex}-before`}
+                  terms={card.problem.terms}
+                  draggable={phase !== "extracting"}
+                  onDragMove={handleDragMove}
+                  onDragEnd={handleDragEnd}
+                  transforming={phase === "extracting"}
+                />
+              ) : (
+                <AfterView
+                  key={`${cardIndex}-after`}
+                  factor={factored.factor}
+                  remainders={factored.remainders}
+                />
+              )}
+            </AnimatePresence>
 
-      {/* 캡션 */}
-      <p className="mt-6 text-body text-type-secondary">{card.hint}</p>
-
-      {/* 메인 영역 */}
-      <section className="mt-10 flex flex-1 flex-col items-center justify-center gap-8">
-        <AnimatePresence mode="wait">
-          {phase !== "done" ? (
-            <BeforeView
-              key={`${cardIndex}-before`}
-              terms={card.problem.terms}
-              draggable={phase !== "extracting"}
-              onDragMove={handleDragMove}
-              onDragEnd={handleDragEnd}
-              transforming={phase === "extracting"}
-            />
-          ) : (
-            <AfterView
-              key={`${cardIndex}-after`}
-              factor={factored.factor}
-              remainders={factored.remainders}
-            />
-          )}
-        </AnimatePresence>
-
-        {phase !== "done" && (
-          <DropZone
-            active={phase === "dragging"}
-            previewText={
-              phase === "dragging" ? card.problem.factoredForm : undefined
-            }
-          />
-        )}
-      </section>
-
-      {/* 액션 영역 */}
-      <footer className="mt-8">
-        {phase === "done" ? (
+            {phase !== "done" && (
+              <DropZone
+                active={phase === "dragging"}
+                previewText={
+                  phase === "dragging" ? card.problem.factoredForm : undefined
+                }
+              />
+            )}
+          </div>
+        </>
+      }
+      cta={
+        phase === "done" ? (
           <button
             type="button"
             onClick={handleNext}
@@ -234,19 +235,20 @@ export default function FactorizationGame() {
           >
             다음 →
           </button>
-        )}
-      </footer>
-
-      <span className="sr-only" aria-live="polite">
-        {phase === "idle" && `${cardIndex + 1}번 문제. 블록을 위로 끌어 공통인수를 빼내세요`}
-        {phase === "dragging" && "드롭 존이 활성화됐어요. 놓으면 변형됩니다."}
-        {phase === "extracting" && "변형 중"}
-        {phase === "done" &&
-          (isLastCard
-            ? "마지막 문제 완료. 마치기를 누르세요."
-            : "다음 문제로 가세요.")}
-      </span>
-    </main>
+        )
+      }
+      liveRegion={
+        <span className="sr-only" aria-live="polite">
+          {phase === "idle" && `${cardIndex + 1}번 문제. 블록을 위로 끌어 공통인수를 빼내세요`}
+          {phase === "dragging" && "드롭 존이 활성화됐어요. 놓으면 변형됩니다."}
+          {phase === "extracting" && "변형 중"}
+          {phase === "done" &&
+            (isLastCard
+              ? "마지막 문제 완료. 마치기를 누르세요."
+              : "다음 문제로 가세요.")}
+        </span>
+      }
+    />
   );
 }
 
@@ -360,7 +362,7 @@ interface CompletionScreenProps {
  *  3개 액션 동등 비중. 폭죽/이모지 X. */
 function CompletionScreen({ totalCards, onRetry }: CompletionScreenProps) {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-10">
+    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-10">
       <section className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
         <motion.h1
           className="text-display text-type-primary"

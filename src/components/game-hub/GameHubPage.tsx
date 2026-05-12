@@ -81,8 +81,8 @@ export function GameHubPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // 뷰 상태 — URL ?view= 우선, 없으면 localStorage, 없으면 grid
-  const [view, setView] = useState<GameHubView>("grid");
+  // 뷰 상태 — URL ?view= 우선, 없으면 localStorage, 없으면 preview (첫 진입 default, design-audit F8)
+  const [view, setView] = useState<GameHubView>("preview");
   const [stats, setStats] = useState<DashboardStats | null>(null);
 
   // 마운트 시 뷰 복원

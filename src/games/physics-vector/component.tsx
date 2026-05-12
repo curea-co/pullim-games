@@ -6,6 +6,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { GameShell } from "@/components/game-shell";
 import { getCardSequence } from "./content";
 import {
   loadAllSrsStates,
@@ -138,27 +139,31 @@ export default function PhysicsVectorGame() {
   }
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-8">
-      <header className="flex items-center justify-between text-label tabular text-type-secondary">
-        <span>
-          {cardIndex + 1} / {cards.length}
-        </span>
-        <Link
-          href="/"
-          aria-label="메인으로"
-          className="rounded-button px-2 py-1 hover:text-type-primary"
-        >
-          ≡
-        </Link>
-      </header>
+    <GameShell
+      variant="split"
+      header={
+        <div className="flex items-center justify-between text-label tabular text-type-secondary">
+          <span>
+            {cardIndex + 1} / {cards.length}
+          </span>
+          <Link
+            href="/"
+            aria-label="메인으로"
+            className="rounded-button px-2 py-1 hover:text-type-primary"
+          >
+            ≡
+          </Link>
+        </div>
+      }
+      content={
+        <>
+          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
+          <h1 className="mt-2 text-display text-type-primary">{card.problem.context}</h1>
+          {card.hint && (
+            <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
 
-      <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
-      <h1 className="mt-2 text-display text-type-primary">{card.problem.context}</h1>
-      {card.hint && (
-        <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
-      )}
-
-      <motion.section
+          <motion.div
         className="mx-auto mt-4"
         animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
         transition={{ duration: 0.36 }}
@@ -314,14 +319,14 @@ export default function PhysicsVectorGame() {
             R
           </text>
         </svg>
-      </motion.section>
+      </motion.div>
 
       <p className="mt-2 text-center text-label tabular text-type-primary">
         합벡터 R = ({rx}, {ry})
       </p>
 
       {/* 컨트롤 */}
-      <section className="mt-3 flex flex-col gap-2">
+      <div className="mt-3 flex flex-col gap-2">
         <Slider
           label="rx (가로 성분)"
           value={rx}
@@ -336,16 +341,17 @@ export default function PhysicsVectorGame() {
           onInc={() => bump(setRy, ry, +1, "ry")}
           disabled={phase !== "playing"}
         />
-      </section>
+      </div>
 
       {wrongCount > 0 && phase !== "correct" && (
         <p className="mt-2 text-center text-helper tabular text-type-secondary">
           오답 {wrongCount}회
         </p>
       )}
-
-      <footer className="mt-auto pt-4">
-        {phase === "correct" ? (
+        </>
+      }
+      cta={
+        phase === "correct" ? (
           <button
             type="button"
             onClick={handleNext}
@@ -362,15 +368,16 @@ export default function PhysicsVectorGame() {
           >
             확인
           </button>
-        )}
-      </footer>
-
-      <span className="sr-only" aria-live="polite">
-        {phase === "playing" && `합벡터 R = ${rx}, ${ry}`}
-        {phase === "wrong" && "합벡터가 일치하지 않아요"}
-        {phase === "correct" && "합벡터가 정답과 일치했어요"}
-      </span>
-    </main>
+        )
+      }
+      liveRegion={
+        <span className="sr-only" aria-live="polite">
+          {phase === "playing" && `합벡터 R = ${rx}, ${ry}`}
+          {phase === "wrong" && "합벡터가 일치하지 않아요"}
+          {phase === "correct" && "합벡터가 정답과 일치했어요"}
+        </span>
+      }
+    />
   );
 }
 
@@ -420,7 +427,7 @@ interface CompletionScreenProps {
 
 function CompletionScreen({ totalCards, onRetry }: CompletionScreenProps) {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-[480px] flex-col px-6 py-10">
+    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-10">
       <section className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
         <motion.h1
           className="text-display text-type-primary"
