@@ -113,24 +113,24 @@ spec/qa-playwright-setup §4.5 에 "split = lg+ aside 노출" 적혀 있지만 �
 
 ## 5. 작업 항목 + 자가 검증
 
-머지 후 다음 체크리스트로 자가 검증.
+PR #18 머지 (2026-05-12 02:02 UTC, main 7d8f63b) 후 다음 체크리스트로 자가 검증.
 
-- [ ] spec/09 §9.7 에 "콘텐츠 영역 max-w 정책" 추가
-  - **검증**: 9.7 끝에 표 형태로 페이지 타입 × max-w 정책 행 존재
-- [ ] [src/app/page.tsx](src/app/page.tsx) 홈 콘텐츠 max-w 캡 (≤ 720px 중앙)
-  - **검증**: 데스크탑 1280px 뷰에서 메인 카드·CTA 컬럼이 좌우 균형 (우측 ~330px 죽은 공간 0)
-- [ ] [src/app/games/\[gameId\]/layout.tsx](src/app/games/[gameId]/layout.tsx) 신설 — 게임 페이지에 chrome minimal 적용
-  - **검증**: `/games/factorization` 데스크탑에서 사이드바 영역 hidden, 헤더는 ✕(뒤로) + 게임명 + 진행도 bar
-- [ ] [src/components/shell/app-shell.tsx](src/components/shell/app-shell.tsx) `variant` prop 추가 — `"default" | "game"`
-  - **검증**: variant="game" 시 사이드바 컴포넌트 자체 미렌더 (DOM 부재)
-- [ ] [src/components/shell/app-header.tsx](src/components/shell/app-header.tsx) `variant="game"` 추가 — 검색/알림/프로필 제거, ✕ + 게임명 + thin progress 노출
+- [x] spec/09 §9.7 에 "콘텐츠 영역 max-w 정책" 추가 — PR #18 commit `249bd11` 으로 적용
+  - **검증**: §9.7 끝에 표 형태로 페이지 타입 × max-w 정책 행 존재 + Chrome 분기 단락
+- [x] [src/app/page.tsx](src/app/page.tsx) 홈 콘텐츠 max-w 캡 (≤ 720px 중앙) — PR #18 commit `5b2910d`
+  - **검증**: 데스크탑 1280px 뷰에서 메인 카드·CTA 컬럼이 좌우 균형 (우측 ~330px 죽은 공간 0) — design-review 캡처 `F1-after.png` 확인
+- [x] ~~[src/app/games/\[gameId\]/layout.tsx](src/app/games/[gameId]/layout.tsx) 신설~~ — AppShell pathname 자동 분기로 대체 (별 layout 파일 불필요)
+  - **검증**: `/games/factorization` 데스크탑 — 사이드바 DOM 부재, 헤더는 ✕(뒤로) + 풀림 로고. thin progress bar 는 본 PR 스코프 외 (후속)
+- [x] [src/components/shell/app-shell.tsx](src/components/shell/app-shell.tsx) `variant` prop — `"default" | "game"` — PR #18 commit `3310791`
+  - **검증**: variant="game" 시 사이드바 컴포넌트 자체 미렌더 (DOM 부재) — design-review 캡처 `F2-factorization-after.png`
+- [x] [src/components/shell/app-header.tsx](src/components/shell/app-header.tsx) `variant="game"` — 검색/알림/프로필 제거, ✕ + 로고 (thin progress 는 후속) — PR #18 commit `3310791`
   - **검증**: 게임 페이지 헤더에 검색·알림 버튼 DOM 부재
-- [ ] [src/components/game-shell/GameShell.tsx](src/components/game-shell/GameShell.tsx) — `header`/`cta` 외에 콘텐츠가 없는 split 의 우측 aside 영역 제거. 게임이 별도 aside 콘텐츠를 prop 으로 안 넘기면 단일 컬럼 max-w 중앙
-  - **검증**: 4개 split 게임(quick-quiz, chemistry, word-match, ...) 데스크탑에서 게임 영역이 화면 중앙 max-w 안에 정렬 (우측 빈 흰 칸 0)
-- [ ] e2e [e2e/viewport.spec.ts](e2e/viewport.spec.ts) — 게임 페이지 데스크탑에서 사이드바 nav DOM 부재 케이스 추가
-  - **검증**: `bun run test:e2e` 60 + 신규 케이스 green
-- [ ] design-audit 보고서의 F1·F2·F3 fix-status "verified" 표기
-  - **검증**: before/after 캡처 첨부
+- [x] [src/components/game-shell/GameShell.tsx](src/components/game-shell/GameShell.tsx) `aside?` prop + split + aside 미지정 시 lg+ 단일 컬럼 — PR #18 commit `eaae9f4`
+  - **검증**: split 게임 데스크탑에서 게임 영역이 화면 중앙 max-w-[640px] 안에 정렬 (우측 빈 흰 칸 0) — design-review 캡처 `F3-quickquiz-after.png`, `F3-chemistry-after.png`. PR #16 머지 후 chemistry-balance 는 aside 채워서 분할 복원
+- [x] e2e [e2e/viewport.spec.ts](e2e/viewport.spec.ts) — 게임 페이지 데스크탑에서 사이드바 nav DOM 부재 케이스 추가 — 후속 plan [2026-05-12_daily-outcome-cleanup.md](2026-05-12_daily-outcome-cleanup.md) §2.1 로 분리 (chrome minimal 회귀 차단 10 case 묶음)
+  - **검증**: 본 plan 머지 시점 e2e 60/60 green (회귀 X). chrome minimal 자동 회귀 차단은 cleanup PR 에서 추가
+- [x] design-audit 보고서의 F1·F2·F3 fix-status "verified" 표기 — [proc/archive/design-audit/2026-05-11.md](../archive/design-audit/2026-05-11.md) "Fix Status" 표에 8개 ID 모두 verified
+  - **검증**: before/after 캡처 `/tmp/pullim-games-design-audit-20260511/screenshots/` (휘발) — 보고서 자체는 repo 영구 보존
 
 ---
 

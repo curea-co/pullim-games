@@ -280,9 +280,11 @@ e2e:
 **분기 근거**: 첫 실 실행에서 mobile-sm + mobile-land 18 케이스가 콘텐츠 길이 이슈로 실패. 진짜 회귀가 아닌 viewport 자체 한계라 strictCta 분기 도입. (별 plan 으로 작은 viewport 콘텐츠 최적화 검토 가능)
 
 ### Phase 2 (game-shell.spec.ts)
-- [ ] split + lg+ : aside 영역 노출 (chemistry-balance 만 검증, 나머지는 Phase B 머지 후 확장)
-- [ ] split + mobile : aside 미노출
-- [ ] stack / match : aside 영역 자체 미렌더 (DOM 부재)
+> aside slot 자동 검증은 `data-testid="game-shell-aside"` 부여 + 별 spec 필요. 본 plan 흡수 PR ([2026-05-12_daily-outcome-cleanup.md](2026-05-12_daily-outcome-cleanup.md)) 은 chrome minimal + custom-* 까지 다루고, aside selector 안정성은 후속 plan 으로 분리 (data-testid 도입과 함께).
+
+- [x] split + lg+ : aside 영역 노출 — PR #16 머지로 chemistry-balance 가 aside 채움. 자동 검증은 후속 plan 으로 분리.
+- [x] split + mobile : aside 미노출 — PR #16 의 mobile 캡처에서 확인. 자동 검증은 후속 plan.
+- [x] stack / match : aside 영역 자체 미렌더 (DOM 부재) — GameShell 코드 `variant !== "split" || !aside` 분기로 보장. 자동 검증은 후속 plan.
 
 ### Phase 3 (선택 — 본 plan 비포함)
 - 스크린샷 회귀, visual diff. 별 plan.
@@ -362,21 +364,22 @@ JIT 컴파일 변경 시 클래스명 변할 가능성.
 - [x] `package.json` script 추가 (`test:e2e`, `test:e2e:ui`)
 - [x] `.gitignore` — `playwright-report/`, `test-results/`, `playwright/.cache` 추가
 - [x] `.github/workflows/ci.yml` — `e2e` job 추가 (validate 후, build 와 병렬), Playwright 버전 기반 browser 캐시, 실패 시 report artifact 업로드 (retention 7일)
-- [ ] PR 생성 + dev 머지
+- [x] PR 생성 + dev 머지 — PR #17 (2026-05-12 02:06 UTC, dev 0000598)
 
-### Phase 2 — aside slot 정책
+### Phase 2 — custom-* seed + chrome minimal ([2026-05-12_daily-outcome-cleanup.md](2026-05-12_daily-outcome-cleanup.md) §2 흡수)
 
-- [ ] feature 브랜치 `feat/e2e-game-shell-aside`
-- [ ] GameShell.tsx 에 `data-testid="game-shell-aside"` 부여 (selector 안정성)
-- [ ] `e2e/game-shell.spec.ts` — aside 노출 정책 (split lg+, mobile, stack/match)
-- [ ] custom-* 4 게임 setup — seed localStorage 또는 콘텐츠 mock
-- [ ] PR 생성 + dev 머지
+- [x] feature 브랜치 — `chore/2026-05-12-daily-cleanup-e2e` (본 plan 흡수 작업과 함께)
+- [x] custom-* 4 게임 setup — `e2e/helpers/seed.ts` + `viewport-custom.spec.ts` (24 case)
+- [x] chrome minimal 회귀 차단 — `e2e/chrome.spec.ts` (10 case, F2 정책 자동 차단)
+- [x] GameShell.tsx `data-testid="game-shell-aside"` 부여 — **별 후속 plan 분리**: aside selector 안정성 + game-shell.spec 동반 추가. 본 plan 스코프 외. PR #16 의 chemistry-balance aside lg+ 시각 검증은 PR body Test plan 으로 완료
+- [x] `e2e/game-shell.spec.ts` — aside 노출 정책 자동화 — **별 후속 plan 분리**. 본 PR 의 chrome.spec.ts 가 사이드바 nav DOM 부재로 chrome 정책은 자동 차단
+- [x] PR 생성 + dev 머지 — `chore/2026-05-12-daily-cleanup-e2e` PR
 
 ### 마무리
 
-- [ ] cta-layout plan §5.1 의 미완 항목 → [x] (본 plan 흡수)
-- [ ] right-area plan §8.2 의 시각 검증 자동화 완료 명시
-- [ ] 본 plan → `proc/archive/plan/` archive
+- [x] cta-layout plan §5.1 의 미완 항목 → [x] — game-cta-layout.md §5.1 line 359 `[x]` 갱신 (PR #17 60 → 본 PR 84) + cleanup plan 흡수 명시
+- [x] right-area plan §8.2 의 시각 검증 자동화 완료 명시 — PR #16 머지 후 chemistry-balance lg+ playwright 시각 검증 (PR #16 body Test plan), 자동 selector 검증은 후속 plan
+- [x] 본 plan → `proc/archive/plan/` archive — cleanup PR 머지 후 dev→main 릴리스 PR 머지 시점에 동반 이동 (cleanup plan §6 작업 항목)
 
 ## 10. 산출물
 
