@@ -6,6 +6,8 @@ import type { GameManifest } from "@/lib/games/types";
 import type { ProgressLookup } from "@/lib/games/filter";
 import type { PerGameStat } from "@/lib/core";
 import { Button } from "@/components/ui/button";
+import { subjectBadgeClass } from "@/lib/games/subject-badge";
+import { cn } from "@/lib/utils";
 
 interface Props {
   games: GameManifest[];
@@ -65,8 +67,16 @@ export function TableView({ games, perGame }: Props) {
                     <span className="font-bold text-type-primary">{g.meta.title}</span>
                   </span>
                 </td>
-                <td className="whitespace-nowrap px-3 py-2.5 text-type-secondary">
-                  {g.meta.subject} · {g.meta.unit}
+                <td className="whitespace-nowrap px-3 py-2.5">
+                  <span
+                    className={cn(
+                      "mr-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium",
+                      subjectBadgeClass(g.meta.subject),
+                    )}
+                  >
+                    {g.meta.subject}
+                  </span>
+                  <span className="text-type-secondary">{g.meta.unit}</span>
                 </td>
                 <td className="whitespace-nowrap px-3 py-2.5 text-type-secondary">
                   {MECHANIC_LABEL[g.meta.mechanic] ?? g.meta.mechanic}
