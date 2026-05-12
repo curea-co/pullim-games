@@ -1,7 +1,8 @@
-// 14 official + 4 custom 게임 메타 — Playwright e2e 매트릭스 input.
+// 15 official + 4 custom 게임 메타 — Playwright e2e 매트릭스 input.
 // `proc/plan/2026-05-11_qa-playwright-setup.md` §4.3 + `2026-05-12_daily-outcome-cleanup.md` §2.2 참조.
+// `2026-05-12_game-discrimination-and-polish.md` Phase 1 에서 english-vocab-typing 추가 (15번째).
 //
-// official 10 — 콘텐츠가 코드 내장이라 별도 setup 불필요.
+// official 11 — 콘텐츠가 코드 내장이라 별도 setup 불필요.
 // custom-* 4 — localStorage seed (helpers/seed.ts) 필수. spec 에서 beforeEach 로 주입.
 
 // GameShellVariant 와 동일 — e2e/ 가 src 외부라 path import 회피 위해 재정의.
@@ -26,6 +27,7 @@ export const OFFICIAL_GAMES: GameE2EMeta[] = [
   { id: "english-blank",      variant: "split", ctaTextPattern: /다음|보기를 골라주세요/ },
   { id: "english-word-match", variant: "match", ctaTextPattern: /다음|마치기/ },
   { id: "vocab-typing",       variant: "split", ctaTextPattern: /확인|다음|마치기/ },
+  { id: "english-vocab-typing", variant: "split", ctaTextPattern: /확인|다음|마치기/ },
 ];
 
 // custom-* 4 게임 — localStorage seed (helpers/seed.ts) 필수.

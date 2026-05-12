@@ -6,6 +6,7 @@ import type { GameManifest } from "@/lib/games/types";
 import type { ProgressLookup } from "@/lib/games/filter";
 import type { PerGameStat } from "@/lib/core";
 import { Card } from "@/components/ui/card";
+import { subjectBadgeClass } from "@/lib/games/subject-badge";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -46,8 +47,18 @@ export function ListView({ games, perGame }: Props) {
               <p className="truncate text-label font-bold text-type-primary">
                 {g.meta.title}
               </p>
-              <p className="truncate text-helper text-type-secondary">
-                {g.meta.subject} · {g.meta.unit} · 약 {g.meta.estimatedMinutes}분
+              <p className="truncate text-helper">
+                <span
+                  className={cn(
+                    "mr-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-medium",
+                    subjectBadgeClass(g.meta.subject),
+                  )}
+                >
+                  {g.meta.subject}
+                </span>
+                <span className="text-type-secondary">
+                  {g.meta.unit} · 약 {g.meta.estimatedMinutes}분
+                </span>
               </p>
             </div>
             {stat && stat.cardsTotal > 0 && (

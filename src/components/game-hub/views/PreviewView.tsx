@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Lock } from "lucide-react";
 import type { GameManifest } from "@/lib/games/types";
 import type { ProgressLookup } from "@/lib/games/filter";
+import { subjectBadgeClass } from "@/lib/games/subject-badge";
 import { Card } from "@/components/ui/card";
 import { PreviewMock } from "@/components/game-hub/preview-mocks";
 import { cn } from "@/lib/utils";
@@ -36,9 +37,17 @@ export function PreviewView({ games, progress }: Props) {
                   />
                 )}
               </header>
-              <p className="text-helper text-type-secondary">
-                {g.meta.subject} · {g.meta.unit}
-              </p>
+              <div className="flex items-center gap-1.5 text-helper">
+                <span
+                  className={cn(
+                    "rounded-full px-2 py-0.5 text-[11px] font-medium",
+                    subjectBadgeClass(g.meta.subject),
+                  )}
+                >
+                  {g.meta.subject}
+                </span>
+                <span className="text-type-secondary">{g.meta.unit}</span>
+              </div>
               <p className="line-clamp-2 text-helper text-type-primary/80">
                 {g.meta.tagline}
               </p>
