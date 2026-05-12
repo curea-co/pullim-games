@@ -4,14 +4,16 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev -p 3033",
     "gen:registry": "tsx scripts/generate-registry.ts",
     "lint": "eslint .",
-    "predev": "npm run gen:registry",
-    "prebuild": "npm run gen:registry",
-    "start": "next start",
+    "predev": "bun run gen:registry",
+    "prebuild": "bun run gen:registry",
+    "start": "next start -p 3033",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -41,6 +43,7 @@
     "zustand": "^5.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@types/node": "^22.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
@@ -59,5 +62,8 @@
     "typescript": "^5.6.0",
     "typescript-eslint": "^8.59.2",
     "vitest": "^4.1.5"
-  }
+  },
+  "trustedDependencies": [
+    "unrs-resolver"
+  ]
 }

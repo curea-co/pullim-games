@@ -17,6 +17,13 @@
   body {
     @apply bg-bg-primary text-type-primary font-sans antialiased;
     font-feature-settings: "tnum"; /* 진행도/숫자 안정 정렬 */
+    /* 한국어 줄바꿈 — 단어(어절) 단위 보존. 영문은 normal 그대로. */
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
   }
 
   /* 터치 영역 시각 보조 — 디버그 시 쓸 수 있도록 비활성 상태로 */

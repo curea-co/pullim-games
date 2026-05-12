@@ -1,5 +1,6 @@
 // 게임 공통 wrapper — 14 게임의 main 레이아웃 통일.
 // `proc/plan/2026-05-11_game-cta-layout.md` §3 따름.
+// `proc/plan/2026-05-11_layout-overhaul.md` F3=B — aside prop 미지정이면 split 도 lg+ 단일 컬럼.
 //
 // 핵심:
 // - 부모(AppShell 본문 스크롤 영역) 의 100% 높이를 채우도록 `min-h-full`.
@@ -24,6 +25,7 @@ interface GameShellProps {
   /**
    * 레이아웃 변형:
    * - "split" : 모바일 세로 stack / lg+ 좌우 분할 (다수 게임 기본).
+   *   ↳ aside prop 미지정이면 lg+ 에서도 단일 컬럼 (빈 우측 컬럼 회피).
    * - "stack" : 항상 세로. 세로 드래그 메커닉 (factorization) 보존.
    * - "match" : 항상 세로. 매칭 메커닉이 이미 좌우라 lg+ 폭만 키움.
    */
@@ -34,6 +36,12 @@ interface GameShellProps {
 
   /** 접근성용 sr-only live region. */
   liveRegion?: ReactNode;
+
+  /**
+   * lg+ 에서 우측 컬럼에 노출할 콘텐츠 (예: 진행 요약, 힌트, 예시).
+   * 미지정 시 split 변형도 단일 컬럼으로 폴백. 게임이 의도해서 채울 때만 분할.
+   */
+  aside?: ReactNode;
 }
 
 export function GameShell({
@@ -43,26 +51,28 @@ export function GameShell({
   variant = "split",
   splitRatio = "3fr 2fr",
   liveRegion,
+  aside,
 }: GameShellProps) {
-  if (variant === "split") {
+  if (variant === "split" && aside) {
     return (
       <main
         className={cn(
           // 모바일 (~md): 세로 stack — 기존 패턴 유지
           "mx-auto flex min-h-full w-full max-w-[480px] flex-col px-6 py-6",
-          // lg+: 좌우 분할
+          // lg+: 좌우 분할 (aside 콘텐츠가 있을 때만)
           "lg:grid lg:max-w-[960px] lg:grid-cols-[var(--split)] lg:gap-8 lg:px-8",
         )}
         style={{ ["--split" as never]: splitRatio }}
       >
         {/* 모바일: header → content → cta (DOM order) */}
-        {/* lg+: content 좌(order-1), header+cta 우(order-2) */}
+        {/* lg+: content 좌(order-1), header+aside+cta 우(order-2) */}
         <div className="contents lg:hidden">{header}</div>
         <section className="flex flex-1 flex-col lg:order-1 lg:min-h-full">
           {content}
         </section>
         <aside className="mt-6 flex flex-col gap-6 lg:order-2 lg:mt-0 lg:justify-between">
           <div className="hidden lg:block">{header}</div>
+          <div className="hidden lg:block">{aside}</div>
           <div>{cta}</div>
         </aside>
         {liveRegion}
@@ -70,8 +80,13 @@ export function GameShell({
     );
   }
 
-  // stack / match — 항상 세로
-  const maxW = variant === "match" ? "max-w-[480px] lg:max-w-[720px]" : "max-w-[480px]";
+  // 단일 컬럼 — stack/match, 또는 split + aside 미지정 폴백
+  const maxW =
+    variant === "match"
+      ? "max-w-[480px] lg:max-w-[720px]"
+      : variant === "split"
+        ? "max-w-[480px] lg:max-w-[640px]"
+        : "max-w-[480px]";
 
   return (
     <main

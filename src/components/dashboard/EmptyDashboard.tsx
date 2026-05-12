@@ -26,8 +26,7 @@ export function EmptyDashboard() {
       </Card>
       <Button
         asChild
-        variant="outline"
-        className="group h-auto justify-between rounded-block border-type-primary bg-bg-block px-5 py-4 text-body text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
+        className="group h-auto justify-between rounded-block border-0 bg-accent-positive px-5 py-4 text-body font-semibold text-type-primary shadow-glow hover:bg-accent-positive/90 hover:text-type-primary"
       >
         <Link href="/games/factorization">
           <span>인수분해 블록 분리부터</span>
@@ -36,8 +35,8 @@ export function EmptyDashboard() {
       </Button>
       <Button
         asChild
-        variant="outline"
-        className="h-auto justify-center rounded-block border-border-hairline bg-bg-block px-5 py-3 text-helper text-type-secondary hover:bg-bg-block hover:text-type-primary"
+        variant="ghost"
+        className="h-auto justify-center rounded-block px-5 py-3 text-helper text-type-secondary hover:bg-bg-block hover:text-type-primary"
       >
         <Link href="/games">전체 게임 허브 보기</Link>
       </Button>
