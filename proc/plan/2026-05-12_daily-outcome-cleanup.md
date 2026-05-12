@@ -145,16 +145,16 @@
 
 순서: ①→②→③ (의존성), ④ 는 디자인 별 트랙
 
-- [ ] **①** §1.1 layout-overhaul.md §5 retroactive [x] (8 항목)
-- [ ] **①** §1.2 game-cta-layout.md retroactive [x] + 이관 메모 (15 항목)
-- [ ] **①** §1.3 audit 리포트 fix-status verified 표기 + 보존 위치 (결정점 2)
-- [ ] **②** §2.1 e2e chrome minimal 회귀 차단 (10 case 신규)
-- [ ] **②** §2.2 e2e custom-* localStorage seed + 24 case
-- [ ] **②** `bun run test:e2e` 84/84 green
-- [ ] **③** dev → main 릴리스 PR (결정점 1 따름)
-- [ ] **③** 릴리스 PR 머지 후 plan 3개 (game-cta-layout, layout-overhaul, qa-playwright-setup) `proc/archive/plan/` 이동
-- [ ] **③** spec/09 §9.7 의 max-w 정책 표 + Chrome 분기 단락이 main 에 있는지 확인 (이미 PR #18 머지로 main 반영, 더블체크)
-- [ ] **④ (사용자)** 24 icon 시안 + 게임즈 할당 + 차별성
+- [x] **①** §1.1 layout-overhaul.md §5 retroactive [x] (8 항목) — PR #19 commit 77f5f8b
+- [x] **①** §1.2 game-cta-layout.md retroactive [x] + 이관 메모 (15 항목) — PR #19 commit 77f5f8b
+- [x] **①** §1.3 audit 리포트 fix-status verified + `proc/archive/design-audit/2026-05-11.md` 보존 (결정점 2 = b) — PR #19 commit 8c506d3
+- [x] **②** §2.1 e2e chrome minimal 회귀 차단 (10 case 신규) — PR #19 commit 6d20961, `e2e/chrome.spec.ts`
+- [x] **②** §2.2 e2e custom-* localStorage seed + 24 case — PR #19 commit 6d20961, `e2e/helpers/seed.ts` + `viewport-custom.spec.ts`
+- [x] **②** `bun run test:e2e` 94/94 green (60 + 24 + 10) — PR #19 본문 + CI green
+- [x] **③** 릴리스 머지 전 plan 3개 (game-cta-layout, layout-overhaul, qa-playwright-setup) `proc/archive/plan/` 이동 — PR A `chore/archive-plans-2026-05-12`
+- [x] **③** dev → main 릴리스 PR (결정점 1 = B) — PR B `release: dev → main 2026-05-12`. PR #16(aside slot) + PR #19(cleanup) + PR A(archive) 묶음
+- [x] **③** spec/09 §9.7 의 max-w 정책 표 + Chrome 분기 단락 main 반영 확인 — PR #18 commit 249bd11 (main 7d8f63b) 으로 이미 반영
+- [ ] **④ (사용자)** 24 icon 시안 + 게임즈 할당 + 차별성 — 디자인 별 트랙, AI 처리 불가
 
 ---
 
