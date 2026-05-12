@@ -91,30 +91,10 @@ interface PreviewMediaProps {
 }
 
 function PreviewMedia({ meta, isAvailable }: PreviewMediaProps) {
-  // 자산 우선: previewImagePath 가 있으면 그게 mock 위에 덮임.
-  // 자산 없거나 로드 실패 시 mock 이 노출됨.
+  // 자산 미준비 — mock 애니메이션만 노출. 자산 생기면 img 블록 복원 (see git log).
   return (
-    <div
-      className={cn(
-        "relative aspect-[16/10] w-full overflow-hidden border-b border-border-hairline bg-pullim-slate-50",
-      )}
-    >
+    <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-border-hairline bg-pullim-slate-50">
       <PreviewMock meta={meta} locked={!isAvailable} />
-      {meta.previewImagePath && (
-        <img
-          src={meta.previewImagePath}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className={cn(
-            "absolute inset-0 h-full w-full object-cover transition-transform group-hover:scale-105",
-            !isAvailable && "grayscale",
-          )}
-          onError={(e) => {
-            e.currentTarget.style.display = "none";
-          }}
-        />
-      )}
     </div>
   );
 }
