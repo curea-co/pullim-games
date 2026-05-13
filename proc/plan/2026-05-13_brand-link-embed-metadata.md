@@ -1,6 +1,6 @@
 # 2026-05-13 — 배포 링크 임베드 메타데이터 풍부화 (OG / Twitter / PWA)
 
-- **상태**: 진행중 (2026-05-13)
+- **상태**: 완료 (2026-05-13) — PR #24 머지 + Vercel 배포 검증 완료
 - **트리거**: 사용자 요청 — "pullim-classbot 처럼 서버 배포 후 링크 임베드 시 설명이 풍부하게"
 - **확정 도메인**: `https://pullim-games.vercel.app/games` (사용자 명시)
 - **스코프**: layout.tsx 메타 풀세트 + 동적 OG/Twitter PNG + PWA manifest + 환경 변수
@@ -68,19 +68,22 @@
 ## 4. 검증
 
 - [x] `bunx tsc --noEmit` — 0 errors
-- [ ] dev 서버에서 `/opengraph-image` `/twitter-image` `/manifest.webmanifest` 200 응답
-- [ ] OG 이미지 시각 검사 — 헤드라인 잘림 없음, `#00D4A1` 액센트 점 1개만, 이모지 0
-- [ ] 배포 후 OG 검사:
-  - https://www.opengraph.xyz/url/https%3A%2F%2Fpullim-games.vercel.app%2Fgames — 카드 이미지/타이틀/디스크립션 노출
-  - KakaoTalk 채팅창 붙여넣기 — 1200×630 풀 이미지 카드
-  - Twitter Card Validator — `summary_large_image` 인식
+- [x] dev 서버에서 `/opengraph-image` `/twitter-image` `/manifest.webmanifest` 200 응답
+- [x] OG 이미지 시각 검사 — 헤드라인 잘림 없음, `#00D4A1` 액센트 점 1개만, 이모지 0
+- [x] 배포 후 OG 검사:
+  - production `/opengraph-image` 200 image/png immutable, `server: Vercel`, age:0
+  - production `/twitter-image` 200, `x-matched-path: /twitter-image`
+  - production `/manifest.webmanifest` 200 application/manifest+json
+  - production `/` HTML head — title/description/keywords/applicationName/og:* 13종/twitter:* 9종/manifest link 전부 노출
+- [ ] (사용자 영역) https://www.opengraph.xyz/url/https%3A%2F%2Fpullim-games.vercel.app%2Fgames 또는 KakaoTalk 채팅창 붙여넣기로 시각 검증
 
 ## 5. 배포
 
-- [ ] feature branch `feat/link-embed-metadata`
-- [ ] commit: `feat(meta): OG/Twitter/PWA 풀세트 — 배포 링크 임베드 풍부화`
-- [ ] push + PR (base: main)
-- [ ] PR 머지 → Vercel main 자동 배포
+- [x] feature branch `feat/link-embed-metadata`
+- [x] commit `528d6eb`: `feat(meta): OG/Twitter/PWA 풀세트 — 배포 링크 임베드 풍부화`
+- [x] push + PR — [#24](https://github.com/curea-co/pullim-games/pull/24)
+- [x] PR 머지 (`182aa6d`, 2026-05-13 01:42:54 UTC) → Vercel main 자동 배포
+- [x] 원격 feature branch 정리 (`git push origin --delete`)
 - [ ] **(선택)** Vercel dashboard 에서 `NEXT_PUBLIC_SITE_URL=https://pullim-games.vercel.app` env 등록 — 미등록 시에도 코드 폴백으로 동작하나, env 명시가 더 안전
 
 ## 6. 자가 검증 (머지 후)
