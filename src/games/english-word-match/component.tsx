@@ -77,20 +77,32 @@ export default function EnglishWordMatchGame() {
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
 
+  // extras 는 음수 pairIndex 로 분리 — pair 와 매칭 시도 시 자연스럽게 wrong (음수 ≠ 양수 인덱스).
+  // 영어/한국어 extras 도 서로 다른 범위라 둘 끼리도 매칭 안 됨. plan 트랙 B I1.
   const englishItems: SideItem[] = useMemo(() => {
     if (!card) return [];
-    return seededShuffle(
-      card.problem.pairs.map((p, i) => ({ pairIndex: i, text: p.english })),
-      `${card.id}-en`,
-    );
+    const pairs = card.problem.pairs.map((p, i) => ({
+      pairIndex: i,
+      text: p.english,
+    }));
+    const extras = (card.problem.extras?.english ?? []).map((text, i) => ({
+      pairIndex: -(i + 1),
+      text,
+    }));
+    return seededShuffle([...pairs, ...extras], `${card.id}-en`);
   }, [card]);
 
   const koreanItems: SideItem[] = useMemo(() => {
     if (!card) return [];
-    return seededShuffle(
-      card.problem.pairs.map((p, i) => ({ pairIndex: i, text: p.korean })),
-      `${card.id}-ko`,
-    );
+    const pairs = card.problem.pairs.map((p, i) => ({
+      pairIndex: i,
+      text: p.korean,
+    }));
+    const extras = (card.problem.extras?.korean ?? []).map((text, i) => ({
+      pairIndex: -1000 - i,
+      text,
+    }));
+    return seededShuffle([...pairs, ...extras], `${card.id}-ko`);
   }, [card]);
 
   useEffect(() => {

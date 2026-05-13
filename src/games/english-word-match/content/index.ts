@@ -18,6 +18,10 @@ const RAW_CARDS: WordMatchCard[] = [
         { english: "distinguish", korean: "구별하다" },
         { english: "regulate", korean: "조절하다" },
       ],
+      extras: {
+        english: ["maintain", "oppose"],
+        korean: ["유지하다", "반대하다"],
+      },
     },
   },
   {
@@ -34,6 +38,10 @@ const RAW_CARDS: WordMatchCard[] = [
         { english: "consensus", korean: "합의" },
         { english: "perspective", korean: "관점" },
       ],
+      extras: {
+        english: ["reputation", "conflict"],
+        korean: ["평판", "갈등"],
+      },
     },
   },
   {
@@ -50,6 +58,10 @@ const RAW_CARDS: WordMatchCard[] = [
         { english: "sufficient", korean: "충분한" },
         { english: "deliberate", korean: "의도적인" },
       ],
+      extras: {
+        english: ["modest", "evident"],
+        korean: ["겸손한", "명백한"],
+      },
     },
   },
   {
@@ -66,6 +78,10 @@ const RAW_CARDS: WordMatchCard[] = [
         { english: "principal", korean: "주요한" },
         { english: "compose", korean: "작곡하다" },
       ],
+      extras: {
+        english: ["accept", "compromise"],
+        korean: ["수용하다", "타협하다"],
+      },
     },
   },
   {
@@ -82,6 +98,10 @@ const RAW_CARDS: WordMatchCard[] = [
         { english: "devote", korean: "헌신하다" },
         { english: "yield", korean: "양보하다" },
       ],
+      extras: {
+        english: ["confess", "contain"],
+        korean: ["고백하다", "포함하다"],
+      },
     },
   },
 ];
