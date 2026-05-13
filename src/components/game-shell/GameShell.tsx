@@ -49,16 +49,23 @@ export function GameShell({
 
   return (
     <main
+      data-testid="game-shell"
+      data-variant={variant}
       className={cn(
         "mx-auto flex h-full w-full flex-col px-6 py-6",
         maxW,
       )}
     >
       {header}
-      <section className="flex min-h-0 flex-1 flex-col overflow-y-auto">
+      <section
+        data-testid="game-shell-content"
+        className="flex min-h-0 flex-1 flex-col overflow-y-auto"
+      >
         {content}
       </section>
-      <footer className="mt-6">{cta}</footer>
+      <footer data-testid="game-shell-cta" className="mt-6">
+        {cta}
+      </footer>
       {liveRegion}
     </main>
   );
