@@ -279,8 +279,9 @@ export default function PhysicsVectorGame() {
               />
             ))}
 
-          {/* 정답 윤곽 */}
-          {phase !== "correct" && (
+          {/* 정답 윤곽 — playing 중엔 hide. 입력 벡터 라벨 보고 합 계산 후 "정답 확인".
+              plan I6 (Phase 3.2) — 답지 hidden + 가설 수립 + 검증 흐름. */}
+          {(phase === "checking" || phase === "wrong") && (
             <line
               x1={projectX(0)}
               y1={projectY(0)}

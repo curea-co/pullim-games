@@ -209,7 +209,9 @@ export default function ChemistryBalanceGame() {
             {elements.map((el) => {
               const l = liveLeft[el] ?? 0;
               const r = liveRight[el] ?? 0;
-              const ok = l === r && l > 0;
+              // 양변 일치 mint 강조는 "정답 확인" 후 correct 일 때만.
+              // playing 중엔 시각 시그널 차단 → 가설 수립 + 검증 흐름. plan I4 (Phase 3.2).
+              const ok = phase === "correct" && l === r && l > 0;
               return (
                 <li key={el} className={ok ? "text-accent-positive" : ""}>
                   {el}:{l}
@@ -224,7 +226,7 @@ export default function ChemistryBalanceGame() {
             {elements.map((el) => {
               const l = liveLeft[el] ?? 0;
               const r = liveRight[el] ?? 0;
-              const ok = l === r && r > 0;
+              const ok = phase === "correct" && l === r && r > 0;
               return (
                 <li key={el} className={ok ? "text-accent-positive" : ""}>
                   {el}:{r}

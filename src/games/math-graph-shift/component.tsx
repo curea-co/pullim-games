@@ -242,14 +242,15 @@ export default function MathGraphShiftGame() {
                 strokeWidth={0.5}
               />
             ))}
-          {/* 목표 곡선 (점선) */}
+          {/* 목표 곡선 (점선) — playing 중엔 hide. 식 보고 슬라이더 조정 후 "정답 확인" 시 reveal.
+              plan I5 (Phase 3.2) — 답지 hidden + 가설 수립 + 검증 흐름. */}
           <path
             d={targetPath}
             fill="none"
             className="stroke-type-secondary"
             strokeWidth={2}
             strokeDasharray="4 4"
-            opacity={phase === "correct" ? 0 : 0.7}
+            opacity={phase === "playing" || phase === "correct" ? 0 : 0.7}
           />
           {/* 학생 곡선 */}
           <path
