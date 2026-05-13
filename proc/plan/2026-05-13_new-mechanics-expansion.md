@@ -1,6 +1,6 @@
 # 2026-05-13 — 신규 메커닉 3종 추가 (라인업 확장)
 
-- **상태**: IN-PROGRESS (2026-05-13) — D1=A / D2=A 합의 완료. M1 펀넷 사각형 PR #32 완료, M2 품사 태깅 PR 2 진행 중 (M1 위 stack)
+- **상태**: COMPLETE (2026-05-13) — D1=A / D2=A / D3=A / D4=A / D5=A. M1 PR #32, M2 PR #33, M3 PR #34 — 3 게임 모두 PR 오픈 완료. 머지 + 자가 검증 대기
 - **트리거**: 사용자 요청 — "게임 몇 개 더 만들어볼까" → 콘텐츠 조합이 아닌 **새 메커닉** 방향 확정
 - **메모리 룰 적용**:
   - 학습효과 > 중독성, PVE 지향 → retrieval depth + 가설 수립 흐름 우선
@@ -58,23 +58,29 @@
   ```
 - **콘텐츠 분량 V0**: 5장 (단문 → 복문 → 인용절 → 시 한 행 → 속담)
 
-### M3 — 분류 트리 (범과목 카테고리)
+### M3 — 분류 트리 (생물 분류)
 
-- **gameId**: `category-sort` (이름 V1, 추후 과목별 분기 가능: `bio-taxonomy`, `ethics-thinkers` 등)
-- **과목 · 단원**: V0은 생명과학 / 분류 (5계 — 원핵·원생·균·식물·동물). V1 이후 윤리(동/서양 사상가), 사회(정치체제) 등 확장
-- **인터랙션**: 화면 상단에 2~4개 카테고리 박스, 하단에 카드 6~10장 → 카드를 카테고리로 드래그 → 모두 분류 완료 시 "정답 확인" 활성화
-- **새 GameMechanic 후보**: `categorization` (sorting 의 N→M 분류 변종) — D1 결정
-- **retrieval depth**: medium — 카드 속성을 카테고리 기준에 매핑. 우성 단서(이미지·키워드) 의도적으로 모호하게 설계
-- **변별 포인트**: 끼워맞추기 회피 — "정답 확인" 클릭 전엔 색만 바뀌고 정/오 표시 없음. 한 카테고리 카드 수 비공개 (학생이 분포까지 추론)
+- **gameId**: `bio-taxonomy` (V0 명확화 — 윤리·사회 분류는 V1+ 별 게임 `ethics-classification` 등으로 분리)
+- **과목 · 단원**: 과학 / 고1 생명과학 — 생물 분류
+- **인터랙션**: 카드 탭 → active → 카테고리 박스 탭 → 배치. 카테고리 안 카드 탭 → 풀로 복귀. 드래그 X (모바일 친화, M2 패턴 재사용)
+- **GameMechanic 매핑**: `sorting` (D1=A 채택 — 기존 5종 안에서 매핑)
+- **카테고리 max**: 4 (모바일 480px 폭 제약. 5계 분류는 V1+)
+- **retrieval depth**: medium — 카드 속성을 카테고리 기준에 매핑
+- **변별 포인트**: 끼워맞추기 회피 — "정답 확인" 클릭 전엔 정/오 표시 없음. wrong 시 정확도(`n/m`) 만 노출, 카드별 정/오 강조 X. 한 카테고리 카드 수 비공개
 - **schema 스케치**:
   ```ts
   problem: {
-    categories: Array<{ id: string; label: string }>;  // ex: 원핵계/원생생물계/균계/식물계/동물계
-    items: Array<{ id: string; label: string; categoryId: string }>;  // 카드 = 정답 카테고리 매핑
+    categories: Array<{ id: string; label: string }>;  // 2~4개
+    items: Array<{ id: string; label: string; categoryId: string }>;  // 6~10장. 카드 = 정답 카테고리 매핑
   }
   ```
-- **콘텐츠 분량 V0**: 5장 (생물 5계 → 척추동물 5강 → 식물 분류 → 윤리 동양사상가 → 윤리 서양사상가)
-  - **주의**: 윤리 카드까지 V0 에 넣으려면 콘텐츠 비중 큼 → V0 = 생명과학 3장 + 윤리 2장 또는 생명과학 5장 으로 좁힐지 D2 결정
+- **콘텐츠 분량 V0**: 5장, 모두 생명과학 (D3 결정):
+  1. 진핵 vs 원핵 (카테고리 2, 카드 6)
+  2. 동물·식물·균류 (카테고리 3, 카드 6)
+  3. 척추 vs 무척추 동물 (카테고리 2, 카드 6)
+  4. 선태·양치·겉씨·속씨식물 (카테고리 4, 카드 8)
+  5. 척추동물 4강 — 어류·파충류·조류·포유류 (카테고리 4, 카드 8). 양서류는 V1+
+  → 5계 분류, 윤리 사상가 등은 V1+ 별 게임으로 분리
 
 ## 2. 우선순위 가설
 
@@ -103,13 +109,27 @@
 
 → **A 추천 이유**: 게임 신규는 manifest+schema+component+content+e2e 등 변경 면이 넓음. 묶으면 리뷰 부담 큼. 별 PR 이 머지·롤백·검증 모두 안전.
 
-### D3 — M3 V0 콘텐츠 범위 (D1·D2 결정 후 진행 시점에 정함)
+### D3 — M3 V0 콘텐츠 범위 ✓ (2026-05-13 정리 — A 채택)
 
 옵션:
-- **A** 생명과학 5장 단일 과목으로 V0 출시 → 윤리/사회는 별 카드 추가 (콘텐츠 별 trk)
-- **B** 생명과학 3 + 윤리 2 혼합 출시 → 범용성 데모
+- **A (채택)** 생명과학 5장 단일 과목으로 V0 출시 → 윤리/사회는 V1+ 별 게임으로 분리 (`ethics-classification` 등)
+- B 생명과학 3 + 윤리 2 혼합 → subject 라벨 모호, 기존 패턴(한 게임 = 한 과목) 이탈
 
-→ V0 게임 출시 시점에 결정. 본 plan scope 외.
+→ **A 채택 이유**: subject 라벨·미리보기 뱃지 일관성. gameId 도 `bio-taxonomy` 로 명확화 — V1 부터 다른 분류 게임은 별 game id.
+
+### D4 — M3 인터랙션 패턴 🔄 2026-05-13 뒤집기 — Drag-and-drop 채택
+
+옵션:
+- ~~A (초기 채택)~~ 클릭/탭으로 active 카드 선택 → 카테고리 박스 탭 → 배치 (M2 패턴)
+- **B (재채택)** 드래그 앤 드롭 (factorization 패턴) — 1단계 메커닉, 시각적 연속성, manipulation 게임군과 결 일관
+
+→ **뒤집기 사유**: V0 click-to-assign 의 2단계 인터랙션 + 풀 복귀 비직관 — 사용자 검토에서 부적합 확인. 상세: [2026-05-13_bio-taxonomy-drag-drop.md](2026-05-13_bio-taxonomy-drag-drop.md). PR #34 안에서 새 commit 으로 교체 (E4=B 채택).
+
+### D5 — M3 카테고리 max ✓ (2026-05-13 정리 — 4 채택)
+
+옵션:
+- **A (채택)** 카테고리 max 4 — 모바일 폭 제약. 5계 분류는 V1+
+- B max 5 — 가로 박스 5개, 모바일 좁음
 
 ## 4. 작업 항목 (D1=A / D2=A 채택 가정, M1 부터 진행)
 
@@ -140,16 +160,17 @@
 - [x] registry 재생성 → 17 게임
 - [x] e2e — 7/7 PASS (5 viewport + chrome). subject="국어" 매핑 기존 활용
 
-### M3 분류 트리 (PR 3 — M2 머지 후)
+### M3 분류 트리 (PR 3 — M2 위 stack, bio-taxonomy)
 
-- [ ] `src/games/category-sort/` 폴더 신규
-  - [ ] schema: 카테고리 N + items M
-  - [ ] logic/checkSort.ts + test
-  - [ ] components/CategoryBox.tsx + ItemCard.tsx (드래그)
-  - [ ] component.tsx
-  - [ ] content/index.ts (D3 결정에 따라 5장)
-- [ ] registry → 18 게임
-- [ ] e2e + 뱃지
+- [x] `src/games/bio-taxonomy/` 폴더 신규 (gameId 명확화 — D3 결정)
+  - [x] manifest.ts (subject=과학, unit=생명과학 분류, mechanic=sorting, retrievalDepth=medium)
+  - [x] schema: categories[2~4] + items[6~10] + refine(categoryId ∈ categories.id)
+  - [x] logic/checkAssignments.ts + test (item-by-item categoryId 비교 + 정확도)
+  - [x] components/CategoryBox.tsx + ItemCard.tsx (click-to-assign — D4 결정)
+  - [x] component.tsx (5-phase, active item → category 탭 = 배치, 카테고리 안 카드 탭 → 풀 복귀)
+  - [x] content/index.ts (5장 — 진핵·원핵 → 동·식·균 → 척추·무척추 → 식물 4분류 → 척추동물 4강)
+- [x] registry → 18 게임
+- [x] e2e — 7/7 PASS (5 viewport + chrome). subject="과학" 매핑 기존 활용
 
 ## 5. 비스코프
 
