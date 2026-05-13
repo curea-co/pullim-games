@@ -1,8 +1,9 @@
-// 인수분해 카드 풀 — V0.2: 공통인수 메커닉 5장.
+// 인수분해 카드 풀 — V0.3: 공통인수 메커닉 10장. 차수·항·계수 다양화.
 // AST 기반 buildCard helper 가 polynomial 문자열에서 UI Term[] + factoredForm 자동 도출.
 // 콘텐츠 큐레이터는 polynomial + difficulty 만 넣으면 됨.
 //
-// V0.3+: 다른 인수분해 기법 (sum-product, 삼차차, 치환) 추가 시 별도 game id 분리 검토.
+// `proc/plan/2026-05-12_game-discrimination-and-polish.md` I3 — Phase 2 콘텐츠 확장.
+// V0.4+: 다른 인수분해 기법 (sum-product, 삼차차, 치환) 추가 시 별도 game id 분리 검토.
 
 import { buildCard } from "../logic/buildCard";
 import { FactorizationCardSchema } from "../schema";
@@ -43,6 +44,41 @@ const RAW_CARDS = [
     difficultySeed: 5,
     hint: "가장 큰 공통인수를 끌어내세요",
     polynomial: "12x² + 18x",
+  }),
+  buildCard({
+    id: "card-006",
+    unit: "고1-인수분해-공통인수",
+    difficultySeed: 2,
+    hint: "상수 공통인수를 찾으세요",
+    polynomial: "5x + 10",
+  }),
+  buildCard({
+    id: "card-007",
+    unit: "고1-인수분해-공통인수",
+    difficultySeed: 3,
+    hint: "공통인수가 변수와 함께 있어요",
+    polynomial: "9x² + 15x",
+  }),
+  buildCard({
+    id: "card-008",
+    unit: "고1-인수분해-공통인수",
+    difficultySeed: 4,
+    hint: "3차식의 공통인수",
+    polynomial: "4x³ + 6x²",
+  }),
+  buildCard({
+    id: "card-009",
+    unit: "고1-인수분해-공통인수",
+    difficultySeed: 5,
+    hint: "3항 다항식, 공통인수 4x",
+    polynomial: "8x³ + 12x² + 4x",
+  }),
+  buildCard({
+    id: "card-010",
+    unit: "고1-인수분해-공통인수",
+    difficultySeed: 4,
+    hint: "3항 다항식, 상수 공통인수",
+    polynomial: "10x² + 15x + 5",
   }),
 ];
 
