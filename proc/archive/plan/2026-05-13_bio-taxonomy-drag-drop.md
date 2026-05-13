@@ -1,6 +1,6 @@
 # 2026-05-13 — bio-taxonomy 드래그 앤 드롭 재구성 (D4 뒤집기)
 
-- **상태**: IN-PROGRESS (2026-05-13) — E1=A / E2=A / E3=A / E4=B 합의 완료. PR #34 안에서 D&D 교체 commit 추가
+- **상태**: ✅ MERGED (2026-05-13) — PR #34 에 D&D 교체 commit `d52a4ec` 추가 + main 머지 완료. 자가 검증: typecheck/vitest 134/e2e 7/SSR 200 PASS. 실기기 드래그 정밀도 확인 미수행 (사용자 권한)
 - **트리거**: 사용자 요청 — "생물 분류 트리는 드래그앤드롭으로 다시 구성하자"
 - **선행 plan**: [proc/plan/2026-05-13_new-mechanics-expansion.md](2026-05-13_new-mechanics-expansion.md) M3 (PR #34 — click-to-assign 으로 V0 출시)
 - **메모리 룰 적용**: 단일 백본 (외부 D&D 라이브러리 금지) · 학습효과 > 중독성 · 모바일 first

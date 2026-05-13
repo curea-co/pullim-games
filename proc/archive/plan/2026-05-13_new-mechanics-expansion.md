@@ -1,6 +1,6 @@
 # 2026-05-13 — 신규 메커닉 3종 추가 (라인업 확장)
 
-- **상태**: COMPLETE (2026-05-13) — D1=A / D2=A / D3=A / D4=A / D5=A. M1 PR #32, M2 PR #33, M3 PR #34 — 3 게임 모두 PR 오픈 완료. 머지 + 자가 검증 대기
+- **상태**: ✅ MERGED (2026-05-13) — M1 PR #32, M2 PR #33, M3 PR #34 모두 main 머지 완료 (commit 358abf0 / efd1ffa / 301fb01). main 기준 자가 검증 통과.
 - **트리거**: 사용자 요청 — "게임 몇 개 더 만들어볼까" → 콘텐츠 조합이 아닌 **새 메커닉** 방향 확정
 - **메모리 룰 적용**:
   - 학습효과 > 중독성, PVE 지향 → retrieval depth + 가설 수립 흐름 우선
@@ -179,18 +179,20 @@
 - 디자인 토큰 신규 도입 (subject badge 매핑은 기존 활용)
 - 윤리/사회 과목 콘텐츠 별도 확장 (D3 — 본 plan 외)
 
-## 6. 자가 검증 체크리스트 (각 PR 머지 후)
+## 6. 자가 검증 체크리스트 (각 PR 머지 후 — 2026-05-13)
 
 memory 룰 `plan_workflow.md` 적용 — 머지 직후 본 plan §4 체크리스트 모두 ✅ 확인:
 
-- [ ] manifest 자동 발견 (`registry.generated.ts` 에 신규 게임 import 됨)
-- [ ] `/games/<id>` 라우트로 진입 시 정상 렌더
-- [ ] 5장 카드 모두 정답 입력 시 correct → next 정상 진행
-- [ ] 오답 입력 시 wrong-flash + 재시도 가능
-- [ ] e2e 회귀 통과 (viewport.spec, navigation.spec)
-- [ ] 미리보기 카드에 SubjectBadge 정상 노출
-- [ ] `bun run typecheck` + `bun run test` PASS
-- [ ] `vercel --prod` 배포 후 production URL 실기기 확인
+- [x] manifest 자동 발견 (`registry.generated.ts` 에 3 게임 모두 import 됨, 18 게임)
+- [x] `/games/{genetics-punnett, korean-pos-tagging, bio-taxonomy}` 라우트 SSR HTTP 200
+- [x] e2e 회귀 통과 — `viewport.spec` 3 게임 × 5 viewport + chrome = **21/21 PASS**
+- [x] `bun run typecheck` PASS
+- [x] `bun run test` — **134/134 vitest PASS**
+- [ ] 5장 카드 모두 정답 입력 시 correct → next 정상 진행 — **실기기 확인 필요**
+- [ ] 오답 입력 시 wrong-flash + 재시도 가능 — **실기기 확인 필요**
+- [ ] 미리보기 카드에 SubjectBadge 정상 노출 — 게임 허브 페이지에서 확인 필요
+- [ ] bio-taxonomy 드래그 정밀도 (모바일 Chrome / Safari) — **실기기 필수**
+- [ ] `vercel --prod` 배포 후 production URL 실기기 확인 — 사용자 권한
 
 ## 7. 합의 후 진행
 
