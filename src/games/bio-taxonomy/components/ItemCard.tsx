@@ -1,6 +1,7 @@
-// 카드 — 풀 또는 카테고리 안에 위치. 탭으로 active toggle.
-// 색깔: 미배치 (default) → 회색. 배치 → 카테고리 색. active → outline 강조.
+// 드래그 가능한 카드. drag-end 시 부모가 zone hit-test → assign or animate-back.
+// framer-motion drag + layout — drop 후 새 위치로 spring 이동.
 
+import { motion, type PanInfo } from "framer-motion";
 import type { Item } from "../schema";
 
 export const CATEGORY_COLORS = [
@@ -13,37 +14,45 @@ export const CATEGORY_COLORS = [
 interface ItemCardProps {
   item: Item;
   placed: boolean;
-  /** 카테고리 색 인덱스 (0..3). 미배치 시 무시. */
+  /** 카테고리 색 인덱스 (0..3). 미배치 시 null. */
   categoryColorIndex: number | null;
-  active: boolean;
   disabled: boolean;
-  onSelect: () => void;
+  onDragStart: () => void;
+  onDragEnd: (info: PanInfo) => void;
 }
 
 export function ItemCard({
   item,
   placed,
   categoryColorIndex,
-  active,
   disabled,
-  onSelect,
+  onDragStart,
+  onDragEnd,
 }: ItemCardProps) {
   const colorClass =
     placed && categoryColorIndex !== null
       ? CATEGORY_COLORS[categoryColorIndex] ?? CATEGORY_COLORS[0]
       : "border-border-hairline bg-bg-block text-type-primary";
   return (
-    <button
-      type="button"
-      onClick={onSelect}
-      disabled={disabled}
-      aria-pressed={active}
-      aria-label={`카드 ${item.label}${placed ? ", 배치됨" : ", 미배치"}`}
-      className={`rounded-block border px-2.5 py-1.5 text-body transition-colors disabled:opacity-60 ${colorClass} ${
-        active ? "ring-2 ring-offset-1 ring-type-primary" : ""
+    <motion.div
+      layout
+      layoutId={`bio-${item.id}`}
+      drag={!disabled}
+      dragMomentum={false}
+      dragElastic={0.1}
+      dragSnapToOrigin
+      whileDrag={{ scale: 1.06, zIndex: 50 }}
+      onDragStart={onDragStart}
+      onDragEnd={(_, info) => onDragEnd(info)}
+      transition={{ type: "spring", stiffness: 320, damping: 26 }}
+      role="button"
+      tabIndex={0}
+      aria-label={`카드 ${item.label}${placed ? ", 배치됨 — 다른 영역으로 드래그" : ", 카테고리로 드래그"}`}
+      className={`min-h-[2.5rem] cursor-grab touch-none select-none rounded-block border px-2.5 py-1.5 text-body transition-colors active:cursor-grabbing disabled:opacity-60 ${colorClass} ${
+        disabled ? "pointer-events-none" : ""
       }`}
     >
       {item.label}
-    </button>
+    </motion.div>
   );
 }

@@ -13,8 +13,8 @@
 
 ## 핵심 명제
 
-> **카드 배치 = retrieval. 정답 확인 전엔 정/오 표시 없음.**
-> 카드를 탭해서 active 로 만들고 카테고리 박스 탭해서 배치. 카테고리 안 카드를 탭하면 풀로 복귀. 모든 카드 배치 후 "정답 확인" → token-by-token 비교. wrong 시 카드별 정/오 강조 없이 `n/m 맞췄어요` 정확도만.
+> **카드 드래그 = retrieval. 정답 확인 전엔 정/오 표시 없음.**
+> 카드를 손가락/마우스로 끌어 카테고리 박스 또는 풀 영역에 놓는다. drag-end pointer 좌표를 모든 zone bounding rect 와 비교(영역 안 hit-test) — 일치 zone 이 있으면 그 카테고리로 assign, 없으면 framer-motion 이 원위치로 자동 spring. 모든 카드가 풀에서 빠져나가야 "정답 확인" 활성. wrong 시 카드별 정/오 강조 없이 `n/m 맞췄어요` 정확도만.
 
 ## 디렉토리
 
@@ -22,10 +22,11 @@
 bio-taxonomy/
   manifest.ts                    # ✅ 자동 발견 대상
   schema.ts                      # categories[2~4] + items[6~10] + categoryId refine
-  component.tsx                  # 5-phase 상태머신, click-to-assign
+  component.tsx                  # 5-phase 상태머신 + drag-end hit-test
   components/
-    CategoryBox.tsx              # 라벨 + 안 카드 + receivable outline
-    ItemCard.tsx                 # 카드 (active outline, 카테고리 색)
+    CategoryBox.tsx              # drop zone (ref forwarding, dragOver outline)
+    ItemCard.tsx                 # motion.div drag, layout spring 이동
+    Pool.tsx                     # 풀 영역 drop zone (카드 복귀)
   logic/
     checkAssignments.ts          # item-by-item categoryId 비교
     checkAssignments.test.ts
@@ -42,12 +43,15 @@ bio-taxonomy/
 4. **식물 4분류** — 카테고리 4, 카드 8 (선태·양치·겉씨·속씨)
 5. **척추동물 4강** — 카테고리 4, 카드 8 (어류·파충류·조류·포유류, 양서류 V1+)
 
-## 인터랙션 (Click-to-assign — D4 결정)
+## 인터랙션 (Drag-and-drop — D4 뒤집기 / E1·E2·E3=A 채택)
 
-- 풀 카드 탭 → active (outline 강조)
-- 카테고리 박스 라벨 탭 → active 카드를 그 카테고리에 배치 + active 해제
-- 카테고리 안 카드 탭 → 풀로 복귀 + 그 카드 active
-- 모든 카드 배치 후 "정답 확인" 활성
+- 카드를 끌어 카테고리 박스 또는 풀 영역에 놓기
+- drag-end 시 pointer 좌표가 어느 zone bounding rect 안에 있는지 hit-test
+- 일치 zone 있으면 그 카테고리로 assign + 카드가 새 위치로 spring 이동 (framer-motion `layout`)
+- 일치 zone 없으면 (빈 영역) 자동 원위치
+- 풀 복귀 = 카테고리 안 카드를 풀 영역으로 드래그 (단일 메커닉)
+- 모바일 4 카테고리는 2×2 그리드, 데스크톱 은 1×4 가로
+- 외부 D&D 라이브러리 사용 X — `framer-motion drag` + `getBoundingClientRect` 만 사용 (factorization 패턴 재사용, 단일 백본 룰)
 
 ## 변별력 설계 (메모리 룰 반영)
 

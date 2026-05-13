@@ -117,11 +117,13 @@
 
 → **A 채택 이유**: subject 라벨·미리보기 뱃지 일관성. gameId 도 `bio-taxonomy` 로 명확화 — V1 부터 다른 분류 게임은 별 game id.
 
-### D4 — M3 인터랙션 패턴 ✓ (2026-05-13 정리 — Click-to-assign 채택)
+### D4 — M3 인터랙션 패턴 🔄 2026-05-13 뒤집기 — Drag-and-drop 채택
 
 옵션:
-- **A (채택)** 클릭/탭으로 active 카드 선택 → 카테고리 박스 탭 → 배치 (M2 패턴 재사용, 모바일 친화)
-- B 드래그 앤 드롭 (factorization 패턴) — 모바일 480px 폭에 카드 작아짐, 정밀도 낮음
+- ~~A (초기 채택)~~ 클릭/탭으로 active 카드 선택 → 카테고리 박스 탭 → 배치 (M2 패턴)
+- **B (재채택)** 드래그 앤 드롭 (factorization 패턴) — 1단계 메커닉, 시각적 연속성, manipulation 게임군과 결 일관
+
+→ **뒤집기 사유**: V0 click-to-assign 의 2단계 인터랙션 + 풀 복귀 비직관 — 사용자 검토에서 부적합 확인. 상세: [2026-05-13_bio-taxonomy-drag-drop.md](2026-05-13_bio-taxonomy-drag-drop.md). PR #34 안에서 새 commit 으로 교체 (E4=B 채택).
 
 ### D5 — M3 카테고리 max ✓ (2026-05-13 정리 — 4 채택)
 

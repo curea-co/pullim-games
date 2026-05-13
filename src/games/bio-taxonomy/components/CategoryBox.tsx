@@ -1,73 +1,39 @@
-// 카테고리 박스 — 라벨 + 안에 들어간 카드 리스트.
-// 활성 (active item 있을 때) 시 outline 강조. 클릭 시 active item 을 이 카테고리에 배치.
+// 카테고리 박스 — drop zone. ref 노출 (부모의 drag-end hit-test 에서 bounding rect 사용).
+// dragOver 시 outline + ring 강조.
 
-import type { Item, Category } from "../schema";
-import { CATEGORY_COLORS, ItemCard } from "./ItemCard";
+import { forwardRef, type ReactNode } from "react";
+import type { Category } from "../schema";
+import { CATEGORY_COLORS } from "./ItemCard";
 
 interface CategoryBoxProps {
   category: Category;
   colorIndex: number;
-  /** 이 카테고리에 들어간 카드들. */
-  items: Item[];
-  activeItemId: string | null;
-  /** active item 이 있을 때만 박스 자체가 클릭 가능 (배치 액션). */
-  receivable: boolean;
-  disabled: boolean;
-  onReceive: () => void;
-  onUnassign: (itemId: string) => void;
+  /** 드래그 중 pointer 가 이 박스 위에 있을 때 true. */
+  dragOver: boolean;
+  /** 카테고리 안 카드들 (자식). 부모가 ItemCard 렌더링. */
+  children: ReactNode;
 }
 
-export function CategoryBox({
-  category,
-  colorIndex,
-  items,
-  activeItemId,
-  receivable,
-  disabled,
-  onReceive,
-  onUnassign,
-}: CategoryBoxProps) {
-  const tintClass = CATEGORY_COLORS[colorIndex] ?? CATEGORY_COLORS[0];
-  return (
-    <div
-      className={`flex flex-col gap-2 rounded-block border-2 p-2.5 transition-colors ${
-        receivable
-          ? `${tintClass!.split(" ")[2]} ring-2 ring-offset-1 ring-type-primary`
-          : tintClass!.split(" ")[2]
-      }`}
-      aria-label={`${category.label} 카테고리`}
-    >
-      <button
-        type="button"
-        onClick={onReceive}
-        disabled={disabled || !receivable}
-        aria-label={`${category.label} 카테고리에 카드 배치`}
-        className={`rounded-button px-2 py-1 text-label tabular text-type-primary text-center ${tintClass} disabled:opacity-100`}
+export const CategoryBox = forwardRef<HTMLDivElement, CategoryBoxProps>(
+  function CategoryBox({ category, colorIndex, dragOver, children }, ref) {
+    const tintClass = CATEGORY_COLORS[colorIndex] ?? CATEGORY_COLORS[0];
+    const borderClass = tintClass!.split(" ")[2] ?? "border-border-hairline";
+    return (
+      <div
+        ref={ref}
+        data-category-id={category.id}
+        aria-label={`${category.label} 분류 영역`}
+        className={`flex min-h-[7rem] flex-col gap-2 rounded-block border-2 p-2.5 transition-all ${borderClass} ${
+          dragOver ? "ring-2 ring-offset-1 ring-type-primary scale-[1.01]" : ""
+        }`}
       >
-        {category.label}
-      </button>
-      <div className="flex min-h-[2.25rem] flex-wrap items-start gap-1.5">
-        {items.length === 0 ? (
-          <span
-            className="text-helper text-type-secondary"
-            aria-hidden="true"
-          >
-            (비어있음)
-          </span>
-        ) : (
-          items.map((item) => (
-            <ItemCard
-              key={item.id}
-              item={item}
-              placed
-              categoryColorIndex={colorIndex}
-              active={activeItemId === item.id}
-              disabled={disabled}
-              onSelect={() => onUnassign(item.id)}
-            />
-          ))
-        )}
+        <span
+          className={`rounded-button px-2 py-1 text-label tabular text-type-primary text-center ${tintClass}`}
+        >
+          {category.label}
+        </span>
+        <div className="flex flex-wrap items-start gap-1.5">{children}</div>
       </div>
-    </div>
-  );
-}
+    );
+  },
+);

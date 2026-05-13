@@ -1,14 +1,16 @@
 "use client";
 
-// 생물 분류 트리 — 카드 탭 (active) → 카테고리 박스 탭 (배치) → "정답 확인".
-// 답지 노출 X (wrong 시 카드별 정/오 강조 X, 정확도 n/m 만 노출).
+// 생물 분류 트리 — 카드를 카테고리 박스 또는 풀로 드래그.
+// drag-end pointer 위치를 모든 zone bounding rect 와 비교 → 일치 zone 으로 assign.
+// 답지 노출 X (wrong 시 카드별 정/오 강조 X, 정확도 n/m 만).
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type PanInfo } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
 import { CategoryBox } from "./components/CategoryBox";
 import { ItemCard } from "./components/ItemCard";
+import { Pool } from "./components/Pool";
 import { checkAssignments } from "./logic/checkAssignments";
 import { getCardSequence } from "./content";
 import {
@@ -21,21 +23,24 @@ import {
 } from "@/lib/core";
 
 const GAME_ID = "bio-taxonomy";
+const POOL_ID = "pool" as const;
+type ZoneId = string; // categoryId | "pool"
 type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
 
 export default function BioTaxonomyGame() {
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
-  const [assignments, setAssignments] = useState<Record<string, string | null>>(
-    {},
-  );
-  const [activeItemId, setActiveItemId] = useState<string | null>(null);
+  const [assignments, setAssignments] = useState<Record<string, ZoneId>>({});
+  const [dragOverZoneId, setDragOverZoneId] = useState<ZoneId | null>(null);
   const [wrongCount, setWrongCount] = useState(0);
   const [accuracy, setAccuracy] = useState<{
     correct: number;
     total: number;
   } | null>(null);
+
+  const categoryRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const poolRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
@@ -61,20 +66,23 @@ export default function BioTaxonomyGame() {
 
   useEffect(() => {
     if (!card) return;
-    const initial: Record<string, string | null> = {};
+    const initial: Record<string, ZoneId> = {};
     for (const item of card.problem.items) {
-      initial[item.id] = null;
+      initial[item.id] = POOL_ID;
     }
     setAssignments(initial);
-    setActiveItemId(null);
+    setDragOverZoneId(null);
     setWrongCount(0);
     setAccuracy(null);
     setPhase("playing");
+    categoryRefs.current = {};
   }, [cardIndex, card]);
 
   const poolItems = useMemo(() => {
     if (!card) return [];
-    return card.problem.items.filter((it) => !assignments[it.id]);
+    return card.problem.items.filter(
+      (it) => assignments[it.id] === POOL_ID,
+    );
   }, [card, assignments]);
 
   const itemsByCategory = useMemo(() => {
@@ -90,8 +98,41 @@ export default function BioTaxonomyGame() {
 
   const allPlaced = useMemo(() => {
     if (!card) return false;
-    return card.problem.items.every((it) => assignments[it.id] != null);
+    return card.problem.items.every(
+      (it) => assignments[it.id] && assignments[it.id] !== POOL_ID,
+    );
   }, [card, assignments]);
+
+  /** pointer 좌표가 어느 zone 안에 있는지 찾기. 없으면 null. */
+  const hitTestZone = useCallback(
+    (x: number, y: number): ZoneId | null => {
+      if (!card) return null;
+      for (const cat of card.problem.categories) {
+        const rect = categoryRefs.current[cat.id]?.getBoundingClientRect();
+        if (
+          rect &&
+          x >= rect.left &&
+          x <= rect.right &&
+          y >= rect.top &&
+          y <= rect.bottom
+        ) {
+          return cat.id;
+        }
+      }
+      const poolRect = poolRef.current?.getBoundingClientRect();
+      if (
+        poolRect &&
+        x >= poolRect.left &&
+        x <= poolRect.right &&
+        y >= poolRect.top &&
+        y <= poolRect.bottom
+      ) {
+        return POOL_ID;
+      }
+      return null;
+    },
+    [card],
+  );
 
   if (phase === "completed") {
     return (
@@ -112,40 +153,48 @@ export default function BioTaxonomyGame() {
 
   if (!card) return null;
 
-  function selectFromPool(itemId: string) {
+  function handleDragStart(_itemId: string) {
     if (phase !== "playing") return;
-    setActiveItemId((cur) => (cur === itemId ? null : itemId));
+    setDragOverZoneId(null);
   }
 
-  function unassign(itemId: string) {
+  function handleDragEnd(itemId: string, info: PanInfo) {
     if (phase !== "playing") return;
-    setAssignments((prev) => ({ ...prev, [itemId]: null }));
-    setActiveItemId(itemId);
-    void logEvent({
-      gameId: GAME_ID,
-      cardId: card!.id,
-      action: "transform",
-      payload: { itemId, categoryId: null },
+    const zoneId = hitTestZone(info.point.x, info.point.y);
+    setDragOverZoneId(null);
+
+    if (zoneId === null) {
+      // 빈 영역에 drop — 원위치 (framer-motion 이 자동 처리)
+      void logEvent({
+        gameId: GAME_ID,
+        cardId: card!.id,
+        action: "drag-end",
+        payload: { itemId, hit: false },
+      });
+      return;
+    }
+
+    setAssignments((prev) => {
+      if (prev[itemId] === zoneId) return prev;
+      return { ...prev, [itemId]: zoneId };
     });
-  }
-
-  function placeIntoCategory(categoryId: string) {
-    if (phase !== "playing" || activeItemId === null) return;
-    const current = activeItemId;
-    setAssignments((prev) => ({ ...prev, [current]: categoryId }));
-    setActiveItemId(null);
     void logEvent({
       gameId: GAME_ID,
       cardId: card!.id,
       action: "transform",
-      payload: { itemId: current, categoryId },
+      payload: { itemId, zoneId },
     });
   }
 
   function handleCheck() {
     if (phase !== "playing" || !allPlaced) return;
     setPhase("checking");
-    const result = checkAssignments(assignments, card!.problem.items);
+    // checkAssignments 의 string|null 시그니처에 맞게 POOL_ID → null 변환
+    const forCheck: Record<string, string | null> = {};
+    for (const [itemId, zone] of Object.entries(assignments)) {
+      forCheck[itemId] = zone === POOL_ID ? null : zone;
+    }
+    const result = checkAssignments(forCheck, card!.problem.items);
     setAccuracy({ correct: result.correctCount, total: result.totalCount });
 
     void logEvent({
@@ -184,7 +233,12 @@ export default function BioTaxonomyGame() {
   }
 
   const disabled = phase !== "playing";
-  const receivable = activeItemId !== null;
+  const categoryGridClass =
+    card.problem.categories.length === 2
+      ? "grid-cols-2"
+      : card.problem.categories.length === 3
+        ? "grid-cols-3"
+        : "grid-cols-2 lg:grid-cols-4";
 
   return (
     <GameShell
@@ -219,13 +273,7 @@ export default function BioTaxonomyGame() {
 
           {/* 카테고리 박스들 */}
           <motion.div
-            className={`mt-6 grid gap-2 ${
-              card.problem.categories.length === 2
-                ? "grid-cols-2"
-                : card.problem.categories.length === 3
-                  ? "grid-cols-3"
-                  : "grid-cols-2 lg:grid-cols-4"
-            }`}
+            className={`mt-6 grid gap-2 ${categoryGridClass}`}
             animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
             transition={{ duration: 0.36 }}
           >
@@ -234,39 +282,45 @@ export default function BioTaxonomyGame() {
                 key={cat.id}
                 category={cat}
                 colorIndex={idx}
-                items={itemsByCategory[cat.id] ?? []}
-                activeItemId={activeItemId}
-                receivable={receivable}
-                disabled={disabled}
-                onReceive={() => placeIntoCategory(cat.id)}
-                onUnassign={unassign}
-              />
+                dragOver={dragOverZoneId === cat.id}
+                ref={(el) => {
+                  categoryRefs.current[cat.id] = el;
+                }}
+              >
+                {(itemsByCategory[cat.id] ?? []).map((item) => (
+                  <ItemCard
+                    key={item.id}
+                    item={item}
+                    placed
+                    categoryColorIndex={idx}
+                    disabled={disabled}
+                    onDragStart={() => handleDragStart(item.id)}
+                    onDragEnd={(info) => handleDragEnd(item.id, info)}
+                  />
+                ))}
+              </CategoryBox>
             ))}
           </motion.div>
 
           {/* 풀 (미배치 카드) */}
-          <div
-            className="mt-6 rounded-block border border-border-hairline bg-bg-block p-3"
-            aria-label="카드 풀"
-          >
-            <p className="text-helper text-type-secondary">
-              {poolItems.length > 0
-                ? "카드를 골라서 위 카테고리에 넣어주세요"
-                : "모든 카드를 배치했어요"}
-            </p>
-            <div className="mt-2 flex flex-wrap gap-1.5">
+          <div className="mt-6">
+            <Pool
+              ref={poolRef}
+              dragOver={dragOverZoneId === POOL_ID}
+              hasItems={poolItems.length > 0}
+            >
               {poolItems.map((item) => (
                 <ItemCard
                   key={item.id}
                   item={item}
                   placed={false}
                   categoryColorIndex={null}
-                  active={activeItemId === item.id}
                   disabled={disabled}
-                  onSelect={() => selectFromPool(item.id)}
+                  onDragStart={() => handleDragStart(item.id)}
+                  onDragEnd={(info) => handleDragEnd(item.id, info)}
                 />
               ))}
-            </div>
+            </Pool>
           </div>
 
           <p
@@ -277,9 +331,7 @@ export default function BioTaxonomyGame() {
               ? `${accuracy.correct}/${accuracy.total} 맞췄어요. 다시 살펴보세요.`
               : phase === "correct"
                 ? "모든 카드가 알맞은 분류에 들어갔어요"
-                : activeItemId !== null
-                  ? "카테고리 라벨을 탭해서 배치하세요"
-                  : "카드를 탭한 뒤 카테고리에 배치하세요"}
+                : "카드를 끌어 알맞은 카테고리에 놓으세요"}
           </p>
           {wrongCount > 0 && phase !== "correct" && (
             <p className="mt-1 text-center text-helper tabular text-type-secondary">
@@ -310,10 +362,7 @@ export default function BioTaxonomyGame() {
       }
       liveRegion={
         <span className="sr-only" aria-live="polite">
-          {phase === "playing" &&
-            (activeItemId === null
-              ? "카드를 탭한 뒤 카테고리에 배치하세요"
-              : "카테고리 라벨을 탭해서 배치하세요")}
+          {phase === "playing" && "카드를 끌어 알맞은 카테고리에 놓으세요"}
           {phase === "wrong" && accuracy
             ? `${accuracy.correct}/${accuracy.total} 맞췄어요. 다시 살펴보세요.`
             : ""}
