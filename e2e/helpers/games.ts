@@ -28,6 +28,7 @@ export const OFFICIAL_GAMES: GameE2EMeta[] = [
   { id: "english-word-match", variant: "match", ctaTextPattern: /다음|마치기/ },
   { id: "vocab-typing",       variant: "split", ctaTextPattern: /확인|다음|마치기/ },
   { id: "english-vocab-typing", variant: "split", ctaTextPattern: /확인|다음|마치기/ },
+  { id: "genetics-punnett",   variant: "split", ctaTextPattern: /정답 확인|다음|마치기/ },
 ];
 
 // custom-* 4 게임 — localStorage seed (helpers/seed.ts) 필수.
