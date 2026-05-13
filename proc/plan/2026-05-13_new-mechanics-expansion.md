@@ -1,6 +1,6 @@
 # 2026-05-13 — 신규 메커닉 3종 추가 (라인업 확장)
 
-- **상태**: IN-PROGRESS (2026-05-13) — D1=A / D2=A 합의 완료, M1 펀넷 사각형 PR 1 진행 중
+- **상태**: IN-PROGRESS (2026-05-13) — D1=A / D2=A 합의 완료. M1 펀넷 사각형 PR #32 완료, M2 품사 태깅 PR 2 진행 중 (M1 위 stack)
 - **트리거**: 사용자 요청 — "게임 몇 개 더 만들어볼까" → 콘텐츠 조합이 아닌 **새 메커닉** 방향 확정
 - **메모리 룰 적용**:
   - 학습효과 > 중독성, PVE 지향 → retrieval depth + 가설 수립 흐름 우선
@@ -129,16 +129,16 @@
 - [x] e2e — `viewport.spec` OFFICIAL_GAMES 에 추가 (5 viewport + chrome spec 7/7 pass)
 - [x] 과목 뱃지 — subject="과학" 이미 매핑 존재 확인
 
-### M2 품사 태깅 (PR 2 — M1 머지 후)
+### M2 품사 태깅 (PR 2 — M1 위에 stack)
 
-- [ ] `src/games/korean-pos-tagging/` 폴더 신규 (구조 동일)
-  - [ ] schema: 어절 토큰 + 품사 팔레트 + 정답
-  - [ ] logic/checkTagging.ts + test (token-by-token 비교)
-  - [ ] components/SentenceTokens.tsx + PalettePicker.tsx
-  - [ ] component.tsx (탭으로 어절 선택 → 팔레트 클릭 → 색 적용)
-  - [ ] content/index.ts (5장)
-- [ ] registry 재생성 → 17 게임
-- [ ] e2e + 뱃지 (subject="국어" 매핑 있음)
+- [x] `src/games/korean-pos-tagging/` 폴더 신규 (구조 동일)
+  - [x] schema: 어절 토큰 + 7 품사 enum + 정답
+  - [x] logic/checkTagging.ts + test (token-by-token 비교 + 정확도)
+  - [x] components/SentenceTokens.tsx + PalettePicker.tsx (POS_TOKEN_CLASS 색 매핑)
+  - [x] component.tsx (탭으로 어절 선택 → 팔레트 클릭 → 색 적용 + 다음 미태깅 토큰 자동 이동)
+  - [x] content/index.ts (5장 — 단문 → 형용사·부사 → 관형사 → 대명사 → 7품사 종합)
+- [x] registry 재생성 → 17 게임
+- [x] e2e — 7/7 PASS (5 viewport + chrome). subject="국어" 매핑 기존 활용
 
 ### M3 분류 트리 (PR 3 — M2 머지 후)
 
