@@ -43,6 +43,8 @@ export default function FactorizationGame() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [dragMagnitude, setDragMagnitude] = useState(0);
   const dragStartLoggedRef = useRef(false);
+  // DropZone bounding rect 로 drag end pointer hit-test. plan 트랙 A.
+  const dropZoneRef = useRef<HTMLDivElement>(null);
 
   // 클라이언트 마운트 시: FSRS 큐 정렬 + session-start 이벤트
   useEffect(() => {
@@ -122,13 +124,26 @@ export default function FactorizationGame() {
     }
   };
 
-  const handleDragEnd = (_info: PanInfo) => {
-    const success = dragMagnitude > DRAG_THRESHOLD_PX;
+  const handleDragEnd = (info: PanInfo) => {
+    // 영역 안 AND distance 임계 — 둘 다 만족해야 success.
+    const distanceOk = dragMagnitude > DRAG_THRESHOLD_PX;
+    const rect = dropZoneRef.current?.getBoundingClientRect();
+    const insideRect = rect
+      ? info.point.x >= rect.left &&
+        info.point.x <= rect.right &&
+        info.point.y >= rect.top &&
+        info.point.y <= rect.bottom
+      : false;
+    const success = distanceOk && insideRect;
     void logEvent({
       gameId: GAME_ID,
       cardId: card.id,
       action: "drag-end",
-      payload: { success, magnitude: Math.round(dragMagnitude) },
+      payload: {
+        success,
+        magnitude: Math.round(dragMagnitude),
+        insideRect,
+      },
     });
     if (success) {
       setPhase("extracting");
@@ -209,6 +224,7 @@ export default function FactorizationGame() {
 
             {phase !== "done" && (
               <DropZone
+                ref={dropZoneRef}
                 active={phase === "dragging"}
                 previewText={
                   phase === "dragging" ? card.problem.factoredForm : undefined
