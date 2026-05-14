@@ -33,17 +33,15 @@ const GAME_ID = "factorization";
 
 type Phase = "idle" | "dragging" | "extracting" | "done" | "completed";
 
-const DRAG_THRESHOLD_PX = 50;
-
 export default function FactorizationGame() {
   // 카드 시퀀스 — FSRS 우선순위 큐로 정렬, 클라이언트 마운트 후 결정.
   // SSR 단계에선 in-order, 클라이언트에서 localStorage 읽고 재정렬.
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
-  const [dragMagnitude, setDragMagnitude] = useState(0);
+  const [overDropZone, setOverDropZone] = useState(false);
   const dragStartLoggedRef = useRef(false);
-  // DropZone bounding rect 로 drag end pointer hit-test. plan 트랙 A.
+  // DropZone bounding rect 로 drag end hit-test (block rect center vs dropZone rect).
   const dropZoneRef = useRef<HTMLDivElement>(null);
 
   // 클라이언트 마운트 시: FSRS 큐 정렬 + session-start 이벤트
@@ -106,10 +104,8 @@ export default function FactorizationGame() {
     card.problem.commonFactor,
   );
 
-  const handleDragMove = (offsetY: number) => {
-    const upward = Math.max(0, -offsetY);
-    setDragMagnitude(upward);
-    if (phase === "idle" && upward > 8) {
+  const handleDragMove = (info: PanInfo) => {
+    if (phase === "idle") {
       setPhase("dragging");
       if (!dragStartLoggedRef.current) {
         dragStartLoggedRef.current = true;
@@ -119,30 +115,40 @@ export default function FactorizationGame() {
           action: "drag-start",
         });
       }
-    } else if (phase === "dragging" && upward < 4) {
-      setPhase("idle");
     }
-  };
-
-  const handleDragEnd = (info: PanInfo) => {
-    // 영역 안 AND distance 임계 — 둘 다 만족해야 success.
-    const distanceOk = dragMagnitude > DRAG_THRESHOLD_PX;
+    // pointer 위치 기반 dropZone hover 시각 피드백
     const rect = dropZoneRef.current?.getBoundingClientRect();
-    const insideRect = rect
+    const hovering = rect
       ? info.point.x >= rect.left &&
         info.point.x <= rect.right &&
         info.point.y >= rect.top &&
         info.point.y <= rect.bottom
       : false;
-    const success = distanceOk && insideRect;
+    setOverDropZone(hovering);
+  };
+
+  const handleDragEnd = (_info: PanInfo, blockRect: DOMRect) => {
+    // block element 의 center 가 dropZone rect 안인지 = success.
+    // (mouse pointer 가 아니라 시각적으로 끌어다 놓은 block 위치 기준)
+    const dzRect = dropZoneRef.current?.getBoundingClientRect();
+    const blockCenter = {
+      x: blockRect.left + blockRect.width / 2,
+      y: blockRect.top + blockRect.height / 2,
+    };
+    const insideDropZone = dzRect
+      ? blockCenter.x >= dzRect.left &&
+        blockCenter.x <= dzRect.right &&
+        blockCenter.y >= dzRect.top &&
+        blockCenter.y <= dzRect.bottom
+      : false;
+    const success = insideDropZone;
     void logEvent({
       gameId: GAME_ID,
       cardId: card.id,
       action: "drag-end",
       payload: {
         success,
-        magnitude: Math.round(dragMagnitude),
-        insideRect,
+        insideDropZone,
       },
     });
     if (success) {
@@ -168,7 +174,7 @@ export default function FactorizationGame() {
     } else {
       setPhase("idle");
     }
-    setDragMagnitude(0);
+    setOverDropZone(false);
     dragStartLoggedRef.current = false;
   };
 
@@ -225,9 +231,11 @@ export default function FactorizationGame() {
             {phase !== "done" && (
               <DropZone
                 ref={dropZoneRef}
-                active={phase === "dragging"}
+                active={phase === "dragging" && overDropZone}
                 previewText={
-                  phase === "dragging" ? card.problem.factoredForm : undefined
+                  phase === "dragging" && overDropZone
+                    ? card.problem.factoredForm
+                    : undefined
                 }
               />
             )}
@@ -271,8 +279,8 @@ export default function FactorizationGame() {
 interface BeforeViewProps {
   terms: UiTerm[];
   draggable: boolean;
-  onDragMove: (offsetY: number) => void;
-  onDragEnd: (info: PanInfo) => void;
+  onDragMove: (info: PanInfo) => void;
+  onDragEnd: (info: PanInfo, blockRect: DOMRect) => void;
   transforming: boolean;
 }
 
