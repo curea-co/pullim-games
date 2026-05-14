@@ -32,6 +32,7 @@ export const OFFICIAL_GAMES: GameE2EMeta[] = [
   { id: "korean-pos-tagging", variant: "split", ctaTextPattern: /정답 확인|다음|마치기/ },
   { id: "bio-taxonomy",       variant: "split", ctaTextPattern: /정답 확인|다음|마치기/ },
   { id: "cloze-multi",        variant: "split", ctaTextPattern: /정답 확인|다음|마치기/ },
+  { id: "letter-assembly",    variant: "split", ctaTextPattern: /정답 확인|다음|마치기/ },
 ];
 
 // custom-* 4 게임 — localStorage seed (helpers/seed.ts) 필수.
