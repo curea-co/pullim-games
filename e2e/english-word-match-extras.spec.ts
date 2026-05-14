@@ -8,7 +8,8 @@ test("5개 매칭 후 남은 2개도 정답 매칭 가능", async ({ page }) => 
   await page.goto("/games/english-word-match");
 
   await expect(page.getByRole("heading", { name: "짝을 맞춰주세요" })).toBeVisible();
-  await expect(page.getByText("매칭 0 / 5")).toBeVisible();
+  // 진행도 표시: 필수 + 보너스 분리 (UX-2 fix)
+  await expect(page.getByText(/매칭 0 \/ 5 · 보너스 0 \/ 2/)).toBeVisible();
 
   // 7개 모두 노출 (pairs 5 + extras 2)
   const allEnglish = ["pursue", "contradict", "perceive", "distinguish", "regulate", "maintain", "oppose"];
@@ -33,7 +34,9 @@ test("5개 매칭 후 남은 2개도 정답 매칭 가능", async ({ page }) => 
     await page.getByRole("button", { name: en, exact: true }).click();
     await page.getByRole("button", { name: ko, exact: true }).click();
     await page.waitForTimeout(400);
-    await expect(page.getByText(`매칭 ${i + 1} / 5`)).toBeVisible();
+    await expect(
+      page.getByText(new RegExp(`매칭 ${i + 1} / 5 · 보너스 0 / 2`)),
+    ).toBeVisible();
   }
 
   // 5/5 매칭 → "다음" 버튼 활성화
@@ -45,8 +48,8 @@ test("5개 매칭 후 남은 2개도 정답 매칭 가능", async ({ page }) => 
   await page.getByRole("button", { name: "유지하다", exact: true }).click();
   await page.waitForTimeout(500);
 
-  // 매칭 카운트 6 으로 증가 (오답 X)
-  await expect(page.getByText("매칭 6 / 5")).toBeVisible();
+  // 필수 5 / 5 유지 + 보너스 1 / 2 증가 (UX-2 fix)
+  await expect(page.getByText(/매칭 5 \/ 5 · 보너스 1 \/ 2/)).toBeVisible();
   // 오답 카운트 표시 안 됨 (== 0)
   await expect(page.locator("text=오답")).toHaveCount(0);
   // 다음 버튼 여전히 활성
@@ -56,7 +59,7 @@ test("5개 매칭 후 남은 2개도 정답 매칭 가능", async ({ page }) => 
   await page.getByRole("button", { name: "oppose", exact: true }).click();
   await page.getByRole("button", { name: "반대하다", exact: true }).click();
   await page.waitForTimeout(500);
-  await expect(page.getByText("매칭 7 / 5")).toBeVisible();
+  await expect(page.getByText(/매칭 5 \/ 5 · 보너스 2 \/ 2/)).toBeVisible();
   await expect(page.locator("text=오답")).toHaveCount(0);
   await expect(nextBtn).toBeEnabled();
 });
@@ -69,7 +72,7 @@ test("extras 와 본 pairs 간 잘못된 매칭은 여전히 오답", async ({ p
   await page.getByRole("button", { name: "반대하다", exact: true }).click();
   await page.waitForTimeout(700);
   await expect(page.getByText(/오답 1/)).toBeVisible();
-  await expect(page.getByText("매칭 0 / 5")).toBeVisible();
+  await expect(page.getByText(/매칭 0 \/ 5 · 보너스 0 \/ 2/)).toBeVisible();
 
   // maintain (extras) ↔ 모순되다 (본 pair) → 오답
   await page.getByRole("button", { name: "maintain", exact: true }).click();
