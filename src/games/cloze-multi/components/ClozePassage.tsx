@@ -27,7 +27,6 @@ export function ClozePassage({
           <span
             key={`t-${i}`}
             className="text-body text-type-primary"
-            aria-hidden="true"
           >
             {token.text}
           </span>
