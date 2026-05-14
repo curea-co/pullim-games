@@ -77,8 +77,9 @@ export default function EnglishWordMatchGame() {
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
 
-  // extras 는 음수 pairIndex 로 분리 — pair 와 매칭 시도 시 자연스럽게 wrong (음수 ≠ 양수 인덱스).
-  // 영어/한국어 extras 도 서로 다른 범위라 둘 끼리도 매칭 안 됨. plan 트랙 B I1.
+  // extras 도 본 pairs 와 동일하게 양수 pairIndex 부여 (pairs.length 부터).
+  // 영어 extras[i] ↔ 한국어 extras[i] 는 의미상 정답 짝이며, 그 매칭을 정답으로 인정.
+  // 통과 조건은 본 pairs 5개 매칭이지만, 사용자가 남은 2개도 매칭하려 하면 자연스럽게 정답 처리.
   const englishItems: SideItem[] = useMemo(() => {
     if (!card) return [];
     const pairs = card.problem.pairs.map((p, i) => ({
@@ -86,7 +87,7 @@ export default function EnglishWordMatchGame() {
       text: p.english,
     }));
     const extras = (card.problem.extras?.english ?? []).map((text, i) => ({
-      pairIndex: -(i + 1),
+      pairIndex: card.problem.pairs.length + i,
       text,
     }));
     return seededShuffle([...pairs, ...extras], `${card.id}-en`);
@@ -99,7 +100,7 @@ export default function EnglishWordMatchGame() {
       text: p.korean,
     }));
     const extras = (card.problem.extras?.korean ?? []).map((text, i) => ({
-      pairIndex: -1000 - i,
+      pairIndex: card.problem.pairs.length + i,
       text,
     }));
     return seededShuffle([...pairs, ...extras], `${card.id}-ko`);
@@ -206,7 +207,8 @@ export default function EnglishWordMatchGame() {
     setCardIndex(cardIndex + 1);
   }
 
-  const allMatched = matched.size === card.problem.pairs.length;
+  // 본 pairs 매칭이 통과 조건. extras 추가 매칭 후 matched.size 가 늘어나도 다음 버튼은 유지.
+  const allMatched = matched.size >= card.problem.pairs.length;
 
   return (
     <GameShell
