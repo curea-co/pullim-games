@@ -235,8 +235,23 @@ export default function EnglishWordMatchGame() {
             <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
           )}
           <p className="mt-2 text-helper tabular text-type-secondary">
-            매칭 {matched.size} / {card.problem.pairs.length}
-            {wrongCount > 0 && ` · 오답 ${wrongCount}`}
+            {(() => {
+              const pairsLen = card.problem.pairs.length;
+              const extrasLen = card.problem.extras?.english.length ?? 0;
+              const matchedRequired = Array.from(matched).filter(
+                (pi) => pi < pairsLen,
+              ).length;
+              const matchedBonus = Array.from(matched).filter(
+                (pi) => pi >= pairsLen,
+              ).length;
+              return (
+                <>
+                  매칭 {matchedRequired} / {pairsLen}
+                  {extrasLen > 0 && ` · 보너스 ${matchedBonus} / ${extrasLen}`}
+                  {wrongCount > 0 && ` · 오답 ${wrongCount}`}
+                </>
+              );
+            })()}
           </p>
 
           <div className="mt-6 grid flex-1 grid-cols-2 gap-3">
