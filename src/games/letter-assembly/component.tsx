@@ -159,7 +159,11 @@ export default function LetterAssemblyGame() {
   function handleCheck() {
     if (phase !== "playing" || !allFilled) return;
     setPhase("checking");
-    const result = checkAssembly(placementsByOrder, card!.problem.slots);
+    const result = checkAssembly(
+      placementsByOrder,
+      card!.problem.slots,
+      card!.problem.cards,
+    );
     setAccuracy({ correct: result.correctCount, total: result.totalCount });
 
     void logEvent({
