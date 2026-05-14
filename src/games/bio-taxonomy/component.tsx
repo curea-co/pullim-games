@@ -27,11 +27,28 @@ const POOL_ID = "pool" as const;
 type ZoneId = string; // categoryId | "pool"
 type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
 
+/** 첫 카드의 모든 item 을 POOL_ID 로 채운 초기 assignments. SSR 첫 paint 부터
+ *  poolItems 가 비어있지 않게 해서 "모든 카드를 배치했어요" flash 회피 (audit UX-1). */
+function initialAssignments(
+  cards: ReturnType<typeof getCardSequence>,
+  cardIndex: number,
+): Record<string, ZoneId> {
+  const first = cards[cardIndex];
+  if (!first) return {};
+  const init: Record<string, ZoneId> = {};
+  for (const item of first.problem.items) {
+    init[item.id] = POOL_ID;
+  }
+  return init;
+}
+
 export default function BioTaxonomyGame() {
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
-  const [assignments, setAssignments] = useState<Record<string, ZoneId>>({});
+  const [assignments, setAssignments] = useState<Record<string, ZoneId>>(
+    () => initialAssignments(getCardSequence(), 0),
+  );
   const [dragOverZoneId, setDragOverZoneId] = useState<ZoneId | null>(null);
   const [wrongCount, setWrongCount] = useState(0);
   const [accuracy, setAccuracy] = useState<{
