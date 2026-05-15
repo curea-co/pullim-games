@@ -2,11 +2,15 @@
 
 // 다항식의 항 1개를 블록으로 렌더 + 자유 방향 드래그.
 // SPEC §08.5 dragging shadow, §08.6 spring motion.
-// 공통인수 part 는 jade 하이라이트 (§08.1 — bg only, 글자색은 그대로).
 //
-// 변경 (audit BUG-2): drag="y" + bottom=0 constraints 로 위쪽 spring-back 만
-// 가능했던 제한 드래그를 자유 방향 드래그로 변경. release 시 block 의
-// boundingClientRect 를 부모 handleDragEnd 에 전달해서 dropZone 와 hit-test.
+// 공통인수 part 의 jade 하이라이트 노출은 revealCommon prop 으로 제어.
+// plan 2026-05-14_factorization-discrimination §2 D3: 초기엔 노출 X
+// (변별력 정책), 정답 chip 선택 후에만 노출.
+//
+// 변경 이력
+// - BUG-2 fix: drag="y" + bottom=0 → 자유 방향. release 시 block 의
+//   boundingClientRect 를 부모 handleDragEnd 로 전달해 chip/dropZone hit-test.
+// - Phase 2: dropZone hit-test → FactorChipRack hit-test. revealCommon 도입.
 
 import { useRef } from "react";
 import { motion, type PanInfo } from "framer-motion";
@@ -15,7 +19,9 @@ import type { Term } from "../logic/types";
 interface TermBlockProps {
   term: Term;
   draggable: boolean;
-  /** drag 중 PanInfo 전달 — 부모가 dropZone hover state 또는 시각 피드백에 사용. */
+  /** 공통인수 part 의 jade 하이라이트 노출 여부. 정답 chip 선택 후 true. */
+  revealCommon?: boolean;
+  /** drag 중 PanInfo 전달 — 부모가 chip hover state 또는 시각 피드백에 사용. */
   onDragMove: (info: PanInfo) => void;
   /** 드래그 종료 시 PanInfo + block 의 viewport rect 전달. 부모가 hit-test. */
   onDragEnd: (info: PanInfo, blockRect: DOMRect) => void;
@@ -24,6 +30,7 @@ interface TermBlockProps {
 export function TermBlock({
   term,
   draggable,
+  revealCommon = false,
   onDragMove,
   onDragEnd,
 }: TermBlockProps) {
@@ -56,7 +63,7 @@ export function TermBlock({
           <span
             key={part.id}
             className={
-              part.isCommon
+              part.isCommon && revealCommon
                 ? "rounded-sm bg-accent-positive/15 px-1 py-0.5"
                 : ""
             }

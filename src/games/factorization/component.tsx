@@ -1,26 +1,38 @@
 "use client";
 
-// 인수분해 블록 분리 — V0.3: FSRS 우선순위 큐 + 이벤트 로깅 + localStorage 영속.
-// SPEC §03 M5 (5문제 카드 시퀀스), §04.4 인터랙션 상태 매트릭스.
+// 인수분해 블록 분리 — drag-to-chip 메커닉.
+// plan 2026-05-14_factorization-discrimination §1·§2.
+//
+// 메커닉:
+//   1) 다항식 블록 표시 (jade 하이라이트 X — 정답 노출 회피).
+//   2) 후보 chip 3 개 (1 정답 + 2 distractors, shuffle).
+//   3) term block 을 chip 위로 드래그 → release → chip hit-test.
+//      - 정답 chip → extracting → done (jade 노출).
+//      - 오답 chip → wrong-flash + 시도 카운트 증가 + spring-back.
+//      - 빈 공간 release → 변동 없음 (BUG-2 hit-test 정합성 보존).
+//   4) 시도 3 회 후 "정답을 보여드릴게요" voluntary reveal 옵션 노출.
+//   5) 시도 5 회 도달 (REVEAL_THRESHOLD) 시 auto reveal (correct-feedback 공통 룰).
+//   6) FSRS 등급: attempt 1 → good, 2 → hard, 3+ → again. reveal → again.
 //
 // Phase 흐름:
 //   idle → dragging → extracting → done → (다음 카드 또는 completed)
-//   completed: 5문제 완료 화면 ("한 번 더" / "다른 게임" / "오늘은 끝")
+//   reveal: voluntary or auto. extracting 와 다른 분기 (FSRS=again).
 
-import { Fragment, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
 import { CorrectBurst } from "@/components/ui/CorrectBurst";
 import { RevealBanner } from "@/components/ui/RevealBanner";
 import { TermBlock } from "./components/TermBlock";
-import { DropZone } from "./components/DropZone";
+import { FactorChipRack } from "./components/FactorChipRack";
 import {
   assertAllTermsHaveCommonPart,
   extractCommonFactor,
 } from "./logic/transform";
 import { getCardSequence } from "./content";
 import type { Term as UiTerm } from "./logic/types";
+import type { FactorizationCard } from "./schema";
 import {
   loadAllSrsStates,
   loadSrsState,
@@ -33,6 +45,7 @@ import {
 
 const GAME_ID = "factorization";
 const REVEAL_THRESHOLD = 5;
+const VOLUNTARY_REVEAL_AT = 3;
 
 type Phase =
   | "idle"
@@ -42,24 +55,37 @@ type Phase =
   | "reveal"
   | "completed";
 
+/** cardId 기반 deterministic shuffle (FY). 같은 카드면 항상 같은 순서. */
+function shuffleCandidates(correct: string, distractors: string[], cardId: string): string[] {
+  const arr = [correct, ...distractors];
+  let seed = 0;
+  for (let i = 0; i < cardId.length; i += 1) {
+    seed = (seed * 31 + cardId.charCodeAt(i)) >>> 0;
+  }
+  for (let i = arr.length - 1; i > 0; i -= 1) {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    const j = seed % (i + 1);
+    [arr[i], arr[j]] = [arr[j]!, arr[i]!];
+  }
+  return arr;
+}
+
 export default function FactorizationGame() {
-  // 카드 시퀀스 — FSRS 우선순위 큐로 정렬, 클라이언트 마운트 후 결정.
-  // SSR 단계에선 in-order, 클라이언트에서 localStorage 읽고 재정렬.
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
-  const [overDropZone, setOverDropZone] = useState(false);
+  const [hoveringChip, setHoveringChip] = useState<string | null>(null);
+  const [wrongFlashChip, setWrongFlashChip] = useState<string | null>(null);
   const [wrongCount, setWrongCount] = useState(0);
   const dragStartLoggedRef = useRef(false);
-  // DropZone bounding rect 로 drag end hit-test (block rect center vs dropZone rect).
-  const dropZoneRef = useRef<HTMLDivElement>(null);
+  // chip text → DOM element. 부모가 직접 boundingClientRect hit-test.
+  const chipRefsRef = useRef<Map<string, HTMLDivElement>>(new Map());
 
   // 클라이언트 마운트 시: FSRS 큐 정렬 + session-start 이벤트
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
     if (all.size > 0) {
-      // SRS 상태 있는 카드만 우선순위로, 새 카드는 후반부에
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -86,6 +112,17 @@ export default function FactorizationGame() {
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
 
+  // 카드별 chip 후보 (정답 + distractors, deterministic shuffle)
+  const candidates = useMemo(
+    () => (card ? buildCandidates(card) : []),
+    [card],
+  );
+
+  const onChipMount = useCallback((text: string, el: HTMLDivElement | null) => {
+    if (el) chipRefsRef.current.set(text, el);
+    else chipRefsRef.current.delete(text);
+  }, []);
+
   if (phase === "completed") {
     return (
       <CompletionScreen
@@ -93,6 +130,7 @@ export default function FactorizationGame() {
         onRetry={() => {
           setCardIndex(0);
           setPhase("idle");
+          setWrongCount(0);
           void logEvent({
             gameId: GAME_ID,
             cardId: null,
@@ -106,13 +144,28 @@ export default function FactorizationGame() {
 
   if (!card) return null;
 
-  // 카드 데이터 검증 (silent miscompute 차단)
   assertAllTermsHaveCommonPart(card.problem.terms);
 
   const factored = extractCommonFactor(
     card.problem.terms,
     card.problem.commonFactor,
   );
+
+  /** chip rect 포함 여부 (point in rect). */
+  function chipAt(point: { x: number; y: number }): string | null {
+    for (const [text, el] of chipRefsRef.current) {
+      const rect = el.getBoundingClientRect();
+      if (
+        point.x >= rect.left &&
+        point.x <= rect.right &&
+        point.y >= rect.top &&
+        point.y <= rect.bottom
+      ) {
+        return text;
+      }
+    }
+    return null;
+  }
 
   const handleDragMove = (info: PanInfo) => {
     if (phase === "idle") {
@@ -126,54 +179,57 @@ export default function FactorizationGame() {
         });
       }
     }
-    // pointer 위치 기반 dropZone hover 시각 피드백
-    const rect = dropZoneRef.current?.getBoundingClientRect();
-    const hovering = rect
-      ? info.point.x >= rect.left &&
-        info.point.x <= rect.right &&
-        info.point.y >= rect.top &&
-        info.point.y <= rect.bottom
-      : false;
-    setOverDropZone(hovering);
+    // pointer 위치로 chip hover 시각 피드백
+    setHoveringChip(chipAt({ x: info.point.x, y: info.point.y }));
   };
 
   const handleDragEnd = (_info: PanInfo, blockRect: DOMRect) => {
-    // block element 의 center 가 dropZone rect 안인지 = success.
-    // (mouse pointer 가 아니라 시각적으로 끌어다 놓은 block 위치 기준)
-    const dzRect = dropZoneRef.current?.getBoundingClientRect();
+    // block element center 가 어떤 chip rect 안인지 — 시각적 위치 기준 hit-test
+    // (BUG-2 fix 정합성 보존: mouse pointer 아님).
     const blockCenter = {
       x: blockRect.left + blockRect.width / 2,
       y: blockRect.top + blockRect.height / 2,
     };
-    const insideDropZone = dzRect
-      ? blockCenter.x >= dzRect.left &&
-        blockCenter.x <= dzRect.right &&
-        blockCenter.y >= dzRect.top &&
-        blockCenter.y <= dzRect.bottom
-      : false;
-    const success = insideDropZone;
+    const hitChip = chipAt(blockCenter);
+    const correctText = card.problem.commonFactor;
+
+    setHoveringChip(null);
+    dragStartLoggedRef.current = false;
+
+    if (hitChip === null) {
+      // 빈 공간 release — 변동 없음 (시도 카운트 변동 X)
+      void logEvent({
+        gameId: GAME_ID,
+        cardId: card.id,
+        action: "drag-end",
+        payload: { success: false, hitChip: null },
+      });
+      setPhase("idle");
+      return;
+    }
+
+    const success = hitChip === correctText;
     void logEvent({
       gameId: GAME_ID,
       cardId: card.id,
       action: "drag-end",
-      payload: {
-        success,
-        insideDropZone,
-      },
+      payload: { success, hitChip, wrongCount },
     });
+
     if (success) {
+      const attempt = wrongCount + 1;
       setPhase("extracting");
       setTimeout(() => {
         setPhase("done");
-        // FSRS state 갱신 + 영속화
         const prev: CardSrsState = loadSrsState(GAME_ID, card.id);
-        const next = reviewCard(prev, wrongCount === 0 ? "good" : "hard");
+        const rating = attempt === 1 ? "good" : attempt === 2 ? "hard" : "again";
+        const next = reviewCard(prev, rating);
         saveSrsState(GAME_ID, card.id, next);
         void logEvent({
           gameId: GAME_ID,
           cardId: card.id,
           action: "transform",
-          payload: { reviewCount: next.reviewCount },
+          payload: { reviewCount: next.reviewCount, attempt, rating },
         });
         void logEvent({
           gameId: GAME_ID,
@@ -181,26 +237,38 @@ export default function FactorizationGame() {
           action: "submit",
         });
       }, 240);
-    } else {
-      const nextWrong = wrongCount + 1;
-      setWrongCount(nextWrong);
-      if (nextWrong >= REVEAL_THRESHOLD) {
-        const prev: CardSrsState = loadSrsState(GAME_ID, card.id);
-        const updated = reviewCard(prev, "again");
-        saveSrsState(GAME_ID, card.id, updated);
-        void logEvent({
-          gameId: GAME_ID,
-          cardId: card.id,
-          action: "transform",
-          payload: { reveal: true, wrongCount: nextWrong },
-        });
-        setPhase("reveal");
-      } else {
-        setPhase("idle");
-      }
+      return;
     }
-    setOverDropZone(false);
-    dragStartLoggedRef.current = false;
+
+    // 오답 chip — wrong-flash 200ms + 시도 카운트 증가 + spring-back
+    setWrongFlashChip(hitChip);
+    setTimeout(() => setWrongFlashChip(null), 200);
+
+    const nextWrong = wrongCount + 1;
+    setWrongCount(nextWrong);
+    if (nextWrong >= REVEAL_THRESHOLD) {
+      triggerReveal(nextWrong, "auto");
+    } else {
+      setPhase("idle");
+    }
+  };
+
+  function triggerReveal(attemptCount: number, source: "auto" | "voluntary") {
+    const prev: CardSrsState = loadSrsState(GAME_ID, card!.id);
+    const updated = reviewCard(prev, "again");
+    saveSrsState(GAME_ID, card!.id, updated);
+    void logEvent({
+      gameId: GAME_ID,
+      cardId: card!.id,
+      action: "transform",
+      payload: { reveal: true, source, wrongCount: attemptCount },
+    });
+    setPhase("reveal");
+  }
+
+  const handleVoluntaryReveal = () => {
+    if (phase !== "idle" && phase !== "dragging") return;
+    triggerReveal(wrongCount, "voluntary");
   };
 
   const handleNext = () => {
@@ -210,11 +278,17 @@ export default function FactorizationGame() {
       setCardIndex(cardIndex + 1);
       setPhase("idle");
       setWrongCount(0);
+      setHoveringChip(null);
+      setWrongFlashChip(null);
       dragStartLoggedRef.current = false;
     }
   };
 
   const isResolved = phase === "done" || phase === "reveal";
+  const showVoluntaryReveal =
+    wrongCount >= VOLUNTARY_REVEAL_AT &&
+    wrongCount < REVEAL_THRESHOLD &&
+    (phase === "idle" || phase === "dragging");
 
   return (
     <>
@@ -250,6 +324,7 @@ export default function FactorizationGame() {
                   key={`${cardIndex}-before`}
                   terms={card.problem.terms}
                   draggable={phase !== "extracting"}
+                  revealCommon={phase === "extracting"}
                   onDragMove={handleDragMove}
                   onDragEnd={handleDragEnd}
                   transforming={phase === "extracting"}
@@ -264,15 +339,22 @@ export default function FactorizationGame() {
             </AnimatePresence>
 
             {!isResolved && (
-              <DropZone
-                ref={dropZoneRef}
-                active={phase === "dragging" && overDropZone}
-                previewText={
-                  phase === "dragging" && overDropZone
-                    ? card.problem.factoredForm
-                    : undefined
-                }
+              <FactorChipRack
+                candidates={candidates}
+                hoveringText={hoveringChip}
+                wrongFlashText={wrongFlashChip}
+                onChipMount={onChipMount}
               />
+            )}
+
+            {showVoluntaryReveal && (
+              <button
+                type="button"
+                onClick={handleVoluntaryReveal}
+                className="rounded-button border border-border-hairline px-3 py-2 text-helper text-type-secondary hover:text-type-primary"
+              >
+                정답을 보여드릴게요
+              </button>
             )}
           </div>
         </>
@@ -298,9 +380,9 @@ export default function FactorizationGame() {
       }
       liveRegion={
         <span className="sr-only" aria-live="polite">
-          {phase === "idle" && `${cardIndex + 1}번 문제. 블록을 위로 끌어 공통인수를 빼내세요`}
-          {phase === "dragging" && "드롭 존이 활성화됐어요. 놓으면 변형됩니다."}
-          {phase === "extracting" && "변형 중"}
+          {phase === "idle" && `${cardIndex + 1}번 문제. 블록을 공통인수 후보 chip 위로 끌어내세요`}
+          {phase === "dragging" && (hoveringChip ? `${hoveringChip} chip 위. 놓으면 검증돼요.` : "chip 위로 가져가세요.")}
+          {phase === "extracting" && "정답이에요. 변형 중"}
           {phase === "done" &&
             (isLastCard
               ? "마지막 문제 완료. 마치기를 누르세요."
@@ -314,9 +396,20 @@ export default function FactorizationGame() {
   );
 }
 
+/** card → chip 후보 3개 (정답 + distractors, deterministic shuffle).
+ *  distractors 가 누락된 카드는 fallback (정답만 노출) — buildCard 가 자동
+ *  생성하므로 실제로는 발생 안 함. */
+function buildCandidates(card: FactorizationCard): string[] {
+  const correct = card.problem.commonFactor;
+  const distractors = card.problem.distractors ?? [];
+  if (distractors.length !== 2) return [correct];
+  return shuffleCandidates(correct, [...distractors], card.id);
+}
+
 interface BeforeViewProps {
   terms: UiTerm[];
   draggable: boolean;
+  revealCommon: boolean;
   onDragMove: (info: PanInfo) => void;
   onDragEnd: (info: PanInfo, blockRect: DOMRect) => void;
   transforming: boolean;
@@ -325,6 +418,7 @@ interface BeforeViewProps {
 function BeforeView({
   terms,
   draggable,
+  revealCommon,
   onDragMove,
   onDragEnd,
   transforming,
@@ -354,6 +448,7 @@ function BeforeView({
           <TermBlock
             term={term}
             draggable={draggable}
+            revealCommon={revealCommon}
             onDragMove={onDragMove}
             onDragEnd={onDragEnd}
           />
@@ -420,8 +515,6 @@ interface CompletionScreenProps {
   onRetry: () => void;
 }
 
-/** 5문제 완료 화면 — SPEC §03.3 IA + §07 microcopy 준수.
- *  3개 액션 동등 비중. 폭죽/이모지 X. */
 function CompletionScreen({ totalCards, onRetry }: CompletionScreenProps) {
   return (
     <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-10">
