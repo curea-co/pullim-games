@@ -1,6 +1,6 @@
 # 2026-05-14 — factorization 변별력 강화 (drag-to-chip)
 
-- **상태**: ACCEPTED (2026-05-15) — §1 drag-to-chip 메커닉 + §2 D1~D4 추천안 채택 합의. Phase 1 (schema/buildCard distractor) 부터 진입.
+- **상태**: COMPLETE (2026-05-15) — Phase 1~5 전체 머지 완료. drag-to-chip 메커닉으로 변별력 0 → 정상 회복.
 - **트리거**: 사용자 피드백 — "이 게임 변별력이 하나도 없어. 모든 카드를 드래그해도 정답이래."
 - **연관 audit**: `proc/audit/2026-05-14_games-catalog-audit.md` §3 — "변별력 정책 준수 21/21" 결론은 **factorization 에 대해 잘못 판정** (audit miss). BUG-2 PR #43 은 hit-test 정합성만 고쳤고, 메커닉 자체의 변별력 0 이슈는 본 plan 에서 처리.
 - **메모리 룰**: 학습효과 > 중독성. 답지 노출 회피. 끼워맞추기 회피. 단일 백본 + 다중 모드 (FSRS 등급 정상화 포함).
@@ -104,33 +104,34 @@
 - [x] `buildCard.test.ts` distractor 생성 케이스 6종 (계수+변수 / 계수만 / 변수만 / 윗첨자 / 자동 포함 / override) 추가.
 - [x] `buildCard.ts` 에서 모든 term 의 `isCommon` 마킹 **유지** (변경 없음, Phase 2 component phase 분기로만 사용 예정).
 
-### Phase 2 — component
+### Phase 2 — component ✅ (PR Phase 2 머지 2026-05-15)
 
-- [ ] `component.tsx` 에 chip rack 컴포넌트 (`<FactorChipRack candidates={...} onPick={...} />`) 추가.
-- [ ] `handleDragEnd` 에서 dropZone hit-test → chip hit-test 로 변경. 각 chip 의 boundingClientRect 검사.
-- [ ] 정답 chip → 기존 변형 애니메이션 흐름 (extracting → done).
-- [ ] 오답 chip → spring-back + 시도 카운트 증가 + 짧은 wrong-flash (jade 하이라이트 노출 X).
-- [ ] 3회 시도 후 "정답을 보여드릴게요" 옵션 노출. reveal 시 FSRS `again`.
-- [ ] FSRS 등급 분기 (`reviewCard(prev, attempt === 1 ? "good" : attempt === 2 ? "hard" : "again")`).
-- [ ] `BeforeView` 의 `TermBlock` 에 jade 하이라이트 prop `revealCommon: boolean` 추가, default false. 정답 chip 선택 후 true.
+- [x] `component.tsx` 에 chip rack 컴포넌트 (`<FactorChipRack candidates={...} hoveringText={...} wrongFlashText={...} onChipMount={...} />`) 추가.
+- [x] `handleDragEnd` 에서 dropZone hit-test → chip hit-test 로 변경. 각 chip 의 boundingClientRect (chipRefsRef Map) 검사.
+- [x] 정답 chip → extracting → done (240ms) + CorrectBurst overlay.
+- [x] 오답 chip → spring-back + 시도 카운트 증가 + 200ms wrong-flash (border red + ring red, jade 하이라이트 노출 X).
+- [x] 3회 시도 후 "정답을 보여드릴게요" voluntary reveal 옵션 노출. reveal 시 FSRS `again`. (5회 도달 시 auto reveal — correct-feedback 공통 룰)
+- [x] FSRS 등급 분기 — attempt 1 → `good`, 2 → `hard`, 3+ → `again`. reveal → `again`.
+- [x] `BeforeView` 의 `TermBlock` 에 `revealCommon: boolean` 추가, default false. `phase === "extracting"` 시 true (정답 chip 선택 후 변형 애니메이션 시 노출).
 
-### Phase 3 — content 검증
+### Phase 3 — content 검증 ✅
 
-- [ ] `content/index.ts` 10 장 모두 buildCard 실행 후 distractor 가 정답과 다르고 의미 있는지 (모든 term 의 일부 분해형이 함정으로 들어가지 않는지) 자동 assert.
-- [ ] 실패 카드 발견 시 hand-curate `distractors` 추가.
+- [x] `content/content.test.ts` 신규 — 10 카드 모두 buildCard schema 통과 + distractors 2개 + 정답 ≠ distractors + d1 ≠ d2 + "1" 제외 자동 assert.
+- [x] 실패 카드 발견 없음 (자동 생성 distractor 가 모든 10 장 의미 만족).
 
-### Phase 4 — 검증
+### Phase 4 — 검증 ✅
 
-- [ ] vitest — buildCard distractor 케이스 / component 시도-FSRS 등급 매핑 / 오답 시 phase 변동
-- [ ] e2e — `e2e/factorization-discrimination.spec.ts` 신규: 정답 chip drop → success / 오답 chip drop → spring-back + 카드 유지 / 3회 후 reveal 옵션 / 빈 공간 drop → 변동 없음 (PR #43 회귀 보존).
-- [ ] `bun run typecheck` + `bun run test` + e2e 회귀 (기존 factorization-drag-hit-test.spec.ts 갱신 — chip 기준)
+- [x] vitest — buildCard distractor 케이스 6종 (Phase 1) + content 의미성 2건 = 8건. component 단위 테스트는 UI 영역 (레포 컨벤션 — logic만 vitest).
+- [x] e2e — `e2e/factorization-discrimination.spec.ts` 신규: 정답 chip drop → success / 오답 chip drop → spring-back + 카드 유지 / 3회 후 voluntary reveal 옵션. 3/3 PASS.
+- [x] `bun run typecheck` + `bun run test` (157/157) + e2e 전체 (159/159 — 기존 spec 갱신 + 신규 포함) 회귀 0.
+- [x] 기존 `factorization-drag-hit-test.spec.ts` 갱신 — chip 기준 빈 공간 release 회귀만 보존 (BUG-2 회귀 검증).
 
-### Phase 5 — 머지 + 자가 검증 + 보고
+### Phase 5 — 머지 + 자가 검증 + 보고 ✅
 
-- [ ] commit + PR + main 머지
-- [ ] 머지 후 §3 작업항목 체크리스트 자가 검증
-- [ ] audit 문서에 후속 fix 추가 행 (BUG-3 또는 BUG-2 미러 확장)
-- [ ] 사용자 보고 (작업 항목 status + dogfooding 요청)
+- [x] commit + PR + main 머지 (PR Phase 2 단일 통합).
+- [x] 머지 후 §3 작업항목 체크리스트 자가 검증 — Phase 1~4 모두 [x].
+- [x] audit 문서 갱신 — `2026-05-15_games-catalog-audit-v2.md` §3 변별력 정책: factorization 20/21 → **21/21 복귀**.
+- [x] 사용자 보고 — 작업항목 status + production dogfooding 가이드.
 
 ---
 
