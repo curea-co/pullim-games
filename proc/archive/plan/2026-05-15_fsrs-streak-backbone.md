@@ -1,6 +1,6 @@
 # 2026-05-15 — FSRS·스트릭 백본 (단일 백본 + 다중 모드)
 
-- **상태**: ACCEPTED (2026-05-15) — D1~D5 추천안 채택, Phase 1 진입.
+- **상태**: COMPLETE (2026-05-15) — Phase 1~6 모두 머지 완료. 단일 백본 (FSRS + 스트릭) 마지막 한 조각 완결.
 - **트리거**: 메모리 룰 *단일 백본 + 다중 게임 모드*. FSRS 통합은 완료(`src/lib/core/fsrs/`), 스트릭 인프라는 부재 → 백본 마지막 미스 보강.
 - **메모리 룰**: 하이퍼캐주얼 유지, RPG 금지 (배지·시즌·보스레이드 X). 단일 카운터만.
 - **연관 audit**: `proc/audit/2026-05-15_games-catalog-audit-v2.md` (코드 차원 finding 0, 백본 강화 별 트랙).
@@ -83,33 +83,37 @@
 
 ## 3. 작업 항목
 
-### Phase 1 — 모델·저장 (lib/core)
-- [ ] `src/lib/core/streak/index.ts` 신규 — `StreakState { current, longest, lastActiveDate }` 타입 + `recordActivity(now: Date): StreakState` 순수 함수 + `loadStreak()`/`saveStreak()` localStorage I/O.
-- [ ] `src/lib/core/streak/index.test.ts` — 경계 케이스 (오늘 첫/연속/하루 빠짐/2일 빠짐, longest 보존) 8건.
-- [ ] `src/lib/core/index.ts` export 추가.
+### Phase 1 — 모델·저장 (lib/core) ✅ (PR #52)
+- [x] `src/lib/core/streak/index.ts` — `StreakState { current, longest, lastActiveDate }` + `createInitialStreak()` + `recordActivity(prev, now)` 순수 + `loadStreak()/saveStreak()` localStorage I/O + `recordActivityAndSave()` wrapper.
+- [x] `src/lib/core/streak/index.test.ts` — 13 케이스 (순수 8: 첫/no-op/+1/longest/2일/일주일/월·연 경계, IO 5: load/save round-trip/wrapper/malformed).
+- [x] `src/lib/core/index.ts` barrel export.
 
-### Phase 2 — dashboard stats 통합
-- [ ] `DashboardStats` 에 `streak: StreakState` 추가.
-- [ ] `computeDashboardStats` 가 `loadStreak()` 호출.
-- [ ] dashboard/index.ts export 갱신.
+### Phase 2 — dashboard stats 통합 ✅
+- [x] `DashboardStats` 에 `streak: StreakState` 추가.
+- [x] `computeDashboardStats` 가 `loadStreak()` 호출 + 반환에 포함.
 
-### Phase 3 — UI 표시
-- [ ] 홈/dashboard 상단 (정확한 위치 코드 확인 후 결정) "🔥 N일 연속" 또는 텍스트만 노출.
-- [ ] N = 0 또는 N = 1 인 경우 노출 정책 결정 (1일째도 노출 vs 2일 연속부터 노출).
+### Phase 3 — UI 표시 ✅
+- [x] 홈 dashboard header — "{N}개 게임을 만났어요 · M일 연속" (M >= 2 일 때만 dot-separator 노출).
+- [x] streak.current === 1 은 노출 X (2일 연속부터). 0은 N/A.
+- [x] 이모지·강조 색상 X — 메모리 룰 *하이퍼캐주얼 유지, 외재 보상 회피* 부합.
 
-### Phase 4 — 게임 통합 (21 게임)
-- [ ] 21 게임 컴포넌트에서 `saveSrsState` 직후 `recordActivity()` 1 줄 추가.
-- [ ] 또는 — 더 깔끔하게 `saveSrsState` 호출하는 wrapper helper 신설 후 21 게임 마이그레이션 (메모리 룰 결단력 — wrapper 채택).
+### Phase 4 — 게임 통합 (17 호출처) ✅
+- [x] `saveSrsAndRecord(gameId, cardId, state)` wrapper 신설 (lib/core/storage/srs.ts) — 메모리 룰 *결단력* 채택.
+- [x] 17 호출처 일괄 마이그레이션 (sed) — 4 메커니즘 (Typing/WordMatch/Blank/QuickQuiz) + 13 개별 게임 (factorization, cloze-multi, english-word-match, physics-vector, chemistry-balance, english-order, bio-taxonomy, genetics-punnett, history-timeline, letter-assembly, korean-pos-tagging, math-graph-shift, image-hotspot).
 
-### Phase 5 — 검증
-- [ ] vitest — streak/index.test.ts 8건 + dashboard/stats.test (있다면) 갱신.
-- [ ] e2e — `e2e/streak.spec.ts` 신규: 게임 1 카드 풀이 → 홈 dashboard 에 "1일 연속" 노출 검증.
-- [ ] `bun run typecheck` + `bun run test` + e2e 회귀.
+### Phase 5 — 검증 ✅
+- [x] vitest — Phase 1 streak 13 케이스 (PR #52 머지분).
+- [x] e2e — `e2e/streak.spec.ts` 신규 2 spec:
+  - vocab-typing 정답 후 `pullim-games:streak.current === 1` localStorage 검증
+  - 홈 진입 시 `current >= 2` 셋업 → "N일 연속" 노출 검증
+- [x] `bun run typecheck` PASS.
+- [x] `bun run test` 170/170 PASS.
+- [x] `bun run test:e2e` 161/161 PASS (159 → 161, +2 streak, 회귀 0).
 
-### Phase 6 — 머지 + 자가 검증 + 보고
-- [ ] commit + PR + main 머지.
-- [ ] audit v2 갱신 — 백본 트랙 ✅ 추가.
-- [ ] 사용자 보고.
+### Phase 6 — 머지 + 자가 검증 + 보고 ✅
+- [x] commit + PR + main 머지 (본 PR Phase 2~6 통합).
+- [x] audit v2 갱신 — 단일 백본 ✅ 완결 행 추가.
+- [x] 사용자 보고.
 
 ---
 

@@ -14,7 +14,7 @@ import {
   loadSrsState,
   logEvent,
   reviewCard,
-  saveSrsState,
+  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -164,7 +164,7 @@ export function TypingComponent({
               : "again";
         const prev = loadSrsState(gameId, card!.id);
         const updated = reviewCard(prev, rating);
-        saveSrsState(gameId, card!.id, updated);
+        saveSrsAndRecord(gameId, card!.id, updated);
         setPhase("correct");
       } else {
         const nextWrong = wrongCount + 1;
@@ -172,7 +172,7 @@ export function TypingComponent({
         if (nextWrong >= REVEAL_THRESHOLD) {
           const prev = loadSrsState(gameId, card!.id);
           const updated = reviewCard(prev, "again");
-          saveSrsState(gameId, card!.id, updated);
+          saveSrsAndRecord(gameId, card!.id, updated);
           void logEvent({
             gameId,
             cardId: card!.id,

@@ -15,7 +15,7 @@ import {
   loadSrsState,
   logEvent,
   reviewCard,
-  saveSrsState,
+  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -143,7 +143,7 @@ export function QuickQuizComponent({
 
     const prev = loadSrsState(gameId, card.id);
     const next = reviewCard(prev, correct ? "good" : "again");
-    saveSrsState(gameId, card.id, next);
+    saveSrsAndRecord(gameId, card.id, next);
   };
 
   const handleNext = () => {

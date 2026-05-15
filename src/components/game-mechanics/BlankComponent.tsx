@@ -13,7 +13,7 @@ import {
   loadSrsState,
   logEvent,
   reviewCard,
-  saveSrsState,
+  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -134,7 +134,7 @@ export function BlankComponent({
     });
     const prev = loadSrsState(gameId, card!.id);
     const updated = reviewCard(prev, correct ? "good" : "again");
-    saveSrsState(gameId, card!.id, updated);
+    saveSrsAndRecord(gameId, card!.id, updated);
   }
 
   function handleNext() {

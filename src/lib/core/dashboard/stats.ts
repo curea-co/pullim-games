@@ -4,6 +4,7 @@
 import type { LucideIcon } from "lucide-react";
 import { games } from "@/lib/games/registry";
 import { loadAllSrsStates } from "../storage/srs";
+import { loadStreak, type StreakState } from "../streak";
 
 export interface PerGameStat {
   gameId: string;
@@ -39,6 +40,9 @@ export interface DashboardStats {
   todayAttempts: number;
   /** due 가 24h 이내 (이미 due 포함) 인 카드 수. */
   dueSoonCount: number;
+  /** 일일 학습 스트릭 — 단일 백본 (사용자 단위, 게임 무관).
+   *  plan 2026-05-15_fsrs-streak-backbone Phase 2 통합. */
+  streak: StreakState;
   /** 게임별 분해. registry 순서. */
   perGame: PerGameStat[];
 }
@@ -139,6 +143,7 @@ export async function computeDashboardStats(
     accuracy: totalAttempts > 0 ? totalCorrect / totalAttempts : 0,
     todayAttempts,
     dueSoonCount,
+    streak: loadStreak(),
     perGame,
   };
 }

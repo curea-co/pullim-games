@@ -15,7 +15,7 @@ import {
   loadSrsState,
   logEvent,
   reviewCard,
-  saveSrsState,
+  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -182,7 +182,7 @@ export default function EnglishOrderGame() {
 
     const prev = loadSrsState(GAME_ID, card!.id);
     const next = reviewCard(prev, correct ? "good" : "again");
-    saveSrsState(GAME_ID, card!.id, next);
+    saveSrsAndRecord(GAME_ID, card!.id, next);
 
     setTimeout(() => {
       if (correct) {
