@@ -1,0 +1,126 @@
+@AGENTS.md
+
+# 풀림 게임즈 작업 가이드
+
+이 프로젝트는 **풀림 시리즈 중 독립 학습 게임 카탈로그**다. `pullim-planner` / `pullim-Q` / `pullim-classbot`과 달리 `pullim-study-demo` 추출본이 아니며, 자체 SPEC(`proc/spec/01~10`)을 권위 문서로 둔다.
+
+> **공통 운영 규칙은 `~/dev_git/.pullim-meta/CONVENTION.md` 참조** (게이트키퍼 G1~G4 정의, daily_outcome 양식, 명령 표준, 배포 정책).
+
+## 1. 도메인 범위
+
+| 영역 | 경로 |
+|---|---|
+| **게임 라우트** | `src/app/games/`, `src/app/manage/` (관리) |
+| **게임 카탈로그** | `src/games/{21개 게임}/` |
+| **메커니즘 컴포넌트** | `src/components/game-mechanics/{Blank,QuickQuiz,Typing,WordMatch}Component.tsx`, `useAttemptCounter.ts` |
+| **게임 셸·허브** | `src/components/{game-shell,game-hub,dashboard,GameCard,RecommendationCard}/` |
+| **공유 lib** | `src/lib/{core,games,server,utils.ts}/` |
+| **레지스트리 자동화** | `scripts/generate-registry.ts` (predev/prebuild에서 실행) |
+
+### 21개 게임 (2026-05-15 기준)
+
+`bio-taxonomy`, `chemistry-balance`, `cloze-multi`, `custom-{blank,multiple-choice,typing,word-match}`, `english-{blank,order,vocab-typing,word-match}`, `factorization`, `genetics-punnett`, `history-timeline`, `image-hotspot`, `korean-pos-tagging`, `letter-assembly`, `math-graph-shift`, `math-quick-quiz`, `physics-vector`, `vocab-typing`
+
+### 4 메커니즘
+
+| 메커니즘 | 컴포넌트 | 활용 게임 예시 |
+|---|---|---|
+| QuickQuiz | `QuickQuizComponent.tsx` | math-quick-quiz, custom-multiple-choice |
+| Blank | `BlankComponent.tsx` | english-blank, custom-blank, cloze-multi |
+| Typing | `TypingComponent.tsx` | vocab-typing, english-vocab-typing, custom-typing |
+| WordMatch | `WordMatchComponent.tsx` | english-word-match, custom-word-match |
+
+5회 오답 시 `useAttemptCounter` → `RevealBanner`로 정답 공개. `CorrectBurst`는 정답 시 공통 피드백.
+
+## 2. 공유 영역 — read 자유, write는 사용자 확인 후
+
+| 영역 | 경로 | 주의 |
+|---|---|---|
+| 게임 셸 | `src/components/shell/`, `src/components/game-shell/` | 21개 게임 공통 셸 — 수정 시 전 게임 영향 |
+| UI 프리미티브 | `src/components/ui/` | shadcn/ui + Radix |
+| 디자인 시스템 | `proc/spec/08-디자인-시스템.md` (read only) | |
+| 게임 lib | `src/lib/core/`, `src/lib/games/` | FSRS·checkAnswer 등 핵심 로직 |
+| 설정 | `next.config.ts`, `eslint.config.mjs`, `package.json`, `tsconfig.json`, `tailwind.config.ts` | |
+
+## 3. 권위 문서 (read only)
+
+다른 풀림 프로젝트와 달리 **`proc/spec/01~10`이 권위 문서**다. `input/docs-archive/`에 풀림 마스터 문서가 없음 — 독립 프로젝트이기 때문.
+
+| 문서 | 내용 |
+|---|---|
+| `proc/spec/01-AI-명령지침.md` | AI 에이전트 작업 룰 |
+| `proc/spec/02-제품-정의.md` | 제품 정의 |
+| `proc/spec/03-핵심-기능.md` | 핵심 기능 명세 |
+| `proc/spec/04-사용자-경험.md` | UX 가이드 |
+| `proc/spec/05-비즈니스-정책.md` | BM·정책 |
+| `proc/spec/06-콘텐츠-데이터.md` | 콘텐츠 데이터 구조 |
+| `proc/spec/07-브랜딩.md` | 브랜딩 |
+| `proc/spec/08-디자인-시스템.md` | 디자인 시스템 |
+| `proc/spec/09-기술-환경.md` | 기술 스택·환경 |
+| `proc/spec/10-개발-로드맵.md` | 개발 로드맵 |
+
+## 4. 작업 컨벤션
+
+활성 게이트키퍼: **G1 / G3 / G4** (G2 부대표 미할당). 자세한 운영은 `~/dev_git/.pullim-meta/CONVENTION.md` §2.
+
+### 해도 되는 것
+
+- 21개 게임 중 단일 게임 작업: `src/games/<game-name>/` 신규·수정
+- 4 메커니즘 컴포넌트 보강 (`src/components/game-mechanics/`)
+- `src/games/<game-name>/`에서 메커니즘 import해서 콘텐츠·스키마·distractor 추가
+- `proc/audit/`에 카탈로그 정기 감사 산출물 추가 (다른 풀림 프로젝트의 `proc/knowhow/`에 대응되는 자리)
+- 새 게임 추가 후 `bun run gen:registry`로 레지스트리 갱신
+
+### 사용자 명시 확인 후
+
+- 게임 셸·메커니즘 컴포넌트 시그니처 변경 → 21개 게임 영향
+- `src/lib/core/`, `src/lib/games/` 공통 로직 수정 (checkAnswer, FSRS 등)
+- `proc/spec/01~10` 권위 문서 수정 — G1/G3/G4 합의 필요
+- `scripts/generate-registry.ts` 수정 → predev/prebuild 자동 트리거
+
+### 하면 안 되는 것
+
+- 다른 풀림 프로젝트(planner/Q/classbot)의 코드·페이지·mock 참조 — **독립 프로젝트**이므로 cross-domain 의존 금지
+- `vercel --prod` 수동 배포 전에 production 검증 보고 — 머지 ≠ 배포
+
+## 5. 도구 보조
+
+| 상황 | 명령 |
+|---|---|
+| 개발 (dev) | `bun dev` → http://localhost:**3033** (다른 풀림은 3030, games만 3033) |
+| 정적 검증 | `bunx tsc --noEmit && bun run lint` |
+| 빌드 | `bun run build` (predev/prebuild에서 `gen:registry` 자동 실행) |
+| 단위 테스트 | `bun test` (vitest) |
+| e2e | `bun run test:e2e` (playwright) |
+| 게임 레지스트리 수동 갱신 | `bun run gen:registry` |
+| 배포 (수동) | `bunx vercel --prod` |
+
+## 6. proc/ 폴더 구조
+
+```
+proc/
+├── spec/       # 01~10 정식 SPEC (권위 문서)
+├── plan/       # 작업 계획 (YYYY-MM-DD_<topic>.md)
+├── archive/    # 완료된 plan·design-audit
+├── research/   # 조사·분석 결과
+└── audit/      # 게임 카탈로그 정기 감사 (games 고유 — 다른 풀림은 knowhow)
+```
+
+`audit` 폴더는 games 고유. 21개 게임의 visual·인터랙션·BUG 정기 점검 산출물 누적. 결정 근거는 `~/dev_git/.pullim-meta/DECISIONS.md` D2 참조.
+
+## 7. 다른 풀림 프로젝트와의 관계
+
+| 항목 | games | planner / Q / classbot |
+|---|---|---|
+| origin | 독립 프로젝트 | `pullim-study-demo` 추출본 |
+| Next.js | 15 | 16 |
+| 포트 | 3033 | 3030 |
+| 권위 문서 | `proc/spec/01~10` | `input/docs-archive/*.md` |
+| proc 5번째 | `audit/` | `knowhow/` |
+| 운영 규칙 | `.pullim-meta/CONVENTION.md` | `.pullim-meta/CONVENTION.md` |
+
+→ 4개 모두 `.pullim-meta/CONVENTION.md`의 공통 운영 규칙은 따른다. 도메인·기술 스택·권위 문서는 games만 별도.
+
+## 8. 컨벤션 변경
+
+본 문서나 `~/dev_git/.pullim-meta/CONVENTION.md`를 수정해야 할 때는 **별도 작업으로 분리**. 일반 게임 작업 도중 컨벤션 파일을 함께 수정하지 말 것 (PR 섞임 방지).
