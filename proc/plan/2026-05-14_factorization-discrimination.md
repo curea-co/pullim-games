@@ -97,12 +97,12 @@
 
 ## 3. 작업 항목
 
-### Phase 1 — schema/logic
+### Phase 1 — schema/logic ✅ (PR #48 머지 2026-05-15)
 
-- [ ] `schema.ts` `FactorizationProblemSchema` 에 `distractors: z.array(z.string()).length(2)` 추가 (정답 외 2 개).
-- [ ] `buildCard.ts` 에 distractor 자동 생성 함수 (`generateDistractors(factor, poly): [string, string]`) 추가.
-- [ ] `buildCard.test.ts` distractor 생성 케이스 4종 (계수만, 변수만, 계수+변수, 상수항 포함) 추가.
-- [ ] `buildCard.ts` 에서 모든 term 의 `isCommon` 마킹 **유지** (정답 변형 후 노출용 — 단 component 에서 phase 분기로만 사용).
+- [x] `schema.ts` `FactorizationProblemSchema` 에 `distractors` 추가 (Phase 1 진입 시 `.optional()`, Phase 2 component 통합 시 `.length(2)` required 전환 예정).
+- [x] `buildCard.ts` 에 distractor 자동 생성 함수 (`generateDistractors(factor, poly): [string, string]`) 추가 — ①약수(계수약화/변수만/계수만/지수-1) ②다항식 term 일부 ③배수(계수2배/지수+1).
+- [x] `buildCard.test.ts` distractor 생성 케이스 6종 (계수+변수 / 계수만 / 변수만 / 윗첨자 / 자동 포함 / override) 추가.
+- [x] `buildCard.ts` 에서 모든 term 의 `isCommon` 마킹 **유지** (변경 없음, Phase 2 component phase 분기로만 사용 예정).
 
 ### Phase 2 — component
 
