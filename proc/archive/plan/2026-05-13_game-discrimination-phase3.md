@@ -1,5 +1,6 @@
 # 2026-05-13 — 게임 변별력 강화 Phase 3 (4 게임)
 
+- **상태**: ✅ COMPLETE (retroactive 2026-05-13) — Phase 3.1 english-word-match distractor PR #28 머지, Phase 3.2 chemistry-balance·math-graph-shift·physics-vector 확인 버튼 PR #30 머지
 - **상태**: DRAFT (2026-05-13) — pilot 1 (english-word-match) 진행 중, 잔여 결정점 D2 합의 후 진행
 - **트리거**: 사용자 피드백 — 4 게임 변별력 부족 (I1·I4·I5·I6). `proc/plan/2026-05-12_game-discrimination-and-polish.md` Phase 3 분리
 - **메모리 룰**: 학습효과 > 중독성. 답지 노출 → 가설 수립 + 검증 흐름 우선. 시간 압박 회피

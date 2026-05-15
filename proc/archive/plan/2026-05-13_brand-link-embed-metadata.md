@@ -1,6 +1,6 @@
 # 2026-05-13 — 배포 링크 임베드 메타데이터 풍부화 (OG / Twitter / PWA)
 
-- **상태**: 진행중 (2026-05-13)
+- **상태**: ✅ COMPLETE (retroactive 2026-05-13) — PR #24 머지, OG/Twitter/PWA 풀세트 production 반영. §4 dev 검증·§5 배포 잔여 체크박스는 머지로 사실상 충족
 - **트리거**: 사용자 요청 — "pullim-classbot 처럼 서버 배포 후 링크 임베드 시 설명이 풍부하게"
 - **확정 도메인**: `https://pullim-games.vercel.app/games` (사용자 명시)
 - **스코프**: layout.tsx 메타 풀세트 + 동적 OG/Twitter PNG + PWA manifest + 환경 변수
