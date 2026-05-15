@@ -1,6 +1,6 @@
 # 2026-05-14 — factorization 변별력 강화 (drag-to-chip)
 
-- **상태**: DRAFT (2026-05-14)
+- **상태**: ACCEPTED (2026-05-15) — §1 drag-to-chip 메커닉 + §2 D1~D4 추천안 채택 합의. Phase 1 (schema/buildCard distractor) 부터 진입.
 - **트리거**: 사용자 피드백 — "이 게임 변별력이 하나도 없어. 모든 카드를 드래그해도 정답이래."
 - **연관 audit**: `proc/audit/2026-05-14_games-catalog-audit.md` §3 — "변별력 정책 준수 21/21" 결론은 **factorization 에 대해 잘못 판정** (audit miss). BUG-2 PR #43 은 hit-test 정합성만 고쳤고, 메커닉 자체의 변별력 0 이슈는 본 plan 에서 처리.
 - **메모리 룰**: 학습효과 > 중독성. 답지 노출 회피. 끼워맞추기 회피. 단일 백본 + 다중 모드 (FSRS 등급 정상화 포함).
