@@ -8,6 +8,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import { getCardSequence } from "./content";
 import {
   loadAllSrsStates,
@@ -19,7 +21,14 @@ import {
 } from "@/lib/core";
 
 const GAME_ID = "history-timeline";
-type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
+const REVEAL_THRESHOLD = 5;
+type Phase =
+  | "playing"
+  | "checking"
+  | "correct"
+  | "wrong"
+  | "reveal"
+  | "completed";
 
 interface PoolEvent {
   id: string;
@@ -50,6 +59,7 @@ export default function HistoryTimelineGame() {
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
+  const [wrongCount, setWrongCount] = useState(0);
   const dragStartedRef = useRef(false);
 
   useEffect(() => {
@@ -92,6 +102,7 @@ export default function HistoryTimelineGame() {
   useEffect(() => {
     if (!card) return;
     setSlots(Array(card.problem.events.length).fill(null));
+    setWrongCount(0);
     setPhase("playing");
     dragStartedRef.current = false;
   }, [cardIndex, card]);
@@ -164,13 +175,34 @@ export default function HistoryTimelineGame() {
     saveSrsState(GAME_ID, card!.id, next);
 
     setTimeout(() => {
-      setPhase(correct ? "correct" : "wrong");
-      if (!correct) {
-        setTimeout(() => {
-          setSlots(Array(card!.problem.events.length).fill(null));
-          setPhase("playing");
-        }, 1400);
+      if (correct) {
+        setPhase("correct");
+        return;
       }
+      const nextWrong = wrongCount + 1;
+      setWrongCount(nextWrong);
+      if (nextWrong >= REVEAL_THRESHOLD) {
+        void logEvent({
+          gameId: GAME_ID,
+          cardId: card!.id,
+          action: "transform",
+          payload: { reveal: true, wrongCount: nextWrong },
+        });
+        const correctOrder: (string | null)[] = card!.problem.events.map(
+          (_, i) => {
+            const ev = poolEvents.find((pe) => pe.originIndex === i);
+            return ev ? ev.id : null;
+          },
+        );
+        setSlots(correctOrder);
+        setPhase("reveal");
+        return;
+      }
+      setPhase("wrong");
+      setTimeout(() => {
+        setSlots(Array(card!.problem.events.length).fill(null));
+        setPhase("playing");
+      }, 1400);
     }, 200);
   }
 
@@ -182,8 +214,12 @@ export default function HistoryTimelineGame() {
     setCardIndex(cardIndex + 1);
   }
 
+  const isResolved = phase === "correct" || phase === "reveal";
+
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct"} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -209,6 +245,11 @@ export default function HistoryTimelineGame() {
           {card.hint && (
             <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
           )}
+          {phase === "reveal" && (
+            <div className="mt-3">
+              <RevealBanner attemptCount={wrongCount} />
+            </div>
+          )}
 
           {/* Slots — 시간축 (위→아래 = 과거→현재) */}
           <motion.div
@@ -227,7 +268,7 @@ export default function HistoryTimelineGame() {
               onClick={() => removeFromSlot(slotIdx)}
               disabled={phase !== "playing" || ev === null}
               className={`flex w-full items-center justify-between rounded-block border px-4 py-3 text-left text-body transition-colors ${
-                phase === "correct" && ev
+                isResolved && ev
                   ? "border-accent-positive bg-accent-positive/10 text-type-primary"
                   : ev
                     ? "border-type-primary bg-bg-block text-type-primary"
@@ -240,7 +281,7 @@ export default function HistoryTimelineGame() {
                 </span>
                 <span>{ev?.title ?? "사건을 놓아주세요"}</span>
               </span>
-              {phase === "correct" && ev && (
+              {isResolved && ev && (
                 <span className="tabular text-helper text-type-secondary">
                   {ev.year}
                 </span>
@@ -270,7 +311,7 @@ export default function HistoryTimelineGame() {
         </>
       }
       cta={
-        phase === "correct" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -293,9 +334,11 @@ export default function HistoryTimelineGame() {
           {phase === "playing" && "사건을 시간 순으로 놓아주세요"}
           {phase === "wrong" && "순서가 틀렸어요. 다시 해보세요."}
           {phase === "correct" && "정답이에요"}
+          {phase === "reveal" && "여러 번 시도했어요. 정답 순서를 보여줄게요."}
         </span>
       }
     />
+    </>
   );
 }
 

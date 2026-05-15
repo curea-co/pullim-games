@@ -8,6 +8,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, type PanInfo } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import { CategoryBox } from "./components/CategoryBox";
 import { ItemCard } from "./components/ItemCard";
 import { Pool } from "./components/Pool";
@@ -24,8 +26,15 @@ import {
 
 const GAME_ID = "bio-taxonomy";
 const POOL_ID = "pool" as const;
+const REVEAL_THRESHOLD = 5;
 type ZoneId = string; // categoryId | "pool"
-type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
+type Phase =
+  | "playing"
+  | "checking"
+  | "correct"
+  | "wrong"
+  | "reveal"
+  | "completed";
 
 /** 첫 카드의 모든 item 을 POOL_ID 로 채운 초기 assignments. SSR 첫 paint 부터
  *  poolItems 가 비어있지 않게 해서 "모든 카드를 배치했어요" flash 회피 (audit UX-1). */
@@ -234,7 +243,26 @@ export default function BioTaxonomyGame() {
         saveSrsState(GAME_ID, card!.id, updated);
         setPhase("correct");
       } else {
-        setWrongCount((w) => w + 1);
+        const nextWrong = wrongCount + 1;
+        setWrongCount(nextWrong);
+        if (nextWrong >= REVEAL_THRESHOLD) {
+          const prev = loadSrsState(GAME_ID, card!.id);
+          const updated = reviewCard(prev, "again");
+          saveSrsState(GAME_ID, card!.id, updated);
+          void logEvent({
+            gameId: GAME_ID,
+            cardId: card!.id,
+            action: "transform",
+            payload: { reveal: true, wrongCount: nextWrong },
+          });
+          const correctAssignments: Record<string, ZoneId> = {};
+          for (const item of card!.problem.items) {
+            correctAssignments[item.id] = item.categoryId;
+          }
+          setAssignments(correctAssignments);
+          setPhase("reveal");
+          return;
+        }
         setPhase("wrong");
         setTimeout(() => setPhase("playing"), 1200);
       }
@@ -249,6 +277,7 @@ export default function BioTaxonomyGame() {
     setCardIndex(cardIndex + 1);
   }
 
+  const isResolved = phase === "correct" || phase === "reveal";
   const disabled = phase !== "playing";
   const categoryGridClass =
     card.problem.categories.length === 2
@@ -258,7 +287,9 @@ export default function BioTaxonomyGame() {
         : "grid-cols-2 lg:grid-cols-4";
 
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct"} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -286,6 +317,11 @@ export default function BioTaxonomyGame() {
             <p className="mt-1 text-helper text-type-secondary">
               힌트 · {card.hint}
             </p>
+          )}
+          {phase === "reveal" && (
+            <div className="mt-3">
+              <RevealBanner attemptCount={wrongCount} />
+            </div>
           )}
 
           {/* 카테고리 박스들 */}
@@ -358,7 +394,7 @@ export default function BioTaxonomyGame() {
         </>
       }
       cta={
-        phase === "correct" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -384,9 +420,11 @@ export default function BioTaxonomyGame() {
             ? `${accuracy.correct}/${accuracy.total} 맞췄어요. 다시 살펴보세요.`
             : ""}
           {phase === "correct" && "모든 카드가 알맞은 분류에 들어갔어요"}
+          {phase === "reveal" && "여러 번 시도했어요. 정답 분류를 보여줄게요."}
         </span>
       }
     />
+    </>
   );
 }
 

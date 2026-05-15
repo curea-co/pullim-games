@@ -9,6 +9,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
 import {
   loadAllSrsStates,
   loadSrsState,
@@ -156,8 +157,13 @@ export function QuickQuizComponent({
     dragStartedRef.current = false;
   };
 
+  const showBurst =
+    phase === "feedback" && picked === card.problem.correctIndex;
+
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={showBurst} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -226,6 +232,7 @@ export function QuickQuizComponent({
         </span>
       }
     />
+    </>
   );
 }
 

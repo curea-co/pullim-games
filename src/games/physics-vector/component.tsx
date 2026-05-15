@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import { getCardSequence } from "./content";
 import {
   loadAllSrsStates,
@@ -18,7 +20,14 @@ import {
 } from "@/lib/core";
 
 const GAME_ID = "physics-vector";
-type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
+const REVEAL_THRESHOLD = 5;
+type Phase =
+  | "playing"
+  | "checking"
+  | "correct"
+  | "wrong"
+  | "reveal"
+  | "completed";
 
 const X_MIN = -5;
 const X_MAX = 6;
@@ -123,7 +132,23 @@ export default function PhysicsVectorGame() {
         saveSrsState(GAME_ID, card!.id, updated);
         setPhase("correct");
       } else {
-        setWrongCount((w) => w + 1);
+        const nextWrong = wrongCount + 1;
+        setWrongCount(nextWrong);
+        if (nextWrong >= REVEAL_THRESHOLD) {
+          const prev = loadSrsState(GAME_ID, card!.id);
+          const updated = reviewCard(prev, "again");
+          saveSrsState(GAME_ID, card!.id, updated);
+          void logEvent({
+            gameId: GAME_ID,
+            cardId: card!.id,
+            action: "transform",
+            payload: { reveal: true, wrongCount: nextWrong },
+          });
+          setRx(targetRx);
+          setRy(targetRy);
+          setPhase("reveal");
+          return;
+        }
         setPhase("wrong");
         setTimeout(() => setPhase("playing"), 1200);
       }
@@ -138,8 +163,12 @@ export default function PhysicsVectorGame() {
     setCardIndex(cardIndex + 1);
   }
 
+  const isResolved = phase === "correct" || phase === "reveal";
+
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct"} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -161,6 +190,11 @@ export default function PhysicsVectorGame() {
           <h1 className="mt-2 text-display text-type-primary">{card.problem.context}</h1>
           {card.hint && (
             <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
+          {phase === "reveal" && (
+            <div className="mt-3">
+              <RevealBanner attemptCount={wrongCount} />
+            </div>
           )}
 
           <motion.div
@@ -275,7 +309,7 @@ export default function PhysicsVectorGame() {
                 className="stroke-type-secondary"
                 strokeWidth={0.8}
                 strokeDasharray="3 3"
-                opacity={phase === "correct" ? 0 : 0.4}
+                opacity={isResolved ? 0 : 0.4}
               />
             ))}
 
@@ -301,18 +335,18 @@ export default function PhysicsVectorGame() {
             x2={projectX(rx)}
             y2={projectY(ry)}
             className={
-              phase === "correct" ? "stroke-accent-positive" : "stroke-type-primary"
+              isResolved ? "stroke-accent-positive" : "stroke-type-primary"
             }
             strokeWidth={2.5}
             markerEnd={
-              phase === "correct" ? "url(#arrow-correct)" : "url(#arrow-student)"
+              isResolved ? "url(#arrow-correct)" : "url(#arrow-student)"
             }
           />
           <text
             x={projectX(rx) + 6}
             y={projectY(ry) - 6}
             className={
-              phase === "correct"
+              isResolved
                 ? "fill-accent-positive text-[11px] font-bold"
                 : "fill-type-primary text-[11px] font-bold"
             }
@@ -352,7 +386,7 @@ export default function PhysicsVectorGame() {
         </>
       }
       cta={
-        phase === "correct" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -376,9 +410,11 @@ export default function PhysicsVectorGame() {
           {phase === "playing" && `합벡터 R = ${rx}, ${ry}`}
           {phase === "wrong" && "합벡터가 일치하지 않아요"}
           {phase === "correct" && "합벡터가 정답과 일치했어요"}
+          {phase === "reveal" && "여러 번 시도했어요. 정답 합벡터를 보여줄게요."}
         </span>
       }
     />
+    </>
   );
 }
 

@@ -11,6 +11,8 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, type PanInfo } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import { TermBlock } from "./components/TermBlock";
 import { DropZone } from "./components/DropZone";
 import {
@@ -30,8 +32,15 @@ import {
 } from "@/lib/core";
 
 const GAME_ID = "factorization";
+const REVEAL_THRESHOLD = 5;
 
-type Phase = "idle" | "dragging" | "extracting" | "done" | "completed";
+type Phase =
+  | "idle"
+  | "dragging"
+  | "extracting"
+  | "done"
+  | "reveal"
+  | "completed";
 
 export default function FactorizationGame() {
   // 카드 시퀀스 — FSRS 우선순위 큐로 정렬, 클라이언트 마운트 후 결정.
@@ -40,6 +49,7 @@ export default function FactorizationGame() {
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
   const [overDropZone, setOverDropZone] = useState(false);
+  const [wrongCount, setWrongCount] = useState(0);
   const dragStartLoggedRef = useRef(false);
   // DropZone bounding rect 로 drag end hit-test (block rect center vs dropZone rect).
   const dropZoneRef = useRef<HTMLDivElement>(null);
@@ -157,7 +167,7 @@ export default function FactorizationGame() {
         setPhase("done");
         // FSRS state 갱신 + 영속화
         const prev: CardSrsState = loadSrsState(GAME_ID, card.id);
-        const next = reviewCard(prev, "good");
+        const next = reviewCard(prev, wrongCount === 0 ? "good" : "hard");
         saveSrsState(GAME_ID, card.id, next);
         void logEvent({
           gameId: GAME_ID,
@@ -172,7 +182,22 @@ export default function FactorizationGame() {
         });
       }, 240);
     } else {
-      setPhase("idle");
+      const nextWrong = wrongCount + 1;
+      setWrongCount(nextWrong);
+      if (nextWrong >= REVEAL_THRESHOLD) {
+        const prev: CardSrsState = loadSrsState(GAME_ID, card.id);
+        const updated = reviewCard(prev, "again");
+        saveSrsState(GAME_ID, card.id, updated);
+        void logEvent({
+          gameId: GAME_ID,
+          cardId: card.id,
+          action: "transform",
+          payload: { reveal: true, wrongCount: nextWrong },
+        });
+        setPhase("reveal");
+      } else {
+        setPhase("idle");
+      }
     }
     setOverDropZone(false);
     dragStartLoggedRef.current = false;
@@ -184,12 +209,17 @@ export default function FactorizationGame() {
     } else {
       setCardIndex(cardIndex + 1);
       setPhase("idle");
+      setWrongCount(0);
       dragStartLoggedRef.current = false;
     }
   };
 
+  const isResolved = phase === "done" || phase === "reveal";
+
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "extracting"} />
+      <GameShell
       variant="stack"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -208,9 +238,14 @@ export default function FactorizationGame() {
       content={
         <>
           <p className="mt-6 text-body text-type-secondary">{card.hint}</p>
+          {phase === "reveal" && (
+            <div className="mt-3">
+              <RevealBanner attemptCount={wrongCount} />
+            </div>
+          )}
           <div className="mt-10 flex flex-1 flex-col items-center justify-center gap-8">
             <AnimatePresence mode="wait">
-              {phase !== "done" ? (
+              {!isResolved ? (
                 <BeforeView
                   key={`${cardIndex}-before`}
                   terms={card.problem.terms}
@@ -228,7 +263,7 @@ export default function FactorizationGame() {
               )}
             </AnimatePresence>
 
-            {phase !== "done" && (
+            {!isResolved && (
               <DropZone
                 ref={dropZoneRef}
                 active={phase === "dragging" && overDropZone}
@@ -243,7 +278,7 @@ export default function FactorizationGame() {
         </>
       }
       cta={
-        phase === "done" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -270,9 +305,12 @@ export default function FactorizationGame() {
             (isLastCard
               ? "마지막 문제 완료. 마치기를 누르세요."
               : "다음 문제로 가세요.")}
+          {phase === "reveal" &&
+            "여러 번 시도했어요. 정답을 보여줄게요."}
         </span>
       }
     />
+    </>
   );
 }
 

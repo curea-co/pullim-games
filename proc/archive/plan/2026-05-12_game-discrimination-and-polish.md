@@ -1,5 +1,6 @@
 # 2026-05-12 — 게임 변별력 강화 + 시각 polish
 
+- **상태**: ✅ COMPLETE (retroactive 2026-05-13) — Phase 1 (subject badge + english-vocab-typing) PR #23 머지, Phase 2 (factorization strict + 콘텐츠) PR #27·#31 머지, Phase 3 (4 게임 변별력) 별 plan `2026-05-13_game-discrimination-phase3.md` 으로 분리·완료
 - **상태**: DRAFT (2026-05-12) — 결정점 3개 합의 필요
 - **트리거**: 사용자 피드백 — 게임 5종 변별력 부족, vocab-typing 영어 라인업 부재, 미리보기 과목 뱃지 부재
 - **메모리 룰 적용**: 학습효과 > 중독성 / PVE 지향. 변별력 강화는 retrieval 깊이 + 가설 수립 흐름 우선, 시간 압박 회피

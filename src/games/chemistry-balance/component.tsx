@@ -8,6 +8,8 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import { getCardSequence } from "./content";
 import { allElements, isBalanced, sumSide } from "./logic/parse";
 import {
@@ -20,7 +22,14 @@ import {
 } from "@/lib/core";
 
 const GAME_ID = "chemistry-balance";
-type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
+const REVEAL_THRESHOLD = 5;
+type Phase =
+  | "playing"
+  | "checking"
+  | "correct"
+  | "wrong"
+  | "reveal"
+  | "completed";
 
 const MIN_COEF = 1;
 const MAX_COEF = 9;
@@ -161,7 +170,23 @@ export default function ChemistryBalanceGame() {
         saveSrsState(GAME_ID, card!.id, updated);
         setPhase("correct");
       } else {
-        setWrongCount((w) => w + 1);
+        const nextWrong = wrongCount + 1;
+        setWrongCount(nextWrong);
+        if (nextWrong >= REVEAL_THRESHOLD) {
+          const prev = loadSrsState(GAME_ID, card!.id);
+          const updated = reviewCard(prev, "again");
+          saveSrsState(GAME_ID, card!.id, updated);
+          void logEvent({
+            gameId: GAME_ID,
+            cardId: card!.id,
+            action: "transform",
+            payload: { reveal: true, wrongCount: nextWrong },
+          });
+          setReactantCoefs(card!.problem.reactants.map((r) => r.coefficient));
+          setProductCoefs(card!.problem.products.map((p) => p.coefficient));
+          setPhase("reveal");
+          return;
+        }
         setPhase("wrong");
         setTimeout(() => setPhase("playing"), 1200);
       }
@@ -176,8 +201,12 @@ export default function ChemistryBalanceGame() {
     setCardIndex(cardIndex + 1);
   }
 
+  const isResolved = phase === "correct" || phase === "reveal";
+
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct"} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -200,6 +229,11 @@ export default function ChemistryBalanceGame() {
           {card.hint && (
             <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
           )}
+          {phase === "reveal" && (
+            <div className="mt-3">
+              <RevealBanner attemptCount={wrongCount} />
+            </div>
+          )}
 
           {/* 원자 카운터 */}
           <div className="mt-6 grid grid-cols-2 gap-3">
@@ -211,7 +245,7 @@ export default function ChemistryBalanceGame() {
               const r = liveRight[el] ?? 0;
               // 양변 일치 mint 강조는 "정답 확인" 후 correct 일 때만.
               // playing 중엔 시각 시그널 차단 → 가설 수립 + 검증 흐름. plan I4 (Phase 3.2).
-              const ok = phase === "correct" && l === r && l > 0;
+              const ok = isResolved && l === r && l > 0;
               return (
                 <li key={el} className={ok ? "text-accent-positive" : ""}>
                   {el}:{l}
@@ -249,7 +283,7 @@ export default function ChemistryBalanceGame() {
               key={`r-${i}`}
               formula={r.formula}
               value={reactantCoefs[i] ?? 1}
-              correct={phase === "correct"}
+              correct={isResolved}
               onInc={() => bumpCoef("r", i, +1)}
               onDec={() => bumpCoef("r", i, -1)}
               showPlus={i < card.problem.reactants.length - 1}
@@ -261,7 +295,7 @@ export default function ChemistryBalanceGame() {
               key={`p-${i}`}
               formula={p.formula}
               value={productCoefs[i] ?? 1}
-              correct={phase === "correct"}
+              correct={isResolved}
               onInc={() => bumpCoef("p", i, +1)}
               onDec={() => bumpCoef("p", i, -1)}
               showPlus={i < card.problem.products.length - 1}
@@ -284,7 +318,7 @@ export default function ChemistryBalanceGame() {
         </>
       }
       cta={
-        phase === "correct" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -308,9 +342,11 @@ export default function ChemistryBalanceGame() {
           {phase === "playing" && "계수를 조정해 양변 원자 수를 맞춰주세요"}
           {phase === "wrong" && "균형이 맞지 않아요. 다시 해보세요."}
           {phase === "correct" && "반응식이 균형됐어요"}
+          {phase === "reveal" && "여러 번 시도했어요. 정답 계수를 보여줄게요."}
         </span>
       }
     />
+    </>
   );
 }
 

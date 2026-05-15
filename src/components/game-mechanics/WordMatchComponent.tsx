@@ -7,6 +7,8 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import {
   loadAllSrsStates,
   loadSrsState,
@@ -16,7 +18,14 @@ import {
   selectNextCards,
 } from "@/lib/core";
 
-type Phase = "playing" | "wrong-flash" | "completed";
+type Phase =
+  | "playing"
+  | "wrong-flash"
+  | "correct-flash"
+  | "reveal"
+  | "completed";
+
+const REVEAL_THRESHOLD = 5;
 
 interface SideItem {
   pairIndex: number;
@@ -183,6 +192,8 @@ export function WordMatchComponent({
         action: "transform",
         payload: { pairIndex: leftPair, correct: true },
       });
+      setPhase("correct-flash");
+      setTimeout(() => setPhase("playing"), 500);
       if (next.size === card!.problem.pairs.length) {
         const rating =
           wrongCount === 0 ? "good" : wrongCount <= 2 ? "hard" : "again";
@@ -197,14 +208,33 @@ export function WordMatchComponent({
         });
       }
     } else {
+      const nextWrong = wrongCount + 1;
       setWrongFlash({ left: leftPair, right: rightPair });
-      setWrongCount((w) => w + 1);
+      setWrongCount(nextWrong);
       void logEvent({
         gameId,
         cardId: card!.id,
         action: "transform",
         payload: { leftPair, rightPair, correct: false },
       });
+      if (nextWrong >= REVEAL_THRESHOLD) {
+        const prev = loadSrsState(gameId, card!.id);
+        const updated = reviewCard(prev, "again");
+        saveSrsState(gameId, card!.id, updated);
+        void logEvent({
+          gameId,
+          cardId: card!.id,
+          action: "transform",
+          payload: { reveal: true, wrongCount: nextWrong },
+        });
+        setTimeout(() => {
+          setSelectedLeft(null);
+          setSelectedRight(null);
+          setWrongFlash(null);
+          setPhase("reveal");
+        }, 600);
+        return;
+      }
       setPhase("wrong-flash");
       setTimeout(() => {
         setSelectedLeft(null);
@@ -244,9 +274,12 @@ export function WordMatchComponent({
   }
 
   const allMatched = matched.size === card.problem.pairs.length;
+  const isResolved = allMatched || phase === "reveal";
 
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct-flash"} />
+      <GameShell
       variant="match"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -274,6 +307,25 @@ export function WordMatchComponent({
             {wrongCount > 0 && ` · 오답 ${wrongCount}`}
           </p>
 
+          {phase === "reveal" && (
+            <div className="mt-4 flex flex-col gap-3">
+              <RevealBanner attemptCount={wrongCount} />
+              <ul className="flex flex-col gap-2">
+                {card.problem.pairs.map((p, i) => (
+                  <li
+                    key={i}
+                    className="flex items-center justify-between gap-3 rounded-block border border-accent-positive/30 bg-accent-positive/5 px-3 py-3 text-body text-type-primary"
+                  >
+                    <span>{p.left}</span>
+                    <span className="text-type-secondary">→</span>
+                    <span>{p.right}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {phase !== "reveal" && (
           <div className="mt-6 grid flex-1 grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
           <AnimatePresence>
@@ -339,10 +391,11 @@ export function WordMatchComponent({
           </AnimatePresence>
         </div>
           </div>
+          )}
         </>
       }
       cta={
-        allMatched ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -362,10 +415,15 @@ export function WordMatchComponent({
       }
       liveRegion={
         <span className="sr-only" aria-live="polite">
-          {allMatched ? "모든 짝이 맞았어요" : "짝을 골라 매칭해주세요"}
+          {phase === "reveal"
+            ? "여러 번 시도했어요. 정답을 보여줄게요."
+            : allMatched
+              ? "모든 짝이 맞았어요"
+              : "짝을 골라 매칭해주세요"}
         </span>
       }
     />
+    </>
   );
 }
 

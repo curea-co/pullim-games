@@ -8,6 +8,8 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import { SlotRow } from "./components/SlotRow";
 import { ComponentPalette } from "./components/ComponentPalette";
 import { checkAssembly } from "./logic/checkAssembly";
@@ -23,7 +25,14 @@ import {
 } from "@/lib/core";
 
 const GAME_ID = "letter-assembly";
-type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
+const REVEAL_THRESHOLD = 5;
+type Phase =
+  | "playing"
+  | "checking"
+  | "correct"
+  | "wrong"
+  | "reveal"
+  | "completed";
 
 export default function LetterAssemblyGame() {
   const [cards, setCards] = useState(() => getCardSequence());
@@ -186,7 +195,27 @@ export default function LetterAssemblyGame() {
         saveSrsState(GAME_ID, card!.id, updated);
         setPhase("correct");
       } else {
-        setWrongCount((w) => w + 1);
+        const nextWrong = wrongCount + 1;
+        setWrongCount(nextWrong);
+        if (nextWrong >= REVEAL_THRESHOLD) {
+          const prev = loadSrsState(GAME_ID, card!.id);
+          const updated = reviewCard(prev, "again");
+          saveSrsState(GAME_ID, card!.id, updated);
+          void logEvent({
+            gameId: GAME_ID,
+            cardId: card!.id,
+            action: "transform",
+            payload: { reveal: true, wrongCount: nextWrong },
+          });
+          const correctMap: Record<string, string | null> = {};
+          card!.problem.slots.forEach((s) => {
+            correctMap[s.id] = s.correctCardId;
+          });
+          setPlacementMap(correctMap);
+          setActiveCardId(null);
+          setPhase("reveal");
+          return;
+        }
         setPhase("wrong");
         setTimeout(() => setPhase("playing"), 1200);
       }
@@ -201,8 +230,12 @@ export default function LetterAssemblyGame() {
     setCardIndex(cardIndex + 1);
   }
 
+  const isResolved = phase === "correct" || phase === "reveal";
+
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct"} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -235,6 +268,11 @@ export default function LetterAssemblyGame() {
               힌트 · {card.hint}
             </p>
           )}
+          {phase === "reveal" && (
+            <div className="mt-3">
+              <RevealBanner attemptCount={wrongCount} />
+            </div>
+          )}
 
           <motion.div
             className="mt-8 flex justify-center"
@@ -249,7 +287,7 @@ export default function LetterAssemblyGame() {
             />
           </motion.div>
 
-          {phase === "correct" && (
+          {isResolved && (
             <p
               className="mt-4 text-center text-display text-type-primary"
               aria-live="polite"
@@ -288,7 +326,7 @@ export default function LetterAssemblyGame() {
         </>
       }
       cta={
-        phase === "correct" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -317,9 +355,11 @@ export default function LetterAssemblyGame() {
             ? `${accuracy.correct}/${accuracy.total} 맞췄어요. 다시 살펴보세요.`
             : ""}
           {phase === "correct" && "한자가 완성됐어요"}
+          {phase === "reveal" && "여러 번 시도했어요. 정답 부수를 보여줄게요."}
         </span>
       }
     />
+    </>
   );
 }
 
