@@ -156,6 +156,17 @@
 - wrong 시 정확도 (`n/m`) 만 노출, 슬롯/토큰별 정/오 강조 X (학생 전체 재검토 강제).
 - distractor 카드 포함 게임 (cloze-multi, letter-assembly, image-hotspot, english-word-match) 모두 카드 자원 한정 → 단순 토글 시도 불가.
 
+### 3.1 5회 오답 시 정답 공개 (2026-05-14 추가)
+
+`proc/plan/2026-05-14_correct-feedback-and-5x-reveal.md` 결정. 변별력 정책 ("답지 노출 회피") 은 학생이 시도하는 동안 유지하되, **같은 카드 wrong 누적 5회 도달 시 자동 reveal**:
+
+- 게임별 자연 UI 로 정답을 채워줌 (drag 게임 = 정답 자동 배치 / slider = 정답 위치 / typing = 정답 텍스트 / 매칭 = 정답 페어 리스트).
+- `RevealBanner` + "다음" CTA. FSRS 는 "again" 등급으로 저장.
+- 카운터는 세션 in-memory (페이지 이탈/재시작 시 reset, FSRS lapse 와 무관).
+- QuickQuiz / Blank 메커닉은 1회 시도 후 정답 노출이라 룰 대상 외 — `CorrectBurst` 만 추가.
+
+학습 효과 우선 결정: 5회 시도 후엔 학습 차단보다 답 노출이 학생에게 더 유익함 (사용자 명시 의도).
+
 ---
 
 ## 4. fix 진행 현황 (2026-05-14)

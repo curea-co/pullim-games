@@ -7,6 +7,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import { getCardSequence } from "./content";
 import {
   loadAllSrsStates,
@@ -18,7 +20,14 @@ import {
 } from "@/lib/core";
 
 const GAME_ID = "english-order";
-type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
+const REVEAL_THRESHOLD = 5;
+type Phase =
+  | "playing"
+  | "checking"
+  | "correct"
+  | "wrong"
+  | "reveal"
+  | "completed";
 
 interface PoolWord {
   id: string;
@@ -48,6 +57,7 @@ export default function EnglishOrderGame() {
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
+  const [wrongCount, setWrongCount] = useState(0);
   const dragStartedRef = useRef(false);
 
   useEffect(() => {
@@ -99,6 +109,7 @@ export default function EnglishOrderGame() {
   useEffect(() => {
     if (!card) return;
     setSlots(Array(card.problem.english.length).fill(null));
+    setWrongCount(0);
     setPhase("playing");
     dragStartedRef.current = false;
   }, [cardIndex, card]);
@@ -174,14 +185,34 @@ export default function EnglishOrderGame() {
     saveSrsState(GAME_ID, card!.id, next);
 
     setTimeout(() => {
-      setPhase(correct ? "correct" : "wrong");
-      if (!correct) {
-        // 오답 시 1.2s 후 자동 reset
-        setTimeout(() => {
-          setSlots(Array(card!.problem.english.length).fill(null));
-          setPhase("playing");
-        }, 1200);
+      if (correct) {
+        setPhase("correct");
+        return;
       }
+      const nextWrong = wrongCount + 1;
+      setWrongCount(nextWrong);
+      if (nextWrong >= REVEAL_THRESHOLD) {
+        void logEvent({
+          gameId: GAME_ID,
+          cardId: card!.id,
+          action: "transform",
+          payload: { reveal: true, wrongCount: nextWrong },
+        });
+        const correctOrder: (string | null)[] = card!.problem.english.map(
+          (text) => {
+            const pw = poolWords.find((p) => p.text === text);
+            return pw ? pw.id : null;
+          },
+        );
+        setSlots(correctOrder);
+        setPhase("reveal");
+        return;
+      }
+      setPhase("wrong");
+      setTimeout(() => {
+        setSlots(Array(card!.problem.english.length).fill(null));
+        setPhase("playing");
+      }, 1200);
     }, 200);
   }
 
@@ -193,8 +224,12 @@ export default function EnglishOrderGame() {
     setCardIndex(cardIndex + 1);
   }
 
+  const isResolved = phase === "correct" || phase === "reveal";
+
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct"} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -217,6 +252,11 @@ export default function EnglishOrderGame() {
           {card.hint && (
             <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
           )}
+          {phase === "reveal" && (
+            <div className="mt-3">
+              <RevealBanner attemptCount={wrongCount} />
+            </div>
+          )}
 
           {/* Slots — 영어 어순 자리 */}
           <motion.div
@@ -237,7 +277,7 @@ export default function EnglishOrderGame() {
               onClick={() => removeFromSlot(slotIdx)}
               disabled={phase !== "playing" || word === null}
               className={`min-w-[3rem] rounded-block border px-3 py-2 text-body text-type-primary transition-colors ${
-                phase === "correct" && word
+                isResolved && word
                   ? "border-accent-positive bg-accent-positive/10"
                   : word
                     ? "border-type-primary bg-bg-block"
@@ -270,7 +310,7 @@ export default function EnglishOrderGame() {
         </>
       }
       cta={
-        phase === "correct" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -293,9 +333,11 @@ export default function EnglishOrderGame() {
           {phase === "playing" && "단어를 골라 어순을 맞춰주세요"}
           {phase === "wrong" && "어순이 틀렸어요. 다시 해보세요."}
           {phase === "correct" && "정답이에요"}
+          {phase === "reveal" && "여러 번 시도했어요. 정답 어순을 보여줄게요."}
         </span>
       }
     />
+    </>
   );
 }
 

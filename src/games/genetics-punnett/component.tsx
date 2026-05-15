@@ -11,6 +11,8 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import { PunnettGrid } from "./components/PunnettGrid";
 import { RatioInput } from "./components/RatioInput";
 import { checkRatio } from "./logic/checkRatio";
@@ -31,7 +33,14 @@ import {
 } from "@/lib/core";
 
 const GAME_ID = "genetics-punnett";
-type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
+const REVEAL_THRESHOLD = 5;
+type Phase =
+  | "playing"
+  | "checking"
+  | "correct"
+  | "wrong"
+  | "reveal"
+  | "completed";
 
 const MIN_RATIO = 0;
 const MAX_RATIO = 16;
@@ -144,7 +153,22 @@ export default function GeneticsPunnettGame() {
         saveSrsState(GAME_ID, card!.id, updated);
         setPhase("correct");
       } else {
-        setWrongCount((w) => w + 1);
+        const nextWrong = wrongCount + 1;
+        setWrongCount(nextWrong);
+        if (nextWrong >= REVEAL_THRESHOLD) {
+          const prev = loadSrsState(GAME_ID, card!.id);
+          const updated = reviewCard(prev, "again");
+          saveSrsState(GAME_ID, card!.id, updated);
+          void logEvent({
+            gameId: GAME_ID,
+            cardId: card!.id,
+            action: "transform",
+            payload: { reveal: true, wrongCount: nextWrong },
+          });
+          setRatio([...card!.problem.expectedRatio]);
+          setPhase("reveal");
+          return;
+        }
         setPhase("wrong");
         setTimeout(() => setPhase("playing"), 1100);
       }
@@ -159,8 +183,12 @@ export default function GeneticsPunnettGame() {
     setCardIndex(cardIndex + 1);
   }
 
+  const isResolved = phase === "correct" || phase === "reveal";
+
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct"} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -189,6 +217,11 @@ export default function GeneticsPunnettGame() {
               힌트 · {card.hint}
             </p>
           )}
+          {phase === "reveal" && (
+            <div className="mt-3">
+              <RevealBanner attemptCount={wrongCount} />
+            </div>
+          )}
 
           {/* 부모 유전자형 */}
           <div className="mt-6 flex items-center justify-center gap-3 text-display tabular text-type-primary">
@@ -213,7 +246,7 @@ export default function GeneticsPunnettGame() {
               topGametes={computed.top}
               leftGametes={computed.left}
               grid={computed.grid}
-              colored={phase === "correct"}
+              colored={isResolved}
             />
           </motion.div>
 
@@ -226,7 +259,7 @@ export default function GeneticsPunnettGame() {
                 label={label}
                 shorthand={computed.shorthand[i] ?? ""}
                 value={ratio[i] ?? 0}
-                correct={phase === "correct"}
+                correct={isResolved}
                 disabled={phase !== "playing"}
                 onInc={() => bumpRatio(i, +1)}
                 onDec={() => bumpRatio(i, -1)}
@@ -252,7 +285,7 @@ export default function GeneticsPunnettGame() {
         </>
       }
       cta={
-        phase === "correct" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -277,9 +310,11 @@ export default function GeneticsPunnettGame() {
             "자손 격자를 보고 각 표현형의 비율을 입력하세요"}
           {phase === "wrong" && "비율이 맞지 않아요. 격자를 다시 세어보세요."}
           {phase === "correct" && "표현형 비율이 맞아요"}
+          {phase === "reveal" && "여러 번 시도했어요. 정답 비율을 보여줄게요."}
         </span>
       }
     />
+    </>
   );
 }
 

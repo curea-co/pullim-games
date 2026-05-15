@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import { getCardSequence } from "./content";
 import {
   loadAllSrsStates,
@@ -19,7 +21,14 @@ import {
 } from "@/lib/core";
 
 const GAME_ID = "math-graph-shift";
-type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
+const REVEAL_THRESHOLD = 5;
+type Phase =
+  | "playing"
+  | "checking"
+  | "correct"
+  | "wrong"
+  | "reveal"
+  | "completed";
 
 const X_MIN = -5;
 const X_MAX = 5;
@@ -145,7 +154,24 @@ export default function MathGraphShiftGame() {
         saveSrsState(GAME_ID, card!.id, updated);
         setPhase("correct");
       } else {
-        setWrongCount((w) => w + 1);
+        const nextWrong = wrongCount + 1;
+        setWrongCount(nextWrong);
+        if (nextWrong >= REVEAL_THRESHOLD) {
+          const prev = loadSrsState(GAME_ID, card!.id);
+          const updated = reviewCard(prev, "again");
+          saveSrsState(GAME_ID, card!.id, updated);
+          void logEvent({
+            gameId: GAME_ID,
+            cardId: card!.id,
+            action: "transform",
+            payload: { reveal: true, wrongCount: nextWrong },
+          });
+          setA(card!.problem.targetA);
+          setH(card!.problem.targetH);
+          setK(card!.problem.targetK);
+          setPhase("reveal");
+          return;
+        }
         setPhase("wrong");
         setTimeout(() => setPhase("playing"), 1200);
       }
@@ -160,6 +186,7 @@ export default function MathGraphShiftGame() {
     setCardIndex(cardIndex + 1);
   }
 
+  const isResolved = phase === "correct" || phase === "reveal";
   const studentPath = curvePath(a, h, k);
   const targetPath = curvePath(
     card.problem.targetA,
@@ -174,7 +201,9 @@ export default function MathGraphShiftGame() {
   const currentEq = `y = ${aStr}${hStr}²${kStr}`;
 
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct"} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -198,6 +227,11 @@ export default function MathGraphShiftGame() {
           </h1>
           {card.hint && (
             <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
+          )}
+          {phase === "reveal" && (
+            <div className="mt-3">
+              <RevealBanner attemptCount={wrongCount} />
+            </div>
           )}
 
           {/* SVG 좌표평면 */}
@@ -257,9 +291,7 @@ export default function MathGraphShiftGame() {
             d={studentPath}
             fill="none"
             className={
-              phase === "correct"
-                ? "stroke-accent-positive"
-                : "stroke-type-primary"
+              isResolved ? "stroke-accent-positive" : "stroke-type-primary"
             }
             strokeWidth={2.5}
           />
@@ -309,7 +341,7 @@ export default function MathGraphShiftGame() {
         </>
       }
       cta={
-        phase === "correct" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -333,9 +365,11 @@ export default function MathGraphShiftGame() {
           {phase === "playing" && `현재 식: ${currentEq}`}
           {phase === "wrong" && "그래프가 일치하지 않아요"}
           {phase === "correct" && "정답이에요. 그래프가 일치했어요"}
+          {phase === "reveal" && "여러 번 시도했어요. 정답 그래프를 보여줄게요."}
         </span>
       }
     />
+    </>
   );
 }
 

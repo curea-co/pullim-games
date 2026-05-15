@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
 import {
   loadAllSrsStates,
   loadSrsState,
@@ -169,9 +170,12 @@ export function BlankComponent({
   });
 
   const isCorrect = picked === card.problem.correctIndex;
+  const showBurst = phase === "feedback" && isCorrect;
 
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={showBurst} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -260,6 +264,7 @@ export function BlankComponent({
         </span>
       }
     />
+    </>
   );
 }
 

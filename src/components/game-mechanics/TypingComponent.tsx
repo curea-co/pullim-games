@@ -7,6 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import {
   loadAllSrsStates,
   loadSrsState,
@@ -16,7 +18,15 @@ import {
   selectNextCards,
 } from "@/lib/core";
 
-type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
+type Phase =
+  | "playing"
+  | "checking"
+  | "correct"
+  | "wrong"
+  | "reveal"
+  | "completed";
+
+const REVEAL_THRESHOLD = 5;
 
 export interface TypingCardLike {
   id: string;
@@ -157,7 +167,22 @@ export function TypingComponent({
         saveSrsState(gameId, card!.id, updated);
         setPhase("correct");
       } else {
-        setWrongCount((w) => w + 1);
+        const nextWrong = wrongCount + 1;
+        setWrongCount(nextWrong);
+        if (nextWrong >= REVEAL_THRESHOLD) {
+          const prev = loadSrsState(gameId, card!.id);
+          const updated = reviewCard(prev, "again");
+          saveSrsState(gameId, card!.id, updated);
+          void logEvent({
+            gameId,
+            cardId: card!.id,
+            action: "transform",
+            payload: { reveal: true, wrongCount: nextWrong },
+          });
+          setInput(card!.problem.answer);
+          setPhase("reveal");
+          return;
+        }
         setPhase("wrong");
         setTimeout(() => {
           setInput("");
@@ -189,9 +214,12 @@ export function TypingComponent({
   }
 
   const firstLetter = card.problem.answer.charAt(0);
+  const isResolved = phase === "correct" || phase === "reveal";
 
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct"} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -237,9 +265,7 @@ export function TypingComponent({
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.18 }}
                 className={`text-display tabular ${
-                  phase === "correct"
-                    ? "text-accent-positive"
-                    : "text-type-primary"
+                  isResolved ? "text-accent-positive" : "text-type-primary"
                 }`}
               >
                 {ch}
@@ -251,7 +277,11 @@ export function TypingComponent({
           )}
         </div>
 
-        {phase === "correct" && card.problem.pronunciation && (
+        {phase === "reveal" && (
+          <RevealBanner attemptCount={wrongCount} />
+        )}
+
+        {isResolved && card.problem.pronunciation && (
           <motion.p
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
@@ -300,7 +330,7 @@ export function TypingComponent({
         </>
       }
       cta={
-        phase === "correct" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -324,9 +354,12 @@ export function TypingComponent({
           {phase === "playing" && "입력해주세요"}
           {phase === "wrong" && "정답이 아니에요. 다시 해보세요."}
           {phase === "correct" && "정답이에요"}
+          {phase === "reveal" &&
+            `여러 번 시도했어요. 정답은 ${card.problem.answer}.`}
         </span>
       }
     />
+    </>
   );
 }
 

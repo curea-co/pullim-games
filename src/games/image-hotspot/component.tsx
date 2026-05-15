@@ -7,6 +7,8 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
+import { CorrectBurst } from "@/components/ui/CorrectBurst";
+import { RevealBanner } from "@/components/ui/RevealBanner";
 import { HotspotCanvas } from "./components/HotspotCanvas";
 import { LabelPalette } from "./components/LabelPalette";
 import { checkHotspot } from "./logic/checkHotspot";
@@ -22,7 +24,14 @@ import {
 } from "@/lib/core";
 
 const GAME_ID = "image-hotspot";
-type Phase = "playing" | "checking" | "correct" | "wrong" | "completed";
+const REVEAL_THRESHOLD = 5;
+type Phase =
+  | "playing"
+  | "checking"
+  | "correct"
+  | "wrong"
+  | "reveal"
+  | "completed";
 
 export default function ImageHotspotGame() {
   const [cards, setCards] = useState(() => getCardSequence());
@@ -181,7 +190,27 @@ export default function ImageHotspotGame() {
         saveSrsState(GAME_ID, card!.id, updated);
         setPhase("correct");
       } else {
-        setWrongCount((w) => w + 1);
+        const nextWrong = wrongCount + 1;
+        setWrongCount(nextWrong);
+        if (nextWrong >= REVEAL_THRESHOLD) {
+          const prev = loadSrsState(GAME_ID, card!.id);
+          const updated = reviewCard(prev, "again");
+          saveSrsState(GAME_ID, card!.id, updated);
+          void logEvent({
+            gameId: GAME_ID,
+            cardId: card!.id,
+            action: "transform",
+            payload: { reveal: true, wrongCount: nextWrong },
+          });
+          const correctMap: Record<string, string | null> = {};
+          for (const r of card!.problem.regions) {
+            correctMap[r.id] = r.correctCardId;
+          }
+          setPlacementMap(correctMap);
+          setActiveCardId(null);
+          setPhase("reveal");
+          return;
+        }
         setPhase("wrong");
         setTimeout(() => setPhase("playing"), 1200);
       }
@@ -196,8 +225,12 @@ export default function ImageHotspotGame() {
     setCardIndex(cardIndex + 1);
   }
 
+  const isResolved = phase === "correct" || phase === "reveal";
+
   return (
-    <GameShell
+    <>
+      <CorrectBurst show={phase === "correct"} />
+      <GameShell
       variant="split"
       header={
         <div className="flex items-center justify-between text-label tabular text-type-secondary">
@@ -225,6 +258,11 @@ export default function ImageHotspotGame() {
             <p className="mt-1 text-helper text-type-secondary">
               힌트 · {card.hint}
             </p>
+          )}
+          {phase === "reveal" && (
+            <div className="mt-3">
+              <RevealBanner attemptCount={wrongCount} />
+            </div>
           )}
 
           <motion.div
@@ -270,7 +308,7 @@ export default function ImageHotspotGame() {
         </>
       }
       cta={
-        phase === "correct" ? (
+        isResolved ? (
           <button
             type="button"
             onClick={handleNext}
@@ -299,9 +337,11 @@ export default function ImageHotspotGame() {
             ? `${accuracy.correct}/${accuracy.total} 맞췄어요. 다시 살펴보세요.`
             : ""}
           {phase === "correct" && "모든 영역이 정답이에요"}
+          {phase === "reveal" && "여러 번 시도했어요. 정답 라벨을 보여줄게요."}
         </span>
       }
     />
+    </>
   );
 }
 
