@@ -48,8 +48,9 @@ audit v1 §3 "21/21 변별력 정책 준수" 결론에서 BUG-2 factorization �
 ## 5. 다음 트랙
 
 - ✅ **factorization 변별력 강화** — `proc/plan/2026-05-14_factorization-discrimination.md` Phase 1~5 모두 머지 완료 (drag-to-chip 메커닉, distractor 자동 생성, FSRS 등급 분기, voluntary/auto reveal).
+- ✅ **단일 백본 (FSRS + 스트릭)** — `proc/plan/2026-05-15_fsrs-streak-backbone.md` Phase 1~6 모두 머지 완료. 메모리 룰 *단일 백본 + 다중 게임 모드* 마지막 한 조각 완결. 17 게임 진입점 `saveSrsAndRecord` 일괄 마이그레이션.
 - **CorrectBurst polish (V0.1)** — 폭죽/사운드는 보류, 시각 톤 dogfooding 후 재검토.
-- **production 배포** — Vercel webhook 우회 (`vercel --prod` 수동). PR #45/#46/#47/#48/#49/(Phase 2) 머지분 사용자 수동 배포 대기.
+- **production 배포** — Vercel webhook 우회 (`vercel --prod` 수동). 오늘 머지분 일괄 배포 대기.
 
 ## 6. 메트릭
 
