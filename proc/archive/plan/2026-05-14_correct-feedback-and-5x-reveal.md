@@ -54,6 +54,8 @@
 ### E. 자가검증
 - [x] `bun run typecheck` PASS
 - [x] `bun run test` — 149/149 PASS (회귀 0). UI/hook 단위 테스트는 본 레포 컨벤션 (vitest coverage = `lib/core/**` + `games/*/logic/**` 만) 에 맞춰 생략. CorrectBurst/RevealBanner/useAttemptCounter 는 UI 영역.
-- [ ] e2e 1건 신규 — typing 5회 wrong → reveal 시나리오 (별도 PR 권장 — 본 PR 범위가 16개 진입점 통합으로 충분히 큼)
-- [ ] manual: 4개 메커니즘 + 12개 개별 게임 정답 시 CorrectBurst 노출 확인 (사용자가 dogfooding 시)
-- [ ] manual: typing 게임에서 5회 오답 → reveal 동작 확인 (사용자가 dogfooding 시)
+- [x] e2e 1건 신규 — `e2e/correct-feedback-reveal.spec.ts` (PR #47 동봉, vocab-typing 5회 wrong → RevealBanner + 정답 자동 입력 + 다음 활성) PASS
+- [ ] manual: 4개 메커니즘 + 12개 개별 게임 정답 시 CorrectBurst 노출 확인 (사용자 `vercel --prod` 수동 배포 후 dogfooding 단계 — daily_outcome 2026-05-15 참조)
+- [ ] manual: typing 게임에서 5회 오답 → reveal 동작 확인 (사용자 dogfooding 단계 — daily_outcome 2026-05-15 참조)
+
+→ 코드/CI 자가검증 완료. manual dogfooding 2건은 사용자 production 배포 후 시점으로 위임. 본 plan 은 ACCEPTED + archive 이관.

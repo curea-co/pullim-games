@@ -1,5 +1,5 @@
 // 다항식 문자열 1개에서 FactorizationCard 자동 도출.
-// 콘텐츠 큐레이터는 polynomial 만 넣으면 UI Term[] + factoredForm 모두 자동 계산.
+// 콘텐츠 큐레이터는 polynomial 만 넣으면 UI Term[] + factoredForm + distractors 모두 자동 계산.
 
 import {
   extractCommonFactor,
@@ -16,6 +16,8 @@ interface BuildCardOptions {
   difficultySeed: 1 | 2 | 3 | 4 | 5;
   hint: string;
   polynomial: string;
+  /** 함정 chip 후보 override (생략 시 자동 생성). plan §1 distractors. */
+  distractors?: [string, string];
 }
 
 const SUPERSCRIPT: Record<string, string> = {
@@ -105,6 +107,108 @@ function buildTermParts(
 }
 
 /**
+ * 정답 공통인수 + 다항식 구조 기반으로 함정 chip 후보 2 개 자동 생성.
+ * plan 2026-05-14_factorization-discrimination §1 distractors 룰:
+ *   ① 정답의 약수 (계수/지수 한 단계 약화)
+ *   ② 다항식에 등장하는 term 의 일부
+ *   ③ 정답의 배수
+ * 정답과 다르고 서로 다른 2 개를 우선순위 순으로 선택.
+ */
+export function generateDistractors(
+  factor: PolynomialTerm,
+  poly: Polynomial,
+): [string, string] {
+  const factorStr = termText(factor);
+  const candidates: string[] = [];
+
+  // ① 약화: 계수 가장 큰 진약수
+  if (factor.coefficient > 1) {
+    for (let d = Math.floor(factor.coefficient / 2); d >= 2; d -= 1) {
+      if (factor.coefficient % d === 0) {
+        candidates.push(
+          termText({
+            coefficient: d,
+            variable: factor.variable,
+            exponent: factor.exponent,
+          }),
+        );
+        break;
+      }
+    }
+  }
+  // ① 약화: 변수만 (계수=1)
+  if (factor.variable && factor.coefficient > 1) {
+    candidates.push(
+      termText({
+        coefficient: 1,
+        variable: factor.variable,
+        exponent: factor.exponent,
+      }),
+    );
+  }
+  // ① 약화: 계수만 (변수 제거)
+  if (factor.variable && factor.coefficient !== 0) {
+    candidates.push(
+      termText({ coefficient: factor.coefficient, variable: "", exponent: 0 }),
+    );
+  }
+  // ① 약화: 지수 -1
+  if (factor.exponent > 1) {
+    candidates.push(
+      termText({
+        coefficient: factor.coefficient,
+        variable: factor.variable,
+        exponent: factor.exponent - 1,
+      }),
+    );
+  }
+
+  // ② 다항식 term 일부 (각 term 전체)
+  for (const t of poly) {
+    candidates.push(termText({ ...t, coefficient: Math.abs(t.coefficient) }));
+  }
+
+  // ③ 배수: 계수 2배
+  if (factor.coefficient !== 0) {
+    candidates.push(
+      termText({
+        coefficient: factor.coefficient * 2,
+        variable: factor.variable,
+        exponent: factor.exponent,
+      }),
+    );
+  }
+  // ③ 배수: 지수 +1
+  if (factor.variable) {
+    candidates.push(
+      termText({
+        coefficient: factor.coefficient,
+        variable: factor.variable,
+        exponent: factor.exponent + 1,
+      }),
+    );
+  }
+
+  // 정답 제거, 중복 제거
+  const filtered = candidates.filter((c) => c !== factorStr && c !== "1");
+  const unique = Array.from(new Set(filtered));
+
+  // 부족 시 fallback
+  if (unique.length < 2) {
+    unique.push(
+      termText({
+        coefficient: factor.coefficient + 1,
+        variable: factor.variable,
+        exponent: factor.exponent,
+      }),
+    );
+  }
+  const deduped = Array.from(new Set(unique.filter((c) => c !== factorStr)));
+
+  return [deduped[0]!, deduped[1]!];
+}
+
+/**
  * 다항식 문자열 1개로 FactorizationCard 자동 도출.
  *
  * @example
@@ -115,7 +219,7 @@ function buildTermParts(
  *     hint: "공통인수를 찾아 끌어내세요",
  *     polynomial: "2x + 4",
  *   });
- *   // → { polynomial: "2x + 4", terms: [...], commonFactor: "2", factoredForm: "2(x + 2)" }
+ *   // → { polynomial: "2x + 4", terms: [...], commonFactor: "2", factoredForm: "2(x + 2)", distractors: ["x", "4"] }
  */
 export function buildCard(opts: BuildCardOptions): FactorizationCard {
   const poly = parsePolynomial(opts.polynomial);
@@ -133,6 +237,8 @@ export function buildCard(opts: BuildCardOptions): FactorizationCard {
 
   const commonFactor = termText(result.factor);
   const factoredForm = `${commonFactor}(${polyText(result.remainders)})`;
+  const distractors =
+    opts.distractors ?? generateDistractors(result.factor, poly);
 
   return {
     id: opts.id,
@@ -145,6 +251,7 @@ export function buildCard(opts: BuildCardOptions): FactorizationCard {
       terms: uiTerms,
       commonFactor,
       factoredForm,
+      distractors,
     },
   };
 }

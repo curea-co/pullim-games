@@ -27,6 +27,9 @@ export const FactorizationProblemSchema = z.object({
 
   /** 인수분해 완료 형태 (백업 표시·로깅용). 예: "2(x + 2)". */
   factoredForm: z.string().min(1),
+
+  /** 함정 chip 후보 2개 (drag-to-chip 메커닉, plan 2026-05-14_factorization-discrimination). buildCard 자동 생성, 큐레이터 override 가능. Phase 1 진입 시 optional, Phase 2 component 통합 시 required. */
+  distractors: z.array(z.string()).length(2).optional(),
 });
 
 export const FactorizationCardSchema = CardBaseSchema.extend({
