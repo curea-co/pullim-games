@@ -58,6 +58,9 @@ export default function HomePage() {
         {stats && stats.gamesPlayed > 0 && (
           <p className="mt-1.5 text-label text-type-secondary tabular">
             {stats.gamesPlayed}개 게임을 만났어요
+            {stats.streak.current >= 2 && (
+              <span> · {stats.streak.current}일 연속</span>
+            )}
           </p>
         )}
       </header>

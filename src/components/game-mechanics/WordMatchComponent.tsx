@@ -14,7 +14,7 @@ import {
   loadSrsState,
   logEvent,
   reviewCard,
-  saveSrsState,
+  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -199,7 +199,7 @@ export function WordMatchComponent({
           wrongCount === 0 ? "good" : wrongCount <= 2 ? "hard" : "again";
         const prev = loadSrsState(gameId, card!.id);
         const updated = reviewCard(prev, rating);
-        saveSrsState(gameId, card!.id, updated);
+        saveSrsAndRecord(gameId, card!.id, updated);
         void logEvent({
           gameId,
           cardId: card!.id,
@@ -220,7 +220,7 @@ export function WordMatchComponent({
       if (nextWrong >= REVEAL_THRESHOLD) {
         const prev = loadSrsState(gameId, card!.id);
         const updated = reviewCard(prev, "again");
-        saveSrsState(gameId, card!.id, updated);
+        saveSrsAndRecord(gameId, card!.id, updated);
         void logEvent({
           gameId,
           cardId: card!.id,

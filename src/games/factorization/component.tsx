@@ -38,7 +38,7 @@ import {
   loadSrsState,
   logEvent,
   reviewCard,
-  saveSrsState,
+  saveSrsAndRecord,
   selectNextCards,
   type CardSrsState,
 } from "@/lib/core";
@@ -224,7 +224,7 @@ export default function FactorizationGame() {
         const prev: CardSrsState = loadSrsState(GAME_ID, card.id);
         const rating = attempt === 1 ? "good" : attempt === 2 ? "hard" : "again";
         const next = reviewCard(prev, rating);
-        saveSrsState(GAME_ID, card.id, next);
+        saveSrsAndRecord(GAME_ID, card.id, next);
         void logEvent({
           gameId: GAME_ID,
           cardId: card.id,
@@ -256,7 +256,7 @@ export default function FactorizationGame() {
   function triggerReveal(attemptCount: number, source: "auto" | "voluntary") {
     const prev: CardSrsState = loadSrsState(GAME_ID, card!.id);
     const updated = reviewCard(prev, "again");
-    saveSrsState(GAME_ID, card!.id, updated);
+    saveSrsAndRecord(GAME_ID, card!.id, updated);
     void logEvent({
       gameId: GAME_ID,
       cardId: card!.id,

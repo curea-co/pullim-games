@@ -19,7 +19,7 @@ import {
   loadSrsState,
   logEvent,
   reviewCard,
-  saveSrsState,
+  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -187,7 +187,7 @@ export default function ImageHotspotGame() {
           wrongCount === 0 ? "good" : wrongCount <= 1 ? "hard" : "again";
         const prev = loadSrsState(GAME_ID, card!.id);
         const updated = reviewCard(prev, rating);
-        saveSrsState(GAME_ID, card!.id, updated);
+        saveSrsAndRecord(GAME_ID, card!.id, updated);
         setPhase("correct");
       } else {
         const nextWrong = wrongCount + 1;
@@ -195,7 +195,7 @@ export default function ImageHotspotGame() {
         if (nextWrong >= REVEAL_THRESHOLD) {
           const prev = loadSrsState(GAME_ID, card!.id);
           const updated = reviewCard(prev, "again");
-          saveSrsState(GAME_ID, card!.id, updated);
+          saveSrsAndRecord(GAME_ID, card!.id, updated);
           void logEvent({
             gameId: GAME_ID,
             cardId: card!.id,
