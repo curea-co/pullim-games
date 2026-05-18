@@ -13,10 +13,13 @@ import type { Card as FsrsCard } from "ts-fsrs";
 
 const KEY_PREFIX = "pullim-games:srs";
 
+// ts-fsrs 5.x 부터 Card 에 learning_steps 필드 추가됨.
+// v4 시점 저장된 localStorage 데이터에는 이 필드가 없으므로 deserialize 시 0 fallback.
 interface SerializedState {
-  fsrsCard: Omit<FsrsCard, "due" | "last_review"> & {
+  fsrsCard: Omit<FsrsCard, "due" | "last_review" | "learning_steps"> & {
     due: string; // ISO
     last_review: string | null;
+    learning_steps?: number; // v4 데이터엔 누락
   };
   reviewCount: number;
   lastReviewAt: string | null; // ISO
@@ -46,6 +49,7 @@ function deserialize(raw: SerializedState): CardSrsState {
       last_review: raw.fsrsCard.last_review
         ? new Date(raw.fsrsCard.last_review)
         : (undefined as unknown as Date),
+      learning_steps: raw.fsrsCard.learning_steps ?? 0,
     } as FsrsCard,
     reviewCount: raw.reviewCount,
     lastReviewAt: raw.lastReviewAt ? new Date(raw.lastReviewAt) : null,

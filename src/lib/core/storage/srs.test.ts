@@ -77,6 +77,35 @@ describe("SRS storage", () => {
     const s = loadSrsState("factorization", "card-001");
     expect(s.reviewCount).toBe(0);
   });
+
+  it("v4 형식 (learning_steps 누락) → learning_steps=0 fallback 후 reviewCard 정상", () => {
+    // v4.7.1 시점에 저장됐을 형식: learning_steps 필드 부재.
+    const v4Serialized = {
+      fsrsCard: {
+        due: new Date("2026-05-08T00:00:00Z").toISOString(),
+        stability: 0,
+        difficulty: 0,
+        elapsed_days: 0,
+        scheduled_days: 0,
+        reps: 0,
+        lapses: 0,
+        state: 0,
+        last_review: null,
+      },
+      reviewCount: 0,
+      lastReviewAt: null,
+    };
+    store.set(
+      "pullim-games:srs:factorization:card-001",
+      JSON.stringify(v4Serialized),
+    );
+    const s = loadSrsState("factorization", "card-001");
+    expect(s.fsrsCard.learning_steps).toBe(0);
+    // ts-fsrs 5.x reviewCard 호출 시 learning_steps 누락 → undefined 비교 오류 방지 확인.
+    const next = reviewCard(s, "good");
+    expect(next.reviewCount).toBe(1);
+    expect(typeof next.fsrsCard.learning_steps).toBe("number");
+  });
 });
 
 describe("SRS storage — SSR (window 없음)", () => {
