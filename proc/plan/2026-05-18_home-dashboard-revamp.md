@@ -159,14 +159,15 @@
 - [x] e2e home-dashboard-layout.spec.ts 신규 3건 + streak.spec.ts 업데이트 (status row 위치 변경 반영).
 - [x] e2e 163 → 166 (+3) 회귀 0.
 
-### Phase 2 — Activity 히트맵 (PR #N2)
-- [ ] `src/lib/core/storage/activity-log.ts` 신규 — `recordActivity(gameId, now)` + `loadActivity(gameId, days)` + 14일 retention.
-- [ ] `saveSrsAndRecord` wrapper 안에서 activity-log 동거 갱신.
-- [ ] `src/components/dashboard/ActivityHeatmap.tsx` 신규 — SVG 14일 × N 게임 셀. accent-positive 단조 색상.
-- [ ] 히트맵 hover/tap 툴팁 (모바일은 tap toggle).
-- [ ] 홈 dashboard grid 의 `col-span-7` (와이드) / `col-span-2` (태블릿) / 1열 (모바일) 슬롯에 배치.
-- [ ] vitest — activity-log 8건 (round-trip, 14일 cutoff, multi-game 등) + ActivityHeatmap render 1건.
-- [ ] e2e — 정답 1회 후 히트맵 셀 변화 확인.
+### Phase 2 — Activity 히트맵 ✅
+- [x] `src/lib/core/storage/activity-log.ts` 신규 — `recordGameActivity(gameId, now)` (streak.recordActivity 와 충돌 회피 prefix) + `loadActivity(gameId, days)` + `loadActivityForGames(gameIds, days)` + 14일 retention prune.
+- [x] `saveSrsAndRecord` wrapper 안에 activity-log 동거 갱신 — 정답·오답 모두 `recordGameActivity` 호출.
+- [x] `src/components/dashboard/ActivityHeatmap.tsx` 신규 — SVG 14일 × N 게임 셀. accent-positive 단조 색상 (5 intensity bucket).
+- [x] 히트맵 hover/tap 툴팁 (게임명·날짜·count).
+- [x] 홈 dashboard grid 의 `col-span-12` 와이드 슬롯에 배치 — 게임별 성과 그리드 위에 위치.
+- [x] vitest 신규 11건 (toDateBucket·빈 storage·1회·누적·다른 날짜·retention prune·multi-game·loadForGames·손상 JSON·clear·SSR).
+- [x] e2e 2건 신규 (정답 후 히트맵 노출 + 미플레이 미노출).
+- [x] e2e 166 → 168 (+2) 회귀 0.
 
 ### Phase 3 — GameSparkline + 게임별 카드 컴팩트화 (PR #N3)
 - [ ] `src/components/dashboard/GameSparkline.tsx` 신규 — 7일 attempts SVG mini chart (path `d` 생성).

@@ -14,6 +14,7 @@ import { UntouchedGamesGrid } from "@/components/dashboard/UntouchedGamesGrid";
 import { EmptyDashboard } from "@/components/dashboard/EmptyDashboard";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { DashboardStatusRow } from "@/components/dashboard/DashboardStatusRow";
+import { ActivityHeatmap } from "@/components/dashboard/ActivityHeatmap";
 import { RecommendationCard } from "@/components/RecommendationCard";
 
 function greeting(now: Date): string {
@@ -128,6 +129,13 @@ function Dashboard({ stats }: { stats: DashboardStats }) {
           }
         />
       </section>
+
+      {/* 활동 히트맵 — 전체 폭. 게임별 × 14일. */}
+      {playedStats.length > 0 && (
+        <div className="md:col-span-6 lg:col-span-12">
+          <ActivityHeatmap playedStats={playedStats} />
+        </div>
+      )}
 
       {/* 게임별 성과 — 전체 폭, 와이드에서 3열 그리드 */}
       <section
