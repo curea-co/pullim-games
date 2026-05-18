@@ -13,6 +13,7 @@ import { GameStatCard } from "@/components/dashboard/GameStatCard";
 import { UntouchedGamesGrid } from "@/components/dashboard/UntouchedGamesGrid";
 import { EmptyDashboard } from "@/components/dashboard/EmptyDashboard";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
+import { DashboardStatusRow } from "@/components/dashboard/DashboardStatusRow";
 import { RecommendationCard } from "@/components/RecommendationCard";
 
 function greeting(now: Date): string {
@@ -47,7 +48,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <main className="mx-auto flex w-full max-w-[720px] flex-col gap-6 px-4 py-6 md:px-6 md:py-8">
+    <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-6 md:px-6 md:py-8 lg:px-8">
       <header>
         <p className="text-xs font-bold uppercase tracking-wider text-type-secondary">
           홈
@@ -58,9 +59,6 @@ export default function HomePage() {
         {stats && stats.gamesPlayed > 0 && (
           <p className="mt-1.5 text-label text-type-secondary tabular">
             {stats.gamesPlayed}개 게임을 만났어요
-            {stats.streak.current >= 2 && (
-              <span> · {stats.streak.current}일 연속</span>
-            )}
           </p>
         )}
       </header>
@@ -85,9 +83,30 @@ function Dashboard({ stats }: { stats: DashboardStats }) {
   const untouched = stats.perGame.filter((p) => p.cardsTouched === 0);
 
   return (
-    <>
-      {/* KPI 2-card — 성공·실패 절댓값 */}
-      <section aria-label="핵심 지표" className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:gap-5 lg:grid-cols-12">
+      {/* 오늘의 추천 — 좌상 (모바일 1열, 태블릿 col-span-6, 와이드 col-span-4) */}
+      <section
+        aria-label="오늘의 추천"
+        className="md:col-span-6 lg:col-span-4"
+      >
+        <Suspense fallback={null}>
+          <RecommendationCard />
+        </Suspense>
+      </section>
+
+      {/* status row — 와이드에서는 추천 옆 col-span-8 (3 chip 그리드 안에) */}
+      <section
+        aria-label="학습 상태"
+        className="md:col-span-6 lg:col-span-8"
+      >
+        <DashboardStatusRow stats={stats} />
+      </section>
+
+      {/* KPI 2-card — 성공·실패 절댓값 (와이드에서는 status 아래 col-span-8) */}
+      <section
+        aria-label="핵심 지표"
+        className="grid grid-cols-2 gap-3 md:col-span-6 lg:col-start-5 lg:col-end-13"
+      >
         <StatCard
           icon={CheckCircle2}
           label="성공"
@@ -110,8 +129,11 @@ function Dashboard({ stats }: { stats: DashboardStats }) {
         />
       </section>
 
-      {/* 게임별 성과 */}
-      <section aria-label="게임별 성과" className="flex flex-col gap-3">
+      {/* 게임별 성과 — 전체 폭, 와이드에서 3열 그리드 */}
+      <section
+        aria-label="게임별 성과"
+        className="flex flex-col gap-3 md:col-span-6 lg:col-span-12"
+      >
         <header>
           <h2 className="text-label font-bold text-type-primary">
             게임별 성과
@@ -120,7 +142,7 @@ function Dashboard({ stats }: { stats: DashboardStats }) {
             {playedStats.length}개 게임을 풀어봤어요
           </p>
         </header>
-        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {playedStats.map((p) => (
             <li key={p.gameId}>
               <GameStatCard stat={p} />
@@ -129,18 +151,15 @@ function Dashboard({ stats }: { stats: DashboardStats }) {
         </ul>
       </section>
 
-      {/* 미진행 게임 그리드 */}
-      <UntouchedGamesGrid games={untouched} />
+      {/* 미진행 게임 그리드 — 전체 폭 */}
+      <div className="md:col-span-6 lg:col-span-12">
+        <UntouchedGamesGrid games={untouched} />
+      </div>
 
-      {/* 오늘의 추천 — 화면 하단 */}
-      <Suspense fallback={null}>
-        <RecommendationCard />
-      </Suspense>
-
-      {/* 외재 보상 회피 안내 — 작게 */}
-      <p className="text-helper text-type-secondary">
+      {/* 외재 보상 회피 안내 — 작게, 전체 폭 */}
+      <p className="text-helper text-type-secondary md:col-span-6 lg:col-span-12">
         풀림 게임즈는 점수·랭크·뱃지 없이 진행 자체를 보여드려요.
       </p>
-    </>
+    </div>
   );
 }

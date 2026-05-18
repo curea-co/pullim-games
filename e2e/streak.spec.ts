@@ -65,5 +65,8 @@ test("홈 dashboard — streak.current >= 2 일 시 'N일 연속' 노출", async
   });
 
   await page.goto("/");
-  await expect(page.getByText(/5일 연속/)).toBeVisible();
+  // 홈 대시보드 §status row — "연속 학습" 칩에 "5일" 노출 (current >= 2).
+  const status = page.getByRole("region", { name: "학습 상태" });
+  await expect(status.getByText("연속 학습")).toBeVisible();
+  await expect(status.getByText("5일")).toBeVisible();
 });
