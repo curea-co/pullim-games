@@ -1,6 +1,6 @@
 # 2026-05-18 — 홈 대시보드 개편 (landscape + 그래픽 성과)
 
-- **상태**: ACCEPTED (2026-05-18) — §1 합의 완료. D1~D5 모두 A 채택. 오늘 진행 범위 = Phase 1~2 (레이아웃 + 히트맵). Phase 3~4 별 트랙.
+- **상태**: COMPLETE (2026-05-18) — Phase 1~4 모두 머지. PR #59 Phase 1 / #60 Phase 2 / #61 fix(행렬 정렬+히트맵 단순화) / #62 Phase 3 / #63 Phase 4.
 - **트리거**: 사용자 피드백 — "홈이 대시보드 성격 떨어짐. 게임 성과는 카드가 아닌 다른 그래픽. 너비가 세로로 좁음, landscape 반응형 재설계."
 - **메모리 룰**: 하이퍼캐주얼 유지 (memory: feedback_scale_hypercasual), 학습효과 > 중독성 (memory: feedback_design_priorities). 그래픽은 정보 전달 우선, 게이미피케이션 보상 X.
 - **연관 plan**: `proc/archive/plan/2026-05-08_home-dashboard-redesign.md` (현 홈 설계의 시작점).
@@ -169,17 +169,20 @@
 - [x] e2e 2건 신규 (정답 후 히트맵 노출 + 미플레이 미노출).
 - [x] e2e 166 → 168 (+2) 회귀 0.
 
-### Phase 3 — GameSparkline + 게임별 카드 컴팩트화 (PR #N3)
-- [ ] `src/components/dashboard/GameSparkline.tsx` 신규 — 7일 attempts SVG mini chart (path `d` 생성).
-- [ ] `GameStatCard` 진행률 바 → sparkline 대체. 카드 height ↓ — 3열 그리드 호환.
-- [ ] 와이드에서 게임별 성과 그리드 `lg:grid-cols-3` (또는 4 — UI 검증 후 결정).
-- [ ] vitest — GameSparkline render·빈 데이터 fallback 2건.
+### Phase 3 — GameSparkline + 게임별 카드 컴팩트화 ✅
+- [x] `src/components/dashboard/GameSparkline.tsx` 신규 — 7일 attempts SVG line+area chart.
+- [x] `src/components/dashboard/sparkline-paths.ts` — `buildPaths` 순수 함수 분리 (JSX 의존 X, 테스트 용이).
+- [x] `GameStatCard` 진행률 바 → sparkline 대체. `attempts >= 10` 시 active, 미만 muted.
+- [x] 와이드 게임별 성과 그리드 `lg:grid-cols-3` (Phase 1에서 이미 적용).
+- [x] vitest 신규 5건 (sparkline-paths: 빈/상승세/단일/area Z 등). 196 → 201.
+- [x] 사용자 검수 캡처 — 모바일·와이드 sparkline 추세(상승/하락/간헐) 한눈에.
 
-### Phase 4 — 추천 영역 강화 (PR #N4)
-- [ ] `RecommendationCard` 좌상 큰 카드 톤 (현 디자인보다 강한 hero) + due-soon 수·streak 함께 표시.
-- [ ] CTA "지금 풀기" 큰 버튼.
-- [ ] 추천 카드 없을 때 (모든 게임 due 아님) — "오늘은 휴식해도 좋아요" placeholder.
-- [ ] e2e — `/` 진입 시 추천 카드가 첫 화면 above the fold.
+### Phase 4 — 추천 영역 강화 ✅
+- [x] `RecommendationCard` hero 톤 강화 — chip + 큰 아이콘 + tagline + CTA 버튼.
+- [x] 추천 이유 우상 컨텍스트 chip (둥근 accent-positive bg).
+- [x] CTA "지금 풀기" 큰 버튼 — hover 시 화살표 translate-x-1.
+- [x] 카드 border-accent-positive/30 + hover 강조.
+- [x] tagline 별도 노출 (line-clamp-2). 시각 우선순위 1번 확보.
 
 ### Phase 5 — 검증 + audit 갱신
 - [ ] typecheck/lint PASS.
