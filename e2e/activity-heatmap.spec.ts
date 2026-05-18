@@ -22,7 +22,8 @@ test("정답 1회 후 → 홈에 활동 히트맵 노출 + 셀 1개 채워짐", 
   const heatmap = page.getByRole("region", { name: "최근 활동 히트맵" });
   await expect(heatmap).toBeVisible();
   await expect(heatmap.getByText("최근 활동")).toBeVisible();
-  await expect(heatmap.getByText(/최근 \d+일/)).toBeVisible();
+  // footer 합산 — "14일 중 N일 · 총 N장"
+  await expect(heatmap.getByText(/일 중 \d+일 · 총 \d+장/)).toBeVisible();
 
   // localStorage 확인 — activity-log 키 존재 + 오늘 bucket count >= 1
   const activity = await page.evaluate(() => {
