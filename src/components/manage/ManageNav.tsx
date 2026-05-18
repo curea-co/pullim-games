@@ -1,6 +1,6 @@
 "use client";
 
-// 관리 페이지 sub-route 탭 — 4 페이지 가로 탭.
+// 관리 페이지 sub-route 탭 — 6 페이지 가로 탭.
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -12,6 +12,7 @@ const TABS = [
   { href: "/manage/curriculum", label: "교육과정" },
   { href: "/manage/content", label: "콘텐츠" },
   { href: "/manage/custom-games", label: "내 게임" },
+  { href: "/manage/billing", label: "결제" },
 ];
 
 export function ManageNav() {
