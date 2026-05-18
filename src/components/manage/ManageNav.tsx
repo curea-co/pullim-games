@@ -6,13 +6,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 
+// label = 데스크톱 (긴 라벨), shortLabel = 모바일 (sm:hidden 으로 분기)
 const TABS = [
-  { href: "/manage", label: "홈" },
-  { href: "/manage/subjects", label: "과목" },
-  { href: "/manage/curriculum", label: "교육과정" },
-  { href: "/manage/content", label: "콘텐츠" },
-  { href: "/manage/custom-games", label: "내 게임" },
-  { href: "/manage/billing", label: "결제" },
+  { href: "/manage", label: "홈", shortLabel: "홈" },
+  { href: "/manage/subjects", label: "과목", shortLabel: "과목" },
+  { href: "/manage/curriculum", label: "교육과정", shortLabel: "교과" },
+  { href: "/manage/content", label: "콘텐츠", shortLabel: "콘텐츠" },
+  { href: "/manage/custom-games", label: "내 게임", shortLabel: "내것" },
+  { href: "/manage/billing", label: "결제", shortLabel: "결제" },
 ];
 
 export function ManageNav() {
@@ -21,7 +22,7 @@ export function ManageNav() {
   return (
     <nav
       aria-label="관리 메뉴"
-      className="flex gap-1 overflow-x-auto border-b border-border-hairline pb-px"
+      className="flex gap-0.5 overflow-x-auto border-b border-border-hairline pb-px sm:gap-1"
     >
       {TABS.map((tab) => {
         const isActive =
@@ -33,13 +34,14 @@ export function ManageNav() {
             href={tab.href}
             aria-current={isActive ? "page" : undefined}
             className={cn(
-              "shrink-0 rounded-t-button px-3 py-2 text-helper transition-colors",
+              "shrink-0 rounded-t-button px-2 py-2 text-helper transition-colors sm:px-3",
               isActive
                 ? "border-b-2 border-accent-positive font-bold text-type-primary"
                 : "text-type-secondary hover:text-type-primary",
             )}
           >
-            {tab.label}
+            <span className="sm:hidden">{tab.shortLabel}</span>
+            <span className="hidden sm:inline">{tab.label}</span>
           </Link>
         );
       })}
