@@ -151,12 +151,13 @@
 
 ## 3. 작업 항목
 
-### Phase 1 — 레이아웃 컨테이너 + grid 슬롯 (PR #N1)
-- [ ] `src/app/page.tsx` 컨테이너 `max-w-[720px]` → `max-w-7xl`.
-- [ ] `<Dashboard />` 본문 — `flex flex-col` → `grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 gap-4` + 섹션마다 `col-span-{n}` 슬롯.
-- [ ] 추천 영역 화면 상단 이동 (`<Suspense><RecommendationCard /></Suspense>` 최상단).
-- [ ] streak·due-soon·todayAttempts 칩을 작은 status row로 묶음 (신규 `<DashboardStatusRow />`).
-- [ ] 모바일 회귀 0 검증 — `e2e/viewport.spec.ts` 의 `/` 라우트 mobile/tablet/desktop 모두 PASS.
+### Phase 1 — 레이아웃 컨테이너 + grid 슬롯 ✅
+- [x] `src/app/page.tsx` 컨테이너 `max-w-[720px]` → `max-w-7xl` (+ `lg:px-8`).
+- [x] `<Dashboard />` 본문 — `flex flex-col` → `grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4` + 섹션마다 `col-span-{n}` 슬롯.
+- [x] 추천 영역 화면 상단 이동 (RecommendationCard 좌상, 와이드 col-span-4).
+- [x] streak·due-soon·todayAttempts 칩 묶음 신규 `DashboardStatusRow.tsx` 컴포넌트.
+- [x] e2e home-dashboard-layout.spec.ts 신규 3건 + streak.spec.ts 업데이트 (status row 위치 변경 반영).
+- [x] e2e 163 → 166 (+3) 회귀 0.
 
 ### Phase 2 — Activity 히트맵 (PR #N2)
 - [ ] `src/lib/core/storage/activity-log.ts` 신규 — `recordActivity(gameId, now)` + `loadActivity(gameId, days)` + 14일 retention.
