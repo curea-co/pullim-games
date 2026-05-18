@@ -106,7 +106,7 @@ proc/
 └── audit/      # 게임 카탈로그 정기 감사 (games 고유 — 다른 풀림은 knowhow)
 ```
 
-`audit` 폴더는 games 고유. 21개 게임의 visual·인터랙션·BUG 정기 점검 산출물 누적. 결정 근거는 `~/dev_git/.pullim-meta/DECISIONS.md` D2 참조.
+`audit` 폴더는 games 고유. 21개 게임의 visual·인터랙션·BUG 정기 점검 산출물 누적. 결정 근거는 `~/dev_git/.pullim-meta/DECISIONS.md` D2 참조. **audit 트리거 룰·doc 양식은 `~/dev_git/.pullim-meta/CONVENTION.md` §7 참조** (games 한정).
 
 ## 7. 다른 풀림 프로젝트와의 관계
 
