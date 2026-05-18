@@ -83,30 +83,26 @@ function Dashboard({ stats }: { stats: DashboardStats }) {
   // 미진행 게임
   const untouched = stats.perGame.filter((p) => p.cardsTouched === 0);
 
+  // 행렬 정렬 우선 — 모든 영역이 전체 폭 row stack. 행 사이 빈 공간 X.
+  // 와이드에서 grid 분할은 row 내부에서만 (chip·KPI·게임별).
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-6 md:gap-5 lg:grid-cols-12">
-      {/* 오늘의 추천 — 좌상 (모바일 1열, 태블릿 col-span-6, 와이드 col-span-4) */}
-      <section
-        aria-label="오늘의 추천"
-        className="md:col-span-6 lg:col-span-4"
-      >
+    <div className="flex flex-col gap-5">
+      {/* 오늘의 추천 — full-width hero */}
+      <section aria-label="오늘의 추천">
         <Suspense fallback={null}>
           <RecommendationCard />
         </Suspense>
       </section>
 
-      {/* status row — 와이드에서는 추천 옆 col-span-8 (3 chip 그리드 안에) */}
-      <section
-        aria-label="학습 상태"
-        className="md:col-span-6 lg:col-span-8"
-      >
+      {/* status 3 chip — 한 row 가로 배치 (모바일도 grid-cols-3) */}
+      <section aria-label="학습 상태">
         <DashboardStatusRow stats={stats} />
       </section>
 
-      {/* KPI 2-card — 성공·실패 절댓값 (와이드에서는 status 아래 col-span-8) */}
+      {/* KPI 2-card — full-width 2열 */}
       <section
         aria-label="핵심 지표"
-        className="grid grid-cols-2 gap-3 md:col-span-6 lg:col-start-5 lg:col-end-13"
+        className="grid grid-cols-2 gap-3"
       >
         <StatCard
           icon={CheckCircle2}
@@ -130,17 +126,15 @@ function Dashboard({ stats }: { stats: DashboardStats }) {
         />
       </section>
 
-      {/* 활동 히트맵 — 전체 폭. 게임별 × 14일. */}
+      {/* 활동 히트맵 — 전체 폭, 단일 row 합산 */}
       {playedStats.length > 0 && (
-        <div className="md:col-span-6 lg:col-span-12">
-          <ActivityHeatmap playedStats={playedStats} />
-        </div>
+        <ActivityHeatmap playedStats={playedStats} />
       )}
 
-      {/* 게임별 성과 — 전체 폭, 와이드에서 3열 그리드 */}
+      {/* 게임별 성과 — 와이드 3열 */}
       <section
         aria-label="게임별 성과"
-        className="flex flex-col gap-3 md:col-span-6 lg:col-span-12"
+        className="flex flex-col gap-3"
       >
         <header>
           <h2 className="text-label font-bold text-type-primary">
@@ -159,13 +153,11 @@ function Dashboard({ stats }: { stats: DashboardStats }) {
         </ul>
       </section>
 
-      {/* 미진행 게임 그리드 — 전체 폭 */}
-      <div className="md:col-span-6 lg:col-span-12">
-        <UntouchedGamesGrid games={untouched} />
-      </div>
+      {/* 미진행 게임 그리드 */}
+      <UntouchedGamesGrid games={untouched} />
 
-      {/* 외재 보상 회피 안내 — 작게, 전체 폭 */}
-      <p className="text-helper text-type-secondary md:col-span-6 lg:col-span-12">
+      {/* 외재 보상 회피 안내 */}
+      <p className="text-helper text-type-secondary">
         풀림 게임즈는 점수·랭크·뱃지 없이 진행 자체를 보여드려요.
       </p>
     </div>
