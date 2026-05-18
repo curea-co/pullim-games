@@ -26,7 +26,7 @@
         "react-dom": "^19.0.0",
         "server-only": "^0.0.1",
         "tailwind-merge": "^3.5.0",
-        "ts-fsrs": "^4.0.0",
+        "ts-fsrs": "^5.3.3",
         "zod": "^3.23.0",
         "zustand": "^5.0.0",
       },
@@ -1127,7 +1127,7 @@
 
     "ts-api-utils": ["ts-api-utils@2.5.0", "", { "peerDependencies": { "typescript": ">=4.8.4" } }, "sha512-OJ/ibxhPlqrMM0UiNHJ/0CKQkoKF243/AEmplt3qpRgkW8VG7IfOS41h7V8TjITqdByHzrjcS/2si+y4lIh8NA=="],
 
-    "ts-fsrs": ["ts-fsrs@4.7.1", "", {}, "sha512-uYqKbSCNWLRPT0PfqFFy2rn0YuYz2fKmtgpgHOBd5/DP14oj6diG7P271AwJ8iGrKnmIspzXCF+nTKxict+Lcg=="],
+    "ts-fsrs": ["ts-fsrs@5.3.3", "", {}, "sha512-DgWFirmZe9MTqJiwtlLZoa/xyzibfKtQvuXZoH5X0kei64Cp4o1SlT6EbajjDT8dr/a4x82fLkKrCbePq4bxag=="],
 
     "ts-interface-checker": ["ts-interface-checker@0.1.13", "", {}, "sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA=="],
 
