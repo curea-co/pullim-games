@@ -9,6 +9,7 @@ import {
   createInitialState,
 } from "@/lib/core/fsrs";
 import { recordActivityAndSave } from "@/lib/core/streak";
+import { recordGameActivity } from "./activity-log";
 import type { Card as FsrsCard } from "ts-fsrs";
 
 const KEY_PREFIX = "pullim-games:srs";
@@ -100,8 +101,9 @@ export function saveSrsState(
   }
 }
 
-/** SRS 저장 + 일일 학습 스트릭 활동 기록 (단일 백본).
- *  plan 2026-05-15_fsrs-streak-backbone §D4.A wrapper helper.
+/** SRS 저장 + 일일 학습 스트릭 활동 기록 + 게임별 활동 로그 (단일 백본).
+ *  plan 2026-05-15_fsrs-streak-backbone §D4.A wrapper helper +
+ *  2026-05-18_home-dashboard-revamp §3 Phase 2 (게임별 일별 카운터).
  *  게임 컴포넌트는 saveSrsState 대신 본 함수를 호출. */
 export function saveSrsAndRecord(
   gameId: string,
@@ -110,6 +112,7 @@ export function saveSrsAndRecord(
 ): void {
   saveSrsState(gameId, cardId, state);
   recordActivityAndSave();
+  recordGameActivity(gameId);
 }
 
 /** 게임의 모든 카드 SRS 상태 일괄 로드 (FSRS 우선순위 큐 입력용). */
