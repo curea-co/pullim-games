@@ -248,10 +248,10 @@ export default function ImageHotspotGame() {
       }
       content={
         <>
-          <p className="mt-6 text-helper text-type-secondary lg:mt-0">
+          <p className="mt-3 text-helper text-type-secondary sm:mt-6 lg:mt-0">
             {card.unit}
           </p>
-          <h1 className="mt-2 text-display text-type-primary">
+          <h1 className="mt-1.5 text-2xl font-bold leading-tight text-type-primary sm:mt-2 sm:text-display">
             그림 위 영역에 라벨을 끼워주세요
           </h1>
           {card.hint && (
@@ -266,7 +266,7 @@ export default function ImageHotspotGame() {
           )}
 
           <motion.div
-            className="mt-6 flex justify-center"
+            className="mt-3 flex justify-center sm:mt-6"
             animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
             transition={{ duration: 0.36 }}
           >
@@ -279,7 +279,7 @@ export default function ImageHotspotGame() {
             />
           </motion.div>
 
-          <div className="mt-6">
+          <div className="mt-3 sm:mt-6">
             <LabelPalette
               available={availableCards}
               activeCardId={activeCardId}
@@ -289,7 +289,7 @@ export default function ImageHotspotGame() {
           </div>
 
           <p
-            className="mt-4 text-center text-helper text-type-secondary"
+            className="mt-2 text-center text-helper text-type-secondary sm:mt-4"
             aria-hidden="true"
           >
             {phase === "wrong" && accuracy

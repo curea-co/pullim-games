@@ -181,15 +181,15 @@ export function QuickQuizComponent({
       }
       content={
         <>
-          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
-          <h1 className="mt-2 text-display text-type-primary">
+          <p className="mt-3 text-helper text-type-secondary sm:mt-6 lg:mt-0">{card.unit}</p>
+          <h1 className="mt-1.5 text-2xl font-bold leading-tight text-type-primary sm:mt-2 sm:text-display">
             {card.problem.question}
           </h1>
           {card.hint && (
-            <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
+            <p className="mt-1.5 text-helper text-type-secondary sm:mt-2">힌트 · {card.hint}</p>
           )}
 
-          <div className="mt-8 flex flex-1 flex-col gap-3">
+          <div className="mt-4 flex flex-1 flex-col gap-2 sm:mt-8 sm:gap-3">
             {card.problem.choices.map((choice, idx) => (
               <ChoiceButton
                 key={`${cardIndex}-${idx}`}
@@ -277,7 +277,7 @@ function ChoiceButton({
           : { x: 0 }
       }
       transition={{ duration: 0.32 }}
-      className={`block w-full rounded-block border px-5 py-4 text-left text-body text-type-primary transition-colors ${stateClass}`}
+      className={`block w-full rounded-block border px-4 py-3 text-left text-body text-type-primary transition-colors sm:px-5 sm:py-4 ${stateClass}`}
     >
       {label}
     </motion.button>

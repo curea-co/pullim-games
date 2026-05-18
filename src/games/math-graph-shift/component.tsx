@@ -221,8 +221,8 @@ export default function MathGraphShiftGame() {
       }
       content={
         <>
-          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
-          <h1 className="mt-2 text-display text-type-primary">
+          <p className="mt-3 text-helper text-type-secondary sm:mt-6 lg:mt-0">{card.unit}</p>
+          <h1 className="mt-1.5 text-2xl font-bold leading-tight text-type-primary sm:mt-2 sm:text-display">
             {card.problem.startEquation} → {card.problem.targetEquation}
           </h1>
           {card.hint && (
@@ -236,13 +236,13 @@ export default function MathGraphShiftGame() {
 
           {/* SVG 좌표평면 */}
           <motion.div
-        className="mx-auto mt-6"
+        className="mx-auto mt-3 sm:mt-6"
         animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
         transition={{ duration: 0.36 }}
       >
         <svg
           viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}
-          className="h-60 w-60 rounded-block border border-border-hairline bg-bg-block"
+          className="h-44 w-44 rounded-block border border-border-hairline bg-bg-block sm:h-60 sm:w-60"
           aria-label="좌표평면 그래프"
         >
           {/* 축 */}
@@ -298,12 +298,12 @@ export default function MathGraphShiftGame() {
         </svg>
       </motion.div>
 
-      <p className="mt-3 text-center text-label tabular text-type-primary">
+      <p className="mt-2 text-center text-label tabular text-type-primary sm:mt-3">
         지금: <span className="font-bold">{currentEq}</span>
       </p>
 
       {/* 컨트롤 */}
-      <div className="mt-4 flex flex-col gap-2">
+      <div className="mt-2 flex flex-col gap-1.5 sm:mt-4 sm:gap-2">
         <Slider
           label="a (계수)"
           value={a}
