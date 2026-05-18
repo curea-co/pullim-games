@@ -1,9 +1,10 @@
-// 게임별 성과 카드 — 큰 숫자로 성공/실패 절댓값. shadcn Card.
+// 게임별 성과 카드 — 큰 숫자로 성공/실패 절댓값 + 7일 sparkline.
 
 import Link from "next/link";
 import type { PerGameStat } from "@/lib/core";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { GameSparkline } from "@/components/dashboard/GameSparkline";
 import { cn } from "@/lib/utils";
 
 interface Props {
@@ -14,10 +15,6 @@ export function GameStatCard({ stat }: Props) {
   const Icon = stat.icon;
   const accuracyPct =
     stat.attempts > 0 ? Math.round(stat.accuracy * 100) : 0;
-  const progressPct =
-    stat.cardsTotal > 0
-      ? Math.round((stat.cardsTouched / stat.cardsTotal) * 100)
-      : 0;
   const isHeavy = stat.attempts >= 10;
 
   return (
@@ -81,18 +78,10 @@ export function GameStatCard({ stat }: Props) {
         </div>
 
         <div className="mt-3">
-          <div
-            aria-hidden="true"
-            className="h-1.5 w-full overflow-hidden rounded-full bg-pullim-slate-100"
-          >
-            <div
-              className={cn(
-                "h-full rounded-full transition-all",
-                isHeavy ? "bg-accent-positive" : "bg-pullim-slate-400",
-              )}
-              style={{ width: `${progressPct}%` }}
-            />
-          </div>
+          <GameSparkline
+            gameId={stat.gameId}
+            variant={isHeavy ? "active" : "muted"}
+          />
           <p className="mt-1.5 text-helper tabular text-type-secondary">
             {stat.cardsTouched}/{stat.cardsTotal} 카드
             {stat.attempts > 0 && ` · 정답률 ${accuracyPct}%`}
