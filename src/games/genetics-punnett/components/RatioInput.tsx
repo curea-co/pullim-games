@@ -24,7 +24,7 @@ export function RatioInput({
 }: RatioInputProps) {
   return (
     <li
-      className={`flex items-center justify-between gap-3 rounded-block border px-3 py-2 transition-colors ${
+      className={`flex items-center justify-between gap-2 rounded-block border px-2.5 py-1.5 transition-colors sm:gap-3 sm:px-3 sm:py-2 ${
         correct
           ? "border-accent-positive bg-accent-positive/10"
           : "border-border-hairline bg-bg-block"
@@ -47,7 +47,7 @@ export function RatioInput({
         >
           −
         </button>
-        <span className="min-w-[1.5rem] text-center text-display tabular text-type-primary">
+        <span className="min-w-[1.5rem] text-center text-xl font-bold tabular text-type-primary sm:text-display">
           {value}
         </span>
         <button

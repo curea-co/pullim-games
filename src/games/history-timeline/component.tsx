@@ -237,9 +237,9 @@ export default function HistoryTimelineGame() {
       }
       content={
         <>
-          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
-          <h1 className="mt-2 text-display text-type-primary">{card.problem.era}</h1>
-          <p className="mt-2 text-label text-type-secondary">
+          <p className="mt-3 text-helper text-type-secondary sm:mt-6 lg:mt-0">{card.unit}</p>
+          <h1 className="mt-1.5 text-2xl font-bold leading-tight text-type-primary sm:mt-2 sm:text-display">{card.problem.era}</h1>
+          <p className="mt-1.5 text-label text-type-secondary sm:mt-2">
             사건을 시간 순으로 놓아주세요
           </p>
           {card.hint && (
@@ -253,7 +253,7 @@ export default function HistoryTimelineGame() {
 
           {/* Slots — 시간축 (위→아래 = 과거→현재) */}
           <motion.div
-            className="mt-6 flex flex-col gap-2"
+            className="mt-2 flex flex-col gap-1.5 sm:mt-6 sm:gap-2"
             animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
             transition={{ duration: 0.36 }}
           >
@@ -267,7 +267,7 @@ export default function HistoryTimelineGame() {
               type="button"
               onClick={() => removeFromSlot(slotIdx)}
               disabled={phase !== "playing" || ev === null}
-              className={`flex w-full items-center justify-between rounded-block border px-4 py-3 text-left text-body transition-colors ${
+              className={`flex w-full items-center justify-between rounded-block border px-3 py-2 text-left text-body transition-colors sm:px-4 sm:py-3 ${
                 isResolved && ev
                   ? "border-accent-positive bg-accent-positive/10 text-type-primary"
                   : ev
@@ -292,7 +292,7 @@ export default function HistoryTimelineGame() {
       </motion.div>
 
       {/* Pool — 셔플된 사건 풀 */}
-      <div className="mt-6 flex flex-1 flex-wrap items-start content-start gap-2">
+      <div className="mt-3 flex flex-1 flex-wrap items-start content-start gap-2 sm:mt-6">
         {availablePool.map((pe) => (
           <motion.button
             key={pe.id}
@@ -302,7 +302,7 @@ export default function HistoryTimelineGame() {
             whileHover={phase === "playing" ? { scale: 1.03 } : undefined}
             whileTap={phase === "playing" ? { scale: 0.97 } : undefined}
             layout
-            className="rounded-block border border-border-hairline bg-bg-block px-3 py-2 text-body text-type-primary"
+            className="rounded-block border border-border-hairline bg-bg-block px-2.5 py-1.5 text-helper text-type-primary sm:px-3 sm:py-2 sm:text-body"
           >
             {pe.title}
           </motion.button>

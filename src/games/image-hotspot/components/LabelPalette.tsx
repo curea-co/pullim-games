@@ -19,7 +19,7 @@ export function LabelPalette({
     <div
       role="toolbar"
       aria-label="라벨 카드"
-      className="flex flex-wrap justify-center gap-2"
+      className="flex flex-wrap justify-center gap-1.5 sm:gap-2"
     >
       {available.length === 0 ? (
         <span className="text-helper text-type-secondary">
@@ -37,7 +37,7 @@ export function LabelPalette({
               aria-pressed={active}
               aria-label={`라벨 ${card.text}${active ? " 선택됨" : ""}`}
               className={[
-                "rounded-button border px-3 py-2 text-body transition-colors disabled:opacity-50",
+                "rounded-button border px-2.5 py-1.5 text-helper transition-colors disabled:opacity-50 sm:px-3 sm:py-2 sm:text-body",
                 active
                   ? "border-type-primary bg-accent-positive/10 text-type-primary ring-2 ring-offset-1 ring-type-primary"
                   : "border-border-hairline bg-bg-block text-type-primary hover:bg-accent-positive/10",

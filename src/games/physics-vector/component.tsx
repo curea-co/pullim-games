@@ -186,8 +186,8 @@ export default function PhysicsVectorGame() {
       }
       content={
         <>
-          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
-          <h1 className="mt-2 text-display text-type-primary">{card.problem.context}</h1>
+          <p className="mt-3 text-helper text-type-secondary sm:mt-6 lg:mt-0">{card.unit}</p>
+          <h1 className="mt-1.5 text-2xl font-bold leading-tight text-type-primary sm:mt-2 sm:text-display">{card.problem.context}</h1>
           {card.hint && (
             <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
           )}
@@ -198,7 +198,7 @@ export default function PhysicsVectorGame() {
           )}
 
           <motion.div
-        className="mx-auto mt-4"
+        className="mx-auto mt-2 sm:mt-4"
         animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
         transition={{ duration: 0.36 }}
       >
@@ -361,7 +361,7 @@ export default function PhysicsVectorGame() {
       </p>
 
       {/* 컨트롤 */}
-      <div className="mt-3 flex flex-col gap-2">
+      <div className="mt-2 flex flex-col gap-1.5 sm:mt-3 sm:gap-2">
         <Slider
           label="rx (가로 성분)"
           value={rx}

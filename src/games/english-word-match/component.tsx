@@ -229,12 +229,12 @@ export default function EnglishWordMatchGame() {
       }
       content={
         <>
-          <p className="mt-6 text-helper text-type-secondary">{card.unit}</p>
-          <h1 className="mt-2 text-display text-type-primary">짝을 맞춰주세요</h1>
+          <p className="mt-3 text-helper text-type-secondary sm:mt-6">{card.unit}</p>
+          <h1 className="mt-1.5 text-2xl font-bold leading-tight text-type-primary sm:mt-2 sm:text-display">짝을 맞춰주세요</h1>
           {card.hint && (
             <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
           )}
-          <p className="mt-2 text-helper tabular text-type-secondary">
+          <p className="mt-1.5 text-helper tabular text-type-secondary sm:mt-2">
             {(() => {
               const pairsLen = card.problem.pairs.length;
               const extrasLen = card.problem.extras?.english.length ?? 0;
@@ -254,7 +254,7 @@ export default function EnglishWordMatchGame() {
             })()}
           </p>
 
-          <div className="mt-6 grid flex-1 grid-cols-2 gap-3">
+          <div className="mt-3 grid flex-1 grid-cols-2 gap-2 sm:mt-6 sm:gap-3">
         {/* 영어 컬럼 */}
         <div className="flex flex-col gap-2">
           <AnimatePresence>
@@ -274,7 +274,7 @@ export default function EnglishWordMatchGame() {
                       : { x: 0 }
                   }
                   transition={{ duration: 0.32 }}
-                  className={`rounded-block border px-3 py-3 text-left text-body transition-colors ${
+                  className={`rounded-block border px-2.5 py-2 text-left text-helper transition-colors sm:px-3 sm:py-3 sm:text-body ${
                     selectedEn === it.pairIndex
                       ? "border-type-primary bg-accent-positive/10 text-type-primary"
                       : wrongFlash?.en === it.pairIndex
@@ -307,7 +307,7 @@ export default function EnglishWordMatchGame() {
                       : { x: 0 }
                   }
                   transition={{ duration: 0.32 }}
-                  className={`rounded-block border px-3 py-3 text-left text-body transition-colors ${
+                  className={`rounded-block border px-2.5 py-2 text-left text-helper transition-colors sm:px-3 sm:py-3 sm:text-body ${
                     selectedKo === it.pairIndex
                       ? "border-type-primary bg-accent-positive/10 text-type-primary"
                       : wrongFlash?.ko === it.pairIndex

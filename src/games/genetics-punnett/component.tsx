@@ -206,10 +206,10 @@ export default function GeneticsPunnettGame() {
       }
       content={
         <>
-          <p className="mt-6 text-helper text-type-secondary lg:mt-0">
+          <p className="mt-3 text-helper text-type-secondary sm:mt-6 lg:mt-0">
             {card.unit}
           </p>
-          <h1 className="mt-2 text-display text-type-primary">
+          <h1 className="mt-1.5 text-2xl font-bold leading-tight text-type-primary sm:mt-2 sm:text-display">
             자손의 표현형 비율을 맞춰주세요
           </h1>
           {card.hint && (
@@ -224,7 +224,7 @@ export default function GeneticsPunnettGame() {
           )}
 
           {/* 부모 유전자형 */}
-          <div className="mt-6 flex items-center justify-center gap-3 text-display tabular text-type-primary">
+          <div className="mt-3 flex items-center justify-center gap-2 text-xl tabular text-type-primary sm:mt-6 sm:gap-3 sm:text-display">
             <span className="rounded-block border border-border-hairline bg-bg-block px-3 py-2">
               {card.problem.p1}
             </span>
@@ -238,7 +238,7 @@ export default function GeneticsPunnettGame() {
 
           {/* 자손 격자 */}
           <motion.div
-            className="mt-6 flex justify-center"
+            className="mt-3 flex justify-center sm:mt-6"
             animate={phase === "wrong" ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
             transition={{ duration: 0.36 }}
           >
@@ -251,7 +251,7 @@ export default function GeneticsPunnettGame() {
           </motion.div>
 
           {/* 표현형 비율 입력 */}
-          <ul className="mt-6 flex flex-col gap-2">
+          <ul className="mt-3 flex flex-col gap-2 sm:mt-6">
             {computed.labels.map((label, i) => (
               <RatioInput
                 key={i}

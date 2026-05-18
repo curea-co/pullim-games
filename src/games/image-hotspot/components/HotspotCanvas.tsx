@@ -26,7 +26,7 @@ export function HotspotCanvas({
   onTap,
 }: HotspotCanvasProps) {
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-[320px]">
+    <div className="relative mx-auto aspect-square w-full max-w-[220px] sm:max-w-[320px]">
       <PlantDiagram diagramId={diagramId} />
       {regions.map((region, i) => {
         const occupant = placements.get(region.id) ?? null;

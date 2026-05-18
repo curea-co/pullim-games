@@ -193,11 +193,11 @@ export function BlankComponent({
       }
       content={
         <>
-          <p className="mt-6 text-helper text-type-secondary lg:mt-0">{card.unit}</p>
-          <h1 className="mt-2 text-label text-type-secondary">빈칸에 알맞은 말은?</h1>
+          <p className="mt-3 text-helper text-type-secondary sm:mt-6 lg:mt-0">{card.unit}</p>
+          <h1 className="mt-1.5 text-label text-type-secondary sm:mt-2">빈칸에 알맞은 말은?</h1>
 
           <motion.div
-            className="mt-3 rounded-block border border-border-hairline bg-bg-block p-4 text-body leading-relaxed text-type-primary"
+            className="mt-2 rounded-block border border-border-hairline bg-bg-block p-2.5 text-helper leading-relaxed text-type-primary sm:mt-3 sm:p-4 sm:text-body"
             animate={
               phase === "feedback" && !isCorrect
                 ? { x: [0, -4, 4, -4, 4, 0] }
@@ -212,7 +212,7 @@ export function BlankComponent({
             <p className="mt-2 text-helper text-type-secondary">힌트 · {card.hint}</p>
           )}
 
-          <div className="mt-4 flex flex-col gap-2">
+          <div className="mt-3 flex flex-col gap-2 sm:mt-4">
             {card.problem.choices.map((choice, idx) => (
               <ChoiceButton
                 key={`${cardIndex}-${idx}`}
@@ -302,7 +302,7 @@ function ChoiceButton({
       disabled={phase !== "playing"}
       whileHover={phase === "playing" ? { scale: 1.01 } : undefined}
       whileTap={phase === "playing" ? { scale: 0.99 } : undefined}
-      className={`block w-full rounded-block border px-4 py-3 text-left text-body text-type-primary transition-colors ${stateClass}`}
+      className={`block w-full rounded-block border px-3 py-2.5 text-left text-body text-type-primary transition-colors sm:px-4 sm:py-3 ${stateClass}`}
     >
       {label}
     </motion.button>
