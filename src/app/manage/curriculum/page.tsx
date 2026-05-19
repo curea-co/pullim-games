@@ -23,6 +23,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { ConfirmDeleteDialog } from "@/components/manage/ConfirmDeleteDialog";
 import { cn } from "@/lib/utils";
 
 interface CurriculumNode extends CustomCurriculum {
@@ -58,6 +59,10 @@ export default function CurriculumPage() {
   } | null>(null);
   const [name, setName] = useState("");
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const [confirmDelete, setConfirmDelete] = useState<{
+    id: string;
+    label: string;
+  } | null>(null);
 
   // mount 1회만 로드. 이전엔 deps 에 activeSubjectId 있어 활성 과목 변경 때마다
   // 불필요한 localStorage 재읽기·setState 폭. (Plan A C9)
@@ -126,9 +131,13 @@ export default function CurriculumPage() {
     cancel();
   }
 
-  function remove(id: string) {
-    if (!window.confirm("이 단원과 하위 단원·카드를 모두 삭제할까요?")) return;
-    deleteCurriculum(id);
+  function askRemove(id: string, label: string) {
+    setConfirmDelete({ id, label });
+  }
+
+  function performRemove() {
+    if (!confirmDelete) return;
+    deleteCurriculum(confirmDelete.id);
     refresh();
   }
 
@@ -234,9 +243,17 @@ export default function CurriculumPage() {
           onToggle={toggle}
           onAddChild={(parentId) => startNew(parentId)}
           onEdit={startEdit}
-          onDelete={remove}
+          onDelete={askRemove}
         />
       )}
+
+      <ConfirmDeleteDialog
+        open={confirmDelete !== null}
+        onOpenChange={(open) => !open && setConfirmDelete(null)}
+        title={`${confirmDelete?.label ?? ""} 단원을 삭제할까요?`}
+        description="하위 단원·카드도 함께 삭제됩니다. 되돌릴 수 없어요."
+        onConfirm={performRemove}
+      />
     </div>
   );
 }
@@ -248,7 +265,7 @@ interface TreeNodesProps {
   onToggle: (id: string) => void;
   onAddChild: (parentId: string) => void;
   onEdit: (item: CustomCurriculum) => void;
-  onDelete: (id: string) => void;
+  onDelete: (id: string, label: string) => void;
 }
 
 function TreeNodes({
@@ -320,7 +337,7 @@ function TreeNodes({
                 type="button"
                 variant="ghost"
                 size="icon"
-                onClick={() => onDelete(node.id)}
+                onClick={() => onDelete(node.id, node.name)}
                 aria-label="삭제"
                 className="h-7 w-7 rounded-button text-type-secondary hover:bg-accent-negative/10 hover:text-accent-negative"
               >

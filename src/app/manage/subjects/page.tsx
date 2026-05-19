@@ -15,12 +15,17 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { ConfirmDeleteDialog } from "@/components/manage/ConfirmDeleteDialog";
 import { cn } from "@/lib/utils";
 
 export default function SubjectsPage() {
   const [subjects, setSubjects] = useState<CustomSubject[]>([]);
   const [editing, setEditing] = useState<CustomSubject | null>(null);
   const [name, setName] = useState("");
+  const [confirmDelete, setConfirmDelete] = useState<{
+    id: string;
+    label: string;
+  } | null>(null);
 
   useEffect(() => {
     setSubjects(loadSubjects());
@@ -63,14 +68,13 @@ export default function SubjectsPage() {
     cancel();
   }
 
-  function remove(id: string) {
-    if (
-      !window.confirm(
-        "이 과목을 삭제하면 단원·카드도 모두 함께 삭제돼요. 진행할까요?",
-      )
-    )
-      return;
-    deleteSubject(id);
+  function askRemove(id: string, label: string) {
+    setConfirmDelete({ id, label });
+  }
+
+  function performRemove() {
+    if (!confirmDelete) return;
+    deleteSubject(confirmDelete.id);
     refresh();
   }
 
@@ -183,7 +187,7 @@ export default function SubjectsPage() {
                     type="button"
                     variant="ghost"
                     size="icon"
-                    onClick={() => remove(s.id)}
+                    onClick={() => askRemove(s.id, s.name)}
                     aria-label="삭제"
                     className="h-8 w-8 rounded-button text-type-secondary hover:bg-accent-negative/10 hover:text-accent-negative"
                   >
@@ -195,6 +199,14 @@ export default function SubjectsPage() {
           ))}
         </ul>
       )}
+
+      <ConfirmDeleteDialog
+        open={confirmDelete !== null}
+        onOpenChange={(open) => !open && setConfirmDelete(null)}
+        title={`${confirmDelete?.label ?? ""} 과목을 삭제할까요?`}
+        description="단원·카드도 함께 삭제됩니다. 되돌릴 수 없어요."
+        onConfirm={performRemove}
+      />
     </div>
   );
 }
