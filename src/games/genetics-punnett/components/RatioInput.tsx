@@ -24,7 +24,7 @@ export function RatioInput({
 }: RatioInputProps) {
   return (
     <li
-      className={`flex items-center justify-between gap-2 rounded-block border px-2.5 py-1.5 transition-colors sm:gap-3 sm:px-3 sm:py-2 ${
+      className={`flex items-center justify-between gap-2 rounded-block border px-2.5 py-1 transition-colors sm:gap-3 sm:px-3 sm:py-2 ${
         correct
           ? "border-accent-positive bg-accent-positive/10"
           : "border-border-hairline bg-bg-block"
