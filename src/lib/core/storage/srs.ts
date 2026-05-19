@@ -43,15 +43,19 @@ function serialize(state: CardSrsState): SerializedState {
 }
 
 function deserialize(raw: SerializedState): CardSrsState {
+  // ts-fsrs Card 타입: last_review?: Date (optional). v4 직렬화 시 null 저장.
+  // 미리뷰 카드는 undefined 유지 (key 자체 미존재) — Plan A C12 명시화.
+  // learning_steps 는 v4 데이터에 없어 0 fallback (Phase 0 마이그레이션).
+  const fsrsCardBase: Omit<FsrsCard, "last_review"> = {
+    ...raw.fsrsCard,
+    due: new Date(raw.fsrsCard.due),
+    learning_steps: raw.fsrsCard.learning_steps ?? 0,
+  } as Omit<FsrsCard, "last_review">;
+  const fsrsCard: FsrsCard = raw.fsrsCard.last_review
+    ? { ...fsrsCardBase, last_review: new Date(raw.fsrsCard.last_review) }
+    : (fsrsCardBase as FsrsCard);
   return {
-    fsrsCard: {
-      ...raw.fsrsCard,
-      due: new Date(raw.fsrsCard.due),
-      last_review: raw.fsrsCard.last_review
-        ? new Date(raw.fsrsCard.last_review)
-        : (undefined as unknown as Date),
-      learning_steps: raw.fsrsCard.learning_steps ?? 0,
-    } as FsrsCard,
+    fsrsCard,
     reviewCount: raw.reviewCount,
     lastReviewAt: raw.lastReviewAt ? new Date(raw.lastReviewAt) : null,
   };
@@ -86,33 +90,65 @@ export function loadSrsState(
   }
 }
 
-/** 카드 SRS 상태 저장. localStorage 실패 시 silent. */
+/** 카드 SRS 상태 저장. localStorage 실패 시 false 반환 (silent, 게임 진행 무영향). */
 export function saveSrsState(
   gameId: string,
   cardId: string,
   state: CardSrsState,
-): void {
+): boolean {
   const storage = getStorage();
-  if (!storage) return;
+  if (!storage) return false;
   try {
     storage.setItem(key(gameId, cardId), JSON.stringify(serialize(state)));
+    return true;
   } catch {
     // localStorage 가득 차거나 거부됨 — 게임 진행은 깨지지 않게
+    return false;
   }
 }
 
 /** SRS 저장 + 일일 학습 스트릭 활동 기록 + 게임별 활동 로그 (단일 백본).
  *  plan 2026-05-15_fsrs-streak-backbone §D4.A wrapper helper +
  *  2026-05-18_home-dashboard-revamp §3 Phase 2 (게임별 일별 카운터).
+ *  Plan A C6 (2026-05-19): 3-write 부분 실패 telemetry.
  *  게임 컴포넌트는 saveSrsState 대신 본 함수를 호출. */
 export function saveSrsAndRecord(
   gameId: string,
   cardId: string,
   state: CardSrsState,
 ): void {
-  saveSrsState(gameId, cardId, state);
-  recordActivityAndSave();
-  recordGameActivity(gameId);
+  const srsOk = saveSrsState(gameId, cardId, state);
+  let streakOk = false;
+  try {
+    recordActivityAndSave();
+    streakOk = true;
+  } catch {
+    streakOk = false;
+  }
+  const activityOk = recordGameActivity(gameId);
+
+  // 3-write 중 하나라도 실패 시 telemetry (silent 누락 방지).
+  if (!srsOk || !streakOk || !activityOk) {
+    void logStorageError(gameId, cardId, { srsOk, streakOk, activityOk });
+  }
+}
+
+function logStorageError(
+  gameId: string,
+  cardId: string,
+  result: { srsOk: boolean; streakOk: boolean; activityOk: boolean },
+): void {
+  if (typeof window === "undefined") return;
+  try {
+    // console.warn 만 — /api/event 로깅은 logEvent dependency 회피 (storage → logger 직접 의존 회피)
+    console.warn("[pullim-games] saveSrsAndRecord 3-write 부분 실패", {
+      gameId,
+      cardId,
+      ...result,
+    });
+  } catch {
+    // ignore
+  }
 }
 
 /** 게임의 모든 카드 SRS 상태 일괄 로드 (FSRS 우선순위 큐 입력용). */

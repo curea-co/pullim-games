@@ -59,12 +59,14 @@ export default function CurriculumPage() {
   const [name, setName] = useState("");
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
 
+  // mount 1회만 로드. 이전엔 deps 에 activeSubjectId 있어 활성 과목 변경 때마다
+  // 불필요한 localStorage 재읽기·setState 폭. (Plan A C9)
   useEffect(() => {
     const subs = loadSubjects();
     setSubjects(subs);
-    if (subs.length > 0 && !activeSubjectId) setActiveSubjectId(subs[0]!.id);
+    if (subs.length > 0) setActiveSubjectId(subs[0]!.id);
     setItems(loadCurriculum());
-  }, [activeSubjectId]);
+  }, []);
 
   function refresh() {
     setItems(loadCurriculum());

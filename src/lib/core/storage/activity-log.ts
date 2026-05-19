@@ -68,19 +68,23 @@ function prune(map: ActivityMap, now: Date = new Date()): ActivityMap {
 
 /**
  * 1회 활동 기록 — 오늘 bucket count +1. 14일 retention prune 자동.
- * localStorage 실패 시 silent.
+ * localStorage 실패 시 false 반환 (silent, 게임 진행 무영향).
  * (이름 prefix `recordGame` — streak.recordActivity 와 충돌 회피)
  */
-export function recordGameActivity(gameId: string, now: Date = new Date()): void {
+export function recordGameActivity(
+  gameId: string,
+  now: Date = new Date(),
+): boolean {
   const storage = getStorage();
-  if (!storage) return;
+  if (!storage) return false;
   try {
     const map = prune(loadRaw(gameId), now);
     const bucket = toDateBucket(now);
     map[bucket] = (map[bucket] ?? 0) + 1;
     storage.setItem(key(gameId), JSON.stringify(map));
+    return true;
   } catch {
-    // localStorage 가득 차거나 거부됨
+    return false;
   }
 }
 

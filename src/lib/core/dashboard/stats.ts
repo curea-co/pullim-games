@@ -106,8 +106,15 @@ export async function computeDashboardStats(
         }
       }
 
+      // 미리뷰 카드(reviewCount === 0)는 createEmptyCard(now).due === now 라서
+      // 모든 미리뷰가 due-soon 으로 잡힘 → "다시 만날 N장" 부풀려짐.
+      // 실제 리뷰된 카드만 dueSoonCount 에 포함.
       const due = state.fsrsCard.due;
-      if (due && due.getTime() - now.getTime() <= TWENTY_FOUR_HOURS_MS) {
+      if (
+        state.reviewCount > 0 &&
+        due &&
+        due.getTime() - now.getTime() <= TWENTY_FOUR_HOURS_MS
+      ) {
         dueSoonCount += 1;
       }
     }
