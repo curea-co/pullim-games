@@ -171,7 +171,15 @@ export default function EnglishOrderGame() {
       .map((id) => poolWords.find((pw) => pw.id === id)?.text ?? "")
       .join(" ");
     const expected = card!.problem.english.join(" ");
-    const correct = assembled === expected;
+    // normalize — 공백 다중·끝 구두점·대소문자 무관 매칭. (Plan A C11)
+    // memory 룰 feedback_user_intent_literal: 의미가 같으면 정답 인식.
+    const normalize = (s: string) =>
+      s
+        .replace(/\s+/g, " ")
+        .replace(/[.!?,;:]+$/, "")
+        .trim()
+        .toLocaleLowerCase();
+    const correct = normalize(assembled) === normalize(expected);
 
     void logEvent({
       gameId: GAME_ID,
