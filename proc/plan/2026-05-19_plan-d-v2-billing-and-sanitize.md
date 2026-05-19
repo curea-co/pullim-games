@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan D: V2 결제 정책·백엔드 + content sanitize·AI error 처리
 
-- **상태**: DRAFT (2026-05-19) — §1 합의 대기 → 3 Phase 분할. **사용자 의사결정 다수 필수** (결제 정책·가격·기능 비교).
+- **상태**: PARTIAL-COMPLETE (2026-05-19) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. Phase 1·2 (V2 결제 정책·백엔드) 다음 세션 별 트랙 이관 — D1~D7 사용자 의사결정 의무.
 - **트리거**: audit v3 §7 informational 4건 + critical C8(V2 트리거) 통합:
   - C8: `billing/page.tsx` 알림 신청 이메일 백엔드 전송 0 (mock toast)
   - informational: 결제 정책 명세 부재 (`proc/spec/05-비즈니스-정책.md §결제 없음`)
