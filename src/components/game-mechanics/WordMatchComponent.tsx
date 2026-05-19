@@ -13,8 +13,7 @@ import {
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  reviewCard,
-  saveSrsAndRecord,
+  applyAndPersist,
   selectNextCards,
 } from "@/lib/core";
 
@@ -195,16 +194,18 @@ export function WordMatchComponent({
       setPhase("correct-flash");
       setTimeout(() => setPhase("playing"), 500);
       if (next.size === card!.problem.pairs.length) {
-        const rating =
-          wrongCount === 0 ? "good" : wrongCount <= 2 ? "hard" : "again";
-        const prev = loadSrsState(gameId, card!.id);
-        const updated = reviewCard(prev, rating);
-        saveSrsAndRecord(gameId, card!.id, updated);
+        // Plan A Phase 3 — modes wrapper 마이그레이션 + 임계 통일 (wc<=2→hard → wc===1→hard).
+        // resolveRating(default) 가 Typing 패턴으로 통일된 결정.
+        applyAndPersist("default", gameId, card!.id, {
+          correct: true,
+          wrongCount,
+          hintUsed: false,
+        });
         void logEvent({
           gameId,
           cardId: card!.id,
           action: "submit",
-          payload: { wrongCount, rating },
+          payload: { wrongCount },
         });
       }
     } else {
@@ -218,9 +219,11 @@ export function WordMatchComponent({
         payload: { leftPair, rightPair, correct: false },
       });
       if (nextWrong >= REVEAL_THRESHOLD) {
-        const prev = loadSrsState(gameId, card!.id);
-        const updated = reviewCard(prev, "again");
-        saveSrsAndRecord(gameId, card!.id, updated);
+        applyAndPersist("default", gameId, card!.id, {
+          correct: false,
+          wrongCount: nextWrong,
+          hintUsed: false,
+        });
         void logEvent({
           gameId,
           cardId: card!.id,

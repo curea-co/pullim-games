@@ -12,8 +12,7 @@ import {
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  reviewCard,
-  saveSrsAndRecord,
+  applyAndPersist,
   selectNextCards,
 } from "@/lib/core";
 
@@ -132,9 +131,13 @@ export function BlankComponent({
       action: "submit",
       payload: { picked: idx, correct },
     });
-    const prev = loadSrsState(gameId, card!.id);
-    const updated = reviewCard(prev, correct ? "good" : "again");
-    saveSrsAndRecord(gameId, card!.id, updated);
+    // Plan A Phase 3 — modes wrapper 마이그레이션. 객관식 1턴 종결 메커닉:
+    // 정답=wc 0 (good), 오답=wc 1 (again). resolveRating(default) 가 동일 결정.
+    applyAndPersist("default", gameId, card!.id, {
+      correct,
+      wrongCount: correct ? 0 : 1,
+      hintUsed: false,
+    });
   }
 
   function handleNext() {
