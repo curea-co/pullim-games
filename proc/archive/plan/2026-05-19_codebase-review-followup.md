@@ -1,6 +1,6 @@
 # 2026-05-19 — 전체 codebase 리뷰 followup
 
-- **상태**: ON-HOLD (2026-05-19) — §1 합의 다음 세션으로 이월. Plan B (UI viewport 캡처 룰) 정착 후 진입.
+- **상태**: COMPLETE (2026-05-19) — Phase 1·2·3·4·6 머지 + Phase 8 audit v3 작성. Phase 5·7 별 plan trigger (다음 세션 V0.4+).
 - **트리거**: 2026-05-18 4 agent 종합 리뷰 (22,648 LOC / 231 파일 / 21 게임) 결과 정착. 어제 종합 회고에서 12 critical + 17 informational 발견, 10 권장 트랙 도출했으나 plan 형태로 미정착 → 본 plan으로 구조화.
 - **메모리 룰**: 하이퍼캐주얼 · 학습효과 우선 · 단일 백본 + 다중 모드 · 외재 보상 회피.
 - **연관 plan**: `proc/archive/plan/2026-05-18_fsrs-backbone.md` (Phase 2~3 잔존), `proc/archive/plan/2026-05-18_audit-trigger-rules.md` (audit v3 작성 트리거 누적).
