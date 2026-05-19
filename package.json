@@ -14,7 +14,8 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "ui:audit": "node scripts/capture-ui-audit.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.95.1",
