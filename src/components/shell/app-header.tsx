@@ -68,8 +68,11 @@ export function AppHeader({ role, variant = "default" }: Props) {
         </Link>
 
         {/* default 모드에서만 우측 액션 — V0.5+ 활성. 현재는 시각 placeholder. */}
+        {/* default 모드 우측 액션 — V0.5+ 활성 예정.
+            모바일에서는 가로 공간 차지 회피 위해 hidden, sm: 이상에서만 시각 placeholder.
+            Plan A Phase 6 — informational placeholder 정리. */}
         {!isGame && (
-          <div className="ml-auto flex items-center gap-1">
+          <div className="ml-auto hidden items-center gap-1 sm:flex">
             <button
               type="button"
               aria-label="검색 (준비 중)"

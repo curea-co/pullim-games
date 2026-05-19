@@ -11,10 +11,12 @@ import { Card } from "@/components/ui/card";
 export default function BillingPage() {
   return (
     <div className="flex flex-col gap-6">
+      {/* layout 의 h1 "내 학습 콘텐츠 만들기" 와 중복 회피 — 본 페이지는 h2 섹션 제목으로.
+          Plan A Phase 6 — manage 페이지 h1 단일화 (다른 manage 페이지는 자체 h1 없음). */}
       <header>
-        <h1 className="text-2xl font-bold leading-tight tracking-tight text-type-primary">
+        <h2 className="text-2xl font-bold leading-tight tracking-tight text-type-primary">
           결제
-        </h1>
+        </h2>
         <p className="mt-1.5 text-helper text-type-secondary">
           현재 플랜 상태와 곧 출시할 유료 플랜 안내입니다.
         </p>
@@ -36,7 +38,7 @@ function CurrentPlanSection() {
         className="mt-0.5 h-5 w-5 shrink-0 text-accent-positive"
       />
       <div className="flex flex-col gap-1">
-        <h2 className="text-label font-bold text-type-primary">현재 플랜</h2>
+        <h3 className="text-label font-bold text-type-primary">현재 플랜</h3>
         <p className="text-helper text-type-secondary">
           <strong className="text-type-primary">무료</strong> · V1 모든 기능을 자유롭게 이용 중이에요.
         </p>
@@ -50,9 +52,9 @@ function PaidPlanPreview() {
     <Card className="flex flex-col gap-3 p-4">
       <header className="flex items-center gap-2">
         <Sparkles aria-hidden="true" className="h-5 w-5 text-accent-positive" />
-        <h2 className="text-label font-bold text-type-primary">
+        <h3 className="text-label font-bold text-type-primary">
           유료 플랜 (준비 중)
-        </h2>
+        </h3>
       </header>
       <p className="text-helper text-type-secondary">
         V2 정식 출시 시 안내드릴 예정이에요. 무료 플랜에 더해 다음 항목이 추가될 예정입니다.
@@ -82,9 +84,9 @@ function NotifyForm() {
   return (
     <Card className="flex flex-col gap-3 p-4">
       <header>
-        <h2 className="text-label font-bold text-type-primary">
+        <h3 className="text-label font-bold text-type-primary">
           출시 알림 받기
-        </h2>
+        </h3>
         <p className="mt-1 text-helper text-type-secondary">
           유료 플랜이 준비되면 이메일로 알려드릴게요.
         </p>
