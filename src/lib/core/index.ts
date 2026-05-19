@@ -11,6 +11,7 @@ export * from "./fingerprint";
 export * from "./fsrs";
 export * from "./fsrs/modes";
 export * from "./distractor";
+export * from "./sanitize";
 export * from "./ast";
 export * from "./storage";
 export * from "./event";
