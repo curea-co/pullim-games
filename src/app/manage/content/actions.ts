@@ -63,8 +63,12 @@ export async function generateFromSourceAction(input: {
     const { drafts } = await generateFromSourceLLM(input);
     return { ok: true, drafts };
   } catch (e) {
-    const message =
-      e instanceof Error ? e.message : "자동 생성에 실패했어요. 잠시 후 다시 시도해주세요.";
-    return { ok: false, error: message };
+    // Plan D Phase 3 — AI error 누출 방지. Anthropic API rate-limit·auth 등
+    // 원본 메시지는 서버 로그로만, 사용자에게는 일반화 메시지만.
+    console.error("[manage/content/actions] generateFromSourceLLM 실패:", e);
+    return {
+      ok: false,
+      error: "자동 생성에 실패했어요. 잠시 후 다시 시도해주세요.",
+    };
   }
 }
