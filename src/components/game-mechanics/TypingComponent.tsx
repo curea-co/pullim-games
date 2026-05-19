@@ -144,7 +144,11 @@ export function TypingComponent({
     const trimmed = input.trim();
     if (trimmed.length === 0) return;
     setPhase("checking");
-    const correct = trimmed === card!.problem.answer;
+    // case-insensitive 정답 매칭 — english-vocab-typing 의 "Achieve" 입력도 정답 인식.
+    // 한글·한자는 toLocaleLowerCase 영향 없음 (이미 case 개념 X).
+    // memory 룰 feedback_user_intent_literal: "사용자가 X했는데 틀렸대. 맞잖아" = 시스템 fix.
+    const correct =
+      trimmed.toLocaleLowerCase() === card!.problem.answer.toLocaleLowerCase();
 
     void logEvent({
       gameId,

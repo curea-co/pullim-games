@@ -64,7 +64,7 @@ export function DashboardStatusRow({ stats }: Props) {
                 "flex h-7 w-7 shrink-0 items-center justify-center rounded-button",
                 item.active
                   ? "bg-accent-positive/10 text-accent-positive"
-                  : "bg-bg-canvas text-type-tertiary",
+                  : "bg-pullim-slate-50 text-pullim-slate-400",
               )}
             >
               <Icon className="h-3.5 w-3.5" strokeWidth={2} />

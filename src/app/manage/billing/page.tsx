@@ -62,7 +62,7 @@ function PaidPlanPreview() {
         <li>· 나만의 게임(custom) 카드 수 무제한</li>
         <li>· 클라우드 동기화 (여러 기기 진행 공유)</li>
       </ul>
-      <p className="text-helper text-type-tertiary">
+      <p className="text-helper text-pullim-slate-400">
         세부 가격·기능 비교는 출시 직전 별도 안내합니다.
       </p>
     </Card>
@@ -108,7 +108,7 @@ function NotifyForm() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="이메일 주소"
-            className="flex-1 rounded-block border border-border-hairline bg-bg-block px-3 py-2 text-helper text-type-primary placeholder:text-type-tertiary focus:border-accent-positive focus:outline-none"
+            className="flex-1 rounded-block border border-border-hairline bg-bg-block px-3 py-2 text-helper text-type-primary placeholder:text-pullim-slate-400 focus:border-accent-positive focus:outline-none"
           />
           <Button type="submit">신청</Button>
         </form>
@@ -119,7 +119,7 @@ function NotifyForm() {
 
 function PolicyNote() {
   return (
-    <p className="text-helper text-type-tertiary">
+    <p className="text-helper text-pullim-slate-400">
       결제·구독 정책은 V2 정식 출시 시 이용약관·환불정책과 함께 안내합니다.
     </p>
   );
