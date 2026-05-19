@@ -54,12 +54,27 @@ export interface ReviewOutcome {
  * - correct + wrongCount === 1 → hard
  * - correct + wrongCount >= 2 → again
  */
+const warnedModes = new Set<GameMode>();
+
 export function resolveRating(
   mode: GameMode,
   outcome: ReviewOutcome,
 ): Rating {
   if (mode !== "default") {
-    // Phase 1 — 비-default 모드는 별 plan에서 정식 구현. default fallback.
+    // 비-default 모드는 별 plan에서 정식 구현. default fallback + 조기 버그 감지 경고.
+    // Plan A C4 — silent default fallback이 향후 모드 구현 시 회귀 마스킹 위험.
+    // dev 환경에서 1회만 경고 (운영 콘솔 스팸 회피).
+    if (
+      process.env.NODE_ENV !== "production" &&
+      typeof console !== "undefined" &&
+      !warnedModes.has(mode)
+    ) {
+      warnedModes.add(mode);
+      console.warn(
+        `[fsrs/modes] resolveRating("${mode}") not implemented — default fallback. ` +
+          `Implement before relying on this mode in production.`,
+      );
+    }
     return resolveRating("default", outcome);
   }
   if (!outcome.correct) return "again";

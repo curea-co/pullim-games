@@ -11,11 +11,10 @@ import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
 import { CorrectBurst } from "@/components/ui/CorrectBurst";
 import {
+  applyAndPersist,
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  reviewCard,
-  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -141,9 +140,12 @@ export function QuickQuizComponent({
       payload: { picked: choiceIdx, correct },
     });
 
-    const prev = loadSrsState(gameId, card.id);
-    const next = reviewCard(prev, correct ? "good" : "again");
-    saveSrsAndRecord(gameId, card.id, next);
+    // Plan A Phase 3 — modes wrapper 마이그레이션. 객관식 1턴 종결.
+    applyAndPersist("default", gameId, card.id, {
+      correct,
+      wrongCount: correct ? 0 : 1,
+      hintUsed: false,
+    });
   };
 
   const handleNext = () => {

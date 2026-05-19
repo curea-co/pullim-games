@@ -10,11 +10,10 @@ import { GameShell } from "@/components/game-shell";
 import { CorrectBurst } from "@/components/ui/CorrectBurst";
 import { RevealBanner } from "@/components/ui/RevealBanner";
 import {
+  applyAndPersist,
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  reviewCard,
-  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -159,24 +158,22 @@ export function TypingComponent({
 
     setTimeout(() => {
       if (correct) {
-        const rating = hintUsed
-          ? "hard"
-          : wrongCount === 0
-            ? "good"
-            : wrongCount === 1
-              ? "hard"
-              : "again";
-        const prev = loadSrsState(gameId, card!.id);
-        const updated = reviewCard(prev, rating);
-        saveSrsAndRecord(gameId, card!.id, updated);
+        // Plan A Phase 3 — modes wrapper 마이그레이션. rating 결정은 resolveRating(default).
+        applyAndPersist("default", gameId, card!.id, {
+          correct: true,
+          wrongCount,
+          hintUsed,
+        });
         setPhase("correct");
       } else {
         const nextWrong = wrongCount + 1;
         setWrongCount(nextWrong);
         if (nextWrong >= REVEAL_THRESHOLD) {
-          const prev = loadSrsState(gameId, card!.id);
-          const updated = reviewCard(prev, "again");
-          saveSrsAndRecord(gameId, card!.id, updated);
+          applyAndPersist("default", gameId, card!.id, {
+            correct: false,
+            wrongCount: nextWrong,
+            hintUsed,
+          });
           void logEvent({
             gameId,
             cardId: card!.id,
