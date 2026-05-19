@@ -302,7 +302,7 @@ export default function HistoryTimelineGame() {
             whileHover={phase === "playing" ? { scale: 1.03 } : undefined}
             whileTap={phase === "playing" ? { scale: 0.97 } : undefined}
             layout
-            className="rounded-block border border-border-hairline bg-bg-block px-2.5 py-1.5 text-helper text-type-primary sm:px-3 sm:py-2 sm:text-body"
+            className="rounded-block border border-border-hairline bg-bg-block px-2 py-1 text-helper text-type-primary sm:px-3 sm:py-2 sm:text-body"
           >
             {pe.title}
           </motion.button>

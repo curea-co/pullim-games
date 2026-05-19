@@ -302,7 +302,7 @@ function ChoiceButton({
       disabled={phase !== "playing"}
       whileHover={phase === "playing" ? { scale: 1.01 } : undefined}
       whileTap={phase === "playing" ? { scale: 0.99 } : undefined}
-      className={`block w-full rounded-block border px-3 py-2.5 text-left text-body text-type-primary transition-colors sm:px-4 sm:py-3 ${stateClass}`}
+      className={`block w-full rounded-block border px-3 py-2 text-left text-helper text-type-primary transition-colors sm:px-4 sm:py-3 sm:text-body ${stateClass}`}
     >
       {label}
     </motion.button>
