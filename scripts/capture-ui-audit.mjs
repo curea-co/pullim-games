@@ -63,6 +63,22 @@ for (const vp of VIEWPORTS) {
       const vh = window.innerHeight;
       const found = [];
       const selectors = "button, a, [role='button'], [draggable='true']";
+      // CONVENTION §8.2.1·§8.2.2 — critical vs informational 분류.
+      function classify(el) {
+        // 명시 마커 우선
+        const explicit = el.getAttribute("data-cta-priority");
+        if (explicit === "critical" || explicit === "informational") return explicit;
+        // form 안 → informational (자연 스크롤 form 영역)
+        if (el.closest("form")) return "informational";
+        // position sticky / fixed → informational (어디서든 노출)
+        let cur = el;
+        while (cur && cur !== document.body) {
+          const pos = getComputedStyle(cur).position;
+          if (pos === "sticky" || pos === "fixed") return "informational";
+          cur = cur.parentElement;
+        }
+        return "critical";
+      }
       document.querySelectorAll(selectors).forEach((el) => {
         const r = el.getBoundingClientRect();
         if (r.width === 0 && r.height === 0) return; // 숨김
@@ -72,6 +88,7 @@ for (const vp of VIEWPORTS) {
           found.push({
             tag: el.tagName,
             text: (el.textContent || "").trim().slice(0, 30),
+            priority: classify(el),
             box: {
               x: Math.round(r.x),
               y: Math.round(r.y),
@@ -88,30 +105,40 @@ for (const vp of VIEWPORTS) {
       return { vw, vh, overflows: found };
     });
 
-    const pass = result.overflows.length === 0;
-    if (!pass) totalOverflow += result.overflows.length;
+    const criticals = result.overflows.filter((o) => o.priority === "critical");
+    const informationals = result.overflows.filter((o) => o.priority === "informational");
+    const pass = criticals.length === 0;
+    if (!pass) totalOverflow += criticals.length;
     summary.push({
       viewport: vp.name,
       label: vp.label,
       vw: result.vw,
       vh: result.vh,
       pass,
-      overflows: result.overflows,
+      criticals,
+      informationals,
       png: pngPath,
     });
 
+    const icon = pass ? (informationals.length > 0 ? "✅⚠" : "✅") : "❌";
     console.log(
-      `${pass ? "✅" : "❌"} ${vp.name} (${result.vw}×${result.vh}) — ${vp.label}`,
+      `${icon} ${vp.name} (${result.vw}×${result.vh}) — ${vp.label}`,
     );
-    if (!pass) {
-      result.overflows.slice(0, 5).forEach((o) =>
+    if (criticals.length > 0) {
+      console.log(`   🔴 critical (gate fail):`);
+      criticals.slice(0, 5).forEach((o) =>
         console.log(
-          `   "${o.text}" right=${o.box.right}/${result.vw} bottom=${o.box.bottom}/${result.vh}`,
+          `      "${o.text}" right=${o.box.right}/${result.vw} bottom=${o.box.bottom}/${result.vh}`,
         ),
       );
-      if (result.overflows.length > 5) {
-        console.log(`   ... +${result.overflows.length - 5}건 더`);
-      }
+    }
+    if (informationals.length > 0) {
+      console.log(`   🟡 informational (자연 스크롤, gate 통과):`);
+      informationals.slice(0, 5).forEach((o) =>
+        console.log(
+          `      "${o.text}" right=${o.box.right}/${result.vw} bottom=${o.box.bottom}/${result.vh}`,
+        ),
+      );
     }
     console.log(`   📷 ${pngPath}`);
   } catch (e) {
@@ -146,12 +173,22 @@ writeFileSync(
   ),
 );
 
+const totalInformational = summary.reduce(
+  (n, s) => n + (s.informationals?.length ?? 0),
+  0,
+);
+
 console.log(`\n=== 요약 ===`);
-console.log(`총 overflow: ${totalOverflow}`);
+console.log(`critical overflow: ${totalOverflow} (gate)`);
+console.log(`informational overflow: ${totalInformational} (자연 스크롤, gate 통과)`);
 console.log(`결과 JSON: ${jsonPath}`);
 
 if (totalOverflow > 0) {
-  console.log(`\n❌ FAIL — overflow ${totalOverflow}건 발견. 머지 전 0까지 fix 의무 (CONVENTION §8.2).`);
+  console.log(`\n❌ FAIL — critical overflow ${totalOverflow}건 발견. 머지 전 0까지 fix 의무 (CONVENTION §8.2.1).`);
   process.exit(1);
 }
-console.log(`\n✅ PASS — 4 viewport 모두 overflow=0.`);
+if (totalInformational > 0) {
+  console.log(`\n✅ PASS (with warnings) — critical=0. informational ${totalInformational}건 (자연 스크롤·form 안·sticky).`);
+} else {
+  console.log(`\n✅ PASS — 4 viewport 모두 overflow=0.`);
+}

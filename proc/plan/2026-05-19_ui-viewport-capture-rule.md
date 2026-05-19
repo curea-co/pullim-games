@@ -1,6 +1,6 @@
 # 2026-05-19 — UI 변경 PR 4 viewport 캡처 의무화 룰
 
-- **상태**: ACCEPTED (2026-05-19) — §1 합의 완료. D1~D5 모두 A 채택. Phase 1+2 묶음 진행 (룰 정착 + script 한 PR).
+- **상태**: ACCEPTED + EXTENDED (2026-05-19) — §1 합의 완료. Phase 1+2 머지 PR #67. fold-aware 확장 (§8.2.1·§8.2.2 critical vs informational 분류) PR #N 추가 머지 — billing "신청" 등 form 안 button 자연 스크롤 허용.
 - **트리거**: 2026-05-18 세 번의 UI 회귀 모두 사용자 캡처로 발견 (PR #61 행/열 정렬 · PR #65 ManageNav overflow · PR #66 320 viewport 7 게임 overflow). e2e + plan + vitest 만으로는 viewport overflow·시각 회귀 잡지 못함 — UI 변경 자체 캡처 단계 부재가 패턴.
 - **메모리 룰**: 문서화 먼저, 코드는 그 다음 (feedback_docs_first). UI 변경은 비자명 → plan 단계 필수. 본 plan 자체가 그 결을 강제하는 룰.
 - **연관**: `~/dev_git/.pullim-meta/CONVENTION.md` §7 (audit 트리거) 보완.
