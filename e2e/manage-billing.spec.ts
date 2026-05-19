@@ -10,12 +10,12 @@ test("/manage/billing 진입 — 4 섹션 렌더 + 알림 신청 mock toast", as
 
   // §1 헤더
   await expect(
-    page.getByRole("heading", { name: "결제", level: 1 }),
+    page.getByRole("heading", { name: "결제", level: 2 }),
   ).toBeVisible();
 
   // §2 현재 플랜
   await expect(
-    page.getByRole("heading", { name: "현재 플랜", level: 2 }),
+    page.getByRole("heading", { name: "현재 플랜", level: 3 }),
   ).toBeVisible();
   await expect(page.getByText("무료", { exact: true })).toBeVisible();
 
