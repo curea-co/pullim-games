@@ -37,6 +37,9 @@ export interface WordMatchCardLike {
   hint?: string;
   problem: {
     pairs: { left: string; right: string }[];
+    /** 보너스 매칭 — 본 pairs 외 추가 좌·우 짝. 카드 종료 조건 X (pairs만 충족 시 종료).
+     *  english-word-match 의 extras 패턴 통합 — Plan C Phase 2. */
+    extras?: { left: string[]; right: string[] };
   };
 }
 
@@ -108,20 +111,32 @@ export function WordMatchComponent({
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
 
+  // pairs index + extras index (pairs.length + j). 매칭 검증 시 pairIndex 동일 = 정답.
+  // 카드 종료 조건은 pairs index 만 (extras 는 보너스).
   const leftItems: SideItem[] = useMemo(() => {
     if (!card) return [];
-    return seededShuffle(
-      card.problem.pairs.map((p, i) => ({ pairIndex: i, text: p.left })),
-      `${card.id}-l`,
-    );
+    const pairs = card.problem.pairs.map((p, i) => ({
+      pairIndex: i,
+      text: p.left,
+    }));
+    const extras = (card.problem.extras?.left ?? []).map((text, j) => ({
+      pairIndex: card.problem.pairs.length + j,
+      text,
+    }));
+    return seededShuffle([...pairs, ...extras], `${card.id}-l`);
   }, [card]);
 
   const rightItems: SideItem[] = useMemo(() => {
     if (!card) return [];
-    return seededShuffle(
-      card.problem.pairs.map((p, i) => ({ pairIndex: i, text: p.right })),
-      `${card.id}-r`,
-    );
+    const pairs = card.problem.pairs.map((p, i) => ({
+      pairIndex: i,
+      text: p.right,
+    }));
+    const extras = (card.problem.extras?.right ?? []).map((text, j) => ({
+      pairIndex: card.problem.pairs.length + j,
+      text,
+    }));
+    return seededShuffle([...pairs, ...extras], `${card.id}-r`);
   }, [card]);
 
   useEffect(() => {
@@ -193,9 +208,11 @@ export function WordMatchComponent({
       });
       setPhase("correct-flash");
       setTimeout(() => setPhase("playing"), 500);
-      if (next.size === card!.problem.pairs.length) {
-        // Plan A Phase 3 — modes wrapper 마이그레이션 + 임계 통일 (wc<=2→hard → wc===1→hard).
-        // resolveRating(default) 가 Typing 패턴으로 통일된 결정.
+      // 카드 종료 조건: 본 pairs 매칭 통과 (extras 보너스 제외) — Plan C Phase 2.
+      const pairsMatched = Array.from(next).filter(
+        (i) => i < card!.problem.pairs.length,
+      ).length;
+      if (pairsMatched === card!.problem.pairs.length) {
         applyAndPersist("default", gameId, card!.id, {
           correct: true,
           wrongCount,
@@ -276,7 +293,10 @@ export function WordMatchComponent({
     setCardIndex(cardIndex + 1);
   }
 
-  const allMatched = matched.size === card.problem.pairs.length;
+  // pairs 모두 매칭 시 통과 (extras 는 보너스, 통과 조건 X)
+  const allMatched =
+    Array.from(matched).filter((i) => i < card.problem.pairs.length)
+      .length === card.problem.pairs.length;
   const isResolved = allMatched || phase === "reveal";
 
   return (
@@ -306,8 +326,24 @@ export function WordMatchComponent({
             <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
           )}
           <p className="mt-2 text-helper tabular text-type-secondary">
-            매칭 {matched.size} / {card.problem.pairs.length}
-            {wrongCount > 0 && ` · 오답 ${wrongCount}`}
+            {(() => {
+              const pairsLen = card.problem.pairs.length;
+              const extrasLen = card.problem.extras?.left.length ?? 0;
+              const matchedArr = Array.from(matched);
+              const pairsMatched = matchedArr.filter(
+                (i) => i < pairsLen,
+              ).length;
+              const bonusMatched = matchedArr.filter(
+                (i) => i >= pairsLen,
+              ).length;
+              return (
+                <>
+                  매칭 {pairsMatched} / {pairsLen}
+                  {extrasLen > 0 && ` · 보너스 ${bonusMatched} / ${extrasLen}`}
+                  {wrongCount > 0 && ` · 오답 ${wrongCount}`}
+                </>
+              );
+            })()}
           </p>
 
           {phase === "reveal" && (
