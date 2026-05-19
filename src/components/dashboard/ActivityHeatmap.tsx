@@ -45,7 +45,7 @@ function intensity(count: number): 0 | 1 | 2 | 3 {
 }
 
 const INTENSITY_BG: Record<number, string> = {
-  0: "bg-bg-canvas border border-border-hairline",
+  0: "bg-pullim-slate-50 border border-border-hairline",
   1: "bg-accent-positive/25",
   2: "bg-accent-positive/55",
   3: "bg-accent-positive/85",
@@ -115,11 +115,11 @@ export function ActivityHeatmap({ playedStats, days = 14 }: Props) {
           );
         })}
       </ul>
-      <footer className="flex items-baseline justify-between text-helper text-type-tertiary">
+      <footer className="flex items-baseline justify-between text-helper text-pullim-slate-400">
         <span>{formatShortDate(aggregated[0]!.date)}</span>
         <span className="flex items-center gap-1.5">
           적음
-          <span className="h-2.5 w-2.5 rounded-sm border border-border-hairline bg-bg-canvas" />
+          <span className="h-2.5 w-2.5 rounded-sm border border-border-hairline bg-pullim-slate-50" />
           <span className="h-2.5 w-2.5 rounded-sm bg-accent-positive/25" />
           <span className="h-2.5 w-2.5 rounded-sm bg-accent-positive/55" />
           <span className="h-2.5 w-2.5 rounded-sm bg-accent-positive/85" />
