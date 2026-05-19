@@ -54,34 +54,38 @@ export interface ReviewOutcome {
  * - correct + wrongCount === 1 → hard
  * - correct + wrongCount >= 2 → again
  */
-const warnedModes = new Set<GameMode>();
-
 export function resolveRating(
   mode: GameMode,
   outcome: ReviewOutcome,
 ): Rating {
-  if (mode !== "default") {
-    // 비-default 모드는 별 plan에서 정식 구현. default fallback + 조기 버그 감지 경고.
-    // Plan A C4 — silent default fallback이 향후 모드 구현 시 회귀 마스킹 위험.
-    // dev 환경에서 1회만 경고 (운영 콘솔 스팸 회피).
-    if (
-      process.env.NODE_ENV !== "production" &&
-      typeof console !== "undefined" &&
-      !warnedModes.has(mode)
-    ) {
-      warnedModes.add(mode);
-      console.warn(
-        `[fsrs/modes] resolveRating("${mode}") not implemented — default fallback. ` +
-          `Implement before relying on this mode in production.`,
-      );
+  // default 패턴 — 모든 모드의 baseline rating 결정.
+  const defaultRating: Rating = !outcome.correct
+    ? "again"
+    : outcome.hintUsed
+      ? "hard"
+      : outcome.wrongCount === 0
+        ? "good"
+        : outcome.wrongCount === 1
+          ? "hard"
+          : "again";
+
+  // review-queue (Plan E Phase 2): 카드 선택 차이 (R 오름차순)이 핵심.
+  // rating 결정은 default 와 동일 — sub-mode 가 아니라 별 진입점.
+  if (mode === "review-queue") return defaultRating;
+
+  // deep-recall (Plan E Phase 4): R<0.6 카드만 풀로. rating 결정은 default 동일.
+  if (mode === "deep-recall") return defaultRating;
+
+  // time-attack (Plan E Phase 3): elapsedMs 30000 초과 = again. 그 외 default.
+  if (mode === "time-attack") {
+    if (outcome.elapsedMs !== undefined && outcome.elapsedMs > 30_000) {
+      return "again";
     }
-    return resolveRating("default", outcome);
+    return defaultRating;
   }
-  if (!outcome.correct) return "again";
-  if (outcome.hintUsed) return "hard";
-  if (outcome.wrongCount === 0) return "good";
-  if (outcome.wrongCount === 1) return "hard";
-  return "again";
+
+  // default
+  return defaultRating;
 }
 
 /**

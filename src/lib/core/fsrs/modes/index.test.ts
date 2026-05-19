@@ -3,7 +3,6 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   applyAndPersist,
   applyReview,
-  type GameMode,
   resolveRating,
   type ReviewOutcome,
 } from "./index";
@@ -67,16 +66,52 @@ describe("resolveRating — default 모드", () => {
   });
 });
 
-describe("resolveRating — 비-default 모드 (Phase 1 default fallback)", () => {
-  it.each<GameMode>(["review-queue", "time-attack", "deep-recall"])(
-    "%s 는 default 와 동일 결과 (Phase 1 fallback)",
-    (mode) => {
-      expect(resolveRating(mode, defaultOutcome())).toBe("good");
-      expect(
-        resolveRating(mode, defaultOutcome({ correct: false })),
-      ).toBe("again");
-    },
-  );
+describe("resolveRating — review-queue (Plan E Phase 2)", () => {
+  it("rating 결정 default 와 동일 — 카드 선택만 차이", () => {
+    expect(resolveRating("review-queue", defaultOutcome())).toBe("good");
+    expect(
+      resolveRating("review-queue", defaultOutcome({ correct: false })),
+    ).toBe("again");
+    expect(
+      resolveRating("review-queue", defaultOutcome({ wrongCount: 1 })),
+    ).toBe("hard");
+  });
+});
+
+describe("resolveRating — deep-recall (Plan E Phase 4)", () => {
+  it("rating 결정 default 와 동일 — R<0.6 카드만 풀로 차이", () => {
+    expect(resolveRating("deep-recall", defaultOutcome())).toBe("good");
+    expect(
+      resolveRating("deep-recall", defaultOutcome({ hintUsed: true })),
+    ).toBe("hard");
+  });
+});
+
+describe("resolveRating — time-attack (Plan E Phase 3)", () => {
+  it("elapsedMs 30초 이내 정답 → default 패턴", () => {
+    expect(
+      resolveRating("time-attack", defaultOutcome({ elapsedMs: 15_000 })),
+    ).toBe("good");
+    expect(
+      resolveRating(
+        "time-attack",
+        defaultOutcome({ elapsedMs: 25_000, wrongCount: 1 }),
+      ),
+    ).toBe("hard");
+  });
+
+  it("elapsedMs 30초 초과 → again (시간 초과 페널티)", () => {
+    expect(
+      resolveRating("time-attack", defaultOutcome({ elapsedMs: 30_001 })),
+    ).toBe("again");
+    expect(
+      resolveRating("time-attack", defaultOutcome({ elapsedMs: 60_000 })),
+    ).toBe("again");
+  });
+
+  it("elapsedMs 미정의 → default (타이머 미가동 케이스)", () => {
+    expect(resolveRating("time-attack", defaultOutcome())).toBe("good");
+  });
 });
 
 describe("applyReview — 순수성", () => {
