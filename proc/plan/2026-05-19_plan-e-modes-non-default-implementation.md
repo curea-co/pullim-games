@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan E: modes 비-default 정식 구현 (review-queue·time-attack·deep-recall)
 
-- **상태**: DRAFT (2026-05-19) — §1 합의 대기 → 4 Phase 분할. **메모리 룰 "단일 백본 + 다중 게임 모드" 의 다중 모드 본격 구현 트랙**.
+- **상태**: PARTIAL-COMPLETE (2026-05-19) — 코어 resolveRating (3 모드 정식 분기) PR #81 머지. D1.1~D1.6 사용자 합의 완료. UI 통합 (타이머·selectNextCards 확장·URL searchParams·홈/허브 진입점) 다음 세션 이관 — 약 430 LOC + 17 호출처 영향.
 - **트리거**: audit v3 §4 단일 백본 진척 — modes wrapper 정식 1/4 (default 만), 비-default 3 모드는 fallback + warn 상태. V0.4+ 트랙으로 정식 구현 의무.
 - **메모리 룰**:
   - **단일 백본 + 다중 게임 모드** (project_architecture_decision) — 본 plan이 다중 모드 정식 진입
