@@ -12,11 +12,10 @@ import { CorrectBurst } from "@/components/ui/CorrectBurst";
 import { RevealBanner } from "@/components/ui/RevealBanner";
 import { getCardSequence } from "./content";
 import {
+  applyAndPersist,
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  reviewCard,
-  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -170,9 +169,11 @@ export default function HistoryTimelineGame() {
       payload: { correct, ordered: orderedIndices },
     });
 
-    const prev = loadSrsState(GAME_ID, card!.id);
-    const next = reviewCard(prev, correct ? "good" : "again");
-    saveSrsAndRecord(GAME_ID, card!.id, next);
+    applyAndPersist("default", GAME_ID, card!.id, {
+      correct,
+      wrongCount: correct ? wrongCount : wrongCount + 1,
+      hintUsed: false,
+    });
 
     setTimeout(() => {
       if (correct) {

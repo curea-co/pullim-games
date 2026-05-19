@@ -34,13 +34,11 @@ import { getCardSequence } from "./content";
 import type { Term as UiTerm } from "./logic/types";
 import type { FactorizationCard } from "./schema";
 import {
+  applyAndPersist,
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  reviewCard,
-  saveSrsAndRecord,
   selectNextCards,
-  type CardSrsState,
 } from "@/lib/core";
 
 const GAME_ID = "factorization";
@@ -221,15 +219,17 @@ export default function FactorizationGame() {
       setPhase("extracting");
       setTimeout(() => {
         setPhase("done");
-        const prev: CardSrsState = loadSrsState(GAME_ID, card.id);
-        const rating = attempt === 1 ? "good" : attempt === 2 ? "hard" : "again";
-        const next = reviewCard(prev, rating);
-        saveSrsAndRecord(GAME_ID, card.id, next);
+        // Plan A Phase 3 — modes wrapper. attempt=1→wc 0(good), attempt=2→wc 1(hard), 그외 again.
+        applyAndPersist("default", GAME_ID, card.id, {
+          correct: true,
+          wrongCount,
+          hintUsed: false,
+        });
         void logEvent({
           gameId: GAME_ID,
           cardId: card.id,
           action: "transform",
-          payload: { reviewCount: next.reviewCount, attempt, rating },
+          payload: { attempt },
         });
         void logEvent({
           gameId: GAME_ID,
@@ -254,9 +254,11 @@ export default function FactorizationGame() {
   };
 
   function triggerReveal(attemptCount: number, source: "auto" | "voluntary") {
-    const prev: CardSrsState = loadSrsState(GAME_ID, card!.id);
-    const updated = reviewCard(prev, "again");
-    saveSrsAndRecord(GAME_ID, card!.id, updated);
+    applyAndPersist("default", GAME_ID, card!.id, {
+      correct: false,
+      wrongCount: attemptCount,
+      hintUsed: false,
+    });
     void logEvent({
       gameId: GAME_ID,
       cardId: card!.id,

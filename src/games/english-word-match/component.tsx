@@ -10,11 +10,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
 import { getCardSequence } from "./content";
 import {
+  applyAndPersist,
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  reviewCard,
-  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -149,15 +148,16 @@ export default function EnglishWordMatchGame() {
       });
       // 카드 완료
       if (next.size === card!.problem.pairs.length) {
-        const rating = wrongCount === 0 ? "good" : wrongCount <= 2 ? "hard" : "again";
-        const prev = loadSrsState(GAME_ID, card!.id);
-        const updated = reviewCard(prev, rating);
-        saveSrsAndRecord(GAME_ID, card!.id, updated);
+        applyAndPersist("default", GAME_ID, card!.id, {
+          correct: true,
+          wrongCount,
+          hintUsed: false,
+        });
         void logEvent({
           gameId: GAME_ID,
           cardId: card!.id,
           action: "submit",
-          payload: { wrongCount, rating },
+          payload: { wrongCount },
         });
       }
     } else {

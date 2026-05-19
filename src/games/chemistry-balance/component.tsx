@@ -13,11 +13,10 @@ import { RevealBanner } from "@/components/ui/RevealBanner";
 import { getCardSequence } from "./content";
 import { allElements, isBalanced, sumSide } from "./logic/parse";
 import {
+  applyAndPersist,
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  reviewCard,
-  saveSrsAndRecord,
   selectNextCards,
 } from "@/lib/core";
 
@@ -164,18 +163,21 @@ export default function ChemistryBalanceGame() {
 
     setTimeout(() => {
       if (correct) {
-        const rating = wrongCount === 0 ? "good" : wrongCount <= 1 ? "hard" : "again";
-        const prev = loadSrsState(GAME_ID, card!.id);
-        const updated = reviewCard(prev, rating);
-        saveSrsAndRecord(GAME_ID, card!.id, updated);
+        applyAndPersist("default", GAME_ID, card!.id, {
+          correct: true,
+          wrongCount,
+          hintUsed: false,
+        });
         setPhase("correct");
       } else {
         const nextWrong = wrongCount + 1;
         setWrongCount(nextWrong);
         if (nextWrong >= REVEAL_THRESHOLD) {
-          const prev = loadSrsState(GAME_ID, card!.id);
-          const updated = reviewCard(prev, "again");
-          saveSrsAndRecord(GAME_ID, card!.id, updated);
+          applyAndPersist("default", GAME_ID, card!.id, {
+            correct: false,
+            wrongCount: nextWrong,
+            hintUsed: false,
+          });
           void logEvent({
             gameId: GAME_ID,
             cardId: card!.id,
