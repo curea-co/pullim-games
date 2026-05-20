@@ -15,7 +15,8 @@ import {
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  selectNextCards,
+  selectCardsForMode,
+  useGameMode,
 } from "@/lib/core";
 
 type Phase = "idle" | "selecting" | "feedback" | "completed";
@@ -52,6 +53,7 @@ export function QuickQuizComponent({
   emptyMessage,
   homeHref = "/",
 }: Props) {
+  const mode = useGameMode();
   const [cards, setCards] = useState(() => initialCards);
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
@@ -65,16 +67,18 @@ export function QuickQuizComponent({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(gameId, c.id),
       }));
-      const ordered = selectNextCards(withSrs, initialCards.length).map(
-        (x) => x.card,
-      );
+      const ordered = selectCardsForMode(
+        withSrs,
+        mode,
+        initialCards.length,
+      ).map((x) => x.card);
       setCards(ordered);
     }
     void logEvent({ gameId, cardId: null, action: "session-start" });
     return () => {
       void logEvent({ gameId, cardId: null, action: "session-end" });
     };
-  }, [gameId]);
+  }, [gameId, mode]);
 
   // 빈 카드 풀
   if (cards.length === 0) {
@@ -141,7 +145,7 @@ export function QuickQuizComponent({
     });
 
     // Plan A Phase 3 — modes wrapper 마이그레이션. 객관식 1턴 종결.
-    applyAndPersist("default", gameId, card.id, {
+    applyAndPersist(mode, gameId, card.id, {
       correct,
       wrongCount: correct ? 0 : 1,
       hintUsed: false,
