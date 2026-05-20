@@ -1,13 +1,17 @@
 // /manage/billing — 결제 진입점 + V1 placeholder.
 // plan: proc/plan/2026-05-18_subscription-cta-entry.md §3 Phase 1
 //       + proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md §3 Phase 2.
+//
+// 정책 갱신 (2026-05-20 — Codex review fix):
+// - hash-only 모델 폐기. 외부 메일 서비스(Resend) 즉시 위임 (SPEC §05.7.5).
+// - 클라이언트는 plain email 전송. 본 서버는 라우트 처리 후 변수 폐기 — 저장 0.
 
 import { test, expect } from "@playwright/test";
 
-test("/manage/billing 진입 — 4 섹션 렌더 + 알림 신청 → POST /api/billing/notify (hash only)", async ({
+test("/manage/billing 진입 — 4 섹션 렌더 + 알림 신청 → POST /api/billing/notify (외부 위임)", async ({
   page,
 }) => {
-  // Phase 2: 알림 신청은 실제 POST 호출. 이메일 원문은 절대 페이로드에 포함되면 안 됨.
+  // Phase 2: 알림 신청은 실제 POST 호출. Resend 호출은 라우트 mock 으로 차단.
   const notifyRequests: Array<{ payload: unknown; status: number }> = [];
   await page.route("**/api/billing/notify", async (route) => {
     const post = route.request().postDataJSON();
@@ -35,29 +39,32 @@ test("/manage/billing 진입 — 4 섹션 렌더 + 알림 신청 → POST /api/b
   // §3 유료 플랜 preview
   await expect(page.getByText("유료 플랜 (준비 중)")).toBeVisible();
 
-  // §4 알림 신청 form — 실 POST 호출 (hash 만 전송)
+  // §4 알림 신청 form — 실 POST 호출 (plain email + 외부 위임 명시)
   await expect(page.getByText("출시 알림 받기")).toBeVisible();
   const email = page.getByLabel("이메일 주소");
   const submit = page.getByRole("button", { name: "신청" });
   await email.fill("user@example.com");
   await submit.click();
 
-  // 정직성 강화 카피 검증
-  await expect(
-    page.getByText(/출시 시 알림을 받기 위해 신청됐어요/),
-  ).toBeVisible();
-  await expect(page.getByText(/해시\(hash\) 처리되어 저장/)).toBeVisible();
-  await expect(page.getByText(/6개월 후 자동 삭제/)).toBeVisible();
+  // 외부 위임 정직성 카피 검증 — role=status (success state) 안에서 1건만.
+  const status = page.getByRole("status");
+  await expect(status).toBeVisible();
+  await expect(status).toContainText("출시 시 알림을 받기 위해 신청됐어요");
+  await expect(status).toContainText("외부 서비스(Resend)");
+  await expect(status).toContainText("풀림 서버에는 이메일이 저장되지 않아요");
 
   // POST 호출 페이로드 검증
   expect(notifyRequests).toHaveLength(1);
   const req = notifyRequests[0].payload as Record<string, unknown>;
   expect(req.action).toBe("billing.notify.signup");
-  // 이메일 원문이 페이로드 어디에도 포함되면 안 됨
-  expect(JSON.stringify(req)).not.toContain("user@example.com");
-  // emailHash 는 sha256 hex 64자
-  expect(req.emailHash).toMatch(/^[a-f0-9]{64}$/);
+  expect(req.email).toBe("user@example.com");
+  expect(req.source).toBe("billing-cta");
   expect(typeof req.ts).toBe("number");
+
+  // [strict 회귀] legacy hash 필드는 포함되지 않음
+  expect(req.emailHash).toBeUndefined();
+  // [strict 회귀] 정의되지 않은 추가 필드 0 — 4 필드만 (action·email·source·ts)
+  expect(Object.keys(req).sort()).toEqual(["action", "email", "source", "ts"]);
 });
 
 test("관리 탭 — 6번째 '결제' 탭 존재 + 활성 강조", async ({ page }) => {

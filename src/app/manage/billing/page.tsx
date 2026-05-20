@@ -4,15 +4,14 @@
 // plan: proc/plan/2026-05-18_subscription-cta-entry.md §3 Phase 1
 //       + proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md §3 Phase 2.
 //
-// Phase 2 (2026-05-20): mock toast → 실제 /api/billing/notify POST.
-// 이메일 원문은 절대 서버로 전송하지 않고, 클라이언트에서 SHA-256 hash 만 보낸다.
-// 6개월 보존 정책 (SPEC §05.6).
+// Phase 2 (2026-05-20 정책 갱신 — Codex review fix):
+// - hash-only 모델 폐기. 외부 메일 서비스(Resend) 즉시 위임 (SPEC §05.7.5).
+// - plain email 을 서버로 보내지만 본 서버는 저장 0 — 라우트가 Resend 위임 후 폐기.
 
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { hashEmail } from "@/lib/core";
 
 export default function BillingPage() {
   return (
@@ -95,18 +94,20 @@ function NotifyForm() {
 
     setState({ kind: "submitting" });
     try {
-      // 클라이언트에서 SHA-256 hash 만 계산 — 서버는 원본 이메일을 받지 않는다.
-      const emailHash = await hashEmail(trimmed);
+      // 서버는 외부 메일 서비스(Resend) 에 즉시 위임 후 변수 폐기 — 본 서버 저장 0
+      // (SPEC §05.7.5). 클라이언트는 plain email + 출처 메타데이터만 전송.
       const res = await fetch("/api/billing/notify", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           action: "billing.notify.signup",
-          emailHash,
+          email: trimmed,
+          source: "billing-cta",
           ts: Date.now(),
         }),
       });
       if (!res.ok) {
+        // 503 (RESEND_API_KEY 미설정) 도 사용자에게는 일반 에러로 노출 — 운영 정보 보호.
         setState({
           kind: "error",
           message: "신청에 실패했어요. 잠시 후 다시 시도해주세요.",
@@ -137,9 +138,9 @@ function NotifyForm() {
           role="status"
           className="rounded-block border border-accent-positive/30 bg-accent-positive/5 px-3 py-2 text-helper text-type-primary"
         >
-          출시 시 알림을 받기 위해 신청됐어요. 입력하신 이메일은 해시(hash)
-          처리되어 저장되고, 출시 알림 발송 외 용도로는 사용하지 않으며 6개월
-          후 자동 삭제됩니다.
+          출시 시 알림을 받기 위해 신청됐어요. 입력하신 이메일은 알림 발송용
+          외부 서비스(Resend)로 즉시 위임되어 보관되며, 출시 알림 외 용도로는
+          사용하지 않습니다. 풀림 서버에는 이메일이 저장되지 않아요.
         </p>
       ) : (
         <>
@@ -185,8 +186,9 @@ function PolicyNote() {
         결제·구독 정책은 V2 정식 출시 시 이용약관·환불정책과 함께 안내합니다.
       </p>
       <p>
-        결제 게이트웨이는 Toss Payments를 사용할 예정이에요. 신청한 이메일은
-        원문 저장 없이 해시(hash) 처리되어 6개월간만 보존됩니다.
+        결제 게이트웨이는 Toss Payments를 사용할 예정이에요. 알림 신청한
+        이메일은 풀림 서버에 저장하지 않고, 알림 발송용 외부 서비스(Resend)에
+        즉시 위임됩니다.
       </p>
     </div>
   );

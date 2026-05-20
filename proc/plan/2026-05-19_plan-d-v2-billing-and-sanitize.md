@@ -96,15 +96,26 @@ C8 fix — 본 plan §1 후 진행.
 - [ ] G1·G3·G4 합의 후 §5.7.2 미합의 항목 → §5.7.1 합의 항목 이동
 
 ### Phase 2 — billing 알림 신청 백엔드 (Phase 1 후)
+
+**1차 구현 (Codex review 전, 2026-05-20)**:
 - [x] `/api/billing/notify` 라우트 신설 (별도 엔드포인트로 분리 — EventSchema 와 형식 충돌 회피, 보안 boilerplate 적용)
 - [x] `BillingNotifySignupSchema` zod 스키마 — emailHash 정규식 검증(`/^[a-f0-9]{64}$/`)
 - [x] `hashEmail` helper — Web Crypto SHA-256, normalize(lowercase+trim)
 - [x] `billing/page.tsx` mock toast → 실제 POST + email hash (sha256). 이메일 원문은 페이로드에 포함되지 않음
-- [x] 알림 신청 완료 메시지 정직성 강화 — "출시 시 알림을 받기 위해 신청됐어요. 입력한 이메일은 해시(hash) 처리되어 저장되고, 출시 알림 발송 외 용도로는 사용하지 않으며 6개월 후 자동 삭제됩니다."
-- [x] PolicyNote 갱신 — Toss Payments 명시 + hash·6개월 보존 명시
-- [x] vitest — `/api/billing/notify` 8 케이스 (성공·invalid JSON·schema 위반·plain email rejection 등)
-- [x] vitest — `hashEmail` 7 케이스 (deterministic·RFC sha256 일치·normalize·collision·plus-aliasing·빈 문자열 throw)
-- [x] e2e — 신청 → POST 호출 mock + 페이로드에 plain email 미포함 검증 + 정직성 카피 노출 검증
+
+**2차 정착 (Codex review fix, 2026-05-20)**:
+Codex 가 hash-only 모델로는 실제 알림 메일 발송이 불가능하다는 **기능 모순**(지적 #1) + zod non-strict 로 raw email 동봉 가능하다는 **PII 누수 경로**(지적 #2) + 누수 테스트 갭(지적 #3) + UI 변경 4 viewport 감사 누락(지적 #4) 을 지적. **사용자 합의: 외부 메일 서비스(Resend) 위임으로 정착** (SPEC §5.7.5 신설).
+- [x] SPEC §5.7.5 외부 메일 서비스 위임 정책 신설 — Resend 채택 + 4 axis 비교 매트릭스(Mailchimp·SendGrid·Postmark) + 데이터 흐름 + secret 관리(`RESEND_API_KEY`·`RESEND_AUDIENCE_ID`)
+- [x] SPEC §5.6 출시 알림 신청 — hash 모델 → 외부 위임 모델 갱신
+- [x] `BillingNotifySignupSchema` `.strict()` 적용 — plain `email` + `source: 'billing-cta'` + `ts` + `action`. 추가 필드 동봉 시 422 (Codex #2 fix)
+- [x] `email-hash` helper 폐기 — 외부 위임 모델에서 hash 불필요
+- [x] `/api/billing/notify` 라우트 재설계 — Resend audience contact 등록 (fetch 직접 호출, SDK 의존성 0) + secret 미설정 시 503 + 외부 호출 실패 시 502
+- [x] `src/lib/server/billing/resend-client.ts` 신설 — `delegateNotifySignupToResend` (deps injection 가능, server-only)
+- [x] `billing/page.tsx` 폼·success 카피·PolicyNote — 외부 위임 정직성 카피로 갱신 ("풀림 서버에는 이메일이 저장되지 않아요")
+- [x] vitest — 라우트 strict 회귀(추가 필드·legacy `emailHash` 거부) + Resend mock(call body·응답 폐기) + 503·502 분기 + PII 0 회귀(응답 본문 email leak X) — 22 케이스
+- [x] vitest — `resend-client` 단위 6 케이스 (env 미설정·정상·auth header·URL encode·4xx·throw)
+- [x] e2e — strict 회귀 (4 필드만·`emailHash` undefined) + 외부 위임 카피 검증
+- [x] `bun run ui:audit /manage/billing` 4 viewport (320·390·768·1280) 통과 — critical=0, informational 2건(자연 스크롤, gate 통과) — Codex #4 fix
 
 ### Phase 3 — sanitize + AI error 일반화 (1 PR, Phase 1·2와 독립)
 - [ ] `manage/content/page.tsx` 입력 정규식 sanitize (`<script>`, `on*=`, `javascript:` 패턴 제거)
