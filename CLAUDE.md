@@ -124,3 +124,37 @@ proc/
 ## 8. 컨벤션 변경
 
 본 문서나 `~/dev_git/.pullim-meta/CONVENTION.md`를 수정해야 할 때는 **별도 작업으로 분리**. 일반 게임 작업 도중 컨벤션 파일을 함께 수정하지 말 것 (PR 섞임 방지).
+
+## 9. AI 검증 거버넌스
+
+본 리포는 `.github/workflows/codex-review.yml` (Codex Review) 를 PR 검증 게이트로 사용한다. 검증 결과의 신뢰성을 지키기 위해 다음 룰을 따른다 — **사용자 합의 2026-05-20**.
+
+### 원칙 — "검사관을 매수하지 마라"
+
+검증자(Codex)의 룰북·프롬프트·트리거를 claude 가 임의로 수정해서 지적을 회피하는 행위는 **작업 결과의 신뢰성을 오염**시킨다. 검사관은 코드를 검증하는 존재이지, 코드 측이 매수할 대상이 아니다.
+
+### 해야 하는 것
+
+- **codex 지적은 원칙적으로 코드 fix 로 응답.** 룰북(workflow yml·프롬프트·AGENTS.md·CLAUDE.md·proc/spec/01~10) 을 **회피 목적**으로 수정하는 행위 금지. codex 가 실제 명세 결함을 짚은 경우는 회피가 아니라 정당한 명세 진화 — 아래 §2 명세 우선 원칙 경로로 spec 을 먼저 정정한 뒤 코드 fix 가능
+- **단, 명세 자체가 틀렸다고 판단되는 경우 — `proc/spec/01-AI-명령지침.md §2 명세 우선 원칙` 의 정상 경로를 따른다 (절차 본문은 본 §9 + plan-g 가 출처, §2 자체는 "명세 먼저 수정, 그 뒤에 코드" 원칙만 명시):**
+  1. 별 plan (`proc/plan/`) 에 "명세 충돌·수정 근거" 기록 — 본 거버넌스 정착 근거는 `proc/plan/2026-05-20_plan-g-pullim-workflow-port.md`
+  2. 사용자(G1/G3/G4) 합의 — 권위 문서(`proc/spec/01~10`) 수정은 본 CLAUDE.md **§4 "사용자 명시 확인 후"** 룰
+  3. 합의 후 spec 먼저 수정, 그 뒤에 코드 fix
+  - 이 경로는 "회피"가 아니라 정당한 명세 진화. codex 지적이 spec 결함을 짚은 경우에도 동일하게 적용
+- **사전 sweep 의무 (PR 생성 전):**
+  - 본 리포 권위 문서(`proc/spec/01~10`) 룰 위반 점검 — 특히 `01-AI-명령지침.md` §3 코드 정책·§7 문서 라우팅, `09-기술-환경.md` 보안·런타임 검증
+  - workflow boilerplate 점검 (timeout / artifact 보관 / permissions 최소화 / pull_request_target 가드 등 codex-review.yml 기존 패턴)
+  - 보안 boilerplate 점검 (secret 노출·외부 입력 런타임 검증·`safety_strategy=unsafe` 정당화)
+- **정당한 trade-off 는 별 plan 합의 후 기록.** `KNOWN-TRADE-OFF: <근거 plan 경로>` 패턴으로 코드/주석에 명시. 단, 패턴 자체를 codex 프롬프트에 *추가하지 말 것* — claude→codex 통제 방향이 되어 거버넌스 위반
+
+### 하면 안 되는 것
+
+- codex review 결과를 **회피할 목적으로** `.github/workflows/codex-review.yml` 의 프롬프트·트리거·paths-filter 수정 (단, 코드 fix 가 불가능한 진짜 인프라 버그 fix 는 별 plan 후 가능)
+- 룰북(AGENTS.md / CLAUDE.md / proc/spec) 을 "codex 가 이걸 지적 못 하게" **회피 목적으로** 수정 — 명세 자체 결함을 spec/01 §2 경로로 고치는 것과는 구분
+- 사전 sweep 없이 PR 띄우고 codex 지적 받은 뒤 룰북 쪽 수정으로 우회
+- "회피"와 "정당한 명세 수정" 의 판단은 **별 plan + 사용자 합의 유무** 로 가른다 — claude 단독 판단 금지
+
+### 거버넌스 위반 시
+
+- claude 가 codex 룰북 회피 수정을 시도하면 사용자가 **즉시 정정 지시** → 해당 변경은 revert, 코드 fix 로 재응답
+- 본 룰은 본 리포 한정. 4 풀림 공통 운영룰 변경 필요 시 별 PR (`.pullim-meta/CONVENTION.md`)
