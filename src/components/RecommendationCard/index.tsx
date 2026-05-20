@@ -8,6 +8,11 @@
 //
 // Plan E Phase 5 (2026-05-20): "다른 모드로 풀기" 보조 링크 추가.
 // review-queue / time-attack / deep-recall 진입 — 학습 깊이 다른 옵션.
+//
+// PR #92 Codex round 1 fix:
+//   - 비지원 게임(직접 게임 12종)에 time-attack/deep-recall 진입점 노출 차단.
+//     supported 여부는 isModeSupportedFor(gameId, mode) 로 판정.
+//   - chip 디자인 SPEC 08.10/08.12 정합: rounded-button + px-4 py-2 (44×44 터치 영역).
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -15,16 +20,18 @@ import { ArrowRight } from "lucide-react";
 import {
   loadAllSrsStates,
   recommendTodaysGame,
+  type GameMode,
   type GameSrsSnapshot,
   type Recommendation,
 } from "@/lib/core";
 import { games } from "@/lib/games/registry";
+import { isModeSupportedFor } from "@/lib/games/supported-modes";
 import { Card } from "@/components/ui/card";
 
 const FALLBACK_GAME_ID = "factorization";
 
 const ALT_MODES: Array<{
-  mode: "review-queue" | "time-attack" | "deep-recall";
+  mode: Exclude<GameMode, "default">;
   label: string;
   hint: string;
 }> = [
@@ -106,25 +113,41 @@ export function RecommendationCard() {
       </Link>
 
       {/* Plan E Phase 5 — 다른 모드 보조 진입 (informational, sticky 아님).
-          캐주얼 톤 유지: chip 형태, 압박 X. data-cta-priority=informational 로 UI audit 통과. */}
-      <nav
-        aria-label="다른 모드로 풀기"
-        className="flex flex-wrap items-center gap-2"
-        data-testid="recommendation-alt-modes"
-      >
-        <span className="text-helper text-type-secondary">다른 모드로</span>
-        {ALT_MODES.map((alt) => (
-          <Link
-            key={alt.mode}
-            href={`/games/${game.meta.id}?mode=${alt.mode}`}
-            data-cta-priority="informational"
-            aria-label={`${game.meta.title} — ${alt.label} 모드 (${alt.hint})`}
-            className="rounded-full border border-border-hairline bg-bg-block px-3 py-1 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary"
+          캐주얼 톤 유지: chip 형태, 압박 X. data-cta-priority=informational 로 UI audit 통과.
+          PR #92 Codex round 1 fix:
+            - 지원 게임만 노출 (isModeSupportedFor). 비지원 모드는 SR-only 안내로 대체.
+            - chip 계약(SPEC 08.10/08.12): rounded-button + px-4 py-2 (44×44 터치). */}
+      {(() => {
+        const supportedAlts = ALT_MODES.filter((alt) =>
+          isModeSupportedFor(game.meta.id, alt.mode),
+        );
+        if (supportedAlts.length === 0) {
+          // 직접 게임 — TimeAttackTimer/DeepRecallEmpty 미통합. 진입점 노출 X.
+          // 시각 노이즈 차단 위해 nav 자체를 렌더 X (a11y 영향 없음 — 다른 진입은 hero CTA).
+          return null;
+        }
+        return (
+          <nav
+            aria-label="다른 모드로 풀기"
+            className="flex flex-wrap items-center gap-2"
+            data-testid="recommendation-alt-modes"
           >
-            {alt.label}
-          </Link>
-        ))}
-      </nav>
+            <span className="text-helper text-type-secondary">다른 모드로</span>
+            {supportedAlts.map((alt) => (
+              <Link
+                key={alt.mode}
+                href={`/games/${game.meta.id}?mode=${alt.mode}`}
+                data-cta-priority="informational"
+                data-mode={alt.mode}
+                aria-label={`${game.meta.title} — ${alt.label} 모드 (${alt.hint})`}
+                className="inline-flex min-h-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-block px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary"
+              >
+                {alt.label}
+              </Link>
+            ))}
+          </nav>
+        );
+      })()}
     </div>
   );
 }
