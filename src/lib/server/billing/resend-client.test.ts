@@ -63,7 +63,7 @@ describe("delegateNotifySignupToResend", () => {
     expect(url).toContain("aud%2Fwith%20space");
   });
 
-  it("Resend 4xx 응답 → external_error + status 보존", async () => {
+  it("Resend 4xx (auth 403) 응답 → external_error + status 보존", async () => {
     const fetchSpy = vi.fn(() => new Response("forbidden", { status: 403 }));
     const result = await delegateNotifySignupToResend("user@example.com", {
       fetch: fetchSpy as unknown as typeof fetch,
@@ -73,6 +73,112 @@ describe("delegateNotifySignupToResend", () => {
       ok: false,
       reason: "external_error",
       status: 403,
+    });
+  });
+
+  it("Resend 5xx 응답 → external_error + status 보존", async () => {
+    const fetchSpy = vi.fn(() => new Response("oops", { status: 503 }));
+    const result = await delegateNotifySignupToResend("user@example.com", {
+      fetch: fetchSpy as unknown as typeof fetch,
+      env: { RESEND_API_KEY: "key", RESEND_AUDIENCE_ID: "aud" },
+    });
+    expect(result).toEqual({
+      ok: false,
+      reason: "external_error",
+      status: 503,
+    });
+  });
+
+  // Codex round 3 지적 #1 회귀 — 중복 등록은 idempotent success.
+  describe("중복 등록 idempotent 분기 (round 3 fix)", () => {
+    it("HTTP 409 Conflict → ok: true + reason: already_exists", async () => {
+      const fetchSpy = vi.fn(
+        () =>
+          new Response(JSON.stringify({ name: "validation_error" }), {
+            status: 409,
+          }),
+      );
+      const result = await delegateNotifySignupToResend("dup@example.com", {
+        fetch: fetchSpy as unknown as typeof fetch,
+        env: { RESEND_API_KEY: "key", RESEND_AUDIENCE_ID: "aud" },
+      });
+      expect(result).toEqual({ ok: true, reason: "already_exists" });
+    });
+
+    it("HTTP 422 + body 'already exists' → ok: true + reason: already_exists", async () => {
+      const fetchSpy = vi.fn(
+        () =>
+          new Response(
+            JSON.stringify({
+              name: "validation_error",
+              message: "Contact already exists in this audience",
+            }),
+            { status: 422 },
+          ),
+      );
+      const result = await delegateNotifySignupToResend("dup2@example.com", {
+        fetch: fetchSpy as unknown as typeof fetch,
+        env: { RESEND_API_KEY: "key", RESEND_AUDIENCE_ID: "aud" },
+      });
+      expect(result).toEqual({ ok: true, reason: "already_exists" });
+    });
+
+    it("HTTP 400 + body 에 'already' 키워드 → idempotent success", async () => {
+      const fetchSpy = vi.fn(
+        () =>
+          new Response(
+            JSON.stringify({
+              message: "Email has already been registered",
+            }),
+            { status: 400 },
+          ),
+      );
+      const result = await delegateNotifySignupToResend("dup3@example.com", {
+        fetch: fetchSpy as unknown as typeof fetch,
+        env: { RESEND_API_KEY: "key", RESEND_AUDIENCE_ID: "aud" },
+      });
+      expect(result).toEqual({ ok: true, reason: "already_exists" });
+    });
+
+    it("HTTP 422 + 일반 validation error (already 키워드 없음) → external_error 유지", async () => {
+      const fetchSpy = vi.fn(
+        () =>
+          new Response(
+            JSON.stringify({
+              name: "validation_error",
+              message: "Invalid email format",
+            }),
+            { status: 422 },
+          ),
+      );
+      const result = await delegateNotifySignupToResend("bad@example.com", {
+        fetch: fetchSpy as unknown as typeof fetch,
+        env: { RESEND_API_KEY: "key", RESEND_AUDIENCE_ID: "aud" },
+      });
+      expect(result).toEqual({
+        ok: false,
+        reason: "external_error",
+        status: 422,
+      });
+    });
+
+    it("HTTP 401 missing_api_key → external_error (already 키워드 없음)", async () => {
+      const fetchSpy = vi.fn(
+        () =>
+          new Response(
+            JSON.stringify({ name: "missing_api_key" }),
+            { status: 401 },
+          ),
+      );
+      const result = await delegateNotifySignupToResend("user@example.com", {
+        fetch: fetchSpy as unknown as typeof fetch,
+        env: { RESEND_API_KEY: "key", RESEND_AUDIENCE_ID: "aud" },
+      });
+      expect(result.ok).toBe(false);
+      if (!result.ok) {
+        expect(result.reason).toBe("external_error");
+        expect(result.status).toBe(401);
+      }
     });
   });
 

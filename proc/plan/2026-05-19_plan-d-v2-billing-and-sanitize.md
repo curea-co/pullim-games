@@ -117,6 +117,18 @@ Codex 가 hash-only 모델로는 실제 알림 메일 발송이 불가능하다�
 - [x] e2e — strict 회귀 (4 필드만·`emailHash` undefined) + 외부 위임 카피 검증
 - [x] `bun run ui:audit /manage/billing` 4 viewport (320·390·768·1280) 통과 — critical=0, informational 2건(자연 스크롤, gate 통과) — Codex #4 fix
 
+**3차 fix (Codex review round 3, 2026-05-20)**:
+Round 3 가 두 가지 잔여 이슈를 지적: (#1) Resend 4xx 중복 응답을 모두 502 로 처리해서 이미 등록된 사용자도 영구 "신청 실패" 가 보임 — idempotent UX 깨짐. (#2) `/api/billing/notify` 가 same-origin 검증·rate limit 0 — 제3자가 임의 이메일을 대량 주입하거나 Resend 무료 한도 소모시키기 쉬움.
+- [x] `resend-client.ts` 4xx 분기 — 409 또는 body `already`/`exists` → `ok: true, reason: 'already_exists'` (idempotent success). 기타 4xx 는 `external_error + status` 유지
+- [x] `src/lib/server/rate-limit.ts` 신설 — 인메모리 sliding window (`checkRateLimit`·`checkRateLimits`·`extractClientIp`), 인프라 의존 0
+- [x] `/api/billing/notify` 라우트 — same-origin 가드(`Origin`/`Referer` vs `NEXT_PUBLIC_SITE_ORIGIN`·`VERCEL_URL`·요청 host) + IP 별 rate limit (1분 5회 + 1시간 10회)
+- [x] `billing/page.tsx` — 429 에러 카피 차별화 ("요청이 너무 잦아요")
+- [x] vitest — `rate-limit` 단위 12 케이스 (sliding window·다중 rule AND·key 격리·IP 추출 5종)
+- [x] vitest — 라우트 추가 케이스: 중복 idempotent 3건 + same-origin 가드 6건 + rate limit 3건
+- [x] vitest — `resend-client` 추가 케이스: 409·422+already·400+already·일반 422·401 missing_api_key·5xx — 5건
+- [x] SPEC §5.6 보안 boilerplate — same-origin·rate limit·idempotent 분기 명시 (BR-PAY3 학생 보호 연결)
+- [x] SPEC §5.7.5 응답 분기 표 신설 + `NEXT_PUBLIC_SITE_ORIGIN` env 추가
+
 ### Phase 3 — sanitize + AI error 일반화 (1 PR, Phase 1·2와 독립)
 - [ ] `manage/content/page.tsx` 입력 정규식 sanitize (`<script>`, `on*=`, `javascript:` 패턴 제거)
 - [ ] `manage/content/actions.ts` Anthropic error catch + 일반화 메시지 + `console.error` 서버 로그

@@ -107,10 +107,13 @@ function NotifyForm() {
         }),
       });
       if (!res.ok) {
-        // 503 (RESEND_API_KEY 미설정) 도 사용자에게는 일반 에러로 노출 — 운영 정보 보호.
+        // 429 만 사용자 친화적 카피 — 잠시 후 재시도 유도. 503·502·422 등은 일반화.
+        const isRateLimited = res.status === 429;
         setState({
           kind: "error",
-          message: "신청에 실패했어요. 잠시 후 다시 시도해주세요.",
+          message: isRateLimited
+            ? "요청이 너무 잦아요. 잠시 후 다시 시도해주세요."
+            : "신청에 실패했어요. 잠시 후 다시 시도해주세요.",
         });
         return;
       }

@@ -5,14 +5,35 @@
 // - hash-only 모델 폐기. plain email + 외부 위임 모델로 전환.
 // - Zod strict — 추가 필드 동봉 시 422 (Codex 지적 #2·#3 회귀 테스트).
 // - Resend 외부 호출은 mock — 실제 호출 0.
+// - round 3 fix: same-origin 검증 + rate limit (5/분, 10/시간) + Resend 4xx 중복 idempotent.
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { GET, POST } from "./route";
+import { resetRateLimitForTests } from "@/lib/server/rate-limit";
 
-function makePostRequest(body: unknown): Request {
+interface RequestOpts {
+  /** Origin 헤더. 기본 = http://localhost (same-origin). null 명시 시 헤더 미설정. */
+  origin?: string | null;
+  /** Referer 헤더. */
+  referer?: string | null;
+  /** x-forwarded-for IP. 기본 = 127.0.0.1. null 명시 시 헤더 미설정. */
+  ip?: string | null;
+}
+
+function makePostRequest(body: unknown, opts: RequestOpts = {}): Request {
+  const headers: Record<string, string> = { "content-type": "application/json" };
+  if (opts.origin !== null) {
+    headers.origin = opts.origin ?? "http://localhost";
+  }
+  if (opts.referer !== null && opts.referer !== undefined) {
+    headers.referer = opts.referer;
+  }
+  if (opts.ip !== null) {
+    headers["x-forwarded-for"] = opts.ip ?? "127.0.0.1";
+  }
   return new Request("http://localhost/api/billing/notify", {
     method: "POST",
-    headers: { "content-type": "application/json" },
+    headers,
     body: typeof body === "string" ? body : JSON.stringify(body),
   });
 }
@@ -43,11 +64,14 @@ beforeEach(() => {
         }),
     ),
   );
+  // 각 테스트 사이 rate-limit store 격리 — 이전 테스트 hit 이 누적되면 429 오작동.
+  resetRateLimitForTests();
 });
 
 afterEach(() => {
   vi.unstubAllGlobals();
   process.env = { ...ORIGINAL_ENV };
+  resetRateLimitForTests();
 });
 
 describe("POST /api/billing/notify — schema 검증 (Zod strict)", () => {
@@ -204,6 +228,161 @@ describe("POST /api/billing/notify — Resend 위임 동작", () => {
     );
     const res = await POST(makePostRequest(basePayload()));
     expect(res.status).toBe(502);
+  });
+
+  // Codex round 3 지적 #1 회귀 — 중복 등록은 idempotent success.
+  describe("중복 contact idempotent (round 3 fix)", () => {
+    it("Resend 409 응답 → 200 ok (사용자 관점 성공)", async () => {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn(
+          () =>
+            new Response(JSON.stringify({ name: "validation_error" }), {
+              status: 409,
+            }),
+        ),
+      );
+      const res = await POST(makePostRequest(basePayload()));
+      expect(res.status).toBe(200);
+      const json = await res.json();
+      expect(json).toEqual({ ok: true });
+    });
+
+    it("Resend 422 + 'already exists' 메시지 → 200 ok", async () => {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn(
+          () =>
+            new Response(
+              JSON.stringify({ message: "Contact already exists" }),
+              { status: 422 },
+            ),
+        ),
+      );
+      const res = await POST(makePostRequest(basePayload()));
+      expect(res.status).toBe(200);
+    });
+
+    it("Resend 422 + 일반 validation (already 키워드 없음) → 502", async () => {
+      vi.stubGlobal(
+        "fetch",
+        vi.fn(
+          () =>
+            new Response(
+              JSON.stringify({ message: "Invalid email format" }),
+              { status: 422 },
+            ),
+        ),
+      );
+      const res = await POST(makePostRequest(basePayload()));
+      expect(res.status).toBe(502);
+    });
+  });
+});
+
+describe("POST /api/billing/notify — same-origin 가드 (round 3 fix)", () => {
+  it("Origin 헤더 없음 + Referer 헤더 없음 → 403 forbidden_origin", async () => {
+    const res = await POST(
+      makePostRequest(basePayload(), { origin: null, referer: null }),
+    );
+    expect(res.status).toBe(403);
+    const json = await res.json();
+    expect(json.error).toBe("forbidden_origin");
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("외부 origin → 403", async () => {
+    const res = await POST(
+      makePostRequest(basePayload(), { origin: "https://evil.example.com" }),
+    );
+    expect(res.status).toBe(403);
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("같은 origin (request.url 호스트 일치) → 통과", async () => {
+    const res = await POST(
+      makePostRequest(basePayload(), { origin: "http://localhost" }),
+    );
+    expect(res.status).toBe(200);
+  });
+
+  it("NEXT_PUBLIC_SITE_ORIGIN 일치 → 통과", async () => {
+    process.env.NEXT_PUBLIC_SITE_ORIGIN = "https://pullim-games.app";
+    const res = await POST(
+      makePostRequest(basePayload(), {
+        origin: "https://pullim-games.app",
+      }),
+    );
+    expect(res.status).toBe(200);
+  });
+
+  it("VERCEL_URL 일치 → 통과", async () => {
+    process.env.VERCEL_URL = "pullim-preview.vercel.app";
+    const res = await POST(
+      makePostRequest(basePayload(), {
+        origin: "https://pullim-preview.vercel.app",
+      }),
+    );
+    expect(res.status).toBe(200);
+  });
+
+  it("Origin 없지만 Referer 가 same-origin → 통과", async () => {
+    const res = await POST(
+      makePostRequest(basePayload(), {
+        origin: null,
+        referer: "http://localhost/manage/billing",
+      }),
+    );
+    expect(res.status).toBe(200);
+  });
+
+  it("Origin 없고 Referer 가 외부 도메인 → 403", async () => {
+    const res = await POST(
+      makePostRequest(basePayload(), {
+        origin: null,
+        referer: "https://evil.example.com/foo",
+      }),
+    );
+    expect(res.status).toBe(403);
+  });
+});
+
+describe("POST /api/billing/notify — rate limit (round 3 fix)", () => {
+  it("1분 5회 초과 → 6번째 요청 429 + Retry-After 헤더", async () => {
+    const ip = "10.20.30.40";
+    for (let i = 0; i < 5; i++) {
+      const res = await POST(makePostRequest(basePayload(), { ip }));
+      expect(res.status).toBe(200);
+    }
+    const res6 = await POST(makePostRequest(basePayload(), { ip }));
+    expect(res6.status).toBe(429);
+    expect(res6.headers.get("retry-after")).toBeTruthy();
+    const json = await res6.json();
+    expect(json.error).toBe("rate_limited");
+  });
+
+  it("다른 IP 는 독립 카운트 — burst 영향 안 받음", async () => {
+    const ipA = "1.1.1.1";
+    const ipB = "2.2.2.2";
+    for (let i = 0; i < 5; i++) {
+      await POST(makePostRequest(basePayload(), { ip: ipA }));
+    }
+    // ipA 는 cap 도달, ipB 는 미시작 → 200.
+    const resB = await POST(makePostRequest(basePayload(), { ip: ipB }));
+    expect(resB.status).toBe(200);
+  });
+
+  it("rate limit 거부 시 Resend 호출 0 (외부 한도 보호)", async () => {
+    const ip = "3.3.3.3";
+    // 5회 정상 hit (Resend 5회 호출).
+    for (let i = 0; i < 5; i++) {
+      await POST(makePostRequest(basePayload(), { ip }));
+    }
+    const fetchSpy = fetch as unknown as ReturnType<typeof vi.fn>;
+    fetchSpy.mockClear();
+    // 6번째 — 429 + Resend 호출 0.
+    await POST(makePostRequest(basePayload(), { ip }));
+    expect(fetchSpy).not.toHaveBeenCalled();
   });
 });
 
