@@ -135,7 +135,12 @@ proc/
 
 ### 해야 하는 것
 
-- **codex 지적은 코드 fix 로만 응답.** 룰북(workflow yml·프롬프트·AGENTS.md·CLAUDE.md·proc/spec/01~10) 수정으로 우회 금지
+- **codex 지적은 원칙적으로 코드 fix 로 응답.** 룰북(workflow yml·프롬프트·AGENTS.md·CLAUDE.md·proc/spec/01~10) 을 **회피 목적**으로 수정하는 행위 금지
+- **단, 명세 자체가 틀렸다고 판단되는 경우 — `proc/spec/01-AI-명령지침.md §2 명세 우선 원칙` 의 정상 경로를 따른다:**
+  1. 별 plan (`proc/plan/`) 에 "명세 충돌·수정 근거" 기록
+  2. 사용자(G1/G3/G4) 합의 — 권위 문서 수정은 CLAUDE.md §2 룰
+  3. 합의 후 spec 먼저 수정, 그 뒤에 코드 fix
+  - 이 경로는 "회피"가 아니라 정당한 명세 진화. codex 지적이 spec 결함을 짚은 경우에도 동일하게 적용
 - **사전 sweep 의무 (PR 생성 전):**
   - 본 리포 권위 문서(`proc/spec/01~10`) 룰 위반 점검 — 특히 `01-AI-명령지침.md` §3 코드 정책·§7 문서 라우팅, `09-기술-환경.md` 보안·런타임 검증
   - workflow boilerplate 점검 (timeout / artifact 보관 / permissions 최소화 / pull_request_target 가드 등 codex-review.yml 기존 패턴)
@@ -144,9 +149,10 @@ proc/
 
 ### 하면 안 되는 것
 
-- codex review 결과를 회피하기 위해 `.github/workflows/codex-review.yml` 의 프롬프트·트리거·paths-filter 수정 (단, 코드 fix 가 불가능한 진짜 인프라 버그 fix 는 별 plan 후 가능)
-- 룰북(AGENTS.md / CLAUDE.md / proc/spec) 을 "codex 가 이걸 지적 못 하게" 목적으로 수정
+- codex review 결과를 **회피할 목적으로** `.github/workflows/codex-review.yml` 의 프롬프트·트리거·paths-filter 수정 (단, 코드 fix 가 불가능한 진짜 인프라 버그 fix 는 별 plan 후 가능)
+- 룰북(AGENTS.md / CLAUDE.md / proc/spec) 을 "codex 가 이걸 지적 못 하게" **회피 목적으로** 수정 — 명세 자체 결함을 spec/01 §2 경로로 고치는 것과는 구분
 - 사전 sweep 없이 PR 띄우고 codex 지적 받은 뒤 룰북 쪽 수정으로 우회
+- "회피"와 "정당한 명세 수정" 의 판단은 **별 plan + 사용자 합의 유무** 로 가른다 — claude 단독 판단 금지
 
 ### 거버넌스 위반 시
 
