@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan D: V2 결제 정책·백엔드 + content sanitize·AI error 처리
 
-- **상태**: PARTIAL-COMPLETE (2026-05-19) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. Phase 1·2 (V2 결제 정책·백엔드) 다음 세션 별 트랙 이관 — D1~D7 사용자 의사결정 의무.
+- **상태**: PARTIAL-COMPLETE (2026-05-20) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. D1~D4·D6·D7 결정 잔존 + Phase 2 (billing 백엔드) 다음 세션 이관.
 - **트리거**: audit v3 §7 informational 4건 + critical C8(V2 트리거) 통합:
   - C8: `billing/page.tsx` 알림 신청 이메일 백엔드 전송 0 (mock toast)
   - informational: 결제 정책 명세 부재 (`proc/spec/05-비즈니스-정책.md §결제 없음`)
@@ -34,7 +34,7 @@
 - D2: 가격 모델 (월 구독 / 연 구독 / 일회성 / freemium)
 - D3: 무료 vs 유료 기능 비교 (광고 제거·custom 무제한·클라우드 동기화 외 추가 기능?)
 - D4: 가격대 (목표 가격)
-- D5: 결제 게이트웨이 (Stripe / Toss / 카카오페이 / 토스 PG / 직접 통신)
+- D5: 결제 게이트웨이 — **Toss Payments 합의 (2026-05-20)**. AI 리서치 4 axis(수수료·정기구독 깊이·KR 결제수단·SDK/DX) 비교 결과 1순위. 사유: 개발 인력 1명 한국어 문서·SDK 품질이 통합 시간 최소화(1~2일), Stripe는 KR 법인 개설 불가로 즉시 탈락, PortOne 멀티-PG는 현 단계 오버엔지니어링. 글로벌 진출 시 PortOne 어그리게이션으로 확장 가능. ([daily_outcome/2026-05-20.md](../../daily_outcome/2026-05-20.md))
 - D6: 환불 정책
 - D7: 학생 할인·체험판
 
