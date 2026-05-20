@@ -1,7 +1,7 @@
 // /api/billing/notify — V2 출시 알림 신청 (외부 메일 서비스 위임).
 // SPEC §05.6 알림 신청 + §05.7.5 외부 메일 서비스 위임 정책.
 //
-// 정책 (2026-05-20 갱신 — Codex review round 2·3·5 fix):
+// 정책 (2026-05-20 갱신 — Codex review round 2·3·5·6 fix):
 // - 본 서버는 이메일을 저장하지 않는다. Resend 에 즉시 위임 후 변수 폐기.
 // - Zod `.strict()` 적용 — 정의되지 않은 필드 동봉 시 422 (PII 누수 차단).
 // - 응답 후 `email` 변수는 함수 스코프 종료와 함께 GC. DB·KV·파일·로그 어디에도 잔존 X.
@@ -13,10 +13,16 @@
 // - **round 5 fail-closed** (Codex 지적 #1):
 //   · IP 추출 실패 시 `"anonymous"` 전역 버킷 fallback 제거. 식별 불가 → 즉시 400 거부.
 //     (전역 anonymous 버킷은 정상 사용자 간 간섭을 유발 — fail-closed 가 옳다.)
+// - **round 6 환경별 균형** (Codex 지적 #1):
+//   · production 은 round 5 fail-closed 그대로 유지 (배포 설정 문제 노출).
+//   · production 외(개발/테스트/로컬 프록시)에서는 `x-forwarded-for` 등 IP 헤더가
+//     원래 없는 게 정상 — 이를 400 으로 막으면 `bun dev` localhost 폼이 깨진다.
+//     production 이 아닐 때만 `dev:<host>` 폴백 키를 사용해 라우트가 작동하게 한다.
+//     same-origin 가드가 이미 외부 남용 1차 차단을 하므로 dev 폴백은 안전.
 //
 // 응답 코드 정책:
 //   200 — Resend 위임 성공 (신규 또는 중복=idempotent)
-//   400 — invalid JSON 또는 IP 식별 불가 (배포 설정 문제 노출)
+//   400 — invalid JSON 또는 (production 한정) IP 식별 불가
 //   403 — same-origin 위반 (외부 도메인 호출)
 //   422 — schema 검증 실패 (추가 필드·잘못된 이메일 형식)
 //   429 — rate limit 초과
@@ -96,24 +102,58 @@ function buildRateLimitRules(key: string) {
   ];
 }
 
+/**
+ * rate-limit 식별자 해소 — round 6 fix.
+ *
+ * production: 실제 IP 가 헤더에 들어와야 한다(Vercel/CF/Nginx 가 보장). 없으면 빈 문자열
+ * 반환 → 호출부가 400 으로 거부 (fail-closed, 배포 설정 문제 노출).
+ *
+ * production 외: `bun dev` localhost·일부 프록시 구성은 `x-forwarded-for` 등을 안 보낸다.
+ * 이 경우 `dev:<host>` 폴백 키를 사용해 라우트가 작동하게 한다. same-origin 가드가 외부
+ * 호출을 이미 차단하므로 dev 폴백은 안전. host 가 없으면 `dev:loopback` 으로 떨어진다.
+ */
+function resolveRateLimitKey(request: Request, rawIp: string): string {
+  if (rawIp) return rawIp;
+  if (process.env.NODE_ENV === "production") return "";
+
+  const host =
+    request.headers.get("host")?.trim() ||
+    safeRequestHost(request) ||
+    "loopback";
+  return `dev:${host}`;
+}
+
+function safeRequestHost(request: Request): string {
+  try {
+    return new URL(request.url).host;
+  } catch {
+    return "";
+  }
+}
+
 export async function POST(request: Request) {
   // ── 1. same-origin 검증 ────────────────────────────────────────────────
   if (!isSameOriginRequest(request)) {
     return NextResponse.json({ error: "forbidden_origin" }, { status: 403 });
   }
 
-  // ── 2. rate limit (fail-closed — round 5 fix) ─────────────────────────────
-  // IP 추출 실패 시 전역 anonymous 버킷에 묶으면 정상 사용자 간 간섭이 발생한다
-  // (한 명의 abuse 가 식별 안 된 모두를 429 로 만듦). 따라서 IP 식별 불가 자체를
-  // 400 으로 즉시 거부 — 배포·프록시 설정 문제를 fail-closed 로 드러내는 쪽이 맞다.
-  const ip = extractClientIp(request.headers);
-  if (!ip) {
+  // ── 2. rate limit (fail-closed in prod · dev fallback — round 5·6 fix) ──
+  // production: IP 추출 실패 시 전역 anonymous 버킷에 묶으면 정상 사용자 간 간섭이
+  // 발생한다(한 명의 abuse 가 식별 안 된 모두를 429 로 만듦). 따라서 IP 식별 불가
+  // 자체를 400 으로 즉시 거부 — 배포·프록시 설정 문제를 fail-closed 로 드러낸다.
+  //
+  // production 외(개발/테스트/로컬 프록시): IP 헤더는 원래 없는 게 정상이므로
+  // `dev:<host>` 폴백 키를 써서 라우트를 작동시킨다. same-origin 가드가 외부 호출을
+  // 1차 차단하기 때문에 dev 폴백은 안전. (Codex round 6 지적: bun dev 깨짐 fix.)
+  const rawIp = extractClientIp(request.headers);
+  const rateLimitKey = resolveRateLimitKey(request, rawIp);
+  if (!rateLimitKey) {
     return NextResponse.json(
       { error: "client_unidentified" },
       { status: 400 },
     );
   }
-  const decision = checkRateLimits(buildRateLimitRules(ip));
+  const decision = checkRateLimits(buildRateLimitRules(rateLimitKey));
   if (!decision.allowed) {
     const retryAfterSec = Math.max(1, Math.ceil(decision.retryAfterMs / 1000));
     return NextResponse.json(

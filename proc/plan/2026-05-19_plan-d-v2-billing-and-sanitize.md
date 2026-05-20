@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan D: V2 결제 정책·백엔드 + content sanitize·AI error 처리
 
-- **상태**: PARTIAL-COMPLETE (2026-05-20) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. **Phase 1 spec(D5 합의분 + D1~D4·D6·D7 합의 후보 매트릭스) + Phase 2 billing 백엔드(`/api/billing/notify` + sha256 hash + 정직성 카피)** 본 세션 진입 (브랜치 `feat/plan-d-phase1-2-billing`). D1·D2·D3·D4·D6·D7 결정은 사용자 G3 합의 대기.
+- **상태**: PARTIAL-COMPLETE (2026-05-20) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. **Phase 1 spec(D5 합의분 + D1~D4·D6·D7 합의 후보 매트릭스) + Phase 2 billing 백엔드(`/api/billing/notify` — plain email + Resend 즉시 위임 / 본 서버 저장 0 / same-origin + IP rate limit / dev 폴백 키)** 본 세션 진입 (브랜치 `feat/plan-d-phase1-2-billing`, PR #91). Codex review round 2·3·5·6 fix 모두 본 브랜치 통합. D1·D2·D3·D4·D6·D7 결정은 사용자 G3 합의 대기.
 - **트리거**: audit v3 §7 informational 4건 + critical C8(V2 트리거) 통합:
   - C8: `billing/page.tsx` 알림 신청 이메일 백엔드 전송 0 (mock toast)
   - informational: 결제 정책 명세 부재 (`proc/spec/05-비즈니스-정책.md §결제 없음`)
@@ -128,6 +128,13 @@ Round 3 가 두 가지 잔여 이슈를 지적: (#1) Resend 4xx 중복 응답을
 - [x] vitest — `resend-client` 추가 케이스: 409·422+already·400+already·일반 422·401 missing_api_key·5xx — 5건
 - [x] SPEC §5.6 보안 boilerplate — same-origin·rate limit·idempotent 분기 명시 (BR-PAY3 학생 보호 연결)
 - [x] SPEC §5.7.5 응답 분기 표 신설 + `NEXT_PUBLIC_SITE_ORIGIN` env 추가
+
+**4차 fix (Codex review round 5·6, 2026-05-20)**:
+Round 5 가 IP 식별 불가 시 `"anonymous"` 전역 버킷 fallback 의 사이드이펙트(정상 사용자 간 간섭)를 지적 → fail-closed 400 으로 전환. Round 6 가 그 fail-closed 가 `bun dev` localhost·일부 프록시 구성에서 정상 폼 제출까지 막는다고 지적 → production 만 fail-closed 유지, 그 외 환경은 host 기반 dev 폴백 키로 작동시키도록 균형 조정.
+- [x] `/api/billing/notify` 라우트 — round 5 fail-closed (전역 anonymous 폴백 제거)
+- [x] `/api/billing/notify` 라우트 — round 6 환경별 분기 (`resolveRateLimitKey` 추가): production = IP 필수, 그 외 = `dev:<host>` 폴백
+- [x] vitest — round 5 fail-closed 회귀 2건 (production 분기 명시)
+- [x] vitest — round 6 dev 폴백 4건 (development·test 모드 200, dev 폴백 rate limit 5/분, 실제 IP 와 키 격리)
 
 ### Phase 3 — sanitize + AI error 일반화 (1 PR, Phase 1·2와 독립)
 - [ ] `manage/content/page.tsx` 입력 정규식 sanitize (`<script>`, `on*=`, `javascript:` 패턴 제거)

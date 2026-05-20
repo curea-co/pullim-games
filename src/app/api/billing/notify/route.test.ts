@@ -6,6 +6,8 @@
 // - Zod strict — 추가 필드 동봉 시 422 (Codex 지적 #2·#3 회귀 테스트).
 // - Resend 외부 호출은 mock — 실제 호출 0.
 // - round 3 fix: same-origin 검증 + rate limit (5/분, 10/시간) + Resend 4xx 중복 idempotent.
+// - round 5 fix: IP 식별 불가 → 400 fail-closed (전역 anonymous 버킷 금지).
+// - round 6 fix: production 외 환경은 dev 폴백 키 사용 (bun dev localhost 작동 보장).
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { GET, POST } from "./route";
@@ -385,8 +387,18 @@ describe("POST /api/billing/notify — rate limit (round 3 fix)", () => {
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
-  // Codex round 5 회귀 — IP 식별 불가 시 fail-closed (전역 anonymous 버킷 금지).
-  describe("[fail-closed] IP 추출 불가 거부 (round 5 fix)", () => {
+  // Codex round 5 회귀 — production 에서 IP 식별 불가 시 fail-closed.
+  // (round 6 fix 후) production 외 환경은 dev 폴백 키로 작동.
+  describe("[fail-closed] production IP 추출 불가 거부 (round 5 fix)", () => {
+    beforeEach(() => {
+      // round 6 fix: production 분기를 명시적으로 검증한다.
+      vi.stubEnv("NODE_ENV", "production");
+    });
+
+    afterEach(() => {
+      vi.unstubAllEnvs();
+    });
+
     it("x-forwarded-for·x-real-ip·cf-connecting-ip 모두 없음 → 400 client_unidentified", async () => {
       const res = await POST(makePostRequest(basePayload(), { ip: null }));
       expect(res.status).toBe(400);
@@ -405,6 +417,51 @@ describe("POST /api/billing/notify — rate limit (round 3 fix)", () => {
       // 식별 가능한 정상 사용자는 영향 없이 200 한도 그대로 사용 가능.
       const res = await POST(
         makePostRequest(basePayload(), { ip: "9.9.9.9" }),
+      );
+      expect(res.status).toBe(200);
+    });
+  });
+
+  // Codex round 6 fix — production 외(개발/테스트/로컬 프록시)에서는 IP 헤더가
+  // 없는 게 정상이라 dev 폴백 키로 라우트가 작동해야 한다.
+  describe("[dev 폴백] production 외 환경 IP 헤더 부재 시 작동 (round 6 fix)", () => {
+    afterEach(() => {
+      vi.unstubAllEnvs();
+    });
+
+    it("NODE_ENV=development + IP 헤더 0 → 200 (host 기반 폴백 키)", async () => {
+      vi.stubEnv("NODE_ENV", "development");
+      const res = await POST(makePostRequest(basePayload(), { ip: null }));
+      expect(res.status).toBe(200);
+      // Resend 정상 호출 — dev 폴백이 라우트를 통과시킴.
+      expect(fetch).toHaveBeenCalledTimes(1);
+    });
+
+    it("NODE_ENV=test + IP 헤더 0 → 200 (dev 폴백 적용)", async () => {
+      vi.stubEnv("NODE_ENV", "test");
+      const res = await POST(makePostRequest(basePayload(), { ip: null }));
+      expect(res.status).toBe(200);
+    });
+
+    it("dev 폴백도 rate limit 적용 — 같은 host 에서 5회 초과 시 429", async () => {
+      vi.stubEnv("NODE_ENV", "development");
+      for (let i = 0; i < 5; i++) {
+        const res = await POST(makePostRequest(basePayload(), { ip: null }));
+        expect(res.status).toBe(200);
+      }
+      const res6 = await POST(makePostRequest(basePayload(), { ip: null }));
+      expect(res6.status).toBe(429);
+    });
+
+    it("dev 폴백 키는 실제 IP 키와 격리 — IP 있는 사용자는 영향 0", async () => {
+      vi.stubEnv("NODE_ENV", "development");
+      // dev 폴백 5회 소진.
+      for (let i = 0; i < 5; i++) {
+        await POST(makePostRequest(basePayload(), { ip: null }));
+      }
+      // 실제 IP 사용자는 자기 한도 그대로.
+      const res = await POST(
+        makePostRequest(basePayload(), { ip: "1.2.3.4" }),
       );
       expect(res.status).toBe(200);
     });
