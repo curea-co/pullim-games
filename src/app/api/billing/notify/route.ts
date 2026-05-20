@@ -1,7 +1,7 @@
 // /api/billing/notify — V2 출시 알림 신청 (외부 메일 서비스 위임).
 // SPEC §05.6 알림 신청 + §05.7.5 외부 메일 서비스 위임 정책.
 //
-// 정책 (2026-05-20 갱신 — Codex review round 2·3 fix):
+// 정책 (2026-05-20 갱신 — Codex review round 2·3·5 fix):
 // - 본 서버는 이메일을 저장하지 않는다. Resend 에 즉시 위임 후 변수 폐기.
 // - Zod `.strict()` 적용 — 정의되지 않은 필드 동봉 시 422 (PII 누수 차단).
 // - 응답 후 `email` 변수는 함수 스코프 종료와 함께 GC. DB·KV·파일·로그 어디에도 잔존 X.
@@ -10,10 +10,13 @@
 //   · rate limit: IP 별 1분 5회 + 1시간 10회. 인메모리 sliding window (인프라 의존 0).
 // - **round 3 추가 분기** (Codex 지적 #1):
 //   · Resend 4xx + "already"/"exists" 또는 409 → idempotent success (사용자에게 ok).
+// - **round 5 fail-closed** (Codex 지적 #1):
+//   · IP 추출 실패 시 `"anonymous"` 전역 버킷 fallback 제거. 식별 불가 → 즉시 400 거부.
+//     (전역 anonymous 버킷은 정상 사용자 간 간섭을 유발 — fail-closed 가 옳다.)
 //
 // 응답 코드 정책:
 //   200 — Resend 위임 성공 (신규 또는 중복=idempotent)
-//   400 — invalid JSON
+//   400 — invalid JSON 또는 IP 식별 불가 (배포 설정 문제 노출)
 //   403 — same-origin 위반 (외부 도메인 호출)
 //   422 — schema 검증 실패 (추가 필드·잘못된 이메일 형식)
 //   429 — rate limit 초과
@@ -99,11 +102,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "forbidden_origin" }, { status: 403 });
   }
 
-  // ── 2. rate limit ───────────────────────────────────────────────────────
+  // ── 2. rate limit (fail-closed — round 5 fix) ─────────────────────────────
+  // IP 추출 실패 시 전역 anonymous 버킷에 묶으면 정상 사용자 간 간섭이 발생한다
+  // (한 명의 abuse 가 식별 안 된 모두를 429 로 만듦). 따라서 IP 식별 불가 자체를
+  // 400 으로 즉시 거부 — 배포·프록시 설정 문제를 fail-closed 로 드러내는 쪽이 맞다.
   const ip = extractClientIp(request.headers);
-  // IP 식별 불가 시 빈 key — checkRateLimit 이 자동 거부 (안전 default).
-  const rateKey = ip || "anonymous";
-  const decision = checkRateLimits(buildRateLimitRules(rateKey));
+  if (!ip) {
+    return NextResponse.json(
+      { error: "client_unidentified" },
+      { status: 400 },
+    );
+  }
+  const decision = checkRateLimits(buildRateLimitRules(ip));
   if (!decision.allowed) {
     const retryAfterSec = Math.max(1, Math.ceil(decision.retryAfterMs / 1000));
     return NextResponse.json(

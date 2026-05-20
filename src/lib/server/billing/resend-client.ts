@@ -7,14 +7,23 @@
 // - `RESEND_API_KEY`·`RESEND_AUDIENCE_ID` 미설정 시 `unavailable` 결과 반환 (503 처리).
 // - 라우트가 결과 처리 후 즉시 GC 되도록 단순 함수 인터페이스.
 //
-// 응답 분기 (2026-05-20 round 3 fix — Codex 지적 #1: 중복 등록 idempotent UX):
+// 응답 분기 (2026-05-20 round 5 fix — Codex 지적 #2: "exists" 부분문자열 매칭 너무 광범):
 //   200·201                                 → ok: true (신규 등록)
-//   4xx + body name/message 에 "already"
-//   또는 "exists" 또는 status 409          → ok: true, reason: "already_exists"
+//   HTTP 409                                → ok: true, reason: "already_exists"
+//   4xx + body 에 정확한 "already exists" 두 단어 인접 매칭
+//                                           → ok: true, reason: "already_exists"
 //                                            (idempotent — 사용자에게는 성공으로 표시)
-//   기타 4xx (validation·auth 등)           → ok: false, reason: "external_error" (502)
+//   기타 4xx (validation·auth·"not exists" 등) → ok: false, reason: "external_error" (502)
 //   5xx 또는 fetch throw                    → ok: false, reason: "external_error" (502)
 //   secret 미설정                            → ok: false, reason: "unavailable" (503)
+//
+// 좁힘 근거 (round 5):
+//   기존 `"exists"` 단독 substring 매칭은 다음과 같은 4xx 도 success 로 오분류했다:
+//     - "audience does not exists"
+//     - "api key not exists"
+//     - "resource exists in another workspace"
+//   실제 Resend 중복 응답은 (관찰) `"Contact already exists"` 형태로 두 단어가 인접.
+//   따라서 두 단어가 공백 1회로 인접한 정규식만 매칭한다.
 //
 // API 레퍼런스: https://resend.com/docs/api-reference/audiences/create-contact
 // 에러 코드: https://resend.com/docs/api-reference/errors
@@ -36,23 +45,31 @@ interface ResendDeps {
 }
 
 /**
- * Resend 4xx 응답 body 에서 "이미 등록된 contact" 판정.
+ * Resend 4xx 응답 body 에서 "이미 등록된 contact" 판정 (round 5 — 좁힘).
  *
- * Resend API 는 중복 contact 에 대한 명시적 에러 코드가 문서화돼 있지 않다.
- * 실무 관찰상 다음 신호 중 하나라도 만족하면 중복으로 간주한다:
- *   - HTTP status 409 (Conflict)
- *   - JSON body 의 `name` 또는 `message` 에 "already" 혹은 "exists" 포함
- * 이 폭넓은 매칭은 향후 Resend 응답 포맷이 바뀌어도 idempotent UX 를 유지하기 위함.
+ * 두 신호 중 하나라도 만족하면 중복으로 간주:
+ *   1. HTTP status 409 (Conflict)
+ *   2. body 에 "already exists" 두 단어가 공백 1회로 인접 매칭
+ *
+ * 이전 round 3 구현은 `"already"` 또는 `"exists"` 단독 substring 을 모두 success
+ * 로 승격했으나, 그러면 다음과 같은 정상 4xx 도 침묵 성공이 된다:
+ *   - "audience does not exists" (오타 또는 다른 자원)
+ *   - "api key not exists"
+ *   - "resource exists in another workspace"
+ * 좁힘으로 false positive 차단.
+ *
+ * 정규식: `\balready\s+exists\b` (대소문자 무시) — word boundary 로 토큰 경계 보장,
+ * 두 단어 사이 공백 1회 이상만 허용.
  */
+const ALREADY_EXISTS_RE = /\balready\s+exists\b/i;
+
 function isAlreadyExistsResponse(
   status: number,
   bodyText: string | null,
 ): boolean {
   if (status === 409) return true;
   if (!bodyText) return false;
-  // Resend 응답이 JSON 이 아닐 수도 있으므로 text 기반 substring 매칭.
-  const lower = bodyText.toLowerCase();
-  return lower.includes("already") || lower.includes("exists");
+  return ALREADY_EXISTS_RE.test(bodyText);
 }
 
 /**

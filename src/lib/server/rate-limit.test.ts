@@ -116,6 +116,14 @@ describe("extractClientIp", () => {
     expect(extractClientIp(new Headers())).toBe("");
   });
 
+  // Codex round 5 회귀 — IP 식별 불가는 빈 문자열 그대로 반환되어야 한다.
+  // (호출 라우트가 빈 문자열을 fail-closed 분기로 처리하기 위함.
+  //  "anonymous" 같은 폴백을 절대 자체 주입하지 않는다.)
+  it("[fail-closed] x-forwarded-for 가 콤마·공백만 → 빈 문자열 (폴백 키 주입 금지)", () => {
+    const h = new Headers({ "x-forwarded-for": " , " });
+    expect(extractClientIp(h)).toBe("");
+  });
+
   it("x-forwarded-for 공백 trim", () => {
     const h = new Headers({ "x-forwarded-for": "  10.0.0.1  " });
     expect(extractClientIp(h)).toBe("10.0.0.1");

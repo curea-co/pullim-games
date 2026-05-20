@@ -89,8 +89,8 @@ describe("delegateNotifySignupToResend", () => {
     });
   });
 
-  // Codex round 3 지적 #1 회귀 — 중복 등록은 idempotent success.
-  describe("중복 등록 idempotent 분기 (round 3 fix)", () => {
+  // Codex round 3·5 지적 회귀 — 중복 등록은 idempotent success, 그러나 정밀 매칭.
+  describe("중복 등록 idempotent 분기 (round 3·5 fix)", () => {
     it("HTTP 409 Conflict → ok: true + reason: already_exists", async () => {
       const fetchSpy = vi.fn(
         () =>
@@ -105,7 +105,7 @@ describe("delegateNotifySignupToResend", () => {
       expect(result).toEqual({ ok: true, reason: "already_exists" });
     });
 
-    it("HTTP 422 + body 'already exists' → ok: true + reason: already_exists", async () => {
+    it("HTTP 422 + body 'Contact already exists' → ok: true + reason: already_exists", async () => {
       const fetchSpy = vi.fn(
         () =>
           new Response(
@@ -123,14 +123,12 @@ describe("delegateNotifySignupToResend", () => {
       expect(result).toEqual({ ok: true, reason: "already_exists" });
     });
 
-    it("HTTP 400 + body 에 'already' 키워드 → idempotent success", async () => {
+    it("HTTP 422 + 대문자 'Already Exists' (대소문자 무시) → idempotent success", async () => {
       const fetchSpy = vi.fn(
         () =>
           new Response(
-            JSON.stringify({
-              message: "Email has already been registered",
-            }),
-            { status: 400 },
+            JSON.stringify({ message: "Already Exists in audience" }),
+            { status: 422 },
           ),
       );
       const result = await delegateNotifySignupToResend("dup3@example.com", {
@@ -140,7 +138,7 @@ describe("delegateNotifySignupToResend", () => {
       expect(result).toEqual({ ok: true, reason: "already_exists" });
     });
 
-    it("HTTP 422 + 일반 validation error (already 키워드 없음) → external_error 유지", async () => {
+    it("HTTP 422 + 일반 validation error (already exists 키워드 없음) → external_error 유지", async () => {
       const fetchSpy = vi.fn(
         () =>
           new Response(
@@ -162,7 +160,7 @@ describe("delegateNotifySignupToResend", () => {
       });
     });
 
-    it("HTTP 401 missing_api_key → external_error (already 키워드 없음)", async () => {
+    it("HTTP 401 missing_api_key → external_error (already exists 키워드 없음)", async () => {
       const fetchSpy = vi.fn(
         () =>
           new Response(
@@ -179,6 +177,75 @@ describe("delegateNotifySignupToResend", () => {
         expect(result.reason).toBe("external_error");
         expect(result.status).toBe(401);
       }
+    });
+
+    // Codex round 5 회귀 — substring "exists" / "already" 단독은 false positive.
+    describe("[round 5] 정밀 매칭 false positive 방지", () => {
+      it("HTTP 404 'audience does not exists' → external_error (idempotent 아님)", async () => {
+        const fetchSpy = vi.fn(
+          () =>
+            new Response(
+              JSON.stringify({ message: "Audience does not exists" }),
+              { status: 404 },
+            ),
+        );
+        const result = await delegateNotifySignupToResend("u@example.com", {
+          fetch: fetchSpy as unknown as typeof fetch,
+          env: { RESEND_API_KEY: "key", RESEND_AUDIENCE_ID: "aud" },
+        });
+        expect(result.ok).toBe(false);
+        if (!result.ok) {
+          expect(result.reason).toBe("external_error");
+          expect(result.status).toBe(404);
+        }
+      });
+
+      it("HTTP 401 'api key not exists' → external_error (idempotent 아님)", async () => {
+        const fetchSpy = vi.fn(
+          () =>
+            new Response(
+              JSON.stringify({ message: "API key not exists" }),
+              { status: 401 },
+            ),
+        );
+        const result = await delegateNotifySignupToResend("u@example.com", {
+          fetch: fetchSpy as unknown as typeof fetch,
+          env: { RESEND_API_KEY: "key", RESEND_AUDIENCE_ID: "aud" },
+        });
+        expect(result.ok).toBe(false);
+      });
+
+      it("HTTP 400 'resource exists in another workspace' → external_error", async () => {
+        const fetchSpy = vi.fn(
+          () =>
+            new Response(
+              JSON.stringify({
+                message: "Resource exists in another workspace",
+              }),
+              { status: 400 },
+            ),
+        );
+        const result = await delegateNotifySignupToResend("u@example.com", {
+          fetch: fetchSpy as unknown as typeof fetch,
+          env: { RESEND_API_KEY: "key", RESEND_AUDIENCE_ID: "aud" },
+        });
+        expect(result.ok).toBe(false);
+      });
+
+      it("HTTP 400 'already pending' (already 단독) → external_error", async () => {
+        const fetchSpy = vi.fn(
+          () =>
+            new Response(
+              JSON.stringify({ message: "Request already pending" }),
+              { status: 400 },
+            ),
+        );
+        const result = await delegateNotifySignupToResend("u@example.com", {
+          fetch: fetchSpy as unknown as typeof fetch,
+          env: { RESEND_API_KEY: "key", RESEND_AUDIENCE_ID: "aud" },
+        });
+        expect(result.ok).toBe(false);
+      });
     });
   });
 

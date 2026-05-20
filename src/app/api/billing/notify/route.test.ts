@@ -384,6 +384,31 @@ describe("POST /api/billing/notify — rate limit (round 3 fix)", () => {
     await POST(makePostRequest(basePayload(), { ip }));
     expect(fetchSpy).not.toHaveBeenCalled();
   });
+
+  // Codex round 5 회귀 — IP 식별 불가 시 fail-closed (전역 anonymous 버킷 금지).
+  describe("[fail-closed] IP 추출 불가 거부 (round 5 fix)", () => {
+    it("x-forwarded-for·x-real-ip·cf-connecting-ip 모두 없음 → 400 client_unidentified", async () => {
+      const res = await POST(makePostRequest(basePayload(), { ip: null }));
+      expect(res.status).toBe(400);
+      const json = await res.json();
+      expect(json.error).toBe("client_unidentified");
+      // Resend 호출 0 — fail-closed.
+      expect(fetch).not.toHaveBeenCalled();
+    });
+
+    it("IP 없는 요청 N건이 누적되어도 다른 정상 사용자에 영향 0 (전역 버킷 부재)", async () => {
+      // 식별 불가 요청을 라우트 한도(5/분)보다 많이 시도 — 모두 400, store mutation 0.
+      for (let i = 0; i < 20; i++) {
+        const res = await POST(makePostRequest(basePayload(), { ip: null }));
+        expect(res.status).toBe(400);
+      }
+      // 식별 가능한 정상 사용자는 영향 없이 200 한도 그대로 사용 가능.
+      const res = await POST(
+        makePostRequest(basePayload(), { ip: "9.9.9.9" }),
+      );
+      expect(res.status).toBe(200);
+    });
+  });
 });
 
 describe("POST /api/billing/notify — PII 0 정책 회귀", () => {
