@@ -70,7 +70,7 @@ function shuffleCandidates(correct: string, distractors: string[], cardId: strin
 }
 
 export default function FactorizationGame() {
-  const mode = useGameMode();
+  const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");

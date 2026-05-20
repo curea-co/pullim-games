@@ -35,7 +35,7 @@ const MIN_COEF = 1;
 const MAX_COEF = 9;
 
 export default function ChemistryBalanceGame() {
-  const mode = useGameMode();
+  const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");

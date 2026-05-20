@@ -59,7 +59,9 @@ export function TypingComponent({
   emptyMessage,
   homeHref = "/",
 }: Props) {
-  const mode = useGameMode();
+  // PR #92 Codex round 4 fix: gameId 를 전달해 비지원 mode URL 직접 진입 시 default 로
+  // 정규화 — `?mode=time-attack` 으로 4 메커니즘 미통합 게임 진입을 라우트 단에서 차단.
+  const mode = useGameMode(gameId);
   const pathname = usePathname();
   const [cards, setCards] = useState(() =>
     mode === "deep-recall" ? [] : initialCards,

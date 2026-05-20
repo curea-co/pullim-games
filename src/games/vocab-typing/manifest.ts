@@ -18,6 +18,7 @@ const manifest: GameManifest = {
     mechanic: "typing",
     retrievalDepth: "medium",
     previewImagePath: "/previews/vocab-typing.png",
+    mechanismComponent: "Typing",
   },
   loadComponent: () => import("./component"),
 };

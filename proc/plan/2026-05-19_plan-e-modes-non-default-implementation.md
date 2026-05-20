@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan E: modes 비-default 정식 구현 (review-queue·time-attack·deep-recall)
 
-- **상태**: COMPLETE (2026-05-20) — 코어 resolveRating PR #81 + review-queue 마이그레이션 PR #85 + **Phase 3·4·5 UI 통합** PR #92. 4 메커니즘 컴포넌트 (`QuickQuiz`·`Blank`·`Typing`·`WordMatch`) 에 `TimeAttackTimer` + `DeepRecallEmpty` 통합. 홈 추천 카드 `alt-modes` 링크 + 게임 허브 `ModeChipsRow` 진입점 추가. PR #92 codex round 1·2·3 fix 반영 — `isModeSupportedFor` 필터(round 1), 44×44 width+height 동시 검증(round 2), deep-recall 미로딩 첫 페인트 회귀 + WordMatch `cardStartRef` 재초기화 dep + time-attack rating 문서 정합(round 3).
+- **상태**: COMPLETE (2026-05-20) — 코어 resolveRating PR #81 + review-queue 마이그레이션 PR #85 + **Phase 3·4·5 UI 통합** PR #92. 4 메커니즘 컴포넌트 (`QuickQuiz`·`Blank`·`Typing`·`WordMatch`) 에 `TimeAttackTimer` + `DeepRecallEmpty` 통합. 홈 추천 카드 `alt-modes` 링크 + 게임 허브 `ModeChipsRow` 진입점 추가. PR #92 codex round 1·2·3·4 fix 반영 — `isModeSupportedFor` 필터(round 1), 44×44 width+height 동시 검증(round 2), deep-recall 미로딩 첫 페인트 회귀 + WordMatch `cardStartRef` 재초기화 dep + time-attack rating 문서 정합(round 3), URL 직접 진입 시 비지원 mode default 정규화 (`useGameMode(gameId)` + `normalizeModeForGame`) + 메커니즘 게임 목록 single source of truth (`manifest.meta.mechanismComponent` 도출 = drift 차단, 테스트·e2e registry 동적 도출)(round 4).
 - **트리거**: audit v3 §4 단일 백본 진척 — modes wrapper 정식 1/4 (default 만), 비-default 3 모드는 fallback + warn 상태. V0.4+ 트랙으로 정식 구현 의무.
 - **메모리 룰**:
   - **단일 백본 + 다중 게임 모드** (project_architecture_decision) — 본 plan이 다중 모드 정식 진입
@@ -132,6 +132,8 @@ const mode = (searchParams.get("mode") ?? "default") as GameMode;
 - [x] 홈 RecommendationCard 옆 "다른 모드로 풀기" 보조 링크 (chip nav) — 본 PR
 - [x] 게임 허브 `ModeChipsRow` — chip 형태 진입점 (math-quick-quiz default) — 본 PR
 - [x] e2e — `mode-entry-points.spec.ts` (허브 chips · 추천 alt-modes · 클릭 진입) — 본 PR
+- [x] PR #92 Codex round 4 fix — URL 직접 진입 가드: `useGameMode(gameId)` 가 `normalizeModeForGame` 으로 비지원 mode 를 default 로 정규화. 직접 게임에 `?mode=time-attack` 진입해도 TimeAttackTimer 미노출 (e2e 회귀 차단)
+- [x] PR #92 Codex round 4 fix — 메커니즘 게임 목록 single source of truth: `manifest.meta.mechanismComponent` 필드 신설 → 9 메커니즘 게임 manifest 명시 + `supported-modes.ts`·`supported-modes.test.ts`·`mode-entry-points.spec.ts` 모두 registry 에서 동적 도출 (drift 차단)
 
 ## 4. 비스코프
 
