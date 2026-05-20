@@ -8,6 +8,8 @@
 // - round 3 fix: same-origin 검증 + rate limit (5/분, 10/시간) + Resend 4xx 중복 idempotent.
 // - round 5 fix: IP 식별 불가 → 400 fail-closed (전역 anonymous 버킷 금지).
 // - round 6 fix: production 외 환경은 dev 폴백 키 사용 (bun dev localhost 작동 보장).
+// - round 8 fix: Resend 최신 API 경로 (POST /contacts), 중복 시 PATCH 재구독 보장,
+//   properties.source 마커 (`billing-launch-notify`) 동봉.
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { GET, POST } from "./route";
@@ -54,8 +56,11 @@ const ORIGINAL_ENV = { ...process.env };
 
 beforeEach(() => {
   // 기본 테스트 환경: secret 설정 + global fetch mock 으로 Resend 호출 차단.
+  // round 8: RESEND_AUDIENCE_ID 는 옵셔널(legacy) — 본 테스트는 글로벌 Contacts 경로
+  // 검증이 목적이므로 설정하지 않는다.
   process.env.RESEND_API_KEY = "test-key";
-  process.env.RESEND_AUDIENCE_ID = "aud_test";
+  delete process.env.RESEND_AUDIENCE_ID;
+  delete process.env.RESEND_SEGMENT_ID;
   vi.stubGlobal(
     "fetch",
     vi.fn(
@@ -169,7 +174,7 @@ describe("POST /api/billing/notify — schema 검증 (Zod strict)", () => {
 });
 
 describe("POST /api/billing/notify — Resend 위임 동작", () => {
-  it("Resend 호출 body 에 email 포함 + 200 응답", async () => {
+  it("[round 8] Resend POST /contacts 호출 + email/properties.source 포함 + 200 응답", async () => {
     const fetchSpy = fetch as unknown as ReturnType<typeof vi.fn>;
     await POST(makePostRequest(basePayload({ email: "alice@example.com" })));
 
@@ -178,14 +183,20 @@ describe("POST /api/billing/notify — Resend 위임 동작", () => {
       string,
       RequestInit,
     ];
-    expect(url).toContain("api.resend.com/audiences/aud_test/contacts");
+    // round 8 — 글로벌 Contacts 엔드포인트 (audiences 경로 아님).
+    expect(url).toBe("https://api.resend.com/contacts");
+    expect(url).not.toContain("audiences");
     expect(init.method).toBe("POST");
     expect(init.headers).toMatchObject({
       authorization: "Bearer test-key",
       "content-type": "application/json",
     });
-    const body = JSON.parse(init.body as string);
+    const body = JSON.parse(init.body as string) as Record<string, unknown>;
     expect(body.email).toBe("alice@example.com");
+    expect(body.unsubscribed).toBe(false);
+    // round 8 #3 — properties.source 마커.
+    const props = body.properties as Record<string, unknown>;
+    expect(props.source).toBe("billing-launch-notify");
   });
 
   it("Resend 응답 본문 (id) 은 클라이언트 응답에 노출되지 않는다", async () => {
@@ -203,11 +214,12 @@ describe("POST /api/billing/notify — Resend 위임 동작", () => {
     expect(fetch).not.toHaveBeenCalled();
   });
 
-  it("RESEND_AUDIENCE_ID 미설정 → 503", async () => {
+  it("[round 8] RESEND_AUDIENCE_ID 없어도 200 — 글로벌 Contacts 경로는 audience id 미사용", async () => {
+    // round 8: audience 모델 폐로. legacy env 부재가 라우트를 막아서는 안 됨.
     delete process.env.RESEND_AUDIENCE_ID;
     const res = await POST(makePostRequest(basePayload()));
-    expect(res.status).toBe(503);
-    expect(fetch).not.toHaveBeenCalled();
+    expect(res.status).toBe(200);
+    expect(fetch).toHaveBeenCalledTimes(1);
   });
 
   it("Resend 5xx 응답 → 502 external_error", async () => {
@@ -232,52 +244,91 @@ describe("POST /api/billing/notify — Resend 위임 동작", () => {
     expect(res.status).toBe(502);
   });
 
-  // Codex round 3 지적 #1 회귀 — 중복 등록은 idempotent success.
-  describe("중복 contact idempotent (round 3 fix)", () => {
-    it("Resend 409 응답 → 200 ok (사용자 관점 성공)", async () => {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn(
-          () =>
-            new Response(JSON.stringify({ name: "validation_error" }), {
-              status: 409,
-            }),
-        ),
+  // Codex round 3·8 지적 회귀 — 중복 등록은 PATCH 재구독 보장 후 success.
+  describe("중복 contact 재구독 보장 (round 3·8 fix)", () => {
+    /**
+     * round 8: POST → 409/422 already-exists 응답이면 PATCH 한 번 더 호출해
+     * `unsubscribed: false` 보정. fetch mock 호출 순서로 두 단계 검증.
+     */
+    function mockDuplicateThenPatchOK(
+      initialStatus: number,
+      initialBody: string,
+    ): ReturnType<typeof vi.fn> {
+      let callCount = 0;
+      return vi.fn(() => {
+        callCount++;
+        if (callCount === 1) {
+          return new Response(initialBody, { status: initialStatus });
+        }
+        return new Response("{}", { status: 200 });
+      });
+    }
+
+    it("[round 8] Resend 409 → PATCH 재구독 → 200 ok", async () => {
+      const fetchSpy = mockDuplicateThenPatchOK(
+        409,
+        JSON.stringify({ name: "validation_error" }),
       );
+      vi.stubGlobal("fetch", fetchSpy);
       const res = await POST(makePostRequest(basePayload()));
       expect(res.status).toBe(200);
       const json = await res.json();
       expect(json).toEqual({ ok: true });
+      // POST + PATCH = 2 호출.
+      expect(fetchSpy).toHaveBeenCalledTimes(2);
+      const [patchUrl, patchInit] = fetchSpy.mock.calls[1] as unknown as [
+        string,
+        RequestInit,
+      ];
+      expect(patchUrl).toContain("https://api.resend.com/contacts/");
+      expect(patchInit.method).toBe("PATCH");
+      const patchBody = JSON.parse(patchInit.body as string) as Record<
+        string,
+        unknown
+      >;
+      // round 8 #2 — unsubscribed: false 로 재구독.
+      expect(patchBody.unsubscribed).toBe(false);
     });
 
-    it("Resend 422 + 'already exists' 메시지 → 200 ok", async () => {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn(
-          () =>
-            new Response(
-              JSON.stringify({ message: "Contact already exists" }),
-              { status: 422 },
-            ),
-        ),
+    it("[round 8] Resend 422 + 'already exists' → PATCH 재구독 → 200 ok", async () => {
+      const fetchSpy = mockDuplicateThenPatchOK(
+        422,
+        JSON.stringify({ message: "Contact already exists" }),
       );
+      vi.stubGlobal("fetch", fetchSpy);
       const res = await POST(makePostRequest(basePayload()));
       expect(res.status).toBe(200);
+      expect(fetchSpy).toHaveBeenCalledTimes(2);
     });
 
-    it("Resend 422 + 일반 validation (already 키워드 없음) → 502", async () => {
-      vi.stubGlobal(
-        "fetch",
-        vi.fn(
-          () =>
-            new Response(
-              JSON.stringify({ message: "Invalid email format" }),
-              { status: 422 },
-            ),
-        ),
-      );
+    it("[round 8] POST 409 → PATCH 4xx 실패 → 502 (재구독 실패 노출)", async () => {
+      // 사용자에게 거짓 success 노출 X — PATCH 자체 실패 시 502 로 정직히 노출.
+      let callCount = 0;
+      const fetchSpy = vi.fn(() => {
+        callCount++;
+        if (callCount === 1) {
+          return new Response("{}", { status: 409 });
+        }
+        return new Response("not found", { status: 404 });
+      });
+      vi.stubGlobal("fetch", fetchSpy);
       const res = await POST(makePostRequest(basePayload()));
       expect(res.status).toBe(502);
+    });
+
+    it("Resend 422 + 일반 validation (already 키워드 없음) → 502 (PATCH 미호출)", async () => {
+      const fetchSpy = vi.fn(
+        () =>
+          new Response(
+            JSON.stringify({ message: "Invalid email format" }),
+            { status: 422 },
+          ),
+      );
+      vi.stubGlobal("fetch", fetchSpy);
+      const res = await POST(makePostRequest(basePayload()));
+      expect(res.status).toBe(502);
+      // 중복 판정 실패 → POST 1회만, PATCH 호출 X.
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
     });
   });
 });
