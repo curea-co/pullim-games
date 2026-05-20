@@ -16,6 +16,8 @@ jobs:
   review:
     name: Review
     runs-on: self-hosted
+    # Codex 지적(P0 보안): self-hosted + pull_request → 포크 PR 차단. curea-co 소속 브랜치만 실행.
+    if: github.event.pull_request.head.repo.full_name == github.repository
     steps:
       - name: Clear stale git credentials
         run: |
@@ -120,11 +122,12 @@ jobs:
               pull_number: context.payload.pull_request.number,
             });
 
-            const { data: files } = await github.rest.pulls.listFiles({
+            // Codex 지적(신뢰성): pagination 처리 — 301+ 파일 PR 에서 인라인 코멘트 손실 방지.
+            const files = await github.paginate(github.rest.pulls.listFiles, {
               owner: context.repo.owner,
               repo: context.repo.repo,
               pull_number: context.payload.pull_request.number,
-              per_page: 300,
+              per_page: 100,
             });
 
             const diffLines = new Map();

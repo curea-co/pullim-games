@@ -81,7 +81,7 @@
 
 ### D2 — self-hosted runner 본 리포 등록
 - **(A 추천)** pullim 에서 쓰는 self-hosted runner 본 리포에도 등록 — 같은 머신 공유 가능 (Codex CLI 이미 설치돼있을 가능성)
-- (B) ubuntu-latest 변경 — Codex CLI 매 실행 시 설치(`npm i -g @openai/codex-cli`) + 모델 키 환경변수. self-hosted 의존성 회피하지만 매 실행 비용·시간 증가
+- (B) ubuntu-latest 변경 — Codex CLI 사전 설치된 컨테이너 이미지 또는 `bunx @openai/codex` 호출 (`proc/spec/09 §9.1` "npm/npx 직접 호출 금지" 룰 준수). 모델 키 환경변수. self-hosted 의존성 회피하지만 매 실행 비용·시간 증가
 - (C) Codex 외 대안(Claude GitHub App 등) — 사용자 동기와 어긋남
 
 → **A 권고**. self-hosted 가용 안 하면 B fallback.
