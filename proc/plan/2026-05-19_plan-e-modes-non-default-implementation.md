@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan E: modes 비-default 정식 구현 (review-queue·time-attack·deep-recall)
 
-- **상태**: PARTIAL-COMPLETE (2026-05-20) — 코어 resolveRating (3 모드 정식 분기) PR #81 머지. Phase 2 review-queue **URL searchParams + 16 호출처 마이그레이션** PR #(본 PR) 머지. Phase 3·4 (time-attack 타이머·deep-recall 풀 필터) + Phase 5 (홈/허브 진입 UI) 다음 세션 이관.
+- **상태**: COMPLETE (2026-05-20) — 코어 resolveRating PR #81 + review-queue 마이그레이션 PR #85 + **Phase 3·4·5 UI 통합** PR #(본 PR). 4 메커니즘 컴포넌트 (`QuickQuiz`·`Blank`·`Typing`·`WordMatch`) 에 `TimeAttackTimer` + `DeepRecallEmpty` 통합. 홈 추천 카드 `alt-modes` 링크 + 게임 허브 `ModeChipsRow` 진입점 추가.
 - **트리거**: audit v3 §4 단일 백본 진척 — modes wrapper 정식 1/4 (default 만), 비-default 3 모드는 fallback + warn 상태. V0.4+ 트랙으로 정식 구현 의무.
 - **메모리 룰**:
   - **단일 백본 + 다중 게임 모드** (project_architecture_decision) — 본 plan이 다중 모드 정식 진입
@@ -112,24 +112,24 @@ const mode = (searchParams.get("mode") ?? "default") as GameMode;
 - [x] ui:audit 4 viewport ✅ (본 PR)
 
 ### Phase 3 — time-attack 구현 (1 PR)
-- [ ] `modes/index.ts` `resolveRating('time-attack', outcome)` 정식 — `elapsedMs` 사용
-- [ ] 4 메커니즘 컴포넌트에 타이머 컴포넌트 통합 (`TimeAttackTimer`)
-- [ ] `ReviewOutcome.elapsedMs` 측정·전달 — 게임별 submitTime 추적
-- [ ] 타이머 표시 UI (game-shell sticky top 또는 카드 위)
-- [ ] e2e — 시간 내 정답 → easy / 시간 초과 → again
-- [ ] ui:audit 4 viewport ✅
+- [x] `modes/index.ts` `resolveRating('time-attack', outcome)` 정식 — `elapsedMs` 사용 (PR #81)
+- [x] 4 메커니즘 컴포넌트에 타이머 컴포넌트 통합 (`TimeAttackTimer`) — 본 PR
+- [x] `ReviewOutcome.elapsedMs` 측정·전달 — 게임별 submitTime 추적 (`cardStartRef`) — 본 PR
+- [x] 타이머 표시 UI (header 아래 sticky compact bar) — 본 PR
+- [x] e2e — `?mode=time-attack` 진입 + timer 노출 검증 (`mode-time-attack.spec.ts`) — 본 PR
+- [x] ui:audit 4 viewport ✅ (`/games/english-blank?mode=time-attack` 등 PASS)
 
 ### Phase 4 — deep-recall 구현 (1 PR)
-- [ ] `modes/index.ts` `resolveRating('deep-recall', outcome)` 정식
-- [ ] `selectNextCards` 확장 — R 임계 < 0.6 만 반환
-- [ ] 빈 풀 처리 — "잊혀가는 카드 없음" 화면
-- [ ] e2e — `?mode=deep-recall` 진입 + R 낮은 카드만 노출
-- [ ] ui:audit ✅
+- [x] `modes/index.ts` `resolveRating('deep-recall', outcome)` 정식 — default 유지 (PR #81)
+- [x] `selectCardsForMode` 확장 — R<0.6 만 통과 (`select-for-mode.ts`) — 본 PR
+- [x] 빈 풀 처리 — `DeepRecallEmpty` 컴포넌트 + 4 메커니즘 통합 — 본 PR
+- [x] e2e — `?mode=deep-recall` 진입 시 신규 세션은 빈 풀 화면 노출 (`mode-deep-recall.spec.ts`) — 본 PR
+- [x] ui:audit ✅
 
 ### Phase 5 — 진입 UI (옵션, 별 PR)
-- [ ] 홈 RecommendationCard 옆 "다른 모드로 풀기" 보조 링크 (V0.4+)
-- [ ] 게임 허브 mode 필터·선택 (V0.4+)
-- 본 plan §3 의 다른 Phase는 URL searchParams 만, UI 진입점은 별 PR
+- [x] 홈 RecommendationCard 옆 "다른 모드로 풀기" 보조 링크 (chip nav) — 본 PR
+- [x] 게임 허브 `ModeChipsRow` — chip 형태 진입점 (math-quick-quiz default) — 본 PR
+- [x] e2e — `mode-entry-points.spec.ts` (허브 chips · 추천 alt-modes · 클릭 진입) — 본 PR
 
 ## 4. 비스코프
 

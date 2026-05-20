@@ -3,8 +3,9 @@
 // 매칭 메커닉 — english-word-match / custom-word-match 공유.
 // 좌·우 컬럼 셔플, 2-탭 매칭 + AnimatePresence fade-out.
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
 import { CorrectBurst } from "@/components/ui/CorrectBurst";
@@ -17,6 +18,8 @@ import {
   selectCardsForMode,
   useGameMode,
 } from "@/lib/core";
+import { TimeAttackTimer } from "./TimeAttackTimer";
+import { DeepRecallEmpty } from "./DeepRecallEmpty";
 
 type Phase =
   | "playing"
@@ -80,7 +83,11 @@ export function WordMatchComponent({
   homeHref = "/",
 }: Props) {
   const mode = useGameMode();
-  const [cards, setCards] = useState(() => initialCards);
+  const pathname = usePathname();
+  const [cards, setCards] = useState(() =>
+    mode === "deep-recall" ? [] : initialCards,
+  );
+  const [cardsLoaded, setCardsLoaded] = useState(mode === "default");
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [matched, setMatched] = useState<Set<number>>(new Set());
@@ -91,26 +98,28 @@ export function WordMatchComponent({
     right: number;
   } | null>(null);
   const [wrongCount, setWrongCount] = useState(0);
+  const cardStartRef = useRef<number>(0);
 
   useEffect(() => {
     const all = loadAllSrsStates(gameId);
-    if (all.size > 0) {
-      const withSrs = initialCards.map((c) => ({
-        card: c,
-        srs: all.get(c.id) ?? loadSrsState(gameId, c.id),
-      }));
-      const ordered = selectCardsForMode(
-        withSrs,
-        mode,
-        initialCards.length,
-      ).map((x) => x.card);
-      setCards(ordered);
-    }
+    const withSrs = initialCards.map((c) => ({
+      card: c,
+      srs: all.get(c.id) ?? loadSrsState(gameId, c.id),
+    }));
+    const ordered = selectCardsForMode(
+      withSrs,
+      mode,
+      initialCards.length,
+    ).map((x) => x.card);
+    setCards(
+      mode === "deep-recall" ? ordered : ordered.length > 0 ? ordered : initialCards,
+    );
+    setCardsLoaded(true);
     void logEvent({ gameId, cardId: null, action: "session-start" });
     return () => {
       void logEvent({ gameId, cardId: null, action: "session-end" });
     };
-  }, [gameId, mode]);
+  }, [gameId, mode, initialCards]);
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
@@ -150,9 +159,15 @@ export function WordMatchComponent({
     setWrongFlash(null);
     setWrongCount(0);
     setPhase("playing");
+    cardStartRef.current = performance.now();
   }, [cardIndex]);
 
   if (cards.length === 0) {
+    if (cardsLoaded && mode === "deep-recall" && initialCards.length > 0) {
+      return (
+        <DeepRecallEmpty homeHref={homeHref} defaultModeHref={pathname ?? "/"} />
+      );
+    }
     return (
       <main className="mx-auto flex min-h-full max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
         <h1 className="text-display text-type-primary">
@@ -217,16 +232,18 @@ export function WordMatchComponent({
         (i) => i < card!.problem.pairs.length,
       ).length;
       if (pairsMatched === card!.problem.pairs.length) {
+        const elapsedMs = performance.now() - cardStartRef.current;
         applyAndPersist(mode, gameId, card!.id, {
           correct: true,
           wrongCount,
           hintUsed: false,
+          elapsedMs,
         });
         void logEvent({
           gameId,
           cardId: card!.id,
           action: "submit",
-          payload: { wrongCount },
+          payload: { wrongCount, elapsedMs },
         });
       }
     } else {
@@ -240,10 +257,12 @@ export function WordMatchComponent({
         payload: { leftPair, rightPair, correct: false },
       });
       if (nextWrong >= REVEAL_THRESHOLD) {
+        const elapsedMs = performance.now() - cardStartRef.current;
         applyAndPersist(mode, gameId, card!.id, {
           correct: false,
           wrongCount: nextWrong,
           hintUsed: false,
+          elapsedMs,
         });
         void logEvent({
           gameId,
@@ -297,6 +316,27 @@ export function WordMatchComponent({
     setCardIndex(cardIndex + 1);
   }
 
+  // time-attack 시간 초과 — 강제 reveal 진입 (again 적용).
+  function handleTimeout() {
+    if (phase !== "playing") return;
+    applyAndPersist(mode, gameId, card!.id, {
+      correct: false,
+      wrongCount: wrongCount + 1,
+      hintUsed: false,
+      elapsedMs: 30_001,
+    });
+    void logEvent({
+      gameId,
+      cardId: card!.id,
+      action: "submit",
+      payload: { timeout: true, correct: false, elapsedMs: 30_001 },
+    });
+    setSelectedLeft(null);
+    setSelectedRight(null);
+    setWrongFlash(null);
+    setPhase("reveal");
+  }
+
   // pairs 모두 매칭 시 통과 (extras 는 보너스, 통과 조건 X)
   const allMatched =
     Array.from(matched).filter((i) => i < card.problem.pairs.length)
@@ -309,17 +349,24 @@ export function WordMatchComponent({
       <GameShell
       variant="match"
       header={
-        <div className="flex items-center justify-between text-label tabular text-type-secondary">
-          <span>
-            {cardIndex + 1} / {cards.length}
-          </span>
-          <Link
-            href={homeHref}
-            aria-label="메인으로"
-            className="rounded-button px-2 py-1 hover:text-type-primary"
-          >
-            ≡
-          </Link>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between text-label tabular text-type-secondary">
+            <span>
+              {cardIndex + 1} / {cards.length}
+            </span>
+            <Link
+              href={homeHref}
+              aria-label="메인으로"
+              className="rounded-button px-2 py-1 hover:text-type-primary"
+            >
+              ≡
+            </Link>
+          </div>
+          <TimeAttackTimer
+            active={mode === "time-attack" && phase === "playing"}
+            resetKey={cardIndex}
+            onExpire={handleTimeout}
+          />
         </div>
       }
       content={

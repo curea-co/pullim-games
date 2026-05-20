@@ -7,6 +7,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
 import { CorrectBurst } from "@/components/ui/CorrectBurst";
@@ -18,6 +19,8 @@ import {
   selectCardsForMode,
   useGameMode,
 } from "@/lib/core";
+import { TimeAttackTimer } from "./TimeAttackTimer";
+import { DeepRecallEmpty } from "./DeepRecallEmpty";
 
 type Phase = "idle" | "selecting" | "feedback" | "completed";
 
@@ -54,34 +57,54 @@ export function QuickQuizComponent({
   homeHref = "/",
 }: Props) {
   const mode = useGameMode();
-  const [cards, setCards] = useState(() => initialCards);
+  const pathname = usePathname();
+  // deep-recall 모드는 R<0.6 필터가 적용 — 신규 세션에선 풀이 0건이 보통.
+  // initialCards 가 SSR/하드코딩 카드라 무조건 default 진입 시 사용 — deep-recall 진입 시
+  // SRS load 전엔 빈 표시 (잘못된 화면) 피하려 default 모드 외엔 effect 가 cards 갱신 전까지 hidden.
+  const [cards, setCards] = useState(() =>
+    mode === "deep-recall" ? [] : initialCards,
+  );
+  const [cardsLoaded, setCardsLoaded] = useState(mode === "default");
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
   const [picked, setPicked] = useState<number | null>(null);
   const dragStartedRef = useRef(false);
+  // time-attack: 카드 진입 시각 — submit 시 elapsedMs 계산.
+  const cardStartRef = useRef<number>(0);
 
   useEffect(() => {
     const all = loadAllSrsStates(gameId);
-    if (all.size > 0) {
-      const withSrs = initialCards.map((c) => ({
-        card: c,
-        srs: all.get(c.id) ?? loadSrsState(gameId, c.id),
-      }));
-      const ordered = selectCardsForMode(
-        withSrs,
-        mode,
-        initialCards.length,
-      ).map((x) => x.card);
-      setCards(ordered);
-    }
+    const withSrs = initialCards.map((c) => ({
+      card: c,
+      srs: all.get(c.id) ?? loadSrsState(gameId, c.id),
+    }));
+    const ordered = selectCardsForMode(
+      withSrs,
+      mode,
+      initialCards.length,
+    ).map((x) => x.card);
+    // deep-recall 빈 풀(R<0.6 카드 0건)은 ordered=[] — DeepRecallEmpty 표시.
+    // 그 외 모드는 0개 selected 케이스 X (review-queue 도 cards.length 보존).
+    setCards(mode === "deep-recall" ? ordered : ordered.length > 0 ? ordered : initialCards);
+    setCardsLoaded(true);
     void logEvent({ gameId, cardId: null, action: "session-start" });
     return () => {
       void logEvent({ gameId, cardId: null, action: "session-end" });
     };
-  }, [gameId, mode]);
+  }, [gameId, mode, initialCards]);
 
-  // 빈 카드 풀
+  // 카드 진입 시 타이머 기준 시각 갱신 — time-attack elapsedMs 계산용.
+  useEffect(() => {
+    cardStartRef.current = performance.now();
+  }, [cardIndex, cards]);
+
+  // 빈 카드 풀 — deep-recall 모드는 R<0.6 카드 0건 안내.
   if (cards.length === 0) {
+    if (cardsLoaded && mode === "deep-recall" && initialCards.length > 0) {
+      return (
+        <DeepRecallEmpty homeHref={homeHref} defaultModeHref={pathname ?? "/"} />
+      );
+    }
     return (
       <main className="mx-auto flex min-h-full max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
         <h1 className="text-display text-type-primary">
@@ -137,18 +160,41 @@ export function QuickQuizComponent({
     setPhase("feedback");
 
     const correct = choiceIdx === card.problem.correctIndex;
+    const elapsedMs = performance.now() - cardStartRef.current;
     void logEvent({
       gameId,
       cardId: card.id,
       action: "submit",
-      payload: { picked: choiceIdx, correct },
+      payload: { picked: choiceIdx, correct, elapsedMs },
     });
 
     // Plan A Phase 3 — modes wrapper 마이그레이션. 객관식 1턴 종결.
+    // Plan E Phase 3 — time-attack 시 elapsedMs 전달 (resolveRating 가 30s 초과 → again).
     applyAndPersist(mode, gameId, card.id, {
       correct,
       wrongCount: correct ? 0 : 1,
       hintUsed: false,
+      elapsedMs,
+    });
+  };
+
+  // time-attack 시간 초과 — 강제 오답 처리. correct=false + 30s 초과 elapsedMs →
+  // resolveRating('time-attack') 가 again. 카드 답 노출 후 다음 카드 진행 가능 상태.
+  const handleTimeout = () => {
+    if (phase !== "idle") return;
+    setPhase("feedback");
+    setPicked(null);
+    void logEvent({
+      gameId,
+      cardId: card.id,
+      action: "submit",
+      payload: { timeout: true, correct: false, elapsedMs: 30_001 },
+    });
+    applyAndPersist(mode, gameId, card.id, {
+      correct: false,
+      wrongCount: 1,
+      hintUsed: false,
+      elapsedMs: 30_001,
     });
   };
 
@@ -172,17 +218,24 @@ export function QuickQuizComponent({
       <GameShell
       variant="split"
       header={
-        <div className="flex items-center justify-between text-label tabular text-type-secondary">
-          <span>
-            {cardIndex + 1} / {cards.length}
-          </span>
-          <Link
-            href={homeHref}
-            aria-label="메인으로"
-            className="rounded-button px-2 py-1 hover:text-type-primary"
-          >
-            ≡
-          </Link>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between text-label tabular text-type-secondary">
+            <span>
+              {cardIndex + 1} / {cards.length}
+            </span>
+            <Link
+              href={homeHref}
+              aria-label="메인으로"
+              className="rounded-button px-2 py-1 hover:text-type-primary"
+            >
+              ≡
+            </Link>
+          </div>
+          <TimeAttackTimer
+            active={mode === "time-attack" && phase === "idle"}
+            resetKey={cardIndex}
+            onExpire={handleTimeout}
+          />
         </div>
       }
       content={
