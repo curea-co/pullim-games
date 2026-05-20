@@ -1,5 +1,6 @@
 // /games/[gameId] — 동적 라우팅. registry에서 gameId로 게임 조회.
 
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getAllGameIds, getGameById } from "@/lib/games/registry";
 import type { Metadata } from "next";
@@ -42,5 +43,16 @@ export default async function GamePage({ params }: PageProps) {
 
   // 동적 import — Next.js 가 게임별 청크 분할.
   const { default: Game } = await game.loadComponent();
-  return <Game />;
+  // Suspense — useSearchParams 사용 게임 컴포넌트의 prerender CSR bailout 처리 (Plan E Phase 2).
+  return (
+    <Suspense
+      fallback={
+        <div className="flex min-h-screen items-center justify-center text-helper text-type-secondary">
+          불러오는 중…
+        </div>
+      }
+    >
+      <Game />
+    </Suspense>
+  );
 }
