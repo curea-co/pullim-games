@@ -1,0 +1,174 @@
+name: E2E Nightly
+
+# Plan G Phase 2 — pullim 의 e2e-nightly.yml 변형 이식.
+# 본 리포는 단일 앱이고 DEV_API_URL 등 서버 의존 X (현 V1 fingerprint).
+# matrix per game (21 게임) + shared specs job 으로 plan §3 Phase 2 의도 충실 이행.
+#
+# 보안 사전 sweep:
+# - schedule + workflow_dispatch 트리거만 — 외부 PR 영향 0.
+# - secrets 의존 0 — pullim 원본의 DEV_API_URL/TEST_EMAIL/TEST_PASSWORD 제거.
+# - self-hosted runner 채택 (codex-review.yml 과 동일) — schedule 트리거라 외부 위협 0.
+
+on:
+  # KST 02:00 = UTC 17:00 (전날). pullim 동일.
+  schedule:
+    - cron: "0 17 * * *"
+  # 수동 실행 — 회귀 점검·디버깅용.
+  workflow_dispatch:
+
+# 최소 권한 — secrets:write·contents:write 불필요 (artifact upload 만).
+permissions:
+  contents: read
+
+# 같은 워크플로 중복 실행 방지 — workflow_dispatch 연타 시 이전 run cancel.
+concurrency:
+  group: e2e-nightly-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # Plan §3 Phase 2 의도: 21 게임별 matrix 분산 → 격리 디버깅 + 병렬 실행.
+  # playwright --grep "<game-id>" 로 해당 게임 ID 가 test title 에 포함된 케이스 필터.
+  # (chrome·viewport·game-shell·mode-review-queue·factorization-* 등이 매치 대상.)
+  e2e-per-game:
+    name: e2e (${{ matrix.game }})
+    runs-on: self-hosted
+    # 사전 sweep: 게임별 30분 상한. 21 게임 × 30 = 1 job 격리 hang 방지.
+    timeout-minutes: 30
+    strategy:
+      # 한 게임 실패가 다른 게임 회귀 검출을 막지 않도록 fail-fast 끔.
+      fail-fast: false
+      matrix:
+        # 21 게임 — src/games/ 하위 카탈로그. CLAUDE.md §1 와 동기 의무.
+        game:
+          - bio-taxonomy
+          - chemistry-balance
+          - cloze-multi
+          - custom-blank
+          - custom-multiple-choice
+          - custom-typing
+          - custom-word-match
+          - english-blank
+          - english-order
+          - english-vocab-typing
+          - english-word-match
+          - factorization
+          - genetics-punnett
+          - history-timeline
+          - image-hotspot
+          - korean-pos-tagging
+          - letter-assembly
+          - math-graph-shift
+          - math-quick-quiz
+          - physics-vector
+          - vocab-typing
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Generate game registry
+        run: bun run gen:registry
+
+      # ci.yml 의 e2e job 과 동일 — playwright 버전 해석 후 캐시.
+      - name: Resolve Playwright version
+        id: pw
+        run: |
+          VERSION=$(node -p "require('@playwright/test/package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ steps.pw.outputs.version }}
+
+      # proc/spec/09 §9.1 — Bun 단일 매니저. bunx 만 사용 (npm/npx/pnpm 금지).
+      - name: Install Playwright Chromium + system deps
+        run: bunx playwright install --with-deps chromium
+
+      # game ID 가 test title 에 포함된 케이스만 실행.
+      # 매치 없는 케이스(--grep 미스) 는 e2e-shared job 에서 커버.
+      - name: Run e2e (filtered by game)
+        run: bunx playwright test --grep "${{ matrix.game }}"
+
+      # 실패 시 playwright report 아카이브 — game 별 격리 보관.
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-report-${{ matrix.game }}-${{ github.run_id }}
+          path: playwright-report/
+          retention-days: 14
+
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-results-${{ matrix.game }}-${{ github.run_id }}
+          path: test-results/
+          retention-days: 7
+
+  # 게임 ID 가 test title 에 없는 cross-cutting spec 커버.
+  # 예: activity-heatmap, custom-games-cta, home-dashboard-layout, manage-billing,
+  #     streak, correct-feedback-reveal, mode-review-queue (잘못된 mode 값).
+  # --grep-invert 로 21 게임 ID 모두 제외한 나머지 케이스 실행.
+  e2e-shared:
+    name: e2e (shared specs)
+    runs-on: self-hosted
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Generate game registry
+        run: bun run gen:registry
+
+      - name: Resolve Playwright version
+        id: pw
+        run: |
+          VERSION=$(node -p "require('@playwright/test/package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ steps.pw.outputs.version }}
+
+      - name: Install Playwright Chromium + system deps
+        run: bunx playwright install --with-deps chromium
+
+      # 21 게임 ID 모두 제외 — alternation regex.
+      # per-game job 이 커버하는 케이스 중복 실행 방지.
+      - name: Run e2e (shared cross-cutting specs)
+        run: |
+          bunx playwright test --grep-invert "bio-taxonomy|chemistry-balance|cloze-multi|custom-blank|custom-multiple-choice|custom-typing|custom-word-match|english-blank|english-order|english-vocab-typing|english-word-match|factorization|genetics-punnett|history-timeline|image-hotspot|korean-pos-tagging|letter-assembly|math-graph-shift|math-quick-quiz|physics-vector|vocab-typing"
+
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-report-shared-${{ github.run_id }}
+          path: playwright-report/
+          retention-days: 14
+
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-results-shared-${{ github.run_id }}
+          path: test-results/
+          retention-days: 7

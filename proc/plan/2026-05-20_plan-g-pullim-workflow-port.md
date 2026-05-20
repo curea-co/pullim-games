@@ -1,6 +1,6 @@
 # 2026-05-20 — Plan G: pullim 리포 workflows 이식 + monorepo 판단
 
-- **상태**: PHASE 1 COMPLETE (2026-05-20) — codex-review.yml 정착 + Codex 1·2·3 라운드 지적 모두 반영 + 사전 sweep 4건 통합. 본 PR 의 yml 변경 효력은 머지 후 다음 PR 부터 (pull_request_target 패턴). Phase 2 (e2e-nightly) 다음 세션 이관.
+- **상태**: PHASE 2 COMPLETE (2026-05-20) — e2e-nightly.yml 신설 (`.github/workflows/e2e-nightly.yml`). cron `0 17 * * *` (KST 02:00) + workflow_dispatch. 21 게임 matrix + shared specs job. self-hosted runner. secrets 의존 0. 사전 sweep 5건 통합. PHASE 1 (codex-review.yml) 도 main 정착 완료.
 - **거버넌스 (사용자 합의 2026-05-20)**: codex review 결과를 회피하기 위해 codex 워크플로·프롬프트 수정 금지. codex 지적은 코드 fix 로만 응답 (룰북 수정 X). 정당한 trade-off 만 별 plan 합의 후 기록.
 - **트리거**: 사용자 요청 "pullim의 workflows를 pullim-games로 이식. monorepo 구조 필요하면 변경도 같이". 직접 동기 = Codex Review bot 작동 (오늘 PR #83 검증 시 0 review 발견).
 - **메모리 룰**:
@@ -138,14 +138,22 @@
 - 본 PR (#87) 자체 round 4 review 없음 — `pull_request_target` 트리거는 base(main) 의 yml 만 실행. 본 PR 머지 전에는 main 에 codex-review.yml 없음.
 - 머지 후 다음 sosohan PR 으로 정착 검증 의무 — 별 PR 작성 후 codex review 자동 작동 확인.
 
-### Phase 2 — e2e-nightly.yml 이식 (1 PR)
+### Phase 2 — e2e-nightly.yml 이식 (PR 작성 완료, 머지 대기)
 
-- [ ] `.github/workflows/e2e-nightly.yml` 신설
-- [ ] cron: `0 17 * * *` (KST 02:00) — pullim 동일
-- [ ] bun + playwright (Chromium only) + matrix per game (21 게임)
-- [ ] base = main (pullim은 dev. 본 리포는 dev 분기 X)
-- [ ] artifacts: playwright-report · test-results 14·7 days
-- [ ] DEV_API_URL 등 secrets 의존 X — 현 V1 fingerprint(서버 의존 0)
+- [x] `.github/workflows/e2e-nightly.yml` 신설
+- [x] cron: `0 17 * * *` (KST 02:00) — pullim 동일
+- [x] bun + playwright (Chromium only) + matrix per game (21 게임)
+- [x] base = main (pullim은 dev. 본 리포는 dev 분기 X)
+- [x] artifacts: playwright-report · test-results 14·7 days
+- [x] DEV_API_URL 등 secrets 의존 X — 현 V1 fingerprint(서버 의존 0)
+- [x] **사전 sweep 5건 통합**:
+  - permissions `contents: read` 만 — 최소 권한 원칙
+  - concurrency group `e2e-nightly-${{ github.ref }}` — workflow_dispatch 연타 안전
+  - timeout-minutes 30 (per game · shared 양쪽)
+  - fail-fast: false — 한 게임 실패가 타 게임 회귀 검출 방해 X
+  - persist-credentials: false — checkout 후 토큰 잔류 차단
+- [x] **per-game grep + shared `--grep-invert` 페어** — e2e spec 구조 분석 결과 mode-review-queue 등 cross-cutting spec 누락 위험 차단 (정합성 트레이드오프 명시)
+- [x] **runner = self-hosted** (codex-review.yml 정착 동일) — schedule + workflow_dispatch 외 트리거 0 → 외부 위협 0
 
 ### Phase 3 — AGENTS.md 보강 (Phase 1 후속, 1 PR)
 
