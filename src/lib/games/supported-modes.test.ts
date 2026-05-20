@@ -90,4 +90,48 @@ describe("getAuxiliaryModesFor", () => {
   it("default 모드는 보조 chip 후보에서 제외 (본 진입은 ?mode 미지정 link)", () => {
     expect(getAuxiliaryModesFor("math-quick-quiz")).not.toContain("default");
   });
+
+  // PR #92 Codex round 2 fix:
+  //   nav 가 사라지는 회귀(=auxiliary 가 비어 컴포넌트가 null 을 반환)를 잡는다.
+  //   review-queue 가 모든 게임 지원이라는 계약이 깨지면 직접 게임에서 nav 가 null 이
+  //   되며, 이 테스트가 fail 하여 회귀를 명시한다.
+  it("review-queue 는 모든 게임에서 노출되어야 한다 (nav 미렌더 회귀 차단)", () => {
+    const allGames = [
+      "math-quick-quiz",
+      "english-blank",
+      "english-vocab-typing",
+      "english-word-match",
+      "vocab-typing",
+      "custom-blank",
+      "custom-multiple-choice",
+      "custom-typing",
+      "custom-word-match",
+      "factorization",
+      "image-hotspot",
+      "chemistry-balance",
+      "bio-taxonomy",
+      "physics-vector",
+      "genetics-punnett",
+      "history-timeline",
+      "english-order",
+      "letter-assembly",
+      "korean-pos-tagging",
+      "math-graph-shift",
+      "cloze-multi",
+    ];
+    for (const id of allGames) {
+      const modes = getAuxiliaryModesFor(id);
+      expect(modes.length).toBeGreaterThan(0);
+      expect(modes).toContain("review-queue");
+    }
+  });
+
+  it("어떤 게임에서도 auxiliary 가 비지 않아 nav 가 렌더링됨을 보장 (RecommendationCard·ModeChipsRow 매핑)", () => {
+    // RecommendationCard / ModeChipsRow 의 supportedAlts.length === 0 가지가 모든
+    // V1 게임에서 발화되지 않아야 한다 — review-queue 일관 지원의 직접 결과.
+    const sampleDirectGame = "factorization";
+    const sampleMechanismGame = "math-quick-quiz";
+    expect(getAuxiliaryModesFor(sampleDirectGame).length).toBeGreaterThan(0);
+    expect(getAuxiliaryModesFor(sampleMechanismGame).length).toBe(3);
+  });
 });

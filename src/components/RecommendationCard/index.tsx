@@ -13,6 +13,11 @@
 //   - 비지원 게임(직접 게임 12종)에 time-attack/deep-recall 진입점 노출 차단.
 //     supported 여부는 isModeSupportedFor(gameId, mode) 로 판정.
 //   - chip 디자인 SPEC 08.10/08.12 정합: rounded-button + px-4 py-2 (44×44 터치 영역).
+//
+// PR #92 Codex round 2 fix:
+//   - chip 가로 너비 44px 보장 — min-w-[44px] 추가 (label 변경 회귀 차단).
+//   - review-queue 는 모든 게임 지원이므로 supportedAlts 가 비지 않음(직접 게임도 최소 1개).
+//     실제로 nav 는 어떤 추천에서도 렌더링됨 — 회귀 회로 e2e 가 확실히 잡게끔 테스트 보강.
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -140,7 +145,7 @@ export function RecommendationCard() {
                 data-cta-priority="informational"
                 data-mode={alt.mode}
                 aria-label={`${game.meta.title} — ${alt.label} 모드 (${alt.hint})`}
-                className="inline-flex min-h-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-block px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary"
+                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-block px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary"
               >
                 {alt.label}
               </Link>

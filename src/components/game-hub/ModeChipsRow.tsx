@@ -7,6 +7,9 @@
 // PR #92 Codex round 1 fix:
 //   - defaultGameId 가 비지원이면 비-default 모드 chip 노출 차단 (실 동작 계약 정합).
 //   - chip 디자인 SPEC 08.10/08.12 정합: rounded-button + px-4 py-2 (44×44 터치 영역).
+//
+// PR #92 Codex round 2 fix:
+//   - chip 의 가로 너비도 44px 이상 보장 — min-w-[44px] 추가 (짧은 label 회귀 차단).
 
 import Link from "next/link";
 import type { GameMode } from "@/lib/core";
@@ -56,7 +59,7 @@ export function ModeChipsRow({ defaultGameId = "math-quick-quiz" }: Props) {
           data-cta-priority="informational"
           data-mode={alt.mode}
           aria-label={`${alt.label} 모드로 진입 (${alt.hint})`}
-          className="inline-flex min-h-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-primary px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary"
+          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-primary px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary"
         >
           {alt.label}
           <span className="ml-1 text-type-secondary/60">· {alt.hint}</span>
