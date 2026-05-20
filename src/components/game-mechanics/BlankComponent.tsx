@@ -13,7 +13,8 @@ import {
   loadSrsState,
   logEvent,
   applyAndPersist,
-  selectNextCards,
+  selectCardsForMode,
+  useGameMode,
 } from "@/lib/core";
 
 type Phase = "playing" | "feedback" | "completed";
@@ -47,6 +48,7 @@ export function BlankComponent({
   emptyMessage,
   homeHref = "/",
 }: Props) {
+  const mode = useGameMode();
   const [cards, setCards] = useState(() => initialCards);
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
@@ -59,16 +61,18 @@ export function BlankComponent({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(gameId, c.id),
       }));
-      const ordered = selectNextCards(withSrs, initialCards.length).map(
-        (x) => x.card,
-      );
+      const ordered = selectCardsForMode(
+        withSrs,
+        mode,
+        initialCards.length,
+      ).map((x) => x.card);
       setCards(ordered);
     }
     void logEvent({ gameId, cardId: null, action: "session-start" });
     return () => {
       void logEvent({ gameId, cardId: null, action: "session-end" });
     };
-  }, [gameId]);
+  }, [gameId, mode]);
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
@@ -133,7 +137,8 @@ export function BlankComponent({
     });
     // Plan A Phase 3 — modes wrapper 마이그레이션. 객관식 1턴 종결 메커닉:
     // 정답=wc 0 (good), 오답=wc 1 (again). resolveRating(default) 가 동일 결정.
-    applyAndPersist("default", gameId, card!.id, {
+    // Plan E Phase 2 — mode 전파 (URL ?mode=review-queue 등).
+    applyAndPersist(mode, gameId, card!.id, {
       correct,
       wrongCount: correct ? 0 : 1,
       hintUsed: false,

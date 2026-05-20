@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan E: modes 비-default 정식 구현 (review-queue·time-attack·deep-recall)
 
-- **상태**: PARTIAL-COMPLETE (2026-05-19) — 코어 resolveRating (3 모드 정식 분기) PR #81 머지. D1.1~D1.6 사용자 합의 완료. UI 통합 (타이머·selectNextCards 확장·URL searchParams·홈/허브 진입점) 다음 세션 이관 — 약 430 LOC + 17 호출처 영향.
+- **상태**: PARTIAL-COMPLETE (2026-05-20) — 코어 resolveRating (3 모드 정식 분기) PR #81 머지. Phase 2 review-queue **URL searchParams + 16 호출처 마이그레이션** PR #(본 PR) 머지. Phase 3·4 (time-attack 타이머·deep-recall 풀 필터) + Phase 5 (홈/허브 진입 UI) 다음 세션 이관.
 - **트리거**: audit v3 §4 단일 백본 진척 — modes wrapper 정식 1/4 (default 만), 비-default 3 모드는 fallback + warn 상태. V0.4+ 트랙으로 정식 구현 의무.
 - **메모리 룰**:
   - **단일 백본 + 다중 게임 모드** (project_architecture_decision) — 본 plan이 다중 모드 정식 진입
@@ -10,10 +10,12 @@
 
 ## 0. 현 상태
 
-### A. modes wrapper (default 정식)
-- `src/lib/core/fsrs/modes/index.ts` — `GameMode` enum 4종 선언, default 정식 구현
-- 비-default (`review-queue`·`time-attack`·`deep-recall`) — silent fallback + dev `console.warn` (Plan A C4 fix)
-- 17 호출처 모두 `applyAndPersist('default', ...)` 사용
+### A. modes wrapper (default + review-queue 정식)
+- `src/lib/core/fsrs/modes/index.ts` — `GameMode` enum 4종 선언, **4 모드 모두 resolveRating 정식** (PR #81)
+- `src/lib/core/fsrs/modes/use-game-mode.ts` — URL searchParams → GameMode 추출 hook (본 PR)
+- `src/lib/core/fsrs/modes/select-for-mode.ts` — 모드별 카드 선택 wrapper (본 PR)
+- **16 호출처** (4 메커니즘 + 12 직접 게임) 모두 `applyAndPersist(mode, ...)` + `selectCardsForMode(withSrs, mode, ...)` 사용 (본 PR)
+- 메커니즘 경유 9 게임 (custom-*·english-blank/vocab-typing/word-match·math-quick-quiz·vocab-typing)은 메커니즘 내부 hook으로 자동 해소
 
 ### B. 모드별 의도 (메모리 룰 기준)
 - **review-queue**: due-soon 우선 N개 카드 자동 선택. 사용자가 "오늘 풀 카드" 1터치 진입
@@ -69,8 +71,8 @@ const mode = (searchParams.get("mode") ?? "default") as GameMode;
 
 ### D1 — 모드별 정책 합의 (각 모드 사용자 결정 필수)
 **review-queue**:
-- D1.1: 카드 수 N — 5 (현 default와 동일) 또는 10·15
-- D1.2: 진입 트리거 — 홈에서 1 터치, 게임 허브 일괄 due-soon 진입
+- D1.1: 카드 수 N — **임시 5 채택 (2026-05-20 본 PR)** — Phase 2 진입 단순화. 사용자 합의 시 10·15 등 변경.
+- D1.2: 진입 트리거 — Phase 2 본 PR은 **URL 직접 진입(`?mode=review-queue`)만 지원**. 홈/허브 보조 링크는 Phase 5(별 PR).
 
 **time-attack**:
 - D1.3: 타이머 단위 — 카드별 30초 / 세션 전체 1분 / 5문제 1분
@@ -101,12 +103,13 @@ const mode = (searchParams.get("mode") ?? "default") as GameMode;
 - 합의 산출: `proc/spec/04-사용자-경험.md` 또는 신규 spec 모드 §
 
 ### Phase 2 — review-queue 정식 구현 (1 PR)
-- [ ] `modes/index.ts` `resolveRating('review-queue', outcome)` 정식 — silent fallback 제거
-- [ ] `selectNextCards` 호출 위치 통합 (현재 일부 게임만 사용) — review-queue 모드일 때 자동 활성
-- [ ] URL searchParams mode 처리 — 4 메커니즘 + 13 게임 컴포넌트 mode prop 전달
-- [ ] modes/index.test.ts review-queue 분기 추가
-- [ ] e2e — `?mode=review-queue` 진입 + due-soon 카드 우선 검증
-- [ ] ui:audit 4 viewport ✅
+- [x] `modes/index.ts` `resolveRating('review-queue', outcome)` 정식 — silent fallback 제거 (PR #81)
+- [x] `selectCardsForMode` helper 신설 — review-queue 시 N=5, 그 외 fallbackCount (본 PR)
+- [x] `useGameMode` hook 신설 — URL searchParams → GameMode 추출, type-safe (본 PR)
+- [x] URL searchParams mode 처리 — 4 메커니즘 + 12 직접 게임 (= 16 호출처) `applyAndPersist(mode, ...)` + `selectCardsForMode(withSrs, mode, ...)` (본 PR)
+- [x] modes/index.test.ts review-queue 분기 (PR #81) + `select-for-mode.test.ts` 6 신규 (본 PR)
+- [x] e2e — `?mode=review-queue` 진입 검증 (본 PR)
+- [x] ui:audit 4 viewport ✅ (본 PR)
 
 ### Phase 3 — time-attack 구현 (1 PR)
 - [ ] `modes/index.ts` `resolveRating('time-attack', outcome)` 정식 — `elapsedMs` 사용

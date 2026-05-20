@@ -38,7 +38,8 @@ import {
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  selectNextCards,
+  selectCardsForMode,
+  useGameMode,
 } from "@/lib/core";
 
 const GAME_ID = "factorization";
@@ -69,6 +70,7 @@ function shuffleCandidates(correct: string, distractors: string[], cardId: strin
 }
 
 export default function FactorizationGame() {
+  const mode = useGameMode();
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
@@ -88,7 +90,7 @@ export default function FactorizationGame() {
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
       }));
-      const ordered = selectNextCards(withSrs, allCards.length).map(
+      const ordered = selectCardsForMode(withSrs, mode, allCards.length).map(
         (x) => x.card,
       );
       setCards(ordered);
@@ -105,7 +107,7 @@ export default function FactorizationGame() {
         action: "session-end",
       });
     };
-  }, []);
+  }, [mode]);
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
@@ -220,7 +222,7 @@ export default function FactorizationGame() {
       setTimeout(() => {
         setPhase("done");
         // Plan A Phase 3 — modes wrapper. attempt=1→wc 0(good), attempt=2→wc 1(hard), 그외 again.
-        applyAndPersist("default", GAME_ID, card.id, {
+        applyAndPersist(mode, GAME_ID, card.id, {
           correct: true,
           wrongCount,
           hintUsed: false,
@@ -254,7 +256,7 @@ export default function FactorizationGame() {
   };
 
   function triggerReveal(attemptCount: number, source: "auto" | "voluntary") {
-    applyAndPersist("default", GAME_ID, card!.id, {
+    applyAndPersist(mode, GAME_ID, card!.id, {
       correct: false,
       wrongCount: attemptCount,
       hintUsed: false,

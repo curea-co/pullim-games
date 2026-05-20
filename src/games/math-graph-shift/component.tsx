@@ -16,7 +16,8 @@ import {
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  selectNextCards,
+  selectCardsForMode,
+  useGameMode,
 } from "@/lib/core";
 
 const GAME_ID = "math-graph-shift";
@@ -60,6 +61,7 @@ function curvePath(a: number, h: number, k: number): string {
 }
 
 export default function MathGraphShiftGame() {
+  const mode = useGameMode();
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
@@ -76,7 +78,7 @@ export default function MathGraphShiftGame() {
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
       }));
-      const ordered = selectNextCards(withSrs, allCards.length).map(
+      const ordered = selectCardsForMode(withSrs, mode, allCards.length).map(
         (x) => x.card,
       );
       setCards(ordered);
@@ -85,7 +87,7 @@ export default function MathGraphShiftGame() {
     return () => {
       void logEvent({ gameId: GAME_ID, cardId: null, action: "session-end" });
     };
-  }, []);
+  }, [mode]);
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
@@ -147,7 +149,7 @@ export default function MathGraphShiftGame() {
 
     setTimeout(() => {
       if (correct) {
-        applyAndPersist("default", GAME_ID, card!.id, {
+        applyAndPersist(mode, GAME_ID, card!.id, {
           correct: true,
           wrongCount,
           hintUsed: false,
@@ -157,7 +159,7 @@ export default function MathGraphShiftGame() {
         const nextWrong = wrongCount + 1;
         setWrongCount(nextWrong);
         if (nextWrong >= REVEAL_THRESHOLD) {
-          applyAndPersist("default", GAME_ID, card!.id, {
+          applyAndPersist(mode, GAME_ID, card!.id, {
             correct: false,
             wrongCount: nextWrong,
             hintUsed: false,

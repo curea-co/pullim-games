@@ -6,6 +6,9 @@
 // - 모드 wrapper(이 파일)는 outcome(정답/오답·wrongCount·hintUsed·elapsedMs) → Rating 결정.
 // - 게임 컴포넌트는 outcome 만 넘김 — 모드 추가 시 호출처 재수정 X.
 
+export { useGameMode } from "./use-game-mode";
+export { selectCardsForMode } from "./select-for-mode";
+
 import {
   type CardSrsState,
   type Rating,

@@ -14,7 +14,8 @@ import {
   loadSrsState,
   logEvent,
   applyAndPersist,
-  selectNextCards,
+  selectCardsForMode,
+  useGameMode,
 } from "@/lib/core";
 
 type Phase =
@@ -78,6 +79,7 @@ export function WordMatchComponent({
   emptyMessage,
   homeHref = "/",
 }: Props) {
+  const mode = useGameMode();
   const [cards, setCards] = useState(() => initialCards);
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
@@ -97,16 +99,18 @@ export function WordMatchComponent({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(gameId, c.id),
       }));
-      const ordered = selectNextCards(withSrs, initialCards.length).map(
-        (x) => x.card,
-      );
+      const ordered = selectCardsForMode(
+        withSrs,
+        mode,
+        initialCards.length,
+      ).map((x) => x.card);
       setCards(ordered);
     }
     void logEvent({ gameId, cardId: null, action: "session-start" });
     return () => {
       void logEvent({ gameId, cardId: null, action: "session-end" });
     };
-  }, [gameId]);
+  }, [gameId, mode]);
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
@@ -213,7 +217,7 @@ export function WordMatchComponent({
         (i) => i < card!.problem.pairs.length,
       ).length;
       if (pairsMatched === card!.problem.pairs.length) {
-        applyAndPersist("default", gameId, card!.id, {
+        applyAndPersist(mode, gameId, card!.id, {
           correct: true,
           wrongCount,
           hintUsed: false,
@@ -236,7 +240,7 @@ export function WordMatchComponent({
         payload: { leftPair, rightPair, correct: false },
       });
       if (nextWrong >= REVEAL_THRESHOLD) {
-        applyAndPersist("default", gameId, card!.id, {
+        applyAndPersist(mode, gameId, card!.id, {
           correct: false,
           wrongCount: nextWrong,
           hintUsed: false,

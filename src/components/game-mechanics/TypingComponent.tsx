@@ -14,7 +14,8 @@ import {
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  selectNextCards,
+  selectCardsForMode,
+  useGameMode,
 } from "@/lib/core";
 
 type Phase =
@@ -55,6 +56,7 @@ export function TypingComponent({
   emptyMessage,
   homeHref = "/",
 }: Props) {
+  const mode = useGameMode();
   const [cards, setCards] = useState(() => initialCards);
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
@@ -70,16 +72,18 @@ export function TypingComponent({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(gameId, c.id),
       }));
-      const ordered = selectNextCards(withSrs, initialCards.length).map(
-        (x) => x.card,
-      );
+      const ordered = selectCardsForMode(
+        withSrs,
+        mode,
+        initialCards.length,
+      ).map((x) => x.card);
       setCards(ordered);
     }
     void logEvent({ gameId, cardId: null, action: "session-start" });
     return () => {
       void logEvent({ gameId, cardId: null, action: "session-end" });
     };
-  }, [gameId]);
+  }, [gameId, mode]);
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
@@ -159,7 +163,7 @@ export function TypingComponent({
     setTimeout(() => {
       if (correct) {
         // Plan A Phase 3 — modes wrapper 마이그레이션. rating 결정은 resolveRating(default).
-        applyAndPersist("default", gameId, card!.id, {
+        applyAndPersist(mode, gameId, card!.id, {
           correct: true,
           wrongCount,
           hintUsed,
@@ -169,7 +173,7 @@ export function TypingComponent({
         const nextWrong = wrongCount + 1;
         setWrongCount(nextWrong);
         if (nextWrong >= REVEAL_THRESHOLD) {
-          applyAndPersist("default", gameId, card!.id, {
+          applyAndPersist(mode, gameId, card!.id, {
             correct: false,
             wrongCount: nextWrong,
             hintUsed,

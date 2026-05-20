@@ -16,7 +16,8 @@ import {
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  selectNextCards,
+  selectCardsForMode,
+  useGameMode,
 } from "@/lib/core";
 
 const GAME_ID = "history-timeline";
@@ -55,6 +56,7 @@ function seededShuffle<T>(arr: T[], seed: string): T[] {
 }
 
 export default function HistoryTimelineGame() {
+  const mode = useGameMode();
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
@@ -69,7 +71,7 @@ export default function HistoryTimelineGame() {
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
       }));
-      const ordered = selectNextCards(withSrs, allCards.length).map(
+      const ordered = selectCardsForMode(withSrs, mode, allCards.length).map(
         (x) => x.card,
       );
       setCards(ordered);
@@ -78,7 +80,7 @@ export default function HistoryTimelineGame() {
     return () => {
       void logEvent({ gameId: GAME_ID, cardId: null, action: "session-end" });
     };
-  }, []);
+  }, [mode]);
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
@@ -169,7 +171,7 @@ export default function HistoryTimelineGame() {
       payload: { correct, ordered: orderedIndices },
     });
 
-    applyAndPersist("default", GAME_ID, card!.id, {
+    applyAndPersist(mode, GAME_ID, card!.id, {
       correct,
       wrongCount: correct ? wrongCount : wrongCount + 1,
       hintUsed: false,

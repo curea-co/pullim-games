@@ -19,7 +19,8 @@ import {
   loadAllSrsStates,
   loadSrsState,
   logEvent,
-  selectNextCards,
+  selectCardsForMode,
+  useGameMode,
 } from "@/lib/core";
 
 const GAME_ID = "cloze-multi";
@@ -33,6 +34,7 @@ type Phase =
   | "completed";
 
 export default function ClozeMultiGame() {
+  const mode = useGameMode();
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
@@ -55,7 +57,7 @@ export default function ClozeMultiGame() {
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
       }));
-      const ordered = selectNextCards(withSrs, allCards.length).map(
+      const ordered = selectCardsForMode(withSrs, mode, allCards.length).map(
         (x) => x.card,
       );
       setCards(ordered);
@@ -64,7 +66,7 @@ export default function ClozeMultiGame() {
     return () => {
       void logEvent({ gameId: GAME_ID, cardId: null, action: "session-end" });
     };
-  }, []);
+  }, [mode]);
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
@@ -185,7 +187,7 @@ export default function ClozeMultiGame() {
 
     setTimeout(() => {
       if (result.allCorrect) {
-        applyAndPersist("default", GAME_ID, card!.id, {
+        applyAndPersist(mode, GAME_ID, card!.id, {
           correct: true,
           wrongCount,
           hintUsed: false,
@@ -195,7 +197,7 @@ export default function ClozeMultiGame() {
         const nextWrong = wrongCount + 1;
         setWrongCount(nextWrong);
         if (nextWrong >= REVEAL_THRESHOLD) {
-          applyAndPersist("default", GAME_ID, card!.id, {
+          applyAndPersist(mode, GAME_ID, card!.id, {
             correct: false,
             wrongCount: nextWrong,
             hintUsed: false,
