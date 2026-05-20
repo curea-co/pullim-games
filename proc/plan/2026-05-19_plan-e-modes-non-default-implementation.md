@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan E: modes 비-default 정식 구현 (review-queue·time-attack·deep-recall)
 
-- **상태**: COMPLETE (2026-05-20) — 코어 resolveRating PR #81 + review-queue 마이그레이션 PR #85 + **Phase 3·4·5 UI 통합** PR #(본 PR). 4 메커니즘 컴포넌트 (`QuickQuiz`·`Blank`·`Typing`·`WordMatch`) 에 `TimeAttackTimer` + `DeepRecallEmpty` 통합. 홈 추천 카드 `alt-modes` 링크 + 게임 허브 `ModeChipsRow` 진입점 추가.
+- **상태**: COMPLETE (2026-05-20) — 코어 resolveRating PR #81 + review-queue 마이그레이션 PR #85 + **Phase 3·4·5 UI 통합** PR #92. 4 메커니즘 컴포넌트 (`QuickQuiz`·`Blank`·`Typing`·`WordMatch`) 에 `TimeAttackTimer` + `DeepRecallEmpty` 통합. 홈 추천 카드 `alt-modes` 링크 + 게임 허브 `ModeChipsRow` 진입점 추가. PR #92 codex round 1·2·3 fix 반영 — `isModeSupportedFor` 필터(round 1), 44×44 width+height 동시 검증(round 2), deep-recall 미로딩 첫 페인트 회귀 + WordMatch `cardStartRef` 재초기화 dep + time-attack rating 문서 정합(round 3).
 - **트리거**: audit v3 §4 단일 백본 진척 — modes wrapper 정식 1/4 (default 만), 비-default 3 모드는 fallback + warn 상태. V0.4+ 트랙으로 정식 구현 의무.
 - **메모리 룰**:
   - **단일 백본 + 다중 게임 모드** (project_architecture_decision) — 본 plan이 다중 모드 정식 진입
@@ -52,11 +52,13 @@ const mode = (searchParams.get("mode") ?? "default") as GameMode;
 - 차별 포인트: 카드 선택 알고리즘만 (rating 결정 X)
 
 #### time-attack
-- 타이머: 30초 / 카드 또는 1분 / 5카드
-- rating:
-  - `elapsedMs < 5000` + correct + wc=0 → **easy** (빠른 정답)
-  - `elapsedMs >= 5000` + correct → default 패턴 (`good`/`hard`)
-  - 시간 초과 → `again` (correct=false 와 동일)
+- 타이머: 30초 / 카드 (D1.3 — 단순화 채택, 2026-05-20)
+- rating (실제 구현 = `resolveRating('time-attack')`, PR #81 + PR #92):
+  - `elapsedMs > 30_000` → **again** (시간 초과 페널티)
+  - 그 외 → **default 패턴 유지** (`good`/`hard`/`again` — wrongCount·hintUsed 기준)
+- 학습효과 우선 룰 (Plan E §0.C): 빠른 정답 보너스(`easy`) 도입 X — 시간 압박이 학습으로
+  전이되지 않도록 페널티 한 축만 두는 것이 더 캐주얼 결. `< 5초 → easy` 안은 V0.5+ trigger
+  발생 시 별 plan 으로 재검토.
 
 #### deep-recall
 - 카드 풀: `getRetrievability(state, now) < 0.6` 카드만

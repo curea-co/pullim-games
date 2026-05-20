@@ -96,6 +96,11 @@ export function BlankComponent({
         <DeepRecallEmpty homeHref={homeHref} defaultModeHref={pathname ?? "/"} />
       );
     }
+    // PR #92 Codex round 3 fix: deep-recall 미로딩(`cardsLoaded=false`) 상태에서
+    // 일반 empty-state 가 한 프레임 노출되는 회귀 차단.
+    if (mode === "deep-recall" && !cardsLoaded) {
+      return null;
+    }
     return (
       <main className="mx-auto flex min-h-full max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
         <h1 className="text-display text-type-primary">

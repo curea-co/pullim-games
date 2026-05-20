@@ -152,6 +152,11 @@ export function WordMatchComponent({
     return seededShuffle([...pairs, ...extras], `${card.id}-r`);
   }, [card]);
 
+  // 카드 진입 시 카드별 상태 reset + time-attack 기준 시각 갱신.
+  // PR #92 Codex round 3 fix: dep 에 `card` 추가 — `setCards(ordered)` 가 첫 카드를
+  // 실제로 바꾸는 시점(cardIndex 는 0 으로 동일)에도 cardStartRef 가 재초기화되도록.
+  // time-attack 첫 카드 elapsedMs 가 mount 시점(performance.now() 초기 0) 이 아니라
+  // 실제 표시 시점부터 시작되도록 보장.
   useEffect(() => {
     setMatched(new Set());
     setSelectedLeft(null);
@@ -160,13 +165,19 @@ export function WordMatchComponent({
     setWrongCount(0);
     setPhase("playing");
     cardStartRef.current = performance.now();
-  }, [cardIndex]);
+  }, [cardIndex, card]);
 
   if (cards.length === 0) {
     if (cardsLoaded && mode === "deep-recall" && initialCards.length > 0) {
       return (
         <DeepRecallEmpty homeHref={homeHref} defaultModeHref={pathname ?? "/"} />
       );
+    }
+    // PR #92 Codex round 3 fix: deep-recall 미로딩(`cardsLoaded=false`) 상태에서
+    // 일반 empty-state ("아직 풀 카드가 없어요.") 가 한 프레임 노출되는 회귀 차단.
+    // SRS load 완료 후 DeepRecallEmpty 또는 게임 화면 둘 중 하나로 안정 전환.
+    if (mode === "deep-recall" && !cardsLoaded) {
+      return null;
     }
     return (
       <main className="mx-auto flex min-h-full max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
