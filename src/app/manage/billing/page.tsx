@@ -1,12 +1,18 @@
 "use client";
 
-// /manage/billing — 결제 (구독 진입점). V1 placeholder + V2 알림 신청 mock.
-// plan: proc/plan/2026-05-18_subscription-cta-entry.md §3 Phase 1.
+// /manage/billing — 결제 (구독 진입점). V1 placeholder + V2 알림 신청.
+// plan: proc/plan/2026-05-18_subscription-cta-entry.md §3 Phase 1
+//       + proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md §3 Phase 2.
+//
+// Phase 2 (2026-05-20): mock toast → 실제 /api/billing/notify POST.
+// 이메일 원문은 절대 서버로 전송하지 않고, 클라이언트에서 SHA-256 hash 만 보낸다.
+// 6개월 보존 정책 (SPEC §05.6).
 
 import { useState, type FormEvent } from "react";
 import { CheckCircle2, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { hashEmail } from "@/lib/core";
 
 export default function BillingPage() {
   return (
@@ -71,14 +77,49 @@ function PaidPlanPreview() {
   );
 }
 
+type NotifyState =
+  | { kind: "idle" }
+  | { kind: "submitting" }
+  | { kind: "ok" }
+  | { kind: "error"; message: string };
+
 function NotifyForm() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [state, setState] = useState<NotifyState>({ kind: "idle" });
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (!email.trim()) return;
-    setSubmitted(true);
+    const trimmed = email.trim();
+    if (!trimmed) return;
+    if (state.kind === "submitting") return;
+
+    setState({ kind: "submitting" });
+    try {
+      // 클라이언트에서 SHA-256 hash 만 계산 — 서버는 원본 이메일을 받지 않는다.
+      const emailHash = await hashEmail(trimmed);
+      const res = await fetch("/api/billing/notify", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          action: "billing.notify.signup",
+          emailHash,
+          ts: Date.now(),
+        }),
+      });
+      if (!res.ok) {
+        setState({
+          kind: "error",
+          message: "신청에 실패했어요. 잠시 후 다시 시도해주세요.",
+        });
+        return;
+      }
+      setState({ kind: "ok" });
+    } catch {
+      setState({
+        kind: "error",
+        message: "신청에 실패했어요. 잠시 후 다시 시도해주세요.",
+      });
+    }
   }
 
   return (
@@ -91,29 +132,47 @@ function NotifyForm() {
           유료 플랜이 준비되면 이메일로 알려드릴게요.
         </p>
       </header>
-      {submitted ? (
+      {state.kind === "ok" ? (
         <p
           role="status"
           className="rounded-block border border-accent-positive/30 bg-accent-positive/5 px-3 py-2 text-helper text-type-primary"
         >
-          신청이 완료되었어요. 출시 시 알림을 보내드릴게요.
+          출시 시 알림을 받기 위해 신청됐어요. 입력하신 이메일은 해시(hash)
+          처리되어 저장되고, 출시 알림 발송 외 용도로는 사용하지 않으며 6개월
+          후 자동 삭제됩니다.
         </p>
       ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:flex-row">
-          <label htmlFor="billing-notify-email" className="sr-only">
-            이메일 주소
-          </label>
-          <input
-            id="billing-notify-email"
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="이메일 주소"
-            className="flex-1 rounded-block border border-border-hairline bg-bg-block px-3 py-2 text-helper text-type-primary placeholder:text-pullim-slate-400 focus:border-accent-positive focus:outline-none"
-          />
-          <Button type="submit">신청</Button>
-        </form>
+        <>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col gap-2 sm:flex-row"
+          >
+            <label htmlFor="billing-notify-email" className="sr-only">
+              이메일 주소
+            </label>
+            <input
+              id="billing-notify-email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="이메일 주소"
+              disabled={state.kind === "submitting"}
+              className="flex-1 rounded-block border border-border-hairline bg-bg-block px-3 py-2 text-helper text-type-primary placeholder:text-pullim-slate-400 focus:border-accent-positive focus:outline-none disabled:opacity-60"
+            />
+            <Button type="submit" disabled={state.kind === "submitting"}>
+              {state.kind === "submitting" ? "신청 중…" : "신청"}
+            </Button>
+          </form>
+          {state.kind === "error" && (
+            <p
+              role="alert"
+              className="rounded-block border border-accent-negative/30 bg-accent-negative/5 px-3 py-2 text-helper text-type-primary"
+            >
+              {state.message}
+            </p>
+          )}
+        </>
       )}
     </Card>
   );
@@ -121,8 +180,14 @@ function NotifyForm() {
 
 function PolicyNote() {
   return (
-    <p className="text-helper text-pullim-slate-400">
-      결제·구독 정책은 V2 정식 출시 시 이용약관·환불정책과 함께 안내합니다.
-    </p>
+    <div className="flex flex-col gap-1 text-helper text-pullim-slate-400">
+      <p>
+        결제·구독 정책은 V2 정식 출시 시 이용약관·환불정책과 함께 안내합니다.
+      </p>
+      <p>
+        결제 게이트웨이는 Toss Payments를 사용할 예정이에요. 신청한 이메일은
+        원문 저장 없이 해시(hash) 처리되어 6개월간만 보존됩니다.
+      </p>
+    </div>
   );
 }

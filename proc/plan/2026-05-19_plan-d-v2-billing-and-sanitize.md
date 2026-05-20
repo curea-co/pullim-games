@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan D: V2 결제 정책·백엔드 + content sanitize·AI error 처리
 
-- **상태**: PARTIAL-COMPLETE (2026-05-20) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. D1~D4·D6·D7 결정 잔존 + Phase 2 (billing 백엔드) 다음 세션 이관.
+- **상태**: PARTIAL-COMPLETE (2026-05-20) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. **Phase 1 spec(D5 합의분 + D1~D4·D6·D7 합의 후보 매트릭스) + Phase 2 billing 백엔드(`/api/billing/notify` + sha256 hash + 정직성 카피)** 본 세션 진입 (브랜치 `feat/plan-d-phase1-2-billing`). D1·D2·D3·D4·D6·D7 결정은 사용자 G3 합의 대기.
 - **트리거**: audit v3 §7 informational 4건 + critical C8(V2 트리거) 통합:
   - C8: `billing/page.tsx` 알림 신청 이메일 백엔드 전송 0 (mock toast)
   - informational: 결제 정책 명세 부재 (`proc/spec/05-비즈니스-정책.md §결제 없음`)
@@ -89,16 +89,22 @@ C8 fix — 본 plan §1 후 진행.
 ## 3. 작업 항목
 
 ### Phase 1 — V2 결제 정책 spec (사용자 합의 후 진행)
-- [ ] 사용자 합의 — D1~D7 결정 (별 회의 또는 비동기 합의)
-- [ ] `proc/spec/05-비즈니스-정책.md §결제·구독` 신규 ≈200 LOC
-- [ ] `/manage/billing/page.tsx` 유료 플랜 preview 콘텐츠 갱신 (실제 가격·기능 비교)
-- [ ] G1·G3·G4 합의 후 머지
+- [~] 사용자 합의 — **D5 합의 완료 (2026-05-20)**. D1·D2·D3·D4·D6·D7 합의 대기 (G3·G4)
+- [x] `proc/spec/05-비즈니스-정책.md §5.7 결제·구독 정책` 신규 (합의 D5 + 합의 후보 매트릭스 D1~D4·D6·D7 + BR-PAY1~4 비즈니스 룰)
+- [x] `proc/spec/05-비즈니스-정책.md §5.6` 출시 알림 신청 PII 정책 추가 (hash·6개월 보존)
+- [ ] `/manage/billing/page.tsx` 유료 플랜 preview 콘텐츠 갱신 (D2·D3·D4 합의 후 실제 가격·기능 비교)
+- [ ] G1·G3·G4 합의 후 §5.7.2 미합의 항목 → §5.7.1 합의 항목 이동
 
 ### Phase 2 — billing 알림 신청 백엔드 (Phase 1 후)
-- [ ] `/api/event` 라우트 확장 (이미 존재 시 action 추가, 없으면 신설)
-- [ ] `billing/page.tsx` mock toast → 실제 POST + email hash (sha256)
-- [ ] 알림 신청 완료 메시지 정직성 강화 ("출시 시 알림을 보내드릴게요" → "출시 시 알림을 받기 위해 등록됐어요. 6개월 보존.")
-- [ ] e2e — 신청 → POST 호출 mock 검증
+- [x] `/api/billing/notify` 라우트 신설 (별도 엔드포인트로 분리 — EventSchema 와 형식 충돌 회피, 보안 boilerplate 적용)
+- [x] `BillingNotifySignupSchema` zod 스키마 — emailHash 정규식 검증(`/^[a-f0-9]{64}$/`)
+- [x] `hashEmail` helper — Web Crypto SHA-256, normalize(lowercase+trim)
+- [x] `billing/page.tsx` mock toast → 실제 POST + email hash (sha256). 이메일 원문은 페이로드에 포함되지 않음
+- [x] 알림 신청 완료 메시지 정직성 강화 — "출시 시 알림을 받기 위해 신청됐어요. 입력한 이메일은 해시(hash) 처리되어 저장되고, 출시 알림 발송 외 용도로는 사용하지 않으며 6개월 후 자동 삭제됩니다."
+- [x] PolicyNote 갱신 — Toss Payments 명시 + hash·6개월 보존 명시
+- [x] vitest — `/api/billing/notify` 8 케이스 (성공·invalid JSON·schema 위반·plain email rejection 등)
+- [x] vitest — `hashEmail` 7 케이스 (deterministic·RFC sha256 일치·normalize·collision·plus-aliasing·빈 문자열 throw)
+- [x] e2e — 신청 → POST 호출 mock + 페이로드에 plain email 미포함 검증 + 정직성 카피 노출 검증
 
 ### Phase 3 — sanitize + AI error 일반화 (1 PR, Phase 1·2와 독립)
 - [ ] `manage/content/page.tsx` 입력 정규식 sanitize (`<script>`, `on*=`, `javascript:` 패턴 제거)

@@ -7,6 +7,7 @@
 // 상세: proc/plan/2026-05-08_parallel-game-architecture.md §5.4
 
 export * from "./schema";
+export * from "./billing";
 export * from "./fingerprint";
 export * from "./fsrs";
 export * from "./fsrs/modes";
