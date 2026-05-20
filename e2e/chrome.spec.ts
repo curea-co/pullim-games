@@ -10,14 +10,25 @@
 // viewport: 데스크탑 single (chrome 정책은 viewport 비종속).
 
 import { test, expect } from "@playwright/test";
-import { OFFICIAL_GAMES } from "./helpers/games";
+import { OFFICIAL_GAMES, CUSTOM_GAMES } from "./helpers/games";
+import { seedCustomGames } from "./helpers/seed";
 
 const DESKTOP = { width: 1280, height: 800 } as const;
 
-for (const game of OFFICIAL_GAMES) {
+// PR #90 codex round 2 — custom-* 4 게임도 chrome minimal 회귀 검증 대상.
+// official 17 + custom 4 = 21 게임 1:1. custom 은 seedCustomGames 로 콘텐츠 주입.
+const ALL_GAMES = [
+  ...OFFICIAL_GAMES.map((g) => ({ ...g, needsSeed: false })),
+  ...CUSTOM_GAMES.map((g) => ({ ...g, needsSeed: true })),
+];
+
+for (const game of ALL_GAMES) {
   test(`${game.id} @ desktop — chrome minimal (사이드바·검색·알림 부재, ✕ 존재)`, async ({
     page,
   }) => {
+    if (game.needsSeed) {
+      await seedCustomGames(page);
+    }
     await page.setViewportSize(DESKTOP);
     const res = await page.goto(`/games/${game.id}`);
     expect(res?.status(), `${game.id} page response`).toBe(200);

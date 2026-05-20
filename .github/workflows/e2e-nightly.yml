@@ -1,0 +1,268 @@
+name: E2E Nightly
+
+# Plan G Phase 2 — pullim 의 e2e-nightly.yml 변형 이식.
+# 본 리포는 단일 앱이고 DEV_API_URL 등 서버 의존 X (현 V1 fingerprint).
+# matrix per game (21 게임) + shared specs job 으로 plan §3 Phase 2 의도 충실 이행.
+#
+# 보안 사전 sweep:
+# - schedule + workflow_dispatch 트리거만 — 외부 PR 영향 0.
+# - secrets 의존 0 — pullim 원본의 DEV_API_URL/TEST_EMAIL/TEST_PASSWORD 제거.
+# - self-hosted runner 채택 (codex-review.yml 과 동일) — schedule 트리거라 외부 위협 0.
+
+on:
+  # KST 02:00 = UTC 17:00 (전날). pullim 동일.
+  schedule:
+    - cron: "0 17 * * *"
+  # 수동 실행 — 회귀 점검·디버깅용.
+  workflow_dispatch:
+
+# 최소 권한 — secrets:write·contents:write 불필요 (artifact upload 만).
+permissions:
+  contents: read
+
+# Codex round 1 (PR #90 r3271490574) 지적 반영:
+# workflow_dispatch 연타 시 이전 self-hosted runner 점유 즉시 해제가 의도.
+# cancel-in-progress: true 로 변경. schedule run 은 ref 가 main 으로 안정적이고
+# 새 schedule 이 이전 schedule 을 끊는 건 nightly 정책상 허용 (가장 최신만 유효).
+concurrency:
+  group: e2e-nightly-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Plan §3 Phase 2 의도: 21 게임별 matrix 분산 → 격리 디버깅 + 병렬 실행.
+  #
+  # Codex round 1 (r3271490577, r3271490579) 지적 반영:
+  # 단순 `--grep "<gameId>"` 는 두 가지 결함이 있었음:
+  #  (a) 게임 전용 spec 중 title 에 ID 없는 케이스 누락
+  #      (factorization-{discrimination,drag-hit-test}, english-word-match-extras,
+  #       english-vocab-typing-case, correct-feedback-reveal)
+  #      → shared 로 흘러가 격리 디버깅 의도 깨짐.
+  #  (b) substring match 라 게임 경계 깨짐
+  #      → vocab-typing job 이 english-vocab-typing title 도 매치 → 중복 실행.
+  #
+  # 대응 (이중 안전):
+  #  1. game 별 전용 spec 파일을 명시적 path 로 추가 (per-game extras 변수).
+  #  2. loop 기반 spec (viewport·chrome·viewport-custom·game-shell·mode-review-queue) 은
+  #     단어경계 lookaround regex 로 grep — `(?<![a-z0-9-])<gameId>(?![a-z0-9-])`.
+  #     vocab-typing 은 english-vocab-typing 과 충돌 X (앞 `-` 가 lookbehind 차단).
+  e2e-per-game:
+    name: e2e (${{ matrix.game }})
+    runs-on: self-hosted
+    # 사전 sweep: 게임별 30분 상한. 21 게임 × 30 = 1 job 격리 hang 방지.
+    timeout-minutes: 30
+    strategy:
+      # 한 게임 실패가 다른 게임 회귀 검출을 막지 않도록 fail-fast 끔.
+      fail-fast: false
+      matrix:
+        # 21 게임 — src/games/ 하위 카탈로그. CLAUDE.md §1 와 동기 의무.
+        game:
+          - bio-taxonomy
+          - chemistry-balance
+          - cloze-multi
+          - custom-blank
+          - custom-multiple-choice
+          - custom-typing
+          - custom-word-match
+          - english-blank
+          - english-order
+          - english-vocab-typing
+          - english-word-match
+          - factorization
+          - genetics-punnett
+          - history-timeline
+          - image-hotspot
+          - korean-pos-tagging
+          - letter-assembly
+          - math-graph-shift
+          - math-quick-quiz
+          - physics-vector
+          - vocab-typing
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Generate game registry
+        run: bun run gen:registry
+
+      # ci.yml 의 e2e job 과 동일 — playwright 버전 해석 후 캐시.
+      - name: Resolve Playwright version
+        id: pw
+        run: |
+          VERSION=$(node -p "require('@playwright/test/package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ steps.pw.outputs.version }}
+
+      # proc/spec/09 §9.1 — Bun 단일 매니저. bunx 만 사용 (npm/npx/pnpm 금지).
+      - name: Install Playwright Chromium + system deps
+        run: bunx playwright install --with-deps chromium
+
+      # Step 1) 게임 전용 spec 파일 매핑 — title 에 game ID 가 없는 케이스 보강.
+      # 매핑 출처: e2e/*.spec.ts 의 import target + page.goto 경로 분석.
+      # 단일 게임 1:1 spec 파일만 매핑 (다게임 spec 은 loop spec 에서 grep 으로 처리):
+      #   factorization                ← factorization-discrimination, factorization-drag-hit-test
+      #   english-word-match           ← english-word-match-extras
+      #   english-vocab-typing         ← english-vocab-typing-case
+      #   vocab-typing                 ← correct-feedback-reveal, vocab-typing-case (분리 — round 2 fix)
+      # 나머지 17 게임은 loop spec 만으로 커버 (viewport·chrome·viewport-custom·game-shell·mode-review-queue).
+      #
+      # Codex round 2 (PR #90 r3...) 지적 — english-vocab-typing-case 안의
+      # "한글 vocab-typing 정답 인식 회귀 0 — 모순" 케이스는 vocab-typing 회귀였으나
+      # extras path-only 실행으로 english-vocab-typing job 에 잘못 귀속됐었음.
+      # → 본 케이스를 e2e/vocab-typing-case.spec.ts 로 분리, vocab-typing extras 에 매핑.
+      - name: Resolve per-game extra specs
+        id: extras
+        run: |
+          set -euo pipefail
+          case "${{ matrix.game }}" in
+            factorization)
+              echo "specs=e2e/factorization-discrimination.spec.ts e2e/factorization-drag-hit-test.spec.ts" >> "$GITHUB_OUTPUT"
+              ;;
+            english-word-match)
+              echo "specs=e2e/english-word-match-extras.spec.ts" >> "$GITHUB_OUTPUT"
+              ;;
+            english-vocab-typing)
+              echo "specs=e2e/english-vocab-typing-case.spec.ts" >> "$GITHUB_OUTPUT"
+              ;;
+            vocab-typing)
+              echo "specs=e2e/correct-feedback-reveal.spec.ts e2e/vocab-typing-case.spec.ts" >> "$GITHUB_OUTPUT"
+              ;;
+            *)
+              echo "specs=" >> "$GITHUB_OUTPUT"
+              ;;
+          esac
+
+      # Step 2) loop 기반 spec 을 단어경계 lookaround grep 으로 필터링.
+      # playwright --grep 은 JS RegExp 라 lookbehind/ahead 지원.
+      # 경계 문자 집합: [a-z0-9-] (kebab-case ID 기준).
+      # 예: vocab-typing  → english-vocab-typing 의 `-vocab-typing` 부분 매치 X
+      #     (앞 `-` 가 [a-z0-9-] 에 포함되어 lookbehind 가 차단).
+      #     english-vocab-typing → 자기 자신만 매치.
+      - name: Run e2e (loop specs filtered by game)
+        env:
+          GAME: ${{ matrix.game }}
+        run: |
+          set -euo pipefail
+          GREP="(?<![a-z0-9-])${GAME}(?![a-z0-9-])"
+          bunx playwright test \
+            e2e/viewport.spec.ts \
+            e2e/viewport-custom.spec.ts \
+            e2e/chrome.spec.ts \
+            e2e/game-shell.spec.ts \
+            e2e/mode-review-queue.spec.ts \
+            --grep "$GREP"
+
+      # Step 3) 게임 전용 extras spec — title 에 ID 가 없으므로 grep 없이 path 만 실행.
+      # extras 가 없는 게임 (17 게임) 은 step 자체가 no-op (조건 가드).
+      - name: Run e2e (per-game extras spec files)
+        if: steps.extras.outputs.specs != ''
+        env:
+          EXTRAS: ${{ steps.extras.outputs.specs }}
+        run: |
+          set -euo pipefail
+          # shellcheck disable=SC2086
+          # EXTRAS 는 공백 분리 spec path 리스트 (의도적 word splitting).
+          bunx playwright test $EXTRAS
+
+      # 실패 시 playwright report 아카이브 — game 별 격리 보관.
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-report-${{ matrix.game }}-${{ github.run_id }}
+          path: playwright-report/
+          retention-days: 14
+
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-results-${{ matrix.game }}-${{ github.run_id }}
+          path: test-results/
+          retention-days: 7
+
+  # Cross-cutting spec 커버 — 게임 종속 X.
+  # 명시적 path 지정으로 per-game job 과 중복 0:
+  #   - activity-heatmap         : 홈 히트맵 (게임 무관)
+  #   - custom-games-cta         : /manage/content CTA
+  #   - home-dashboard-layout    : 홈 레이아웃 (추천·status·KPI·히트맵 stack)
+  #   - manage-billing           : /manage/billing
+  #   - streak                   : streak 카운터
+  #   - mode-review-queue        : "잘못된 mode 값" 1 케이스만 — grep 으로 분리.
+  #                                나머지 sample 게임 8 케이스는 per-game 에서 커버됨.
+  e2e-shared:
+    name: e2e (shared specs)
+    runs-on: self-hosted
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Generate game registry
+        run: bun run gen:registry
+
+      - name: Resolve Playwright version
+        id: pw
+        run: |
+          VERSION=$(node -p "require('@playwright/test/package.json').version")
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Playwright browsers
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-${{ runner.os }}-${{ steps.pw.outputs.version }}
+
+      - name: Install Playwright Chromium + system deps
+        run: bunx playwright install --with-deps chromium
+
+      # 명시적 path — per-game job 의 spec 파일 집합과 disjoint.
+      # 2 step 분리: cross-cutting spec 파일 5개 (grep 무관) + mode-review-queue 의
+      # cross-cutting 1 케이스만 따로 grep. sample 4 게임 mode 케이스 8건은
+      # per-game (math-quick-quiz·english-blank·factorization·chemistry-balance) 에서 자연 커버.
+      - name: Run e2e (cross-cutting spec files)
+        run: |
+          bunx playwright test \
+            e2e/activity-heatmap.spec.ts \
+            e2e/custom-games-cta.spec.ts \
+            e2e/home-dashboard-layout.spec.ts \
+            e2e/manage-billing.spec.ts \
+            e2e/streak.spec.ts
+
+      - name: Run e2e (mode-review-queue cross-cutting only)
+        run: |
+          bunx playwright test e2e/mode-review-queue.spec.ts --grep "잘못된 mode 값"
+
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-report-shared-${{ github.run_id }}
+          path: playwright-report/
+          retention-days: 14
+
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-results-shared-${{ github.run_id }}
+          path: test-results/
+          retention-days: 7
