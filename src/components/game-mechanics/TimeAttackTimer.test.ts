@@ -72,6 +72,63 @@ describe("4 메커니즘 deep-recall 미로딩 첫 페인트 차단 (Plan E Phas
   }
 });
 
+// PR #92 Codex round 5 fix — time-attack 초 카운트 포맷·경계 단위 검증.
+//
+// e2e (mode-time-attack.spec.ts) 는 `<숫자>s` 포맷만 검증하도록 축소했다 (wall-clock
+// 의존성 제거). 본 단위 테스트가 secondsLeft = Math.ceil(remainingMs/1000) 의
+// 경계 동작을 결정적으로 보장한다 — durationMs=30_000 시 초기 30s, 거의 만료 시 1s,
+// 정확한 만료 시 0s.
+describe("time-attack 초 포맷 (Plan E Phase 3, Codex round 5)", () => {
+  // TimeAttackTimer.tsx 의 계산식:
+  //   secondsLeft = Math.ceil(remainingMs / 1000)
+  // 본 헬퍼는 같은 식을 그대로 적용해 경계 케이스를 회귀 차단.
+  function secondsLeft(remainingMs: number): number {
+    return Math.ceil(remainingMs / 1000);
+  }
+  // 표시 포맷: `${secondsLeft}s`.
+  function formatSeconds(remainingMs: number): string {
+    return `${secondsLeft(remainingMs)}s`;
+  }
+
+  it("durationMs=30_000 시작 시점 → 30s", () => {
+    expect(formatSeconds(30_000)).toBe("30s");
+  });
+
+  it("거의 만료 (1ms 남음) → 1s", () => {
+    expect(formatSeconds(1)).toBe("1s");
+  });
+
+  it("정확히 만료 (0ms) → 0s", () => {
+    expect(formatSeconds(0)).toBe("0s");
+  });
+
+  it("중간 (15.5s 남음) → 16s (ceil)", () => {
+    expect(formatSeconds(15_500)).toBe("16s");
+  });
+
+  it("정확히 15s 경과 (15_000ms 남음) → 15s", () => {
+    expect(formatSeconds(15_000)).toBe("15s");
+  });
+
+  it("포맷 정규식 — e2e 와 동일한 `<digit>+s` 패턴 일치", () => {
+    // e2e 는 /^\d+s$/ 로 검증. 경계 출력이 모두 매칭되는지 회귀 차단.
+    const pattern = /^\d+s$/;
+    for (const ms of [30_000, 15_500, 1_000, 1, 0]) {
+      expect(formatSeconds(ms)).toMatch(pattern);
+    }
+  });
+
+  it("소스 코드 — secondsLeft = Math.ceil(remainingMs / 1000) 식 보존", () => {
+    // 위 헬퍼와 실제 컴포넌트가 분리되어도, 식 자체가 바뀌면 e2e 정규식만으로는
+    // 회귀를 잡지 못한다. 소스에서 동일 식이 유지되는지 정적 검증.
+    const src = readFileSync(
+      resolve(__dirname, "TimeAttackTimer.tsx"),
+      "utf8",
+    );
+    expect(src).toMatch(/Math\.ceil\(\s*remainingMs\s*\/\s*1000\s*\)/);
+  });
+});
+
 describe("time-attack rating 정책 (Plan E D1.3 — 30초/카드)", () => {
   it("elapsedMs=30_001 → again — timer expire 와 일치", () => {
     expect(

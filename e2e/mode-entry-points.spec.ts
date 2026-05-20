@@ -1,7 +1,7 @@
 // Plan E Phase 5 — 홈/허브 mode 진입점 검증.
-// 홈 페이지는 gamesPlayed === 0 시 EmptyDashboard 만 노출 (RecommendationCard 미 렌더링) — 본 케이스 e2e 비결정적.
 // 본 테스트는 (1) 게임 허브 ModeChipsRow + (2) 게임 허브 RecommendationCard 상의 alt-modes +
-// (3) URL 직접 진입 가드 (Codex round 4) 를 검증.
+// (3) URL 직접 진입 가드 (Codex round 4) + (4) 홈 RecommendationCard 의 alt-modes
+// (Codex round 5) 를 검증.
 //
 // PR #92 Codex round 1 fix: 비지원 게임이 추천될 수 있으므로 alt-modes 는 supportedAlts
 // 결과에 따라 조건부. 본 케이스는 ModeChipsRow (default math-quick-quiz = 지원) 만
@@ -19,8 +19,14 @@
 //   - URL 직접 진입 가드: 4 메커니즘 미통합 게임 (factorization 등) 에
 //     `?mode=time-attack` 으로 진입해도 TimeAttackTimer 가 노출되지 않아야 한다
 //     (default 로 정규화 = useGameMode(gameId) 의 normalizeModeForGame).
+//
+// PR #92 Codex round 5 fix:
+//   - 홈 (`/`) 의 RecommendationCard alt-modes 회귀 차단. 홈은 gamesPlayed > 0 게이트
+//     뒤에서만 RecommendationCard 가 렌더되므로 SRS 상태를 시드해서 dashboard 경로로
+//     진입한 뒤 alt-modes nav · chip URL · 비지원 시 미노출을 직접 검증.
+//   - 허브만 보는 것은 홈 회귀를 놓친다.
 
-import { test, expect } from "@playwright/test";
+import { test, expect, type Page } from "@playwright/test";
 import { games } from "../src/lib/games/registry";
 
 // registry 도출 — manifest.meta.mechanismComponent 단일 진실원.
@@ -179,4 +185,168 @@ test("URL 직접 진입 가드 — 비지원 게임 ?mode=deep-recall 진입 시
   // 동일하게 게임 본 화면이 나와야 한다.
   const empty = page.getByTestId("deep-recall-empty");
   await expect(empty).toHaveCount(0);
+});
+
+// PR #92 Codex round 5 fix — 홈 (`/`) RecommendationCard 진입점 회귀 차단.
+//
+// 홈은 gamesPlayed > 0 일 때만 Dashboard 가 렌더되며 그 안에서 RecommendationCard
+// (alt-modes 포함) 가 노출된다. SRS 카드 1개를 시드해 dashboard 경로로 진입한 뒤
+// 홈에서도 (1) alt-modes nav (2) chip URL (3) 비지원 모드 미노출 계약을 검증.
+//
+// 시드 방법: localStorage 의 `pullim-games:srs:<gameId>:<cardId>` 키에 SerializedState
+// (`reviewCount > 0`) 직접 주입 — `src/lib/core/storage/srs.ts` 의 serialize 와 동일 포맷.
+// 실 게임 1판 자동화보다 결정적 + 빠름.
+
+interface SerializedSrsState {
+  fsrsCard: {
+    due: string;
+    stability: number;
+    difficulty: number;
+    elapsed_days: number;
+    scheduled_days: number;
+    reps: number;
+    lapses: number;
+    state: number;
+    last_review: string | null;
+    learning_steps: number;
+  };
+  reviewCount: number;
+  lastReviewAt: string | null;
+}
+
+/** 메커니즘 게임의 카드 1장에 reviewed=true 시드.
+ *  → gamesPlayed=1 → home 이 Dashboard + RecommendationCard 를 렌더.
+ *  → recommendation 알고리즘은 lowestR>=0.85 일 때 default 로 fallback하며
+ *    lowestGameId 가 시드된 게임. 시드 게임을 메커니즘 게임으로 두면
+ *    alt-modes 가 3개 모두 노출되어 검증 범위가 최대화된다. */
+async function seedReviewedCard(
+  page: Page,
+  gameId: string,
+  cardId: string,
+): Promise<void> {
+  const now = new Date().toISOString();
+  const due = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+  const state: SerializedSrsState = {
+    fsrsCard: {
+      due,
+      stability: 1,
+      difficulty: 5,
+      elapsed_days: 0,
+      scheduled_days: 1,
+      reps: 1,
+      lapses: 0,
+      state: 2,
+      last_review: now,
+      learning_steps: 0,
+    },
+    reviewCount: 1,
+    lastReviewAt: now,
+  };
+  await page.addInitScript(
+    ({ key, value }) => {
+      try {
+        window.localStorage.setItem(key, value);
+      } catch {
+        // localStorage 거부 환경은 e2e 대상 아님
+      }
+    },
+    {
+      key: `pullim-games:srs:${gameId}:${cardId}`,
+      value: JSON.stringify(state),
+    },
+  );
+}
+
+test("홈 (`/`) — gamesPlayed>0 일 때 RecommendationCard alt-modes nav 노출 (메커니즘 게임 시드)", async ({
+  page,
+}) => {
+  // 시드 게임 = 메커니즘 게임 (alt-modes 3개 모두 지원). registry 에서 첫 메커니즘
+  // 게임을 도출 — 하드코딩 X.
+  const seedGameId = [...mechanismGameIds][0];
+  expect(seedGameId).toBeTruthy();
+  if (!seedGameId) return;
+
+  await seedReviewedCard(page, seedGameId, "seed-card-1");
+  await page.goto("/");
+  await page.waitForLoadState("networkidle");
+
+  // Dashboard 경로 진입 — RecommendationCard 가 등장해야 한다.
+  // 시드 카드가 due 24h 이내라 R>=0.85 → default fallback, lowestGameId=seedGameId
+  // (메커니즘 게임) → alt-modes nav 노출 + 3 chip 모두 등장 예상.
+  const altNav = page.getByTestId("recommendation-alt-modes");
+  await expect(altNav).toBeVisible({ timeout: 5_000 });
+});
+
+test("홈 (`/`) — RecommendationCard alt-modes chip 클릭 시 정확한 URL 진입", async ({
+  page,
+}) => {
+  const seedGameId = [...mechanismGameIds][0];
+  expect(seedGameId).toBeTruthy();
+  if (!seedGameId) return;
+
+  await seedReviewedCard(page, seedGameId, "seed-card-1");
+  await page.goto("/");
+  await page.waitForLoadState("networkidle");
+
+  const altNav = page.getByTestId("recommendation-alt-modes");
+  await expect(altNav).toBeVisible({ timeout: 5_000 });
+
+  // review-queue link (모든 게임 지원 — 가장 안정적 검증 대상) 의 href 검증 + 클릭.
+  const reviewLink = altNav.locator('a[data-mode="review-queue"]');
+  await expect(reviewLink).toHaveCount(1);
+  const href = await reviewLink.getAttribute("href");
+  expect(href).toBe(`/games/${seedGameId}?mode=review-queue`);
+
+  await reviewLink.click();
+  await page.waitForURL(/\?mode=review-queue/);
+  await expect(page).toHaveURL(
+    new RegExp(`/games/${seedGameId}\\?mode=review-queue`),
+  );
+});
+
+test("홈 (`/`) — RecommendationCard alt-modes 의 모든 chip 이 (gameId, mode) supportedModes 정합", async ({
+  page,
+}) => {
+  // PR #92 Codex round 1 fix 와 동일 계약을 홈에서도 검증.
+  // recommendation 이 어느 게임이든 다음을 보장:
+  //   - review-queue : 항상 등장 (모든 게임 지원)
+  //   - time-attack / deep-recall : 메커니즘 게임에서만 등장 (비지원 노출 차단)
+  //   - 모든 chip 44×44 만족
+  const seedGameId = [...mechanismGameIds][0];
+  expect(seedGameId).toBeTruthy();
+  if (!seedGameId) return;
+
+  await seedReviewedCard(page, seedGameId, "seed-card-1");
+  await page.goto("/");
+  await page.waitForLoadState("networkidle");
+
+  const altNav = page.getByTestId("recommendation-alt-modes");
+  await expect(altNav).toBeVisible({ timeout: 5_000 });
+
+  const links = altNav.getByRole("link");
+  const count = await links.count();
+  expect(count).toBeGreaterThan(0);
+
+  let sawReviewQueue = false;
+  for (let i = 0; i < count; i++) {
+    const link = links.nth(i);
+    const href = await link.getAttribute("href");
+    expect(href).toBeTruthy();
+    const match = href!.match(/\/games\/([^?]+)\?mode=([^&]+)/);
+    expect(match).not.toBeNull();
+    const [, gameId, mode] = match!;
+    if (mode === "review-queue") sawReviewQueue = true;
+    if (mode === "time-attack" || mode === "deep-recall") {
+      // 비지원 게임 노출 차단 (Codex round 1 fix 의 홈 버전).
+      expect(mechanismGameIds.has(gameId)).toBe(true);
+    }
+    // 44×44 (height + width) 둘 다 검증 (SPEC 08.10).
+    const box = await link.boundingBox();
+    expect(box).not.toBeNull();
+    if (box) {
+      expect(box.height).toBeGreaterThanOrEqual(44);
+      expect(box.width).toBeGreaterThanOrEqual(44);
+    }
+  }
+  expect(sawReviewQueue).toBe(true);
 });
