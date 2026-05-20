@@ -112,12 +112,17 @@ jobs:
 
       # Step 1) 게임 전용 spec 파일 매핑 — title 에 game ID 가 없는 케이스 보강.
       # 매핑 출처: e2e/*.spec.ts 의 import target + page.goto 경로 분석.
-      # 21 게임 중 5 개 spec 파일이 단일 게임 전용 (제목엔 ID 미포함):
+      # 단일 게임 1:1 spec 파일만 매핑 (다게임 spec 은 loop spec 에서 grep 으로 처리):
       #   factorization                ← factorization-discrimination, factorization-drag-hit-test
       #   english-word-match           ← english-word-match-extras
       #   english-vocab-typing         ← english-vocab-typing-case
-      #   vocab-typing                 ← correct-feedback-reveal
+      #   vocab-typing                 ← correct-feedback-reveal, vocab-typing-case (분리 — round 2 fix)
       # 나머지 17 게임은 loop spec 만으로 커버 (viewport·chrome·viewport-custom·game-shell·mode-review-queue).
+      #
+      # Codex round 2 (PR #90 r3...) 지적 — english-vocab-typing-case 안의
+      # "한글 vocab-typing 정답 인식 회귀 0 — 모순" 케이스는 vocab-typing 회귀였으나
+      # extras path-only 실행으로 english-vocab-typing job 에 잘못 귀속됐었음.
+      # → 본 케이스를 e2e/vocab-typing-case.spec.ts 로 분리, vocab-typing extras 에 매핑.
       - name: Resolve per-game extra specs
         id: extras
         run: |
@@ -133,7 +138,7 @@ jobs:
               echo "specs=e2e/english-vocab-typing-case.spec.ts" >> "$GITHUB_OUTPUT"
               ;;
             vocab-typing)
-              echo "specs=e2e/correct-feedback-reveal.spec.ts" >> "$GITHUB_OUTPUT"
+              echo "specs=e2e/correct-feedback-reveal.spec.ts e2e/vocab-typing-case.spec.ts" >> "$GITHUB_OUTPUT"
               ;;
             *)
               echo "specs=" >> "$GITHUB_OUTPUT"

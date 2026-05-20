@@ -41,17 +41,5 @@ test("전부 대문자 입력 — ACHIEVE", async ({ page }) => {
   await expect(page.getByRole("button", { name: /다음|마치기/ })).toBeEnabled();
 });
 
-test("한글 vocab-typing 정답 인식 회귀 0 — 모순", async ({ page }) => {
-  await page.goto("/");
-  await page.evaluate(() => localStorage.clear());
-
-  await page.goto("/games/vocab-typing");
-  const input = page.getByPlaceholder("입력해주세요");
-  await input.waitFor({ state: "visible" });
-  await input.fill("모순");
-  await page.getByRole("button", { name: "확인" }).click();
-
-  await expect(page.getByText("오답")).not.toBeVisible({ timeout: 1500 });
-  await page.waitForTimeout(800);
-  await expect(page.getByRole("button", { name: /다음|마치기/ })).toBeEnabled();
-});
+// 한글 vocab-typing 회귀 케이스는 PR #90 codex round 2 (r3...) 지적에 따라
+// e2e/vocab-typing-case.spec.ts 로 분리됨. extras path 매핑이 단일 게임 1:1 이도록.
