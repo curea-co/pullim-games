@@ -1,6 +1,7 @@
 # 2026-05-20 — Plan G: pullim 리포 workflows 이식 + monorepo 판단
 
-- **상태**: DRAFT (2026-05-20) — 사용자 G3(인프라·보안) 합의 의무. Phase 1 진입 전 secrets·self-hosted runner 의사결정 필수.
+- **상태**: PHASE 1 COMPLETE (2026-05-20) — codex-review.yml 정착 + Codex 1·2·3 라운드 지적 모두 반영 + 사전 sweep 4건 통합. 본 PR 의 yml 변경 효력은 머지 후 다음 PR 부터 (pull_request_target 패턴). Phase 2 (e2e-nightly) 다음 세션 이관.
+- **거버넌스 (사용자 합의 2026-05-20)**: codex review 결과를 회피하기 위해 codex 워크플로·프롬프트 수정 금지. codex 지적은 코드 fix 로만 응답 (룰북 수정 X). 정당한 trade-off 만 별 plan 합의 후 기록.
 - **트리거**: 사용자 요청 "pullim의 workflows를 pullim-games로 이식. monorepo 구조 필요하면 변경도 같이". 직접 동기 = Codex Review bot 작동 (오늘 PR #83 검증 시 0 review 발견).
 - **메모리 룰**:
   - **단일 백본 + 다중 게임 모드** (project_architecture_decision) — 본 이식이 백본·테스트 인프라 강화
@@ -117,16 +118,25 @@
 - [ ] **GitHub App 권한 확인**: `curea-co/pullim-games` repo 에 review bot App 권한 부여
 - [ ] **Codex CLI 모델**: gpt-5.4 유지 또는 변경 의사
 
-### Phase 1 — codex-review.yml 이식 (Phase 0 완료 후, 1 PR)
+### Phase 1 — codex-review.yml 이식 (PR #87 머지 완료 / 사용자 합의 후)
 
-- [ ] `.github/workflows/codex-review.yml` 신설 — 본 리포 paths-filter scope (D3 = B 단일)
-- [ ] paths-filter trigger: `src/**`·`scripts/**`·`proc/spec/**`·`AGENTS.md`·`CLAUDE.md`·`.github/workflows/**` 변경 시 (Codex 지적 2차 — 워크플로 변경 PR 도 self-review)
-  - 참고: 현 구현은 paths 제한 없이 모든 PR review 채택 (본 리포 PR 수 적음, 우회 위험 0)
-- [ ] diff 추출: `git diff origin/main...HEAD` 전체 (앱 split 없음)
-- [ ] Codex 프롬프트: AGENTS.md → CLAUDE.md 순 우선, "리뷰 코멘트 한국어" 유지
-- [ ] inline / fallback 분리: pullim 패턴 그대로 (`pulls.createReview`)
-- [ ] PR 테스트 — 본 PR 자체 + 추가 sosohan PR 1건으로 동작 검증
-- [ ] e2e — 동작 검증 후 PR #83 close (브랜치 삭제)
+- [x] `.github/workflows/codex-review.yml` 신설 — paths 제한 없이 모든 PR review (본 리포 PR 수 적음)
+- [x] diff 추출: `base.sha...head.sha` (force-push 안정)
+- [x] Codex 프롬프트: AGENTS.md → CLAUDE.md → proc/spec/01~10 순 우선, "리뷰 코멘트 한국어"
+- [x] inline / fallback 분리: pullim 패턴 변형 적용
+- [x] **Codex 1차 지적 3건 반영** — pull_request 포크 가드 / listFiles pagination / Bun 룰 fallback 표기
+- [x] **Codex 2차 지적 3건 반영** — ready_for_review 추가 / git config --global 제거 / .github/workflows/** 명시
+- [x] **Codex 3차 지적 3건 반영**:
+  - #1 base 분리 → `pull_request_target` 패턴 (yml 자체 수정으로 secret 유출 불가)
+  - #2 checkout `ref: head.sha` 명시 (merge ref 어긋남 차단)
+  - #3 JSON 스키마 인라인 검증 (proc/spec/01 §21 런타임 검증 룰 준수)
+- [x] **사전 sweep 4건 통합** — timeout 15분 / artifact 보관 / safety_strategy unsafe 정당화 / base.sha 명시
+- [x] e2e — PR #83 close + 브랜치 삭제
+
+### Phase 1 검증 한계 (정직한 trade-off)
+
+- 본 PR (#87) 자체 round 4 review 없음 — `pull_request_target` 트리거는 base(main) 의 yml 만 실행. 본 PR 머지 전에는 main 에 codex-review.yml 없음.
+- 머지 후 다음 sosohan PR 으로 정착 검증 의무 — 별 PR 작성 후 codex review 자동 작동 확인.
 
 ### Phase 2 — e2e-nightly.yml 이식 (1 PR)
 
