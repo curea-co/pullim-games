@@ -8,6 +8,10 @@
 //   (Vercel serverless 는 같은 인스턴스가 단시간 다중 호출 처리 — abuser 가 한 인스턴스에
 //    얹히면 즉시 차단. 분산 환경 정밀 limit 은 V2 결제 진입 시 KV 도입과 함께 재설계.)
 // - 메모리 누수 방지를 위해 hit 마다 만료된 stamp 를 prune.
+// - 추가로 prune 후 fresh 가 비면 store key 자체를 삭제 (round 7 fix — Codex 지적 #2):
+//   고유 IP·host 가 누적되면 빈 배열이 영구 잔존해 warm 인스턴스 메모리가 단조 증가
+//   하는 문제 차단. abuse·고유 IP 폭증 시에도 Map size 가 활성 window 안의 key 수준
+//   으로만 유지된다.
 //
 // Codex round 3 지적 #2 — 같은-origin 검증과 함께 라우트 가드 핵심.
 
@@ -39,6 +43,49 @@ export function resetRateLimitForTests(): void {
   store.clear();
 }
 
+/** 테스트·관측 전용 — 현재 store 안에 보관된 key 수. */
+export function getRateLimitStoreSizeForTests(): number {
+  return store.size;
+}
+
+/**
+ * 콜드 키 GC — store 전체를 훑어 가장 큰 window(가장 보수적) 기준으로 모든 timestamp 가
+ * 만료된 bucket key 를 제거한다.
+ *
+ * 호출 시점: hit 진입 시 store.size 가 threshold 를 넘으면 단 1회 trigger.
+ * O(N) 이지만 amortized O(1) per hit (threshold 가 일정 배수마다만 fire).
+ *
+ * round 7 — Codex 지적 #2: prune 후 빈 배열이 잔존하는 단조 증가 차단.
+ */
+const GC_BUCKET_THRESHOLD = 1024;
+// fail-safe upper bound — store 가 이 이상 자라면 가장 작은 window 보다 오래된 모든 key 제거.
+// hot path 안에서 단발성으로만 작동 — 비용은 hit/호출 횟수 대비 미미.
+
+function maybeGcStore(now: number): void {
+  if (store.size < GC_BUCKET_THRESHOLD) return;
+  for (const [bucketKey, stamps] of store) {
+    // 어떤 window 가 적용될지는 호출자별로 다르므로 보수적으로 1시간 보존 후 제거.
+    // 본 라우트(`/api/billing/notify`) 의 최대 window 도 1시간이라 일치.
+    const lastStamp = stamps[stamps.length - 1] ?? 0;
+    if (now - lastStamp > 60 * 60_000) {
+      store.delete(bucketKey);
+    }
+  }
+}
+
+/**
+ * fresh stamp 배열을 store 에 반영. 비었으면 key 삭제 (Map 누수 차단 — round 7).
+ *
+ * 호출 위치 모두 prune 직후로 통일해서 "비면 삭제" 정책을 단일 진실 원천으로 보장.
+ */
+function persistStamps(bucketKey: string, fresh: number[]): void {
+  if (fresh.length === 0) {
+    store.delete(bucketKey);
+    return;
+  }
+  store.set(bucketKey, fresh);
+}
+
 /**
  * 단일 hit 시도. window 안의 hit 수가 max 미만이면 timestamp 를 push 하고 allowed=true.
  * 초과하면 push 하지 않고 allowed=false.
@@ -53,6 +100,8 @@ export function checkRateLimit(
     return { allowed: false, count: 0, limit: rule.max, retryAfterMs: rule.windowMs };
   }
 
+  maybeGcStore(now);
+
   const windowStart = now - rule.windowMs;
   const stamps = store.get(rule.key) ?? [];
   // 만료된 stamp prune.
@@ -65,7 +114,7 @@ export function checkRateLimit(
   if (fresh.length >= rule.max) {
     // 가장 오래된 stamp 가 만료되는 시점까지 대기 필요.
     const retryAfterMs = Math.max(0, fresh[0] + rule.windowMs - now);
-    store.set(rule.key, fresh);
+    persistStamps(rule.key, fresh);
     return {
       allowed: false,
       count: fresh.length,
@@ -75,7 +124,7 @@ export function checkRateLimit(
   }
 
   fresh.push(now);
-  store.set(rule.key, fresh);
+  persistStamps(rule.key, fresh);
   return {
     allowed: true,
     count: fresh.length,
@@ -104,6 +153,8 @@ export function checkRateLimits(
   if (rules.length === 0) {
     return { allowed: true, count: 0, limit: 0, retryAfterMs: 0 };
   }
+
+  maybeGcStore(now);
 
   const buckets = rules.map((rule) => ({
     rule,
@@ -176,7 +227,8 @@ function commitRateLimit(
   }
   const fresh = firstFresh === 0 ? stamps : stamps.slice(firstFresh);
   fresh.push(now);
-  store.set(bucketKey, fresh);
+  // 비어 있으면 삭제 — 다만 push 직후라 length >= 1 보장. 일관성을 위해 동일 헬퍼 사용.
+  persistStamps(bucketKey, fresh);
   return {
     allowed: true,
     count: fresh.length,

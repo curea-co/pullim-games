@@ -53,6 +53,9 @@ function CurrentPlanSection() {
 }
 
 function PaidPlanPreview() {
+  // 본 UI 는 "유료 플랜 미정 — 출시 시 알림" 만 약속한다.
+  // SPEC §05.7.2 D2~D4(가격 모델·무료/유료 기능 비교·가격대) 는 G3 합의 전 단계이므로
+  // 구체 항목을 *확정 약속처럼* 노출하지 않는다 (Codex round 7 지적 #1 fix).
   return (
     <Card className="flex flex-col gap-3 p-4">
       <header className="flex items-center gap-2">
@@ -62,13 +65,9 @@ function PaidPlanPreview() {
         </h3>
       </header>
       <p className="text-helper text-type-secondary">
-        V2 정식 출시 시 안내드릴 예정이에요. 무료 플랜에 더해 다음 항목이 추가될 예정입니다.
+        유료 플랜의 가격·구성·혜택은 아직 확정되지 않았어요. 정식 출시 시점에
+        별도로 안내드릴 예정입니다.
       </p>
-      <ul className="flex flex-col gap-1.5 text-helper text-type-secondary">
-        <li>· 광고 제거</li>
-        <li>· 나만의 게임(custom) 카드 수 무제한</li>
-        <li>· 클라우드 동기화 (여러 기기 진행 공유)</li>
-      </ul>
       <p className="text-helper text-pullim-slate-400">
         세부 가격·기능 비교는 출시 직전 별도 안내합니다.
       </p>

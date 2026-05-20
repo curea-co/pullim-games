@@ -6,6 +6,7 @@ import {
   checkRateLimit,
   checkRateLimits,
   extractClientIp,
+  getRateLimitStoreSizeForTests,
   resetRateLimitForTests,
 } from "./rate-limit";
 
@@ -127,5 +128,50 @@ describe("extractClientIp", () => {
   it("x-forwarded-for 공백 trim", () => {
     const h = new Headers({ "x-forwarded-for": "  10.0.0.1  " });
     expect(extractClientIp(h)).toBe("10.0.0.1");
+  });
+});
+
+describe("store GC — Map key 누수 차단 (Codex round 7 지적 #2)", () => {
+  it("[round 7] 활성 window 안에서 고유 key 수만큼 store size 증가, window 만료 + GC 임계 시 자동 정리", () => {
+    const t0 = 1_000_000;
+    // 단일 hit, 짧은 window — 다수 고유 IP 시뮬레이션.
+    for (let i = 0; i < 1024; i++) {
+      checkRateLimit(
+        { key: `ip:cold-${i}`, windowMs: 60_000, max: 5 },
+        t0,
+      );
+    }
+    // 1024 key 진입 단계에서는 GC trigger 안 됨 (threshold 미달).
+    expect(getRateLimitStoreSizeForTests()).toBe(1024);
+
+    // 1시간+1초 후 hit — GC 가 1시간 초과 stamp 를 가진 모든 cold key 를 제거해야 한다.
+    // GC 가 fire 되려면 새 hit 가 들어와야 함. threshold 를 넘긴 상태에서 1 hit 만으로 청소.
+    const t1 = t0 + 60 * 60_000 + 1_000;
+    checkRateLimit({ key: "ip:fresh", windowMs: 60_000, max: 5 }, t1);
+
+    // 모든 cold key 는 제거되고, 새 key 하나만 남아야 한다.
+    expect(getRateLimitStoreSizeForTests()).toBe(1);
+  });
+
+  it("[round 7] 단일 hit 후 window 만료 → prune + 빈 배열 시 key 자체 삭제", () => {
+    const rule = { key: "ip:once", windowMs: 1_000, max: 5 };
+    const t0 = 1_000_000;
+    checkRateLimit(rule, t0);
+    expect(getRateLimitStoreSizeForTests()).toBe(1);
+
+    // window 만료 후 동일 key 재 hit — 만료된 stamp prune + push.
+    // 다만 push 가 있어 size 는 그대로 1 (정상).
+    checkRateLimit(rule, t0 + 1_500);
+    expect(getRateLimitStoreSizeForTests()).toBe(1);
+
+    // 새 hit 가 없는 cold key 는 GC 임계까지는 잔존 — 정상 동작.
+    // 핵심 회귀: hit 마다 store.set(key, fresh) 가 무조건 호출되지 않아야 한다.
+    // 다중 rule (`checkRateLimits`) 에서 거부 시 push 가 발생하지 않는지도 확인.
+    resetRateLimitForTests();
+    const denyRule = { key: "ip:deny", windowMs: 60_000, max: 1 };
+    checkRateLimits([denyRule], t0); // 1 — 허용 + push.
+    expect(getRateLimitStoreSizeForTests()).toBe(1);
+    checkRateLimits([denyRule], t0); // 2 — 거부, push 없음.
+    expect(getRateLimitStoreSizeForTests()).toBe(1);
   });
 });
