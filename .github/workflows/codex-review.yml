@@ -2,7 +2,8 @@ name: Codex Review
 
 on:
   pull_request:
-    types: [opened, synchronize, reopened]
+    # Codex 지적(2차): draft→ready 전환도 review 트리거 대상.
+    types: [opened, synchronize, reopened, ready_for_review]
 
 permissions:
   contents: read
@@ -19,12 +20,8 @@ jobs:
     # Codex 지적(P0 보안): self-hosted + pull_request → 포크 PR 차단. curea-co 소속 브랜치만 실행.
     if: github.event.pull_request.head.repo.full_name == github.repository
     steps:
-      - name: Clear stale git credentials
-        run: |
-          git config --global --unset-all http.https://github.com/.extraheader || true
-          git config --global --unset-all http.proxy || true
-          git config --global --unset-all https.proxy || true
-
+      # Codex 지적(2차): `git config --global` 은 self-hosted runner 글로벌 오염.
+      # checkout 의 `persist-credentials: false` 로 잔여 인증 충돌 방지가 같은 목적 달성.
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0

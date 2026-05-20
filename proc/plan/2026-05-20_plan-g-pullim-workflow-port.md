@@ -120,7 +120,8 @@
 ### Phase 1 — codex-review.yml 이식 (Phase 0 완료 후, 1 PR)
 
 - [ ] `.github/workflows/codex-review.yml` 신설 — 본 리포 paths-filter scope (D3 = B 단일)
-- [ ] paths-filter trigger: `src/**`·`scripts/**`·`proc/spec/**`·`AGENTS.md`·`CLAUDE.md` 변경 시
+- [ ] paths-filter trigger: `src/**`·`scripts/**`·`proc/spec/**`·`AGENTS.md`·`CLAUDE.md`·`.github/workflows/**` 변경 시 (Codex 지적 2차 — 워크플로 변경 PR 도 self-review)
+  - 참고: 현 구현은 paths 제한 없이 모든 PR review 채택 (본 리포 PR 수 적음, 우회 위험 0)
 - [ ] diff 추출: `git diff origin/main...HEAD` 전체 (앱 split 없음)
 - [ ] Codex 프롬프트: AGENTS.md → CLAUDE.md 순 우선, "리뷰 코멘트 한국어" 유지
 - [ ] inline / fallback 분리: pullim 패턴 그대로 (`pulls.createReview`)
