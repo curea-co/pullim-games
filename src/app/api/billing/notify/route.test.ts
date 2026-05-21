@@ -1,15 +1,17 @@
 // /api/billing/notify 라우트 동작 검증.
 // SPEC §05.6 알림 신청 + §05.7.5 외부 메일 서비스 위임 정책.
 //
-// 정책 갱신 (2026-05-20 — Codex review fix):
+// 정책 갱신 (2026-05-21 — Codex review fix):
 // - hash-only 모델 폐기. plain email + 외부 위임 모델로 전환.
 // - Zod strict — 추가 필드 동봉 시 422 (Codex 지적 #2·#3 회귀 테스트).
 // - Resend 외부 호출은 mock — 실제 호출 0.
-// - round 3 fix: same-origin 검증 + rate limit (5/분, 10/시간) + Resend 4xx 중복 idempotent.
+// - round 3 fix: same-origin 검증 + rate limit + Resend 4xx 중복 idempotent.
 // - round 5 fix: IP 식별 불가 → 400 fail-closed (전역 anonymous 버킷 금지).
 // - round 6 fix: production 외 환경은 dev 폴백 키 사용 (bun dev localhost 작동 보장).
 // - round 8 fix: Resend 최신 API 경로 (POST /contacts), 중복 시 PATCH 재구독 보장,
 //   properties.source 마커 (`billing-launch-notify`) 동봉.
+// - round 9 fix #2: 2-tier rate limit (IP 30/분·100/시간 NAT 친화 + IP+email 6/시간).
+// - round 9 fix #3: Resend 실패 시 production 에서도 `console.error` 구조화 로깅.
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { GET, POST } from "./route";
@@ -400,41 +402,113 @@ describe("POST /api/billing/notify — same-origin 가드 (round 3 fix)", () => 
   });
 });
 
-describe("POST /api/billing/notify — rate limit (round 3 fix)", () => {
-  it("1분 5회 초과 → 6번째 요청 429 + Retry-After 헤더", async () => {
+describe("POST /api/billing/notify — rate limit (round 3·9 fix)", () => {
+  // round 9 fix #2 — IP 한도 NAT 친화 상향(30/분·100/시간) + IP+email 좁은 버킷 6/시간.
+
+  it("[NAT 친화] 같은 IP 30회 초과 → 31번째 429 + Retry-After 헤더", async () => {
     const ip = "10.20.30.40";
-    for (let i = 0; i < 5; i++) {
-      const res = await POST(makePostRequest(basePayload(), { ip }));
+    // 같은 IP 라도 30회까지 (다른 이메일이라는 가정 — 각 i 마다 unique email).
+    for (let i = 0; i < 30; i++) {
+      const res = await POST(
+        makePostRequest(basePayload({ email: `nat${i}@example.com` }), { ip }),
+      );
       expect(res.status).toBe(200);
     }
-    const res6 = await POST(makePostRequest(basePayload(), { ip }));
-    expect(res6.status).toBe(429);
-    expect(res6.headers.get("retry-after")).toBeTruthy();
-    const json = await res6.json();
+    const res31 = await POST(
+      makePostRequest(basePayload({ email: "nat31@example.com" }), { ip }),
+    );
+    expect(res31.status).toBe(429);
+    expect(res31.headers.get("retry-after")).toBeTruthy();
+    const json = await res31.json();
     expect(json.error).toBe("rate_limited");
+  });
+
+  it("[NAT 친화 회귀] 같은 IP + 다른 이메일 20건 → 모두 200 (학교/학원/가정 NAT)", async () => {
+    // round 9 fix #2 회귀 — 기존 5/분 한도였다면 6번째부터 429 였음.
+    // NAT 안 20+ 학생 시나리오: 공인 IP 하나에 서로 다른 이메일.
+    const sharedNatIp = "203.0.113.50";
+    for (let i = 0; i < 20; i++) {
+      const res = await POST(
+        makePostRequest(basePayload({ email: `student${i}@school.kr` }), {
+          ip: sharedNatIp,
+        }),
+      );
+      expect(res.status).toBe(200);
+    }
+  });
+
+  it("[좁은 버킷] 같은 IP + 같은 email 6회 초과 → 7번째 429 (abuse 차단)", async () => {
+    // round 9 fix #2 tier-2 — 같은 이메일 abuse 만 좁게 6/시간 으로 차단.
+    const ip = "198.51.100.10";
+    const abusedEmail = "spam-target@example.com";
+    for (let i = 0; i < 6; i++) {
+      const res = await POST(
+        makePostRequest(basePayload({ email: abusedEmail }), { ip }),
+      );
+      expect(res.status).toBe(200);
+    }
+    const res7 = await POST(
+      makePostRequest(basePayload({ email: abusedEmail }), { ip }),
+    );
+    expect(res7.status).toBe(429);
+  });
+
+  it("[좁은 버킷 회귀] 같은 IP 라도 다른 email 이면 좁은 버킷 무관 — 30건 분당 한도 안에서 모두 OK", async () => {
+    // 같은 IP 30건(분당 한도)이고 모두 다른 이메일 → tier-2 좁은 버킷은 (IP, email) 쌍이라
+    // 다른 email 은 영향 X. 즉 분당 한도 30 안에서 모두 200.
+    // (기존 5/분 한도였다면 6번째부터 429 — round 9 fix #2 회귀 검증.)
+    const ip = "192.0.2.100";
+    for (let i = 0; i < 30; i++) {
+      const res = await POST(
+        makePostRequest(basePayload({ email: `u${i}@example.com` }), { ip }),
+      );
+      expect(res.status).toBe(200);
+    }
+  });
+
+  it("[email 정규화] 대소문자·앞뒤 공백 차이 우회 차단 — 같은 이메일로 간주", async () => {
+    // " User@Example.com " 과 "user@example.com" 은 trim+lowercase 후 같은 토큰.
+    const ip = "192.0.2.200";
+    for (let i = 0; i < 6; i++) {
+      const res = await POST(
+        makePostRequest(basePayload({ email: "user@example.com" }), { ip }),
+      );
+      expect(res.status).toBe(200);
+    }
+    // 대소문자만 변경하여 우회 시도 — Zod trim 이 적용된 같은 토큰 → 429.
+    const res7 = await POST(
+      makePostRequest(basePayload({ email: "USER@example.com" }), { ip }),
+    );
+    expect(res7.status).toBe(429);
   });
 
   it("다른 IP 는 독립 카운트 — burst 영향 안 받음", async () => {
     const ipA = "1.1.1.1";
     const ipB = "2.2.2.2";
-    for (let i = 0; i < 5; i++) {
-      await POST(makePostRequest(basePayload(), { ip: ipA }));
+    for (let i = 0; i < 30; i++) {
+      await POST(
+        makePostRequest(basePayload({ email: `a${i}@example.com` }), { ip: ipA }),
+      );
     }
-    // ipA 는 cap 도달, ipB 는 미시작 → 200.
+    // ipA 는 분당 cap 도달, ipB 는 미시작 → 200.
     const resB = await POST(makePostRequest(basePayload(), { ip: ipB }));
     expect(resB.status).toBe(200);
   });
 
   it("rate limit 거부 시 Resend 호출 0 (외부 한도 보호)", async () => {
     const ip = "3.3.3.3";
-    // 5회 정상 hit (Resend 5회 호출).
-    for (let i = 0; i < 5; i++) {
-      await POST(makePostRequest(basePayload(), { ip }));
+    // 30회 정상 hit (Resend 30회 호출 — 각 unique email).
+    for (let i = 0; i < 30; i++) {
+      await POST(
+        makePostRequest(basePayload({ email: `b${i}@example.com` }), { ip }),
+      );
     }
     const fetchSpy = fetch as unknown as ReturnType<typeof vi.fn>;
     fetchSpy.mockClear();
-    // 6번째 — 429 + Resend 호출 0.
-    await POST(makePostRequest(basePayload(), { ip }));
+    // 31번째 — 429 + Resend 호출 0.
+    await POST(
+      makePostRequest(basePayload({ email: "b30@example.com" }), { ip }),
+    );
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
@@ -494,20 +568,21 @@ describe("POST /api/billing/notify — rate limit (round 3 fix)", () => {
       expect(res.status).toBe(200);
     });
 
-    it("dev 폴백도 rate limit 적용 — 같은 host 에서 5회 초과 시 429", async () => {
+    it("dev 폴백도 rate limit 적용 — 같은 host + 같은 email 6회 초과 시 429 (tier-2)", async () => {
+      // round 9 fix #2: 같은 email 좁은 버킷이 dev 폴백에서도 작동.
       vi.stubEnv("NODE_ENV", "development");
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 6; i++) {
         const res = await POST(makePostRequest(basePayload(), { ip: null }));
         expect(res.status).toBe(200);
       }
-      const res6 = await POST(makePostRequest(basePayload(), { ip: null }));
-      expect(res6.status).toBe(429);
+      const res7 = await POST(makePostRequest(basePayload(), { ip: null }));
+      expect(res7.status).toBe(429);
     });
 
     it("dev 폴백 키는 실제 IP 키와 격리 — IP 있는 사용자는 영향 0", async () => {
       vi.stubEnv("NODE_ENV", "development");
-      // dev 폴백 5회 소진.
-      for (let i = 0; i < 5; i++) {
+      // dev 폴백 같은 이메일 6회 소진.
+      for (let i = 0; i < 6; i++) {
         await POST(makePostRequest(basePayload(), { ip: null }));
       }
       // 실제 IP 사용자는 자기 한도 그대로.
@@ -516,6 +591,88 @@ describe("POST /api/billing/notify — rate limit (round 3 fix)", () => {
       );
       expect(res.status).toBe(200);
     });
+  });
+});
+
+describe("POST /api/billing/notify — production 로깅 (round 9 fix #3)", () => {
+  // round 9 fix #3 — Resend 위임 실패 시 production 에서도 console.error 로 구조화 로깅.
+
+  let errorSpy: ReturnType<typeof vi.spyOn>;
+
+  beforeEach(() => {
+    errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    errorSpy.mockRestore();
+  });
+
+  it("[production] Resend 5xx → console.error 호출 + email 원문 미포함", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubGlobal("fetch", vi.fn(() => new Response("oops", { status: 500 })));
+    const res = await POST(
+      makePostRequest(basePayload({ email: "log-test@example.com" })),
+    );
+    expect(res.status).toBe(502);
+    expect(errorSpy).toHaveBeenCalledTimes(1);
+    const [msg, meta] = errorSpy.mock.calls[0] as [string, Record<string, unknown>];
+    expect(msg).toContain("[billing/notify]");
+    expect(meta).toMatchObject({
+      reason: "external_error",
+      status: 500,
+      marker: "external_error",
+    });
+    // PII 0 회귀 — 로그 메타에 email 원문이 어떤 형태로도 포함되지 않음.
+    const logJson = JSON.stringify(errorSpy.mock.calls);
+    expect(logJson).not.toContain("log-test@example.com");
+    vi.unstubAllEnvs();
+  });
+
+  it("[production] RESEND_API_KEY 미설정 → console.error + marker=secret_missing", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    delete process.env.RESEND_API_KEY;
+    const res = await POST(makePostRequest(basePayload()));
+    expect(res.status).toBe(503);
+    expect(errorSpy).toHaveBeenCalledTimes(1);
+    const [, meta] = errorSpy.mock.calls[0] as [string, Record<string, unknown>];
+    expect(meta).toMatchObject({
+      reason: "unavailable",
+      marker: "secret_missing",
+    });
+    vi.unstubAllEnvs();
+  });
+
+  it("[production] Resend 네트워크 단절 → console.error 호출", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => {
+        throw new Error("network down");
+      }),
+    );
+    const res = await POST(makePostRequest(basePayload()));
+    expect(res.status).toBe(502);
+    expect(errorSpy).toHaveBeenCalledTimes(1);
+    vi.unstubAllEnvs();
+  });
+
+  it("[production] 성공 시(200) console.error 호출 0", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    const res = await POST(makePostRequest(basePayload()));
+    expect(res.status).toBe(200);
+    expect(errorSpy).not.toHaveBeenCalled();
+    vi.unstubAllEnvs();
+  });
+
+  it("[NODE_ENV !== production] 실패도 동일하게 logging — 환경 의존 없음", async () => {
+    // round 9 이전(`NODE_ENV !== 'production'` 게이트) 회귀: production 외 환경에서도
+    // 로깅이 사라져선 안 된다 (디버깅 시그널 일관 보존).
+    vi.stubEnv("NODE_ENV", "development");
+    vi.stubGlobal("fetch", vi.fn(() => new Response("oops", { status: 500 })));
+    const res = await POST(makePostRequest(basePayload()));
+    expect(res.status).toBe(502);
+    expect(errorSpy).toHaveBeenCalledTimes(1);
+    vi.unstubAllEnvs();
   });
 });
 

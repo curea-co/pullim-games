@@ -1,13 +1,13 @@
 // /api/billing/notify — V2 출시 알림 신청 (외부 메일 서비스 위임).
 // SPEC §05.6 알림 신청 + §05.7.5 외부 메일 서비스 위임 정책.
 //
-// 정책 (2026-05-20 갱신 — Codex review round 2·3·5·6 fix):
+// 정책 (2026-05-21 갱신 — Codex review round 2·3·5·6·9 fix):
 // - 본 서버는 이메일을 저장하지 않는다. Resend 에 즉시 위임 후 변수 폐기.
 // - Zod `.strict()` 적용 — 정의되지 않은 필드 동봉 시 422 (PII 누수 차단).
 // - 응답 후 `email` 변수는 함수 스코프 종료와 함께 GC. DB·KV·파일·로그 어디에도 잔존 X.
 // - **round 3 추가 가드** (Codex 지적 #2):
 //   · same-origin 검증: `Origin`·`Referer` 헤더가 본 사이트 origin 일치해야 함. 외부 도메인 거부.
-//   · rate limit: IP 별 1분 5회 + 1시간 10회. 인메모리 sliding window (인프라 의존 0).
+//   · rate limit: IP 별 sliding window. 인메모리 (인프라 의존 0).
 // - **round 3 추가 분기** (Codex 지적 #1):
 //   · Resend 4xx + "already"/"exists" 또는 409 → idempotent success (사용자에게 ok).
 // - **round 5 fail-closed** (Codex 지적 #1):
@@ -19,6 +19,17 @@
 //     원래 없는 게 정상 — 이를 400 으로 막으면 `bun dev` localhost 폼이 깨진다.
 //     production 이 아닐 때만 `dev:<host>` 폴백 키를 사용해 라우트가 작동하게 한다.
 //     same-origin 가드가 이미 외부 남용 1차 차단을 하므로 dev 폴백은 안전.
+// - **round 9 fix — NAT 친화 2-tier rate limit** (Codex 지적 #2):
+//   · 학교/학원/가정 NAT 는 공인 IP 1개를 여러 학생이 공유 — 기존 5회/분 한도는 정상 사용자
+//     간 간섭을 유발 (한 학생 재시도가 같은 IP 의 다른 학생을 429 로 막음).
+//   · 해결: IP 한도를 30/분 + 100/시간 으로 상향(NAT 친화) + (IP + email 해시) 좁은
+//     버킷 6/시간 추가(같은 이메일 abuse 만 좁게 차단).
+//   · email 해시는 normalize(lowercase + trim) 후 SHA-256. 메모리 안에서만 rate-limit
+//     bucket key 로 사용되고 폐기 — DB·로그 어디에도 저장 X (PII 0 유지).
+// - **round 9 fix — production 관측 신호** (Codex 지적 #3):
+//   · Resend 위임 실패를 production 에서도 `console.error` 로 구조화 로깅.
+//   · email 원문은 절대 포함하지 않음 (메타데이터만: `source`, `ts`, `reason`, `status`).
+//   · secret 미설정(503) 도 별도 로그 마커(`secret_missing`) 로 운영 측 noticing 가능.
 //
 // 응답 코드 정책:
 //   200 — Resend 위임 성공 (신규 또는 중복=idempotent)
@@ -29,6 +40,7 @@
 //   502 — Resend 외부 호출 실패 (4xx validation·auth, 5xx 등)
 //   503 — Resend secret 미설정 (외부 의존성 단절)
 
+import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { BillingNotifySignupSchema } from "@/lib/core";
 import { delegateNotifySignupToResend } from "@/lib/server/billing/resend-client";
@@ -87,19 +99,57 @@ function collectAllowedOrigins(request: Request): Set<string> {
 }
 
 /**
- * Rate limit rule — IP 별 1분 5회 + 1시간 10회.
+ * Rate limit rule — 2-tier (round 9 fix: NAT 친화).
  *
- * 정당한 사용자 시나리오(오타 수정·재시도)는 1분 5회 안에서 충분히 흡수.
- * abuser 가 1시간 10회로 캡 → Resend 무료 한도(100/일) 의 abuse 벡터 차단.
+ * tier 1 — **IP 한도**: 30/분 + 100/시간 (학교/학원/가정 NAT 친화 상향).
+ *   기존 5/분·10/시간 한도는 공인 IP 1개를 공유하는 학생 N 명이 서로를 즉시 429 로
+ *   막는 문제가 있었다. 30/분 = NAT 안에서 동시 5~10 명이 각자 재시도 2~3회 해도
+ *   허용. 100/시간 = 한 시간 동안 같은 NAT 안 20+ 학생이 정상 신청 가능.
+ *
+ * tier 2 — **IP + email 해시 한도**: 6/시간 (좁은 abuse 차단).
+ *   같은 IP 라도 같은 이메일로 6회 초과 신청 시 429. 같은 이메일 abuse 만 좁게 차단.
+ *   email 해시는 normalize(lowercase + trim) 후 SHA-256(16 chars). 메모리 rate-limit
+ *   bucket key 로만 사용 — DB·로그 저장 X (PII 0).
+ *
+ * Resend 무료 한도(100/일) 대비:
+ *   - 30/분 × 60 = 1800/시간 이론치이지만, 100/시간 IP 한도가 cap.
+ *   - 단일 NAT 가 100/시간 × 24 = 2400/일 까지 가능하지만 같은 이메일은 6/시간 으로
+ *     좁혀 같은-이메일 abuse 는 Resend 호출량을 못 늘림. 다른 이메일은 정상 신청.
+ *   - V2 진입 시점 KV 기반 globally-shared limit 으로 재설계 (SPEC §5.7.5 진화 노트).
  */
-const RATE_LIMIT_PER_MINUTE = 5;
-const RATE_LIMIT_PER_HOUR = 10;
+const RATE_LIMIT_IP_PER_MINUTE = 30;
+const RATE_LIMIT_IP_PER_HOUR = 100;
+const RATE_LIMIT_IP_EMAIL_PER_HOUR = 6;
 
-function buildRateLimitRules(key: string) {
+/**
+ * 이메일 → rate-limit bucket key 용 짧은 해시 (서버 측 SHA-256 prefix).
+ *
+ * 정책:
+ *   - normalize: trim + lowercase (대소문자·공백 차이 우회 차단)
+ *   - SHA-256 → hex prefix 16 chars (collision 충분히 낮음 + bucket key 짧게)
+ *   - **저장 X**: rate-limit Map 의 일부로만 in-memory 잔존 → 시간 경과 시 GC.
+ *   - DB·KV·로그 어디에도 저장하지 않음 — PII 0 정책 유지 (SPEC §5.7.5).
+ */
+function emailRateLimitToken(email: string): string {
+  const normalized = email.trim().toLowerCase();
+  return createHash("sha256").update(normalized).digest("hex").slice(0, 16);
+}
+
+function buildIpRateLimitRules(ipKey: string) {
   return [
-    { key, windowMs: 60_000, max: RATE_LIMIT_PER_MINUTE },
-    { key, windowMs: 60 * 60_000, max: RATE_LIMIT_PER_HOUR },
+    // tier 1 — IP 만 (NAT 친화 상향).
+    { key: ipKey, windowMs: 60_000, max: RATE_LIMIT_IP_PER_MINUTE },
+    { key: ipKey, windowMs: 60 * 60_000, max: RATE_LIMIT_IP_PER_HOUR },
   ];
+}
+
+function buildEmailRateLimitRule(ipKey: string, emailToken: string) {
+  return {
+    // tier 2 — IP + email 좁은 버킷 (같은 이메일 abuse 차단).
+    key: `${ipKey}|email:${emailToken}`,
+    windowMs: 60 * 60_000,
+    max: RATE_LIMIT_IP_EMAIL_PER_HOUR,
+  };
 }
 
 /**
@@ -131,13 +181,24 @@ function safeRequestHost(request: Request): string {
   }
 }
 
+function rateLimitedResponse(retryAfterMs: number): NextResponse {
+  const retryAfterSec = Math.max(1, Math.ceil(retryAfterMs / 1000));
+  return NextResponse.json(
+    { error: "rate_limited" },
+    {
+      status: 429,
+      headers: { "retry-after": String(retryAfterSec) },
+    },
+  );
+}
+
 export async function POST(request: Request) {
   // ── 1. same-origin 검증 ────────────────────────────────────────────────
   if (!isSameOriginRequest(request)) {
     return NextResponse.json({ error: "forbidden_origin" }, { status: 403 });
   }
 
-  // ── 2. rate limit (fail-closed in prod · dev fallback — round 5·6 fix) ──
+  // ── 2. IP 식별 (fail-closed in prod · dev fallback — round 5·6 fix) ────
   // production: IP 추출 실패 시 전역 anonymous 버킷에 묶으면 정상 사용자 간 간섭이
   // 발생한다(한 명의 abuse 가 식별 안 된 모두를 429 로 만듦). 따라서 IP 식별 불가
   // 자체를 400 으로 즉시 거부 — 배포·프록시 설정 문제를 fail-closed 로 드러낸다.
@@ -153,19 +214,16 @@ export async function POST(request: Request) {
       { status: 400 },
     );
   }
-  const decision = checkRateLimits(buildRateLimitRules(rateLimitKey));
-  if (!decision.allowed) {
-    const retryAfterSec = Math.max(1, Math.ceil(decision.retryAfterMs / 1000));
-    return NextResponse.json(
-      { error: "rate_limited" },
-      {
-        status: 429,
-        headers: { "retry-after": String(retryAfterSec) },
-      },
-    );
+
+  // ── 3. tier 1 rate limit — IP 만 (사전 abuse 차단) ─────────────────────
+  // 본문 파싱 전에 IP 한도부터 적용해 invalid-body 폭주 abuse 도 막는다.
+  // tier 2 (IP+email) 은 schema 파싱 후 적용 (email 필요).
+  const ipDecision = checkRateLimits(buildIpRateLimitRules(rateLimitKey));
+  if (!ipDecision.allowed) {
+    return rateLimitedResponse(ipDecision.retryAfterMs);
   }
 
-  // ── 3. 본문 파싱·검증 ──────────────────────────────────────────────────
+  // ── 4. 본문 파싱·검증 ──────────────────────────────────────────────────
   let body: unknown;
   try {
     body = await request.json();
@@ -187,18 +245,31 @@ export async function POST(request: Request) {
   // 이메일은 로컬 변수로만 보관 — 함수 스코프 종료 시 GC.
   // 로깅·DB·KV·파일 어디에도 plain email 을 저장하지 않는다 (SPEC §05.7.5).
   const { email, source, ts } = parsed.data;
+
+  // ── 5. tier 2 rate limit — IP + email 좁은 버킷 (round 9 fix #2) ───────
+  // tier 1 (IP 만) 은 NAT 친화로 30/분·100/시간 으로 넓혀졌으므로, 같은-이메일 abuse
+  // 만 좁게 6/시간 으로 막는 보완 버킷이다. emailToken 은 SHA-256 prefix (메모리만).
+  const emailToken = emailRateLimitToken(email);
+  const emailDecision = checkRateLimits([
+    buildEmailRateLimitRule(rateLimitKey, emailToken),
+  ]);
+  if (!emailDecision.allowed) {
+    return rateLimitedResponse(emailDecision.retryAfterMs);
+  }
+
   const result = await delegateNotifySignupToResend(email);
 
   if (!result.ok) {
-    if (process.env.NODE_ENV !== "production") {
-      // 메타데이터만 — email 자체는 절대 로깅하지 않는다.
-      console.warn("[billing/notify] resend delegation failed", {
-        source,
-        ts,
-        reason: result.reason,
-        status: result.status,
-      });
-    }
+    // round 9 fix #3 — production 에서도 구조화 로깅 (Vercel logs 에서 관측 가능).
+    // email 원문은 절대 포함하지 않음. secret 미설정·외부 장애를 운영 측이 즉시 인지.
+    console.error("[billing/notify] resend delegation failed", {
+      source,
+      ts,
+      reason: result.reason,
+      status: result.status,
+      // marker — secret 미설정(503) vs 외부 호출 실패(502) 를 grep 으로 구분.
+      marker: result.reason === "unavailable" ? "secret_missing" : "external_error",
+    });
     if (result.reason === "unavailable") {
       return NextResponse.json(
         { error: "service_unavailable" },
