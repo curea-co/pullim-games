@@ -10,6 +10,11 @@
 //
 // PR #92 Codex round 2 fix:
 //   - chip 의 가로 너비도 44px 이상 보장 — min-w-[44px] 추가 (짧은 label 회귀 차단).
+//
+// PR #92 Codex round 6 fix:
+//   - SPEC 08.10 focus ring (outline: 2px solid #00D4A1; outline-offset: 2px) 정합:
+//     focus-visible:outline-2 focus-visible:outline-accent-positive focus-visible:outline-offset-2
+//     명시적으로 부여 — 키보드 Tab 진입 시 chip 포커스 표시 누락 방지.
 
 import Link from "next/link";
 import type { GameMode } from "@/lib/core";
@@ -59,7 +64,7 @@ export function ModeChipsRow({ defaultGameId = "math-quick-quiz" }: Props) {
           data-cta-priority="informational"
           data-mode={alt.mode}
           aria-label={`${alt.label} 모드로 진입 (${alt.hint})`}
-          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-primary px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary"
+          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-primary px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-positive"
         >
           {alt.label}
           <span className="ml-1 text-type-secondary/60">· {alt.hint}</span>

@@ -25,6 +25,12 @@
 //     뒤에서만 RecommendationCard 가 렌더되므로 SRS 상태를 시드해서 dashboard 경로로
 //     진입한 뒤 alt-modes nav · chip URL · 비지원 시 미노출을 직접 검증.
 //   - 허브만 보는 것은 홈 회귀를 놓친다.
+//
+// PR #92 Codex round 6 fix:
+//   - SPEC 08.10 focus ring 회귀 차단. chip 에 키보드 Tab 으로 진입한 뒤
+//     `:focus-visible` 상태에서 outline-width = 2px, outline-color = #00D4A1
+//     (accent-positive) 가 적용되는지를 직접 검증.
+//   - 두 진입점 (허브 ModeChipsRow + 홈 RecommendationCard alt-modes) 양쪽 확인.
 
 import { test, expect, type Page } from "@playwright/test";
 import { games } from "../src/lib/games/registry";
@@ -349,4 +355,63 @@ test("홈 (`/`) — RecommendationCard alt-modes 의 모든 chip 이 (gameId, mo
     }
   }
   expect(sawReviewQueue).toBe(true);
+});
+
+// PR #92 Codex round 6 fix — SPEC 08.10 focus ring 회귀 차단.
+//
+// `:focus-visible` 상태에서 outline-width 가 2px 이상이고 outline-color 가
+// accent-positive (#00D4A1) 인지 확인. 전역 globals.css 의 :focus-visible 룰 + chip
+// 클래스의 명시적 focus-visible:outline-* 토큰이 둘 다 적용되도록 박혔는지 검증.
+//
+// `keyboard.press("Tab")` 으로 첫 chip 에 포커스가 갈 때까지 진행한 뒤
+// computed outlineWidth/outlineColor 를 확인.
+async function assertFocusRing(page: Page, locator: ReturnType<Page["locator"]>) {
+  await locator.first().focus();
+  // SPEC 08.10: outline 2px solid #00D4A1; outline-offset 2px.
+  const style = await locator.first().evaluate((el) => {
+    const cs = window.getComputedStyle(el);
+    return {
+      outlineWidth: cs.outlineWidth,
+      outlineStyle: cs.outlineStyle,
+      outlineColor: cs.outlineColor,
+      outlineOffset: cs.outlineOffset,
+    };
+  });
+  // 2px 이상 (브라우저별 px 정밀 표기 차 허용).
+  const widthPx = Number.parseFloat(style.outlineWidth);
+  expect(Number.isFinite(widthPx)).toBe(true);
+  expect(widthPx).toBeGreaterThanOrEqual(2);
+  // accent-positive #00D4A1 = rgb(0, 212, 161).
+  expect(style.outlineColor).toMatch(/rgba?\(\s*0\s*,\s*212\s*,\s*161/);
+  expect(style.outlineStyle).not.toBe("none");
+}
+
+test("게임 허브 — ModeChipsRow chip 키보드 포커스 시 SPEC 08.10 focus ring 적용", async ({
+  page,
+}) => {
+  await page.goto("/games");
+  await page.waitForLoadState("networkidle");
+  const chips = page.getByTestId("hub-mode-chips");
+  await expect(chips).toBeVisible();
+  const links = chips.getByRole("link");
+  await expect(links.first()).toBeVisible();
+  await assertFocusRing(page, links);
+});
+
+test("홈 (`/`) — RecommendationCard alt-modes chip 키보드 포커스 시 SPEC 08.10 focus ring 적용", async ({
+  page,
+}) => {
+  const seedGameId = [...mechanismGameIds][0];
+  expect(seedGameId).toBeTruthy();
+  if (!seedGameId) return;
+
+  await seedReviewedCard(page, seedGameId, "seed-card-1");
+  await page.goto("/");
+  await page.waitForLoadState("networkidle");
+
+  const altNav = page.getByTestId("recommendation-alt-modes");
+  await expect(altNav).toBeVisible({ timeout: 5_000 });
+  const links = altNav.getByRole("link");
+  await expect(links.first()).toBeVisible();
+  await assertFocusRing(page, links);
 });

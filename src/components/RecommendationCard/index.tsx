@@ -18,6 +18,12 @@
 //   - chip 가로 너비 44px 보장 — min-w-[44px] 추가 (label 변경 회귀 차단).
 //   - review-queue 는 모든 게임 지원이므로 supportedAlts 가 비지 않음(직접 게임도 최소 1개).
 //     실제로 nav 는 어떤 추천에서도 렌더링됨 — 회귀 회로 e2e 가 확실히 잡게끔 테스트 보강.
+//
+// PR #92 Codex round 6 fix:
+//   - alt-mode chip 들에 SPEC 08.10 focus ring 명시적 부여
+//     (focus-visible:outline-2 focus-visible:outline-accent-positive focus-visible:outline-offset-2).
+//   - 전역 :focus-visible 룰이 있으나 Link 컴포넌트 anchor 에 명시적으로도 박아
+//     키보드 Tab 탐색 시 chip 외곽 ring 이 안정적으로 보이도록 한다.
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -145,7 +151,7 @@ export function RecommendationCard() {
                 data-cta-priority="informational"
                 data-mode={alt.mode}
                 aria-label={`${game.meta.title} — ${alt.label} 모드 (${alt.hint})`}
-                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-block px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary"
+                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-block px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-positive"
               >
                 {alt.label}
               </Link>
