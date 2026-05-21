@@ -50,3 +50,10 @@ export async function GET() {
     { status: 405 },
   );
 }
+
+export async function PUT() {
+  return NextResponse.json(
+    { error: "method_not_allowed" },
+    { status: 405 },
+  );
+}
