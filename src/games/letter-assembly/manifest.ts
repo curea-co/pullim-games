@@ -10,7 +10,7 @@ const manifest: GameManifest = {
     title: "한자 부수 조합",
     subject: "국어",
     unit: "고1 국어 — 한자 부수",
-    tagline: "부수를 끼워 한자를 완성해요",
+    tagline: "부수를 조합해 한자를 완성해요",
     estimatedMinutes: 4,
     status: "available",
     icon: Combine,
