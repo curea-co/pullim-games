@@ -12,10 +12,18 @@
 //   properties.source 마커 (`billing-launch-notify`) 동봉.
 // - round 9 fix #2: 2-tier rate limit (IP 30/분·100/시간 NAT 친화 + IP+email 6/시간).
 // - round 9 fix #3: Resend 실패 시 production 에서도 `console.error` 구조화 로깅.
+// - round 10 fix #1: CSRF 토큰 (SameSite=Strict 쿠키) 검증 — 헤더 spoof 차단.
+// - round 10 fix #2: IP 일일 한도(20/일) + 글로벌 일일 cap(80/일) — Resend 100/일 정합.
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { GET, POST } from "./route";
 import { resetRateLimitForTests } from "@/lib/server/rate-limit";
+import {
+  issueBillingNotifyCsrfToken,
+  resetBillingNotifyCsrfStoreForTests,
+  BILLING_NOTIFY_CSRF_COOKIE,
+} from "@/lib/server/billing/csrf";
+import { resetBillingNotifyDailyQuotaForTests } from "@/lib/server/billing/daily-quota";
 
 interface RequestOpts {
   /** Origin 헤더. 기본 = http://localhost (same-origin). null 명시 시 헤더 미설정. */
@@ -24,8 +32,17 @@ interface RequestOpts {
   referer?: string | null;
   /** x-forwarded-for IP. 기본 = 127.0.0.1. null 명시 시 헤더 미설정. */
   ip?: string | null;
+  /**
+   * CSRF 토큰. 기본 = 새 토큰 발급(통과). null 명시 시 쿠키 미설정 → 403 missing.
+   * 임의 값 지정 시 정확한 invalid·expired·spoof 시나리오 검증.
+   */
+  csrfToken?: string | null;
 }
 
+/**
+ * 헬퍼 — round 10 fix #1: 기본적으로 CSRF 토큰을 발급+쿠키에 부착해
+ * 정상 same-origin 폼 흐름을 재현한다. `csrfToken: null` 로 명시하면 쿠키 미설정.
+ */
 function makePostRequest(body: unknown, opts: RequestOpts = {}): Request {
   const headers: Record<string, string> = { "content-type": "application/json" };
   if (opts.origin !== null) {
@@ -36,6 +53,13 @@ function makePostRequest(body: unknown, opts: RequestOpts = {}): Request {
   }
   if (opts.ip !== null) {
     headers["x-forwarded-for"] = opts.ip ?? "127.0.0.1";
+  }
+  // CSRF cookie 처리 — undefined 면 자동 발급, null 이면 미설정, string 이면 그대로 사용.
+  if (opts.csrfToken === undefined) {
+    const issued = issueBillingNotifyCsrfToken({ isProduction: false });
+    headers.cookie = `${BILLING_NOTIFY_CSRF_COOKIE}=${issued.token}`;
+  } else if (opts.csrfToken !== null) {
+    headers.cookie = `${BILLING_NOTIFY_CSRF_COOKIE}=${opts.csrfToken}`;
   }
   return new Request("http://localhost/api/billing/notify", {
     method: "POST",
@@ -73,14 +97,18 @@ beforeEach(() => {
         }),
     ),
   );
-  // 각 테스트 사이 rate-limit store 격리 — 이전 테스트 hit 이 누적되면 429 오작동.
+  // 각 테스트 사이 rate-limit·CSRF·일일 quota store 격리 — 누적 시 429/403 오작동.
   resetRateLimitForTests();
+  resetBillingNotifyCsrfStoreForTests();
+  resetBillingNotifyDailyQuotaForTests();
 });
 
 afterEach(() => {
   vi.unstubAllGlobals();
   process.env = { ...ORIGINAL_ENV };
   resetRateLimitForTests();
+  resetBillingNotifyCsrfStoreForTests();
+  resetBillingNotifyDailyQuotaForTests();
 });
 
 describe("POST /api/billing/notify — schema 검증 (Zod strict)", () => {
@@ -402,30 +430,33 @@ describe("POST /api/billing/notify — same-origin 가드 (round 3 fix)", () => 
   });
 });
 
-describe("POST /api/billing/notify — rate limit (round 3·9 fix)", () => {
+describe("POST /api/billing/notify — rate limit (round 3·9·10 fix)", () => {
   // round 9 fix #2 — IP 한도 NAT 친화 상향(30/분·100/시간) + IP+email 좁은 버킷 6/시간.
+  // round 10 fix #2 — 추가로 IP 일일 한도(20/일) + 글로벌 일일 cap(80/일).
 
-  it("[NAT 친화] 같은 IP 30회 초과 → 31번째 429 + Retry-After 헤더", async () => {
+  it("[일일] 같은 IP 20회 초과 → 21번째 429 + Retry-After 헤더 (IP 일일 한도)", async () => {
+    // round 10 fix #2 — IP 일일 한도 20/일 (Resend 100/일 의 20%) 가 분당 한도(30) 보다
+    // 먼저 트리거된다 → 21번째부터 429.
     const ip = "10.20.30.40";
-    // 같은 IP 라도 30회까지 (다른 이메일이라는 가정 — 각 i 마다 unique email).
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
       const res = await POST(
         makePostRequest(basePayload({ email: `nat${i}@example.com` }), { ip }),
       );
       expect(res.status).toBe(200);
     }
-    const res31 = await POST(
-      makePostRequest(basePayload({ email: "nat31@example.com" }), { ip }),
+    const res21 = await POST(
+      makePostRequest(basePayload({ email: "nat21@example.com" }), { ip }),
     );
-    expect(res31.status).toBe(429);
-    expect(res31.headers.get("retry-after")).toBeTruthy();
-    const json = await res31.json();
+    expect(res21.status).toBe(429);
+    expect(res21.headers.get("retry-after")).toBeTruthy();
+    const json = await res21.json();
     expect(json.error).toBe("rate_limited");
   });
 
   it("[NAT 친화 회귀] 같은 IP + 다른 이메일 20건 → 모두 200 (학교/학원/가정 NAT)", async () => {
     // round 9 fix #2 회귀 — 기존 5/분 한도였다면 6번째부터 429 였음.
-    // NAT 안 20+ 학생 시나리오: 공인 IP 하나에 서로 다른 이메일.
+    // NAT 안 20 학생 시나리오: 공인 IP 하나에 서로 다른 이메일.
+    // round 10 fix #2: IP 일일 한도가 정확히 20/일이라 20건은 모두 통과해야 한다.
     const sharedNatIp = "203.0.113.50";
     for (let i = 0; i < 20; i++) {
       const res = await POST(
@@ -453,12 +484,12 @@ describe("POST /api/billing/notify — rate limit (round 3·9 fix)", () => {
     expect(res7.status).toBe(429);
   });
 
-  it("[좁은 버킷 회귀] 같은 IP 라도 다른 email 이면 좁은 버킷 무관 — 30건 분당 한도 안에서 모두 OK", async () => {
-    // 같은 IP 30건(분당 한도)이고 모두 다른 이메일 → tier-2 좁은 버킷은 (IP, email) 쌍이라
-    // 다른 email 은 영향 X. 즉 분당 한도 30 안에서 모두 200.
+  it("[좁은 버킷 회귀] 같은 IP 라도 다른 email 이면 좁은 버킷 무관 — IP 일일 한도(20) 안에서 모두 OK", async () => {
+    // 같은 IP 20건(IP 일일 한도) + 모두 다른 이메일 → tier-2 좁은 버킷은 (IP, email) 쌍이라
+    // 다른 email 은 영향 X. 즉 IP 일일 한도 20 안에서 모두 200.
     // (기존 5/분 한도였다면 6번째부터 429 — round 9 fix #2 회귀 검증.)
     const ip = "192.0.2.100";
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
       const res = await POST(
         makePostRequest(basePayload({ email: `u${i}@example.com` }), { ip }),
       );
@@ -485,29 +516,29 @@ describe("POST /api/billing/notify — rate limit (round 3·9 fix)", () => {
   it("다른 IP 는 독립 카운트 — burst 영향 안 받음", async () => {
     const ipA = "1.1.1.1";
     const ipB = "2.2.2.2";
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < 20; i++) {
       await POST(
         makePostRequest(basePayload({ email: `a${i}@example.com` }), { ip: ipA }),
       );
     }
-    // ipA 는 분당 cap 도달, ipB 는 미시작 → 200.
+    // ipA 는 IP 일일 한도(20) 도달, ipB 는 미시작 → 200.
     const resB = await POST(makePostRequest(basePayload(), { ip: ipB }));
     expect(resB.status).toBe(200);
   });
 
   it("rate limit 거부 시 Resend 호출 0 (외부 한도 보호)", async () => {
     const ip = "3.3.3.3";
-    // 30회 정상 hit (Resend 30회 호출 — 각 unique email).
-    for (let i = 0; i < 30; i++) {
+    // 20회 정상 hit (Resend 20회 호출 — 각 unique email, IP 일일 한도 그대로).
+    for (let i = 0; i < 20; i++) {
       await POST(
         makePostRequest(basePayload({ email: `b${i}@example.com` }), { ip }),
       );
     }
     const fetchSpy = fetch as unknown as ReturnType<typeof vi.fn>;
     fetchSpy.mockClear();
-    // 31번째 — 429 + Resend 호출 0.
+    // 21번째 — 429 + Resend 호출 0.
     await POST(
-      makePostRequest(basePayload({ email: "b30@example.com" }), { ip }),
+      makePostRequest(basePayload({ email: "b20@example.com" }), { ip }),
     );
     expect(fetchSpy).not.toHaveBeenCalled();
   });
@@ -708,6 +739,224 @@ describe("POST /api/billing/notify — PII 0 정책 회귀", () => {
     await POST(makePostRequest(basePayload()));
     // Resend 호출 정확히 1회. 추가 fetch (예: 자체 KV) 0.
     expect(fetchSpy).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("POST /api/billing/notify — CSRF 토큰 가드 (round 10 fix #1)", () => {
+  // round 10 fix #1 — Origin/Referer 헤더 spoof 차단을 위한 SameSite=Strict 쿠키 nonce.
+  // 비브라우저 클라이언트(curl) 가 헤더만 spoof 해도 쿠키 nonce 가 없으면 즉시 403.
+
+  it("쿠키 자체 미설정 → 403 forbidden_csrf + reason=missing", async () => {
+    const res = await POST(makePostRequest(basePayload(), { csrfToken: null }));
+    expect(res.status).toBe(403);
+    const json = await res.json();
+    expect(json.error).toBe("forbidden_csrf");
+    expect(json.reason).toBe("missing");
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("[헤더 spoof 차단] Origin 헤더만 spoof 하고 쿠키 없음 → 403", async () => {
+    // Codex round 10 지적 #1 — curl/봇 시나리오: Origin·Referer 를 본 사이트로 spoof
+    // 해도 SameSite=Strict 쿠키는 cross-origin POST 에 동봉되지 않으므로 nonce 부재.
+    const res = await POST(
+      makePostRequest(basePayload(), {
+        origin: "http://localhost",
+        referer: "http://localhost/manage/billing",
+        csrfToken: null,
+      }),
+    );
+    expect(res.status).toBe(403);
+    const json = await res.json();
+    expect(json.error).toBe("forbidden_csrf");
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("위조 토큰 (store 안에 없음) → 403 forbidden_csrf + reason=invalid", async () => {
+    // 위조 시도 — 형식상 hex 64chars 이지만 store 에 등록되지 않은 토큰.
+    const fakeToken = "a".repeat(64);
+    const res = await POST(
+      makePostRequest(basePayload(), { csrfToken: fakeToken }),
+    );
+    expect(res.status).toBe(403);
+    const json = await res.json();
+    expect(json.reason).toBe("invalid");
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("형식 불일치 토큰 (비-hex, 길이 부족) → 403 invalid", async () => {
+    const res = await POST(
+      makePostRequest(basePayload(), { csrfToken: "short-non-hex-token" }),
+    );
+    expect(res.status).toBe(403);
+    expect(fetch).not.toHaveBeenCalled();
+  });
+
+  it("만료된 토큰 → 403 forbidden_csrf + reason=expired", async () => {
+    // 토큰 발급 후 시계를 앞당겨 만료 시킴 — Date.now() spy 활용.
+    const issuedAt = 1_700_000_000_000;
+    const dateSpy = vi.spyOn(Date, "now").mockReturnValue(issuedAt);
+    const issued = issueBillingNotifyCsrfToken({
+      isProduction: false,
+      now: issuedAt,
+    });
+    // 2시간 뒤로 시계 이동 (TTL 1시간 초과).
+    dateSpy.mockReturnValue(issuedAt + 2 * 60 * 60_000);
+    const res = await POST(
+      makePostRequest(basePayload(), { csrfToken: issued.token }),
+    );
+    expect(res.status).toBe(403);
+    const json = await res.json();
+    expect(json.reason).toBe("expired");
+    dateSpy.mockRestore();
+  });
+
+  it("유효 토큰 → 200 통과 + 같은 토큰 재사용 시 두번째 403 (1회 소비 — replay 차단)", async () => {
+    // 1회 소비 정책: 첫번째 요청에서 토큰 통과 후 store 에서 제거. 같은 토큰 재요청은 invalid.
+    const issued = issueBillingNotifyCsrfToken({ isProduction: false });
+    const cookie = `${BILLING_NOTIFY_CSRF_COOKIE}=${issued.token}`;
+
+    const first = new Request("http://localhost/api/billing/notify", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        origin: "http://localhost",
+        "x-forwarded-for": "127.0.0.1",
+        cookie,
+      },
+      body: JSON.stringify(basePayload({ email: "first@example.com" })),
+    });
+    const firstRes = await POST(first);
+    expect(firstRes.status).toBe(200);
+
+    const replay = new Request("http://localhost/api/billing/notify", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        origin: "http://localhost",
+        "x-forwarded-for": "127.0.0.1",
+        cookie,
+      },
+      body: JSON.stringify(basePayload({ email: "replay@example.com" })),
+    });
+    const replayRes = await POST(replay);
+    expect(replayRes.status).toBe(403);
+    const json = await replayRes.json();
+    expect(json.reason).toBe("invalid");
+  });
+
+  it("CSRF 가 same-origin 가드 이후 실행 — 외부 origin + 정상 토큰이어도 403 (origin 우선)", async () => {
+    // 라우트 순서상 origin 가드가 먼저. CSRF 검증까지 가지 않음.
+    const issued = issueBillingNotifyCsrfToken({ isProduction: false });
+    const res = await POST(
+      makePostRequest(basePayload(), {
+        origin: "https://evil.example.com",
+        csrfToken: issued.token,
+      }),
+    );
+    expect(res.status).toBe(403);
+    const json = await res.json();
+    // forbidden_origin 가 먼저 — CSRF 토큰은 소비되지 않음.
+    expect(json.error).toBe("forbidden_origin");
+  });
+
+  it("CSRF 거부 시 IP rate limit·일일 quota·Resend 호출 0 — 자원 보호", async () => {
+    // 위조 토큰으로 폭주해도 IP rate limit·일일 quota 카운터·Resend 가 동작하지 않아야 한다.
+    for (let i = 0; i < 50; i++) {
+      const res = await POST(
+        makePostRequest(basePayload(), { csrfToken: "x".repeat(64) }),
+      );
+      expect(res.status).toBe(403);
+    }
+    expect(fetch).not.toHaveBeenCalled();
+    // 같은 IP 로 정상 토큰 요청 → 통과 (rate limit·일일 quota 카운터 미증가 검증).
+    const res = await POST(makePostRequest(basePayload()));
+    expect(res.status).toBe(200);
+  });
+});
+
+describe("POST /api/billing/notify — 일일 한도 (round 10 fix #2)", () => {
+  // round 10 fix #2 — Resend 무료 한도(100/일) 정합. IP 20/일 + 글로벌 80/일.
+
+  it("[IP 일일] 같은 IP 20건 → 21번째 429 + Retry-After (다음 UTC 자정)", async () => {
+    const ip = "10.10.10.10";
+    for (let i = 0; i < 20; i++) {
+      const res = await POST(
+        makePostRequest(basePayload({ email: `q${i}@example.com` }), { ip }),
+      );
+      expect(res.status).toBe(200);
+    }
+    const res21 = await POST(
+      makePostRequest(basePayload({ email: "q21@example.com" }), { ip }),
+    );
+    expect(res21.status).toBe(429);
+    const retryAfter = Number(res21.headers.get("retry-after"));
+    expect(retryAfter).toBeGreaterThan(0);
+    // 24시간 안으로 fall back 보장.
+    expect(retryAfter).toBeLessThanOrEqual(24 * 60 * 60);
+  });
+
+  it("[글로벌 일일] 80건 도달 → 81번째 429 (다른 IP 라도 차단 — Resend 100/일 보호)", async () => {
+    // 80건을 4개 다른 IP 로 분산 (각 IP 20건 = IP 일일 한도 정확히 도달).
+    const ips = ["20.0.0.1", "20.0.0.2", "20.0.0.3", "20.0.0.4"];
+    for (const ip of ips) {
+      for (let i = 0; i < 20; i++) {
+        const res = await POST(
+          makePostRequest(basePayload({ email: `g-${ip}-${i}@example.com` }), {
+            ip,
+          }),
+        );
+        expect(res.status).toBe(200);
+      }
+    }
+    // 5번째 IP 시도 — 글로벌 cap(80) 도달 → 429.
+    const res = await POST(
+      makePostRequest(basePayload({ email: "overflow@example.com" }), {
+        ip: "20.0.0.5",
+      }),
+    );
+    expect(res.status).toBe(429);
+  });
+
+  it("[글로벌 soft warning] 60건 도달 시 console.warn 마커", async () => {
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+    // 60건을 3개 IP × 20건으로 분산.
+    const ips = ["30.0.0.1", "30.0.0.2", "30.0.0.3"];
+    for (const ip of ips) {
+      for (let i = 0; i < 20; i++) {
+        const res = await POST(
+          makePostRequest(basePayload({ email: `w-${ip}-${i}@example.com` }), {
+            ip,
+          }),
+        );
+        expect(res.status).toBe(200);
+      }
+    }
+    // 정확히 60번째 hit 에서 console.warn 1회 발생.
+    expect(warnSpy).toHaveBeenCalledTimes(1);
+    const [msg, meta] = warnSpy.mock.calls[0] as [string, Record<string, unknown>];
+    expect(msg).toContain("[billing/notify]");
+    expect(meta).toMatchObject({
+      marker: "daily_quota_soft_warning",
+      globalCount: 60,
+      cap: 80,
+    });
+    warnSpy.mockRestore();
+  });
+
+  it("[일일 한도 거부 시] Resend 호출 0 — 외부 quota 보호", async () => {
+    const ip = "40.0.0.1";
+    for (let i = 0; i < 20; i++) {
+      await POST(
+        makePostRequest(basePayload({ email: `d${i}@example.com` }), { ip }),
+      );
+    }
+    const fetchSpy = fetch as unknown as ReturnType<typeof vi.fn>;
+    fetchSpy.mockClear();
+    const res = await POST(
+      makePostRequest(basePayload({ email: "d20@example.com" }), { ip }),
+    );
+    expect(res.status).toBe(429);
+    expect(fetchSpy).not.toHaveBeenCalled();
   });
 });
 

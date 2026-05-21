@@ -1,7 +1,7 @@
 // /api/billing/notify — V2 출시 알림 신청 (외부 메일 서비스 위임).
 // SPEC §05.6 알림 신청 + §05.7.5 외부 메일 서비스 위임 정책.
 //
-// 정책 (2026-05-21 갱신 — Codex review round 2·3·5·6·9 fix):
+// 정책 (2026-05-21 갱신 — Codex review round 2·3·5·6·9·10 fix):
 // - 본 서버는 이메일을 저장하지 않는다. Resend 에 즉시 위임 후 변수 폐기.
 // - Zod `.strict()` 적용 — 정의되지 않은 필드 동봉 시 422 (PII 누수 차단).
 // - 응답 후 `email` 변수는 함수 스코프 종료와 함께 GC. DB·KV·파일·로그 어디에도 잔존 X.
@@ -20,23 +20,30 @@
 //     production 이 아닐 때만 `dev:<host>` 폴백 키를 사용해 라우트가 작동하게 한다.
 //     same-origin 가드가 이미 외부 남용 1차 차단을 하므로 dev 폴백은 안전.
 // - **round 9 fix — NAT 친화 2-tier rate limit** (Codex 지적 #2):
-//   · 학교/학원/가정 NAT 는 공인 IP 1개를 여러 학생이 공유 — 기존 5회/분 한도는 정상 사용자
-//     간 간섭을 유발 (한 학생 재시도가 같은 IP 의 다른 학생을 429 로 막음).
-//   · 해결: IP 한도를 30/분 + 100/시간 으로 상향(NAT 친화) + (IP + email 해시) 좁은
-//     버킷 6/시간 추가(같은 이메일 abuse 만 좁게 차단).
-//   · email 해시는 normalize(lowercase + trim) 후 SHA-256. 메모리 안에서만 rate-limit
-//     bucket key 로 사용되고 폐기 — DB·로그 어디에도 저장 X (PII 0 유지).
+//   · IP 30/분 + 100/시간 + (IP+email) 6/시간.
 // - **round 9 fix — production 관측 신호** (Codex 지적 #3):
-//   · Resend 위임 실패를 production 에서도 `console.error` 로 구조화 로깅.
-//   · email 원문은 절대 포함하지 않음 (메타데이터만: `source`, `ts`, `reason`, `status`).
-//   · secret 미설정(503) 도 별도 로그 마커(`secret_missing`) 로 운영 측 noticing 가능.
+//   · Resend 위임 실패 시 환경 무관 `console.error` 구조화 로깅.
+// - **round 10 fix #1 — CSRF 토큰 (Codex 지적 #1, 헤더 spoof 차단)**:
+//   · Origin/Referer 헤더는 비브라우저 클라이언트가 쉽게 위조 가능 → 추가 가드 필요.
+//   · 페이지 진입 시 GET `/api/billing/notify/csrf` 가 SameSite=Strict + HttpOnly 쿠키
+//     발급 → POST 시 쿠키 자동 동봉 → 라우트가 nonce 검증.
+//   · SameSite=Strict 는 브라우저가 cross-origin 요청에 쿠키 미동봉 — curl/봇 이
+//     `Origin: https://<service>` 헤더만 spoof 해도 쿠키가 없으면 403.
+//   · 1회 소비 + 1시간 만료 → replay 차단.
+//   · same-origin 헤더 가드는 1차 방어로 유지 (CSRF 토큰이 2차 강 가드).
+// - **round 10 fix #2 — Resend 일일 한도 정합 (Codex 지적 #2)**:
+//   · 기존 IP 한도(30/분·100/시간) 만으로는 단일 IP 가 amortized 시 하루 2400 건 가능 →
+//     Resend 무료 한도(100/일) 의 24배. 무료 quota 가 1시간 안에 전부 소진될 위험.
+//   · IP 일일 한도 20/일 추가 + 글로벌 일일 cap 80/일 추가.
+//   · 60/일 도달 시 console.warn 마커 (운영 측 soft warning).
+//   · 일일 한도 도달 시 429 + Retry-After (다음 UTC 자정까지 ms).
 //
 // 응답 코드 정책:
 //   200 — Resend 위임 성공 (신규 또는 중복=idempotent)
 //   400 — invalid JSON 또는 (production 한정) IP 식별 불가
-//   403 — same-origin 위반 (외부 도메인 호출)
+//   403 — same-origin 위반 또는 CSRF 토큰 부재·만료·위조
 //   422 — schema 검증 실패 (추가 필드·잘못된 이메일 형식)
-//   429 — rate limit 초과
+//   429 — rate limit 초과 (분·시간·일·글로벌 모두 동일 코드)
 //   502 — Resend 외부 호출 실패 (4xx validation·auth, 5xx 등)
 //   503 — Resend secret 미설정 (외부 의존성 단절)
 
@@ -44,6 +51,12 @@ import { createHash } from "node:crypto";
 import { NextResponse } from "next/server";
 import { BillingNotifySignupSchema } from "@/lib/core";
 import { delegateNotifySignupToResend } from "@/lib/server/billing/resend-client";
+import {
+  readBillingNotifyCsrfToken,
+  verifyBillingNotifyCsrfToken,
+  type CsrfVerifyOutcome,
+} from "@/lib/server/billing/csrf";
+import { checkBillingNotifyDailyQuota } from "@/lib/server/billing/daily-quota";
 import { checkRateLimits, extractClientIp } from "@/lib/server/rate-limit";
 
 /**
@@ -111,11 +124,9 @@ function collectAllowedOrigins(request: Request): Set<string> {
  *   email 해시는 normalize(lowercase + trim) 후 SHA-256(16 chars). 메모리 rate-limit
  *   bucket key 로만 사용 — DB·로그 저장 X (PII 0).
  *
- * Resend 무료 한도(100/일) 대비:
- *   - 30/분 × 60 = 1800/시간 이론치이지만, 100/시간 IP 한도가 cap.
- *   - 단일 NAT 가 100/시간 × 24 = 2400/일 까지 가능하지만 같은 이메일은 6/시간 으로
- *     좁혀 같은-이메일 abuse 는 Resend 호출량을 못 늘림. 다른 이메일은 정상 신청.
- *   - V2 진입 시점 KV 기반 globally-shared limit 으로 재설계 (SPEC §5.7.5 진화 노트).
+ * tier 3 — **IP 일일 + 글로벌 일일 cap** (round 10 fix #2 — Resend 100/일 정합):
+ *   별도 모듈(`daily-quota.ts`) 에서 관리. UTC 자정마다 reset.
+ *   IP 20/일 + 글로벌 80/일. 60/일 도달 시 console.warn 마커.
  */
 const RATE_LIMIT_IP_PER_MINUTE = 30;
 const RATE_LIMIT_IP_PER_HOUR = 100;
@@ -192,20 +203,47 @@ function rateLimitedResponse(retryAfterMs: number): NextResponse {
   );
 }
 
+/**
+ * CSRF 토큰 검증 outcome → HTTP 응답.
+ * 모든 거부 사유를 403 으로 일반화 — 공격자 식별 정보 누설 차단.
+ */
+function csrfRejectionResponse(outcome: CsrfVerifyOutcome): NextResponse {
+  return NextResponse.json(
+    {
+      error: "forbidden_csrf",
+      // outcome 은 운영 디버깅 용도로만 노출 (production 로그 grep 도움). 공격자는 이미
+      // missing/expired/invalid 중 어느 케이스인지 시도하면 알 수 있어 OPSEC 손실 X.
+      reason: outcome,
+    },
+    { status: 403 },
+  );
+}
+
 export async function POST(request: Request) {
-  // ── 1. same-origin 검증 ────────────────────────────────────────────────
+  // ── 1. same-origin 검증 (1차 가드) ─────────────────────────────────────
   if (!isSameOriginRequest(request)) {
     return NextResponse.json({ error: "forbidden_origin" }, { status: 403 });
   }
 
-  // ── 2. IP 식별 (fail-closed in prod · dev fallback — round 5·6 fix) ────
+  // ── 2. CSRF 토큰 검증 (2차 강 가드 — round 10 fix #1) ──────────────────
+  // SameSite=Strict + HttpOnly 쿠키이므로 cross-origin 호출에 쿠키 미동봉.
+  // 비브라우저 클라이언트(curl) 가 헤더만 spoof 해도 쿠키 nonce 가 없거나 위조 →
+  // 즉시 403. CSRF 토큰 1회 소비 → replay 차단.
+  const cookieHeader = request.headers.get("cookie");
+  const csrfToken = readBillingNotifyCsrfToken(cookieHeader);
+  const csrfOutcome = verifyBillingNotifyCsrfToken(csrfToken);
+  if (csrfOutcome !== "valid") {
+    return csrfRejectionResponse(csrfOutcome);
+  }
+
+  // ── 3. IP 식별 (fail-closed in prod · dev fallback — round 5·6 fix) ────
   // production: IP 추출 실패 시 전역 anonymous 버킷에 묶으면 정상 사용자 간 간섭이
   // 발생한다(한 명의 abuse 가 식별 안 된 모두를 429 로 만듦). 따라서 IP 식별 불가
   // 자체를 400 으로 즉시 거부 — 배포·프록시 설정 문제를 fail-closed 로 드러낸다.
   //
   // production 외(개발/테스트/로컬 프록시): IP 헤더는 원래 없는 게 정상이므로
-  // `dev:<host>` 폴백 키를 써서 라우트를 작동시킨다. same-origin 가드가 외부 호출을
-  // 1차 차단하기 때문에 dev 폴백은 안전. (Codex round 6 지적: bun dev 깨짐 fix.)
+  // `dev:<host>` 폴백 키를 써서 라우트를 작동시킨다. same-origin + CSRF 가드가 외부
+  // 호출을 1차 차단하기 때문에 dev 폴백은 안전.
   const rawIp = extractClientIp(request.headers);
   const rateLimitKey = resolveRateLimitKey(request, rawIp);
   if (!rateLimitKey) {
@@ -215,7 +253,7 @@ export async function POST(request: Request) {
     );
   }
 
-  // ── 3. tier 1 rate limit — IP 만 (사전 abuse 차단) ─────────────────────
+  // ── 4. tier 1 rate limit — IP 만 (사전 abuse 차단) ─────────────────────
   // 본문 파싱 전에 IP 한도부터 적용해 invalid-body 폭주 abuse 도 막는다.
   // tier 2 (IP+email) 은 schema 파싱 후 적용 (email 필요).
   const ipDecision = checkRateLimits(buildIpRateLimitRules(rateLimitKey));
@@ -223,7 +261,15 @@ export async function POST(request: Request) {
     return rateLimitedResponse(ipDecision.retryAfterMs);
   }
 
-  // ── 4. 본문 파싱·검증 ──────────────────────────────────────────────────
+  // ── 5. tier 3 일일 한도 — IP 일일·글로벌 일일 (round 10 fix #2) ────────
+  // Resend 무료 한도(100/일) 정합. IP 20/일 + 글로벌 80/일.
+  // 본문 파싱 전 적용 — 일일 한도 도달 시 schema 검증 비용도 절약.
+  const dailyDecision = checkBillingNotifyDailyQuota({ ipKey: rateLimitKey });
+  if (!dailyDecision.allowed) {
+    return rateLimitedResponse(dailyDecision.retryAfterMs);
+  }
+
+  // ── 6. 본문 파싱·검증 ──────────────────────────────────────────────────
   let body: unknown;
   try {
     body = await request.json();
@@ -246,7 +292,7 @@ export async function POST(request: Request) {
   // 로깅·DB·KV·파일 어디에도 plain email 을 저장하지 않는다 (SPEC §05.7.5).
   const { email, source, ts } = parsed.data;
 
-  // ── 5. tier 2 rate limit — IP + email 좁은 버킷 (round 9 fix #2) ───────
+  // ── 7. tier 2 rate limit — IP + email 좁은 버킷 (round 9 fix #2) ───────
   // tier 1 (IP 만) 은 NAT 친화로 30/분·100/시간 으로 넓혀졌으므로, 같은-이메일 abuse
   // 만 좁게 6/시간 으로 막는 보완 버킷이다. emailToken 은 SHA-256 prefix (메모리만).
   const emailToken = emailRateLimitToken(email);

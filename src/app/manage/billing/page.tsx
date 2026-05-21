@@ -93,10 +93,28 @@ function NotifyForm() {
 
     setState({ kind: "submitting" });
     try {
+      // round 10 fix #1 — CSRF 토큰 발급 (SameSite=Strict + HttpOnly 쿠키).
+      // submit 직전에 매번 fresh 토큰 발급 — 1회 소비 정책이라 재시도 시 새 토큰 필요.
+      // GET 응답이 쿠키를 set 한 직후 POST 가 같은 fetch jar 로 자동 동봉 → 서버 nonce 검증.
+      const csrfRes = await fetch("/api/billing/notify/csrf", {
+        method: "GET",
+        credentials: "same-origin",
+        cache: "no-store",
+      });
+      if (!csrfRes.ok) {
+        setState({
+          kind: "error",
+          message: "신청에 실패했어요. 잠시 후 다시 시도해주세요.",
+        });
+        return;
+      }
       // 서버는 외부 메일 서비스(Resend) 에 즉시 위임 후 변수 폐기 — 본 서버 저장 0
       // (SPEC §05.7.5). 클라이언트는 plain email + 출처 메타데이터만 전송.
+      // CSRF 쿠키는 same-origin fetch 시 브라우저가 자동 동봉 (SameSite=Strict).
       const res = await fetch("/api/billing/notify", {
         method: "POST",
+        credentials: "same-origin",
+        cache: "no-store",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           action: "billing.notify.signup",

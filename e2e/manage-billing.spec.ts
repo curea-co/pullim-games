@@ -12,8 +12,29 @@ test("/manage/billing 진입 — 4 섹션 렌더 + 알림 신청 → POST /api/b
   page,
 }) => {
   // Phase 2: 알림 신청은 실제 POST 호출. Resend 호출은 라우트 mock 으로 차단.
+  // round 10 fix #1 — CSRF 토큰 발급 라우트도 mock (브라우저 cookie jar 자동 처리).
   const notifyRequests: Array<{ payload: unknown; status: number }> = [];
+  let csrfRequests = 0;
+  await page.route("**/api/billing/notify/csrf", async (route) => {
+    csrfRequests++;
+    await route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      headers: {
+        // 실제 라우트의 Set-Cookie 와 동일 정책 — 브라우저가 다음 POST 에 동봉.
+        "set-cookie":
+          "pullim-csrf-billing-notify=e2etoken; Path=/api/billing/notify; SameSite=Strict; Max-Age=3600",
+      },
+      body: JSON.stringify({ ok: true }),
+    });
+  });
+  // POST mock — `/api/billing/notify` 정확 매칭 (csrf 하위 라우트 제외).
   await page.route("**/api/billing/notify", async (route) => {
+    // csrf 하위 경로는 이미 위 라우트가 가져갔으므로 본 핸들러엔 안 옴 — 안전.
+    if (route.request().url().endsWith("/csrf")) {
+      await route.continue();
+      return;
+    }
     const post = route.request().postDataJSON();
     notifyRequests.push({ payload: post, status: 200 });
     await route.fulfill({
@@ -65,6 +86,9 @@ test("/manage/billing 진입 — 4 섹션 렌더 + 알림 신청 → POST /api/b
   expect(req.emailHash).toBeUndefined();
   // [strict 회귀] 정의되지 않은 추가 필드 0 — 4 필드만 (action·email·source·ts)
   expect(Object.keys(req).sort()).toEqual(["action", "email", "source", "ts"]);
+
+  // round 10 fix #1 — CSRF 라우트가 submit 직전에 호출됐는지 확인.
+  expect(csrfRequests).toBeGreaterThanOrEqual(1);
 });
 
 test("관리 탭 — 6번째 '결제' 탭 존재 + 활성 강조", async ({ page }) => {
