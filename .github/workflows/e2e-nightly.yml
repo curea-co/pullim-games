@@ -50,7 +50,6 @@ jobs:
     # pullim-games 전용 group — 라우팅 근거는 codex-review.yml review job 주석 참조.
     runs-on:
       group: curea-runner-groups-2
-      labels: [self-hosted, curea-runner-2]
     # 사전 sweep: 게임별 30분 상한. 21 게임 × 30 = 1 job 격리 hang 방지.
     timeout-minutes: 30
     strategy:
@@ -209,7 +208,6 @@ jobs:
     # pullim-games 전용 group — 라우팅 근거는 codex-review.yml review job 주석 참조.
     runs-on:
       group: curea-runner-groups-2
-      labels: [self-hosted, curea-runner-2]
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
