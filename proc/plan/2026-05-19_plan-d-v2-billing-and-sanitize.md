@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan D: V2 결제 정책·백엔드 + content sanitize·AI error 처리
 
-- **상태**: PARTIAL-COMPLETE (2026-05-20) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. **Phase 1 spec(D5 합의분 + D1~D4·D6·D7 합의 후보 매트릭스) + Phase 2 billing 백엔드(`/api/billing/notify` — plain email + Resend 즉시 위임 / 본 서버 저장 0 / same-origin + IP rate limit / dev 폴백 키)** 본 세션 진입 (브랜치 `feat/plan-d-phase1-2-billing`, PR #91). Codex review round 2·3·5·6 fix 모두 본 브랜치 통합. D1·D2·D3·D4·D6·D7 결정은 사용자 G3 합의 대기.
+- **상태**: PARTIAL-COMPLETE (2026-05-22) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. **D1 V2 출시 시점 = 2026 Q4 사용자 합의 (2026-05-22, 추천안 그대로 채택)**. **Phase 1 spec(D5·D1 합의분 + D2·D3·D4·D6·D7 합의 후보 매트릭스) + Phase 2 billing 백엔드(`/api/billing/notify` — plain email + Resend 즉시 위임 / 본 서버 저장 0 / same-origin + IP rate limit / dev 폴백 키)** PR #91 머지. Codex review round 2·3·5·6 fix 모두 통합. D2·D3·D4·D6·D7 결정은 사용자 G3 합의 대기.
 - **트리거**: audit v3 §7 informational 4건 + critical C8(V2 트리거) 통합:
   - C8: `billing/page.tsx` 알림 신청 이메일 백엔드 전송 0 (mock toast)
   - informational: 결제 정책 명세 부재 (`proc/spec/05-비즈니스-정책.md §결제 없음`)
@@ -30,7 +30,7 @@
 ### Phase 1 — V2 결제 정책 spec 신설 (별 plan trigger — 사용자 결정 의무)
 
 **사용자 합의 필요 항목 (D1~D7)**:
-- D1: V2 출시 시점 (분기? 연도?)
+- D1: V2 출시 시점 — **2026 Q4 합의 (2026-05-22)**. 추천 (B) 그대로 채택. D2·D3·D4·D6 일정 역산 기준값. ([daily_outcome/2026-05-22.md](../../daily_outcome/2026-05-22.md))
 - D2: 가격 모델 (월 구독 / 연 구독 / 일회성 / freemium)
 - D3: 무료 vs 유료 기능 비교 (광고 제거·custom 무제한·클라우드 동기화 외 추가 기능?)
 - D4: 가격대 (목표 가격)
@@ -89,8 +89,8 @@ C8 fix — 본 plan §1 후 진행.
 ## 3. 작업 항목
 
 ### Phase 1 — V2 결제 정책 spec (사용자 합의 후 진행)
-- [~] 사용자 합의 — **D5 합의 완료 (2026-05-20)**. D1·D2·D3·D4·D6·D7 합의 대기 (G3·G4)
-- [x] `proc/spec/05-비즈니스-정책.md §5.7 결제·구독 정책` 신규 (합의 D5 + 합의 후보 매트릭스 D1~D4·D6·D7 + BR-PAY1~4 비즈니스 룰)
+- [~] 사용자 합의 — **D5 합의 완료 (2026-05-20)** + **D1 합의 완료 (2026-05-22, V2 출시 = 2026 Q4)**. D2·D3·D4·D6·D7 합의 대기 (G3·G4)
+- [x] `proc/spec/05-비즈니스-정책.md §5.7 결제·구독 정책` 신규 (합의 D5·D1 + 합의 후보 매트릭스 D2·D3·D4·D6·D7 + BR-PAY1~4 비즈니스 룰)
 - [x] `proc/spec/05-비즈니스-정책.md §5.6` 출시 알림 신청 PII 정책 추가 (hash·6개월 보존)
 - [ ] `/manage/billing/page.tsx` 유료 플랜 preview 콘텐츠 갱신 (D2·D3·D4 합의 후 실제 가격·기능 비교)
 - [ ] G1·G3·G4 합의 후 §5.7.2 미합의 항목 → §5.7.1 합의 항목 이동
