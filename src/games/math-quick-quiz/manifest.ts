@@ -18,6 +18,7 @@ const manifest: GameManifest = {
     mechanic: "multiple-choice",
     retrievalDepth: "shallow",
     previewImagePath: "/previews/math-quick-quiz.png",
+    mechanismComponent: "QuickQuiz",
   },
   loadComponent: () => import("./component"),
 };

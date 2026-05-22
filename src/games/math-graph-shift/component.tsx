@@ -61,7 +61,7 @@ function curvePath(a: number, h: number, k: number): string {
 }
 
 export default function MathGraphShiftGame() {
-  const mode = useGameMode();
+  const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");

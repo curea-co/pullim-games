@@ -26,6 +26,7 @@ import { ThumbnailView } from "./views/ThumbnailView";
 import { FilterContents } from "./FilterContents";
 import { FilterSheet } from "./FilterSheet";
 import { CustomGamesSection } from "./CustomGamesSection";
+import { ModeChipsRow } from "./ModeChipsRow";
 import { RecommendationCard } from "@/components/RecommendationCard";
 
 const VIEW_STORAGE_KEY = "pullim-games:hub:view";
@@ -210,6 +211,9 @@ export function GameHubPage() {
           <Suspense fallback={null}>
             <RecommendationCard />
           </Suspense>
+
+          {/* Plan E Phase 5 — 다른 모드 보조 진입 */}
+          <ModeChipsRow />
 
           {/* 결과 */}
           {filtered.length === 0 ? (

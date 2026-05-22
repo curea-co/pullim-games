@@ -5,6 +5,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
 import { CorrectBurst } from "@/components/ui/CorrectBurst";
@@ -17,6 +18,8 @@ import {
   selectCardsForMode,
   useGameMode,
 } from "@/lib/core";
+import { TimeAttackTimer } from "./TimeAttackTimer";
+import { DeepRecallEmpty } from "./DeepRecallEmpty";
 
 type Phase =
   | "playing"
@@ -56,34 +59,42 @@ export function TypingComponent({
   emptyMessage,
   homeHref = "/",
 }: Props) {
-  const mode = useGameMode();
-  const [cards, setCards] = useState(() => initialCards);
+  // PR #92 Codex round 4 fix: gameId 를 전달해 비지원 mode URL 직접 진입 시 default 로
+  // 정규화 — `?mode=time-attack` 으로 4 메커니즘 미통합 게임 진입을 라우트 단에서 차단.
+  const mode = useGameMode(gameId);
+  const pathname = usePathname();
+  const [cards, setCards] = useState(() =>
+    mode === "deep-recall" ? [] : initialCards,
+  );
+  const [cardsLoaded, setCardsLoaded] = useState(mode === "default");
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [input, setInput] = useState("");
   const [wrongCount, setWrongCount] = useState(0);
   const [hintUsed, setHintUsed] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const cardStartRef = useRef<number>(0);
 
   useEffect(() => {
     const all = loadAllSrsStates(gameId);
-    if (all.size > 0) {
-      const withSrs = initialCards.map((c) => ({
-        card: c,
-        srs: all.get(c.id) ?? loadSrsState(gameId, c.id),
-      }));
-      const ordered = selectCardsForMode(
-        withSrs,
-        mode,
-        initialCards.length,
-      ).map((x) => x.card);
-      setCards(ordered);
-    }
+    const withSrs = initialCards.map((c) => ({
+      card: c,
+      srs: all.get(c.id) ?? loadSrsState(gameId, c.id),
+    }));
+    const ordered = selectCardsForMode(
+      withSrs,
+      mode,
+      initialCards.length,
+    ).map((x) => x.card);
+    setCards(
+      mode === "deep-recall" ? ordered : ordered.length > 0 ? ordered : initialCards,
+    );
+    setCardsLoaded(true);
     void logEvent({ gameId, cardId: null, action: "session-start" });
     return () => {
       void logEvent({ gameId, cardId: null, action: "session-end" });
     };
-  }, [gameId, mode]);
+  }, [gameId, mode, initialCards]);
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;
@@ -95,9 +106,21 @@ export function TypingComponent({
     setHintUsed(false);
     setPhase("playing");
     inputRef.current?.focus();
+    // time-attack 카드별 기준 시각 갱신
+    cardStartRef.current = performance.now();
   }, [cardIndex, card]);
 
   if (cards.length === 0) {
+    if (cardsLoaded && mode === "deep-recall" && initialCards.length > 0) {
+      return (
+        <DeepRecallEmpty homeHref={homeHref} defaultModeHref={pathname ?? "/"} />
+      );
+    }
+    // PR #92 Codex round 3 fix: deep-recall 미로딩(`cardsLoaded=false`) 상태에서
+    // 일반 empty-state 가 한 프레임 노출되는 회귀 차단.
+    if (mode === "deep-recall" && !cardsLoaded) {
+      return null;
+    }
     return (
       <main className="mx-auto flex min-h-full max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center">
         <h1 className="text-display text-type-primary">
@@ -152,12 +175,14 @@ export function TypingComponent({
     // memory 룰 feedback_user_intent_literal: "사용자가 X했는데 틀렸대. 맞잖아" = 시스템 fix.
     const correct =
       trimmed.toLocaleLowerCase() === card!.problem.answer.toLocaleLowerCase();
+    // Plan E Phase 3 — time-attack 시 elapsedMs 측정 (카드 진입 ~ submit 까지).
+    const elapsedMs = performance.now() - cardStartRef.current;
 
     void logEvent({
       gameId,
       cardId: card!.id,
       action: "submit",
-      payload: { correct, input: trimmed, hintUsed, wrongCount },
+      payload: { correct, input: trimmed, hintUsed, wrongCount, elapsedMs },
     });
 
     setTimeout(() => {
@@ -167,6 +192,7 @@ export function TypingComponent({
           correct: true,
           wrongCount,
           hintUsed,
+          elapsedMs,
         });
         setPhase("correct");
       } else {
@@ -177,6 +203,7 @@ export function TypingComponent({
             correct: false,
             wrongCount: nextWrong,
             hintUsed,
+            elapsedMs,
           });
           void logEvent({
             gameId,
@@ -196,6 +223,25 @@ export function TypingComponent({
         }, 1200);
       }
     }, 200);
+  }
+
+  // time-attack 시간 초과 — 강제 reveal (정답 노출 + again 적용).
+  function handleTimeout() {
+    if (phase !== "playing") return;
+    void logEvent({
+      gameId,
+      cardId: card!.id,
+      action: "submit",
+      payload: { timeout: true, correct: false, elapsedMs: 30_001 },
+    });
+    applyAndPersist(mode, gameId, card!.id, {
+      correct: false,
+      wrongCount: wrongCount + 1,
+      hintUsed,
+      elapsedMs: 30_001,
+    });
+    setInput(card!.problem.answer);
+    setPhase("reveal");
   }
 
   function showHint() {
@@ -227,17 +273,24 @@ export function TypingComponent({
       <GameShell
       variant="split"
       header={
-        <div className="flex items-center justify-between text-label tabular text-type-secondary">
-          <span>
-            {cardIndex + 1} / {cards.length}
-          </span>
-          <Link
-            href={homeHref}
-            aria-label="메인으로"
-            className="rounded-button px-2 py-1 hover:text-type-primary"
-          >
-            ≡
-          </Link>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between text-label tabular text-type-secondary">
+            <span>
+              {cardIndex + 1} / {cards.length}
+            </span>
+            <Link
+              href={homeHref}
+              aria-label="메인으로"
+              className="rounded-button px-2 py-1 hover:text-type-primary"
+            >
+              ≡
+            </Link>
+          </div>
+          <TimeAttackTimer
+            active={mode === "time-attack" && phase === "playing"}
+            resetKey={cardIndex}
+            onExpire={handleTimeout}
+          />
         </div>
       }
       content={

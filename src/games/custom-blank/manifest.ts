@@ -17,6 +17,7 @@ const manifest: GameManifest = {
     mechanic: "multiple-choice",
     retrievalDepth: "deep",
     previewImagePath: "/previews/custom-blank.png",
+    mechanismComponent: "Blank",
   },
   loadComponent: () => import("./component"),
 };
