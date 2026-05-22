@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan E: modes 비-default 정식 구현 (review-queue·time-attack·deep-recall)
 
-- **상태**: PARTIAL-COMPLETE (2026-05-20) — 코어 resolveRating (3 모드 정식 분기) PR #81 머지. Phase 2 review-queue **URL searchParams + 16 호출처 마이그레이션** PR #(본 PR) 머지. Phase 3·4 (time-attack 타이머·deep-recall 풀 필터) + Phase 5 (홈/허브 진입 UI) 다음 세션 이관.
+- **상태**: PARTIAL-COMPLETE (2026-05-22) — 코어 resolveRating (3 모드 정식 분기) PR #81 머지. Phase 2 review-queue **URL searchParams + 16 호출처 마이그레이션** PR #85 머지. Phase 3+4+5 (time-attack 타이머·deep-recall 필터·진입점) PR #92 OPEN. **D1.3 = 30초/카드 사용자 합의 (2026-05-22)** + **D1.4 = `again` 강제 사후 추인 (2026-05-22, 추천 패키지로 D1.3 합의 시점에 묶음 채택)** → PR #92 구현값 그대로.
 - **트리거**: audit v3 §4 단일 백본 진척 — modes wrapper 정식 1/4 (default 만), 비-default 3 모드는 fallback + warn 상태. V0.4+ 트랙으로 정식 구현 의무.
 - **메모리 룰**:
   - **단일 백본 + 다중 게임 모드** (project_architecture_decision) — 본 plan이 다중 모드 정식 진입
@@ -75,8 +75,8 @@ const mode = (searchParams.get("mode") ?? "default") as GameMode;
 - D1.2: 진입 트리거 — Phase 2 본 PR은 **URL 직접 진입(`?mode=review-queue`)만 지원**. 홈/허브 보조 링크는 Phase 5(별 PR).
 
 **time-attack**:
-- D1.3: 타이머 단위 — 카드별 30초 / 세션 전체 1분 / 5문제 1분
-- D1.4: 시간 초과 페널티 강도 — `again` 강제 vs default 패턴
+- D1.3: 타이머 단위 — **카드별 30초 합의 (2026-05-22)**. 카드별 독립 타이머가 메커니즘 컴포넌트와 1:1 매핑 가장 단순. PR #92 `TimeAttackTimer` default 값과 일치. ([daily_outcome/2026-05-22.md](../../daily_outcome/2026-05-22.md))
+- D1.4: 시간 초과 페널티 강도 — **`again` 강제 사후 추인 (2026-05-22)**. D1.3 추천 패키지에 묶음 채택. 시간 초과 = FSRS 재학습 신호 (자연스러운 처리). PR #92 `handleTimeout()` 구현값 그대로.
 
 **deep-recall**:
 - D1.5: R 임계값 — 0.5 / 0.6 / 0.7 (낮을수록 잊혀가는 카드만)
@@ -97,9 +97,9 @@ const mode = (searchParams.get("mode") ?? "default") as GameMode;
 ## 3. 작업 항목
 
 ### Phase 1 — 사용자 합의 (별 회의 또는 비동기)
-- [ ] D1.1·D1.2 review-queue 정책
-- [ ] D1.3·D1.4 time-attack 정책
-- [ ] D1.5·D1.6 deep-recall 정책
+- [x] D1.1·D1.2 review-queue 정책 (PR #85 진행 시 임시 5장 + URL 직접 진입 채택, 2026-05-20)
+- [x] D1.3·D1.4 time-attack 정책 (D1.3 = 30초/카드 + D1.4 = `again` 강제, 2026-05-22)
+- [ ] D1.5·D1.6 deep-recall 정책 (PR #92 진행 시 R<0.6 + 정답 1회 후 종결 잠정 채택, 사용자 사후 추인 필요)
 - 합의 산출: `proc/spec/04-사용자-경험.md` 또는 신규 spec 모드 §
 
 ### Phase 2 — review-queue 정식 구현 (1 PR)

@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan D: V2 결제 정책·백엔드 + content sanitize·AI error 처리
 
-- **상태**: PARTIAL-COMPLETE (2026-05-20) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. D1~D4·D6·D7 결정 잔존 + Phase 2 (billing 백엔드) 다음 세션 이관.
+- **상태**: PARTIAL-COMPLETE (2026-05-22) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. **D1 V2 출시 시점 = 2026 Q4 사용자 합의 (2026-05-22, 추천안 그대로 채택)**. D2·D3·D4·D6·D7 결정 잔존 + Phase 2 (billing 백엔드) PR #91 OPEN.
 - **트리거**: audit v3 §7 informational 4건 + critical C8(V2 트리거) 통합:
   - C8: `billing/page.tsx` 알림 신청 이메일 백엔드 전송 0 (mock toast)
   - informational: 결제 정책 명세 부재 (`proc/spec/05-비즈니스-정책.md §결제 없음`)
@@ -30,7 +30,7 @@
 ### Phase 1 — V2 결제 정책 spec 신설 (별 plan trigger — 사용자 결정 의무)
 
 **사용자 합의 필요 항목 (D1~D7)**:
-- D1: V2 출시 시점 (분기? 연도?)
+- D1: V2 출시 시점 — **2026 Q4 합의 (2026-05-22)**. 추천 (B) 그대로 채택. D2·D3·D4·D6 일정 역산 기준값. ([daily_outcome/2026-05-22.md](../../daily_outcome/2026-05-22.md))
 - D2: 가격 모델 (월 구독 / 연 구독 / 일회성 / freemium)
 - D3: 무료 vs 유료 기능 비교 (광고 제거·custom 무제한·클라우드 동기화 외 추가 기능?)
 - D4: 가격대 (목표 가격)
@@ -89,7 +89,7 @@ C8 fix — 본 plan §1 후 진행.
 ## 3. 작업 항목
 
 ### Phase 1 — V2 결제 정책 spec (사용자 합의 후 진행)
-- [ ] 사용자 합의 — D1~D7 결정 (별 회의 또는 비동기 합의)
+- [x] 사용자 합의 — D5 Toss (2026-05-20) + D1 = 2026 Q4 (2026-05-22). D2·D3·D4·D6·D7 잔존
 - [ ] `proc/spec/05-비즈니스-정책.md §결제·구독` 신규 ≈200 LOC
 - [ ] `/manage/billing/page.tsx` 유료 플랜 preview 콘텐츠 갱신 (실제 가격·기능 비교)
 - [ ] G1·G3·G4 합의 후 머지
