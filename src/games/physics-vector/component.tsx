@@ -43,7 +43,7 @@ function projectY(y: number): number {
 }
 
 export default function PhysicsVectorGame() {
-  const mode = useGameMode();
+  const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");

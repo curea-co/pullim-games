@@ -21,6 +21,9 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // `server-only` 는 React Server Component runtime 보호용. vitest 환경에서는
+      // no-op 으로 alias 하여 server-side 모듈 직접 테스트 가능하게 한다.
+      "server-only": path.resolve(__dirname, "./src/test/server-only-shim.ts"),
     },
   },
 });

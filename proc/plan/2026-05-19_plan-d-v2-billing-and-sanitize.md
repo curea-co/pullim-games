@@ -1,6 +1,6 @@
 # 2026-05-19 — Plan D: V2 결제 정책·백엔드 + content sanitize·AI error 처리
 
-- **상태**: PARTIAL-COMPLETE (2026-05-22) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. **D1 V2 출시 시점 = 2026 Q4 사용자 합의 (2026-05-22, 추천안 그대로 채택)**. D2·D3·D4·D6·D7 결정 잔존 + Phase 2 (billing 백엔드) PR #91 OPEN.
+- **상태**: PARTIAL-COMPLETE (2026-05-22) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. **D1 V2 출시 시점 = 2026 Q4 사용자 합의 (2026-05-22, 추천안 그대로 채택)**. **Phase 1 spec(D5·D1 합의분 + D2·D3·D4·D6·D7 합의 후보 매트릭스) + Phase 2 billing 백엔드(`/api/billing/notify` — plain email + Resend 즉시 위임 / 본 서버 저장 0 / same-origin + IP rate limit / dev 폴백 키)** PR #91 머지. Codex review round 2·3·5·6 fix 모두 통합. D2·D3·D4·D6·D7 결정은 사용자 G3 합의 대기.
 - **트리거**: audit v3 §7 informational 4건 + critical C8(V2 트리거) 통합:
   - C8: `billing/page.tsx` 알림 신청 이메일 백엔드 전송 0 (mock toast)
   - informational: 결제 정책 명세 부재 (`proc/spec/05-비즈니스-정책.md §결제 없음`)
@@ -89,16 +89,52 @@ C8 fix — 본 plan §1 후 진행.
 ## 3. 작업 항목
 
 ### Phase 1 — V2 결제 정책 spec (사용자 합의 후 진행)
-- [x] 사용자 합의 — D5 Toss (2026-05-20) + D1 = 2026 Q4 (2026-05-22). D2·D3·D4·D6·D7 잔존
-- [ ] `proc/spec/05-비즈니스-정책.md §결제·구독` 신규 ≈200 LOC
-- [ ] `/manage/billing/page.tsx` 유료 플랜 preview 콘텐츠 갱신 (실제 가격·기능 비교)
-- [ ] G1·G3·G4 합의 후 머지
+- [~] 사용자 합의 — **D5 합의 완료 (2026-05-20)** + **D1 합의 완료 (2026-05-22, V2 출시 = 2026 Q4)**. D2·D3·D4·D6·D7 합의 대기 (G3·G4)
+- [x] `proc/spec/05-비즈니스-정책.md §5.7 결제·구독 정책` 신규 (합의 D5·D1 + 합의 후보 매트릭스 D2·D3·D4·D6·D7 + BR-PAY1~4 비즈니스 룰)
+- [x] `proc/spec/05-비즈니스-정책.md §5.6` 출시 알림 신청 PII 정책 추가 (hash·6개월 보존)
+- [ ] `/manage/billing/page.tsx` 유료 플랜 preview 콘텐츠 갱신 (D2·D3·D4 합의 후 실제 가격·기능 비교)
+- [ ] G1·G3·G4 합의 후 §5.7.2 미합의 항목 → §5.7.1 합의 항목 이동
 
 ### Phase 2 — billing 알림 신청 백엔드 (Phase 1 후)
-- [ ] `/api/event` 라우트 확장 (이미 존재 시 action 추가, 없으면 신설)
-- [ ] `billing/page.tsx` mock toast → 실제 POST + email hash (sha256)
-- [ ] 알림 신청 완료 메시지 정직성 강화 ("출시 시 알림을 보내드릴게요" → "출시 시 알림을 받기 위해 등록됐어요. 6개월 보존.")
-- [ ] e2e — 신청 → POST 호출 mock 검증
+
+**1차 구현 (Codex review 전, 2026-05-20)**:
+- [x] `/api/billing/notify` 라우트 신설 (별도 엔드포인트로 분리 — EventSchema 와 형식 충돌 회피, 보안 boilerplate 적용)
+- [x] `BillingNotifySignupSchema` zod 스키마 — emailHash 정규식 검증(`/^[a-f0-9]{64}$/`)
+- [x] `hashEmail` helper — Web Crypto SHA-256, normalize(lowercase+trim)
+- [x] `billing/page.tsx` mock toast → 실제 POST + email hash (sha256). 이메일 원문은 페이로드에 포함되지 않음
+
+**2차 정착 (Codex review fix, 2026-05-20)**:
+Codex 가 hash-only 모델로는 실제 알림 메일 발송이 불가능하다는 **기능 모순**(지적 #1) + zod non-strict 로 raw email 동봉 가능하다는 **PII 누수 경로**(지적 #2) + 누수 테스트 갭(지적 #3) + UI 변경 4 viewport 감사 누락(지적 #4) 을 지적. **사용자 합의: 외부 메일 서비스(Resend) 위임으로 정착** (SPEC §5.7.5 신설).
+- [x] SPEC §5.7.5 외부 메일 서비스 위임 정책 신설 — Resend 채택 + 4 axis 비교 매트릭스(Mailchimp·SendGrid·Postmark) + 데이터 흐름 + secret 관리(`RESEND_API_KEY`·`RESEND_AUDIENCE_ID`)
+- [x] SPEC §5.6 출시 알림 신청 — hash 모델 → 외부 위임 모델 갱신
+- [x] `BillingNotifySignupSchema` `.strict()` 적용 — plain `email` + `source: 'billing-cta'` + `ts` + `action`. 추가 필드 동봉 시 422 (Codex #2 fix)
+- [x] `email-hash` helper 폐기 — 외부 위임 모델에서 hash 불필요
+- [x] `/api/billing/notify` 라우트 재설계 — Resend audience contact 등록 (fetch 직접 호출, SDK 의존성 0) + secret 미설정 시 503 + 외부 호출 실패 시 502
+- [x] `src/lib/server/billing/resend-client.ts` 신설 — `delegateNotifySignupToResend` (deps injection 가능, server-only)
+- [x] `billing/page.tsx` 폼·success 카피·PolicyNote — 외부 위임 정직성 카피로 갱신 ("풀림 서버에는 이메일이 저장되지 않아요")
+- [x] vitest — 라우트 strict 회귀(추가 필드·legacy `emailHash` 거부) + Resend mock(call body·응답 폐기) + 503·502 분기 + PII 0 회귀(응답 본문 email leak X) — 22 케이스
+- [x] vitest — `resend-client` 단위 6 케이스 (env 미설정·정상·auth header·URL encode·4xx·throw)
+- [x] e2e — strict 회귀 (4 필드만·`emailHash` undefined) + 외부 위임 카피 검증
+- [x] `bun run ui:audit /manage/billing` 4 viewport (320·390·768·1280) 통과 — critical=0, informational 2건(자연 스크롤, gate 통과) — Codex #4 fix
+
+**3차 fix (Codex review round 3, 2026-05-20)**:
+Round 3 가 두 가지 잔여 이슈를 지적: (#1) Resend 4xx 중복 응답을 모두 502 로 처리해서 이미 등록된 사용자도 영구 "신청 실패" 가 보임 — idempotent UX 깨짐. (#2) `/api/billing/notify` 가 same-origin 검증·rate limit 0 — 제3자가 임의 이메일을 대량 주입하거나 Resend 무료 한도 소모시키기 쉬움.
+- [x] `resend-client.ts` 4xx 분기 — 409 또는 body `already`/`exists` → `ok: true, reason: 'already_exists'` (idempotent success). 기타 4xx 는 `external_error + status` 유지
+- [x] `src/lib/server/rate-limit.ts` 신설 — 인메모리 sliding window (`checkRateLimit`·`checkRateLimits`·`extractClientIp`), 인프라 의존 0
+- [x] `/api/billing/notify` 라우트 — same-origin 가드(`Origin`/`Referer` vs `NEXT_PUBLIC_SITE_ORIGIN`·`VERCEL_URL`·요청 host) + IP 별 rate limit (1분 5회 + 1시간 10회)
+- [x] `billing/page.tsx` — 429 에러 카피 차별화 ("요청이 너무 잦아요")
+- [x] vitest — `rate-limit` 단위 12 케이스 (sliding window·다중 rule AND·key 격리·IP 추출 5종)
+- [x] vitest — 라우트 추가 케이스: 중복 idempotent 3건 + same-origin 가드 6건 + rate limit 3건
+- [x] vitest — `resend-client` 추가 케이스: 409·422+already·400+already·일반 422·401 missing_api_key·5xx — 5건
+- [x] SPEC §5.6 보안 boilerplate — same-origin·rate limit·idempotent 분기 명시 (BR-PAY3 학생 보호 연결)
+- [x] SPEC §5.7.5 응답 분기 표 신설 + `NEXT_PUBLIC_SITE_ORIGIN` env 추가
+
+**4차 fix (Codex review round 5·6, 2026-05-20)**:
+Round 5 가 IP 식별 불가 시 `"anonymous"` 전역 버킷 fallback 의 사이드이펙트(정상 사용자 간 간섭)를 지적 → fail-closed 400 으로 전환. Round 6 가 그 fail-closed 가 `bun dev` localhost·일부 프록시 구성에서 정상 폼 제출까지 막는다고 지적 → production 만 fail-closed 유지, 그 외 환경은 host 기반 dev 폴백 키로 작동시키도록 균형 조정.
+- [x] `/api/billing/notify` 라우트 — round 5 fail-closed (전역 anonymous 폴백 제거)
+- [x] `/api/billing/notify` 라우트 — round 6 환경별 분기 (`resolveRateLimitKey` 추가): production = IP 필수, 그 외 = `dev:<host>` 폴백
+- [x] vitest — round 5 fail-closed 회귀 2건 (production 분기 명시)
+- [x] vitest — round 6 dev 폴백 4건 (development·test 모드 200, dev 폴백 rate limit 5/분, 실제 IP 와 키 격리)
 
 ### Phase 3 — sanitize + AI error 일반화 (1 PR, Phase 1·2와 독립)
 - [ ] `manage/content/page.tsx` 입력 정규식 sanitize (`<script>`, `on*=`, `javascript:` 패턴 제거)

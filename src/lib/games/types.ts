@@ -65,6 +65,24 @@ export interface GameMeta {
    * proc/archive/plan/2026-05-11_game-preview.md §3.1.
    */
   previewImagePath?: string;
+
+  /**
+   * 4 메커니즘 컴포넌트 통합 식별자 — Plan E Phase 5 / PR #92 Codex round 4 fix.
+   *
+   * `src/games/<id>/component.tsx` 가 `BlankComponent`·`QuickQuizComponent`·
+   * `TypingComponent`·`WordMatchComponent` 중 하나를 직접 render 한다면 그 이름을 명시.
+   * 직접 게임(factorization, image-hotspot 등)은 누락 (`undefined`) 으로 둔다.
+   *
+   * Single source of truth — `isMechanismBasedGame()` / `isModeSupportedFor()` /
+   * `getMechanismBasedGameIds()` / 테스트 / e2e 모두 이 필드를 도출 기준으로 사용한다.
+   * 새 메커니즘 게임 추가 시 manifest 한 곳만 갱신하면 진입점·라우트 가드·테스트가
+   * 자동 반영 (별도 hard list drift 차단).
+   *
+   * 메커니즘별 보장 UX:
+   *   - `TimeAttackTimer` (time-attack 30초/카드)
+   *   - `DeepRecallEmpty` (deep-recall R<0.6 빈 풀)
+   */
+  mechanismComponent?: "Blank" | "QuickQuiz" | "Typing" | "WordMatch";
 }
 
 /**
