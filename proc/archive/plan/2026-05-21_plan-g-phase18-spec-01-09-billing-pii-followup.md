@@ -3,7 +3,7 @@
 - **상태**: COMPLETE (2026-05-26) — D1 추천안 A (spec/01·09 예외 조항 신설) G1 합의 완료. spec/01 §5 + spec/09 §9.2.2·§9.8 갱신 본 PR 머지.
 - **트리거**: PR #91 의 Codex round 9 지적 #1 — "spec/05 가 V1.5 이메일 수집·외부 위임 허용으로 갱신됐는데 spec/01:36 + spec/09:20,42-45,209 의 `PII 0`·`이메일 수집은 V2 재검토` 권위 룰이 그대로라 source of truth 충돌".
 - **거버넌스 룰** (CLAUDE.md §9 — 2026-05-20 정착): 권위 문서(`proc/spec/01·09`) 수정은 §4 "사용자 명시 확인 후" 룰 — G1/G3/G4 합의 의무. PR #91 scope 초과로 별 PR 분리.
-- **연관**: `proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md`, `proc/spec/05-비즈니스-정책.md §5.7`, `proc/plan/2026-05-20_plan-g-phase17-spec-01-section3-followup.md` (PR #93 — spec/01 §3 정합화, 동일 패턴).
+- **연관**: `proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md`, `proc/spec/05-비즈니스-정책.md §5.7`, `proc/archive/plan/2026-05-20_plan-g-phase17-spec-01-section3-followup.md` (PR #105 머지 — spec/01 §3 정합화, 동일 패턴).
 
 ## 0. 현 상태
 
@@ -89,7 +89,7 @@
 - [x] `proc/spec/09-기술-환경.md`:
   - §9.2.2 "이메일 수집 트리거 — V1.5 예외" 단락 신설 — fingerprint 합침 트리거 (옵션 B) 와 V1.5 외부 위임 경로 구분 명시
   - §9.8 (line 209) 에러 트래킹 항목에 V1.5 예외 인지 + 이메일 누출 0 회귀 의무 명시
-- [ ] codex review 자동 트리거 → 권위 정합 확인 (본 PR 머지 시점)
+- [x] codex review 자동 트리거 → 권위 정합 확인 (본 PR #106 머지 시점에 codex round 1 지적 통합 후 정합 확인)
 
 ## 4. 비스코프
 
