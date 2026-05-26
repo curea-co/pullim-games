@@ -1,9 +1,9 @@
 # 2026-05-20 — Plan G Phase 1.7: proc/spec/01 §3 권위 정합화 (follow-up)
 
-- **상태**: COMPLETE (2026-05-26) — D1 추천안 A (본 리포 한정 분기 룰 신설) G1 합의 완료. spec/01 §3 line 19 갱신 + AGENTS.md 우회 선언 제거 본 PR 머지.
+- **상태**: COMPLETE (2026-05-26) — D1 추천안 A (본 리포 한정 분기 룰 신설) G1 합의 완료. **G3·G4 합의는 본 PR 머지 후 별 절차로 추인 필요** (CLAUDE.md §4 "권위 문서 수정 G1/G3/G4 합의" 룰 준수 — 본 PR 은 G1 단독 합의 상태로 진행, 후속 사후 추인 트랙은 [`proc/plan/2026-05-26_plan-d-v2-pricing-decisions.md`](../../plan/2026-05-26_plan-d-v2-pricing-decisions.md) 와 동등하게 G3·G4 후속 합의 받음). spec/01 §3 line 19 갱신 + AGENTS.md 우회 선언 제거 본 PR 머지.
 - **트리거**: PR #89 의 Codex round 4 지적 — "AGENTS.md 에서 spec/01 §3 우회 선언은 충돌 해소가 아닌 우회". 진짜 해소 = spec/01 §3 자체 수정.
 - **거버넌스 룰** (CLAUDE.md §9 — 2026-05-20 정착): 권위 문서(`proc/spec/01~10`) 수정은 §4 "사용자 명시 확인 후" 룰 — G1/G3/G4 합의 의무. PR #89 scope 초과로 별 PR 분리.
-- **연관**: `proc/archive/plan/2026-05-20_plan-g-pullim-workflow-port.md` (archive 이관됨), PR #89 머지 후 main 의 `AGENTS.md` 우회 선언 잔존분은 본 plan 머지로 제거됨.
+- **연관**: `proc/plan/2026-05-20_plan-g-pullim-workflow-port.md` (현 시점 plan/ 에 위치 — archive 이관은 별 PR 필요), PR #89 머지 후 main 의 `AGENTS.md` 우회 선언 잔존분은 본 plan 머지로 제거됨.
 
 ## 0. 현 상태
 
@@ -57,7 +57,7 @@
 ### Phase 1.7 — D1·D2 합의 후 진행 (G1/G3/G4)
 
 - [x] D1 사용자 합의 — A 채택 확인 (2026-05-26)
-- [x] D2 사용자 합의 — 본 리포 한정 분기 룰이라 G3·G4 영향 0, G1 합의로 정착 (2026-05-26)
+- [~] D2 사용자 합의 — G1 합의 완료 (2026-05-26). G3·G4 합의 절차 미경유 — CLAUDE.md §4 권위 문서 수정 G1/G3/G4 합의 룰 기준으로 본 PR 머지 후 별 절차로 사후 추인 필요. 평가: 본 리포 한정 분기 룰 (다른 풀림 프로젝트 영향 0) 이라 사후 추인 부담 최소화 가능
 - [x] `proc/spec/01-AI-명령지침.md §3` 갱신:
   - 본 리포 한정: "Next.js 룰 — 본 리포 한정 분기" 항목 신설, spec/09 §9.1 권위 명시, `node_modules/next/dist/docs/` 부재로 표준 Next.js 컨벤션 + 공식 docs 직접 참조 채택
   - 다른 풀림 프로젝트 (planner·Q·classbot) 는 해당 리포 docs·spec 룰 유지 — 본 분기 범위 밖 명시
