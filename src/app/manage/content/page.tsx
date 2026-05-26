@@ -12,7 +12,6 @@ import {
   loadCurriculum,
   loadSubjects,
   newId,
-  sanitizeUserText,
   saveCard,
   type CustomBlankCard,
   type CustomCard,
@@ -163,11 +162,6 @@ export default function ContentPage() {
     if (selected.length === 0) return;
     const now = new Date().toISOString();
     let savedCount = 0;
-    // Plan D Phase 3 — 사용자 입력·LLM 응답 모두 카드 저장 직전 sanitize.
-    // React 자동 escape 가 1차 방어이지만, dangerouslyHTML 도입·외부 렌더 경로 추가 시 안전판.
-    const sanit = (s: string) => sanitizeUserText(s.trim());
-    const sanitOpt = (s: string | undefined) =>
-      s === undefined ? undefined : sanit(s);
     for (const item of selected) {
       const d = item.draft as CustomCardDraft;
       const base = {
@@ -183,35 +177,35 @@ export default function ContentPage() {
         card = {
           ...base,
           kind: "multiple-choice",
-          question: sanit(d.question),
-          choices: d.choices.map(sanit),
+          question: d.question.trim(),
+          choices: d.choices.map((c) => c.trim()),
           correctIndex: d.correctIndex,
-          hint: sanitOpt(d.hint),
+          hint: d.hint?.trim(),
         } as CustomMultipleChoiceCard;
       } else if (d.kind === "blank") {
         card = {
           ...base,
           kind: "blank",
-          passage: sanit(d.passage),
-          choices: d.choices.map(sanit),
+          passage: d.passage.trim(),
+          choices: d.choices.map((c) => c.trim()),
           correctIndex: d.correctIndex,
-          rationale: sanitOpt(d.rationale),
+          rationale: d.rationale?.trim(),
         } as CustomBlankCard;
       } else if (d.kind === "typing") {
         card = {
           ...base,
           kind: "typing",
-          answer: sanit(d.answer),
-          meaning: sanit(d.meaning),
-          pronunciation: sanitOpt(d.pronunciation),
+          answer: d.answer.trim(),
+          meaning: d.meaning.trim(),
+          pronunciation: d.pronunciation?.trim(),
         } as CustomTypingCard;
       } else {
         card = {
           ...base,
           kind: "word-match",
           pairs: d.pairs.map((p) => ({
-            left: sanit(p.left),
-            right: sanit(p.right),
+            left: p.left.trim(),
+            right: p.right.trim(),
           })),
         } as CustomWordMatchCard;
       }

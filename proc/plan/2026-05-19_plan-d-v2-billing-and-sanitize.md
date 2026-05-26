@@ -146,10 +146,10 @@ Round 5 가 IP 식별 불가 시 `"anonymous"` 전역 버킷 fallback 의 사이
 - [x] `manage/content/actions.ts` Anthropic error catch + 일반화 메시지 + `console.error` 서버 로그
 - [x] vitest — sanitize 패턴 10건 (`src/lib/core/sanitize/index.test.ts` — 일반/빈 문자열/script block/unclosed script/onclick/onload+onerror/javascript:/data:text/html/markdown 보존/연속 패턴)
 
-**PR-A (본 turn, 2026-05-26)** — page.tsx 통합 + AI error 일반화 회귀:
-- [x] `manage/content/page.tsx` `commitAll` 4 분기 (multiple-choice·blank·typing·word-match) 카드 저장 직전 `sanitizeUserText` 통합 — trim 후 sanitize 적용. PR #80 helper 가 page.tsx 에서 직접 호출되지 않던 통합 누락 보강
+**PR-A (본 turn, 2026-05-26)** — AI error 일반화 회귀 + page.tsx 통합은 학습 콘텐츠 훼손 위험 trade-off 로 보류:
+- [→] `manage/content/page.tsx` 입력 정규식 sanitize 통합 — **codex review 지적 (#104) 반영하여 보류 (TRADE-OFF)**. 저장 시점 sanitize 는 학습 콘텐츠 (정답·문제·해설에 `javascript:`·`<script>`·`on*=` 같은 문자열이 정답으로 포함될 수 있음 — 컴퓨터·웹 보안 학습 카드 등) 를 영구 변형해서 채점 깨짐·빈 문자열 저장 같은 회귀를 일으킴. **현재 dangerouslyHTML 사용처 0** 이라 React 자동 escape 가 1차 방어로 충분. sanitize helper 는 유지하되 호출 위치는 dangerouslyHTML 도입 시점에 렌더-측에서 적용 (별 plan). 근거: `KNOWN-TRADE-OFF: proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md §3 Phase3 — codex review #104`
 - [x] vitest — `actions.test.ts` 5건 (rate-limit/auth/network error → 일반화 메시지 회귀, API key·status code 누출 0 검증, console.error 원본 보존, 정상 응답 통과)
-- [x] `bun run ui:audit /manage/content` 4 viewport (320·390·768·1280) 통과 — critical=0, informational=0
+- [x] `bun run ui:audit /manage/content` 4 viewport (320·390·768·1280) 통과 — critical=0, informational=0 (sanitize 통합 롤백 후에도 UI 변경 X 이므로 동일)
 - [x] e2e 비스코프 — `playwright.config.ts` 가 production build 환경이고 `@anthropic-ai/sdk` mock 부담이 큼. **TRADE-OFF** (`KNOWN-TRADE-OFF: proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md §3 Phase3`): 대신 vitest unit (5건) 으로 actions catch 분기 + console.error 보존 직접 검증. 회귀 신뢰성 동등 (logic-level coverage)
 
 ## 4. 비스코프
