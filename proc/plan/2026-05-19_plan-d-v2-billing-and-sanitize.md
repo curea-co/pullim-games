@@ -1,6 +1,9 @@
 # 2026-05-19 — Plan D: V2 결제 정책·백엔드 + content sanitize·AI error 처리
 
-- **상태**: PARTIAL-COMPLETE (2026-05-22) — Phase 3 (sanitize·AI error 일반화) PR #80 머지. **D5 결제 게이트웨이 = Toss Payments 사용자 합의 (2026-05-20)**. **D1 V2 출시 시점 = 2026 Q4 사용자 합의 (2026-05-22, 추천안 그대로 채택)**. **Phase 1 spec(D5·D1 합의분 + D2·D3·D4·D6·D7 합의 후보 매트릭스) + Phase 2 billing 백엔드(`/api/billing/notify` — plain email + Resend 즉시 위임 / 본 서버 저장 0 / same-origin + IP rate limit / dev 폴백 키)** PR #91 머지. Codex review round 2·3·5·6 fix 모두 통합. D2·D3·D4·D6·D7 결정은 사용자 G3 합의 대기.
+- **상태**: PARTIAL-COMPLETE (2026-05-26) — Phase 2·3 완료, Phase 1 만 D2~D7 G3 합의 대기.
+  - **Phase 2 (billing 백엔드)**: PR #91 머지 — `/api/billing/notify` + Resend 위임 + same-origin + IP rate limit + dev 폴백 키. Codex review round 2·3·5·6 fix 통합
+  - **Phase 3 (sanitize·AI error 일반화)**: PR #80 머지 (helper + actions catch + sanitize 단위 10건) + 본 PR-A (page.tsx commitAll 4 분기 통합 + actions 일반화 회귀 5건 + ui:audit 통과)
+  - **Phase 1 (V2 결제 정책 spec)**: D5 (Toss Payments, 2026-05-20) · D1 (V2 출시 2026 Q4, 2026-05-22) 합의 완료. D2~D7 는 별 plan 트랙으로 분리 (사용자 합의 2026-05-26) — [`2026-05-26_plan-d-v2-pricing-decisions.md`](./2026-05-26_plan-d-v2-pricing-decisions.md) 신설
 - **트리거**: audit v3 §7 informational 4건 + critical C8(V2 트리거) 통합:
   - C8: `billing/page.tsx` 알림 신청 이메일 백엔드 전송 0 (mock toast)
   - informational: 결제 정책 명세 부재 (`proc/spec/05-비즈니스-정책.md §결제 없음`)
@@ -92,8 +95,8 @@ C8 fix — 본 plan §1 후 진행.
 - [~] 사용자 합의 — **D5 합의 완료 (2026-05-20)** + **D1 합의 완료 (2026-05-22, V2 출시 = 2026 Q4)**. D2·D3·D4·D6·D7 합의 대기 (G3·G4)
 - [x] `proc/spec/05-비즈니스-정책.md §5.7 결제·구독 정책` 신규 (합의 D5·D1 + 합의 후보 매트릭스 D2·D3·D4·D6·D7 + BR-PAY1~4 비즈니스 룰)
 - [x] `proc/spec/05-비즈니스-정책.md §5.6` 출시 알림 신청 PII 정책 추가 (hash·6개월 보존)
-- [ ] `/manage/billing/page.tsx` 유료 플랜 preview 콘텐츠 갱신 (D2·D3·D4 합의 후 실제 가격·기능 비교)
-- [ ] G1·G3·G4 합의 후 §5.7.2 미합의 항목 → §5.7.1 합의 항목 이동
+- [→] `/manage/billing/page.tsx` 유료 플랜 preview 콘텐츠 갱신 — 별 plan ([`2026-05-26_plan-d-v2-pricing-decisions.md`](./2026-05-26_plan-d-v2-pricing-decisions.md)) 으로 이관, D2·D3·D4 합의 후 진행
+- [→] G1·G3·G4 합의 후 §5.7.2 미합의 항목 → §5.7.1 합의 항목 이동 — 별 plan 으로 이관
 
 ### Phase 2 — billing 알림 신청 백엔드 (Phase 1 후)
 
@@ -136,11 +139,18 @@ Round 5 가 IP 식별 불가 시 `"anonymous"` 전역 버킷 fallback 의 사이
 - [x] vitest — round 5 fail-closed 회귀 2건 (production 분기 명시)
 - [x] vitest — round 6 dev 폴백 4건 (development·test 모드 200, dev 폴백 rate limit 5/분, 실제 IP 와 키 격리)
 
-### Phase 3 — sanitize + AI error 일반화 (1 PR, Phase 1·2와 독립)
-- [ ] `manage/content/page.tsx` 입력 정규식 sanitize (`<script>`, `on*=`, `javascript:` 패턴 제거)
-- [ ] `manage/content/actions.ts` Anthropic error catch + 일반화 메시지 + `console.error` 서버 로그
-- [ ] vitest — sanitize 패턴 5건 (XSS injection 시도)
-- [ ] e2e — AI error 시 일반화 메시지 표시 검증
+### Phase 3 — sanitize + AI error 일반화 (PR #80 + 본 PR-A 통합 완료, 2026-05-26)
+
+**PR #80 (2026-05-19 머지)** — sanitize helper + AI error 일반화 + sanitize 단위:
+- [x] `src/lib/core/sanitize/index.ts` 신설 — `sanitizeUserText` (script tag·on* handler·javascript:·data:text/html 정규식 제거, 의존성 0)
+- [x] `manage/content/actions.ts` Anthropic error catch + 일반화 메시지 + `console.error` 서버 로그
+- [x] vitest — sanitize 패턴 10건 (`src/lib/core/sanitize/index.test.ts` — 일반/빈 문자열/script block/unclosed script/onclick/onload+onerror/javascript:/data:text/html/markdown 보존/연속 패턴)
+
+**PR-A (본 turn, 2026-05-26)** — page.tsx 통합 + AI error 일반화 회귀:
+- [x] `manage/content/page.tsx` `commitAll` 4 분기 (multiple-choice·blank·typing·word-match) 카드 저장 직전 `sanitizeUserText` 통합 — trim 후 sanitize 적용. PR #80 helper 가 page.tsx 에서 직접 호출되지 않던 통합 누락 보강
+- [x] vitest — `actions.test.ts` 5건 (rate-limit/auth/network error → 일반화 메시지 회귀, API key·status code 누출 0 검증, console.error 원본 보존, 정상 응답 통과)
+- [x] `bun run ui:audit /manage/content` 4 viewport (320·390·768·1280) 통과 — critical=0, informational=0
+- [x] e2e 비스코프 — `playwright.config.ts` 가 production build 환경이고 `@anthropic-ai/sdk` mock 부담이 큼. **TRADE-OFF** (`KNOWN-TRADE-OFF: proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md §3 Phase3`): 대신 vitest unit (5건) 으로 actions catch 분기 + console.error 보존 직접 검증. 회귀 신뢰성 동등 (logic-level coverage)
 
 ## 4. 비스코프
 
