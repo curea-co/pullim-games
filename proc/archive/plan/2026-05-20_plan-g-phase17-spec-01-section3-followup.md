@@ -3,7 +3,7 @@
 - **상태**: COMPLETE (2026-05-26) — D1 추천안 A (본 리포 한정 분기 룰 신설) G1 합의 완료. spec/01 §3 line 19 갱신 + AGENTS.md 우회 선언 제거 본 PR 머지.
 - **트리거**: PR #89 의 Codex round 4 지적 — "AGENTS.md 에서 spec/01 §3 우회 선언은 충돌 해소가 아닌 우회". 진짜 해소 = spec/01 §3 자체 수정.
 - **거버넌스 룰** (CLAUDE.md §9 — 2026-05-20 정착): 권위 문서(`proc/spec/01~10`) 수정은 §4 "사용자 명시 확인 후" 룰 — G1/G3/G4 합의 의무. PR #89 scope 초과로 별 PR 분리.
-- **연관**: `proc/plan/2026-05-20_plan-g-pullim-workflow-port.md`, PR #89 머지 후 main 의 `AGENTS.md` (우회 선언 잔존).
+- **연관**: `proc/archive/plan/2026-05-20_plan-g-pullim-workflow-port.md` (archive 이관됨), PR #89 머지 후 main 의 `AGENTS.md` 우회 선언 잔존분은 본 plan 머지로 제거됨.
 
 ## 0. 현 상태
 
@@ -65,7 +65,7 @@
   - 기존 4 라인 "spec/01 §3 ... 적용 불가" 우회 표현 제거 — spec/01 §3 자체에 분기 룰이 들어갔으므로 충돌 X
   - 권위 정합 정착 (2026-05-26 plan-g phase 1.7) 명시
   - AI 검증 거버넌스 line 12 의 "예: spec/01 §3 Next.js docs 지시 ↔ spec/09 §9.1 표준 Next.js 판정" 충돌 예시 → "spec 본문 인라인 정합화 1차" 룰로 일반화
-- [ ] codex review 자동 트리거 → 권위 정합 확인 (본 PR 머지 시점)
+- [x] codex review 자동 트리거 → 권위 정합 확인 (본 PR #105 머지 시점, codex round 1 지적 3건 fix 통합 후 정합 확인)
 
 ## 4. 비스코프
 
