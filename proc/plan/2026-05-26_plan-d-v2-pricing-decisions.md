@@ -109,16 +109,16 @@
 
 ## 5. 영향도
 
-| 작업 | 변경 | LOC |
-|---|---|---|
-| 본 plan 신설 + plan-d 본문 갱신 | docs only | ≈+150 |
-| Phase A (D4) | spec/05 + plan + audit | ≈+50 |
-| Phase B (D2) | spec/05 + plan + billing/page.tsx preview | ≈+80 |
-| Phase C (D3) | spec/05 + plan | ≈+50 |
-| Phase D (D6) | spec/05 + plan | ≈+30 |
-| Phase E (D7) | spec/05 + plan | ≈+30 |
+| 작업 | 변경 | 코드 변경 여부 | LOC |
+|---|---|---|---|
+| 본 plan 신설 + plan-d 본문 갱신 | docs only | 0 (docs) | ≈+150 |
+| Phase A (D4) | spec/05 + plan + audit | 0 (docs) | ≈+50 |
+| Phase B (D2) | spec/05 + plan + `/manage/billing/page.tsx` preview 콘텐츠 갱신 | **있음 — `bun run ui:audit /manage/billing` 4 viewport 게이트 필수** (AGENTS.md §"viewport 4 audit") | ≈+80 |
+| Phase C (D3) | spec/05 + plan | 0 (docs) | ≈+50 |
+| Phase D (D6) | spec/05 + plan | 0 (docs) | ≈+30 |
+| Phase E (D7) | spec/05 + plan | 0 (docs) | ≈+30 |
 
-→ 본 plan 종결까지 ≈+390 LOC, 모두 docs/spec. 코드 변경은 V2 결제 실 연동 별 plan 에서.
+→ 본 plan 종결까지 ≈+390 LOC. **Phase B 만 코드 변경 포함** (billing/page.tsx preview 갱신 — 가격대·기능 비교 합의 결과 반영). 나머지 Phase 는 docs/spec 만. V2 결제 게이트웨이 실 연동 (Toss Payments SDK 통합·webhook·결제 흐름 e2e) 은 본 plan 비스코프 — 별 plan.
 
 ## 6. 거버넌스
 
