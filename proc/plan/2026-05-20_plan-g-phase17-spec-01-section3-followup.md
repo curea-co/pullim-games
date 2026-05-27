@@ -1,9 +1,9 @@
 # 2026-05-20 — Plan G Phase 1.7: proc/spec/01 §3 권위 정합화 (follow-up)
 
-- **상태**: IN-REVIEW (2026-05-27) — D1 추천안 A (본 리포 한정 분기 룰 신설) **G1 승인** (2026-05-27 사용자 명시 결정). CLAUDE.md §4 "권위 문서 수정 G1/G3/G4 합의" 룰의 G3·G4 합의는 별 채널·후속으로 보류 — 본 plan 안에서 "G1 단독 = G3·G4 대리" 예외를 발명하지 않는다 (codex #105 round 5 지적: 권위 문서가 정의하지 않은 우회를 plan 자기 문장으로 만들면 이후 spec 수정 절차의 신뢰성이 무너짐). spec/01 §3 line 19 갱신 + AGENTS.md 우회 선언 제거 본 PR #105 review 진행 중. 작업 항목 §3 의 codex review 자동 트리거 항목이 미완료 상태이므로 archive 이관은 본 PR 머지 + G3·G4 합의 채널 완료 후 후속 commit/PR (CLAUDE.md:112 "proc/archive/ = 완료된 plan 보관용" 룰 준수).
+- **상태**: PROPOSAL (2026-05-27) — D1 추천안 A (본 리포 한정 분기 룰 신설) **G1 승인** (2026-05-27 사용자 명시 결정). D2 G3·G4 합의는 별 채널·후속 진행. CLAUDE.md §4 "권위 문서 수정 G1/G3/G4 합의" 룰을 본 plan 안에서 "G1 단독 = G3·G4 대리" 예외로 우회하지 않는다 (codex #105 round 5 지적). 본 PR #105 의 scope = **본 plan 문서 자체만 추가** — `proc/spec/01-AI-명령지침.md §3`, `proc/spec/09-기술-환경.md §9.1·§9.6`, `AGENTS.md` 본문 갱신은 **G3·G4 합의 완료 후 별 commit/PR 로 분리** (codex #105 round 6 지적: 합의 전 spec 본문 변경 머지 = 거버넌스 예외 선례 — 분리 머지가 정합).
 - **트리거**: PR #89 의 Codex round 4 지적 — "AGENTS.md 에서 spec/01 §3 우회 선언은 충돌 해소가 아닌 우회". 진짜 해소 = spec/01 §3 자체 수정.
 - **거버넌스 룰** (CLAUDE.md §9 — 2026-05-20 정착): 권위 문서(`proc/spec/01~10`) 수정은 §4 "사용자 명시 확인 후" 룰 — G1/G3/G4 합의 의무. PR #89 scope 초과로 별 PR 분리.
-- **연관**: `proc/plan/2026-05-20_plan-g-pullim-workflow-port.md` (현 시점 plan/ 에 위치 — archive 이관은 별 PR 필요), PR #89 머지 후 main 의 `AGENTS.md` 우회 선언 잔존분은 본 plan 머지로 제거됨.
+- **연관**: `proc/plan/2026-05-20_plan-g-pullim-workflow-port.md` (현 시점 plan/ 에 위치 — archive 이관은 별 PR 필요), PR #89 머지 후 main 의 `AGENTS.md` 우회 선언 잔존분은 본 plan 의 후속 spec 정합화 PR 머지로 제거 예정.
 
 ## 0. 현 상태
 
@@ -19,7 +19,7 @@
 
 `AGENTS.md` 4·13 라인에 "spec/01 §3 의 Next.js docs 우선 지시는 본 리포 환경에서 적용 불가, spec/09 §9.1 권위" 우회 선언 박혀 있음.
 
-→ 진짜 정합화 = spec/01 §3 자체 갱신해서 본 리포가 spec/09 §9.1 권위 따른다는 사실을 §3 안에 명시.
+→ 진짜 정합화 = spec/01 §3 자체 갱신해서 본 리포가 spec/09 §9.1 권위 따른다는 사실을 §3 안에 명시. **단, 본 갱신은 G3·G4 합의 완료 후 별 commit/PR.** 본 PR #105 는 plan 문서로 변경 방향만 합의 기록.
 
 ## 1. 추천 설계
 
@@ -29,11 +29,11 @@
 
 | 옵션 | 변경 | 영향 |
 |---|---|---|
-| **(A 권고)** §3 의 "Next.js docs 우선" 룰 → "본 리포 Next.js 룰은 spec/09 §9.1 권위, 그 외 풀림 프로젝트는 docs 우선" 명시 | 풀림 4 프로젝트 분기 룰 신설 | spec/01 자체에 분기 — 깨끗 |
+| **(A 권고)** §3 의 "Next.js docs 우선" 룰 → "본 리포 Next.js 룰은 spec/09 §9.1 권위" 명시. 본 리포 한정 분기 룰 (다른 풀림 프로젝트 룰은 본 spec 의 source of truth 경계 밖) | games 리포 권위 문서에 분기 룰 신설 | spec/01 자체에 분기 — 깨끗 |
 | (B) §3 완전 삭제 후 docs 우선 룰 자체 폐기 | 모든 풀림 프로젝트가 spec/09 류 권위 따름 | 큰 변경 — 다른 풀림 영향 |
 | (C) AGENTS.md 우회 선언 유지 | 본 plan 0 작업 | 우회 잔존, 향후 PR 의 review 가 매 PR 우회 지적 가능 |
 
-→ **(A) 채택 권고** — 본 리포 한정 분기 룰 신설, AGENTS.md 우회 선언 제거.
+→ **(A) 채택 권고** — 본 리포 한정 분기 룰 신설, AGENTS.md 우회 선언 제거. **단 본 spec/01 §3 본문에 다른 풀림 프로젝트 (planner·Q·classbot) 운용 룰을 함께 적지 않는다** (codex #105 round 6 지적 #2: games spec 권위 문서에 타 프로젝트 룰까지 적으면 source of truth 경계 흐림. CLAUDE.md §7 "다른 풀림 프로젝트와의 관계" 표 참조 — 각 프로젝트 권위 문서가 다름).
 
 ### B. AGENTS.md 정리
 
@@ -47,25 +47,28 @@
 - (B) §3 완전 삭제 — 큰 변경
 - (C) 우회 선언 유지 — 별 plan 마무리 X
 
-→ A.
+→ A (G1 승인 2026-05-27).
 
 ### D2 — G1/G3/G4 합의 채널
-- spec/01 은 4 풀림 공통이라 G1/G3/G4 모두 영향 가능. 본 리포 한정 분기면 영향 최소화. 사용자 결정 의무
+- spec/01 은 4 풀림 공통이라 G1/G3/G4 모두 영향 가능. 본 리포 한정 분기면 영향 최소화. **G3·G4 합의는 별 채널 진행 중** — 합의 확보 후 §3 작업 항목의 spec 본문 갱신 commit 진행.
 
 ## 3. 작업 항목
 
 ### Phase 1.7 — D1·D2 합의 후 진행 (G1/G3/G4)
 
-- [x] D1 사용자 합의 — A 채택 확인 (2026-05-26)
-- [ ] D2 사용자 합의 — G1 승인 (2026-05-27). CLAUDE.md §4 권위 문서 수정 G1/G3/G4 합의 룰 중 G3·G4 합의 채널은 별도 진행 보류 — plan 안에서 "G1 단독 = G3·G4 대리" 예외를 발명하지 않는다 (codex #105 round 5 지적). 본 항목은 G3·G4 합의 확보 후 체크
-- [x] `proc/spec/01-AI-명령지침.md §3` 갱신:
+- [x] D1 사용자 합의 — A 채택 확인 (2026-05-27 G1 승인)
+- [ ] D2 사용자 합의 — G3·G4 합의 (별 채널 진행 중). 본 항목 완료 전까지 아래 spec/AGENTS 갱신 작업은 미진행
+- [ ] `proc/spec/01-AI-명령지침.md §3` 갱신 (D2 합의 후 별 commit/PR):
   - 본 리포 한정: "Next.js 룰 — 본 리포 한정 분기" 항목 신설, spec/09 §9.1 권위 명시, `node_modules/next/dist/docs/` 부재로 표준 Next.js 컨벤션 + 공식 docs 직접 참조 채택
-  - 다른 풀림 프로젝트 (planner·Q·classbot) 는 해당 리포 docs·spec 룰 유지 — 본 분기 범위 밖 명시
-- [x] `AGENTS.md` 우회 선언 제거:
+  - games 리포 권위 문서이므로 본 §3 안에 다른 풀림 프로젝트 (planner·Q·classbot) 운용 룰을 적지 않는다 — source of truth 경계 유지 (CLAUDE.md §7 표 참조)
+- [ ] `proc/spec/09-기술-환경.md §9.1·§9.6` 갱신 (D2 합의 후 별 commit/PR):
+  - §9.1 표의 "AGENTS.md 경고 stale" 표현을 spec/01 §3 분기 룰 인용으로 정합화
+  - §9.6 greenfield 셋업 가이드의 "AGENTS.md 경고 진지하게 받아들이기 → node_modules/next/dist/docs/ 가이드 읽기" 단계를 표준 Next.js 컨벤션 + 공식 docs 직접 참조로 갱신
+- [ ] `AGENTS.md` 우회 선언 제거 (D2 합의 후 별 commit/PR):
   - 기존 4 라인 "spec/01 §3 ... 적용 불가" 우회 표현 제거 — spec/01 §3 자체에 분기 룰이 들어갔으므로 충돌 X
-  - 권위 정합 정착 (2026-05-26 plan-g phase 1.7) 명시
+  - 권위 정합 정착 명시
   - AI 검증 거버넌스 line 12 의 "예: spec/01 §3 Next.js docs 지시 ↔ spec/09 §9.1 표준 Next.js 판정" 충돌 예시 → "spec 본문 인라인 정합화 1차" 룰로 일반화
-- [ ] codex review 자동 트리거 → 권위 정합 확인 (본 PR #105 머지 시점에 최종 확정. 본 plan 의 archive 이관과 본 항목 완료 체크는 PR 머지 후 후속 commit/PR 에서 처리 — 현 PR 범위에서는 미완료 유지가 기록 정확성에 부합. 본 PR 의 codex 진행 상황: round 1 (3건) · round 2 (4건) · round 3 (2건) 모두 fix 통합 완료)
+- [ ] codex review 자동 트리거 → 권위 정합 확인 (spec/AGENTS 갱신 PR 머지 시점). 본 plan 의 archive 이관은 위 spec/AGENTS 갱신 PR 머지 후 별 commit/PR. 본 PR #105 의 codex 진행 상황: round 1 (3건) · round 2 (4건) · round 3 (2건) · round 4 (1건) · round 5 (1건) · round 6 (4건) 모두 fix 통합 진행 중
 
 ## 4. 비스코프
 
@@ -76,7 +79,9 @@
 
 | 작업 | LOC |
 |---|---|
-| spec/01 §3 갱신 | ≈+15 |
-| AGENTS.md 우회 제거 | ≈-4 |
+| 본 PR #105: plan 문서 추가 | ≈+80 |
+| 후속 PR: spec/01 §3 갱신 | ≈+5 |
+| 후속 PR: spec/09 §9.1·§9.6 갱신 | ≈+10 |
+| 후속 PR: AGENTS.md 우회 제거 | ≈-4 |
 
-→ 총 ≈+11 LOC, docs only.
+→ 본 PR #105 = docs only (plan 문서). spec/AGENTS 본문 갱신은 후속 PR.
