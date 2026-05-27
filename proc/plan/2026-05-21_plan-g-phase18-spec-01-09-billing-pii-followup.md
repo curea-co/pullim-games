@@ -86,16 +86,18 @@
 
 #### 본 PR (#106) scope — plan doc 갱신 (상태·scope 정정)
 
-- [x] D1 — G1 단독 추천안 A 승인 (2026-05-27) **부분 합의만** — D1 정의(§2)는 정합화 방향 선택이며, 본 PR 한정으로 G1 단독 승인 기록. G3·G4 합의는 D2 트랙으로 미완료
+- [ ] D1 — G1/G3/G4 합의 (§2 정의대로) — **미완료**. G3·G4 합의 D2 와 함께 후속 PR 에서 정착 예정
+- [x] D1 보조 — G1 단독 의견 기록 (2026-05-27, 추천안 A 방향) — D1 정식 합의 아님, 후속 G3·G4 합의 시 참고용
 - [ ] D2 — G1/G3/G4 합의 채널 (§2 정의대로) — G3·G4 미합의로 **미완료**. 후속 PR 에서 정착 예정
 - [x] 본 plan doc 갱신 — 상태 DRAFT → ACTIVE/PARTIAL, scope·체크리스트·한계 정정 (docs only, 기존 파일 수정. plan 본문 자체는 PR #91 머지 후 별 plan 으로 이미 신설된 상태)
 - [x] Codex Review round 1 지적 수용 — "G3·G4 합의 보류 상태에서 권위 문서 본문 박아 넣는 행위 = CLAUDE.md §4/§9 위반" → spec/01·09 본문 변경 revert, scope 축소
 - [x] Codex Review round 2 지적 수용 — "archive 이동 + D1·D2 체크박스 [x] = CLAUDE.md §6 archive 계약 + D2 정의 위반" → plan 을 `proc/plan/` 활성 트랙 복귀 + D2 체크박스 미완료 분리
+- [x] Codex Review round 5 지적 수용 — (1) D1 체크박스 의미 모호 → D1 정식 합의 미완료 [ ] 로 되돌리고 "D1 보조 — G1 단독 의견 기록" 항목으로 분리, (2) `segment marker` 표현이 spec/05 §5.7.5 의 optional segment 와 필수 `properties.source` 마커 혼동 → `contact properties source marker` 로 정정 + §5.6 (정직성 카피) 출처 명시 분리
 
 #### 별 PR (D2 완료 = G3·G4 합의 후)
 
 - [ ] D2 G3·G4 합의 — 본 plan §1.B (spec/01 §PII 예외 draft) + §1.C (spec/09 §이메일 수집 예외 draft) 검토 및 합의
-- [ ] `proc/spec/01-AI-명령지침.md §5` 갱신 — "V1.5 알림 신청 예외" 항목 신설, 3 의무 조건 (본 서버 영속 저장 0 · 정직성 카피 · segment marker) 명시, spec/05 §5.7.5 권위 인용
+- [ ] `proc/spec/01-AI-명령지침.md §5` 갱신 — "V1.5 알림 신청 예외" 항목 신설, 3 의무 조건 (본 서버 영속 저장 0 · 정직성 카피 · contact properties source marker = `properties.source = 'billing-launch-notify'` + `consented_at`) 명시, spec/05 §5.6 (정직성 카피) + §5.7.5 (외부 위임 정책) 권위 인용 (RESEND_SEGMENT_ID 기반 segment 추가는 spec/05 §5.7.5 선택 사항이며 필수 조건 아님)
 - [ ] `proc/spec/09-기술-환경.md`:
   - §9.2.2 "이메일 수집 트리거 — V1.5 예외" 단락 신설 — fingerprint 합침 트리거 (옵션 B) 와 V1.5 외부 위임 경로 구분 명시
   - §9.8 에러 트래킹 항목에 V1.5 예외 인지 + 이메일 누출 0 회귀 의무 명시
