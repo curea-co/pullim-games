@@ -3,7 +3,7 @@
 - **상태**: DRAFT (2026-05-21) — G1/G3/G4 합의 의무. PR #91 (Plan D V2 결제) 머지 후 후속 트랙.
 - **트리거**: PR #91 의 Codex round 9 지적 #1 — "spec/05 가 V1.5 이메일 수집·외부 위임 허용으로 갱신됐는데 spec/01:36 + spec/09:20,42-45,209 의 `PII 0`·`이메일 수집은 V2 재검토` 권위 룰이 그대로라 source of truth 충돌".
 - **거버넌스 룰** (CLAUDE.md §9 — 2026-05-20 정착): 권위 문서(`proc/spec/01·09`) 수정은 §4 "사용자 명시 확인 후" 룰 — G1/G3/G4 합의 의무. PR #91 scope 초과로 별 PR 분리.
-- **연관**: `proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md`, `proc/spec/05-비즈니스-정책.md §5.7`, `proc/plan/2026-05-20_plan-g-phase17-spec-01-section3-followup.md` (PR #93 — spec/01 §3 정합화, 동일 패턴).
+- **연관**: `proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md`, `proc/spec/05-비즈니스-정책.md §5.7`, `proc/plan/2026-05-20_plan-g-phase17-spec-01-section3-followup.md` (PR #105 — spec/01 §3 정합화 plan, 동일 패턴. PR #105 머지 후에도 phase 1.7 의 spec 본문 갱신은 G3·G4 합의 후 별 PR 로 진행 예정이므로 plan 은 `proc/plan/` 유지).
 
 ## 0. 현 상태
 
