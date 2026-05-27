@@ -1,6 +1,6 @@
 # 2026-05-20 — Plan G Phase 1.7: proc/spec/01 §3 권위 정합화 (follow-up)
 
-- **상태**: IN-REVIEW (2026-05-27) — D1 추천안 A (본 리포 한정 분기 룰 신설) **G1·G3·G4 합의 완료** (CLAUDE.md §4 "권위 문서 수정 G1/G3/G4 합의" 룰 준수 — G1 이 4 풀림 단일 owner 권한으로 G3·G4 명목 대리 합의, 2026-05-27 사용자 명시 결정). spec/01 §3 line 19 갱신 + AGENTS.md 우회 선언 제거 본 PR #105 review 진행 중. 작업 항목 §3 의 codex review 자동 트리거 항목이 미완료 상태이므로 archive 이관은 본 PR 머지 후 후속 commit/PR (CLAUDE.md:112 "proc/archive/ = 완료된 plan 보관용" 룰 준수).
+- **상태**: IN-REVIEW (2026-05-27) — D1 추천안 A (본 리포 한정 분기 룰 신설) **G1 승인** (2026-05-27 사용자 명시 결정). CLAUDE.md §4 "권위 문서 수정 G1/G3/G4 합의" 룰의 G3·G4 합의는 별 채널·후속으로 보류 — 본 plan 안에서 "G1 단독 = G3·G4 대리" 예외를 발명하지 않는다 (codex #105 round 5 지적: 권위 문서가 정의하지 않은 우회를 plan 자기 문장으로 만들면 이후 spec 수정 절차의 신뢰성이 무너짐). spec/01 §3 line 19 갱신 + AGENTS.md 우회 선언 제거 본 PR #105 review 진행 중. 작업 항목 §3 의 codex review 자동 트리거 항목이 미완료 상태이므로 archive 이관은 본 PR 머지 + G3·G4 합의 채널 완료 후 후속 commit/PR (CLAUDE.md:112 "proc/archive/ = 완료된 plan 보관용" 룰 준수).
 - **트리거**: PR #89 의 Codex round 4 지적 — "AGENTS.md 에서 spec/01 §3 우회 선언은 충돌 해소가 아닌 우회". 진짜 해소 = spec/01 §3 자체 수정.
 - **거버넌스 룰** (CLAUDE.md §9 — 2026-05-20 정착): 권위 문서(`proc/spec/01~10`) 수정은 §4 "사용자 명시 확인 후" 룰 — G1/G3/G4 합의 의무. PR #89 scope 초과로 별 PR 분리.
 - **연관**: `proc/plan/2026-05-20_plan-g-pullim-workflow-port.md` (현 시점 plan/ 에 위치 — archive 이관은 별 PR 필요), PR #89 머지 후 main 의 `AGENTS.md` 우회 선언 잔존분은 본 plan 머지로 제거됨.
@@ -57,7 +57,7 @@
 ### Phase 1.7 — D1·D2 합의 후 진행 (G1/G3/G4)
 
 - [x] D1 사용자 합의 — A 채택 확인 (2026-05-26)
-- [x] D2 사용자 합의 — G1·G3·G4 합의 완료 (2026-05-27). G1 이 4 풀림 단일 owner 권한으로 G3·G4 명목 대리 합의 — 본 리포 한정 분기 룰 (다른 풀림 프로젝트 영향 0) 이라 대리 합의 정당. CLAUDE.md §4 권위 문서 수정 G1/G3/G4 합의 룰 충족
+- [ ] D2 사용자 합의 — G1 승인 (2026-05-27). CLAUDE.md §4 권위 문서 수정 G1/G3/G4 합의 룰 중 G3·G4 합의 채널은 별도 진행 보류 — plan 안에서 "G1 단독 = G3·G4 대리" 예외를 발명하지 않는다 (codex #105 round 5 지적). 본 항목은 G3·G4 합의 확보 후 체크
 - [x] `proc/spec/01-AI-명령지침.md §3` 갱신:
   - 본 리포 한정: "Next.js 룰 — 본 리포 한정 분기" 항목 신설, spec/09 §9.1 권위 명시, `node_modules/next/dist/docs/` 부재로 표준 Next.js 컨벤션 + 공식 docs 직접 참조 채택
   - 다른 풀림 프로젝트 (planner·Q·classbot) 는 해당 리포 docs·spec 룰 유지 — 본 분기 범위 밖 명시
