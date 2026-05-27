@@ -1,6 +1,6 @@
 # 2026-05-20 — Plan G: pullim 리포 workflows 이식 + monorepo 판단
 
-- **상태**: PHASE 2 PR 작성 완료 — 머지 대기 (2026-05-20). e2e-nightly.yml PR #90 (`.github/workflows/e2e-nightly.yml`). cron `0 17 * * *` (KST 02:00) + workflow_dispatch. 21 게임 matrix + shared specs job. self-hosted runner. secrets 의존 0. Codex round 1·2 지적 fix 반영(매핑 재설계 + concurrency 정합 + custom-* chrome 커버 + vocab-typing 회귀 분리). 머지·schedule 작동은 아직. PHASE 1 (codex-review.yml) 만 main 정착 완료.
+- **상태**: COMPLETE (2026-05-26 archive) — Phase 1 (codex-review.yml, PR #87) + Phase 2 (e2e-nightly.yml, PR #90) + Phase 3 (AGENTS.md 보강, PR #98) 모두 머지. self-hosted runner group 라우팅 (PR #97 → #100 → #101 안정화) 정착. Phase 4·5 검증 트랙은 별 plan 으로 분기 — `2026-05-20_plan-g-phase17-spec-01-section3-followup.md` (spec/01 §3 정합화, PR #93 plan 머지) + `2026-05-21_plan-g-phase18-spec-01-09-billing-pii-followup.md` (spec/01·09 PII 예외 조항, PR #94 plan 머지). 두 follow-up 모두 G1/G3/G4 합의 대기. e2e-nightly 첫 실 작동 검증은 audit v5 §10 / 다음 audit 사이클 (v6) 의무. 본 plan 자체는 archive 이관.
 - **거버넌스 (사용자 합의 2026-05-20)**: codex review 결과를 회피하기 위해 codex 워크플로·프롬프트 수정 금지. codex 지적은 코드 fix 로만 응답 (룰북 수정 X). 정당한 trade-off 만 별 plan 합의 후 기록.
 - **트리거**: 사용자 요청 "pullim의 workflows를 pullim-games로 이식. monorepo 구조 필요하면 변경도 같이". 직접 동기 = Codex Review bot 작동 (오늘 PR #83 검증 시 0 review 발견).
 - **메모리 룰**:

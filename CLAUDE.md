@@ -137,7 +137,7 @@ proc/
 
 - **codex 지적은 원칙적으로 코드 fix 로 응답.** 룰북(workflow yml·프롬프트·AGENTS.md·CLAUDE.md·proc/spec/01~10) 을 **회피 목적**으로 수정하는 행위 금지. codex 가 실제 명세 결함을 짚은 경우는 회피가 아니라 정당한 명세 진화 — 아래 §2 명세 우선 원칙 경로로 spec 을 먼저 정정한 뒤 코드 fix 가능
 - **단, 명세 자체가 틀렸다고 판단되는 경우 — `proc/spec/01-AI-명령지침.md §2 명세 우선 원칙` 의 정상 경로를 따른다 (절차 본문은 본 §9 + plan-g 가 출처, §2 자체는 "명세 먼저 수정, 그 뒤에 코드" 원칙만 명시):**
-  1. 별 plan (`proc/plan/`) 에 "명세 충돌·수정 근거" 기록 — 본 거버넌스 정착 근거는 `proc/plan/2026-05-20_plan-g-pullim-workflow-port.md`
+  1. 별 plan (`proc/plan/`) 에 "명세 충돌·수정 근거" 기록 — 본 거버넌스 정착 근거는 `proc/archive/plan/2026-05-20_plan-g-pullim-workflow-port.md` (COMPLETE archive 이관)
   2. 사용자(G1/G3/G4) 합의 — 권위 문서(`proc/spec/01~10`) 수정은 본 CLAUDE.md **§4 "사용자 명시 확인 후"** 룰
   3. 합의 후 spec 먼저 수정, 그 뒤에 코드 fix
   - 이 경로는 "회피"가 아니라 정당한 명세 진화. codex 지적이 spec 결함을 짚은 경우에도 동일하게 적용
