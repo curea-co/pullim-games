@@ -96,7 +96,7 @@ v4 ✅ 5/5 → v5 dry-run "PR #92 머지 후 modes wrapper 강화 예고" → �
 | production 미반영 누적 일수 | **4일** (2026-05-22 → 2026-05-26) | 본 audit 시점 |
 | 사용자 본인 액션 의무 | `bunx vercel --prod` 수동 배포 — CLAUDE.md §4 "하면 안 되는 것" 의 "`vercel --prod` 수동 배포 전에 production 검증 보고" + 메모리 룰 `project_deploy_manual` 에 명시. (본 audit 시점 daily_outcome 5/22·5/26 파일은 main 미머지 — 별 PR 로 누적 정리 예정) | CLAUDE.md §4 + 메모리 `project_deploy_manual` |
 
-→ **production 미반영 4일째**. dry-run §3.2 의 "사용자 검증 의무" 항목이 본 doc 시점에 4일 이월. main 머지된 daily_outcome 5/20 시점부터 **production URL 정상 접속 여부** 미확인 상태가 4일 이월 (5/21·5/22·5/26 일자 daily_outcome 자체가 별 PR 로 누적 정리 대기 중 — 본 audit 시점 main 미머지) — 본 doc 직후 사용자 본인 vercel --prod 액션 1회로 일괄 해소 가능.
+→ **production 미반영 4일째**. dry-run §3.2 의 "사용자 검증 의무" 항목이 본 doc 시점에 4일 이월. main 머지된 daily_outcome 의 마지막 일자가 **5/20** (`daily_outcome/2026-05-20.md` 가 main 최신본) 인 점·§6 표의 배포 시점(2026-05-22 10:42 KST) 이후 머지된 PR #91·#92·#93·#94·#98·#99·#100·#101 8건이 production 에 미반영 인 점 두 가지 main 검증 가능한 근거만으로 — **production URL 정상 접속 여부** 미확인 상태가 4일 이월 (`bunx vercel inspect` 마지막 production 배포 = 5/22 10:42 KST 이후 사용자 본인 vercel --prod 액션 0회). 본 doc 직후 사용자 본인 vercel --prod 액션 1회로 일괄 해소 가능.
 
 ## 7. CI 인프라 정착 (v3/v4 informational "CI 정착도" → progress)
 
@@ -145,7 +145,7 @@ D1(V2=2026 Q4) + D5(Toss) 합의 완료. 잔여 5건 (가격 모델·기능 비�
 | 게임 수 | 21 | 21 | 21 |
 | critical 미해소 | 0 | 0 | 0 |
 | informational 미해소 | 17 | 8 | 8 (정체) |
-| vitest | 201 | 221 | **398** (`bun run test` = `vitest run` 본 audit 작성 시점 실 카운트, 36 파일 / 398 pass / 0 fail. `bun test` 직접 실행은 `vi.unstubAllEnvs` 등 vitest API 미지원으로 실패 — 본 리포 단위 테스트 채널은 `bun run test` 가 정식) |
+| vitest | 201 | 221 | **398** (본 audit 작성 시점 `bun run test` (= `vitest run`) 로 측정한 실 카운트, 36 파일 / 398 pass / 0 fail. 본 audit 시점 `bun test` 직접 실행은 `vi.unstubAllEnvs` 등 vitest API 미지원으로 실패 — 단, CLAUDE.md §5 명령 표는 `bun test` 로 적혀 있어 명령 표준화는 별 트랙. 본 메트릭은 `bun run test` 측정값으로만 한정) |
 | 단일 백본 완결 | 4/4 | 5/5 | 5/5 (modes wrapper 학습 로직 확장) |
 | 모드 wrapper 채택률 | 21/21 default | 21/21 default + 3 모드 rating 정식 | 21/21 default + review-queue 16 호출처 + time-attack 4 메커니즘 + deep-recall R<0.6 |
 | 머지 PR (audit 사이클) | — | 5 (#76~#81) | **15** (#84~#101, 본 audit 본 doc PR 제외) |
