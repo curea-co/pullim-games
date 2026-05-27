@@ -63,10 +63,10 @@ v4 ✅ 5/5 → v5 dry-run "PR #92 머지 후 modes wrapper 강화 예고" → �
 | modes wrapper | ✅ 4/4 rating 정식 | 잠정 진화 예고 | **✅ 학습 로직 확장 정착** — time-attack `elapsedMs` 의존, deep-recall R<0.6 카드 풀 필터, 4 메커니즘 TimeAttackTimer 통합 | PR #92 / 단순 분기 → 실제 학습 로직 보유 wrapper |
 | 변별력 distractor helper | ✅ COMPLETE | 변화 X | 변화 X | — |
 
-**모드 wrapper 채택률**:
-- default: 17/17 게임
-- review-queue: 16 호출처 URL `?mode=review-queue` 진입 (PR #85)
-- time-attack: 30초/카드 + `again` 강제 (PR #92, Plan E D1.3·D1.4 합의)
+**모드 wrapper 채택률** (분모 = 본 리포 21개 게임 전체):
+- default: 21/21 게임 (`src/games/*` 21개 디렉터리 모두 modes wrapper 위에서 동작 — PR #73·#74 마이그레이션 완료)
+- review-queue: 16 호출처 URL `?mode=review-queue` 진입 (PR #85, 호출처 카운트 — 게임 단위 아님)
+- time-attack: 30초/카드 + `again` 강제, 4 메커니즘 TimeAttackTimer 통합 (PR #92, Plan E D1.3·D1.4 합의)
 - deep-recall: R<0.6 카드 풀 필터 (PR #92)
 
 → **단일 백본 + 다중 모드** 메모리 룰 본격 발현. modes wrapper 가 실제 학습 신호(timer·R 필터) 보유 stage 로 진입.
@@ -94,15 +94,15 @@ v4 ✅ 5/5 → v5 dry-run "PR #92 머지 후 modes wrapper 강화 예고" → �
 | 배포 시점 main HEAD | (확인 필요: vercel build commit SHA) — 시간상 PR #97 (2026-05-21 16:35 KST 머지) 까지 반영 가능성 농후. PR #91~#94 (2026-05-22 13:49 KST 머지) 는 vercel 배포 (10:42 KST) **이후** 머지로 미반영 | `git log --before='2026-05-22T01:42:52Z'` |
 | **production 미반영 PR** | **PR #91·#92·#93·#94·#98·#99·#100·#101 — 8건** (`feat(plan-d) V2 결제 spec + Resend 알림` / `feat(plan-e) time-attack + deep-recall + 진입점` / Plan G Phase 1.7·1.8 plan / AGENTS.md 보강 + audit v5 dry-run / Plan D·E 사용자 합의 메모 / CI runner 라우팅 2회) | 본 audit + `gh pr list --state merged` |
 | production 미반영 누적 일수 | **4일** (2026-05-22 → 2026-05-26) | 본 audit 시점 |
-| 사용자 본인 액션 의무 | `bunx vercel --prod` 수동 배포 — daily_outcome 5/22 §3 / 5/26 09:30 §4 반복 명시 | CLAUDE.md §4 "사용자 명시 확인 후" + 메모리 `project_deploy_manual` |
+| 사용자 본인 액션 의무 | `bunx vercel --prod` 수동 배포 — CLAUDE.md §4 "하면 안 되는 것" 의 "`vercel --prod` 수동 배포 전에 production 검증 보고" + 메모리 룰 `project_deploy_manual` 에 명시. (본 audit 시점 daily_outcome 5/22·5/26 파일은 main 미머지 — 별 PR 로 누적 정리 예정) | CLAUDE.md §4 + 메모리 `project_deploy_manual` |
 
-→ **production 미반영 4일째**. dry-run §3.2 의 "사용자 검증 의무" 항목이 본 doc 시점에 4일 이월. daily_outcome 마감 4열 검증 행에서 **production URL 정상 접속 여부** 미확인 상태가 5/20·5/21·5/22 3 일자 반복 — 본 doc 직후 사용자 본인 vercel --prod 액션 1회로 일괄 해소 가능.
+→ **production 미반영 4일째**. dry-run §3.2 의 "사용자 검증 의무" 항목이 본 doc 시점에 4일 이월. main 머지된 daily_outcome 5/20 시점부터 **production URL 정상 접속 여부** 미확인 상태가 4일 이월 (5/21·5/22·5/26 일자 daily_outcome 자체가 별 PR 로 누적 정리 대기 중 — 본 audit 시점 main 미머지) — 본 doc 직후 사용자 본인 vercel --prod 액션 1회로 일괄 해소 가능.
 
 ## 7. CI 인프라 정착 (v3/v4 informational "CI 정착도" → progress)
 
 | CI 변화 | PR | 정착 상태 (v5 본 doc) | 검증 의무 |
 |---|---|---|---|
-| codex-review.yml 이식 (Plan G Phase 1) | #87 | ✅ self-hosted runner + GitHub App secret 정착 (별 PR #88 검증 완료) | PR #91·#92·#93·#94 본 PR 들에서 Codex round 5~9 실 동작 확인 (PR #91 9 round, PR #92 다회) |
+| codex-review.yml 이식 (Plan G Phase 1) | #87 | ✅ self-hosted runner + GitHub App secret 정착. (PR #88 은 검증용 docs PR 로 작성됐으나 main 미머지 — CLOSED 상태로 산출물 `proc/research/2026-05-20_codex-review-port-validation.md` 도 main 부재. 본 audit 의 정착 판단 근거는 아래 "검증 의무" 열의 실 동작 PR 들로 대체) | PR #91·#92·#93·#94 본 PR 들에서 Codex round 5~9 실 동작 확인 (PR #91 9 round, PR #92 다회) |
 | e2e-nightly.yml (Plan G Phase 2) | #90 | ✅ cron `0 17 * * *` (KST 02:00) | (확인 필요: 첫 1회 실 작동 결과 — 5/21 02:00 KST 이후) |
 | self-hosted runner `pullim-games` 전용 group | #97 | ✅ 정착 | — |
 | runner 라우팅 fluctuation (curea-runner-2 → group 복귀) | #100 → #101 | ✅ 안정화 (#101 fix) | 본 시도 학습: runner 이름 직접 지정 회피, group 단독 명시가 안정적 |
@@ -124,7 +124,7 @@ PR #93·#94 머지로 plan 신설은 정착했으나 **D1·D2 사용자 합의 0
 
 - Phase 1.7: spec/01 §3 의 Next.js docs 우선 룰 → 본 리포 한정 분기 룰 신설 (A 추천)
 - Phase 1.8: spec/01 PII 0 + spec/09 이메일 V2 재검토 ↔ spec/05 §5.7.5 V1.5 외부 위임 정합화 (A 추천 — 예외 조항 신설)
-- → **본 audit 와 별개로 daily_outcome 09:30 §4 합의 추천 항목으로 라우팅 의무**
+- → **본 audit 와 별개로 차기 daily_outcome (사용자 누적 정리 PR 머지 시) 합의 추천 섹션에 라우팅 의무**
 
 ### 8.3 Plan D D2·D3·D4·D6·D7 합의 5건 정체
 
@@ -132,7 +132,7 @@ D1(V2=2026 Q4) + D5(Toss) 합의 완료. 잔여 5건 (가격 모델·기능 비�
 
 - D1(2026 Q4) 기준 역산 시 가격 정의 (D2·D4) 가 가장 선행. D3 기능 비교는 D2 모델 따라 가변. D6·D7 는 D2·D4 후
 - → **합의 권장 순서**: D4 가격대 → D2 가격 모델 → D3 기능 비교 → D6 환불 → D7 학생할인
-- → 본 audit 와 별개로 daily_outcome 09:30 §4 합의 추천 항목으로 라우팅 의무
+- → 본 audit 와 별개로 차기 daily_outcome (사용자 누적 정리 PR 머지 시) 합의 추천 섹션에 라우팅 의무
 
 ### 8.4 production 미반영 8 PR 누적
 
@@ -147,7 +147,7 @@ D1(V2=2026 Q4) + D5(Toss) 합의 완료. 잔여 5건 (가격 모델·기능 비�
 | informational 미해소 | 17 | 8 | 8 (정체) |
 | vitest | 201 | 221 | (확인 필요: PR #91·#92 머지 후 신규 테스트 — `bun test` 1회 실 카운트) |
 | 단일 백본 완결 | 4/4 | 5/5 | 5/5 (modes wrapper 학습 로직 확장) |
-| 모드 wrapper 채택률 | 17/17 default | 17/17 default + 3 모드 rating 정식 | 17/17 default + review-queue 16 호출처 + time-attack 4 메커니즘 + deep-recall R<0.6 |
+| 모드 wrapper 채택률 | 21/21 default | 21/21 default + 3 모드 rating 정식 | 21/21 default + review-queue 16 호출처 + time-attack 4 메커니즘 + deep-recall R<0.6 |
 | 머지 PR (audit 사이클) | — | 5 (#76~#81) | **15** (#84~#101, 본 audit 본 doc PR 제외) |
 | production 미반영 PR | — | — | **8** (#91·#92·#93·#94·#98·#99·#100·#101) |
 | CI 워크플로우 | codex-review.yml 없음 | 없음 | codex-review.yml + e2e-nightly.yml + runner group 라우팅 |
