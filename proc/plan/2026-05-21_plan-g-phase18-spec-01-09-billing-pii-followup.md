@@ -10,7 +10,7 @@
 ### A. spec/05 V1.5 변경 사항 (PR #91 머지 후 main 적용)
 
 - **§5.7 결제·구독 정책 신설** (PR #91 b0d0c3f) — D5 Toss Payments 채택, D1·D2·D3·D4·D6·D7 미합의 매트릭스
-- **§5.7.5 외부 메일 위임 정책** (PR #91 53f4c3b) — Resend 채택, 본 서버 PII 저장 0, segment marker `billing-launch-notify`
+- **§5.7.5 외부 메일 위임 정책** (PR #91 53f4c3b) — Resend 채택, 본 서버 PII 저장 0, contact properties source marker `properties.source = 'billing-launch-notify'` (필수) + 선택적 `RESEND_SEGMENT_ID` 기반 segment 부착 (옵션)
 - **§5.6 알림 정직성 카피 강화** — "출시 시 알림 받기, 6개월 보존, 외부 메일 서비스 위임"
 
 ### B. spec/01·09 의 PII 룰 (현 권위)
@@ -51,7 +51,7 @@
 조건 (3 의무):
 1. **본 서버 PII 저장 0** — 받은 이메일은 외부 메일 서비스(Resend 등) 위임 즉시 메모리 폐기. DB·logfile·캐시 어떤 영속 채널에도 잔존 X
 2. **외부 위임 정직성 카피** — 사용자 화면에 "외부 메일 서비스 위임" 명시. spec/05 §5.6 일치
-3. **segment marker** — 외부 서비스 측 contact 에 `source = 'billing-launch-notify'` + `consented_at` ISO 마커. spec/05 §5.7.5 일치
+3. **contact properties source marker** — 외부 서비스 측 contact 의 `properties.source = 'billing-launch-notify'` + `consented_at` ISO 마커 (필수). spec/05 §5.7.5 의 contact properties 정책 일치. 참고: 동 §5.7.5 의 `RESEND_SEGMENT_ID` 기반 segment 부착은 선택 사항이며 본 예외 인정 조건 아님 — 본 항목과 혼동 금지
 
 위 3 조건 모두 만족 시 V1.5 알림 신청은 본 PII 0 룰의 예외로 인정. 다른 신규 이메일 수집 경로는 V2 합의 (G1/G3/G4) 후 별 plan.
 ```
@@ -92,7 +92,8 @@
 - [x] 본 plan doc 갱신 — 상태 DRAFT → ACTIVE/PARTIAL, scope·체크리스트·한계 정정 (docs only, 기존 파일 수정. plan 본문 자체는 PR #91 머지 후 별 plan 으로 이미 신설된 상태)
 - [x] Codex Review round 1 지적 수용 — "G3·G4 합의 보류 상태에서 권위 문서 본문 박아 넣는 행위 = CLAUDE.md §4/§9 위반" → spec/01·09 본문 변경 revert, scope 축소
 - [x] Codex Review round 2 지적 수용 — "archive 이동 + D1·D2 체크박스 [x] = CLAUDE.md §6 archive 계약 + D2 정의 위반" → plan 을 `proc/plan/` 활성 트랙 복귀 + D2 체크박스 미완료 분리
-- [x] Codex Review round 5 지적 수용 — (1) D1 체크박스 의미 모호 → D1 정식 합의 미완료 [ ] 로 되돌리고 "D1 보조 — G1 단독 의견 기록" 항목으로 분리, (2) `segment marker` 표현이 spec/05 §5.7.5 의 optional segment 와 필수 `properties.source` 마커 혼동 → `contact properties source marker` 로 정정 + §5.6 (정직성 카피) 출처 명시 분리
+- [x] Codex Review round 5 지적 수용 — (1) D1 체크박스 의미 모호 → D1 정식 합의 미완료 [ ] 로 되돌리고 "D1 보조 — G1 단독 의견 기록" 항목으로 분리, (2) `segment marker` 표현이 spec/05 §5.7.5 의 optional segment 와 필수 `properties.source` 마커 혼동 → `contact properties source marker` 로 정정 + §5.6 (정직성 카피) 출처 명시 분리 (round 5 commit `abd523b` 은 §3 작업 항목 서술만 정정했고, draft 본문 §0.A line 13 + §1.B Draft line 54 의 `segment marker 'billing-launch-notify'` 표현이 그대로 남아 있었음 — round 6 에서 draft 본문 일괄 정정)
+- [x] Codex Review round 6 지적 수용 — round 5 commit `abd523b` 이 §0.A + §1.B Draft 의 `segment marker` 표현을 미반영했던 정합성 결함 정정. §0.A → "contact properties source marker `properties.source = 'billing-launch-notify'` (필수) + 선택적 segment (옵션)" 로 풀어 적시. §1.B Draft 3 의무 조건 (3) → "contact properties source marker — `properties.source = 'billing-launch-notify'` + `consented_at` ISO (필수)" 명시 + RESEND_SEGMENT_ID segment 부착이 선택 사항임을 본문에 박아 후속 spec 본문 갱신 PR 의 혼동 차단
 
 #### 별 PR (D2 완료 = G3·G4 합의 후)
 
