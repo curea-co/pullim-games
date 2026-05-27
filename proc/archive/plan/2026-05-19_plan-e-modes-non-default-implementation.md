@@ -77,7 +77,7 @@ const mode = (searchParams.get("mode") ?? "default") as GameMode;
 - D1.2: 진입 트리거 — Phase 2 본 PR은 **URL 직접 진입(`?mode=review-queue`)만 지원**. 홈/허브 보조 링크는 Phase 5(별 PR).
 
 **time-attack**:
-- D1.3: 타이머 단위 — **카드별 30초 합의 (2026-05-22)**. 카드별 독립 타이머가 메커니즘 컴포넌트와 1:1 매핑 가장 단순. PR #92 `TimeAttackTimer` default 값과 일치. ([daily_outcome/2026-05-22.md](../../daily_outcome/2026-05-22.md))
+- D1.3: 타이머 단위 — **카드별 30초 합의 (2026-05-22)**. 카드별 독립 타이머가 메커니즘 컴포넌트와 1:1 매핑 가장 단순. PR #92 `TimeAttackTimer` default 값과 일치. ([daily_outcome/2026-05-22.md](../../../daily_outcome/2026-05-22.md))
 - D1.4: 시간 초과 페널티 강도 — **`again` 강제 사후 추인 (2026-05-22)**. D1.3 추천 패키지에 묶음 채택. 시간 초과 = FSRS 재학습 신호 (자연스러운 처리). PR #92 `handleTimeout()` 구현값 그대로.
 
 **deep-recall**:
