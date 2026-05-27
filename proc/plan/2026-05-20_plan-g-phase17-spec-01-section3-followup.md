@@ -1,6 +1,6 @@
 # 2026-05-20 — Plan G Phase 1.7: proc/spec/01 §3 권위 정합화 (follow-up)
 
-- **상태**: COMPLETE (2026-05-27) — D1 추천안 A (본 리포 한정 분기 룰 신설) **G1·G3·G4 합의 완료** (CLAUDE.md §4 "권위 문서 수정 G1/G3/G4 합의" 룰 준수 — G1 이 4 풀림 단일 owner 권한으로 G3·G4 명목 대리 합의, 2026-05-27 사용자 명시 결정). spec/01 §3 line 19 갱신 + AGENTS.md 우회 선언 제거 본 PR 머지.
+- **상태**: IN-REVIEW (2026-05-27) — D1 추천안 A (본 리포 한정 분기 룰 신설) **G1·G3·G4 합의 완료** (CLAUDE.md §4 "권위 문서 수정 G1/G3/G4 합의" 룰 준수 — G1 이 4 풀림 단일 owner 권한으로 G3·G4 명목 대리 합의, 2026-05-27 사용자 명시 결정). spec/01 §3 line 19 갱신 + AGENTS.md 우회 선언 제거 본 PR #105 review 진행 중. 작업 항목 §3 의 codex review 자동 트리거 항목이 미완료 상태이므로 archive 이관은 본 PR 머지 후 후속 commit/PR (CLAUDE.md:112 "proc/archive/ = 완료된 plan 보관용" 룰 준수).
 - **트리거**: PR #89 의 Codex round 4 지적 — "AGENTS.md 에서 spec/01 §3 우회 선언은 충돌 해소가 아닌 우회". 진짜 해소 = spec/01 §3 자체 수정.
 - **거버넌스 룰** (CLAUDE.md §9 — 2026-05-20 정착): 권위 문서(`proc/spec/01~10`) 수정은 §4 "사용자 명시 확인 후" 룰 — G1/G3/G4 합의 의무. PR #89 scope 초과로 별 PR 분리.
 - **연관**: `proc/plan/2026-05-20_plan-g-pullim-workflow-port.md` (현 시점 plan/ 에 위치 — archive 이관은 별 PR 필요), PR #89 머지 후 main 의 `AGENTS.md` 우회 선언 잔존분은 본 plan 머지로 제거됨.
