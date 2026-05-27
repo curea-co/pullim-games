@@ -66,7 +66,7 @@
 
 - [x] plan-d 본 plan 에서 D2~D7 항목 본 plan 으로 이관 표기 (`[→]` 마커 + 링크)
 - [x] 본 plan 신설 — Phase A~E 골격 + 합의 권장 순서 명시
-- [x] plan-d 본 plan 본문 상태 갱신 — Phase 1 만 D2~D7 G3 합의 대기 명시
+- [x] plan-d 본 plan 본문 상태 갱신 — Phase 1 만 D2~D7 **G1·G3·G4** 합의 대기 명시 (`CLAUDE.md §4` 권위 문서 수정 룰 — 합의 주체는 G1·G3·G4 모두)
 
 ### Phase A — D4 (가격대) 합의 (별 PR)
 

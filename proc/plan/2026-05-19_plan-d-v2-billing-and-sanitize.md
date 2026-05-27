@@ -1,9 +1,9 @@
 # 2026-05-19 — Plan D: V2 결제 정책·백엔드 + content sanitize·AI error 처리
 
-- **상태**: PARTIAL-COMPLETE (2026-05-26) — Phase 2·3 완료, Phase 1 만 D2~D7 **G1·G3·G4** 합의 대기 (`CLAUDE.md §4` 권위 문서 수정 룰 — 합의 주체는 G1·G3·G4 모두).
+- **상태**: PARTIAL-COMPLETE (2026-05-26) — Phase 2 완료, Phase 3 = AI error 일반화 완료 / page.tsx sanitize 통합은 후속(별 plan) 으로 이관, Phase 1 만 D2~D7 **G1·G3·G4** 합의 대기 (`CLAUDE.md §4` 권위 문서 수정 룰 — 합의 주체는 G1·G3·G4 모두).
   - **Phase 2 (billing 백엔드)**: PR #91 머지 — `/api/billing/notify` + Resend 위임 + same-origin + IP rate limit + dev 폴백 키. Codex review round 2·3·5·6 fix 통합
-  - **Phase 3 (sanitize·AI error 일반화)**: PR #80 머지 (helper + actions catch + sanitize 단위 10건) + 본 PR-A (actions 일반화 회귀 5건 + plan-d D2~D7 별 plan 분리). page.tsx commitAll 통합은 codex review #104 round 1 지적 (학습 콘텐츠 훼손 위험) 반영하여 본 PR 에서 롤백 → 본 PR 의 page.tsx diff = 0 (UI 변경 없음, ui:audit 면제 사유 = `proc/audit` viewport audit gate §"docs only PR 면제")
-  - **Phase 1 (V2 결제 정책 spec)**: D5 (Toss Payments, 2026-05-20) · D1 (V2 출시 2026 Q4, 2026-05-22) 합의 완료 (G1·G3·G4). D2~D7 는 별 plan 트랙으로 분리 (사용자 합의 2026-05-26) — [`2026-05-26_plan-d-v2-pricing-decisions.md`](./2026-05-26_plan-d-v2-pricing-decisions.md) 신설
+  - **Phase 3 (sanitize·AI error 일반화)**: **부분 완료** — (a) AI error 일반화 = 완료 (PR #80 helper + actions catch + sanitize 단위 10건 + 본 PR-A actions 일반화 회귀 5건), (b) **page.tsx sanitize 통합 = 미완료 / 후속 별 plan** — codex review #104 round 1 지적 (학습 콘텐츠 훼손 위험) 반영하여 본 PR 에서 롤백 → 본 PR 의 page.tsx diff = 0. sanitize 호출 위치는 dangerouslyHTML 도입 시점에 렌더-측에서 적용 (별 plan 트리거)
+  - **Phase 1 (V2 결제 정책 spec)**: D5 (Toss Payments, 2026-05-20) 합의 완료 + spec/05 §5.7.1 반영 완료. D1 (V2 출시 2026 Q4, 2026-05-22) **합의 완료, spec 반영 대기** — 현재 `proc/spec/05 §5.7.2` D1 항목이 여전히 TBD 상태이므로 정합화될 때까지 plan 단독 선언으로 남음 (별 PR 에서 spec/05 §5.7.2 → §5.7.1 이동 필요). D2~D7 는 별 plan 트랙으로 분리 (사용자 합의 2026-05-26) — [`2026-05-26_plan-d-v2-pricing-decisions.md`](./2026-05-26_plan-d-v2-pricing-decisions.md) 신설
 - **트리거**: audit v3 §7 informational 4건 + critical C8(V2 트리거) 통합:
   - C8: `billing/page.tsx` 알림 신청 이메일 백엔드 전송 0 (mock toast)
   - informational: 결제 정책 명세 부재 (`proc/spec/05-비즈니스-정책.md §결제 없음`)
@@ -149,7 +149,7 @@ Round 5 가 IP 식별 불가 시 `"anonymous"` 전역 버킷 fallback 의 사이
 **PR-A (본 turn, 2026-05-26)** — AI error 일반화 회귀만 통합. page.tsx 통합은 codex 지적 반영하여 본 PR diff 0 으로 롤백:
 - [→] `manage/content/page.tsx` 입력 정규식 sanitize 통합 — **codex review #104 round 1 지적 반영하여 본 PR 에서 롤백 (TRADE-OFF)**. 저장 시점 sanitize 는 학습 콘텐츠 (정답·문제·해설에 `javascript:`·`<script>`·`on*=` 같은 문자열이 정답으로 포함될 수 있음 — 컴퓨터·웹 보안 학습 카드 등) 를 영구 변형해서 채점 깨짐·빈 문자열 저장 같은 회귀를 일으킴. **현재 dangerouslyHTML 사용처 0** 이라 React 자동 escape 가 1차 방어로 충분. sanitize helper (`src/lib/core/sanitize/index.ts`) 는 유지하되 호출 위치는 dangerouslyHTML 도입 시점에 렌더-측에서 적용 (별 plan). 본 PR 의 page.tsx diff = 0. 근거: `KNOWN-TRADE-OFF: proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md §3 Phase3 — codex review #104`
 - [x] vitest — `actions.test.ts` 5건 (rate-limit/auth/network error → 일반화 메시지 회귀, API key·status code 누출 0 검증, console.error 원본 보존, 정상 응답 통과)
-- [—] ui:audit 면제 — 본 PR 최종 diff 에 `page.tsx`·UI 컴포넌트 변경 없음 (page.tsx 통합 롤백 후). viewport audit §"docs only PR 면제" 사유 동일 적용
+- [—] ui:audit 면제 — 본 PR 최종 diff 에 `page.tsx`·UI 컴포넌트 변경 없음 (page.tsx 통합 롤백 후). 면제 근거 = **UI 대상 파일 미변경** (AGENTS.md §"viewport 4 audit" 의 대상 경로 — `src/components/{game-mechanics,game-shell,…}/`·`src/app/**/page.tsx|layout.tsx`·`src/games/*/component.tsx`·`tailwind.config.ts` — 변경 없음). 본 PR 에는 `actions.test.ts` 가 포함되어 docs-only PR 은 아니지만 viewport audit 게이트 대상 파일은 미변경이므로 면제 정당. 정정 근거: codex review #104 round 3
 - [x] e2e 비스코프 — `playwright.config.ts` 가 production build 환경이고 `@anthropic-ai/sdk` mock 부담이 큼. **TRADE-OFF** (`KNOWN-TRADE-OFF: proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md §3 Phase3`): 대신 vitest unit (5건) 으로 actions catch 분기 + console.error 보존 직접 검증. 회귀 신뢰성 동등 (logic-level coverage)
 
 ## 4. 비스코프
