@@ -4,14 +4,14 @@
 - **트리거** (CONVENTION §7):
   - **HARD T3 + T7** — PR #92 머지 (`resolveRating('time-attack')` `elapsedMs` 의존 신설 + `selectCardsForMode` deep-recall R<0.6 필터 = 단일 백본 modes wrapper 학습 로직 확장)
   - **SOFT T4** 2건 — PR #85 (메커니즘 mode prop 통합 16 호출처) + PR #92 (4 메커니즘 TimeAttackTimer 통합)
-  - **SOFT T6** — v4(PR #82) 이후 머지 PR 14건 (#84·#85·#86·#87·#89·#90·#91·#92·#93·#94·#97·#98·#99·#100·#101) → 임계 5건의 3배 초과
+  - **SOFT T6** — v4(PR #82) 이후 머지 PR 15건 (#84·#85·#86·#87·#89·#90·#91·#92·#93·#94·#97·#98·#99·#100·#101) → 임계 5건의 3배 초과
   - dry-run 산출 (PR #98, `proc/audit/2026-05-22_v5-dry-run.md`) 정합화 + 본 doc 정식 진입
 - **본 audit 의미**: dry-run 시점 잠정·추정값 확정. Plan D Phase 1+2 (V2 결제 spec + billing 알림 백엔드) + Plan E Phase 3+4+5 (time-attack 타이머·deep-recall 필터·홈/허브 진입점) + Plan G Phase 1·2·3 (Codex Review + e2e-nightly + AGENTS.md 보강) + Phase 1.7·1.8 (spec/01·09 정합화 follow-up plan) 진척 누계 점검.
-- **방법**: dry-run 6 PR + dry-run 이후 머지 8 PR (#91·#92·#93·#94·#98·#99·#100·#101) 직접 검증. v4 informational 잔존 8건은 본 doc 시점 변화 0 확인.
+- **방법**: dry-run 7 PR (#84·#85·#86·#87·#89·#90·#97) + dry-run 이후 머지 8 PR (#91·#92·#93·#94·#98·#99·#100·#101) 직접 검증. v4 informational 잔존 8건은 본 doc 시점 변화 0 확인.
 
 ## 1. dry-run 이후 추가 머지 8건 (T6 카운트 확정)
 
-dry-run (PR #98) 시점 카운트 7건 + 본 doc 시점 추가 8건 = **누계 15건**. SOFT T6 5건 임계의 3배.
+dry-run (PR #98) 시점 카운트 7건 (#84·#85·#86·#87·#89·#90·#97 — `proc/audit/2026-05-22_v5-dry-run.md` §1 표 기준) + 본 doc 시점 추가 8건 = **누계 15건**. SOFT T6 5건 임계의 3배.
 
 | PR | 머지 (KST) | 본질 | 카운트 | HARD/SOFT |
 |---|---|---|---|---|
@@ -91,7 +91,7 @@ v4 ✅ 5/5 → v5 dry-run "PR #92 머지 후 modes wrapper 강화 예고" → �
 | 마지막 production 배포 시점 | **2026-05-22 10:42:52 KST (01:42 UTC)** | `bunx vercel inspect pullim-games-jw0gjzlx6-powershs-projects.vercel.app` |
 | 배포 ID | `dpl_CbvZzdh7i4mMXzRk7o1CSQHc91Sj` | 동 |
 | 배포 alias | `pullim-games.vercel.app` (Production Ready) | 동 |
-| 배포 시점 main HEAD | (확인 필요: vercel build commit SHA) — 시간상 PR #97 (2026-05-21 16:35 KST 머지) 까지 반영 가능성 농후. PR #91~#94 (2026-05-22 13:49 KST 머지) 는 vercel 배포 (10:42 KST) **이후** 머지로 미반영 | `git log --before='2026-05-22T01:42:52Z'` |
+| 배포 시점 main HEAD | **`9207cc5`** (PR #97 `chore(ci): self-hosted runner를 pullim-games 전용 group 으로 라우팅`, 2026-05-21 16:35 KST 머지) — `git log --before='2026-05-22T01:42:52Z'` main 최상단 commit. PR #91~#94 (2026-05-22 13:49 KST 머지) 는 vercel 배포 (10:42 KST) **이후** 머지로 미반영 | `git log --before='2026-05-22T01:42:52Z' main -1` |
 | **production 미반영 PR** | **PR #91·#92·#93·#94·#98·#99·#100·#101 — 8건** (`feat(plan-d) V2 결제 spec + Resend 알림` / `feat(plan-e) time-attack + deep-recall + 진입점` / Plan G Phase 1.7·1.8 plan / AGENTS.md 보강 + audit v5 dry-run / Plan D·E 사용자 합의 메모 / CI runner 라우팅 2회) | 본 audit + `gh pr list --state merged` |
 | production 미반영 누적 일수 | **4일** (2026-05-22 → 2026-05-26) | 본 audit 시점 |
 | 사용자 본인 액션 의무 | `bunx vercel --prod` 수동 배포 — CLAUDE.md §4 "하면 안 되는 것" 의 "`vercel --prod` 수동 배포 전에 production 검증 보고" + 메모리 룰 `project_deploy_manual` 에 명시. (본 audit 시점 daily_outcome 5/22·5/26 파일은 main 미머지 — 별 PR 로 누적 정리 예정) | CLAUDE.md §4 + 메모리 `project_deploy_manual` |
@@ -103,11 +103,11 @@ v4 ✅ 5/5 → v5 dry-run "PR #92 머지 후 modes wrapper 강화 예고" → �
 | CI 변화 | PR | 정착 상태 (v5 본 doc) | 검증 의무 |
 |---|---|---|---|
 | codex-review.yml 이식 (Plan G Phase 1) | #87 | ✅ self-hosted runner + GitHub App secret 정착. (PR #88 은 검증용 docs PR 로 작성됐으나 main 미머지 — CLOSED 상태로 산출물 `proc/research/2026-05-20_codex-review-port-validation.md` 도 main 부재. 본 audit 의 정착 판단 근거는 아래 "검증 의무" 열의 실 동작 PR 들로 대체) | PR #91·#92·#93·#94 본 PR 들에서 Codex round 5~9 실 동작 확인 (PR #91 9 round, PR #92 다회) |
-| e2e-nightly.yml (Plan G Phase 2) | #90 | ✅ cron `0 17 * * *` (KST 02:00) | (확인 필요: 첫 1회 실 작동 결과 — 5/21 02:00 KST 이후) |
+| e2e-nightly.yml (Plan G Phase 2) | #90 | ⏳ **설정 반영만 확인** — cron `0 17 * * *` (KST 02:00) workflow yml 만 머지. 첫 1회 실 작동 결과 미검증 | 5/21 02:00 KST 이후 actions log 1회 실 작동 확인 의무 — §10 후속 트랙 |
 | self-hosted runner `pullim-games` 전용 group | #97 | ✅ 정착 | — |
 | runner 라우팅 fluctuation (curea-runner-2 → group 복귀) | #100 → #101 | ✅ 안정화 (#101 fix) | 본 시도 학습: runner 이름 직접 지정 회피, group 단독 명시가 안정적 |
 
-→ v3/v4 informational "CI 정착도" 트랙 **본 doc 시점 ✅ 안정화**. e2e-nightly 첫 실 작동 검증은 §8 후속.
+→ v3/v4 informational "CI 정착도" 트랙 — **codex-review·runner group 라우팅은 ✅ 안정화, e2e-nightly 는 ⏳ 설정 반영 단계** (첫 실 작동 검증은 §10 후속).
 
 ## 8. 신규 finding (v5 본 doc 진입)
 
@@ -145,7 +145,7 @@ D1(V2=2026 Q4) + D5(Toss) 합의 완료. 잔여 5건 (가격 모델·기능 비�
 | 게임 수 | 21 | 21 | 21 |
 | critical 미해소 | 0 | 0 | 0 |
 | informational 미해소 | 17 | 8 | 8 (정체) |
-| vitest | 201 | 221 | (확인 필요: PR #91·#92 머지 후 신규 테스트 — `bun test` 1회 실 카운트) |
+| vitest | 201 | 221 | **398** (`bun run test` = `vitest run` 본 audit 작성 시점 실 카운트, 36 파일 / 398 pass / 0 fail. `bun test` 직접 실행은 `vi.unstubAllEnvs` 등 vitest API 미지원으로 실패 — 본 리포 단위 테스트 채널은 `bun run test` 가 정식) |
 | 단일 백본 완결 | 4/4 | 5/5 | 5/5 (modes wrapper 학습 로직 확장) |
 | 모드 wrapper 채택률 | 21/21 default | 21/21 default + 3 모드 rating 정식 | 21/21 default + review-queue 16 호출처 + time-attack 4 메커니즘 + deep-recall R<0.6 |
 | 머지 PR (audit 사이클) | — | 5 (#76~#81) | **15** (#84~#101, 본 audit 본 doc PR 제외) |
