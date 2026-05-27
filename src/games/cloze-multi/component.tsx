@@ -3,7 +3,7 @@
 // 다중 빈칸 cloze — 본문 + 카드 풀. 카드 active → 슬롯 탭 = 배치. 슬롯 탭 = 풀 복귀.
 // 답지 노출 X — wrong 시 정확도만, 슬롯별 정/오 강조 X (학생 전체 재검토 강제).
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
@@ -22,6 +22,7 @@ import {
   selectCardsForMode,
   useGameMode,
 } from "@/lib/core";
+import { useEnterClicksRef } from "@/components/game-mechanics/useEnterToAdvance";
 
 const GAME_ID = "cloze-multi";
 const REVEAL_THRESHOLD = 5;
@@ -48,6 +49,8 @@ export default function ClozeMultiGame() {
     correct: number;
     total: number;
   } | null>(null);
+  const ctaRef = useRef<HTMLButtonElement | null>(null);
+  useEnterClicksRef(ctaRef);
 
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
@@ -316,6 +319,7 @@ export default function ClozeMultiGame() {
       cta={
         isResolved ? (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleNext}
             className="block w-full rounded-button border border-type-primary bg-bg-block px-4 py-3 text-center text-body text-type-primary transition-colors hover:bg-accent-positive/10"
@@ -324,6 +328,7 @@ export default function ClozeMultiGame() {
           </button>
         ) : (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleCheck}
             disabled={phase !== "playing" || !allFilled}

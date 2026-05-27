@@ -23,6 +23,7 @@ import {
   selectCardsForMode,
   useGameMode,
 } from "@/lib/core";
+import { useEnterClicksRef } from "@/components/game-mechanics/useEnterToAdvance";
 
 const GAME_ID = "bio-taxonomy";
 const POOL_ID = "pool" as const;
@@ -68,6 +69,8 @@ export default function BioTaxonomyGame() {
 
   const categoryRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const poolRef = useRef<HTMLDivElement | null>(null);
+  const ctaRef = useRef<HTMLButtonElement | null>(null);
+  useEnterClicksRef(ctaRef);
 
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
@@ -399,6 +402,7 @@ export default function BioTaxonomyGame() {
       cta={
         isResolved ? (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleNext}
             className="block w-full rounded-button border border-type-primary bg-bg-block px-4 py-3 text-center text-body text-type-primary transition-colors hover:bg-accent-positive/10"
@@ -407,6 +411,7 @@ export default function BioTaxonomyGame() {
           </button>
         ) : (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleCheck}
             disabled={phase !== "playing" || !allPlaced}

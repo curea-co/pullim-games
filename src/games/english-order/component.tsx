@@ -18,6 +18,7 @@ import {
   selectCardsForMode,
   useGameMode,
 } from "@/lib/core";
+import { useEnterClicksRef } from "@/components/game-mechanics/useEnterToAdvance";
 
 const GAME_ID = "english-order";
 const REVEAL_THRESHOLD = 5;
@@ -60,6 +61,8 @@ export default function EnglishOrderGame() {
   const [phase, setPhase] = useState<Phase>("playing");
   const [wrongCount, setWrongCount] = useState(0);
   const dragStartedRef = useRef(false);
+  const ctaRef = useRef<HTMLButtonElement | null>(null);
+  useEnterClicksRef(ctaRef);
 
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
@@ -323,6 +326,7 @@ export default function EnglishOrderGame() {
       cta={
         isResolved ? (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleNext}
             className="block w-full rounded-button border border-type-primary bg-bg-block px-4 py-3 text-center text-body text-type-primary transition-colors hover:bg-accent-positive/10"

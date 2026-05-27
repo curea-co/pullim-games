@@ -21,6 +21,7 @@ import {
 } from "@/lib/core";
 import { TimeAttackTimer } from "./TimeAttackTimer";
 import { DeepRecallEmpty } from "./DeepRecallEmpty";
+import { useEnterToAdvance } from "./useEnterToAdvance";
 
 type Phase = "idle" | "selecting" | "feedback" | "completed";
 
@@ -99,6 +100,18 @@ export function QuickQuizComponent({
   useEffect(() => {
     cardStartRef.current = performance.now();
   }, [cardIndex, cards]);
+
+  // Enter 단축키 — feedback 상태에서 다음 카드로 진행.
+  useEnterToAdvance(phase === "feedback", () => {
+    if (cardIndex >= cards.length - 1) {
+      setPhase("completed");
+      return;
+    }
+    setCardIndex(cardIndex + 1);
+    setPhase("idle");
+    setPicked(null);
+    dragStartedRef.current = false;
+  });
 
   // 빈 카드 풀 — deep-recall 모드는 R<0.6 카드 0건 안내.
   if (cards.length === 0) {
