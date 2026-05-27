@@ -3,7 +3,7 @@
 - **상태**: PROPOSAL (2026-05-27) — D1 추천안 A (본 리포 한정 분기 룰 신설) **G1 승인** (2026-05-27 사용자 명시 결정). D2 G3·G4 합의는 별 채널·후속 진행. CLAUDE.md §4 "권위 문서 수정 G1/G3/G4 합의" 룰을 본 plan 안에서 "G1 단독 = G3·G4 대리" 예외로 우회하지 않는다 (codex #105 round 5 지적). 본 PR #105 의 scope = **본 plan 문서 자체만 추가** — `proc/spec/01-AI-명령지침.md §3`, `proc/spec/09-기술-환경.md §9.1·§9.6`, `AGENTS.md` 본문 갱신은 **G3·G4 합의 완료 후 별 commit/PR 로 분리** (codex #105 round 6 지적: 합의 전 spec 본문 변경 머지 = 거버넌스 예외 선례 — 분리 머지가 정합).
 - **트리거**: PR #89 의 Codex round 4 지적 — "AGENTS.md 에서 spec/01 §3 우회 선언은 충돌 해소가 아닌 우회". 진짜 해소 = spec/01 §3 자체 수정.
 - **거버넌스 룰** (CLAUDE.md §9 — 2026-05-20 정착): 권위 문서(`proc/spec/01~10`) 수정은 §4 "사용자 명시 확인 후" 룰 — G1/G3/G4 합의 의무. PR #89 scope 초과로 별 PR 분리.
-- **연관**: `proc/archive/plan/2026-05-20_plan-g-pullim-workflow-port.md` (PR #105 머지로 archive 이관 완료, 2026-05-26 main 반영), PR #89 머지 후 main 의 `AGENTS.md` 우회 선언은 PR #105 정합화로 제거됨.
+- **연관**: `proc/archive/plan/2026-05-20_plan-g-pullim-workflow-port.md` (PR #105 머지로 archive 이관 완료, 2026-05-26 main 반영). PR #105 머지 시 `AGENTS.md` 우회 선언 (spec/01 §3 본 리포 환경에서 적용 불가) 도 함께 제거 예정이었으나, **G3·G4 합의 보류로 scope 축소** (본 plan §3 작업항목의 spec/01 §3·spec/09 §9.1·§9.6·AGENTS.md 본문 갱신 항목 미수행) — `AGENTS.md` L4·L13 우회 선언은 현 main 에 잔존. 또한 본 PR #103 의 plan-g-port archive 이관에 따라 `AGENTS.md` L4·L13 의 본 plan-g-port 경로 참조도 별 PR 의 archive 경로 갱신 대상. 둘 다 D2 합의 완료 후 별 PR 로 정합화.
 
 ## 0. 현 상태
 
