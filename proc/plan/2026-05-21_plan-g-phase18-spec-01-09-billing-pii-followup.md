@@ -1,9 +1,9 @@
 # 2026-05-21 — Plan G Phase 1.8: spec/01·09 PII 정책 ↔ spec/05 V1.5 결제 알림 정합화
 
-- **상태**: ACTIVE / PARTIAL (2026-05-27) — D1 추천안 A (spec/01·09 예외 조항 신설) **G1 단독 승인만 완료 · D2 (G3·G4 합의 채널) 대기**. CLAUDE.md §4 "권위 문서 수정 G1/G3/G4 합의" 룰 미충족 → spec/01·09 본문 변경은 본 PR 에서 분리. **본 PR scope = 본 plan doc 추가만** (docs only, plan 자체는 `proc/plan/` 활성 트랙에 유지). 실제 spec/01·09 본문 수정 + 본 plan archive 이동은 G3·G4 합의 후 별 PR — CLAUDE.md §4/§9 거버넌스 + §6 archive 계약 (완료된 plan만 archive) 준수 (사용자 결단 2026-05-27, Codex Review round 1·2 지적 수용). 현 시점 권위 문서에 대리 합의·우회 규칙 없음 — 정착하려면 별 PR 로 거버넌스 자체 개정 필요.
+- **상태**: ACTIVE / PARTIAL (2026-05-27) — D1 추천안 A (spec/01·09 예외 조항 신설) **G1 단독 승인만 완료 · D2 (G3·G4 합의 채널) 대기**. CLAUDE.md §4 "권위 문서 수정 G1/G3/G4 합의" 룰 미충족 → spec/01·09 본문 변경은 본 PR 에서 분리. **본 PR scope = 본 plan doc 갱신 (상태·scope 정정)** (docs only, plan 자체는 `proc/plan/` 활성 트랙에 유지 — 기존 DRAFT plan 의 상태/범위 갱신 PR 이며 신규 파일 생성은 아님). 실제 spec/01·09 본문 수정 + 본 plan archive 이동은 G3·G4 합의 후 별 PR — CLAUDE.md §4/§9 거버넌스 + §6 archive 계약 (완료된 plan만 archive) 준수 (사용자 결단 2026-05-27, Codex Review round 1·2 지적 수용). 현 시점 권위 문서에 대리 합의·우회 규칙 없음 — 정착하려면 별 PR 로 거버넌스 자체 개정 필요.
 - **트리거**: PR #91 의 Codex round 9 지적 #1 — "spec/05 가 V1.5 이메일 수집·외부 위임 허용으로 갱신됐는데 spec/01:36 + spec/09:20,42-45,209 의 `PII 0`·`이메일 수집은 V2 재검토` 권위 룰이 그대로라 source of truth 충돌".
 - **거버넌스 룰** (CLAUDE.md §9 — 2026-05-20 정착): 권위 문서(`proc/spec/01·09`) 수정은 §4 "사용자 명시 확인 후" 룰 — G1/G3/G4 합의 의무. PR #91 scope 초과로 별 PR 분리.
-- **연관**: `proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md`, `proc/spec/05-비즈니스-정책.md §5.7`, PR #105 (spec/01 §3 정합화, 동일 패턴).
+- **연관**: `proc/plan/2026-05-19_plan-d-v2-billing-and-sanitize.md`, `proc/spec/05-비즈니스-정책.md §5.7`, PR #93 (spec/01 §3 정합화 follow-up plan — plan doc only PR 의 동일 패턴 선행 사례. PR #105 는 그 후속 spec 본문 갱신 PR 이며 본 PR 의 별 PR 단계에 해당).
 
 ## 0. 현 상태
 
@@ -84,11 +84,11 @@
 
 ### Phase 1.8 — D1·D2 합의 후 (G1/G3/G4)
 
-#### 본 PR (#106) scope — plan doc 추가만
+#### 본 PR (#106) scope — plan doc 갱신 (상태·scope 정정)
 
 - [x] D1 — G1 단독 추천안 A 승인 (2026-05-27) **부분 합의만** — D1 정의(§2)는 정합화 방향 선택이며, 본 PR 한정으로 G1 단독 승인 기록. G3·G4 합의는 D2 트랙으로 미완료
 - [ ] D2 — G1/G3/G4 합의 채널 (§2 정의대로) — G3·G4 미합의로 **미완료**. 후속 PR 에서 정착 예정
-- [x] 본 plan doc 신설 — 충돌 본질·옵션 매트릭스·예외 조항 draft 기록 (docs only)
+- [x] 본 plan doc 갱신 — 상태 DRAFT → ACTIVE/PARTIAL, scope·체크리스트·한계 정정 (docs only, 기존 파일 수정. plan 본문 자체는 PR #91 머지 후 별 plan 으로 이미 신설된 상태)
 - [x] Codex Review round 1 지적 수용 — "G3·G4 합의 보류 상태에서 권위 문서 본문 박아 넣는 행위 = CLAUDE.md §4/§9 위반" → spec/01·09 본문 변경 revert, scope 축소
 - [x] Codex Review round 2 지적 수용 — "archive 이동 + D1·D2 체크박스 [x] = CLAUDE.md §6 archive 계약 + D2 정의 위반" → plan 을 `proc/plan/` 활성 트랙 복귀 + D2 체크박스 미완료 분리
 
@@ -119,4 +119,4 @@
 
 ## 6. 본 PR 의 한계
 
-본 PR (#106) 은 plan 신설만 (docs only). 본 plan 은 `proc/plan/` 활성 트랙에 유지 — D2 (G3·G4 합의 채널) 미완료이므로 CLAUDE.md §6 archive 계약 ("완료된 plan·design-audit만 archive") 을 따라 `proc/archive/plan/` 이동은 후속 PR (별 PR) 에서 실시. 실제 spec/01·09 본문 수정은 G3·G4 합의 후 별 PR — 동일 패턴: PR #105 (spec/01 §3 정합화 follow-up plan) 와 같은 절차. 본 PR scope 축소 결단은 **사용자 결단 2026-05-27** 근거 (Codex Review round 1·2 지적 수용, CLAUDE.md §4 권위 문서 G1/G3/G4 합의 룰 + §6 archive 계약 + §9 거버넌스 회피 금지 룰 준수).
+본 PR (#106) 은 plan doc 갱신만 (docs only — 기존 DRAFT plan 의 상태/scope 정정. 신규 파일 생성 아님). 본 plan 은 `proc/plan/` 활성 트랙에 유지 — D2 (G3·G4 합의 채널) 미완료이므로 CLAUDE.md §6 archive 계약 ("완료된 plan·design-audit만 archive") 을 따라 `proc/archive/plan/` 이동은 후속 PR (별 PR) 에서 실시. 실제 spec/01·09 본문 수정은 G3·G4 합의 후 별 PR — 동일 패턴 선행 사례: **PR #93** (spec/01 §3 정합화 follow-up plan doc only PR). PR #105 는 그 후속 spec 본문 갱신 PR 이며 본 PR 의 별 PR 단계에 해당. 본 PR scope 축소 결단은 **사용자 결단 2026-05-27** 근거 (Codex Review round 1·2 지적 수용, CLAUDE.md §4 권위 문서 G1/G3/G4 합의 룰 + §6 archive 계약 + §9 거버넌스 회피 금지 룰 준수).
