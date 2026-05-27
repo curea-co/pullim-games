@@ -65,7 +65,7 @@
   - 기존 4 라인 "spec/01 §3 ... 적용 불가" 우회 표현 제거 — spec/01 §3 자체에 분기 룰이 들어갔으므로 충돌 X
   - 권위 정합 정착 (2026-05-26 plan-g phase 1.7) 명시
   - AI 검증 거버넌스 line 12 의 "예: spec/01 §3 Next.js docs 지시 ↔ spec/09 §9.1 표준 Next.js 판정" 충돌 예시 → "spec 본문 인라인 정합화 1차" 룰로 일반화
-- [x] codex review 자동 트리거 → 권위 정합 확인 (본 PR #105 머지 시점, codex round 1 지적 3건 fix 통합 후 정합 확인)
+- [ ] codex review 자동 트리거 → 권위 정합 확인 (본 PR #105 머지 시점에 최종 확정. 본 plan 의 archive 이관과 본 항목 완료 체크는 PR 머지 후 후속 commit/PR 에서 처리 — 현 PR 범위에서는 미완료 유지가 기록 정확성에 부합. 본 PR 의 codex 진행 상황: round 1 (3건) · round 2 (4건) · round 3 (2건) 모두 fix 통합 완료)
 
 ## 4. 비스코프
 
