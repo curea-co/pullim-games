@@ -46,6 +46,10 @@ export function useEnterToAdvance(active: boolean, handler: () => void) {
     if (!active) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Enter") return;
+      // 키 반복(누르고 있을 때 OS 가 발사하는 연속 keydown) 무시 —
+      // 결과 화면에서 Enter 로 다음 카드 진입 후 키 떼기 전까지의 연속 이벤트가
+      // 새 카드의 풀이/제출을 자동으로 통과시키는 회귀 차단.
+      if (e.repeat) return;
       if (isImeComposing(e)) return;
       if (shouldSkipForTarget(e.target)) return;
       e.preventDefault();
@@ -62,6 +66,8 @@ export function useEnterClicksRef(
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key !== "Enter") return;
+      // 키 반복(Enter hold) 무시 — 동일 회귀(다음 카드 mount 직후 onclick 자동 발사) 차단.
+      if (e.repeat) return;
       if (isImeComposing(e)) return;
       if (shouldSkipForTarget(e.target)) return;
       const btn = ref.current;
