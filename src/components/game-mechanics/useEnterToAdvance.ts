@@ -9,10 +9,16 @@ import { useEffect, useRef, type RefObject } from "react";
 //      ref 가 가리키는 button 의 disabled 상태를 그대로 따라가서 게임별 활성화 조건을
 //      재기술할 필요 없음.
 
+// ARIA 인터랙티브 role — Enter/Space 키 자체 동작이 의도된 커스텀 포커스 요소.
+// 예: bio-taxonomy 의 ItemCard (role="button" + tabIndex={0}) — SPEC 04 §4.7
+// "키보드 네비게이션: Tab 선택 / Space·Enter 잡기" 의미론 보호.
+const INTERACTIVE_ROLE_SELECTOR =
+  '[role="button"], [role="link"], [role="checkbox"], [role="radio"], [role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"], [role="tab"], [role="option"], [role="switch"]';
+
 function shouldSkipForTarget(target: EventTarget | null): boolean {
   if (!(target instanceof HTMLElement)) return false;
   const tag = target.tagName;
-  if (tag === "TEXTAREA") return true;
+  if (tag === "TEXTAREA" || tag === "SELECT") return true;
   if (tag === "INPUT") {
     const input = target as HTMLInputElement;
     // disabled 가 아니면 input 의 자체 onKeyDown 이 우선
@@ -20,6 +26,11 @@ function shouldSkipForTarget(target: EventTarget | null): boolean {
   }
   // 포커스된 button/a 는 브라우저 기본 click 동작이 이미 수행
   if (tag === "BUTTON" || tag === "A") return true;
+  // contentEditable 영역에서는 Enter 가 줄바꿈 등 자체 동작
+  if (target.isContentEditable) return true;
+  // ARIA interactive role — closest 까지 보는 이유: role="button" 컨테이너 안의
+  // span 등 후손이 focus 받을 수 있고, 어느 경우든 자체 키 핸들러가 우선.
+  if (target.closest(INTERACTIVE_ROLE_SELECTOR)) return true;
   return false;
 }
 
