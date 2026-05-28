@@ -31,42 +31,43 @@
 
 ### 1.1 origin 차이
 
-| 항목 | planner / Q / classbot | games |
+| 항목 | 기타 풀림 프로젝트 (참고) | games |
 |---|---|---|
-| origin | `pullim-study-demo` 추출본 (공통 부모) | **독립 신규 프로젝트** (2026-05-07 SPEC 작성) |
-| 권위 문서 | `input/docs-archive/*` (풀림 마스터 문서) | **`proc/spec/01~10`** (자체 SPEC) |
-| proc 5번째 폴더 | `knowhow/` | **`audit/`** (21 게임 정기 감사) |
-| 도메인 단위 | 학습 보조 도구 (단일 도메인) | **카탈로그형 21 게임** + 4 메커니즘 컴포넌트 + FSRS 단일 백본 |
+| origin | 공통 부모 추출본 기반 (참고용 맥락) | **독립 신규 프로젝트** (2026-05-07 SPEC 작성) |
+| 권위 문서 | 각 리포 자체 — 본 plan 의 권위 아님 | **`proc/spec/01~10`** (자체 SPEC, 본 리포 권위) |
+| proc 보조 폴더 | (각 리포 컨벤션 — 본 plan 비참조) | **`proc/audit/`** (21 게임 정기 감사) |
+| 도메인 단위 | (참고 정보 — 본 plan 비결정) | **카탈로그형 21 게임** + 4 메커니즘 컴포넌트 + FSRS 단일 백본 |
 
-games 는 `pullim-study-demo` 의 어떤 시그니처도 상속받지 않았다 — 따라서 planner 의 mock·entity·page 시그니처가 games 에는 적용 안 됨.
+games 는 다른 풀림 프로젝트와 독립 origin 이므로 그쪽의 mock·entity·page 시그니처를 import·복사할 수 없다 (루트 `CLAUDE.md` cross-project 참조 금지).
 
-### 1.2 기술 스택 차이 (verbatim 비교)
+### 1.2 기술 스택 — games 현 상태 (외부 사례는 비경로 *맥락* 으로만)
 
-| 항목 | planner | games | 갭 |
+다음은 games 의 현재 워크스페이스 관찰 결과를 정리한 것이다. "외부 사례 맥락" 컬럼은 풀림 생태계의 다른 프로젝트 동향을 *비경로 수준 요약* 으로만 적는다 (구체 경로·파일명 미기재 — 루트 `CLAUDE.md` cross-project 참조 금지).
+
+| 항목 | games 현 상태 | 외부 사례 맥락 (참고용, 비경로) | 의의 |
 |---|---|---|---|
-| Next.js | **16.2.4** (App Router) | **15.x** (App Router) | major upgrade 1개 |
-| React | 19.2.4 | ^19.0.0 | 호환 (minor) |
-| Tailwind | **4.x** + `@tailwindcss/postcss` | **3.4.x** + `autoprefixer` | major upgrade 1개 (CSS-first config) |
-| shadcn style | `base-nova` | `new-york` | 토큰 라인 다름 |
-| shadcn baseColor | `neutral` | `slate` | 팔레트 다름 |
-| shadcn cssVariables | **true** | **false** | 토큰 인터페이스 다름 (Tailwind class vs CSS var) |
-| 패키지 매니저 | bun + workspaces | bun (단일 앱) | workspace 미적용 |
-| 모노레포 | `apps/{planner,backend}/` + `packages/{types,api-client,auth}/` | **단일 앱** (모노레포 미적용) | 전체 재편 필요 |
-| BE | NestJS 11 + TypeORM + Postgres (Phase β 이후) | **없음** (정적 카탈로그 + client-side FSRS state) | BE 도입 자체가 미결정 |
-| DB | Postgres 16 + Drizzle → TypeORM 마이그레이션 중 | **없음** | n/a |
-| mock | `apps/planner/src/lib/mock/*` (Phase η 까지 잔존) | **없음** (직접 정적 데이터) | n/a |
-| FE 컨벤션 | Container/Presenter + `features/<domain>/` (Phase 1~3 진행) | **자체 game-mechanics 4 컴포넌트 + game-shell + game-hub** | 컨벤션 mapping 새로 정의 필요 |
-| 자동화 | (없음) | **`scripts/generate-registry.ts` predev/prebuild 자동 트리거** | games 특유 — 보존해야 함 |
-| 외부 API | (없음) | **`ANTHROPIC_API_KEY`** — `src/app/manage/content/actions.ts` 서버 액션이 `src/lib/server/ai/anthropic.ts` 를 import (management 자동 생성). `src/app/api/` 에는 `/api/event` 만 존재 (Anthropic 라우트 부재) | games 특유 |
-| 포트 | 3030 | **3033** | 충돌 없음 (의도된 분리) |
-| viewport 4 audit | (없음 — planner는 단일 도메인이라 의무 없음) | **`bun run ui:audit <path>` HARD gate** (UI 변경 PR 의무) | games 특유 — 보존해야 함 |
+| Next.js | **15.x** (App Router, `proc/spec/09 §9.1` 명문) | 일부 프로젝트가 16 라인 사용 중이라는 일반 정보 | spec 변경 합의 시 16 검토 가능 |
+| React | ^19.0.0 | 호환 라인 동일 | 호환 |
+| Tailwind | **3.4.x** + `autoprefixer` | 일부 프로젝트가 4 라인 사용 중이라는 일반 정보 | spec 변경 합의 시 4 검토 가능 |
+| shadcn style | `new-york` | (참고: 다른 라인도 존재) | spec 합의 시 변경 가능 |
+| shadcn baseColor | `slate` | (참고: neutral 등 다른 팔레트 존재) | spec 합의 시 변경 가능 |
+| shadcn cssVariables | **false** | (참고: true 채택 사례 존재 — 토큰 인터페이스가 CSS var 기반) | 외부 토큰 공급 수용 시 true 검토 |
+| 패키지 매니저 | bun (단일 앱) | bun workspace 일반화 | workspace 도입 시 변경 |
+| 모노레포 | **단일 앱** | (참고: 모노레포 일반화 추세) | Phase α 결정 |
+| BE | **없음** (정적 카탈로그 + client-side FSRS state) | NestJS 채택 사례 존재 | §3.2 옵션 결정 |
+| DB | **없음** | n/a | BE 옵션 종속 |
+| mock | **없음** (직접 정적 데이터) | (참고: 일부 프로젝트는 mock 계층 존재) | games 와 출발점 다름 |
+| FE 컨벤션 | **자체 game-mechanics 4 컴포넌트 + game-shell + game-hub** + `src/games/<id>/` 단위 | (참고: Container/Presenter 등 다양한 컨벤션 존재) | games 의 자체 layer 분리가 이미 강함 |
+| 자동화 | **`scripts/generate-registry.ts` predev/prebuild 자동 트리거** | (없거나 다른 형태) | games 특유 — 보존 |
+| 외부 API | **`ANTHROPIC_API_KEY`** — `src/app/manage/content/actions.ts` 서버 액션이 `src/lib/server/ai/anthropic.ts` 를 import. `src/app/api/` 에는 `/api/event` 만 존재 | (참고: 외부 API 사용 없음 또는 다른 위치) | games 특유 |
+| 포트 | **3033** | (각 프로젝트별 상이) | 충돌 없음 (의도된 분리) |
+| viewport 4 audit | **`bun run ui:audit` HARD gate** (`.pullim-meta/CONVENTION.md §8`) | 공통 운영 룰 일부 적용 | games 특유 운영 |
 
-### 1.3 권위 문서 차이
+### 1.3 권위 문서 — games 시점
 
-planner: `input/docs-archive/08_풀림_플래너_핸드오프.md` + `proc/spec/2026-05-18_be-api-design.md` (BE spec).
-games: `proc/spec/01-AI-명령지침.md` ~ `10-개발-로드맵.md` (10개) — **숫자 prefix 정식 SPEC**. 풀림 마스터 문서 부재.
+games: `proc/spec/01-AI-명령지침.md` ~ `10-개발-로드맵.md` (10개) — **숫자 prefix 정식 SPEC, 본 리포의 유일한 권위 문서**.
 
-→ 정렬 시 games 의 자체 SPEC 을 **삭제·흡수해서는 안 된다** (사용자 합의 시까지). 보존 옵션은 §5 에 분리.
+→ 정렬 시 games 의 자체 SPEC 을 **삭제·흡수해서는 안 된다** (사용자 합의 시까지). 보존 옵션은 §5 에 분리. 다른 풀림 프로젝트의 권위 문서 위치·이름은 본 plan 의 결정 근거로 사용하지 않는다.
 
 ### 1.4 BE 부재의 함의
 
@@ -140,16 +141,16 @@ games 의 현 상태는 BE 부재 + 정적 카탈로그 + client-side FSRS state
 - **단점**: 도입 비용 큼, 정적 카탈로그의 단순함 손실
 - **외부 사례와의 관계**: 스택만 동일, 도메인 entity·서비스 경계는 games 독립
 
-#### 옵션 C — pullim 본체 backend 흡수 (Studio question-adapter 통합)
+#### 옵션 C — 상위 플랫폼 흡수 (이름·구조 추상화)
 
-- games 가 독립 backend 를 갖지 않고, `curea-co/pullim` 본 리포의 backend (`apps/backend/`, `apps/studio/`) 에 흡수됨
-- games 의 카탈로그·메커니즘은 그대로 유지하되, 사용자 state·결제·계정은 pullim 본체 backend 가 책임
-- Studio 의 question-adapter (자동 문제 생성) 와 games 의 management 자동 생성 흐름이 통합 — `ANTHROPIC_API_KEY` 도 pullim 본체로 이동
-- **장점**: 4 풀림 + pullim 본체 SaaS 통합 (planner 의 종착점과 동일 방향), question pipeline 일원화
-- **단점**: pullim 본체 흡수 결정·진척도에 종속 (현재 미정), games 의 독립성 손실
-- **planner 와의 동기화 수준**: 최종 종착점 동일 (둘 다 pullim 본체로 흡수)
+- games 가 자체 backend 를 갖지 않고, 풀림 생태계의 상위 플랫폼(이름·리포·구조는 본 plan 의 권위 범위 밖) 에 흡수되는 시나리오
+- games 의 카탈로그·메커니즘은 그대로 유지하되, 사용자 state·결제·계정은 상위 플랫폼이 책임
+- 외부 API (`ANTHROPIC_API_KEY` 등) 흐름의 이전 위치도 상위 플랫폼 결정에 종속
+- **장점**: 생태계 SaaS 통합 가능성
+- **단점**: 상위 플랫폼 결정·진척도에 종속, games 의 독립성 손실
+- **본 plan 의 입장**: 본 plan 은 이 옵션의 *구체 경로/리포 구조를 결정하지 않음*. 옵션 C 채택 시 상세는 별도 상위 계획 문서에서 결정.
 
-→ **선택은 사용자 (G1/G3/G4) 합의**. §10 슬롯 1. 본 plan PR 의 PR 본문에 본 절 링크 첨부.
+→ **선택은 사용자 (G1/G3/G4) 합의**. §10 슬롯 1. (§11.3 에서 C 폐기 확정.)
 
 ---
 
@@ -332,16 +333,19 @@ games 는 자체 `proc/spec/01~10` 을 권위로 둔다. planner 정렬 시 다�
   - pullim 본체 흡수 결정 trace 만 본 plan §3.2 옵션 C 에 누적
   - 본 리포에서는 BE 신설 없음, pullim 본체 진척에 종속
 
-### Phase γ — FE 컨벤션 합의 (옵션) (1 PR)
+### Phase γ — FE 컨벤션 재검토 (옵션, 트리거 조건부) (1 PR)
 
-**목표**: planner 의 Container/Presenter + `features/<domain>/` 컨벤션을 games 에 도입할지 결정.
+**진입 조건**: games 의 현 컨벤션(`src/games/<id>/` 단일 게임 단위 + `src/components/game-mechanics/` 4 메커니즘 + `game-shell/`·`game-hub/`·`dashboard/`) 에서 *실제로* 문제가 발생하는 경우에만 진입. 외부 도메인이 어떤 FE 패턴을 쓰는지는 본 Phase 의 결정 축이 아니다.
 
-- games 의 현 컨벤션: `src/games/<id>/` (단일 게임 단위) + `src/components/game-mechanics/` (4 메커니즘) + `src/components/game-shell/`, `game-hub/`, `dashboard/`
-- planner Container/Presenter 컨벤션을 games 에 도입하면:
-  - `src/components/features/game-hub/{containers,presenters,components}/` 등으로 재편
-  - **단**, games 의 21 게임은 이미 `src/games/<id>/{component.tsx, content, logic, schema.ts, manifest.ts}` 의 자체 구조 — 이 구조와 Container/Presenter 가 정합되는지 검증 필요
+- 트리거 후보 (모두 games 내부 문제):
+  - 21 게임 추가 시 `src/games/<id>/` 단위가 무너지는 경우
+  - 4 메커니즘 컴포넌트가 game 간 시그니처 충돌을 일으키는 경우
+  - dashboard / manage / game-hub 의 layer 가 한 파일에 섞여 테스트가 어려운 경우
+- 트리거 시 검토할 옵션 (이름·세부는 별 plan 에서 결정):
+  - 현 구조 유지 + 부분 리팩토링
+  - layer 분리 컨벤션 (Container/Presenter 등 일반 FE 관용 패턴 중 적합한 것) 도입
 - **선택**: 사용자 결정 슬롯 §10 슬롯 5
-- 본 plan default 는 **도입 보류** (games 의 자체 구조가 이미 강한 layer 분리). 도입 시 별 plan 분기.
+- 본 plan default 는 **도입 보류** (games 의 자체 구조가 이미 강한 layer 분리, 트리거 부재). 외부 도메인 정렬을 진입 사유로 삼지 않는다.
 
 ### Phase δ — 자체 SPEC 권위 처리 (옵션) (1 PR)
 
