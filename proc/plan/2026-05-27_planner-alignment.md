@@ -230,7 +230,7 @@ games 는 자체 `proc/spec/01~10` 을 권위로 둔다. planner 정렬 시 다�
 - 21 게임 회귀 검증 — 각 게임 진입 → 첫 카드 풀이 → 정답·오답·5회 오답 reveal 흐름 동작 확인
 - **`bun run ui:audit`** — `.pullim-meta/CONVENTION.md §8` viewport rule 적용 대상 전 경로(`src/app/**`, `src/components/ui/`, `tailwind.config.ts` 변경 동반 시 포함) 4 viewport HARD gate (§4 #5)
 - **완료 기준**: `bun run typecheck && bun run lint && bun test && bun run build` 통과, 21 게임 진입 회귀 0, ui:audit critical overflow 0
-- **spec 갱신 분리 원칙**: spec/09 §9.1 본문 갱신은 *본 PR 과 묶지 않고* 선행 별 PR 또는 후속 별 PR 로 분리 (루트 `CLAUDE.md §8` 컨벤션 파일 분리 규칙)
+- **spec-first 거버넌스**: spec/09 §9.1 본문 갱신은 *본 PR 과 묶지 않고* **반드시 선행 별 PR** 로 분리 (루트 `CLAUDE.md §9` + `proc/spec/01 §2` — spec 우선 후 코드 변경). 후속 PR 로 미루는 것은 금지 (코드는 16, 권위 문서는 15 인 모순 상태 방지)
 
 **리스크**: Next.js 16 의 RSC 패턴 변경 → 21 게임 중 client-only 컴포넌트(`'use client'` 보유) 의 hydration 검증 필요.
 
@@ -268,7 +268,7 @@ games 는 자체 `proc/spec/01~10` 을 권위로 둔다. planner 정렬 시 다�
   - `tailwind.cssVariables`: `false` → `true`
   - `tailwind.config` 비우기 (Tailwind 4 와 정합)
   - `menuColor`, `menuAccent`, `rtl` 등 추가 필드는 games spec 요구사항 기준으로 결정
-- `src/components/ui/*` 재발급 — `src/components/ui/` 디렉토리 내 모든 파일 (현재 기준 — 변경될 수 있으므로 경로 기준 점검) 을 `bunx shadcn@latest add` 로 base-nova 라인 재생성
+- shadcn primitive 재발급 — `bunx shadcn@latest add` 대상은 **shadcn 표준 primitive 파일만** (소문자 kebab-case, e.g. `button.tsx`, `input.tsx`, `dialog.tsx` 등). **제외 대상** (수제 게임 공통 커스텀 컴포넌트): `src/components/ui/CorrectBurst.tsx`, `src/components/ui/RevealBanner.tsx` 등 PascalCase + framer-motion 기반 파일. 재발급 PR 분기 시 **대상 파일 목록을 PR 본문에 명시 후 진행** — 자동 일괄 덮어쓰기 금지
 - `bg-*`, `text-*`, `border-*` 등 shadcn 토큰을 사용하는 모든 곳 검증 — `cssVariables:true` 로 인터페이스 변경 (Tailwind class → CSS var) 시 직접 import 영향 추적
 - spec/08 §8.1 의 `pullim-slate-*`, `pullim-blue-*` 등 자체 토큰은 그대로 유지 (shadcn 토큰과 병존)
 - **단계적 확인 의무**:
@@ -300,15 +300,17 @@ games 는 자체 `proc/spec/01~10` 을 권위로 둔다. planner 정렬 시 다�
 
 **목표**: 외부 사례를 *참고* 하되, games spec 기준으로 모노레포 재편. 동작 회귀 없이 구조만 재편.
 
+**proc/ 위치 결정 원자성 원칙** (선결): `proc/` 디렉토리 (= `proc/spec/`, `proc/plan/`, `proc/audit/`, `proc/archive/`) 의 위치 변경은 권위 문서 라우팅 갱신을 동반하므로, **본 plan default 는 root `proc/` 유지** (= 모노레포 후에도 root `proc/`, `apps/games/proc/` 로 이동하지 않음). 이렇게 하면 α-1 / α-2 분리 시에도 권위 문서 경로가 끊기지 않는다. `apps/games/proc/` 로의 이동은 옵션이며, *채택 시* 권위 문서 라우팅 갱신(`CLAUDE.md` / `AGENTS.md` 의 `proc/spec` / `proc/plan` 직접 가리킴 변경) 을 같은 PR 에서 원자적으로 처리해야 한다 (§10 슬롯 4 의 default = root `proc/` 유지).
+
 **Phase α-1 — 구조 재편 PR (코드·설정 변경)**
 
 - `apps/games/` 생성, 기존 `src/`, `public/`(있다면), `next.config.ts`, `eslint.config.mjs`, `tsconfig.json`, `e2e/`, `playwright.config.ts`, `vitest.config.ts` 등을 모두 이동
-- `apps/games/proc/` 또는 root `proc/` — §10 슬롯 4 (audit 폴더 + spec 폴더 위치 결정)
-- `packages/types/` 빈 placeholder (BE 옵션 B 시점에 본격)
+- `proc/` 는 root 잔존 (위 "원자성 원칙" 참조). 따라서 α-1 에서 권위 문서 경로 변경 없음
+- `packages/types/` 빈 placeholder (BE 옵션 B 시점에 본격) — 권위 문서 흡수 위치 아님 (§5.2 참조)
 - `packages/ui/` — 본 plan default 미생성 (옵션)
 - bun workspace 셋업 (`package.json` workspaces 필드)
 - `turbo.json` 신규 + `tsconfig.base.json` 신규
-- **`gen:registry` 경로 갱신** (Phase 0d 결정에 따라)
+- **`gen:registry` 경로 갱신** (Phase 0d 결정에 따라 `apps/games/scripts/`)
 - **`ui:audit` 경로 갱신** (`apps/games/scripts/capture-ui-audit.mjs`)
 - 포트 3033 보존 (`apps/games/package.json` dev/start)
 - README.md 갱신은 본 PR 포함 가능 (운영 컨벤션 룰 아님)
@@ -318,7 +320,9 @@ games 는 자체 `proc/spec/01~10` 을 권위로 둔다. planner 정렬 시 다�
 **Phase α-2 — 컨벤션 문서 갱신 PR (별 PR, 루트 `CLAUDE.md §8` 분리 규칙)**
 
 - `CLAUDE.md` / `AGENTS.md` 갱신 — 모노레포 구조 반영, games 의 자율성·자체 spec 권위 재확인
+- `proc/` 위치는 변경하지 않으므로 권위 문서 라우팅(`proc/spec`, `proc/plan` 직접 가리킴) 은 그대로 유효
 - α-1 머지 후 분리된 PR 로 진행 (코드 변경 PR 과 컨벤션 변경 PR 의 리뷰 경계 보존)
+- **예외**: 만약 사용자가 §10 슬롯 4 에서 `apps/games/proc/` 이동을 선택한다면, *그 경우 α-1 / α-2 분리를 폐기* 하고 모노레포 재편 + proc 이동 + 컨벤션 문서 갱신을 단일 원자 PR 로 처리
 
 ### Phase β — BE 도입 (옵션 B/C 합의 시만, 1~N PR)
 
@@ -424,7 +428,7 @@ games 의 client-side FSRS state → server state 전환. 본 plan 에서는 상
 | 1 | **BE 도입 옵션** (§3.2) | A (미도입) / B (자체 NestJS BE) / C (pullim 본체 흡수) | A | **B 확정** (§12.1, C 폐기 §11.3) | Phase β |
 | 2 | **`proc/spec/01~10` 권위 처리** (§5) | A (유지) / B (부분 흡수) / C (전체 흡수) | A | (미정 — default 유지) | Phase δ |
 | 3 | **`gen:registry` 위치** (Phase 0d) | `apps/games/scripts/` / `packages/games-registry/` | `apps/games/scripts/` | (미정 — default 유지) | Phase α |
-| 4 | **`proc/audit/` 위치** (Phase α) | `apps/games/proc/audit/` / root `proc/audit/` | `apps/games/proc/audit/` | (미정 — default 유지) | Phase α |
+| 4 | **`proc/` 위치** (Phase α, 권위 문서 라우팅 정합) | root `proc/` 유지 / `apps/games/proc/` 이동 | **root `proc/` 유지** (권위 라우팅 원자성) | (미정 — default 유지) | Phase α |
 | 5 | **FE Container/Presenter 도입** (Phase γ) | 도입 / 보류 | 보류 | (미정 — default 유지) | Phase γ |
 | 6 | **`packages/ui/` 신설 여부** | 신설 / 미신설 | 미신설 (필요 시 옵션) | (미정 — default 유지) | Phase α |
 | 7 | **`packages/games-registry/` 신설 여부** | 슬롯 3 종속 — `packages/games-registry/` 선택 시 자동 신설 | 미신설 | (슬롯 3 종속) | Phase α |
@@ -441,49 +445,36 @@ games 의 client-side FSRS state → server state 전환. 본 plan 에서는 상
 
 ---
 
-## 11. 사용자 결정 (2026-05-27 — games 에 영향을 미치는 한도 내에서)
+## 11. 로컬 전제 — games 의 후속 작업에 필요한 자율 결정만
 
-> **범위 주의**: 본 절은 **games 리포의 후속 작업에 영향을 미치는 한도** 에서 사용자 결정을 기록한다. 풀림 생태계 전반의 거버넌스 결정 (arcade·pullim 본체·`@pullim/design-tokens` 패키지 호스팅 등) 은 본 리포의 권위 범위 밖이며, 정식 기록은 별도 상위 계획 문서 (예: 풀림 본체 리포 또는 `pullim-meta` 공간) 로 이관되어야 한다. 본 절에 적힌 외부 도메인 정책은 **games 가 자신의 작업을 결정하기 위해 필요한 전제** 로만 사용된다.
+> **범위 주의**: 본 절은 **games 리포 내부 작업을 결정하기 위해 필요한 *로컬 전제*** 만 기록한다. 생태계 수준 결정 (다른 도메인의 통합·운영 분류, 외부 SSO 정책, 디자인 토큰 패키지 호스팅 등) 은 본 plan 의 권위 범위 밖이므로 **확정값으로 기록하지 않고**, 결정이 확정되면 별도 상위 계획 문서로 링크만 남긴다 (상위 계획 문서 위치는 본 plan 범위 밖).
 
-### 11.1 도메인 분류 (games 의 위치만 기록)
+### 11.1 games 의 자율 운영 전제
 
-games 는 풀림 생태계 안에서 **독립 운영 (별개 제품, pullim 본체 흡수 대상 아님)** 위치에 있다는 사용자 확인을 받았다. 이 위치는 본 plan 의 BE 옵션 결정과 spec 자율성 보존 (§5) 의 전제. 다른 도메인 (planner/Q/classbot/studio/store/arcade) 의 통합·운영 분류는 본 plan 의 권위 범위가 아니므로 정식 표는 별도 상위 계획 문서에 둔다.
+games 는 본 plan 의 §3·§5 결정 (BE 옵션, spec 권위 처리) 을 *독립적으로* 진행할 수 있는 위치라는 사용자 확인을 받았다. 즉, 본 plan 의 BE 옵션 B 확정과 spec 자율성 보존 (§5.1 옵션 A) 은 외부 도메인의 결정과 무관하게 games 시점에서 진행 가능하다.
 
-### 11.2 games 운영 정책 3 결정 (사용자 확정)
+### 11.2 games 내부 운영 정책 (사용자 확정, 본 리포 작업에 직접 영향)
 
-| # | 영역 | 결정 (games 시점) |
+| # | 영역 | games 시점 결정 |
 |---|---|---|
-| 1 | **타 도메인과의 데이터 공유** | **데이터 공유 0** — games 의 사용자·진척도·FSRS state 는 본 리포 내부 자산. 외부 도메인과의 데이터 교환 채널 미도입. |
-| 2 | **인증** | **게스트 우선** — 비로그인 사용 가능. 로그인은 진척도·디바이스 동기화 용도. 외부 SSO 통합은 선택. |
-| 3 | **디자인 시스템** | **공통 토큰 사용 + 컴포넌트 자율** — 색·타이포·간격 토큰은 외부 공급 (별 plan, §11.5) 의 *결정 결과 를 따름*. shadcn 컴포넌트는 자체 보유. games 내부에 디자인 시스템 패키지 흡수 안 함. |
+| 1 | **games 의 데이터 경계** | games 의 사용자·진척도·FSRS state 는 본 리포 내부 자산. 외부 도메인과의 데이터 교환 채널 미도입 (= 본 plan 의 Phase β BE 설계 시 cross-domain 데이터 export 채널 신설하지 않음). |
+| 2 | **games 의 인증** | **게스트 우선** — 비로그인 사용 가능. 로그인은 진척도·디바이스 동기화 용도. 외부 SSO 의존 미도입 (= 본 plan 의 Phase β 인증은 자체 Mock 헤더 + Cls 로 시작). |
+| 3 | **games 의 디자인 시스템 의존성** | shadcn 컴포넌트는 자체 보유. games 내부에 외부 디자인 시스템 패키지 의존성 미도입 (= 본 plan 의 Phase 0b·0c 에서 외부 DS 패키지 import 안 함). |
 
 ### 11.3 자동 폐기된 옵션 (games 의 후속 작업 결정에 영향)
 
-- ❌ BE 옵션 C — pullim 본체 흡수 (독립 운영 결정으로 폐기, §3.2)
-- ❌ 본체 SSO 강제 (게스트 우선 결정으로 옵션화)
-- ❌ games 내부에 외부 디자인 시스템 패키지 도입 (컴포넌트 자율 결정으로 폐기)
-- ❌ games 의 사용자 / 진척도 데이터를 외부 도메인과 공유 (데이터 독립 결정으로 폐기)
+- ❌ BE 옵션 C — pullim 본체 흡수 (§11.1 의 자율 운영 전제로 폐기, §3.2)
+- ❌ 외부 SSO 강제 의존 (§11.2 #2 게스트 우선 결정으로 폐기)
+- ❌ games 내부에 외부 디자인 시스템 패키지 import (§11.2 #3 결정으로 폐기)
+- ❌ games BE 의 cross-domain 데이터 export 채널 (§11.2 #1 결정으로 폐기)
 
-### 11.4 자동으로 영향받는 후속 결정
+### 11.4 BE 옵션 — §12.1 에서 옵션 B 확정
 
-**BE 옵션 (남은 A vs B)** — 게스트 우선 결정의 함의:
+games 시점에서 게스트 우선 + 로그인 시 진척도 보관 정책을 만족하는 BE 옵션은 §12.1 에서 옵션 B 로 확정.
 
-| 옵션 | 게스트 모드 | 로그인 모드 | 비고 |
-|---|---|---|---|
-| **A. BE 미도입** | localStorage | localStorage (디바이스 동기화 X) | 진척도 의미 약화 |
-| **B. 자체 NestJS BE** | localStorage + 익명 세션 | 서버 보관 + 디바이스 동기화 | 사용자 정착 시 가치 큼 |
+### 11.5 디자인 토큰 — games 는 수요자 인터페이스만 (구체 공급 방식은 본 plan 범위 밖)
 
-→ "게스트 우선 + 로그인 시 진척도 보관" 정책으로 **옵션 B 가 자연스러움**. 단 진입 시점은 별 결정 (Phase 0a-d 마이그레이션 + 모노레포 재편 후로 미룰지 / 동시 진행할지).
-
-### 11.5 디자인 토큰 공급 방식 — games 가 *수요자* 로서 따를 옵션
-
-"공통 토큰 사용" 결정에 따라 games 는 다음 중 어떤 공급 방식이 외부에서 채택되든 *수용 가능* 한 형태로 자체 토큰 인터페이스를 설계해 둔다 (구체 선택은 본 리포 권위 밖):
-
-- a. 외부 npm 패키지 의존 (e.g. `@pullim/design-tokens`)
-- b. CSS 변수 파일 동기화
-- c. Tailwind preset 공유
-
-games 시점의 작업 요구사항: 어떤 옵션이든 `proc/spec/08 §8.1` 토큰과 1:1 정합이 보장되어야 함. 패키지 호스팅·발행 정책 자체는 본 plan 범위 밖, 별도 상위 계획 문서로 이관.
+games 의 의무는 외부에서 어떤 공급 방식이 결정되든 그것을 *수용 가능* 한 토큰 인터페이스를 유지하는 것 뿐. 구체 공급 방식 (외부 npm 패키지 / CSS 변수 동기화 / Tailwind preset 등) 은 본 plan 의 권위 범위 밖이며, 결정 확정 시 상위 계획 문서 링크만 남긴다. games 시점의 작업 요구사항: 어떤 방식이든 `proc/spec/08 §8.1` 토큰과 1:1 정합이 보장되어야 함.
 
 ### 11.6 다음 진입 단계 (games 한정)
 
