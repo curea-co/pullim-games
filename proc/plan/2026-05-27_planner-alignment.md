@@ -477,3 +477,51 @@ games·arcade 는 풀림 생태계의 **별개 제품**. pullim 본체에 흡수
 1. BE 옵션 A vs B 결정 (위 §11.4)
 2. 디자인 토큰 공유 방식 결정 (위 §11.5) — 별 plan 분기
 3. Phase 0a (Next.js 15→16, games 한정) 또는 Phase 1 (mini-monorepo, arcade 한정) 진입 시점 결정
+
+---
+
+## 12. 사용자 결정 — BE 옵션 + 디자인 토큰 + 진입 시점 (2026-05-27 후속)
+
+### 12.1 BE 옵션 — 두 도메인 모두 옵션 B
+
+| 도메인 | 결정 |
+|---|---|
+| games | **B. 자체 NestJS BE 도입** |
+| arcade | **B. 자체 NestJS BE 도입** |
+
+함의:
+- 게스트 모드 = localStorage (인증 없이 진척도 임시 저장)
+- 로그인 시 = 서버 진척도 + 디바이스 동기화 (`POST /api/progress/sync` 류)
+- planner 패턴 차용: NestJS 11 + TypeORM + Mock 헤더 인증 + Cls. **Redis·JWT 보류**.
+- 두 도메인 BE는 **완전 독립** (§11.1 데이터 공유 0 결정에 따라)
+
+진입 순서 (각 도메인 내부):
+- Phase α (모노레포) → β (BE common) → γ (entity) → δ (read) → ε (mutation) → η (FE 전환)
+- 게스트 모드는 Phase γ 이전에도 동작 — Phase η 까지 무로그인 사용 보장
+
+### 12.2 디자인 토큰 — npm 패키지 `@pullim/design-tokens`
+
+- **결정**: 옵션 a — npm 패키지로 공유
+- **호스팅**: 별 plan 분기. 후보:
+  - pullim 본체 `packages/design-tokens` + private npm 발행
+  - 별 레포 `curea-co/pullim-design-tokens`
+  - GitHub Packages (private)
+- 7 도메인 모두 npm 의존성으로 사용. workspace 내부는 `workspace:*` , 외부는 published version.
+- **scope**: 색 + 타이포 + 간격 토큰. shadcn 컴포넌트는 포함 X (자율).
+- **별 plan 필요**: `proc/plan/<date>_design-tokens-package.md`
+
+### 12.3 진입 시점
+
+| 도메인 | 시점 |
+|---|---|
+| **arcade Phase 1 (mini-monorepo)** | **즉시 진입** — 본 plan PR 머지 전이라도 별 PR 분기 가능 |
+| games Phase 0a (Next.js 15→16) | 진행 중 PR 마무리 후 |
+| games·arcade Phase β (BE common) | Phase α / Phase 1 머지 후 |
+| 디자인 토큰 패키지 도입 | 별 plan 분기 후 — 본체 통합 트랙과 함께 결정 |
+
+### 12.4 후속 결정 사안 (이번 결정으로 새로 발생)
+
+- BE 인프라 호스팅 — Vercel Functions 부적합 (stateful) → AWS ECS / Fly.io / Render / Railway 중 결정 필요
+- DB 호스팅 — RDS / Supabase / Neon / Vercel Postgres
+- 디자인 토큰 패키지 위치 — 위 §12.2 후보 3안 중 결정
+- `@pullim/design-tokens` 와 본체 통합 트랙(planner/Q/classbot/studio/store) `@pullim/design-system` 의 관계 — DS 는 shadcn 컴포넌트 포함, tokens 는 토큰만 → 종속 관계 정리
