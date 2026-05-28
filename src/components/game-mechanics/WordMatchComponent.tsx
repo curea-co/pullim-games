@@ -20,6 +20,7 @@ import {
 } from "@/lib/core";
 import { TimeAttackTimer } from "./TimeAttackTimer";
 import { DeepRecallEmpty } from "./DeepRecallEmpty";
+import { useEnterToAdvance } from "./useEnterToAdvance";
 
 type Phase =
   | "playing"
@@ -168,6 +169,22 @@ export function WordMatchComponent({
     setPhase("playing");
     cardStartRef.current = performance.now();
   }, [cardIndex, card]);
+
+  // Enter 단축키 — 카드 해결(전체 매칭 완료 또는 reveal) 시 다음 카드로 진행.
+  const pairsMatchedCount = card
+    ? Array.from(matched).filter((i) => i < card.problem.pairs.length).length
+    : 0;
+  const allPairsMatched = card
+    ? pairsMatchedCount === card.problem.pairs.length
+    : false;
+  const isCardResolved = allPairsMatched || phase === "reveal";
+  useEnterToAdvance(isCardResolved, () => {
+    if (cardIndex >= cards.length - 1) {
+      setPhase("completed");
+      return;
+    }
+    setCardIndex(cardIndex + 1);
+  });
 
   if (cards.length === 0) {
     if (cardsLoaded && mode === "deep-recall" && initialCards.length > 0) {
@@ -351,10 +368,8 @@ export function WordMatchComponent({
   }
 
   // pairs 모두 매칭 시 통과 (extras 는 보너스, 통과 조건 X)
-  const allMatched =
-    Array.from(matched).filter((i) => i < card.problem.pairs.length)
-      .length === card.problem.pairs.length;
-  const isResolved = allMatched || phase === "reveal";
+  const allMatched = allPairsMatched;
+  const isResolved = isCardResolved;
 
   return (
     <>

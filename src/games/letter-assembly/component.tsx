@@ -4,7 +4,7 @@
 // 답지 노출 X — wrong 시 정확도만, 슬롯별 정/오 강조 X.
 // 정답 시 완성된 한자 + 의미 + 음 노출.
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
@@ -23,6 +23,7 @@ import {
   selectCardsForMode,
   useGameMode,
 } from "@/lib/core";
+import { useEnterClicksRef } from "@/components/game-mechanics/useEnterToAdvance";
 
 const GAME_ID = "letter-assembly";
 const REVEAL_THRESHOLD = 5;
@@ -48,6 +49,8 @@ export default function LetterAssemblyGame() {
     correct: number;
     total: number;
   } | null>(null);
+  const ctaRef = useRef<HTMLButtonElement | null>(null);
+  useEnterClicksRef(ctaRef);
 
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
@@ -331,6 +334,7 @@ export default function LetterAssemblyGame() {
       cta={
         isResolved ? (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleNext}
             className="block w-full rounded-button border border-type-primary bg-bg-block px-4 py-3 text-center text-body text-type-primary transition-colors hover:bg-accent-positive/10"
@@ -339,6 +343,7 @@ export default function LetterAssemblyGame() {
           </button>
         ) : (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleCheck}
             disabled={phase !== "playing" || !allFilled}

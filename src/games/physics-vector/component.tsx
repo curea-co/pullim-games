@@ -3,7 +3,7 @@
 // 물리 벡터 합성 — 두 벡터 표시, 학생이 합벡터 (rx, ry) 를 +/- 로 조정.
 // 합벡터 시작점은 원점 고정. 평행사변형 보조선이 학생 합벡터 기준 자동 표시.
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
@@ -18,6 +18,7 @@ import {
   selectCardsForMode,
   useGameMode,
 } from "@/lib/core";
+import { useEnterClicksRef } from "@/components/game-mechanics/useEnterToAdvance";
 
 const GAME_ID = "physics-vector";
 const REVEAL_THRESHOLD = 5;
@@ -50,6 +51,8 @@ export default function PhysicsVectorGame() {
   const [rx, setRx] = useState(1);
   const [ry, setRy] = useState(0);
   const [wrongCount, setWrongCount] = useState(0);
+  const ctaRef = useRef<HTMLButtonElement | null>(null);
+  useEnterClicksRef(ctaRef);
 
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
@@ -392,6 +395,7 @@ export default function PhysicsVectorGame() {
       cta={
         isResolved ? (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleNext}
             className="block w-full rounded-button border border-type-primary bg-bg-block px-4 py-3 text-center text-body text-type-primary transition-colors hover:bg-accent-positive/10"
@@ -400,6 +404,7 @@ export default function PhysicsVectorGame() {
           </button>
         ) : (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleCheck}
             disabled={phase !== "playing"}

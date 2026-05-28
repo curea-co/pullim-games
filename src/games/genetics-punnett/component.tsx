@@ -7,7 +7,7 @@
 //   - 답지 노출 X (correct 진입 전 색칠 없음 — 끼워맞추기 회피)
 //   - retrieval depth deep: 우성/열성 판정 후 빈도 추론
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
@@ -31,6 +31,7 @@ import {
   selectCardsForMode,
   useGameMode,
 } from "@/lib/core";
+import { useEnterClicksRef } from "@/components/game-mechanics/useEnterToAdvance";
 
 const GAME_ID = "genetics-punnett";
 const REVEAL_THRESHOLD = 5;
@@ -52,6 +53,8 @@ export default function GeneticsPunnettGame() {
   const [phase, setPhase] = useState<Phase>("playing");
   const [ratio, setRatio] = useState<number[]>([]);
   const [wrongCount, setWrongCount] = useState(0);
+  const ctaRef = useRef<HTMLButtonElement | null>(null);
+  useEnterClicksRef(ctaRef);
 
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
@@ -290,6 +293,7 @@ export default function GeneticsPunnettGame() {
       cta={
         isResolved ? (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleNext}
             className="block w-full rounded-button border border-type-primary bg-bg-block px-4 py-3 text-center text-body text-type-primary transition-colors hover:bg-accent-positive/10"
@@ -298,6 +302,7 @@ export default function GeneticsPunnettGame() {
           </button>
         ) : (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleCheck}
             disabled={phase !== "playing" || ratio.every((n) => n === 0)}

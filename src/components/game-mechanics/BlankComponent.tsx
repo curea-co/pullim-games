@@ -19,6 +19,7 @@ import {
 } from "@/lib/core";
 import { TimeAttackTimer } from "./TimeAttackTimer";
 import { DeepRecallEmpty } from "./DeepRecallEmpty";
+import { useEnterToAdvance } from "./useEnterToAdvance";
 
 type Phase = "playing" | "feedback" | "completed";
 
@@ -88,6 +89,17 @@ export function BlankComponent({
   useEffect(() => {
     cardStartRef.current = performance.now();
   }, [cardIndex, cards]);
+
+  // Enter 단축키 — feedback 상태에서 다음 카드로 진행.
+  useEnterToAdvance(phase === "feedback", () => {
+    if (cardIndex >= cards.length - 1) {
+      setPhase("completed");
+      return;
+    }
+    setCardIndex(cardIndex + 1);
+    setPhase("playing");
+    setPicked(null);
+  });
 
   const card = cards[cardIndex];
   const isLastCard = cardIndex === cards.length - 1;

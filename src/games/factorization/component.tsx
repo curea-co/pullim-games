@@ -41,6 +41,7 @@ import {
   selectCardsForMode,
   useGameMode,
 } from "@/lib/core";
+import { useEnterClicksRef } from "@/components/game-mechanics/useEnterToAdvance";
 
 const GAME_ID = "factorization";
 const REVEAL_THRESHOLD = 5;
@@ -80,6 +81,8 @@ export default function FactorizationGame() {
   const dragStartLoggedRef = useRef(false);
   // chip text → DOM element. 부모가 직접 boundingClientRect hit-test.
   const chipRefsRef = useRef<Map<string, HTMLDivElement>>(new Map());
+  const ctaRef = useRef<HTMLButtonElement | null>(null);
+  useEnterClicksRef(ctaRef);
 
   // 클라이언트 마운트 시: FSRS 큐 정렬 + session-start 이벤트
   useEffect(() => {
@@ -366,6 +369,7 @@ export default function FactorizationGame() {
       cta={
         isResolved ? (
           <button
+            ref={ctaRef}
             type="button"
             onClick={handleNext}
             className="block w-full rounded-button border border-type-primary bg-bg-block px-4 py-3 text-center text-body text-type-primary transition-colors hover:bg-accent-positive/10"

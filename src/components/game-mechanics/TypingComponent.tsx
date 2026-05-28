@@ -20,6 +20,7 @@ import {
 } from "@/lib/core";
 import { TimeAttackTimer } from "./TimeAttackTimer";
 import { DeepRecallEmpty } from "./DeepRecallEmpty";
+import { useEnterToAdvance } from "./useEnterToAdvance";
 
 type Phase =
   | "playing"
@@ -109,6 +110,17 @@ export function TypingComponent({
     // time-attack 카드별 기준 시각 갱신
     cardStartRef.current = performance.now();
   }, [cardIndex, card]);
+
+  // Enter 단축키 — input 이 disabled(isResolved) 인 동안 다음 카드로 진행.
+  // playing 중에는 input 의 onKeyDown 이 우선 처리.
+  const isResolved = phase === "correct" || phase === "reveal";
+  useEnterToAdvance(isResolved, () => {
+    if (cardIndex >= cards.length - 1) {
+      setPhase("completed");
+      return;
+    }
+    setCardIndex(cardIndex + 1);
+  });
 
   if (cards.length === 0) {
     if (cardsLoaded && mode === "deep-recall" && initialCards.length > 0) {
@@ -265,7 +277,6 @@ export function TypingComponent({
   }
 
   const firstLetter = card.problem.answer.charAt(0);
-  const isResolved = phase === "correct" || phase === "reveal";
 
   return (
     <>
