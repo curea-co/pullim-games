@@ -124,7 +124,7 @@ games 의 현 상태는 BE 부재 + 정적 카탈로그 + client-side FSRS state
 - 카탈로그 정적 유지 (`src/games/<id>/manifest.ts` + `gen:registry`)
 - 사용자 진척도(FSRS state)·streak·activity 는 **client-side localStorage 만**
 - `/api/event` 만 server route (Vercel Analytics + 자체 이벤트 로그)
-- `ANTHROPIC_API_KEY` 서버 라우트는 그대로 `src/app/api/` 잔존 (또는 Next.js Route Handler 패턴 유지)
+- `ANTHROPIC_API_KEY` 흐름은 그대로 — `src/app/manage/content/actions.ts` 서버 액션 → `src/lib/server/ai/anthropic.ts` (현 구조 유지, Route Handler 로의 재구성 없음)
 - `apps/backend/` 신설 안 함 — 모노레포는 `apps/games/` 단일 앱 + `packages/{types,ui?}/` 정도만
 - **장점**: 갭 최소, BE 운영 비용 0, 정적 SaaS 단순함 유지
 - **단점**: 사용자 cross-device 동기화 불가능, V2 결제·계정 도입 시 재설계 필요
@@ -255,15 +255,17 @@ games 는 자체 `proc/spec/01~10` 을 권위로 둔다. planner 정렬 시 다�
 
 #### Phase 0c — shadcn 재발급 (`new-york/slate/cssVar:false` → `base-nova/neutral/cssVar:true`) (1~2 PR)
 
-**목표**: planner 와 동일한 shadcn 라인으로 정렬. **21 게임 시각 회귀 위험이 가장 큰 단계**.
+**선행 게이트**: 현 `proc/spec/08 §8.x` (디자인 시스템) 에 shadcn 라인 변경 합의 선행. 합의 없이는 본 Phase 진입 금지.
+
+**목표**: games spec 이 요구하는 디자인 시스템 속성 — `cssVariables:true` 기반 토큰 인터페이스, `@theme` 호환, 외부 디자인 토큰 공급 수용 가능 — 을 만족하도록 shadcn 라인을 재발급. 특정 외부 도메인의 현재 구성을 정답으로 고정하지 않으며, **21 게임 시각 회귀 위험이 가장 큰 단계**.
 
 - `components.json` 갱신:
   - `style`: `new-york` → `base-nova`
   - `tailwind.baseColor`: `slate` → `neutral`
   - `tailwind.cssVariables`: `false` → `true`
   - `tailwind.config` 비우기 (Tailwind 4 와 정합)
-  - `menuColor`, `menuAccent`, `rtl` 등 planner 와 동일 필드 추가
-- `src/components/ui/*` 재발급 — 현 17개 컴포넌트 (Radix + shadcn) 모두 `bunx shadcn@latest add` 로 base-nova 라인 재생성
+  - `menuColor`, `menuAccent`, `rtl` 등 추가 필드는 games spec 요구사항 기준으로 결정
+- `src/components/ui/*` 재발급 — `src/components/ui/` 디렉토리 내 모든 파일 (현재 기준 — 변경될 수 있으므로 경로 기준 점검) 을 `bunx shadcn@latest add` 로 base-nova 라인 재생성
 - `bg-*`, `text-*`, `border-*` 등 shadcn 토큰을 사용하는 모든 곳 검증 — `cssVariables:true` 로 인터페이스 변경 (Tailwind class → CSS var) 시 직접 import 영향 추적
 - spec/08 §8.1 의 `pullim-slate-*`, `pullim-blue-*` 등 자체 토큰은 그대로 유지 (shadcn 토큰과 병존)
 - **단계적 확인 의무**:
@@ -409,32 +411,27 @@ games 의 client-side FSRS state → server state 전환. 본 plan 에서는 상
 
 본 plan 진척에 필수인 결정 슬롯. 본 plan PR 머지 후 사용자가 슬롯별로 합의해야 후속 Phase 진입 가능.
 
-| # | 슬롯 | 옵션 | default | 진입 차단 Phase |
-|---|---|---|---|---|
-| 1 | **BE 도입 옵션** (§3.2) | A (미도입) / B (자체 NestJS BE) / C (pullim 본체 흡수) | A | Phase β |
-| 2 | **`proc/spec/01~10` 권위 처리** (§5) | A (유지) / B (부분 흡수) / C (전체 흡수) | A | Phase δ |
-| 3 | **`gen:registry` 위치** (Phase 0d) | `apps/games/scripts/` / `packages/games-registry/` | `apps/games/scripts/` | Phase α |
-| 4 | **`proc/audit/` 위치** (Phase α) | `apps/games/proc/audit/` / root `proc/audit/` | `apps/games/proc/audit/` | Phase α |
-| 5 | **FE Container/Presenter 도입** (Phase γ) | 도입 / 보류 | 보류 | Phase γ |
-| 6 | **`packages/ui/` 신설 여부** | 신설 / 미신설 | 미신설 (필요 시 옵션) | Phase α |
-| 7 | **`packages/games-registry/` 신설 여부** | 슬롯 3 종속 — `packages/games-registry/` 선택 시 자동 신설 | 미신설 | Phase α |
-| 8 | **`ANTHROPIC_API_KEY` 라우트 이전 위치** (BE 옵션 B 시) | `apps/backend/src/modules/games/ai/` / `apps/games/src/app/api/` 잔존 | `apps/backend/` (옵션 B 종속) | Phase β |
-| 9 | **본 plan 진입 시점** — 진행 중 별 PR 마무리 후 진입 확인 | 사용자 안내 대기 | (사용자 안내) | Phase 0a |
+> **상태 갱신 주의**: 일부 슬롯은 §11·§12 에서 사용자가 이미 확정했다. 본 표의 "default" 컬럼은 *원안* 이며, **현재 상태** 컬럼이 실제 의사결정 상태이다 (§12 변경이 우선). 후속 작업자는 "현재 상태" 를 따른다.
 
-→ 본 plan PR 본문에 슬롯 1·2·9 의 합의 요청 명시.
+| # | 슬롯 | 옵션 | default (원안) | 현재 상태 | 진입 차단 Phase |
+|---|---|---|---|---|---|
+| 1 | **BE 도입 옵션** (§3.2) | A (미도입) / B (자체 NestJS BE) / C (pullim 본체 흡수) | A | **B 확정** (§12.1, C 폐기 §11.3) | Phase β |
+| 2 | **`proc/spec/01~10` 권위 처리** (§5) | A (유지) / B (부분 흡수) / C (전체 흡수) | A | (미정 — default 유지) | Phase δ |
+| 3 | **`gen:registry` 위치** (Phase 0d) | `apps/games/scripts/` / `packages/games-registry/` | `apps/games/scripts/` | (미정 — default 유지) | Phase α |
+| 4 | **`proc/audit/` 위치** (Phase α) | `apps/games/proc/audit/` / root `proc/audit/` | `apps/games/proc/audit/` | (미정 — default 유지) | Phase α |
+| 5 | **FE Container/Presenter 도입** (Phase γ) | 도입 / 보류 | 보류 | (미정 — default 유지) | Phase γ |
+| 6 | **`packages/ui/` 신설 여부** | 신설 / 미신설 | 미신설 (필요 시 옵션) | (미정 — default 유지) | Phase α |
+| 7 | **`packages/games-registry/` 신설 여부** | 슬롯 3 종속 — `packages/games-registry/` 선택 시 자동 신설 | 미신설 | (슬롯 3 종속) | Phase α |
+| 8 | **`ANTHROPIC_API_KEY` 흐름의 BE 이전 위치** (BE 옵션 B 시) | `apps/backend/src/modules/games/ai/` / `apps/games/` 의 서버 액션 경로 잔존 | `apps/backend/` (옵션 B 종속) | (활성화 — 옵션 B 확정으로) | Phase β |
+| 9 | **본 plan 진입 시점** — 진행 중 별 PR 마무리 후 진입 확인 | 사용자 안내 대기 | (사용자 안내) | (대기) | Phase 0a |
+
+→ 본 plan PR 본문에 슬롯 1·2·9 의 합의 요청 명시. 슬롯 1 은 §12.1 에서 옵션 B 확정으로 해소됨.
 
 ---
 
-## 11. 다음 단계
+## (다음 단계 — §12.3 에 통합됨)
 
-본 plan 머지 + §10 슬롯 1·2·9 합의 후 — Phase 0a (Next.js 15→16) 진입. 진입 시 작업 순서:
-
-1. 본 plan §10 슬롯 1·2·9 합의 확인 (사용자 명시)
-2. 진행 중인 별 PR 마무리 확인 (사용자 안내)
-3. Phase 0a 별 PR 분기 — Next.js 16 업그레이드 + 21 게임 회귀 검증 + ui:audit 4 viewport
-4. Phase 0a 머지 후 Phase 0b (Tailwind 4) → 0c (shadcn 재발급) → 0d 결정 → α (모노레포) → (선택) β·γ·δ
-
-본 11 단계 진입 여부 — 사용자 응답 대기.
+본 plan 머지 + §10 슬롯 2·9 합의 후 — Phase 0a (Next.js 15→16) 진입. 진입 시 작업 순서는 §12.3 참조. 슬롯 1 은 §12.1 에서 옵션 B 확정.
 
 ---
 
@@ -510,11 +507,9 @@ games 시점의 작업 요구사항: 어떤 옵션이든 `proc/spec/08 §8.1` �
 - Phase α (모노레포) → β (BE common) → γ (entity) → δ (read) → ε (mutation) → η (FE 전환)
 - 게스트 모드는 Phase γ 이전에도 동작 — Phase η 까지 무로그인 사용 보장
 
-### 12.2 디자인 토큰 — games 는 외부 공급 결과를 수용
+### 12.2 디자인 토큰 — games 는 수요자 인터페이스만 유지
 
-- 사용자 결정: 풀림 생태계 전반에 npm 패키지 방식 (`@pullim/design-tokens` 가칭) 으로 토큰을 공유한다는 상위 방향이 합의됨.
-- **본 plan 의 의무**: games 는 *수요자* 로서 토큰 인터페이스를 외부 공급 결과와 정합되게 받을 수 있도록 Phase 0b (Tailwind 4 `@theme`) 설계 시 외부 패키지 import 가 가능한 구조로 둔다.
-- **본 plan 의 비의무**: 패키지 호스팅 위치 (별 레포 / 풀림 본체 / GitHub Packages 등) 결정, 발행 정책, 다른 도메인의 채택 결정 — 모두 별도 상위 계획 문서.
+games 시점의 의무는 단 하나: 외부에서 어떤 공급 방식이 결정되든 그것을 *수용 가능한* 토큰 인터페이스를 유지한다 (Phase 0b 의 Tailwind 4 `@theme` 설계 시 외부 토큰 소스 import 호환 구조). 어떤 공급 방식이 채택되는지, 호스팅 위치가 어디인지, 발행 정책은 어떠한지 등의 *생태계 결정* 은 본 plan 의 권위 범위 밖이며 별도 상위 계획 문서에서 추적한다 (링크는 결정 확정 시 추가).
 
 ### 12.3 진입 시점 (games)
 
