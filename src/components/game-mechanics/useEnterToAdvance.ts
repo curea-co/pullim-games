@@ -24,13 +24,23 @@ function shouldSkipForTarget(target: EventTarget | null): boolean {
     // disabled 가 아니면 input 의 자체 onKeyDown 이 우선
     return !input.disabled;
   }
-  // 포커스된 button/a 는 브라우저 기본 click 동작이 이미 수행
-  if (tag === "BUTTON" || tag === "A") return true;
+  // 포커스된 활성 button — 브라우저 기본 click 이 이미 발사되므로 skip.
+  // disabled button(예: QuickQuiz/Blank 의 선택 후 비활성된 보기) 은 자체 동작이
+  // 없으므로 CTA 발사로 양보 — 마우스로 보기를 클릭한 뒤 focus 가 그 button 에
+  // 남아 있는 키보드 사용자의 가장 흔한 흐름에서 다음 카드로 못 넘어가는 회귀 차단.
+  if (tag === "BUTTON") {
+    return !(target as HTMLButtonElement).disabled;
+  }
+  if (tag === "A") return true;
   // contentEditable 영역에서는 Enter 가 줄바꿈 등 자체 동작
   if (target.isContentEditable) return true;
   // ARIA interactive role — closest 까지 보는 이유: role="button" 컨테이너 안의
   // span 등 후손이 focus 받을 수 있고, 어느 경우든 자체 키 핸들러가 우선.
-  if (target.closest(INTERACTIVE_ROLE_SELECTOR)) return true;
+  // aria-disabled="true" 인 인터랙티브 요소는 자체 핸들러도 noop 이라 양보.
+  const interactive = target.closest(INTERACTIVE_ROLE_SELECTOR);
+  if (interactive && interactive.getAttribute("aria-disabled") !== "true") {
+    return true;
+  }
   return false;
 }
 
