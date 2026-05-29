@@ -16,6 +16,13 @@ const nextConfig: NextConfig = {
   // dev 인디케이터(좌하단 N + Issue 토스트) — 학습 콘텐츠 위 노출 회피.
   // 빌드 상태는 터미널/네트워크 패널에서 확인 (prod 영향 없음).
   devIndicators: false,
+  // 인증 API 가 런타임에 migrations/*.sql 을 fs 로 읽어 자동 마이그레이션한다.
+  // Next.js 는 import 하지 않은 파일을 서버리스 함수 번들에 자동 포함하지 않으므로,
+  // Vercel 배포 시 첫 연결 마이그레이션이 동작하도록 명시 포함한다.
+  // 근거: proc/plan/2026-05-29_auth-login-signup.md (DB 자동 마이그레이션).
+  outputFileTracingIncludes: {
+    "/api/auth/**": ["./migrations/**"],
+  },
 };
 
 export default nextConfig;
