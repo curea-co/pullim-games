@@ -17,6 +17,7 @@ import {
   CardContent,
 } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Checkbox } from "@/components/ui/checkbox";
 import { authErrorMessage, login, signup } from "@/lib/auth/client";
 
 type Mode = "login" | "signup";
@@ -53,7 +54,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
   }
 
   return (
-    <div className="mx-auto flex min-h-[60vh] w-full max-w-sm items-center px-4">
+    // spec/08 §8.3·§8.7: 모바일 가장자리 패딩 24px(px-6), 컨텐츠 폭 480px.
+    <div className="mx-auto flex min-h-[60vh] w-full max-w-[480px] items-center px-6">
       {/* 디자인 시스템 토큰 정합(AGENTS.md/spec/08): pullim-* 색, 블록 radius 4px. */}
       <Card className="w-full rounded border-pullim-slate-200 bg-card shadow-sm">
         <CardHeader>
@@ -101,15 +103,21 @@ export function AuthForm({ mode }: { mode: Mode }) {
             </div>
 
             {isSignup && (
-              <label className="flex items-start gap-2 text-sm">
-                <input
-                  type="checkbox"
-                  className="mt-0.5"
+              // spec/08 §8.10: 토큰화 + focus ring + 44×44 터치 영역(min-h-11 행 + 라벨 클릭).
+              <div className="flex min-h-11 items-start gap-2 py-1">
+                <Checkbox
+                  id="over14"
                   checked={over14}
-                  onChange={(e) => setOver14(e.target.checked)}
+                  onCheckedChange={(v) => setOver14(v === true)}
+                  className="mt-0.5 h-5 w-5"
                 />
-                <span>만 14세 이상이며, 이메일·비밀번호 저장에 동의해요.</span>
-              </label>
+                <Label
+                  htmlFor="over14"
+                  className="text-sm font-normal leading-snug text-pullim-slate-700"
+                >
+                  만 14세 이상이며, 이메일·비밀번호 저장에 동의해요.
+                </Label>
+              </div>
             )}
 
             {error && (

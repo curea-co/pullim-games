@@ -4,7 +4,7 @@
 services:
   db:
     image: postgres:16
-    container_name: pullim-games-db
+    # container_name 고정 X — Compose 프로젝트 스코프 이름 사용(worktree/병렬 스택 충돌 회피).
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
