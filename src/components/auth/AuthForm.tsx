@@ -115,7 +115,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
                   htmlFor="over14"
                   className="text-sm font-normal leading-snug text-pullim-slate-700"
                 >
-                  만 14세 이상이며, 이메일·비밀번호 저장에 동의해요.
+                  만 14세 이상이며, 이메일·비밀번호와 기기 식별값(fingerprint) 저장에
+                  동의해요.
                 </Label>
               </div>
             )}

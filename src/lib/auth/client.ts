@@ -39,21 +39,27 @@ async function postAuth(
   return { ok: false, error: data.error ?? "unknown_error", status: res.status };
 }
 
+function readCsrfCookie(): string | null {
+  if (typeof document === "undefined") return null;
+  const m = document.cookie.match(/(?:^|;\s*)pullim-csrf-auth=([^;]+)/);
+  return m ? m[1] : null;
+}
+
 /**
- * CSRF 토큰 확보(double-submit). GET 으로 쿠키를 받고, 쿠키 값을 읽어 반환 →
- * 호출부가 POST 헤더로 echo. 쿠키는 non-HttpOnly(Path=/) 라 같은 출처 페이지에서 읽힘.
+ * CSRF 토큰 확보(double-submit). **기존 쿠키가 있으면 재사용** — 매 호출 새 토큰으로 회전
+ * 시키면 멀티탭/동시 제출에서 한 탭이 쿠키를 덮어써 다른 탭 제출이 403 자기충돌하기 때문.
+ * (double-submit 보안은 cookie==header 일치에서 나오므로 토큰 freshness 는 불필요.)
+ * 쿠키가 없을 때만 GET 으로 발급받는다. 쿠키는 non-HttpOnly(Path=/) 라 같은 출처에서 읽힘.
  */
 async function ensureCsrf(): Promise<string | null> {
+  const existing = readCsrfCookie();
+  if (existing) return existing;
   try {
     await fetch("/api/auth/csrf", { cache: "no-store" });
   } catch {
     return null;
   }
-  const m =
-    typeof document !== "undefined"
-      ? document.cookie.match(/(?:^|;\s*)pullim-csrf-auth=([^;]+)/)
-      : null;
-  return m ? m[1] : null;
+  return readCsrfCookie();
 }
 
 export async function signup(
