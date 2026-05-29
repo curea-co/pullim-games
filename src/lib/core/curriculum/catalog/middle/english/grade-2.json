@@ -1,0 +1,98 @@
+{
+  "gradeBand": "middle",
+  "subject": "english",
+  "grade": 2,
+  "gradeName": "중학교 2학년",
+  "units": [
+    {
+      "unitId": "interests-hobbies",
+      "unitName": "흥미와 취미",
+      "achievementCodes": ["[9영02-03]"],
+      "achievementText": "자신의 취미나 관심사를 구체적으로 설명하고 친구와 공유한다.",
+      "suggestedKinds": ["typing", "blank", "multiple-choice"],
+      "focusVocab": ["passion", "activity", "creative", "outdoor", "indoor"],
+      "focusGrammar": ["I'm into ~", "I've been ~ing for ~", "It makes me feel ~"]
+    },
+    {
+      "unitId": "travel-experiences",
+      "unitName": "여행 경험",
+      "achievementCodes": ["[9영01-04]", "[9영02-06]"],
+      "achievementText": "여행 경험에 관한 짧은 글을 이해하고 자신의 여행 경험을 표현한다.",
+      "suggestedKinds": ["blank", "typing", "multiple-choice"],
+      "focusVocab": ["abroad", "experience", "tourist", "landmark", "journey"],
+      "focusGrammar": ["I've been to ~", "When I was ~", "It was the best ~"]
+    },
+    {
+      "unitId": "social-issues",
+      "unitName": "사회 문제",
+      "achievementCodes": ["[9영01-06]", "[9영02-08]"],
+      "achievementText": "사회 문제에 관한 글을 읽고 자신의 의견을 짧게 표현한다.",
+      "suggestedKinds": ["word-match", "blank", "multiple-choice"],
+      "focusVocab": ["issue", "society", "problem", "opinion", "solution"],
+      "focusGrammar": ["I think ~", "In my opinion ~", "We need to ~"]
+    },
+    {
+      "unitId": "compare-contrast",
+      "unitName": "비교와 대조",
+      "achievementCodes": ["[9영02-05]"],
+      "achievementText": "사람·사물·생각을 비교하거나 대조하는 표현을 사용해 글이나 말로 표현한다.",
+      "suggestedKinds": ["blank", "multiple-choice", "typing"],
+      "focusVocab": ["similar", "different", "however", "while", "than"],
+      "focusGrammar": ["~ is more ~ than ~", "Unlike ~, ~", "Both ~ and ~"]
+    },
+    {
+      "unitId": "whats-happening",
+      "unitName": "진행 중인 일",
+      "achievementCodes": ["[9영02-04]"],
+      "achievementText": "현재 진행 중인 일이나 일시적인 상황을 묻고 답하는 표현을 사용한다.",
+      "suggestedKinds": ["blank", "typing", "multiple-choice"],
+      "focusVocab": ["currently", "right now", "these days", "lately", "moment"],
+      "focusGrammar": ["I'm ~ing right now", "What are you doing?", "These days, I ~"]
+    },
+    {
+      "unitId": "science-inventions",
+      "unitName": "과학과 발명",
+      "achievementCodes": ["[9영01-05]"],
+      "achievementText": "과학 발견이나 발명에 관한 짧은 글을 읽고 주요 정보를 이해한다.",
+      "suggestedKinds": ["word-match", "blank", "multiple-choice"],
+      "focusVocab": ["invent", "discover", "technology", "experiment", "scientist"],
+      "focusGrammar": ["~ was invented by ~", "~ helps us to ~", "Thanks to ~"]
+    },
+    {
+      "unitId": "books-movies",
+      "unitName": "책과 영화",
+      "achievementCodes": ["[9영02-07]"],
+      "achievementText": "책이나 영화의 줄거리나 감상을 짧게 소개하고 추천한다.",
+      "suggestedKinds": ["typing", "blank", "word-match"],
+      "focusVocab": ["plot", "character", "ending", "scene", "review"],
+      "focusGrammar": ["It's about ~", "The main character ~", "I recommend ~"]
+    },
+    {
+      "unitId": "protecting-environment",
+      "unitName": "환경 보호",
+      "achievementCodes": ["[9영02-08]"],
+      "achievementText": "환경 보호와 관련된 행동을 제안하거나 글로 표현한다.",
+      "suggestedKinds": ["blank", "word-match", "multiple-choice"],
+      "focusVocab": ["sustainable", "reduce", "reuse", "climate", "global"],
+      "focusGrammar": ["We must ~", "If we ~, we can ~", "~ is important because ~"]
+    },
+    {
+      "unitId": "global-citizenship",
+      "unitName": "글로벌 시민",
+      "achievementCodes": ["[9영02-07]"],
+      "achievementText": "다양한 문화와 사람들에 대한 이해와 존중을 짧은 글이나 말로 표현한다.",
+      "suggestedKinds": ["word-match", "blank", "multiple-choice"],
+      "focusVocab": ["culture", "respect", "diverse", "global", "citizen"],
+      "focusGrammar": ["People around the world ~", "We should respect ~", "Differences make ~"]
+    },
+    {
+      "unitId": "future-society",
+      "unitName": "미래 사회",
+      "achievementCodes": ["[9영02-08]"],
+      "achievementText": "미래 사회의 모습을 상상하고 짧은 글이나 말로 표현한다.",
+      "suggestedKinds": ["typing", "blank", "multiple-choice"],
+      "focusVocab": ["future", "predict", "imagine", "advanced", "robot"],
+      "focusGrammar": ["In the future, ~ will ~", "I predict that ~", "Maybe ~ will ~"]
+    }
+  ]
+}

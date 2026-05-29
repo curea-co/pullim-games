@@ -1,0 +1,80 @@
+{
+  "gradeBand": "elementary",
+  "subject": "english",
+  "grade": 6,
+  "gradeName": "초등 6학년",
+  "units": [
+    {
+      "unitId": "future-dream",
+      "unitName": "미래의 꿈",
+      "achievementCodes": ["[6영02-04]"],
+      "achievementText": "장래 희망이나 직업을 묻고 답하며 자신의 꿈을 소개한다.",
+      "suggestedKinds": ["typing", "blank", "multiple-choice"],
+      "focusVocab": ["doctor", "teacher", "scientist", "artist", "future"],
+      "focusGrammar": ["I want to be ~", "What do you want to be?"]
+    },
+    {
+      "unitId": "travel-culture",
+      "unitName": "여행과 문화",
+      "achievementCodes": ["[6영01-03]", "[6영02-05]"],
+      "achievementText": "다른 나라의 문화나 여행 경험에 대한 짧은 글을 듣고 자신의 경험을 소개한다.",
+      "suggestedKinds": ["word-match", "blank", "typing"],
+      "focusVocab": ["country", "trip", "culture", "visit", "souvenir"],
+      "focusGrammar": ["I went to ~", "It was ~", "Have you been to ~?"]
+    },
+    {
+      "unitId": "lets-compare",
+      "unitName": "비교해 봐",
+      "achievementCodes": ["[6영02-03]"],
+      "achievementText": "두 사물이나 사람을 비교하는 표현을 사용해 짧은 문장을 만든다.",
+      "suggestedKinds": ["blank", "multiple-choice", "typing"],
+      "focusVocab": ["taller", "shorter", "bigger", "faster", "better"],
+      "focusGrammar": ["~ is taller than ~", "~ is the most ~", "as ~ as"]
+    },
+    {
+      "unitId": "what-happened-yesterday",
+      "unitName": "어제 있었던 일",
+      "achievementCodes": ["[6영02-06]"],
+      "achievementText": "과거에 있었던 일을 묻고 답하며 자신의 경험을 짧게 표현한다.",
+      "suggestedKinds": ["blank", "multiple-choice", "typing"],
+      "focusVocab": ["yesterday", "went", "ate", "saw", "played"],
+      "focusGrammar": ["I went to ~", "Did you ~?", "Yes, I did. / No, I didn't."]
+    },
+    {
+      "unitId": "save-environment",
+      "unitName": "환경을 지켜요",
+      "achievementCodes": ["[6영01-05]", "[6영02-07]"],
+      "achievementText": "환경 보호와 관련된 짧은 글을 듣고 우리가 할 수 있는 일을 표현한다.",
+      "suggestedKinds": ["word-match", "blank", "multiple-choice"],
+      "focusVocab": ["recycle", "save", "earth", "pollution", "trash"],
+      "focusGrammar": ["We should ~", "Don't ~", "Let's ~"]
+    },
+    {
+      "unitId": "school-events",
+      "unitName": "학교 행사",
+      "achievementCodes": ["[6영01-04]"],
+      "achievementText": "학교 행사의 일정이나 안내를 듣고 누구와 무엇을 하는지 이해한다.",
+      "suggestedKinds": ["blank", "multiple-choice", "word-match"],
+      "focusVocab": ["festival", "field", "trip", "concert", "graduation"],
+      "focusGrammar": ["When is ~?", "It's on ~", "We're going to ~"]
+    },
+    {
+      "unitId": "internet-digital",
+      "unitName": "인터넷과 디지털",
+      "achievementCodes": ["[6영02-08]"],
+      "achievementText": "디지털 기기나 인터넷 사용과 관련된 짧은 표현을 듣고 사용한다.",
+      "suggestedKinds": ["word-match", "typing", "multiple-choice"],
+      "focusVocab": ["computer", "internet", "email", "click", "search"],
+      "focusGrammar": ["How do I ~?", "Click on ~", "Type your ~"]
+    },
+    {
+      "unitId": "time-to-say-goodbye",
+      "unitName": "작별의 시간",
+      "achievementCodes": ["[6영02-02]"],
+      "achievementText": "졸업이나 헤어짐과 관련된 감정과 추억을 짧은 표현으로 나눈다.",
+      "suggestedKinds": ["blank", "typing", "word-match"],
+      "focusVocab": ["graduate", "memory", "friend", "miss", "goodbye"],
+      "focusGrammar": ["I will miss ~", "Thank you for ~", "Good luck!"]
+    }
+  ]
+}

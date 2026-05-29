@@ -1,18 +1,32 @@
 "use client";
 
-// /manage/content — 자동 생성 (Mode A: 교육과정 / Mode B: 자료).
-// `2026-05-08_management-auto-generation.md` 본격 구현.
-// 사용자는 형식을 학습할 필요 없음. picker 또는 자유 paste 만.
+// /manage/content — 자동 생성.
+//   Mode A "교육과정" = 통합 4-depth picker (학교급 → 과목 → 학년 → 단원).
+//     - 단원이 seedRef 를 가지면 seed 정적 변환 (빠름) / AI 생성 (다양) 서브토글
+//     - 그렇지 않으면 catalog 컨텍스트 + LLM 생성
+//   Mode B "자료" = 사용자 paste 텍스트 + LLM 생성.
+// spec/06 §6.10·§6.11·§6.12 + plan: 2026-05-27_curriculum-ai-content-creation.md
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
-  listSeedSubjects,
+  DAILY_LIMIT,
+  clearCachedDrafts,
+  describeCacheAge,
+  findCatalogUnit,
+  getCachedDrafts,
+  getLlmQuotaRemaining,
+  incrementLlmQuota,
+  isLlmQuotaExhausted,
+  listCatalog,
+  setCachedDrafts,
   loadCards,
   loadCurriculum,
   loadSubjects,
   newId,
   saveCard,
+  type CatalogGradeBand,
+  type CatalogPath,
   type CustomBlankCard,
   type CustomCard,
   type CustomCardDraft,
@@ -22,7 +36,6 @@ import {
   type CustomSubject,
   type CustomTypingCard,
   type CustomWordMatchCard,
-  type SeedSubjectMeta,
 } from "@/lib/core";
 import { MechanicPicker } from "@/components/manage/MechanicPicker";
 import { SubjectCurriculumPicker } from "@/components/manage/SubjectCurriculumPicker";
@@ -30,7 +43,10 @@ import {
   ModeToggle,
   type GenerateMode,
 } from "@/components/manage/auto/ModeToggle";
-import { CurriculumPicker } from "@/components/manage/auto/CurriculumPicker";
+import {
+  CurriculumPicker,
+  type CurriculumSubMode,
+} from "@/components/manage/auto/CurriculumPicker";
 import { RawMaterialInput } from "@/components/manage/auto/RawMaterialInput";
 import { GenerateButton } from "@/components/manage/auto/GenerateButton";
 import { GenerationProgress } from "@/components/manage/auto/GenerationProgress";
@@ -62,37 +78,51 @@ type GenState =
   | { kind: "loading" }
   | { kind: "error"; message: string };
 
+function isCatalogPathComplete(p: Partial<CatalogPath>): p is CatalogPath {
+  return !!p.gradeBand && !!p.subject && p.grade != null && !!p.unitId;
+}
+
 export default function ContentPage() {
-  // 사용자 (저장 대상) 데이터
   const [subjects, setSubjects] = useState<CustomSubject[]>([]);
   const [curriculum, setCurriculum] = useState<CustomCurriculum[]>([]);
   const [savedCards, setSavedCards] = useState<CustomCard[]>([]);
 
-  // 폼 상태
   const [kind, setKind] = useState<CustomCardKind | null>(null);
   const [saveSubjectId, setSaveSubjectId] = useState<string | null>(null);
   const [saveCurriculumId, setSaveCurriculumId] = useState<string | null>(null);
   const [mode, setMode] = useState<GenerateMode>("curriculum");
-  const [seedSubjectId, setSeedSubjectId] = useState<string | null>(null);
-  const [seedUnitId, setSeedUnitId] = useState<string | null>(null);
+  const [curriculumPath, setCurriculumPath] = useState<Partial<CatalogPath>>({});
+  const [curriculumSubMode, setCurriculumSubMode] =
+    useState<CurriculumSubMode>("seed");
   const [sourceText, setSourceText] = useState("");
   const [count, setCount] = useState(10);
+  const [quotaRemaining, setQuotaRemaining] = useState(DAILY_LIMIT);
 
-  // 결과 상태
   const [genState, setGenState] = useState<GenState>({ kind: "idle" });
   const [previews, setPreviews] = useState<PreviewItem[]>([]);
+  /** catalog-ai 분기에서 미리보기가 캐시에서 왔는지 (ISO 시각, null = 라이브 호출). */
+  const [cacheLabel, setCacheLabel] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
 
-  // 카탈로그
-  const seedCatalog = useMemo<SeedSubjectMeta[]>(
-    () => listSeedSubjects(),
-    [],
-  );
+  const courseCatalog = useMemo<CatalogGradeBand[]>(() => listCatalog(), []);
+  const selectedCatalogUnit = useMemo(() => {
+    if (!isCatalogPathComplete(curriculumPath)) return undefined;
+    return findCatalogUnit(curriculumPath);
+  }, [curriculumPath]);
+
+  // 단원 변경 시 sub-mode 자동 조정 — 단원이 확정된 순간만 동작.
+  // path 구축 중(selectedCatalogUnit === undefined)에 건드리면 학교급/과목/학년 픽 단계마다
+  // subMode 가 "ai" 로 리셋돼 단원 확정 후에도 ai 가 박혀버림.
+  useEffect(() => {
+    if (!selectedCatalogUnit) return;
+    setCurriculumSubMode(selectedCatalogUnit.seedRef ? "seed" : "ai");
+  }, [selectedCatalogUnit]);
 
   useEffect(() => {
     setSubjects(loadSubjects());
     setCurriculum(loadCurriculum());
     setSavedCards(loadCards());
+    setQuotaRemaining(getLlmQuotaRemaining());
   }, []);
 
   function refreshSaved() {
@@ -106,36 +136,102 @@ export default function ContentPage() {
     setGenState({ kind: "idle" });
   }
 
-  async function handleGenerate() {
+  /** 현재 폼 상태가 LLM 호출을 유발하는지. */
+  function willCallLlm(): boolean {
+    if (mode === "source") return true;
+    if (mode === "curriculum") {
+      // seedRef 있으면 sub-mode 가 결정. 없으면 AI.
+      if (!selectedCatalogUnit) return false;
+      return curriculumSubMode === "ai" || !selectedCatalogUnit.seedRef;
+    }
+    return false;
+  }
+
+  /** catalog-ai 분기. forceFresh=true 면 캐시 무시하고 LLM 호출. */
+  async function handleGenerate(forceFresh = false) {
     if (!kind) return;
     setGenState({ kind: "loading" });
     setPreviews([]);
+    setCacheLabel(null);
 
     let result;
     if (mode === "curriculum") {
-      if (!seedSubjectId || !seedUnitId) {
-        setGenState({ kind: "error", message: "과목과 단원을 골라주세요." });
-        return;
-      }
-      result = await generateFromCurriculumAction({
-        kind,
-        subjectId: seedSubjectId,
-        unitId: seedUnitId,
-        count,
-      });
-    } else {
-      if (!sourceText.trim()) {
+      if (!isCatalogPathComplete(curriculumPath) || !selectedCatalogUnit) {
         setGenState({
           kind: "error",
-          message: "자료를 붙여넣어 주세요.",
+          message: "학교급·과목·학년·단원을 모두 골라주세요.",
         });
         return;
       }
-      result = await generateFromSourceAction({
-        kind,
-        sourceText,
-        count,
-      });
+      const useSeed =
+        !!selectedCatalogUnit.seedRef && curriculumSubMode === "seed";
+      if (useSeed) {
+        result = await generateFromCurriculumAction({
+          kind,
+          count,
+          seedSubjectId: selectedCatalogUnit.seedRef!.subjectId,
+          seedUnitId: selectedCatalogUnit.seedRef!.unitId,
+        });
+      } else {
+        // catalog-ai: 캐시 hit 우선 (forceFresh 시 무시)
+        const cacheKey = {
+          gradeBand: curriculumPath.gradeBand!,
+          subject: curriculumPath.subject!,
+          grade: curriculumPath.grade!,
+          unitId: curriculumPath.unitId!,
+          kind,
+          count,
+        };
+        const cached = forceFresh ? null : getCachedDrafts(cacheKey);
+        if (cached) {
+          setPreviews(
+            cached.drafts.map((d) => ({
+              uid: newId(),
+              draft: d as PreviewDraft,
+              selected: true,
+              editing: false,
+            })),
+          );
+          setCacheLabel(`AI 캐시 · ${describeCacheAge(cached.savedAt)}`);
+          setGenState({ kind: "idle" });
+          return;
+        }
+        // 캐시 miss → quota 체크 → LLM 호출
+        if (isLlmQuotaExhausted()) {
+          setGenState({
+            kind: "error",
+            message: `오늘 AI 호출 한도(${DAILY_LIMIT}회) 를 다 썼어요. 내일 자정에 리셋돼요.`,
+          });
+          return;
+        }
+        result = await generateFromCurriculumAction({
+          kind,
+          count,
+          catalogPath: curriculumPath,
+        });
+        if (result.ok && result.drafts) {
+          incrementLlmQuota();
+          setQuotaRemaining(getLlmQuotaRemaining());
+          setCachedDrafts(cacheKey, result.drafts);
+        }
+      }
+    } else {
+      if (!sourceText.trim()) {
+        setGenState({ kind: "error", message: "자료를 붙여넣어 주세요." });
+        return;
+      }
+      if (isLlmQuotaExhausted()) {
+        setGenState({
+          kind: "error",
+          message: `오늘 AI 호출 한도(${DAILY_LIMIT}회) 를 다 썼어요. 내일 자정에 리셋돼요.`,
+        });
+        return;
+      }
+      result = await generateFromSourceAction({ kind, sourceText, count });
+      if (result.ok) {
+        incrementLlmQuota();
+        setQuotaRemaining(getLlmQuotaRemaining());
+      }
     }
 
     if (!result.ok || !result.drafts) {
@@ -156,6 +252,20 @@ export default function ContentPage() {
     setGenState({ kind: "idle" });
   }
 
+  /** 캐시 무시하고 새로 LLM 호출 (사용자가 "다시 생성" 버튼 클릭 시). */
+  function regenerateFresh() {
+    if (!isCatalogPathComplete(curriculumPath)) return;
+    clearCachedDrafts({
+      gradeBand: curriculumPath.gradeBand!,
+      subject: curriculumPath.subject!,
+      grade: curriculumPath.grade!,
+      unitId: curriculumPath.unitId!,
+      kind: kind ?? "typing",
+      count,
+    });
+    void handleGenerate(true);
+  }
+
   function commitAll() {
     if (!kind || !saveSubjectId || !saveCurriculumId) return;
     const selected = previews.filter((p) => p.selected);
@@ -169,6 +279,7 @@ export default function ContentPage() {
         subjectId: saveSubjectId,
         curriculumId: saveCurriculumId,
         difficulty: d.difficulty ?? 3,
+        source: d.source ?? "manual",
         createdAt: now,
         updatedAt: now,
       };
@@ -278,8 +389,9 @@ export default function ContentPage() {
     saveSubjectId !== null &&
     saveCurriculumId !== null &&
     (mode === "curriculum"
-      ? seedSubjectId !== null && seedUnitId !== null
+      ? isCatalogPathComplete(curriculumPath)
       : sourceText.trim().length > 0);
+  const usesLlm = willCallLlm();
 
   return (
     <div className="flex flex-col gap-5">
@@ -333,24 +445,28 @@ export default function ContentPage() {
 
           {mode === "curriculum" ? (
             <CurriculumPicker
-              catalog={seedCatalog}
-              subjectId={seedSubjectId}
-              unitId={seedUnitId}
-              onSubjectChange={(id) => {
-                setSeedSubjectId(id);
-                setSeedUnitId(null);
-              }}
-              onUnitChange={(id) => setSeedUnitId(id)}
+              catalog={courseCatalog}
+              path={curriculumPath}
+              onChange={setCurriculumPath}
+              selectedUnit={selectedCatalogUnit}
+              subMode={curriculumSubMode}
+              onSubModeChange={setCurriculumSubMode}
             />
           ) : (
             <RawMaterialInput value={sourceText} onChange={setSourceText} />
           )}
 
+          {usesLlm && (
+            <p className="text-helper text-type-secondary tabular">
+              오늘 AI 호출 남음: {quotaRemaining} / {DAILY_LIMIT}
+            </p>
+          )}
+
           <GenerateButton
             count={count}
             onCountChange={setCount}
-            onGenerate={handleGenerate}
-            disabled={!canGenerate}
+            onGenerate={() => handleGenerate()}
+            disabled={!canGenerate || (usesLlm && quotaRemaining <= 0)}
             loading={genState.kind === "loading"}
           />
 
@@ -362,24 +478,40 @@ export default function ContentPage() {
               state={{
                 kind: "error",
                 message: genState.message,
-                onRetry: handleGenerate,
+                onRetry: () => handleGenerate(),
               }}
             />
           )}
 
           {previews.length > 0 && (
             <section className="flex flex-col gap-3">
-              <header className="flex items-center justify-between">
+              <header className="flex items-center justify-between gap-2">
                 <h3 className="text-label font-bold text-type-primary">
                   4. 미리보기 — 카드 {previews.length}장 (선택 {selectedCount})
                 </h3>
-                <button
-                  type="button"
-                  onClick={() => setPreviews([])}
-                  className="text-helper text-type-secondary hover:text-type-primary"
-                >
-                  비우기
-                </button>
+                <div className="flex items-center gap-2">
+                  {cacheLabel && (
+                    <span className="rounded-full bg-pullim-blue-50 px-2 py-0.5 text-[10px] font-bold text-pullim-blue-700">
+                      {cacheLabel}
+                    </span>
+                  )}
+                  {cacheLabel && (
+                    <button
+                      type="button"
+                      onClick={regenerateFresh}
+                      className="text-helper text-pullim-blue-700 hover:text-pullim-blue-500"
+                    >
+                      다시 생성
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setPreviews([])}
+                    className="text-helper text-type-secondary hover:text-type-primary"
+                  >
+                    비우기
+                  </button>
+                </div>
               </header>
               <ul className="flex flex-col gap-2">
                 {previews.map((item) => (

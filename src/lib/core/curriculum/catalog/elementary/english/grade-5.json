@@ -1,0 +1,80 @@
+{
+  "gradeBand": "elementary",
+  "subject": "english",
+  "grade": 5,
+  "gradeName": "초등 5학년",
+  "units": [
+    {
+      "unitId": "daily-routines",
+      "unitName": "일상의 시간",
+      "achievementCodes": ["[6영02-03]"],
+      "achievementText": "일상 생활에서 자주 하는 행동이나 시간을 묻고 답하는 짧은 대화를 한다.",
+      "suggestedKinds": ["typing", "blank", "multiple-choice"],
+      "focusVocab": ["wake up", "breakfast", "lunch", "dinner", "time"],
+      "focusGrammar": ["What time is it?", "I get up at ~", "in the morning"]
+    },
+    {
+      "unitId": "introduce-friend",
+      "unitName": "내 친구를 소개해",
+      "achievementCodes": ["[6영02-02]"],
+      "achievementText": "친구의 외모나 성격을 간단하게 묘사하며 친구를 소개하는 글이나 말을 표현한다.",
+      "suggestedKinds": ["word-match", "blank", "multiple-choice"],
+      "focusVocab": ["tall", "short", "kind", "smart", "funny"],
+      "focusGrammar": ["He/She is ~", "He/She has ~", "My friend is from ~"]
+    },
+    {
+      "unitId": "my-neighborhood",
+      "unitName": "우리 동네",
+      "achievementCodes": ["[6영01-04]", "[6영02-05]"],
+      "achievementText": "주변 장소를 가리키는 표현을 이해하고 간단한 길 안내를 듣거나 한다.",
+      "suggestedKinds": ["word-match", "blank", "typing"],
+      "focusVocab": ["library", "park", "hospital", "store", "street"],
+      "focusGrammar": ["Where is ~?", "Go straight", "Turn left/right"]
+    },
+    {
+      "unitId": "whats-your-hobby",
+      "unitName": "취미가 뭐예요?",
+      "achievementCodes": ["[6영02-04]"],
+      "achievementText": "자신의 취미나 좋아하는 활동을 묻고 답하는 짧은 대화를 한다.",
+      "suggestedKinds": ["typing", "word-match", "blank"],
+      "focusVocab": ["read", "draw", "swim", "dance", "hobby"],
+      "focusGrammar": ["What's your hobby?", "My hobby is ~ing", "I love ~ing"]
+    },
+    {
+      "unitId": "seasons-weather",
+      "unitName": "사계절과 날씨",
+      "achievementCodes": ["[6영01-02]"],
+      "achievementText": "날씨와 계절에 관한 표현을 듣고 이해하며 자신이 좋아하는 계절을 표현한다.",
+      "suggestedKinds": ["word-match", "multiple-choice", "blank"],
+      "focusVocab": ["spring", "summer", "fall", "winter", "sunny", "rainy"],
+      "focusGrammar": ["How's the weather?", "It's ~", "I like ~ best"]
+    },
+    {
+      "unitId": "favorite-sports",
+      "unitName": "좋아하는 운동",
+      "achievementCodes": ["[6영02-04]"],
+      "achievementText": "운동의 종류와 좋아하는 운동을 묻고 답하는 표현을 사용한다.",
+      "suggestedKinds": ["word-match", "typing", "multiple-choice"],
+      "focusVocab": ["soccer", "basketball", "baseball", "tennis", "swim"],
+      "focusGrammar": ["Can you ~?", "I can ~", "Let's play ~"]
+    },
+    {
+      "unitId": "cooking-food",
+      "unitName": "음식 만들기",
+      "achievementCodes": ["[6영01-05]", "[6영02-06]"],
+      "achievementText": "요리 과정이나 음식 재료를 나타내는 표현을 이해하고 사용한다.",
+      "suggestedKinds": ["typing", "blank", "word-match"],
+      "focusVocab": ["mix", "cut", "boil", "sugar", "salt"],
+      "focusGrammar": ["First, ~", "Next, ~", "Add some ~"]
+    },
+    {
+      "unitId": "clothes-fashion",
+      "unitName": "옷차림과 패션",
+      "achievementCodes": ["[6영02-03]"],
+      "achievementText": "옷의 종류나 색깔을 표현하며 무엇을 입었는지 묻고 답한다.",
+      "suggestedKinds": ["word-match", "multiple-choice", "typing"],
+      "focusVocab": ["shirt", "pants", "shoes", "hat", "jacket"],
+      "focusGrammar": ["What are you wearing?", "I'm wearing ~", "It looks ~"]
+    }
+  ]
+}

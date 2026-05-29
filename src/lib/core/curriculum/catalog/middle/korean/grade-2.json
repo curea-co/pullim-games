@@ -1,0 +1,71 @@
+{
+  "gradeBand": "middle",
+  "subject": "korean",
+  "grade": 2,
+  "gradeName": "중학교 2학년",
+  "units": [
+    {
+      "unitId": "morpheme-word-formation",
+      "unitName": "형태소와 단어 형성",
+      "achievementCodes": ["[9국04-03]"],
+      "achievementText": "형태소와 단어의 짜임(파생·합성)을 이해하고 새 단어를 분석한다.",
+      "suggestedKinds": ["word-match", "multiple-choice", "blank"],
+      "focusVocab": ["형태소", "자립 형태소", "의존 형태소", "파생어", "합성어"],
+      "focusGrammar": ["헛-+소리 = 헛소리 (파생)", "산+길 = 산길 (합성)"]
+    },
+    {
+      "unitId": "sentence-structure",
+      "unitName": "문장 성분과 구조",
+      "achievementCodes": ["[9국04-04]"],
+      "achievementText": "문장의 주성분·부속 성분·독립 성분을 구별하고 문장 구조를 분석한다.",
+      "suggestedKinds": ["multiple-choice", "blank", "word-match"],
+      "focusVocab": ["주어", "서술어", "목적어", "보어", "관형어"],
+      "focusGrammar": ["주어 - 서술어 호응", "관형어 + 체언"]
+    },
+    {
+      "unitId": "informative-text-writing",
+      "unitName": "설명문·논설문 쓰기",
+      "achievementCodes": ["[9국03-02]", "[9국03-03]"],
+      "achievementText": "설명·논증 글의 구조를 익혀 글을 쓰고 동료 글을 평가한다.",
+      "suggestedKinds": ["multiple-choice", "blank", "word-match"],
+      "focusVocab": ["서론", "본론", "결론", "주장", "근거"],
+      "focusGrammar": ["주장 + 근거 + 사례", "두괄식·미괄식 구분"]
+    },
+    {
+      "unitId": "literature-modern-novel",
+      "unitName": "현대 소설 읽기",
+      "achievementCodes": ["[9국05-03]"],
+      "achievementText": "현대 소설을 읽고 갈등 구조와 주제 의식을 이해한다.",
+      "suggestedKinds": ["blank", "multiple-choice", "word-match"],
+      "focusVocab": ["갈등", "주제", "복선", "시점", "내적·외적 갈등"],
+      "focusGrammar": ["인물 간 갈등 분석", "주제 의식 도출"]
+    },
+    {
+      "unitId": "classic-literature",
+      "unitName": "고전 시가·산문 맛보기",
+      "achievementCodes": ["[9국05-04]"],
+      "achievementText": "고전 시가와 산문을 읽고 시대 배경과 가치관을 이해한다.",
+      "suggestedKinds": ["word-match", "blank", "multiple-choice"],
+      "focusVocab": ["향가", "시조", "고전 소설", "주제", "시대 배경"],
+      "focusGrammar": ["조선 시대 사대부 가치관", "운율과 형식의 차이"]
+    },
+    {
+      "unitId": "language-and-culture",
+      "unitName": "언어와 한국 문화",
+      "achievementCodes": ["[9국04-05]"],
+      "achievementText": "언어가 사회·문화와 관련됨을 이해하고 한국어의 특징을 알아본다.",
+      "suggestedKinds": ["multiple-choice", "word-match", "blank"],
+      "focusVocab": ["존댓말", "방언", "은어", "외래어", "표준어"],
+      "focusGrammar": ["존댓말 사용 상황", "표준어 vs 방언"]
+    },
+    {
+      "unitId": "drama-script",
+      "unitName": "희곡·시나리오",
+      "achievementCodes": ["[9국05-05]"],
+      "achievementText": "희곡과 시나리오의 특성을 이해하고 짧은 극본을 쓰거나 분석한다.",
+      "suggestedKinds": ["multiple-choice", "blank", "word-match"],
+      "focusVocab": ["대사", "지문", "장면", "갈등", "막과 장"],
+      "focusGrammar": ["대사 + 지문 구분", "장면 단위 구성"]
+    }
+  ]
+}
