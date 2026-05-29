@@ -1,0 +1,8 @@
+import type { Metadata } from "next";
+import { AuthForm } from "@/components/auth/AuthForm";
+
+export const metadata: Metadata = { title: "로그인 · 풀림 게임즈" };
+
+export default function LoginPage() {
+  return <AuthForm mode="login" />;
+}
