@@ -44,4 +44,8 @@ describe("LoginSchema", () => {
   it("빈 비번 거부", () => {
     expect(LoginSchema.safeParse({ email: "a@b.com", password: "" }).success).toBe(false);
   });
+  it("UTF-8 72바이트 초과 비번 거부(가입과 동일 truncation 처리)", () => {
+    const pw = "가".repeat(25); // 75 bytes
+    expect(LoginSchema.safeParse({ email: "a@b.com", password: pw }).success).toBe(false);
+  });
 });

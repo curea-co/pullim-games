@@ -1,16 +1,22 @@
 // games 인증 입력 검증 (zod). 근거: proc/plan/2026-05-29_auth-login-signup.md.
 import { z } from "zod";
 
-// 비밀번호: 8자 이상 + UTF-8 72바이트 이하(bcrypt 한계 — 초과 시 조용히 잘림),
-// 영문+숫자 각 1자 이상.
+// bcrypt 72바이트 한계 — 초과 시 뒤가 조용히 잘려 입력≠해시대상. 가입·로그인 공통 적용.
+const within72Bytes = (v: string) => new TextEncoder().encode(v).length <= 72;
+const BYTES_MSG = "비밀번호가 너무 길어요 (UTF-8 72바이트 이하). 한글·이모지는 더 짧게 입력해주세요";
+
+// 가입 비밀번호: 8자 이상 + 72바이트 이하 + 영문·숫자 각 1자 이상.
 const passwordSchema = z
   .string()
   .min(8, "비밀번호는 8자 이상이어야 해요")
-  .refine(
-    (v) => new TextEncoder().encode(v).length <= 72,
-    "비밀번호가 너무 길어요 (UTF-8 72바이트 이하). 한글·이모지는 더 짧게 입력해주세요",
-  )
+  .refine(within72Bytes, BYTES_MSG)
   .refine((v) => /[A-Za-z]/.test(v) && /[0-9]/.test(v), "비밀번호에 영문과 숫자를 함께 넣어주세요");
+
+// 로그인 비밀번호: 비어있지 않음 + 72바이트 이하(가입과 동일 truncation 처리로 의미 일치).
+const loginPasswordSchema = z
+  .string()
+  .min(1, "비밀번호를 입력해주세요")
+  .refine(within72Bytes, BYTES_MSG);
 
 const emailSchema = z
   .string()
@@ -37,7 +43,7 @@ export const SignupSchema = z
 export const LoginSchema = z
   .object({
     email: emailSchema,
-    password: z.string().min(1, "비밀번호를 입력해주세요").max(72),
+    password: loginPasswordSchema,
     fingerprint: fingerprintSchema,
   })
   .strict();
