@@ -54,19 +54,24 @@ export function AuthForm({ mode }: { mode: Mode }) {
 
   return (
     <div className="mx-auto flex min-h-[60vh] w-full max-w-sm items-center px-4">
-      <Card className="w-full">
+      {/* 디자인 시스템 토큰 정합(AGENTS.md/spec/08): pullim-* 색, 블록 radius 4px. */}
+      <Card className="w-full rounded border-pullim-slate-200 bg-card shadow-sm">
         <CardHeader>
-          <CardTitle>{isSignup ? "회원가입" : "로그인"}</CardTitle>
-          <CardDescription>
+          <CardTitle className="text-pullim-slate-900">
+            {isSignup ? "회원가입" : "로그인"}
+          </CardTitle>
+          <CardDescription className="text-pullim-slate-500">
             {isSignup
-              ? "계정을 만들면 학습 기록이 안전하게 보관돼요."
+              ? "계정을 만들면 어느 기기에서든 로그인할 수 있어요."
               : "다시 오셨네요. 계속 이어가요."}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={onSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="email">이메일</Label>
+              <Label htmlFor="email" className="text-pullim-slate-700">
+                이메일
+              </Label>
               <Input
                 id="email"
                 type="email"
@@ -74,10 +79,13 @@ export function AuthForm({ mode }: { mode: Mode }) {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                className="border-pullim-slate-300"
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="password">비밀번호</Label>
+              <Label htmlFor="password" className="text-pullim-slate-700">
+                비밀번호
+              </Label>
               <Input
                 id="password"
                 type="password"
@@ -85,6 +93,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                className="border-pullim-slate-300"
               />
               {isSignup && (
                 <p className="text-type-secondary text-xs">8자 이상, 영문과 숫자 포함</p>

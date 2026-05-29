@@ -1,11 +1,15 @@
 // games 인증 입력 검증 (zod). 근거: proc/plan/2026-05-29_auth-login-signup.md.
 import { z } from "zod";
 
-// 비밀번호: 8~72자(bcrypt 72바이트 한계), 영문+숫자 각 1자 이상.
+// 비밀번호: 8자 이상 + UTF-8 72바이트 이하(bcrypt 한계 — 초과 시 조용히 잘림),
+// 영문+숫자 각 1자 이상.
 const passwordSchema = z
   .string()
   .min(8, "비밀번호는 8자 이상이어야 해요")
-  .max(72, "비밀번호는 72자 이하여야 해요")
+  .refine(
+    (v) => new TextEncoder().encode(v).length <= 72,
+    "비밀번호가 너무 길어요 (UTF-8 72바이트 이하). 한글·이모지는 더 짧게 입력해주세요",
+  )
   .refine((v) => /[A-Za-z]/.test(v) && /[0-9]/.test(v), "비밀번호에 영문과 숫자를 함께 넣어주세요");
 
 const emailSchema = z

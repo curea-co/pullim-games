@@ -10,6 +10,7 @@
 import Link from "next/link";
 import { ArrowLeft, Bell, Search } from "lucide-react";
 import { MobileDrawer } from "./mobile-drawer";
+import { AuthMenu } from "@/components/auth/AuthMenu";
 import type { Role } from "./nav-config";
 
 interface Props {
@@ -72,32 +73,30 @@ export function AppHeader({ role, variant = "default" }: Props) {
             모바일에서는 가로 공간 차지 회피 위해 hidden, sm: 이상에서만 시각 placeholder.
             Plan A Phase 6 — informational placeholder 정리. */}
         {!isGame && (
-          <div className="ml-auto hidden items-center gap-1 sm:flex">
-            <button
-              type="button"
-              aria-label="검색 (준비 중)"
-              disabled
-              className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
-              title="검색 — 준비 중"
-            >
-              <Search className="h-5 w-5" />
-            </button>
-            <button
-              type="button"
-              aria-label="알림 (준비 중)"
-              disabled
-              className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
-              title="알림 — 준비 중"
-            >
-              <Bell className="h-5 w-5" />
-            </button>
-            <span
-              aria-label="프로필 (준비 중)"
-              title="프로필 — 준비 중"
-              className="ml-1 inline-flex h-8 w-8 items-center justify-center rounded-full bg-pullim-slate-200 text-xs font-bold text-pullim-slate-500"
-            >
-              ·
-            </span>
+          <div className="ml-auto flex items-center gap-1">
+            {/* 검색·알림은 V0.5+ placeholder — sm+ 에서만. */}
+            <div className="hidden items-center gap-1 sm:flex">
+              <button
+                type="button"
+                aria-label="검색 (준비 중)"
+                disabled
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
+                title="검색 — 준비 중"
+              >
+                <Search className="h-5 w-5" />
+              </button>
+              <button
+                type="button"
+                aria-label="알림 (준비 중)"
+                disabled
+                className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
+                title="알림 — 준비 중"
+              >
+                <Bell className="h-5 w-5" />
+              </button>
+            </div>
+            {/* 계정 진입점 — 전 뷰포트 노출(모바일 포함). */}
+            <AuthMenu />
           </div>
         )}
       </div>

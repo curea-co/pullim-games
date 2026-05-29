@@ -3,7 +3,9 @@
 //
 // 정책:
 // - dev: docker-compose Postgres (localhost:5436) — SSL off.
-// - prod: games 전용 Supabase (DATABASE_URL 주입) — SSL on.
+// - prod: games 전용 Supabase (DATABASE_URL 주입) — TLS 인증서 검증 ON (기본).
+//   Supabase 는 정상 인증서를 제공하므로 기본 검증 유지. 특수 체인 예외가 정말
+//   필요할 때만 PGSSL_NO_VERIFY=1 로 명시적으로 검증 해제(권장 X).
 // - 마이그레이션: migrations/*.sql 알파벳순, schema_migrations 로 적용 추적. 도구 미도입.
 
 import "server-only";
@@ -33,9 +35,20 @@ function createPool(): Pool {
   }
   return new Pool({
     connectionString: url,
-    // 로컬 docker 는 SSL 미사용. Supabase 등 원격은 TLS (self-signed 체인 허용).
-    ssl: isLocalHost(url) ? undefined : { rejectUnauthorized: false },
+    ssl: resolveSsl(url),
   });
+}
+
+/**
+ * SSL 설정 해소.
+ * - 로컬 docker: SSL 미사용.
+ * - 원격(Supabase 등): 기본 인증서 검증 ON(`true`). MITM·잘못된 체인을 막는다.
+ * - 탈출구: PGSSL_NO_VERIFY=1 일 때만 검증 해제(특수 체인 대응, 권장 X).
+ */
+function resolveSsl(url: string): boolean | { rejectUnauthorized: boolean } | undefined {
+  if (isLocalHost(url)) return undefined;
+  if (process.env.PGSSL_NO_VERIFY === "1") return { rejectUnauthorized: false };
+  return true;
 }
 
 /** Pool 싱글톤. 최초 호출 시 생성 + 마이그레이션 1회 실행. */
@@ -44,31 +57,42 @@ export async function getPool(): Promise<Pool> {
     pool = createPool();
   }
   if (!migrationsReady) {
-    migrationsReady = runMigrations(pool);
+    // 실패 시 rejected promise 가 고정되면 warm instance 가 영구 장애가 된다.
+    // 실패하면 migrationsReady 를 null 로 되돌려 다음 요청에서 재시도하게 한다.
+    migrationsReady = runMigrations(pool).catch((err) => {
+      migrationsReady = null;
+      throw err;
+    });
   }
   await migrationsReady;
   return pool;
 }
 
-/** 파라미터라이즈드 쿼리 헬퍼. */
-export async function query<T extends Record<string, unknown> = Record<string, unknown>>(
+/**
+ * 쿼리 실행자 타입. pool 직접 실행(`query`)과 트랜잭션 client(`withTx` 의 q)가 같은
+ * 시그니처를 공유 — DB 헬퍼가 둘 중 무엇으로든 실행되게 해 트랜잭션 합성을 가능케 한다.
+ */
+export type QueryFn = <T extends Record<string, unknown> = Record<string, unknown>>(
   text: string,
   params?: unknown[],
-): Promise<{ rows: T[]; rowCount: number }> {
+) => Promise<{ rows: T[]; rowCount: number }>;
+
+/** 파라미터라이즈드 쿼리 헬퍼 (pool). */
+export const query: QueryFn = async (text, params) => {
   const p = await getPool();
   const res = await p.query(text, params as never);
-  return { rows: res.rows as T[], rowCount: res.rowCount ?? 0 };
-}
+  return { rows: res.rows as never, rowCount: res.rowCount ?? 0 };
+};
 
-/** 트랜잭션 헬퍼. */
-export async function withTx<T>(fn: (q: (text: string, params?: unknown[]) => Promise<{ rows: Record<string, unknown>[]; rowCount: number }>) => Promise<T>): Promise<T> {
+/** 트랜잭션 헬퍼. 콜백에 트랜잭션 바인딩된 QueryFn 을 넘긴다. */
+export async function withTx<T>(fn: (q: QueryFn) => Promise<T>): Promise<T> {
   const p = await getPool();
   const client = await p.connect();
   try {
     await client.query("BEGIN");
-    const q = async (text: string, params?: unknown[]) => {
+    const q: QueryFn = async (text, params) => {
       const res = await client.query(text, params as never);
-      return { rows: res.rows as Record<string, unknown>[], rowCount: res.rowCount ?? 0 };
+      return { rows: res.rows as never, rowCount: res.rowCount ?? 0 };
     };
     const out = await fn(q);
     await client.query("COMMIT");
@@ -79,6 +103,15 @@ export async function withTx<T>(fn: (q: (text: string, params?: unknown[]) => Pr
   } finally {
     client.release();
   }
+}
+
+/** Postgres UNIQUE 제약 위반(23505) 여부. 경합으로 인한 중복 INSERT 식별용. */
+export function isUniqueViolation(err: unknown): boolean {
+  return (
+    typeof err === "object" &&
+    err !== null &&
+    (err as { code?: string }).code === "23505"
+  );
 }
 
 // games 마이그레이션 전용 advisory lock 키 (임의 상수).

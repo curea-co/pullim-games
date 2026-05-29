@@ -15,6 +15,7 @@ import {
 } from "@/lib/server/auth/session";
 import { resolveRateLimitKey } from "@/lib/server/auth/net";
 import { checkRateLimits } from "@/lib/server/rate-limit";
+import { isUniqueViolation, withTx } from "@/lib/server/db/client";
 
 export async function POST(request: Request) {
   // 가입 abuse 방어 — IP 5/분 + 20/시간.
@@ -49,19 +50,37 @@ export async function POST(request: Request) {
   }
   const { email, password, fingerprint } = parsed.data;
 
+  // 흔한 경우(이미 가입) 빠른 409. 경합은 아래 UNIQUE 위반 캐치가 처리.
   const existing = await findUserByEmail(email);
   if (existing) {
     return NextResponse.json({ error: "email_taken" }, { status: 409 });
   }
 
   const passwordHash = await hashPassword(password);
-  const user = await createUser(email, passwordHash);
 
-  if (fingerprint) {
-    await linkFingerprint(fingerprint, user.id);
+  // 회원 생성 + fingerprint 연결 + 세션 발급을 한 트랜잭션으로 원자화 —
+  // 중간 실패 시 user 레코드가 고아로 남지 않게(재시도 시 email_taken 만 받는 문제 방지).
+  let user;
+  let token: string;
+  let expiresAt: number;
+  try {
+    const out = await withTx(async (q) => {
+      const u = await createUser(email, passwordHash, q);
+      if (fingerprint) await linkFingerprint(fingerprint, u.id, q);
+      const s = await createSession(u.id, q);
+      return { u, s };
+    });
+    user = out.u;
+    token = out.s.token;
+    expiresAt = out.s.expiresAt;
+  } catch (err) {
+    // TOCTOU 경합: pre-check 통과 후 동시 가입 → users.email UNIQUE 위반 → 409.
+    if (isUniqueViolation(err)) {
+      return NextResponse.json({ error: "email_taken" }, { status: 409 });
+    }
+    throw err;
   }
 
-  const { token, expiresAt } = await createSession(user.id);
   return NextResponse.json(
     { user: toPublicUser(user) },
     { status: 201, headers: { "set-cookie": buildSessionCookie(token, expiresAt) } },

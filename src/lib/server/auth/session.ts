@@ -2,7 +2,7 @@
 // 근거: proc/plan/2026-05-29_auth-login-signup.md.
 import "server-only";
 import { randomBytes } from "node:crypto";
-import { query } from "@/lib/server/db/client";
+import { query, type QueryFn } from "@/lib/server/db/client";
 import { findUserById, type UserRow } from "@/lib/server/auth/users";
 
 export const SESSION_COOKIE = "pullim_games_session";
@@ -15,12 +15,15 @@ export type SessionRow = {
   expires_at: number;
 };
 
-/** 새 세션 생성 후 토큰·만료 반환. */
-export async function createSession(userId: string): Promise<{ token: string; expiresAt: number }> {
+/** 새 세션 생성 후 토큰·만료 반환. exec 를 주면 트랜잭션 안에서 실행. */
+export async function createSession(
+  userId: string,
+  exec: QueryFn = query,
+): Promise<{ token: string; expiresAt: number }> {
   const token = randomBytes(32).toString("hex");
   const now = Date.now();
   const expiresAt = now + SESSION_TTL_MS;
-  await query(
+  await exec(
     "INSERT INTO auth_sessions (token, user_id, created_at, expires_at) VALUES ($1, $2, $3, $4)",
     [token, userId, now, expiresAt],
   );
