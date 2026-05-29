@@ -58,6 +58,7 @@ games에 **로그인/회원가입(계정)**을 도입한다. 익명 fingerprint�
 | D5 | **미성년 보호 범위** | 가입 시 생년/학년 수집 + 만14세 동의 / 익명 유지로 회피 | 로그인 도입 시 정통망법 트리거 (spec §5.6) |
 | D6 | **계정 강제 여부** | 선택(비로그인 유지) / 특정 기능만 로그인 게이트 | spec의 무마찰 진입 원칙 보존 권고 = 선택 |
 | D-ENUM | **signup 이메일 열거** | (a) 409 email_taken 유지 + rate-limit 완화(현재) / (b) generic 응답 + 이메일 검증 | 코덱스 라운드3 지적. 완전 차단은 이메일 발송 인프라(후속 phase) 필요 → 현재 (a) 수용(KNOWN-TRADE-OFF), 이메일 검증 phase 시 (b) 전환 |
+| D-RL | **rate-limit IP 위조 내성** | (a) 헤더 기반 best-effort(현재, 신뢰 프록시 전제) / (b) KV + trusted-proxy 화이트리스트 | 코덱스 라운드14 지적. 헤더(x-forwarded-for)는 신뢰 프록시(Vercel)가 덮어쓰는 배포 전제. 위조 내성 분산 rate-limit 은 후속 phase(billing 과 동일 한계). 1차 방어는 bcrypt+CSRF. 현재 (a) 수용(KNOWN-TRADE-OFF) |
 
 **권고 기본값**: D1 승인 / D2 신규 프로젝트 / D3 이메일+비밀번호(arcade 검증된 패턴 재사용) / D4 흡수 / D5 가입 시 학년+만14세 동의 / D6 선택(비로그인 유지).
 

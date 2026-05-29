@@ -4,10 +4,17 @@
 import { NextResponse } from "next/server";
 import { authCsrf } from "@/lib/server/auth/csrf";
 
+// 매 요청 새 랜덤 토큰을 쿠키로 발급해야 하므로 절대 캐시 금지.
+// (Request 인자가 없어 App Router 가 static 으로 최적화할 여지를 차단.)
+export const dynamic = "force-dynamic";
+
 export function GET() {
   const { cookieHeader } = authCsrf.issue();
   return NextResponse.json(
     { ok: true },
-    { status: 200, headers: { "set-cookie": cookieHeader } },
+    {
+      status: 200,
+      headers: { "set-cookie": cookieHeader, "cache-control": "no-store" },
+    },
   );
 }
