@@ -6,11 +6,15 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { getMe, logout, type AuthUser } from "@/lib/auth/client";
 
 export function AuthMenu() {
   const router = useRouter();
+  // AppShell 이 루트 레이아웃에 고정돼 라우트 이동 시 AuthMenu 가 언마운트되지 않는다.
+  // pathname 을 deps 에 넣어 /login -> / 이동(로그인 성공) 등 경로 변화마다 재조회 →
+  // 헤더 로그인/로그아웃 상태가 갱신된다(hard refresh 없이).
+  const pathname = usePathname();
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [busy, setBusy] = useState(false);
@@ -26,7 +30,7 @@ export function AuthMenu() {
     return () => {
       alive = false;
     };
-  }, []);
+  }, [pathname]);
 
   async function onLogout() {
     setBusy(true);

@@ -133,8 +133,11 @@ async function runMigrations(p: Pool): Promise<void> {
   let files: string[];
   try {
     files = (await readdir(dir)).filter((f) => f.endsWith(".sql")).sort();
-  } catch {
-    return; // migrations/ 부재 — 적용할 것 없음.
+  } catch (err) {
+    // ENOENT(디렉토리 부재)만 "적용할 것 없음" 으로 무시. 번들 누락(tracing 오타)·권한·
+    // 읽기 실패 등 다른 fs 오류는 삼키지 않고 surface — 원인불명 500 으로 숨기지 않기 위해.
+    if ((err as NodeJS.ErrnoException).code === "ENOENT") return;
+    throw err;
   }
   if (files.length === 0) return;
 
