@@ -16,8 +16,24 @@ import {
 import { resolveRateLimitKey } from "@/lib/server/auth/net";
 import { checkRateLimits } from "@/lib/server/rate-limit";
 import { isUniqueViolation, withTx } from "@/lib/server/db/client";
+import { isSameOriginRequest } from "@/lib/server/http/same-origin";
+import { AUTH_CSRF_HEADER, authCsrf } from "@/lib/server/auth/csrf";
 
 export async function POST(request: Request) {
+  // CSRF 방어 — same-origin(1차) + double-submit 토큰(2차). 외부 페이지가 사용자
+  // 브라우저로 임의 계정 생성·세션 발급을 유도하는 것을 차단.
+  if (!isSameOriginRequest(request)) {
+    return NextResponse.json({ error: "forbidden_origin" }, { status: 403 });
+  }
+  if (
+    !authCsrf.verify(
+      authCsrf.readCookieToken(request.headers.get("cookie")),
+      request.headers.get(AUTH_CSRF_HEADER),
+    )
+  ) {
+    return NextResponse.json({ error: "forbidden_csrf" }, { status: 403 });
+  }
+
   // 가입 abuse 방어 — IP 5/분 + 20/시간.
   const key = resolveRateLimitKey(request);
   if (!key) {

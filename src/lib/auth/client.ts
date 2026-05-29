@@ -10,12 +10,18 @@ export type AuthResult =
   | { ok: true; user: AuthUser }
   | { ok: false; error: string; status: number };
 
-async function postAuth(path: string, payload: Record<string, unknown>): Promise<AuthResult> {
+async function postAuth(
+  path: string,
+  payload: Record<string, unknown>,
+  csrfToken: string | null,
+): Promise<AuthResult> {
+  const headers: Record<string, string> = { "content-type": "application/json" };
+  if (csrfToken) headers["x-csrf-token"] = csrfToken; // double-submit
   let res: Response;
   try {
     res = await fetch(path, {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers,
       body: JSON.stringify(payload),
     });
   } catch {
@@ -33,21 +39,43 @@ async function postAuth(path: string, payload: Record<string, unknown>): Promise
   return { ok: false, error: data.error ?? "unknown_error", status: res.status };
 }
 
-export function signup(email: string, password: string, over14: boolean): Promise<AuthResult> {
-  return postAuth("/api/auth/signup", {
-    email,
-    password,
-    over14,
-    fingerprint: getFingerprint() ?? undefined,
-  });
+/**
+ * CSRF 토큰 확보(double-submit). GET 으로 쿠키를 받고, 쿠키 값을 읽어 반환 →
+ * 호출부가 POST 헤더로 echo. 쿠키는 non-HttpOnly(Path=/) 라 같은 출처 페이지에서 읽힘.
+ */
+async function ensureCsrf(): Promise<string | null> {
+  try {
+    await fetch("/api/auth/csrf", { cache: "no-store" });
+  } catch {
+    return null;
+  }
+  const m =
+    typeof document !== "undefined"
+      ? document.cookie.match(/(?:^|;\s*)pullim-csrf-auth=([^;]+)/)
+      : null;
+  return m ? m[1] : null;
 }
 
-export function login(email: string, password: string): Promise<AuthResult> {
-  return postAuth("/api/auth/login", {
-    email,
-    password,
-    fingerprint: getFingerprint() ?? undefined,
-  });
+export async function signup(
+  email: string,
+  password: string,
+  over14: boolean,
+): Promise<AuthResult> {
+  const csrf = await ensureCsrf();
+  return postAuth(
+    "/api/auth/signup",
+    { email, password, over14, fingerprint: getFingerprint() ?? undefined },
+    csrf,
+  );
+}
+
+export async function login(email: string, password: string): Promise<AuthResult> {
+  const csrf = await ensureCsrf();
+  return postAuth(
+    "/api/auth/login",
+    { email, password, fingerprint: getFingerprint() ?? undefined },
+    csrf,
+  );
 }
 
 export async function logout(): Promise<void> {

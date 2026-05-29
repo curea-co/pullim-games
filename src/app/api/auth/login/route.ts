@@ -2,7 +2,7 @@
 // 근거: proc/plan/2026-05-29_auth-login-signup.md.
 import { NextResponse } from "next/server";
 import { LoginSchema } from "@/lib/server/auth/schemas";
-import { verifyPassword } from "@/lib/server/auth/password";
+import { verifyPasswordConstantTime } from "@/lib/server/auth/password";
 import {
   findUserByEmail,
   linkFingerprint,
@@ -12,8 +12,25 @@ import {
 import { buildSessionCookie, createSession } from "@/lib/server/auth/session";
 import { resolveRateLimitKey } from "@/lib/server/auth/net";
 import { checkRateLimits } from "@/lib/server/rate-limit";
+import { isSameOriginRequest } from "@/lib/server/http/same-origin";
+import { AUTH_CSRF_HEADER, authCsrf } from "@/lib/server/auth/csrf";
 
 export async function POST(request: Request) {
+  // CSRF 방어 — same-origin(1차) + double-submit 토큰(2차). login CSRF(외부 폼이
+  // 피해자를 공격자 계정으로 로그인시키는 시나리오) 차단. SameSite=Lax 만으로는 새
+  // 세션 쿠키 주입을 못 막으므로 Origin/Referer + 토큰 둘 다 검증.
+  if (!isSameOriginRequest(request)) {
+    return NextResponse.json({ error: "forbidden_origin" }, { status: 403 });
+  }
+  if (
+    !authCsrf.verify(
+      authCsrf.readCookieToken(request.headers.get("cookie")),
+      request.headers.get(AUTH_CSRF_HEADER),
+    )
+  ) {
+    return NextResponse.json({ error: "forbidden_csrf" }, { status: 403 });
+  }
+
   // brute-force 방어 — IP 10/분 + 50/시간.
   const key = resolveRateLimitKey(request);
   if (!key) {
@@ -47,8 +64,13 @@ export async function POST(request: Request) {
   const { email, password, fingerprint } = parsed.data;
 
   const user = await findUserByEmail(email);
-  // 사용자 부재·비번 불일치 모두 동일 401 (계정 존재 여부 누설 차단).
-  if (!user || !(await verifyPassword(password, user.password_hash))) {
+  // 상수 시간 검증 — 사용자 부재여도 더미 해시로 compare 를 태워 타이밍 평준화.
+  // 사용자 부재·비번 불일치 모두 동일 401 + 동일 응답 시간 (계정 열거 차단).
+  const passwordOk = await verifyPasswordConstantTime(
+    password,
+    user?.password_hash ?? null,
+  );
+  if (!user || !passwordOk) {
     return NextResponse.json({ error: "invalid_credentials" }, { status: 401 });
   }
 
