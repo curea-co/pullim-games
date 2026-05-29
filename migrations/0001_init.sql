@@ -14,9 +14,10 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
 
--- opaque 세션 토큰 (JWT 미사용). HttpOnly 쿠키로 전달, TTL 7일.
+-- opaque 세션 (JWT 미사용). 쿠키에는 원문 토큰, DB 에는 SHA-256 해시만 저장 →
+-- DB 유출 시 세션 탈취 방지. HttpOnly 쿠키로 전달, TTL 7일.
 CREATE TABLE IF NOT EXISTS auth_sessions (
-  token       TEXT PRIMARY KEY,
+  token_hash  TEXT PRIMARY KEY,
   user_id     TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   created_at  BIGINT NOT NULL,
   expires_at  BIGINT NOT NULL

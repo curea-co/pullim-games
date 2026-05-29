@@ -42,4 +42,12 @@ describe("GET /api/auth/me", () => {
     const res = await GET(req("pullim_games_session=tok"));
     expect(await res.json()).toEqual({ user: { id: "u1", email: "a@b.com" } });
   });
+
+  it("DB 장애여도 fail-soft → 200 + user:null (익명 브라우징 유지)", async () => {
+    vi.mocked(readSessionTokenFromCookie).mockReturnValue("tok");
+    vi.mocked(getUserFromSessionToken).mockRejectedValue(new Error("DB down"));
+    const res = await GET(req("pullim_games_session=tok"));
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ user: null });
+  });
 });

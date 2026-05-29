@@ -1,7 +1,7 @@
 // opaque 세션 토큰 + HttpOnly 쿠키. JWT 미사용(arcade 패턴 차용).
 // 근거: proc/plan/2026-05-29_auth-login-signup.md.
 import "server-only";
-import { randomBytes } from "node:crypto";
+import { createHash, randomBytes } from "node:crypto";
 import { query, type QueryFn } from "@/lib/server/db/client";
 import { findUserById, type UserRow } from "@/lib/server/auth/users";
 
@@ -9,13 +9,21 @@ export const SESSION_COOKIE = "pullim_games_session";
 const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7일
 
 export type SessionRow = {
-  token: string;
+  token_hash: string;
   user_id: string;
   created_at: number;
   expires_at: number;
 };
 
-/** 새 세션 생성 후 토큰·만료 반환. exec 를 주면 트랜잭션 안에서 실행. */
+/**
+ * 세션 토큰 해시 — 쿠키에는 원문 bearer 토큰을 주되 DB 에는 SHA-256 해시만 저장한다.
+ * DB dump/조회 권한 유출만으로 살아있는 세션을 재사용하지 못하게 한다(세션 탈취 방어).
+ */
+function hashToken(token: string): string {
+  return createHash("sha256").update(token).digest("hex");
+}
+
+/** 새 세션 생성 후 (원문)토큰·만료 반환. DB 에는 해시 저장. exec 로 트랜잭션 합성 가능. */
 export async function createSession(
   userId: string,
   exec: QueryFn = query,
@@ -24,18 +32,18 @@ export async function createSession(
   const now = Date.now();
   const expiresAt = now + SESSION_TTL_MS;
   await exec(
-    "INSERT INTO auth_sessions (token, user_id, created_at, expires_at) VALUES ($1, $2, $3, $4)",
-    [token, userId, now, expiresAt],
+    "INSERT INTO auth_sessions (token_hash, user_id, created_at, expires_at) VALUES ($1, $2, $3, $4)",
+    [hashToken(token), userId, now, expiresAt],
   );
   return { token, expiresAt };
 }
 
-/** 토큰으로 현재 사용자 조회. 만료/부재면 null (만료 세션은 정리). */
+/** (원문)토큰으로 현재 사용자 조회. 해시 기준 매칭. 만료/부재면 null (만료 세션 정리). */
 export async function getUserFromSessionToken(token: string | null | undefined): Promise<UserRow | null> {
   if (!token) return null;
   const { rows } = await query<SessionRow>(
-    "SELECT * FROM auth_sessions WHERE token = $1 LIMIT 1",
-    [token],
+    "SELECT * FROM auth_sessions WHERE token_hash = $1 LIMIT 1",
+    [hashToken(token)],
   );
   const session = rows[0];
   if (!session) return null;
@@ -46,8 +54,9 @@ export async function getUserFromSessionToken(token: string | null | undefined):
   return findUserById(session.user_id);
 }
 
+/** (원문)토큰 기준 세션 파기 — 해시로 변환해 삭제. */
 export async function destroySession(token: string): Promise<void> {
-  await query("DELETE FROM auth_sessions WHERE token = $1", [token]);
+  await query("DELETE FROM auth_sessions WHERE token_hash = $1", [hashToken(token)]);
 }
 
 /** 쿠키 문자열에서 세션 토큰 추출 (요청 헤더용). */
