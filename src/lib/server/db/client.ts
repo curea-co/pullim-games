@@ -85,63 +85,60 @@ export async function withTx<T>(fn: (q: (text: string, params?: unknown[]) => Pr
 const MIGRATION_LOCK_KEY = 832914;
 
 /**
- * migrations/*.sql 을 알파벳순으로 적용. 각 파일은 트랜잭션 1개로 실행.
- * schema_migrations(filename PK) 로 적용 여부 추적 — 미적용 파일만 실행.
+ * migrations/*.sql 을 알파벳순으로 적용. schema_migrations(filename PK) 로 추적.
  *
- * 동시성: 단일 client 에 advisory lock 을 걸어 마이그레이션을 직렬화한다.
- * Vercel 서버리스의 동시 cold start 가 같은 마이그레이션을 동시에 돌려
- * schema_migrations PK 경합을 일으키는 것을 방지 — 한 인스턴스만 실행, 나머지는
- * lock 대기 후 "이미 적용됨" 으로 통과.
+ * 동시성/풀러 안전: 전체를 단일 트랜잭션으로 묶고 `pg_advisory_xact_lock` 을 건다.
+ * - 트랜잭션 advisory lock 은 commit/rollback 시 자동 해제되고, 같은 트랜잭션 = 같은
+ *   backend 라서 transaction-mode 풀러(Supabase Supavisor 6543, pgBouncer)에서도
+ *   안전하다. (세션 advisory lock 은 풀러에서 쿼리마다 backend 가 바뀌어 보장 X.)
+ * - Vercel 서버리스 동시 cold start: 한 트랜잭션만 lock 획득, 나머지는 대기 후
+ *   "이미 적용됨" 을 보고 통과. INSERT 는 ON CONFLICT DO NOTHING 으로 이중 안전.
+ * - 모든 마이그레이션 DDL 이 IF NOT EXISTS 라 재실행도 무해.
  */
 async function runMigrations(p: Pool): Promise<void> {
+  const dir = path.join(process.cwd(), "migrations");
+  let files: string[];
+  try {
+    files = (await readdir(dir)).filter((f) => f.endsWith(".sql")).sort();
+  } catch {
+    return; // migrations/ 부재 — 적용할 것 없음.
+  }
+  if (files.length === 0) return;
+
+  // 파일 내용을 먼저 읽어 트랜잭션 점유 시간을 최소화.
+  const sqls = await Promise.all(
+    files.map(async (file) => ({ file, sql: await readFile(path.join(dir, file), "utf8") })),
+  );
+
   const client = await p.connect();
   try {
-    await client.query("SELECT pg_advisory_lock($1)", [MIGRATION_LOCK_KEY]);
-
+    await client.query("BEGIN");
+    await client.query("SELECT pg_advisory_xact_lock($1)", [MIGRATION_LOCK_KEY]);
     await client.query(
       `CREATE TABLE IF NOT EXISTS schema_migrations (
          filename   TEXT PRIMARY KEY,
          applied_at BIGINT NOT NULL
        )`,
     );
-
-    const dir = path.join(process.cwd(), "migrations");
-    let files: string[];
-    try {
-      files = (await readdir(dir)).filter((f) => f.endsWith(".sql")).sort();
-    } catch {
-      // migrations/ 부재 — 적용할 것 없음. finally 에서 unlock.
-      return;
-    }
-
     const applied = new Set(
       (
         await client.query<{ filename: string }>("SELECT filename FROM schema_migrations")
       ).rows.map((r) => r.filename),
     );
 
-    for (const file of files) {
+    for (const { file, sql } of sqls) {
       if (applied.has(file)) continue;
-      const sql = await readFile(path.join(dir, file), "utf8");
-      try {
-        await client.query("BEGIN");
-        await client.query(sql);
-        await client.query(
-          "INSERT INTO schema_migrations (filename, applied_at) VALUES ($1, $2)",
-          [file, Date.now()],
-        );
-        await client.query("COMMIT");
-      } catch (err) {
-        await client.query("ROLLBACK");
-        throw new Error(`마이그레이션 실패: ${file} — ${(err as Error).message}`);
-      }
+      await client.query(sql);
+      await client.query(
+        "INSERT INTO schema_migrations (filename, applied_at) VALUES ($1, $2) ON CONFLICT DO NOTHING",
+        [file, Date.now()],
+      );
     }
+    await client.query("COMMIT");
+  } catch (err) {
+    await client.query("ROLLBACK").catch(() => {});
+    throw new Error(`마이그레이션 실패 — ${(err as Error).message}`);
   } finally {
-    try {
-      await client.query("SELECT pg_advisory_unlock($1)", [MIGRATION_LOCK_KEY]);
-    } catch {
-      /* unlock 실패는 무시 — 연결 종료 시 자동 해제 */
-    }
     client.release();
   }
 }
