@@ -78,11 +78,13 @@ export async function login(email: string, password: string): Promise<AuthResult
   );
 }
 
-export async function logout(): Promise<void> {
+/** 로그아웃. 서버가 세션을 실제로 파기했는지(성공 여부) 반환 — 호출부가 상태 정합에 사용. */
+export async function logout(): Promise<boolean> {
   try {
-    await fetch("/api/auth/logout", { method: "POST" });
+    const res = await fetch("/api/auth/logout", { method: "POST" });
+    return res.ok;
   } catch {
-    /* 무시 — 쿠키는 서버가 제거 시도 */
+    return false;
   }
 }
 

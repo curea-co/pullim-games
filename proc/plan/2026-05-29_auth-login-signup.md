@@ -25,14 +25,15 @@
 
 ## 1. 목표
 
-games에 **로그인/회원가입(계정)**을 도입해, 익명 fingerprint에 묶여 silent loss 되던 학습 데이터(SRS 진척·스트릭·커스텀 콘텐츠)를 계정에 귀속시켜 보존·다기기 동기화한다. **games·games-arcade = 완전 독립 계정**(2026-05-29 사용자 결정)이므로 풀림 플랫폼 통합 유저 테이블을 쓰지 않고 **games 자체 계정 시스템**을 구축한다.
+games에 **로그인/회원가입(계정)**을 도입한다. 익명 fingerprint를 계정에 **연결**해 두어, 추후 학습 데이터(SRS·스트릭·커스텀)의 서버 귀속/다기기 동기화의 토대를 만든다. **단, 본 PR 범위는 계정·세션·fingerprint 연결까지이며, 학습 데이터의 서버 흡수/동기화는 후속 phase**(§2 비목표 참조 — spec/05 §5.2 와 일치). **games·games-arcade = 완전 독립 계정**(2026-05-29 사용자 결정)이므로 풀림 플랫폼 통합 유저 테이블을 쓰지 않고 **games 자체 계정 시스템**을 구축한다.
 
-**완료 기준**
-- games 자체 Supabase(Postgres) + `users`/`auth_sessions` 테이블 + 마이그레이션 러너
+**완료 기준 (본 PR)**
+- games 자체 Supabase(Postgres) + `users`/`auth_sessions`/`fingerprint_links` 테이블 + 마이그레이션 러너
 - 이메일+비밀번호 회원가입·로그인·로그아웃 동작
-- 익명 fingerprint → 계정 연결(로그인 시 기존 localStorage 학습 데이터 흡수)
+- 익명 fingerprint → 계정 **연결만** (`fingerprint_links`). **localStorage 학습 데이터의 서버 흡수는 본 PR 비범위 — 후속 phase**
 - 비로그인 플레이는 그대로 유지(계정은 선택) — spec의 "무마찰 진입" 원칙 보존
 - spec/05 §5.2·§5.6 개정 반영(G1 합의 후)
+- auth 스택 회귀 테스트 + CI `test (auth)` 잡
 
 ---
 

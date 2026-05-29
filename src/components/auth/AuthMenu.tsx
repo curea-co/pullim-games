@@ -34,8 +34,13 @@ export function AuthMenu() {
 
   async function onLogout() {
     setBusy(true);
-    await logout();
-    setUser(null);
+    const ok = await logout();
+    if (ok) {
+      setUser(null);
+    } else {
+      // 로그아웃 실패(네트워크·403·500): 세션이 남아있을 수 있으므로 실제 상태로 복구.
+      setUser(await getMe());
+    }
     setBusy(false);
     router.refresh();
   }
