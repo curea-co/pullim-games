@@ -81,7 +81,10 @@ export async function login(email: string, password: string): Promise<AuthResult
 /** 로그아웃. 서버가 세션을 실제로 파기했는지(성공 여부) 반환 — 호출부가 상태 정합에 사용. */
 export async function logout(): Promise<boolean> {
   try {
-    const res = await fetch("/api/auth/logout", { method: "POST" });
+    const csrf = await ensureCsrf(); // signup/login 과 동일한 double-submit 방어
+    const headers: Record<string, string> = {};
+    if (csrf) headers["x-csrf-token"] = csrf;
+    const res = await fetch("/api/auth/logout", { method: "POST", headers });
     return res.ok;
   } catch {
     return false;

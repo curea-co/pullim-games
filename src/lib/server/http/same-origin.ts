@@ -11,10 +11,16 @@ function collectAllowedOrigins(request: Request): Set<string> {
   if (explicit) set.add(explicit.replace(/\/$/, ""));
   const vercelUrl = process.env.VERCEL_URL;
   if (vercelUrl) set.add(`https://${vercelUrl}`);
-  try {
-    set.add(new URL(request.url).origin);
-  } catch {
-    // request.url 파싱 실패는 거의 없음.
+  // request.url(=Host 기반) origin 은 **dev 에서만** 신뢰. production 에서 이를 허용하면
+  // 프록시가 Host 를 그대로 전달할 때 공격자가 Host+Origin 을 임의 도메인으로 맞춰 가드를
+  // 통과할 수 있다(fail-open). prod 는 명시 allowlist(NEXT_PUBLIC_SITE_ORIGIN/VERCEL_URL)만
+  // 신뢰 → 미설정 시 fail-closed(403). 커스텀 도메인은 .env.example 대로 명시 설정 필요.
+  if (process.env.NODE_ENV !== "production") {
+    try {
+      set.add(new URL(request.url).origin);
+    } catch {
+      // request.url 파싱 실패는 거의 없음.
+    }
   }
   return set;
 }
