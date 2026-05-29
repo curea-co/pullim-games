@@ -134,12 +134,15 @@ async function runMigrations(p: Pool): Promise<void> {
   try {
     files = (await readdir(dir)).filter((f) => f.endsWith(".sql")).sort();
   } catch (err) {
-    // ENOENT(디렉토리 부재)만 "적용할 것 없음" 으로 무시. 번들 누락(tracing 오타)·권한·
-    // 읽기 실패 등 다른 fs 오류는 삼키지 않고 surface — 원인불명 500 으로 숨기지 않기 위해.
-    if ((err as NodeJS.ErrnoException).code === "ENOENT") return;
-    throw err;
+    // 이 앱의 auth 스키마는 전부 migrations/0001_init.sql 에 있다. 디렉터리 부재(ENOENT)
+    // 든 권한·읽기 실패든, readdir 실패는 "적용할 것 없음" 정상 경로가 아니라 서버리스
+    // 번들 누락(outputFileTracingIncludes 오타) 등의 신호다. 조용히 통과하면 첫 요청에서
+    // `relation "users" does not exist` 로 터지고 원인 파악이 어렵다 → 즉시 실패시킨다.
+    throw new Error(`migrations/ 를 읽을 수 없습니다 — ${(err as Error).message}`);
   }
-  if (files.length === 0) return;
+  if (files.length === 0) {
+    throw new Error("migrations/ 에 .sql 파일이 없습니다 — 번들 누락 의심");
+  }
 
   // 파일 내용을 먼저 읽어 트랜잭션 점유 시간을 최소화.
   const sqls = await Promise.all(

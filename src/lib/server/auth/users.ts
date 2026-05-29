@@ -54,8 +54,8 @@ export async function createUser(
   return rows[0];
 }
 
-export async function touchLastSeen(userId: string): Promise<void> {
-  await query("UPDATE users SET last_seen_at = $2 WHERE id = $1", [userId, Date.now()]);
+export async function touchLastSeen(userId: string, exec: QueryFn = query): Promise<void> {
+  await exec("UPDATE users SET last_seen_at = $2 WHERE id = $1", [userId, Date.now()]);
 }
 
 /**

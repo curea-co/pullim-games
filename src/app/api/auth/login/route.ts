@@ -14,6 +14,7 @@ import { resolveRateLimitKey } from "@/lib/server/auth/net";
 import { checkRateLimits } from "@/lib/server/rate-limit";
 import { isSameOriginRequest } from "@/lib/server/http/same-origin";
 import { AUTH_CSRF_HEADER, authCsrf } from "@/lib/server/auth/csrf";
+import { withTx } from "@/lib/server/db/client";
 
 export async function POST(request: Request) {
   // CSRF 방어 — same-origin(1차) + double-submit 토큰(2차). login CSRF(외부 폼이
@@ -74,12 +75,13 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "invalid_credentials" }, { status: 401 });
   }
 
-  if (fingerprint) {
-    await linkFingerprint(fingerprint, user.id);
-  }
-  await touchLastSeen(user.id);
-
-  const { token, expiresAt } = await createSession(user.id);
+  // 부분 커밋 방지 — fingerprint 연결·last_seen 갱신·세션 발급을 한 트랜잭션으로.
+  // (signup 과 동일하게 원자화: 세션 INSERT 실패 시 앞선 변경이 롤백)
+  const { token, expiresAt } = await withTx(async (q) => {
+    if (fingerprint) await linkFingerprint(fingerprint, user.id, q);
+    await touchLastSeen(user.id, q);
+    return createSession(user.id, q);
+  });
   return NextResponse.json(
     { user: toPublicUser(user) },
     { status: 200, headers: { "set-cookie": buildSessionCookie(token, expiresAt) } },

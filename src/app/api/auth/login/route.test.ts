@@ -12,6 +12,9 @@ vi.mock("@/lib/server/auth/session", () => ({
   buildSessionCookie: () => "pullim_games_session=s; Path=/; HttpOnly",
 }));
 vi.mock("@/lib/server/auth/password", () => ({ verifyPasswordConstantTime: vi.fn() }));
+vi.mock("@/lib/server/db/client", () => ({
+  withTx: vi.fn(async (fn: (q: unknown) => Promise<unknown>) => fn(vi.fn())),
+}));
 
 import { POST } from "./route";
 import { findUserByEmail } from "@/lib/server/auth/users";
