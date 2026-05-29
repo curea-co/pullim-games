@@ -62,6 +62,12 @@ export async function touchLastSeen(userId: string, exec: QueryFn = query): Prom
  * 익명 fingerprint 를 계정에 연결. 이미 다른 계정에 연결돼 있으면 현재 계정으로 갱신
  * (마지막 로그인 기기 = 현재 사용자). 멱등.
  */
+/**
+ * fingerprint 를 계정에 연결. **첫 귀속 계정이 소유** — 이미 다른 user 에 묶인 fingerprint
+ * 는 자동 재귀속하지 않는다(ON CONFLICT DO NOTHING). 공유 브라우저에서 마지막 로그인
+ * 계정으로 귀속이 조용히 덮어써져 후속 익명 진행도 흡수/귀속 근거가 망가지는 것을 방지.
+ * (계정 간 명시적 fingerprint 이전은 후속 phase.)
+ */
 export async function linkFingerprint(
   fingerprint: string,
   userId: string,
@@ -70,8 +76,7 @@ export async function linkFingerprint(
   await exec(
     `INSERT INTO fingerprint_links (fingerprint, user_id, linked_at)
      VALUES ($1, $2, $3)
-     ON CONFLICT (fingerprint)
-     DO UPDATE SET user_id = EXCLUDED.user_id, linked_at = EXCLUDED.linked_at`,
+     ON CONFLICT (fingerprint) DO NOTHING`,
     [fingerprint, userId, Date.now()],
   );
 }

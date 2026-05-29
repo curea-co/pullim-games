@@ -35,6 +35,9 @@ export async function createSession(
     "INSERT INTO auth_sessions (token_hash, user_id, created_at, expires_at) VALUES ($1, $2, $3, $4)",
     [hashToken(token), userId, now, expiresAt],
   );
+  // 만료 세션 기회적 purge — 별도 배치 인프라 없이 세션 생성 시점에 expired 행 정리.
+  // (재방문 없는 사용자의 세션이 TTL 후에도 영구 잔존해 보존정책과 어긋나던 문제 해소.)
+  await exec("DELETE FROM auth_sessions WHERE expires_at <= $1", [now]);
   return { token, expiresAt };
 }
 
