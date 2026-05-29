@@ -122,6 +122,20 @@ jobs:
       # 테스트가 없는 게임은 vitest 가 exit 1 — passWithNoTests 로 허용.
       - run: bunx vitest run --passWithNoTests src/games/${{ matrix.game }}
 
+  test-auth:
+    name: test (auth)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run gen:registry
+      # 인증 스택(password/session/csrf/same-origin/schemas/라우트) 단위·라우트 테스트.
+      # DB 불필요(라우트 테스트는 DB 계층 mock). plan 완료조건의 회귀 가드.
+      - run: bunx vitest run src/lib/server/http src/lib/server/auth src/app/api/auth
+
   build:
     name: build (Next.js)
     needs: validate

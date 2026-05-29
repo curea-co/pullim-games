@@ -67,6 +67,13 @@ export async function POST(request: Request) {
   const { email, password, fingerprint } = parsed.data;
 
   // 흔한 경우(이미 가입) 빠른 409. 경합은 아래 UNIQUE 위반 캐치가 처리.
+  //
+  // KNOWN-TRADE-OFF (proc/plan/2026-05-29_auth-login-signup.md §3 D-ENUM):
+  //   409 email_taken 은 이메일 가입 여부를 노출(enumeration)한다. 완전 차단은 "generic
+  //   응답 + 이메일 검증으로 실제 중복 통지" 패턴이 필요하나, 이메일 발송 인프라는 후속
+  //   phase(비범위)다. 현 단계는 (a) 회원가입 UX 상 "이미 가입된 이메일" 안내가 필요하고,
+  //   (b) signup 라우트에 IP rate-limit(5/분·20/시간)이 걸려 대량 enumeration 은 차단되므로
+  //   tradeoff 를 수용한다. 이메일 검증 phase 도입 시 generic 응답으로 전환.
   const existing = await findUserByEmail(email);
   if (existing) {
     return NextResponse.json({ error: "email_taken" }, { status: 409 });

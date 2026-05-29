@@ -62,7 +62,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
           </CardTitle>
           <CardDescription className="text-pullim-slate-500">
             {isSignup
-              ? "계정을 만들면 어느 기기에서든 로그인할 수 있어요."
+              ? "계정을 만들면 로그인 정보가 저장돼요. (학습 기록의 기기 간 동기화는 준비 중이에요.)"
               : "다시 오셨네요. 계속 이어가요."}
           </CardDescription>
         </CardHeader>
