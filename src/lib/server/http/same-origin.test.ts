@@ -26,20 +26,19 @@ describe("isSameOriginRequest (dev — request.url fallback 신뢰)", () => {
   });
 });
 
-describe("isSameOriginRequest (production — 명시 allowlist만 신뢰)", () => {
-  it("prod + 명시 origin 미설정이면 request.url(Host) 신뢰 안 함 → 거부", () => {
+describe("isSameOriginRequest (production)", () => {
+  it("prod + env 미설정이어도 Origin 이 요청 Host 와 일치하면 허용(정상 same-origin)", () => {
     vi.stubEnv("NODE_ENV", "production");
-    // Origin 이 Host 기반 request.url 과 같아도(스푸핑 시나리오) 명시 allowlist 없으면 거부.
-    expect(isSameOriginRequest(req({ origin: "http://localhost:3033" }))).toBe(false);
+    // CSRF 토큰이 Host-spoof 백스톱이므로, 정상 same-origin POST 를 막지 않는다.
+    expect(isSameOriginRequest(req({ origin: "http://localhost:3033" }))).toBe(true);
   });
   it("prod + NEXT_PUBLIC_SITE_ORIGIN 일치하면 허용", () => {
     vi.stubEnv("NODE_ENV", "production");
     vi.stubEnv("NEXT_PUBLIC_SITE_ORIGIN", "https://games.pullim.app");
     expect(isSameOriginRequest(req({ origin: "https://games.pullim.app" }))).toBe(true);
   });
-  it("prod + 명시 allowlist 와 다른 origin 이면 거부", () => {
+  it("prod + 요청 Host 도 allowlist 도 아닌 외부 origin 이면 거부", () => {
     vi.stubEnv("NODE_ENV", "production");
-    vi.stubEnv("NEXT_PUBLIC_SITE_ORIGIN", "https://games.pullim.app");
     expect(isSameOriginRequest(req({ origin: "https://evil.example.com" }))).toBe(false);
   });
 });
