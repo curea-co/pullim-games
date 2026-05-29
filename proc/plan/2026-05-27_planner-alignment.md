@@ -1,5 +1,28 @@
 # 2026-05-27 — games 도메인 진화 plan (외부 사례 비교 포함)
 
+**상태**: **PROPOSAL — 정렬 목표 문서. 실행 게이트 아님. 코드 변경 0.**
+
+## 0. 권위 우선순위 (Authority Order) — 반드시 먼저 읽을 것
+
+본 plan 은 games 도메인의 **외부 사례 비교 + 진화 로드맵 제안서** 다. 실행 게이트로 채택된 적은 없으며, 다음 우선순위로 해석한다:
+
+1. **`proc/spec/01~10`** — games 의 유일한 권위 SOT. 본 plan 이 충돌하는 항목은 항상 패배.
+2. **루트 `AGENTS.md` / `CLAUDE.md`** — 현행 운영 규칙. 본 plan 이 충돌하면 패배. 특히 **"다른 풀림 프로젝트 코드 직접 참조 금지"** 규칙은 본 plan 도 종속.
+3. **`.pullim-meta/CONVENTION.md`** — 4 풀림 공통 운영 룰.
+4. **본 plan** — PROPOSAL. 외부 사례는 *참고* 만, 의사결정 근거 아님.
+
+**패배 사례** (codex R1~R8 누적 지적 흡수):
+- 본 plan 이 외부 리포(`pullim-planner` 등)의 절대경로·코드·페이지·mock·문서명·구체 구조를 games 의 **목표 상태**·**현재 상태**·**의사결정 축**·**SOT 위치 제안** 등으로 적었다면 — 모두 *맥락 참고* 로만 해석. 의사결정 근거 아님. 루트 `CLAUDE.md` 의 외부 참조 금지 규칙이 우선.
+- 본 plan 이 외부 리포의 FE/BE 컨벤션(planner Container/Presenter 등)을 games 의 의사결정 축으로 올린 경우 — `proc/spec/01~10` 우선. spec 갱신 없이는 채택 없음.
+- 본 plan 이 spec 의 Bun·Next.js 15·Vercel 스택을 "갭" 으로 표기하고 후속 작업을 유도하는 경우 — **spec 이 우선**. spec 변경은 별도 spec 갱신 PR 통해서만.
+- 본 plan 의 BE 옵션 상태 / DS 아이콘 전제 / 병렬 전개 시점 / Anthropic 경로 / UI 컴포넌트 수 / `src/components/ui/` 서술 / `proc/` 라우팅 등 정량·정성 표기 — `proc/spec/` 의 표기가 우선. 본 plan 내부 모순은 본 plan 측 오기로 간주.
+- **`CLAUDE.md` / `AGENTS.md` 같은 컨벤션 문서 수정** — 본 plan 만으로 수정 게이트 아님. 별도 룰 변경 PR 필요.
+- **외부 의사결정의 기록 위치** — 본 plan 이 외부 리포의 결정을 games 의 `proc/` 안에 기록할 수 없음. 그런 표기는 무효.
+
+본 plan 의 머지는 **자동 실행 게이트를 열지 않는다**. 후속 작업은 spec 갱신 PR 을 통해서만 진입한다.
+
+---
+
 > **상태**: DRAFT (2026-05-27). 본 plan 은 코드 변경 0 — 정렬 로드맵 문서화만. 진입은 진행 중인 별 PR 마감 후.
 > **본 리포의 유일한 권위 문서**:
 > - `proc/spec/01-AI-명령지침.md` ~ `proc/spec/10-개발-로드맵.md` (games 자체 SPEC, 10건)
