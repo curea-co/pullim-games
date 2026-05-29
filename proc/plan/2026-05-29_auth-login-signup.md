@@ -31,7 +31,7 @@ games에 **로그인/회원가입(계정)**을 도입한다. 익명 fingerprint�
 **완료 기준 (본 PR)**
 - games 자체 Supabase(Postgres) + `users`/`auth_sessions`/`fingerprint_links` 테이블 + 마이그레이션 러너
 - 이메일+비밀번호 회원가입·로그인·로그아웃 동작
-- 익명 fingerprint → 계정 **연결만** (`fingerprint_links`). **localStorage 학습 데이터의 서버 흡수는 본 PR 비범위 — 후속 phase**
+- 익명 fingerprint → 계정 **연결만** (`fingerprint_links`, **first-writer-wins** — 처음 귀속 계정 소유, 공유 기기 재귀속 X). **localStorage 학습 데이터의 서버 흡수는 본 PR 비범위 — 후속 phase**
 - 비로그인 플레이는 그대로 유지(계정은 선택) — spec의 "무마찰 진입" 원칙 보존
 - spec/05 §5.2·§5.6 개정 반영(G1 합의 후)
 - auth 스택 회귀 테스트 + CI `test (auth)` 잡

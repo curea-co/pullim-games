@@ -24,6 +24,8 @@ CREATE TABLE IF NOT EXISTS auth_sessions (
 );
 
 CREATE INDEX IF NOT EXISTS idx_auth_sessions_user_id ON auth_sessions(user_id);
+-- 만료 세션 purge(DELETE WHERE expires_at <= now)가 풀스캔 안 되도록.
+CREATE INDEX IF NOT EXISTS idx_auth_sessions_expires_at ON auth_sessions(expires_at);
 
 -- 익명 fingerprint → 계정 연결. 로그인 시 현재 브라우저 fingerprint 를 계정에 귀속.
 -- 한 계정이 여러 기기(fingerprint)를 가질 수 있으므로 fingerprint 가 PK.
