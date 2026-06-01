@@ -28,6 +28,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local dev postgres volume (docker compose) — proc/plan/2026-05-29_auth-login-signup.md
+/pgdata
+
 # gstack data (user-machine specific, not project)
 /.gstack
 
