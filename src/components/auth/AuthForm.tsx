@@ -46,7 +46,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
     setPending(false);
 
     if (result.ok) {
-      router.push("/");
+      router.push("/home");
       router.refresh();
       return;
     }

@@ -8,7 +8,7 @@ import { test, expect } from "@playwright/test";
 test("대문자로 시작한 정답도 정답으로 인식 — Achieve (실제 answer: achieve)", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
 
   await page.goto("/games/english-vocab-typing");
@@ -27,7 +27,7 @@ test("대문자로 시작한 정답도 정답으로 인식 — Achieve (실제 a
 });
 
 test("전부 대문자 입력 — ACHIEVE", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
 
   await page.goto("/games/english-vocab-typing");

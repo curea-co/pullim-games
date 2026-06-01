@@ -247,7 +247,7 @@ export default function ClozeMultiGame() {
             {cardIndex + 1} / {cards.length}
           </span>
           <Link
-            href="/"
+            href="/home"
             aria-label="메인으로"
             className="rounded-button px-2 py-1 hover:text-type-primary"
           >
@@ -384,13 +384,13 @@ function CompletionScreen({ totalCards, onRetry }: CompletionScreenProps) {
           한 번 더 풀어볼까요
         </button>
         <Link
-          href="/"
+          href="/home"
           className="block w-full rounded-button border border-border-hairline bg-bg-block px-4 py-3 text-center text-body text-type-primary"
         >
           다른 게임
         </Link>
         <Link
-          href="/"
+          href="/home"
           className="block w-full px-4 py-3 text-center text-body text-type-secondary hover:text-type-primary"
         >
           오늘은 끝

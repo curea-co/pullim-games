@@ -7,7 +7,7 @@
 import { test, expect } from "@playwright/test";
 
 test("한글 vocab-typing 정답 인식 회귀 0 — 모순", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
 
   await page.goto("/games/vocab-typing");

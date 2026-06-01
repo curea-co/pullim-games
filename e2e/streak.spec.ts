@@ -5,7 +5,7 @@ import { test, expect } from "@playwright/test";
 
 test("게임 카드 정답 → streak 첫 활동 기록 (current=1)", async ({ page }) => {
   // 깨끗한 상태 — localStorage 초기화 (홈 진입 후 clear)
-  await page.goto("/");
+  await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
 
   // vocab-typing 진입 + 첫 카드 ("모순") 정답
@@ -64,7 +64,7 @@ test("홈 dashboard — streak.current >= 2 일 시 'N일 연속' 노출", async
     );
   });
 
-  await page.goto("/");
+  await page.goto("/home");
   // 홈 대시보드 §status row — "연속" 칩에 "5일" 노출 (current >= 2).
   const status = page.getByRole("region", { name: "학습 상태" });
   await expect(status.getByText("연속")).toBeVisible();
