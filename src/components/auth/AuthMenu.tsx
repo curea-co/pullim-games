@@ -7,7 +7,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { getMe, logout, type AuthUser } from "@/lib/auth/client";
+import { getAuthState, logout, type AuthUser } from "@/lib/auth/client";
 import { clearPlayer, getPlayer, type Player } from "@/lib/core/player";
 
 export function AuthMenu() {
@@ -18,15 +18,19 @@ export function AuthMenu() {
   const pathname = usePathname();
   const [user, setUser] = useState<AuthUser | null>(null);
   const [player, setPlayer] = useState<Player | null>(null);
+  // auth 백엔드 미확정(503/네트워크) — 게이트는 fail-open 하므로, 헤더도 "로그인" 단정 대신
+  // 중립 상태를 보인다(Codex #114 R3: 게이트와 헤더 판정 불일치 차단).
+  const [unavailable, setUnavailable] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     let alive = true;
     setPlayer(getPlayer()); // 게스트 프로필(동기)
-    getMe().then((u) => {
+    getAuthState().then(({ user: u, unavailable: un }) => {
       if (alive) {
         setUser(u);
+        setUnavailable(un);
         setLoaded(true);
       }
     });
@@ -42,7 +46,9 @@ export function AuthMenu() {
       setUser(null);
     } else {
       // 로그아웃 실패(네트워크·403·500): 세션이 남아있을 수 있으므로 실제 상태로 복구.
-      setUser(await getMe());
+      const st = await getAuthState();
+      setUser(st.user);
+      setUnavailable(st.unavailable);
     }
     setBusy(false);
     router.refresh();
@@ -61,7 +67,12 @@ export function AuthMenu() {
     return <span aria-hidden className="inline-block h-9 w-16" />;
   }
 
-  // 회원도 게스트도 아니면 로그인 진입(주로 랜딩).
+  // auth 미확정(게스트도 없음) — 로그아웃/로그인 어느 쪽도 단정 불가. 중립 placeholder.
+  if (!user && !player && unavailable) {
+    return <span aria-hidden className="inline-block h-9 w-16" />;
+  }
+
+  // 회원도 게스트도 아니고 확정됨 → 로그인 진입(주로 랜딩).
   if (!user && !player) {
     return (
       <Link

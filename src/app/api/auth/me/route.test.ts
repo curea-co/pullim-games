@@ -43,11 +43,21 @@ describe("GET /api/auth/me", () => {
     expect(await res.json()).toEqual({ user: { id: "u1", email: "a@b.com" } });
   });
 
-  it("DB 장애여도 fail-soft → 200 + user:null (익명 브라우징 유지)", async () => {
+  it("토큰 있는데 DB 장애 → 503 + unavailable (미확정, 게이트 fail-open 근거)", async () => {
     vi.mocked(readSessionTokenFromCookie).mockReturnValue("tok");
     vi.mocked(getUserFromSessionToken).mockRejectedValue(new Error("DB down"));
     const res = await GET(req("pullim_games_session=tok"));
+    expect(res.status).toBe(503);
+    expect(res.headers.get("cache-control")).toBe("private, no-store");
+    expect(await res.json()).toEqual({ user: null, unavailable: true });
+  });
+
+  it("토큰 없으면 DB 미접근 → 200 (백엔드 장애여도 503 안 남, 익명 구분)", async () => {
+    vi.mocked(readSessionTokenFromCookie).mockReturnValue(null);
+    vi.mocked(getUserFromSessionToken).mockRejectedValue(new Error("DB down"));
+    const res = await GET(req());
     expect(res.status).toBe(200);
     expect(await res.json()).toEqual({ user: null });
+    expect(getUserFromSessionToken).not.toHaveBeenCalled();
   });
 });

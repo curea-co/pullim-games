@@ -19,6 +19,7 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { authErrorMessage, login, signup } from "@/lib/auth/client";
+import { clearPlayer } from "@/lib/core/player";
 
 type Mode = "login" | "signup";
 
@@ -46,6 +47,9 @@ export function AuthForm({ mode }: { mode: Mode }) {
     setPending(false);
 
     if (result.ok) {
+      // 로그인/가입 성공 = 회원 신원 확정. 이전 게스트 프로필을 비워, 로그아웃 후 공용 기기에서
+      // 이전 게스트 신원으로 자동 복귀하지 않게 한다(Codex #114 R3).
+      clearPlayer();
       router.push("/home");
       router.refresh();
       return;
