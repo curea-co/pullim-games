@@ -12,7 +12,7 @@
 //   - chip 의 가로 너비도 44px 이상 보장 — min-w-[44px] 추가 (짧은 label 회귀 차단).
 //
 // PR #92 Codex round 6 fix:
-//   - SPEC 08.10 focus ring (outline: 2px solid #00D4A1; outline-offset: 2px) 정합:
+//   - SPEC 08.10 focus ring (outline: 2px solid #0362DA; outline-offset: 2px) 정합:
 //     focus-visible:outline-2 focus-visible:outline-accent-positive focus-visible:outline-offset-2
 //     명시적으로 부여 — 키보드 Tab 진입 시 chip 포커스 표시 누락 방지.
 

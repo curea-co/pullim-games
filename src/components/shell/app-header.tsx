@@ -43,23 +43,26 @@ export function AppHeader({ role, variant = "default" }: Props) {
           className="flex shrink-0 items-center gap-1.5"
           aria-label="풀림 게임즈 홈"
         >
-          <span
+          <svg
+            viewBox="0 0 100 100"
             aria-hidden="true"
-            className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent-positive/10 text-accent-positive"
+            className="h-7 w-7 shrink-0"
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="h-4 w-4"
-            >
-              <circle cx="12" cy="12" r="9" />
-              <path d="M8 12h8M12 8v8" />
-            </svg>
-          </span>
+            <rect x="4" y="4" width="92" height="92" rx="18" fill="#0362DA" />
+            <rect x="30" y="26" width="8" height="8" fill="#FFFFFF" />
+            <rect x="62" y="26" width="8" height="8" fill="#FFFFFF" />
+            <rect x="38" y="34" width="24" height="8" fill="#FFFFFF" />
+            <rect x="22" y="42" width="56" height="8" fill="#FFFFFF" />
+            <rect x="22" y="50" width="8" height="8" fill="#FFFFFF" />
+            <rect x="38" y="50" width="8" height="8" fill="#E6FF4C" />
+            <rect x="54" y="50" width="8" height="8" fill="#E6FF4C" />
+            <rect x="70" y="50" width="8" height="8" fill="#FFFFFF" />
+            <rect x="22" y="58" width="56" height="8" fill="#FFFFFF" />
+            <rect x="30" y="66" width="8" height="8" fill="#FFFFFF" />
+            <rect x="62" y="66" width="8" height="8" fill="#FFFFFF" />
+            <rect x="22" y="74" width="8" height="8" fill="#FFFFFF" />
+            <rect x="70" y="74" width="8" height="8" fill="#FFFFFF" />
+          </svg>
           <span className="text-sm font-bold tracking-tight text-pullim-slate-900">
             풀림
           </span>

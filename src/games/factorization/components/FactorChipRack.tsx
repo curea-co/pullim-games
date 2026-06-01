@@ -74,10 +74,10 @@ function FactorChip({ text, isHovering, isWrongFlash, onMount }: ChipProps) {
         borderColor: isWrongFlash
           ? "#F87171"
           : isHovering
-            ? "#00D4A1"
+            ? "#0362DA"
             : "#E5E5E5",
         backgroundColor: isHovering
-          ? "rgba(0,212,161,0.06)"
+          ? "rgba(3,98,218,0.06)"
           : "rgba(0,0,0,0)",
       }}
       transition={{ duration: 0.14, ease: "easeOut" }}

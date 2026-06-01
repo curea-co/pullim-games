@@ -1,13 +1,13 @@
 "use client";
 
-// matching mechanic mock — 좌·우 짝 사이에 jade 라인이 그어짐.
+// matching mechanic mock — 좌·우 짝 사이에 accent 라인이 그어짐.
 // english-word-match, custom-word-match.
 
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { LOOP_DURATION, LOOP_EASE, mockWrapperClass, type MockProps } from "./shared";
 
-const JADE = "#00D4A1";
+const ACCENT = "#0362DA";
 
 export function MatchingMock({ variant, locked }: MockProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -54,7 +54,7 @@ function PairRow({
       <div className="relative h-px">
         <motion.div
           className="absolute inset-y-0 left-0 origin-left"
-          style={{ height: 2, top: -1, background: JADE }}
+          style={{ height: 2, top: -1, background: ACCENT }}
           animate={
             animate
               ? { scaleX: [0, 0, 1, 1, 0, 0], opacity: [0, 0, 1, 1, 0, 0] }
