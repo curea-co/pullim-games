@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { BarChart3, BookOpenCheck, Sparkles } from "lucide-react";
 import { computeDashboardStats } from "@/lib/core";
 import { getMe } from "@/lib/auth/client";
+import { PullimMark } from "@/components/brand/PullimMark";
 
 const HIGHLIGHTS = [
   {
@@ -62,20 +63,7 @@ export function LandingHero() {
   if (!resolved || returning) {
     return (
       <div className="grid min-h-[60vh] place-items-center" aria-hidden="true">
-        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-positive/10 text-accent-positive">
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="h-5 w-5 animate-pulse"
-          >
-            <circle cx="12" cy="12" r="9" />
-            <path d="M8 12h8M12 8v8" />
-          </svg>
-        </span>
+        <PullimMark className="h-10 w-10 animate-pulse" />
       </div>
     );
   }
@@ -86,21 +74,7 @@ export function LandingHero() {
         {/* 좌 — 카피 & CTA */}
         <div className="flex flex-col">
           <span className="inline-flex w-fit items-center gap-2 rounded-full bg-accent-positive/10 px-3 py-1 text-xs font-bold text-accent-positive">
-            <span className="flex h-4 w-4 items-center justify-center">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="h-3.5 w-3.5"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="9" />
-                <path d="M8 12h8M12 8v8" />
-              </svg>
-            </span>
+            <PullimMark className="h-4 w-4 rounded-[3px]" />
             풀림 게임즈
           </span>
 
