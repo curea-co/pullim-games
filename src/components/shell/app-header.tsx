@@ -39,7 +39,7 @@ export function AppHeader({ role, variant = "default" }: Props) {
 
         {/* 로고 */}
         <Link
-          href="/"
+          href="/home"
           className="flex shrink-0 items-center gap-1.5"
           aria-label="풀림 게임즈 홈"
         >

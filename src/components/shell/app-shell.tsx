@@ -12,9 +12,10 @@
 // variant:
 // - "default": 위 기본 레이아웃
 // - "game": 게임 페이지 minimal chrome — 사이드바 미렌더, 헤더 minimal, breadcrumb 제거
+// - "landing": `/` 랜딩 — 헤더(로고+로그인 진입)만, 사이드바·breadcrumb 제거, 풀폭 캔버스
 //
-// 자동 분기: `/games/<id>` 경로면 game variant. 다른 곳에서 override 필요 시 prop 우선.
-// 근거: proc/plan/2026-05-11_layout-overhaul.md F2=B.
+// 자동 분기: `/games/<id>` 경로면 game variant, `/` 면 landing. override 필요 시 prop 우선.
+// 근거: proc/plan/2026-05-11_layout-overhaul.md F2=B, proc/plan/2026-06-01_landing-page.md.
 
 import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
@@ -23,7 +24,7 @@ import { AppSidebar } from "./app-sidebar";
 import { Breadcrumb } from "./breadcrumb";
 import type { Role } from "./nav-config";
 
-export type AppShellVariant = "default" | "game";
+export type AppShellVariant = "default" | "game" | "landing";
 
 interface Props {
   role: Role;
@@ -38,6 +39,7 @@ function detectVariant(pathname: string): AppShellVariant {
   // /games/<id> 는 game mode. /games 자체(허브)는 default.
   // 정규식 대신 split 으로 안전 — pathname.split('/') = ["", "games", "<id>", ...]
   const segments = pathname.split("/").filter(Boolean);
+  if (segments.length === 0) return "landing"; // `/` = 랜딩
   if (segments[0] === "games" && segments.length >= 2) return "game";
   return "default";
 }
@@ -52,6 +54,16 @@ export function AppShell({ role, children, variant }: Props) {
         <AppHeader role={role} variant="game" />
         {/* GameShell 자체 스크롤 — content section 안에서 overflow. CTA viewport-in 보장. */}
         <div className="flex-1 overflow-hidden">{children}</div>
+      </div>
+    );
+  }
+
+  if (mode === "landing") {
+    // 랜딩(`/`): 헤더만 유지(로고·로그인 진입), 사이드바·breadcrumb 없는 풀폭 스크롤 캔버스.
+    return (
+      <div className="flex h-screen flex-col bg-pullim-slate-50">
+        <AppHeader role={role} />
+        <div className="flex-1 overflow-y-auto">{children}</div>
       </div>
     );
   }

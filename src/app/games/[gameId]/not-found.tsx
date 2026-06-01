@@ -10,7 +10,7 @@ export default function GameNotFound() {
         다른 게임이 메인페이지에서 기다리고 있어요.
       </p>
       <Link
-        href="/"
+        href="/home"
         className="rounded-button border border-border-hairline px-4 py-2 text-body text-type-primary hover:bg-bg-block"
       >
         메인으로 돌아가기

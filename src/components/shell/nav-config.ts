@@ -34,7 +34,7 @@ export type Role = "student";
 /** 4 최상위 메뉴 */
 export const studentDomains: NavItem[] = [
   {
-    href: "/",
+    href: "/home",
     label: "홈",
     icon: Home,
     description: "대시보드 — 진행한 게임 / 성공·실패 통계",
@@ -101,7 +101,8 @@ export function buildBreadcrumb(
   pathname: string,
   role: Role,
 ): { label: string; href?: string }[] {
-  const root = { label: "풀림 게임즈", href: "/" };
+  // in-app 홈 = 대시보드(/home). `/` 는 랜딩이라 brand 크럼은 /home 을 가리킨다(랜딩 바운스 회피).
+  const root = { label: "풀림 게임즈", href: "/home" };
   const trail: { label: string; href?: string }[] = [root];
 
   if (pathname === root.href) return trail;
