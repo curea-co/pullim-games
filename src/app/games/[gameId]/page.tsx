@@ -3,6 +3,7 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getAllGameIds, getGameById } from "@/lib/games/registry";
+import { RequireIdentity } from "@/components/auth/RequireIdentity";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -44,6 +45,7 @@ export default async function GamePage({ params }: PageProps) {
   // 동적 import — Next.js 가 게임별 청크 분할.
   const { default: Game } = await game.loadComponent();
   // Suspense — useSearchParams 사용 게임 컴포넌트의 prerender CSR bailout 처리 (Plan E Phase 2).
+  // RequireIdentity — 입구 게이트(arcade 모델): 신원 없으면 랜딩으로. plan: 2026-06-01_arcade-entry-model.md.
   return (
     <Suspense
       fallback={
@@ -52,7 +54,9 @@ export default async function GamePage({ params }: PageProps) {
         </div>
       }
     >
-      <Game />
+      <RequireIdentity>
+        <Game />
+      </RequireIdentity>
     </Suspense>
   );
 }

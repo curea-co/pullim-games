@@ -1,16 +1,16 @@
 "use client";
 
-// / — 랜딩 히어로 (2026-06-01 도입, plan: proc/plan/2026-06-01_landing-page.md).
-// 신규 방문자에게 풀림 게임즈가 무엇인지·어떻게 시작/로그인하는지 진입 플로우를 제공.
-// 무마찰 원칙(spec/05 §5.2): 로그인 없이 "바로 시작"으로 게스트 즉시 플레이 — 게이트 아님.
-// 로그인했거나 이미 플레이 기록이 있으면 대시보드(/home)로 자동 진입.
+// / — 랜딩 히어로 / 입구 게이트 (arcade 모델, 2026-06-01 개정).
+// plan: proc/plan/2026-06-01_arcade-entry-model.md. spec/05 §5.2.
+// 입구에서 게스트/회원을 구분해 받는다: [회원가입]·[로그인] vs [게스트로 시작(/start)].
+// 랜딩 본문은 항상 즉시 렌더(SSR·LCP·no-JS 폴백, Codex #114 R2) — 스피너로 가리지 않는다.
+// 확정 신원(게스트 프로필 OR 로그인) 보유자만 클라에서 /home 으로 덮어쓴다(미확정은 머묾).
 
 import { useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { BarChart3, BookOpenCheck, Sparkles } from "lucide-react";
-import { computeDashboardStats } from "@/lib/core";
-import { getMe } from "@/lib/auth/client";
+import { useRouter } from "next/navigation";
+import { useIdentity } from "@/lib/core/player/use-identity";
 import { PullimMark } from "@/components/brand/PullimMark";
 
 const HIGHLIGHTS = [
@@ -26,34 +26,20 @@ const HIGHLIGHTS = [
   },
   {
     Icon: Sparkles,
-    label: "회원가입 없이 바로",
-    body: "계정은 선택이에요. 게스트로 즉시 한 판 시작.",
+    label: "게스트는 가입 없이",
+    body: "닉네임·학년만 있으면 바로 시작. 계정은 기록 저장이 필요할 때.",
   },
 ];
 
 export function LandingHero() {
   const router = useRouter();
+  const { ready, hasDefiniteIdentity } = useIdentity();
 
-  // 무마찰·LCP(spec/05 §5.2·spec/04): 랜딩 본문은 즉시 렌더한다. 신규 익명 방문자를
-  // 네트워크 왕복(getMe)으로 붙잡지 않는다. 로그인했거나 게스트 플레이 기록이 있는
-  // "복귀" 사용자만 비동기 판정 후 /home 으로 단방향 리다이렉트(덮어쓰기).
+  // 확정 신원(게스트/회원) 보유자만 /home 으로. 무신원·auth 미확정은 랜딩에 머문다.
+  // (게스트는 동기 판정이라 거의 즉시 리다이렉트 — 짧은 깜빡임은 허용, 랜딩 가림보다 낫다.)
   useEffect(() => {
-    let cancelled = false;
-    async function redirectReturning() {
-      const [me, stats] = await Promise.all([
-        getMe().catch(() => null),
-        computeDashboardStats().catch(() => null),
-      ]);
-      if (cancelled) return;
-      if (Boolean(me) || (stats?.gamesPlayed ?? 0) > 0) {
-        router.replace("/home");
-      }
-    }
-    redirectReturning();
-    return () => {
-      cancelled = true;
-    };
-  }, [router]);
+    if (ready && hasDefiniteIdentity) router.replace("/home");
+  }, [ready, hasDefiniteIdentity, router]);
 
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-12 md:px-8 md:py-20">
@@ -77,23 +63,29 @@ export function LandingHero() {
             <strong className="text-type-primary">점수·랭크·뱃지는 없어요.</strong>
           </p>
 
+          {/* 주 CTA — 회원가입 / 로그인 (회원 경로, 각각 별도 화면) */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
-              href="/games"
+              href="/signup"
               className="inline-flex h-12 items-center justify-center rounded-md bg-accent-positive px-8 text-base font-bold text-white shadow-sm transition-colors hover:bg-accent-positive/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-positive focus-visible:ring-offset-2"
             >
-              바로 시작
+              회원가입
             </Link>
             <Link
               href="/login"
-              className="inline-flex h-12 items-center justify-center rounded-md px-4 text-sm font-semibold text-type-secondary hover:text-type-primary hover:underline"
+              className="inline-flex h-12 items-center justify-center rounded-md border border-pullim-slate-300 bg-card px-8 text-base font-bold text-type-primary shadow-sm transition-colors hover:bg-pullim-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-positive focus-visible:ring-offset-2"
             >
-              로그인 / 회원가입 →
+              로그인
             </Link>
           </div>
-          <p className="mt-3 text-xs text-type-secondary">
-            회원가입 없이 게스트로 바로 풀 수 있어요. 계정은 기록 저장이 필요할 때만.
-          </p>
+
+          {/* 게스트 경로 — 가입 없이 닉네임·학년만 */}
+          <Link
+            href="/start"
+            className="mt-4 inline-flex w-fit items-center text-sm font-semibold text-type-secondary hover:text-type-primary hover:underline"
+          >
+            가입 없이 게스트로 시작 →
+          </Link>
         </div>
 
         {/* 우 — 특징 카드 */}
