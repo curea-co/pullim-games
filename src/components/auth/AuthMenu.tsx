@@ -54,9 +54,14 @@ export function AuthMenu() {
     router.refresh();
   }
 
-  // 게스트 나가기 / 다른 사용자로 시작 — 공용 기기에서 이전 게스트 신원 + fingerprint 기반
-  // 로컬 진행도(SRS·스트릭·활동 등)를 일괄 초기화하고 입구로(Codex #114 R2·R4).
+  // 게스트 나가기 / 다른 사용자로 시작 — 이 기기의 게스트 신원 + fingerprint 기반 로컬 진행도
+  // (SRS·스트릭·활동·커스텀)를 **전부 삭제**한다(Codex #114 R2·R4). 파괴적이므로 확인 1회를
+  // 받는다(R6: 모바일 오탭 영구삭제 방지).
   function onGuestExit() {
+    const ok = window.confirm(
+      "이 기기의 게스트 학습 기록(진행도·스트릭·커스텀 카드)을 모두 지우고 나갈까요? 되돌릴 수 없어요.",
+    );
+    if (!ok) return;
     resetGuestSession();
     setPlayer(null);
     router.push("/");
@@ -95,9 +100,10 @@ export function AuthMenu() {
         <button
           type="button"
           onClick={onGuestExit}
-          className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
+          title="이 기기의 게스트 학습 기록을 모두 지우고 나갑니다"
+          className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-accent-negative hover:bg-pullim-slate-100"
         >
-          나가기
+          기록 지우고 나가기
         </button>
       </div>
     );

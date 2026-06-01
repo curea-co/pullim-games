@@ -19,7 +19,7 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { authErrorMessage, login, signup } from "@/lib/auth/client";
-import { resetGuestSession } from "@/lib/core/player";
+import { clearPlayer } from "@/lib/core/player";
 
 type Mode = "login" | "signup";
 
@@ -47,10 +47,12 @@ export function AuthForm({ mode }: { mode: Mode }) {
     setPending(false);
 
     if (result.ok) {
-      // 로그인/가입 성공 = 회원 신원 확정. 이전 게스트 프로필뿐 아니라 fingerprint·SRS·스트릭·
-      // 활동 등 게스트 로컬 진행도까지 전부 비운다(Codex #114 R3·R5): 공용 기기에서 로그아웃 후
-      // 다음 게스트가 이전 사용자의 학습 기록을 이어받지 않게. (게스트→회원 데이터 이관은 후속 phase.)
-      resetGuestSession();
+      // 로그인/가입 성공 = 회원 신원 확정 → 게스트 **프로필/쿠키만** 정리(clearPlayer).
+      // ⚠️ 학습 데이터(fingerprint·SRS·스트릭·활동)는 **보존**한다(Codex #114 R6 — R5↔R6 진동 해소):
+      //   spec/05 §5.2가 승급 시 fingerprint 연결을 약속하고 학습 데이터는 아직 localStorage
+      //   전용이므로, 방금 로그인한 사용자의 데이터를 즉시 삭제하면 안 된다. 공용 기기 핸드오프의
+      //   전체 삭제는 명시적 "나가기"(resetGuestSession, 확인 UI 동반)에서만 한다.
+      clearPlayer();
       router.push("/home");
       router.refresh();
       return;
