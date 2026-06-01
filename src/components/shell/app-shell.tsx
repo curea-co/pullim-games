@@ -23,6 +23,7 @@ import { AppHeader } from "./app-header";
 import { AppSidebar } from "./app-sidebar";
 import { Breadcrumb } from "./breadcrumb";
 import type { Role } from "./nav-config";
+import { DevResetButton } from "../dev/DevResetButton";
 
 export type AppShellVariant = "default" | "game" | "landing";
 
@@ -54,6 +55,7 @@ export function AppShell({ role, children, variant }: Props) {
         <AppHeader role={role} variant="game" />
         {/* GameShell 자체 스크롤 — content section 안에서 overflow. CTA viewport-in 보장. */}
         <div className="flex-1 overflow-hidden">{children}</div>
+        <DevResetButton />
       </div>
     );
   }
@@ -95,6 +97,7 @@ export function AppShell({ role, children, variant }: Props) {
           <div className={`${CONTENT_MAX} h-[calc(100%-2.25rem)]`}>{children}</div>
         </div>
       </div>
+      <DevResetButton />
     </div>
   );
 }

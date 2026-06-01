@@ -114,7 +114,10 @@ export function deleteCurriculum(id: string): void {
 // ── Cards ────────────────────────────────────────────────
 
 export function loadCards(): CustomCard[] {
-  return loadArray<CustomCard>(KEY_CARDS);
+  // spec/06 §6.11 — V1.5 이전 저장 카드는 source 필드 미존재. "manual" 로 backfill.
+  return loadArray<CustomCard>(KEY_CARDS).map((c) =>
+    c.source ? c : { ...c, source: "manual" },
+  );
 }
 
 export function loadCardsByKind(kind: CustomCardKind): CustomCard[] {

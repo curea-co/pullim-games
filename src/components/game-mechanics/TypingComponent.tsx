@@ -21,6 +21,7 @@ import {
 import { TimeAttackTimer } from "./TimeAttackTimer";
 import { DeepRecallEmpty } from "./DeepRecallEmpty";
 import { useEnterToAdvance } from "./useEnterToAdvance";
+import { normalizeAnswer } from "./normalizeAnswer";
 
 type Phase =
   | "playing"
@@ -180,13 +181,13 @@ export function TypingComponent({
   function handleSubmit() {
     if (phase !== "playing") return;
     const trimmed = input.trim();
-    if (trimmed.length === 0) return;
+    if (normalizeAnswer(trimmed).length === 0) return;
     setPhase("checking");
     // case-insensitive 정답 매칭 — english-vocab-typing 의 "Achieve" 입력도 정답 인식.
     // 한글·한자는 toLocaleLowerCase 영향 없음 (이미 case 개념 X).
     // memory 룰 feedback_user_intent_literal: "사용자가 X했는데 틀렸대. 맞잖아" = 시스템 fix.
     const correct =
-      trimmed.toLocaleLowerCase() === card!.problem.answer.toLocaleLowerCase();
+      normalizeAnswer(trimmed) === normalizeAnswer(card!.problem.answer);
     // Plan E Phase 3 — time-attack 시 elapsedMs 측정 (카드 진입 ~ submit 까지).
     const elapsedMs = performance.now() - cardStartRef.current;
 

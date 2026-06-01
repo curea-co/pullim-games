@@ -1,6 +1,7 @@
 "use client";
 
-// Mode A (교육과정) / Mode B (자료) 토글. shadcn ToggleGroup.
+// Mode A (교육과정 통합) / Mode B (자료) 토글. shadcn ToggleGroup.
+// "교육과정" 안에서 seed 정적 변환 ↔ AI 생성 분기는 CurriculumPicker 가 자체 sub-toggle 로 처리.
 
 import { BookOpenText, FileText } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -35,7 +36,7 @@ export function ModeToggle({ value, onChange }: Props) {
           </span>
         </span>
         <span className="text-helper font-normal text-type-secondary">
-          기본 단원의 자료로 자동 생성
+          단원 선택 → 정적 자료 또는 AI 생성
         </span>
       </ToggleGroupItem>
       <ToggleGroupItem
