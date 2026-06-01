@@ -102,9 +102,12 @@ export async function getMe(): Promise<AuthUser | null> {
 }
 
 /**
- * 회원 신원 + "판정 가능 여부"를 함께 반환(Codex #114 R2). `/api/auth/me`는 auth 백엔드
- * 장애 시 503(`unavailable:true`)로 응답한다. unavailable 이면 "세션 없음"이 아니라 "미확정"
- * 이므로, 입구 게이트는 이를 fail-open(회원일 수 있으니 튕기지 않음)으로 처리한다.
+ * 회원 신원 + "판정 가능 여부"를 함께 반환(Codex #114 R2·R4).
+ * `/api/auth/me`는 **응답을 실제로 받았고** 토큰(세션 쿠키) 보유 + 백엔드 장애일 때만 503
+ * (`unavailable:true`)을 준다. 토큰 없으면 200 null 이라, unavailable=true 는 "회원 세션은
+ * 있는데 검증 불가" 만 의미 → 게이트 fail-open 이 정밀(완전 무신원은 통과 못함).
+ * ⚠️ **네트워크 오류(fetch 실패)는 응답이 없어 토큰 보유 여부를 알 수 없으므로 fail-open 하지
+ * 않는다**(unavailable=false) — 그래야 무신원 사용자가 장애 순간 게이트를 통과하지 못한다.
  */
 export async function getAuthState(): Promise<{
   user: AuthUser | null;
@@ -112,13 +115,14 @@ export async function getAuthState(): Promise<{
 }> {
   try {
     const res = await fetch("/api/auth/me", { cache: "no-store" });
+    // 503 = 응답 받음 + 토큰 보유 + 백엔드 장애 → 미확정(fail-open 대상).
     if (res.status === 503) return { user: null, unavailable: true };
-    if (!res.ok) return { user: null, unavailable: true };
+    if (!res.ok) return { user: null, unavailable: false }; // 기타 비정상 = 보수적 닫힘.
     const data = (await res.json()) as { user: AuthUser | null };
     return { user: data.user ?? null, unavailable: false };
   } catch {
-    // 네트워크 실패도 미확정 → fail-open.
-    return { user: null, unavailable: true };
+    // 응답 자체가 없음 → 토큰 보유 미상 → fail-closed(무신원 통과 방지).
+    return { user: null, unavailable: false };
   }
 }
 

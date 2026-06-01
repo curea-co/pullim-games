@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { getAuthState, logout, type AuthUser } from "@/lib/auth/client";
-import { clearPlayer, getPlayer, type Player } from "@/lib/core/player";
+import { getPlayer, resetGuestSession, type Player } from "@/lib/core/player";
 
 export function AuthMenu() {
   const router = useRouter();
@@ -54,9 +54,10 @@ export function AuthMenu() {
     router.refresh();
   }
 
-  // 게스트 나가기 / 다른 사용자로 시작 — 공용 기기에서 이전 게스트 신원을 비우고 입구로(Codex #114 R2).
+  // 게스트 나가기 / 다른 사용자로 시작 — 공용 기기에서 이전 게스트 신원 + fingerprint 기반
+  // 로컬 진행도(SRS·스트릭·활동 등)를 일괄 초기화하고 입구로(Codex #114 R2·R4).
   function onGuestExit() {
-    clearPlayer();
+    resetGuestSession();
     setPlayer(null);
     router.push("/");
     router.refresh();

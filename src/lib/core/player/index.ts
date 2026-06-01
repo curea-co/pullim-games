@@ -4,6 +4,12 @@
 // arcade 패턴 차용 — 코드 복사 아님, games 네이티브.
 
 const STORAGE_KEY = "pullim-games:player";
+// 게스트 신원 힌트 쿠키(non-HttpOnly) — middleware 가 서버에서 입구 게이트를 판정하게 한다
+// (Codex #114 R4: 클라 useEffect-only 게이트는 직접요청·JS off 에서 계약 불충족).
+export const GUEST_COOKIE = "pullim_games_guest";
+const GUEST_TTL_DAYS = 180;
+// 게스트 신원에 묶인 모든 로컬 데이터 prefix — "다른 사용자로 시작" 시 일괄 초기화.
+const LOCAL_PREFIX = "pullim-games:";
 
 export const GRADES = [
   "초1", "초2", "초3", "초4", "초5", "초6",
@@ -76,6 +82,7 @@ export function createPlayer(
   }
   // read-back: setItem 이 throw 안 해도 실제로 안 남는 환경(일부 private mode) 차단.
   if (!getPlayer()) return null;
+  setGuestCookie(true); // middleware 서버 게이트용 힌트.
   return player;
 }
 
@@ -85,6 +92,34 @@ export function clearPlayer(): void {
   } catch {
     /* noop */
   }
+  setGuestCookie(false);
+}
+
+/**
+ * "다른 사용자로 시작"(공용 기기) — 게스트 프로필뿐 아니라 **fingerprint 와 그에 묶인 모든
+ * 로컬 진행도(SRS·스트릭·활동·커스텀 등 `pullim-games:*`)를 일괄 초기화**한다(Codex #114 R4).
+ * 그러지 않으면 다음 게스트가 이전 사용자의 학습 기록을 그대로 이어받는다.
+ */
+export function resetGuestSession(): void {
+  try {
+    const keys: string[] = [];
+    for (let i = 0; i < window.localStorage.length; i += 1) {
+      const k = window.localStorage.key(i);
+      if (k && k.startsWith(LOCAL_PREFIX)) keys.push(k);
+    }
+    keys.forEach((k) => window.localStorage.removeItem(k));
+  } catch {
+    /* noop */
+  }
+  setGuestCookie(false);
+}
+
+function setGuestCookie(present: boolean): void {
+  if (typeof document === "undefined") return;
+  const secure = window.location?.protocol === "https:" ? "; Secure" : "";
+  document.cookie = present
+    ? `${GUEST_COOKIE}=1; Path=/; Max-Age=${GUEST_TTL_DAYS * 24 * 60 * 60}; SameSite=Lax${secure}`
+    : `${GUEST_COOKIE}=; Path=/; Max-Age=0; SameSite=Lax${secure}`;
 }
 
 function nowMs(): number {
