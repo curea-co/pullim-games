@@ -59,10 +59,11 @@ export function AppShell({ role, children, variant }: Props) {
   }
 
   if (mode === "landing") {
-    // 랜딩(`/`): 헤더만 유지(로고·로그인 진입), 사이드바·breadcrumb 없는 풀폭 스크롤 캔버스.
+    // 랜딩(`/`): landing 헤더(로고→`/` + 로그인만, 햄버거·검색·알림 제거),
+    // 사이드바·breadcrumb 없는 풀폭 스크롤 캔버스.
     return (
       <div className="flex h-screen flex-col bg-pullim-slate-50">
-        <AppHeader role={role} />
+        <AppHeader role={role} variant="landing" />
         <div className="flex-1 overflow-y-auto">{children}</div>
       </div>
     );

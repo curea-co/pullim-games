@@ -5,7 +5,7 @@
 // 무마찰 원칙(spec/05 §5.2): 로그인 없이 "바로 시작"으로 게스트 즉시 플레이 — 게이트 아님.
 // 로그인했거나 이미 플레이 기록이 있으면 대시보드(/home)로 자동 진입.
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { BarChart3, BookOpenCheck, Sparkles } from "lucide-react";
@@ -33,40 +33,27 @@ const HIGHLIGHTS = [
 
 export function LandingHero() {
   const router = useRouter();
-  const [resolved, setResolved] = useState(false);
-  const [returning, setReturning] = useState(false);
 
-  // 로그인 or 게스트 플레이 기록 보유 → 대시보드로 단방향 진입(/ → /home).
+  // 무마찰·LCP(spec/05 §5.2·spec/04): 랜딩 본문은 즉시 렌더한다. 신규 익명 방문자를
+  // 네트워크 왕복(getMe)으로 붙잡지 않는다. 로그인했거나 게스트 플레이 기록이 있는
+  // "복귀" 사용자만 비동기 판정 후 /home 으로 단방향 리다이렉트(덮어쓰기).
   useEffect(() => {
     let cancelled = false;
-    async function decide() {
+    async function redirectReturning() {
       const [me, stats] = await Promise.all([
-        getMe(),
+        getMe().catch(() => null),
         computeDashboardStats().catch(() => null),
       ]);
       if (cancelled) return;
-      const isReturning = Boolean(me) || (stats?.gamesPlayed ?? 0) > 0;
-      if (isReturning) {
-        setReturning(true);
+      if (Boolean(me) || (stats?.gamesPlayed ?? 0) > 0) {
         router.replace("/home");
-        return;
       }
-      setResolved(true);
     }
-    decide();
+    redirectReturning();
     return () => {
       cancelled = true;
     };
   }, [router]);
-
-  // 판정 전 / 리다이렉트 중 — 깜빡임 방지용 최소 로딩.
-  if (!resolved || returning) {
-    return (
-      <div className="grid min-h-[60vh] place-items-center" aria-hidden="true">
-        <PullimMark className="h-10 w-10 animate-pulse" />
-      </div>
-    );
-  }
 
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-12 md:px-8 md:py-20">
@@ -93,13 +80,13 @@ export function LandingHero() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link
               href="/games"
-              className="inline-flex h-12 items-center justify-center rounded-lg bg-accent-positive px-8 text-base font-bold text-white shadow-sm transition-colors hover:bg-accent-positive/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-positive focus-visible:ring-offset-2"
+              className="inline-flex h-12 items-center justify-center rounded-md bg-accent-positive px-8 text-base font-bold text-white shadow-sm transition-colors hover:bg-accent-positive/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-positive focus-visible:ring-offset-2"
             >
               바로 시작
             </Link>
             <Link
               href="/login"
-              className="inline-flex h-12 items-center justify-center rounded-lg px-4 text-sm font-semibold text-type-secondary hover:text-type-primary hover:underline"
+              className="inline-flex h-12 items-center justify-center rounded-md px-4 text-sm font-semibold text-type-secondary hover:text-type-primary hover:underline"
             >
               로그인 / 회원가입 →
             </Link>
@@ -111,13 +98,13 @@ export function LandingHero() {
 
         {/* 우 — 특징 카드 */}
         <div className="relative">
-          <ul className="grid gap-3 rounded-2xl border border-pullim-slate-200 bg-card p-3 shadow-sm sm:p-4 lg:p-5">
+          <ul className="grid gap-3 rounded-block border border-pullim-slate-200 bg-card p-3 shadow-sm sm:p-4 lg:p-5">
             {HIGHLIGHTS.map(({ Icon, label, body }) => (
               <li
                 key={label}
-                className="flex items-start gap-4 rounded-xl border border-pullim-slate-200 bg-background/60 p-4 lg:p-5"
+                className="flex items-start gap-4 rounded-block border border-pullim-slate-200 bg-background/60 p-4 lg:p-5"
               >
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-accent-positive/10 text-accent-positive">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-block bg-accent-positive/10 text-accent-positive">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>

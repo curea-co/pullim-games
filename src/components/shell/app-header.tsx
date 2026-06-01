@@ -6,6 +6,8 @@
 // - "default": 햄버거 + 로고 + 검색/알림/프로필 placeholder
 // - "game": 게임 페이지 minimal — ✕ (게임 허브로 복귀) + 로고만. 검색/알림/프로필 제거.
 //   근거: proc/plan/2026-05-11_layout-overhaul.md F2=B.
+// - "landing": `/` 랜딩 onboarding — 햄버거·검색·알림 제거, 로고는 `/` 유지(랜딩 우회 방지),
+//   로그인 진입(AuthMenu)만. 근거: proc/plan/2026-06-01_landing-page.md (Codex #112 R1).
 
 import Link from "next/link";
 import { ArrowLeft, Bell, Search } from "lucide-react";
@@ -15,16 +17,17 @@ import type { Role } from "./nav-config";
 
 interface Props {
   role: Role;
-  variant?: "default" | "game";
+  variant?: "default" | "game" | "landing";
 }
 
 export function AppHeader({ role, variant = "default" }: Props) {
   const isGame = variant === "game";
+  const isLanding = variant === "landing";
 
   return (
     <header className="sticky top-0 z-30 border-b border-pullim-slate-200 bg-card/85 backdrop-blur-md">
       <div className="flex h-14 items-center gap-2 px-3 md:px-4">
-        {/* 게임 모드: ✕(게임 허브로 복귀). default: 모바일 햄버거 */}
+        {/* 게임: ✕(허브 복귀). default: 모바일 햄버거. landing: 좌측 네비 없음(온보딩 분리) */}
         {isGame ? (
           <Link
             href="/games"
@@ -33,13 +36,13 @@ export function AppHeader({ role, variant = "default" }: Props) {
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
-        ) : (
+        ) : isLanding ? null : (
           <MobileDrawer role={role} />
         )}
 
-        {/* 로고 */}
+        {/* 로고 — 랜딩에서는 `/` 유지(신규 방문자 대시보드 우회 방지), 그 외 /home */}
         <Link
-          href="/home"
+          href={isLanding ? "/" : "/home"}
           className="flex shrink-0 items-center gap-1.5"
           aria-label="풀림 게임즈 홈"
         >
@@ -77,27 +80,29 @@ export function AppHeader({ role, variant = "default" }: Props) {
             Plan A Phase 6 — informational placeholder 정리. */}
         {!isGame && (
           <div className="ml-auto flex items-center gap-1">
-            {/* 검색·알림은 V0.5+ placeholder — sm+ 에서만. */}
-            <div className="hidden items-center gap-1 sm:flex">
-              <button
-                type="button"
-                aria-label="검색 (준비 중)"
-                disabled
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
-                title="검색 — 준비 중"
-              >
-                <Search className="h-5 w-5" />
-              </button>
-              <button
-                type="button"
-                aria-label="알림 (준비 중)"
-                disabled
-                className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
-                title="알림 — 준비 중"
-              >
-                <Bell className="h-5 w-5" />
-              </button>
-            </div>
+            {/* 검색·알림 placeholder — default 만(랜딩 온보딩에선 노출 X). sm+ 에서만. */}
+            {!isLanding && (
+              <div className="hidden items-center gap-1 sm:flex">
+                <button
+                  type="button"
+                  aria-label="검색 (준비 중)"
+                  disabled
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
+                  title="검색 — 준비 중"
+                >
+                  <Search className="h-5 w-5" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="알림 (준비 중)"
+                  disabled
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
+                  title="알림 — 준비 중"
+                >
+                  <Bell className="h-5 w-5" />
+                </button>
+              </div>
+            )}
             {/* 계정 진입점 — 전 뷰포트 노출(모바일 포함). */}
             <AuthMenu />
           </div>
