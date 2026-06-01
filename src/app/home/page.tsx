@@ -15,6 +15,16 @@ import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { DashboardStatusRow } from "@/components/dashboard/DashboardStatusRow";
 import { ActivityHeatmap } from "@/components/dashboard/ActivityHeatmap";
 import { RecommendationCard } from "@/components/RecommendationCard";
+import { RequireIdentity } from "@/components/auth/RequireIdentity";
+
+// 입구 게이트(arcade 모델) — 신원(게스트/회원) 없으면 랜딩으로. plan: 2026-06-01_arcade-entry-model.md.
+export default function HomePage() {
+  return (
+    <RequireIdentity>
+      <HomeDashboard />
+    </RequireIdentity>
+  );
+}
 
 function greeting(now: Date): string {
   const h = now.getHours();
@@ -24,7 +34,7 @@ function greeting(now: Date): string {
   return "늦은 시간 풀이도 좋아요";
 }
 
-export default function HomePage() {
+function HomeDashboard() {
   const [stats, setStats] = useState<DashboardStats | null>(null);
   const [hello, setHello] = useState<string>("");
 
