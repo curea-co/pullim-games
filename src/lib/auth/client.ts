@@ -98,12 +98,27 @@ export async function logout(): Promise<boolean> {
 }
 
 export async function getMe(): Promise<AuthUser | null> {
+  return (await getAuthState()).user;
+}
+
+/**
+ * 회원 신원 + "판정 가능 여부"를 함께 반환(Codex #114 R2). `/api/auth/me`는 auth 백엔드
+ * 장애 시 503(`unavailable:true`)로 응답한다. unavailable 이면 "세션 없음"이 아니라 "미확정"
+ * 이므로, 입구 게이트는 이를 fail-open(회원일 수 있으니 튕기지 않음)으로 처리한다.
+ */
+export async function getAuthState(): Promise<{
+  user: AuthUser | null;
+  unavailable: boolean;
+}> {
   try {
     const res = await fetch("/api/auth/me", { cache: "no-store" });
+    if (res.status === 503) return { user: null, unavailable: true };
+    if (!res.ok) return { user: null, unavailable: true };
     const data = (await res.json()) as { user: AuthUser | null };
-    return data.user;
+    return { user: data.user ?? null, unavailable: false };
   } catch {
-    return null;
+    // 네트워크 실패도 미확정 → fail-open.
+    return { user: null, unavailable: true };
   }
 }
 

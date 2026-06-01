@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { getMe, logout, type AuthUser } from "@/lib/auth/client";
+import { clearPlayer, getPlayer, type Player } from "@/lib/core/player";
 
 export function AuthMenu() {
   const router = useRouter();
@@ -16,11 +17,13 @@ export function AuthMenu() {
   // 헤더 로그인/로그아웃 상태가 갱신된다(hard refresh 없이).
   const pathname = usePathname();
   const [user, setUser] = useState<AuthUser | null>(null);
+  const [player, setPlayer] = useState<Player | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     let alive = true;
+    setPlayer(getPlayer()); // 게스트 프로필(동기)
     getMe().then((u) => {
       if (alive) {
         setUser(u);
@@ -45,12 +48,21 @@ export function AuthMenu() {
     router.refresh();
   }
 
+  // 게스트 나가기 / 다른 사용자로 시작 — 공용 기기에서 이전 게스트 신원을 비우고 입구로(Codex #114 R2).
+  function onGuestExit() {
+    clearPlayer();
+    setPlayer(null);
+    router.push("/");
+    router.refresh();
+  }
+
   // 첫 렌더(로드 전)는 레이아웃 시프트 방지용 자리만 차지.
   if (!loaded) {
     return <span aria-hidden className="inline-block h-9 w-16" />;
   }
 
-  if (!user) {
+  // 회원도 게스트도 아니면 로그인 진입(주로 랜딩).
+  if (!user && !player) {
     return (
       <Link
         href="/login"
@@ -61,6 +73,26 @@ export function AuthMenu() {
     );
   }
 
+  // 게스트(비로그인 + 프로필) — 닉네임 + "나가기"(다른 사용자로 시작).
+  if (!user && player) {
+    return (
+      <div className="flex items-center gap-1">
+        <span className="hidden max-w-[8rem] truncate text-xs font-medium text-pullim-slate-500 sm:inline">
+          {player.nickname} (게스트)
+        </span>
+        <button
+          type="button"
+          onClick={onGuestExit}
+          className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
+        >
+          나가기
+        </button>
+      </div>
+    );
+  }
+
+  // 회원 — 이메일 + 로그아웃. (위 가드들로 여기선 user 비-null 보장.)
+  if (!user) return null;
   return (
     <div className="flex items-center gap-1">
       <span

@@ -15,7 +15,14 @@ export async function GET(request: Request) {
   try {
     user = await getUserFromSessionToken(token);
   } catch (err) {
-    console.error("[auth/me] backend 미가용 — user:null 로 fail-soft", (err as Error).message);
+    console.error("[auth/me] backend 미가용", (err as Error).message);
+    // 입구 모델(Codex #114 R2): "세션 없음(user:null)"과 "auth 백엔드 장애(미확정)"를 구분해
+    // 503 으로 응답한다. 그래야 세션 쿠키가 살아있는 회원이 DB 일시 장애만으로 게이트에서
+    // `/`로 튕기지 않고, 클라가 fail-open 판단할 수 있다. (익명 브라우징은 게이트가 처리.)
+    return NextResponse.json(
+      { user: null, unavailable: true },
+      { status: 503, headers: { "cache-control": "private, no-store" } },
+    );
   }
   // 사용자 식별 JSON(이메일 등)이 중간 캐시·다른 경로로 재사용되지 않게 서버 응답을
   // 비공개·비캐시로 못 박는다(클라 cache:no-store 만으로는 불충분).

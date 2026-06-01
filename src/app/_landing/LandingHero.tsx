@@ -3,15 +3,14 @@
 // / — 랜딩 히어로 / 입구 게이트 (arcade 모델, 2026-06-01 개정).
 // plan: proc/plan/2026-06-01_arcade-entry-model.md. spec/05 §5.2.
 // 입구에서 게스트/회원을 구분해 받는다: [회원가입]·[로그인] vs [게스트로 시작(/start)].
-// 신원(게스트 프로필 OR 로그인) 보유자는 이미 "입장"했으므로 /home 으로 보낸다.
-// 게스트(localStorage) 판정은 동기 → 신규 무신원 방문자는 네트워크 대기 없이 즉시 랜딩.
+// 랜딩 본문은 항상 즉시 렌더(SSR·LCP·no-JS 폴백, Codex #114 R2) — 스피너로 가리지 않는다.
+// 확정 신원(게스트 프로필 OR 로그인) 보유자만 클라에서 /home 으로 덮어쓴다(미확정은 머묾).
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { BarChart3, BookOpenCheck, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { getPlayer } from "@/lib/core/player";
-import { getMe } from "@/lib/auth/client";
+import { useIdentity } from "@/lib/core/player/use-identity";
 import { PullimMark } from "@/components/brand/PullimMark";
 
 const HIGHLIGHTS = [
@@ -34,33 +33,13 @@ const HIGHLIGHTS = [
 
 export function LandingHero() {
   const router = useRouter();
-  const [show, setShow] = useState(false);
+  const { ready, hasDefiniteIdentity } = useIdentity();
 
-  // 게스트 프로필(동기) 있으면 즉시 /home. 없으면 랜딩 노출 후, 로그인 회원이면(비동기) /home.
+  // 확정 신원(게스트/회원) 보유자만 /home 으로. 무신원·auth 미확정은 랜딩에 머문다.
+  // (게스트는 동기 판정이라 거의 즉시 리다이렉트 — 짧은 깜빡임은 허용, 랜딩 가림보다 낫다.)
   useEffect(() => {
-    let cancelled = false;
-    if (getPlayer()) {
-      router.replace("/home");
-      return;
-    }
-    setShow(true);
-    getMe()
-      .catch(() => null)
-      .then((me) => {
-        if (!cancelled && me) router.replace("/home");
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [router]);
-
-  if (!show) {
-    return (
-      <div className="grid min-h-[60vh] place-items-center" aria-hidden="true">
-        <PullimMark className="h-10 w-10 animate-pulse" />
-      </div>
-    );
-  }
+    if (ready && hasDefiniteIdentity) router.replace("/home");
+  }, [ready, hasDefiniteIdentity, router]);
 
   return (
     <main className="mx-auto w-full max-w-6xl px-6 py-12 md:px-8 md:py-20">
