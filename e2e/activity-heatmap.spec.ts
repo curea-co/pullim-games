@@ -6,7 +6,7 @@ import { test, expect } from "@playwright/test";
 test("정답 1회 후 → 홈에 활동 히트맵 노출 + 셀 1개 채워짐", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
 
   // vocab-typing 첫 카드 정답 → saveSrsAndRecord 동거 wrapper 가 activity-log 갱신
@@ -18,7 +18,7 @@ test("정답 1회 후 → 홈에 활동 히트맵 노출 + 셀 1개 채워짐", 
   await page.waitForTimeout(800);
 
   // 홈에 다시 진입 — 히트맵 보임
-  await page.goto("/");
+  await page.goto("/home");
   const heatmap = page.getByRole("region", { name: "최근 활동 히트맵" });
   await expect(heatmap).toBeVisible();
   await expect(heatmap.getByText("최근 활동")).toBeVisible();
@@ -37,9 +37,9 @@ test("정답 1회 후 → 홈에 활동 히트맵 노출 + 셀 1개 채워짐", 
 });
 
 test("미플레이 사용자 — 히트맵 미노출 (playedStats 0)", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
-  await page.goto("/");
+  await page.goto("/home");
   // gamesPlayed === 0 이면 EmptyDashboard 분기 → 히트맵 자체 미렌더
   const heatmap = page.getByRole("region", { name: "최근 활동 히트맵" });
   await expect(heatmap).toHaveCount(0);

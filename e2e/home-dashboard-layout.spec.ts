@@ -7,7 +7,7 @@ import { test, expect } from "@playwright/test";
 
 // 첫 활동 시드 — gamesPlayed > 0 보장 (Dashboard render path 진입).
 async function seedActivity(page: import("@playwright/test").Page) {
-  await page.goto("/");
+  await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
   await page.goto("/games/vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
@@ -22,7 +22,7 @@ test("홈 대시보드 — 추천 영역이 status row 보다 위 (모바일)", 
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await seedActivity(page);
-  await page.goto("/");
+  await page.goto("/home");
 
   const rec = page.getByRole("region", { name: "오늘의 추천" });
   const status = page.getByRole("region", { name: "학습 상태" });
@@ -39,7 +39,7 @@ test("status row — 3 chip (오늘·다시 만날·연속) 가로 grid-cols-3",
   page,
 }) => {
   await seedActivity(page);
-  await page.goto("/");
+  await page.goto("/home");
 
   const status = page.getByRole("region", { name: "학습 상태" });
   await expect(status.getByText("오늘", { exact: true })).toBeVisible();
@@ -52,7 +52,7 @@ test("모든 viewport — 추천·status·KPI·히트맵이 stack 순서대로 �
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await seedActivity(page);
-  await page.goto("/");
+  await page.goto("/home");
 
   const rec = page.getByRole("region", { name: "오늘의 추천" });
   const status = page.getByRole("region", { name: "학습 상태" });

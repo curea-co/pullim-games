@@ -273,7 +273,7 @@ test("홈 (`/`) — gamesPlayed>0 일 때 RecommendationCard alt-modes nav 노�
   if (!seedGameId) return;
 
   await seedReviewedCard(page, seedGameId, "seed-card-1");
-  await page.goto("/");
+  await page.goto("/home");
   await page.waitForLoadState("networkidle");
 
   // Dashboard 경로 진입 — RecommendationCard 가 등장해야 한다.
@@ -291,7 +291,7 @@ test("홈 (`/`) — RecommendationCard alt-modes chip 클릭 시 정확한 URL �
   if (!seedGameId) return;
 
   await seedReviewedCard(page, seedGameId, "seed-card-1");
-  await page.goto("/");
+  await page.goto("/home");
   await page.waitForLoadState("networkidle");
 
   const altNav = page.getByTestId("recommendation-alt-modes");
@@ -323,7 +323,7 @@ test("홈 (`/`) — RecommendationCard alt-modes 의 모든 chip 이 (gameId, mo
   if (!seedGameId) return;
 
   await seedReviewedCard(page, seedGameId, "seed-card-1");
-  await page.goto("/");
+  await page.goto("/home");
   await page.waitForLoadState("networkidle");
 
   const altNav = page.getByTestId("recommendation-alt-modes");
@@ -406,7 +406,7 @@ test("홈 (`/`) — RecommendationCard alt-modes chip 키보드 포커스 시 SP
   if (!seedGameId) return;
 
   await seedReviewedCard(page, seedGameId, "seed-card-1");
-  await page.goto("/");
+  await page.goto("/home");
   await page.waitForLoadState("networkidle");
 
   const altNav = page.getByTestId("recommendation-alt-modes");
