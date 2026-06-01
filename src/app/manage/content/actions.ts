@@ -1,7 +1,9 @@
 "use server";
 
-// /manage/content Server Actions — Mode A (curriculum seed) + Mode B (LLM).
-// `2026-05-08_management-auto-generation.md` §3 따름.
+// /manage/content Server Actions — Mode A (curriculum) + Mode B (자료 paste).
+//   - Mode A 의 V1: seed JSON 정적 변환 (`seedSubjectId/seedUnitId`)
+//   - Mode A 의 V1.5: catalog 4-depth path + LLM (`catalogPath`)
+// spec/06 §6.10 + plan: 2026-05-27_curriculum-ai-content-creation.md
 
 import {
   convertSeedToBlankDrafts,
@@ -9,10 +11,16 @@ import {
   convertSeedToTypingDrafts,
   convertSeedToWordMatchDrafts,
   findSeed,
+  type CatalogPath,
   type CustomCardDraft,
   type CustomCardKind,
 } from "@/lib/core";
-import { generateFromSourceLLM } from "@/lib/server/ai/anthropic";
+// Phase 1: anthropic 직접 import. Gemini provider switch (index.ts) 는 spec/09 합의 후 별도 PR.
+// KNOWN-TRADE-OFF: proc/plan/2026-05-29_curriculum-phase1-commit-and-gemini-gate.md C 항목
+import {
+  generateFromCurriculumLLM,
+  generateFromSourceLLM,
+} from "@/lib/server/ai/anthropic";
 
 export interface GenerateResult {
   ok: boolean;
@@ -20,37 +28,75 @@ export interface GenerateResult {
   error?: string;
 }
 
-/** Mode A: 교육과정 seed → 카드 draft. */
+/**
+ * Mode A — 두 가지 모드:
+ *   1. seed JSON 정적 변환 (LLM 안 부름) — `seedSubjectId` + `seedUnitId` 제공 시
+ *   2. catalog + LLM 생성 — `catalogPath` 제공 시
+ * 둘 다 비면 error. spec/06 §6.10·§6.11.
+ */
 export async function generateFromCurriculumAction(input: {
   kind: CustomCardKind;
-  subjectId: string;
-  unitId: string;
   count: number;
+  /** V1 seed 변환 경로 (기존 인수분해). 우선 시도. */
+  seedSubjectId?: string;
+  seedUnitId?: string;
+  /** V1.5 catalog + LLM 경로 (영어 5 학년). */
+  catalogPath?: CatalogPath;
 }): Promise<GenerateResult> {
-  const { kind, subjectId, unitId, count } = input;
-  const seed = findSeed(subjectId, unitId);
-  if (!seed) {
-    return { ok: false, error: "선택한 단원을 찾을 수 없어요." };
-  }
+  const { kind, count, seedSubjectId, seedUnitId, catalogPath } = input;
   if (count <= 0) {
     return { ok: false, error: "카드 수는 1 이상이어야 해요." };
   }
 
-  let drafts: CustomCardDraft[] = [];
-  if (kind === "typing") drafts = convertSeedToTypingDrafts(seed, count);
-  else if (kind === "word-match")
-    drafts = convertSeedToWordMatchDrafts(seed, count);
-  else if (kind === "multiple-choice")
-    drafts = convertSeedToMultipleChoiceDrafts(seed, count);
-  else if (kind === "blank") drafts = convertSeedToBlankDrafts(seed, count);
-
-  if (drafts.length === 0) {
-    return {
-      ok: false,
-      error: "이 단원에는 해당 게임 타입의 자료가 부족해요. 다른 게임 타입을 골라보세요.",
-    };
+  // 1) seed-first: subject+unit 명시되면 정적 변환 시도. seed 없으면 catalog fallback.
+  if (seedSubjectId && seedUnitId) {
+    const seed = findSeed(seedSubjectId, seedUnitId);
+    if (seed) {
+      let drafts: CustomCardDraft[] = [];
+      if (kind === "typing") drafts = convertSeedToTypingDrafts(seed, count);
+      else if (kind === "word-match")
+        drafts = convertSeedToWordMatchDrafts(seed, count);
+      else if (kind === "multiple-choice")
+        drafts = convertSeedToMultipleChoiceDrafts(seed, count);
+      else if (kind === "blank") drafts = convertSeedToBlankDrafts(seed, count);
+      if (drafts.length > 0) {
+        return {
+          ok: true,
+          drafts: drafts.map((d) => ({ ...d, source: "curriculum-seed" })),
+        };
+      }
+      return {
+        ok: false,
+        error: "이 단원에는 해당 게임 타입의 자료가 부족해요. 다른 게임 타입을 골라보세요.",
+      };
+    }
   }
-  return { ok: true, drafts };
+
+  // 2) catalog + LLM
+  if (catalogPath) {
+    try {
+      const { drafts } = await generateFromCurriculumLLM({
+        path: catalogPath,
+        kind,
+        count,
+      });
+      return {
+        ok: true,
+        drafts: drafts.map((d) => ({ ...d, source: "curriculum-ai" })),
+      };
+    } catch (e) {
+      console.error(
+        "[manage/content/actions] generateFromCurriculumLLM 실패:",
+        e,
+      );
+      return {
+        ok: false,
+        error: "자동 생성에 실패했어요. 잠시 후 다시 시도해주세요.",
+      };
+    }
+  }
+
+  return { ok: false, error: "단원이 선택되지 않았어요." };
 }
 
 /** Mode B: 자료 텍스트 → LLM 으로 카드 draft 생성. */
@@ -61,10 +107,11 @@ export async function generateFromSourceAction(input: {
 }): Promise<GenerateResult> {
   try {
     const { drafts } = await generateFromSourceLLM(input);
-    return { ok: true, drafts };
+    return {
+      ok: true,
+      drafts: drafts.map((d) => ({ ...d, source: "source-text-ai" })),
+    };
   } catch (e) {
-    // Plan D Phase 3 — AI error 누출 방지. Anthropic API rate-limit·auth 등
-    // 원본 메시지는 서버 로그로만, 사용자에게는 일반화 메시지만.
     console.error("[manage/content/actions] generateFromSourceLLM 실패:", e);
     return {
       ok: false,

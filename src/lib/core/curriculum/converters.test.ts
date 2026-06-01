@@ -5,7 +5,7 @@ import {
   convertSeedToTypingDrafts,
   convertSeedToWordMatchDrafts,
 } from "./converters";
-import { findSeed, listSeedSubjects } from "./seed-loader";
+import { findSeed } from "./seed-loader";
 import type { CurriculumSeed } from "./types";
 
 const SAMPLE: CurriculumSeed = {
@@ -46,14 +46,6 @@ const SAMPLE: CurriculumSeed = {
 };
 
 describe("seed-loader", () => {
-  it("V1 카탈로그에 인수분해 단원이 노출된다", () => {
-    const subjects = listSeedSubjects();
-    expect(subjects.length).toBeGreaterThan(0);
-    const math = subjects.find((s) => s.subjectId === "math");
-    expect(math).toBeDefined();
-    expect(math!.units.find((u) => u.unitId === "factorization")).toBeDefined();
-  });
-
   it("findSeed 로 정확히 찾을 수 있다", () => {
     const seed = findSeed("math", "factorization");
     expect(seed).toBeDefined();

@@ -26,12 +26,21 @@ export interface CustomCurriculum {
   updatedAt: string;
 }
 
+/** spec/06 §6.11 — 카드 출처. 기존 카드는 loader 에서 `"manual"` 로 backfill. */
+export type CustomCardSource =
+  | "manual"
+  | "curriculum-seed"
+  | "curriculum-ai"
+  | "source-text-ai";
+
 interface CustomCardCommon {
   id: string;
   subjectId: string;
   curriculumId: string;
   difficulty: 1 | 2 | 3 | 4 | 5;
   hint?: string;
+  /** spec/06 §6.11. 기존 카드는 loader 에서 `"manual"` 로 backfill. */
+  source?: CustomCardSource;
   createdAt: string;
   updatedAt: string;
 }

@@ -1,17 +1,15 @@
 "use client";
 
-// /home — 홈 대시보드 (구 `/`, 2026-06-01 랜딩 도입으로 이전).
-// `2026-05-08_home-dashboard-redesign.md` 따름. `/` 는 랜딩 히어로가 차지하고,
-// 로그인/게스트 기록 보유자는 여기(/home)로 자동 진입한다.
-// 사용자 의도 = "어떤 게임을 얼마나 성공했고 얼마나 실패했고 몇 개 진행했는지".
-// 게임 단위 카드에 성공·실패 절댓값을 큰 숫자로 노출.
+// /home — 홈 대시보드 (구 `/`, 2026-06-01 랜딩 도입으로 이전). `/` 는 랜딩 히어로.
+// 로그인/게스트 기록 보유자는 여기(/home)로 진입.
+// 게임별 성과(옛 GameStatCard 그리드) + 미진행 게임 그리드는 CompactActivity 한 블록으로 통합
+// (2026-05-27) — 슬림 row + 한 줄 게임 허브 CTA, 정보 밀도 향상.
 
 import { Suspense, useEffect, useState } from "react";
 import { CheckCircle2, XCircle } from "lucide-react";
 import { computeDashboardStats, type DashboardStats } from "@/lib/core";
 import { StatCard } from "@/components/dashboard/StatCard";
-import { GameStatCard } from "@/components/dashboard/GameStatCard";
-import { UntouchedGamesGrid } from "@/components/dashboard/UntouchedGamesGrid";
+import { CompactActivity } from "@/components/dashboard/CompactActivity";
 import { EmptyDashboard } from "@/components/dashboard/EmptyDashboard";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { DashboardStatusRow } from "@/components/dashboard/DashboardStatusRow";
@@ -132,30 +130,12 @@ function Dashboard({ stats }: { stats: DashboardStats }) {
         <ActivityHeatmap playedStats={playedStats} />
       )}
 
-      {/* 게임별 성과 — 와이드 3열 */}
-      <section
-        aria-label="게임별 성과"
-        className="flex flex-col gap-3"
-      >
-        <header>
-          <h2 className="text-label font-bold text-type-primary">
-            게임별 성과
-          </h2>
-          <p className="text-helper text-type-secondary">
-            {playedStats.length}개 게임을 풀어봤어요
-          </p>
-        </header>
-        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {playedStats.map((p) => (
-            <li key={p.gameId}>
-              <GameStatCard stat={p} />
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* 미진행 게임 그리드 */}
-      <UntouchedGamesGrid games={untouched} />
+      {/* 게임 활동 — 슬림 row 5개 + 한 줄 게임 허브 CTA (구 GameStatCard + UntouchedGamesGrid 통합) */}
+      <CompactActivity
+        played={playedStats}
+        untouchedCount={untouched.length}
+        totalGames={playedStats.length + untouched.length}
+      />
 
       {/* 외재 보상 회피 안내 */}
       <p className="text-helper text-type-secondary">

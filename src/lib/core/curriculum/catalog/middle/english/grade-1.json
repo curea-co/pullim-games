@@ -1,0 +1,98 @@
+{
+  "gradeBand": "middle",
+  "subject": "english",
+  "grade": 1,
+  "gradeName": "중학교 1학년",
+  "units": [
+    {
+      "unitId": "more-about-myself",
+      "unitName": "자기소개 확장",
+      "achievementCodes": ["[9영02-02]"],
+      "achievementText": "자신의 외모·성격·관심사를 두세 문장으로 소개하는 글이나 말을 한다.",
+      "suggestedKinds": ["typing", "blank", "multiple-choice"],
+      "focusVocab": ["personality", "interest", "favorite", "introduce", "hobby"],
+      "focusGrammar": ["I'm interested in ~", "My favorite ~ is ~", "I enjoy ~ing"]
+    },
+    {
+      "unitId": "our-school",
+      "unitName": "우리 학교",
+      "achievementCodes": ["[9영01-04]", "[9영02-04]"],
+      "achievementText": "학교 생활·교과 활동과 관련된 짧은 글을 이해하고 자신의 학교 생활을 소개한다.",
+      "suggestedKinds": ["word-match", "blank", "typing"],
+      "focusVocab": ["subject", "homework", "classroom", "schedule", "uniform"],
+      "focusGrammar": ["I have ~ on Monday", "Our school is ~", "We study ~"]
+    },
+    {
+      "unitId": "time-schedules",
+      "unitName": "시간과 일정",
+      "achievementCodes": ["[9영02-05]"],
+      "achievementText": "시간이나 일정을 묻고 답하며 자신의 하루 일과를 표현한다.",
+      "suggestedKinds": ["blank", "typing", "multiple-choice"],
+      "focusVocab": ["morning", "afternoon", "evening", "appointment", "schedule"],
+      "focusGrammar": ["What time do you ~?", "I usually ~ at ~", "Let's meet at ~"]
+    },
+    {
+      "unitId": "food-health",
+      "unitName": "음식과 건강",
+      "achievementCodes": ["[9영01-03]", "[9영02-06]"],
+      "achievementText": "건강한 음식 습관과 관련된 글을 이해하고 식습관에 대한 조언을 표현한다.",
+      "suggestedKinds": ["word-match", "blank", "multiple-choice"],
+      "focusVocab": ["healthy", "vegetable", "exercise", "diet", "energy"],
+      "focusGrammar": ["You should ~", "Try to eat ~", "It's good for ~"]
+    },
+    {
+      "unitId": "around-my-town",
+      "unitName": "우리 동네 안내",
+      "achievementCodes": ["[9영02-04]"],
+      "achievementText": "주변 장소를 안내하거나 길을 묻고 답하는 표현을 사용한다.",
+      "suggestedKinds": ["blank", "word-match", "typing"],
+      "focusVocab": ["station", "block", "corner", "between", "across"],
+      "focusGrammar": ["It's next to ~", "Go past ~", "Turn left at ~"]
+    },
+    {
+      "unitId": "family-stories",
+      "unitName": "가족 이야기",
+      "achievementCodes": ["[9영02-02]"],
+      "achievementText": "가족 구성원이나 가족과 함께한 경험을 짧은 글이나 말로 소개한다.",
+      "suggestedKinds": ["typing", "blank", "word-match"],
+      "focusVocab": ["parents", "grandparents", "cousin", "uncle", "memory"],
+      "focusGrammar": ["My ~ is a ~", "He/She likes ~", "We often ~"]
+    },
+    {
+      "unitId": "things-i-like",
+      "unitName": "좋아하는 것",
+      "achievementCodes": ["[9영02-03]"],
+      "achievementText": "자신이 좋아하는 것과 좋아하는 이유를 짧은 문장으로 표현한다.",
+      "suggestedKinds": ["blank", "multiple-choice", "typing"],
+      "focusVocab": ["enjoy", "prefer", "reason", "favorite", "because"],
+      "focusGrammar": ["I like ~ because ~", "I prefer ~ to ~", "My favorite ~ is ~"]
+    },
+    {
+      "unitId": "animals-nature",
+      "unitName": "동물과 자연",
+      "achievementCodes": ["[9영01-05]"],
+      "achievementText": "동물이나 자연 환경에 관한 짧은 글을 읽고 주요 정보를 이해한다.",
+      "suggestedKinds": ["word-match", "multiple-choice", "blank"],
+      "focusVocab": ["forest", "ocean", "wild", "protect", "habitat"],
+      "focusGrammar": ["~ lives in ~", "We should protect ~", "There are ~"]
+    },
+    {
+      "unitId": "future-dreams",
+      "unitName": "미래의 꿈",
+      "achievementCodes": ["[9영02-08]"],
+      "achievementText": "장래 희망이나 미래 계획을 짧은 글이나 말로 표현한다.",
+      "suggestedKinds": ["typing", "blank", "multiple-choice"],
+      "focusVocab": ["dream", "goal", "plan", "career", "future"],
+      "focusGrammar": ["I want to ~", "I will ~", "My goal is to ~"]
+    },
+    {
+      "unitId": "korean-culture",
+      "unitName": "한국 문화 소개",
+      "achievementCodes": ["[9영02-07]"],
+      "achievementText": "한국의 문화나 전통을 외국인에게 소개하는 짧은 글이나 말을 표현한다.",
+      "suggestedKinds": ["word-match", "blank", "typing"],
+      "focusVocab": ["tradition", "festival", "hanbok", "kimchi", "respect"],
+      "focusGrammar": ["~ is a traditional ~", "On ~, people ~", "We celebrate ~"]
+    }
+  ]
+}

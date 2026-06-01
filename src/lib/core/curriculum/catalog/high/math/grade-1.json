@@ -1,0 +1,18 @@
+{
+  "gradeBand": "high",
+  "subject": "math",
+  "grade": 1,
+  "gradeName": "고등 1학년 (공통수학)",
+  "units": [
+    {
+      "unitId": "factorization",
+      "unitName": "다항식의 인수분해",
+      "achievementCodes": ["[10공수1-01-05]"],
+      "achievementText": "다항식의 인수분해를 할 수 있고, 인수분해를 이용해 식의 값을 계산하거나 방정식을 풀 수 있다.",
+      "suggestedKinds": ["typing", "word-match", "multiple-choice", "blank"],
+      "focusVocab": ["인수", "공통인수", "완전제곱식", "차의 제곱", "근의 공식"],
+      "focusGrammar": ["a²-b² = (a+b)(a-b)", "a²+2ab+b² = (a+b)²", "x² + (a+b)x + ab = (x+a)(x+b)"],
+      "seedRef": { "subjectId": "math", "unitId": "factorization" }
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "gradeBand": "middle",
+  "subject": "korean",
+  "grade": 1,
+  "gradeName": "중학교 1학년",
+  "units": [
+    {
+      "unitId": "listening-reading-strategies",
+      "unitName": "듣기·말하기·읽기 전략",
+      "achievementCodes": ["[9국01-01]", "[9국02-01]"],
+      "achievementText": "다양한 매체의 정보를 듣고 핵심 내용을 정리하며, 글의 주제와 짜임을 파악하면서 읽는다.",
+      "suggestedKinds": ["multiple-choice", "blank", "word-match"],
+      "focusVocab": ["주제", "요지", "근거", "짜임", "맥락"],
+      "focusGrammar": ["글의 중심 문장 찾기", "근거 - 주장 관계 정리"]
+    },
+    {
+      "unitId": "word-meanings-vocabulary",
+      "unitName": "어휘의 의미와 활용",
+      "achievementCodes": ["[9국04-01]"],
+      "achievementText": "단어의 다양한 의미 관계(유의·반의·상하)를 이해하고 문맥에 알맞게 어휘를 사용한다.",
+      "suggestedKinds": ["word-match", "typing", "multiple-choice"],
+      "focusVocab": ["유의어", "반의어", "다의어", "상하 관계", "문맥"],
+      "focusGrammar": ["밝다 ↔ 어둡다", "착하다·선하다 (유의)"]
+    },
+    {
+      "unitId": "korean-phonemes",
+      "unitName": "음운과 발음",
+      "achievementCodes": ["[9국04-02]"],
+      "achievementText": "한국어 자음·모음의 체계와 음운 변동(된소리되기, 비음화 등)을 이해한다.",
+      "suggestedKinds": ["multiple-choice", "blank", "word-match"],
+      "focusVocab": ["자음", "모음", "음운", "된소리되기", "비음화"],
+      "focusGrammar": ["국밥 → [국빱] (된소리되기)", "독립 → [동닙] (비음화)"]
+    },
+    {
+      "unitId": "essay-narrative",
+      "unitName": "서사·수필 읽기와 쓰기",
+      "achievementCodes": ["[9국05-01]", "[9국03-01]"],
+      "achievementText": "서사·수필을 읽고 인물·사건·배경을 파악하며 자신의 경험을 글로 표현한다.",
+      "suggestedKinds": ["blank", "multiple-choice", "word-match"],
+      "focusVocab": ["인물", "사건", "배경", "갈등", "수필"],
+      "focusGrammar": ["인물의 마음 변화 추적", "내 경험 글로 옮기기"]
+    },
+    {
+      "unitId": "poetry-image-emotion",
+      "unitName": "시 — 이미지와 정서",
+      "achievementCodes": ["[9국05-02]"],
+      "achievementText": "시의 이미지·운율·정서를 이해하고 감상을 구체적으로 표현한다.",
+      "suggestedKinds": ["word-match", "multiple-choice", "blank"],
+      "focusVocab": ["이미지", "운율", "비유", "정서", "시적 화자"],
+      "focusGrammar": ["은유·직유 구분", "화자의 정서 파악"]
+    },
+    {
+      "unitId": "media-text-critical",
+      "unitName": "매체 자료 비판적 읽기",
+      "achievementCodes": ["[9국02-04]"],
+      "achievementText": "광고·뉴스·SNS 등 매체 자료를 비판적으로 분석한다.",
+      "suggestedKinds": ["multiple-choice", "blank", "word-match"],
+      "focusVocab": ["광고", "사실", "의견", "출처", "편향"],
+      "focusGrammar": ["사실과 의견 구분", "출처 신뢰성 확인"]
+    },
+    {
+      "unitId": "speech-debate",
+      "unitName": "발표와 토의·토론",
+      "achievementCodes": ["[9국01-03]", "[9국01-04]"],
+      "achievementText": "주제를 정해 발표하고 의견을 주고받는 토의·토론에 참여한다.",
+      "suggestedKinds": ["multiple-choice", "blank", "word-match"],
+      "focusVocab": ["발표", "토의", "토론", "근거", "반론"],
+      "focusGrammar": ["주장 + 근거 + 사례 구조", "상대 의견 경청 후 반론"]
+    }
+  ]
+}

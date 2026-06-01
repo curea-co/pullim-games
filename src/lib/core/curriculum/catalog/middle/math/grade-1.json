@@ -1,0 +1,71 @@
+{
+  "gradeBand": "middle",
+  "subject": "math",
+  "grade": 1,
+  "gradeName": "중학교 1학년",
+  "units": [
+    {
+      "unitId": "natural-numbers-properties",
+      "unitName": "소인수분해와 최대공약수·최소공배수",
+      "achievementCodes": ["[9수01-01]", "[9수01-02]"],
+      "achievementText": "소수와 합성수를 구분하고, 자연수를 소인수분해하여 최대공약수와 최소공배수를 구한다.",
+      "suggestedKinds": ["typing", "multiple-choice", "blank", "word-match"],
+      "focusVocab": ["소수", "합성수", "소인수분해", "최대공약수", "최소공배수"],
+      "focusGrammar": ["12 = 2² × 3", "GCD(a,b) × LCM(a,b) = a × b"]
+    },
+    {
+      "unitId": "integers-rationals",
+      "unitName": "정수와 유리수",
+      "achievementCodes": ["[9수01-03]", "[9수01-04]"],
+      "achievementText": "정수와 유리수의 개념을 이해하고 사칙연산을 할 수 있다.",
+      "suggestedKinds": ["multiple-choice", "blank", "typing"],
+      "focusVocab": ["정수", "유리수", "절댓값", "음수", "수직선"],
+      "focusGrammar": ["|-5| = 5", "(-3) + 7 = 4", "(-2) × (-5) = 10"]
+    },
+    {
+      "unitId": "letter-expressions",
+      "unitName": "문자와 식",
+      "achievementCodes": ["[9수02-01]", "[9수02-02]"],
+      "achievementText": "문자를 사용한 식의 표현과 일차식의 계산을 할 수 있다.",
+      "suggestedKinds": ["blank", "multiple-choice", "typing"],
+      "focusVocab": ["문자식", "항", "계수", "동류항", "일차식"],
+      "focusGrammar": ["3x + 5y - x = 2x + 5y", "x · x = x²"]
+    },
+    {
+      "unitId": "linear-equations-one-var",
+      "unitName": "일차방정식",
+      "achievementCodes": ["[9수02-03]", "[9수02-04]"],
+      "achievementText": "일차방정식의 풀이와 활용 문제를 해결한다.",
+      "suggestedKinds": ["multiple-choice", "blank", "typing"],
+      "focusVocab": ["방정식", "해", "이항", "등식의 성질", "활용 문제"],
+      "focusGrammar": ["2x + 3 = 11 → x = 4", "양변에 같은 수를 더해도 등식은 성립"]
+    },
+    {
+      "unitId": "coordinate-and-graphs",
+      "unitName": "좌표평면과 그래프",
+      "achievementCodes": ["[9수03-01]", "[9수03-02]"],
+      "achievementText": "순서쌍과 좌표를 이해하고 그래프로 관계를 표현한다.",
+      "suggestedKinds": ["multiple-choice", "word-match", "blank"],
+      "focusVocab": ["순서쌍", "좌표평면", "x축", "y축", "사분면"],
+      "focusGrammar": ["(3, -2) 는 4사분면", "원점 = (0, 0)"]
+    },
+    {
+      "unitId": "basic-statistics",
+      "unitName": "자료의 정리와 해석",
+      "achievementCodes": ["[9수05-01]", "[9수05-02]"],
+      "achievementText": "도수분포표·히스토그램·도수분포다각형 으로 자료를 정리하고 평균을 구한다.",
+      "suggestedKinds": ["word-match", "multiple-choice", "blank"],
+      "focusVocab": ["도수", "계급", "히스토그램", "평균", "도수분포다각형"],
+      "focusGrammar": ["평균 = (자료 총합) / (자료 개수)"]
+    },
+    {
+      "unitId": "basic-geometry",
+      "unitName": "기본 도형",
+      "achievementCodes": ["[9수04-01]", "[9수04-02]"],
+      "achievementText": "점·선·면·각의 기본 성질을 이해하고 작도와 합동의 조건을 설명한다.",
+      "suggestedKinds": ["word-match", "multiple-choice", "blank"],
+      "focusVocab": ["점", "선분", "각", "맞꼭지각", "합동"],
+      "focusGrammar": ["맞꼭지각은 서로 같다", "SSS·SAS·ASA 합동 조건"]
+    }
+  ]
+}

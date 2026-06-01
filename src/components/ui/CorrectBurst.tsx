@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Check } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   show: boolean;
@@ -16,15 +16,30 @@ export function CorrectBurst({ show, onDone, durationMs = 700 }: Props) {
   // reduced 시 scale 모션 스킵, 정적 체크 마크만 표시.
   const reducedMotion = useReducedMotion();
 
+  // 핵심: `show` 는 trigger 신호로만 사용. visible 은 trigger 후 durationMs 동안 유지된다.
+  // 이전 구현은 useEffect cleanup 에서 timer 를 clear 했기 때문에, 부모가 `show` 를 false 로
+  // 빠르게 돌리면 (예: factorization 의 phase "extracting" → 240ms 후 "done") timer 가 죽고
+  // visible 이 true 인 채로 박혀버렸다. 이제 timerRef 로 timer 를 유지하고 cleanup 은 unmount 시에만.
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   useEffect(() => {
     if (!show) return;
+    if (timerRef.current) clearTimeout(timerRef.current);
     setVisible(true);
-    const t = setTimeout(() => {
+    timerRef.current = setTimeout(() => {
       setVisible(false);
+      timerRef.current = null;
       onDone?.();
     }, durationMs);
-    return () => clearTimeout(t);
+    // 의도적으로 cleanup 없음 — show 가 false 로 돌아와도 burst 가 끝까지 재생되어야 함.
   }, [show, durationMs, onDone]);
+
+  // unmount 시에만 정리
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   return (
     <AnimatePresence>

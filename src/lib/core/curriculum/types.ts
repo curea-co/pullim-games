@@ -45,9 +45,3 @@ export interface CurriculumSeed {
   passages: SeedPassage[];
 }
 
-/** 카탈로그 — UI 의 cascade picker 데이터 */
-export interface SeedSubjectMeta {
-  subjectId: string;
-  subjectName: string;
-  units: { unitId: string; unitName: string }[];
-}

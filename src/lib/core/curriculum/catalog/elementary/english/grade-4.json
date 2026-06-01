@@ -1,0 +1,80 @@
+{
+  "gradeBand": "elementary",
+  "subject": "english",
+  "grade": 4,
+  "gradeName": "초등 4학년",
+  "units": [
+    {
+      "unitId": "greetings-introductions",
+      "unitName": "안녕! 만나서 반가워",
+      "achievementCodes": ["[4영02-01]"],
+      "achievementText": "쉽고 간단한 인사말이나 자기소개를 따라 말하거나 자신감 있게 표현한다.",
+      "suggestedKinds": ["typing", "word-match", "multiple-choice"],
+      "focusVocab": ["hello", "hi", "name", "nice", "meet"],
+      "focusGrammar": ["I'm ~", "What's your name?", "Nice to meet you."]
+    },
+    {
+      "unitId": "my-family",
+      "unitName": "우리 가족",
+      "achievementCodes": ["[4영01-04]", "[4영02-02]"],
+      "achievementText": "가족 구성원이나 친구를 소개하는 짧고 쉬운 말을 듣고 이해하며, 따라 말하거나 표현한다.",
+      "suggestedKinds": ["word-match", "typing", "multiple-choice"],
+      "focusVocab": ["father", "mother", "brother", "sister", "family"],
+      "focusGrammar": ["This is my ~", "He/She is ~"]
+    },
+    {
+      "unitId": "going-to-school",
+      "unitName": "학교에 가요",
+      "achievementCodes": ["[4영01-03]", "[4영02-04]"],
+      "achievementText": "학교 생활과 관련된 쉬운 표현이나 지시를 듣고 행동하며, 자신의 상태를 간단히 표현한다.",
+      "suggestedKinds": ["typing", "word-match", "blank"],
+      "focusVocab": ["school", "book", "pencil", "teacher", "friend"],
+      "focusGrammar": ["I have ~", "It's a ~"]
+    },
+    {
+      "unitId": "animal-friends",
+      "unitName": "동물 친구들",
+      "achievementCodes": ["[4영02-03]"],
+      "achievementText": "주변 동물의 이름을 듣고 따라 말하거나 그림과 연결하며 좋아하는 동물을 표현한다.",
+      "suggestedKinds": ["word-match", "typing", "multiple-choice"],
+      "focusVocab": ["dog", "cat", "rabbit", "bird", "fish"],
+      "focusGrammar": ["I like ~", "Do you like ~?"]
+    },
+    {
+      "unitId": "colors-shapes",
+      "unitName": "색깔과 모양",
+      "achievementCodes": ["[4영01-02]"],
+      "achievementText": "색깔이나 모양을 나타내는 쉬운 낱말을 듣고 그림이나 사물에 연결한다.",
+      "suggestedKinds": ["word-match", "typing", "multiple-choice"],
+      "focusVocab": ["red", "blue", "yellow", "circle", "square"],
+      "focusGrammar": ["It's ~", "What color is ~?"]
+    },
+    {
+      "unitId": "number-play",
+      "unitName": "숫자 놀이",
+      "achievementCodes": ["[4영01-02]", "[4영02-05]"],
+      "achievementText": "1부터 20까지의 수를 듣고 따라 말하며 나이나 개수를 묻고 답한다.",
+      "suggestedKinds": ["typing", "multiple-choice", "word-match"],
+      "focusVocab": ["one", "two", "ten", "twenty", "age"],
+      "focusGrammar": ["How old are you?", "I'm ~ years old.", "How many ~?"]
+    },
+    {
+      "unitId": "yummy-food",
+      "unitName": "음식이 맛있어요",
+      "achievementCodes": ["[4영02-03]", "[4영02-06]"],
+      "achievementText": "음식의 이름을 말하고 좋아하거나 싫어하는 음식을 간단한 문장으로 표현한다.",
+      "suggestedKinds": ["word-match", "typing", "blank"],
+      "focusVocab": ["bread", "milk", "apple", "rice", "chicken"],
+      "focusGrammar": ["I like ~", "I don't like ~", "Do you want ~?"]
+    },
+    {
+      "unitId": "at-the-park",
+      "unitName": "놀이공원에서",
+      "achievementCodes": ["[4영01-05]", "[4영02-04]"],
+      "achievementText": "간단한 명령이나 권유를 듣고 행동하며 친구에게 놀이를 권유한다.",
+      "suggestedKinds": ["multiple-choice", "blank", "word-match"],
+      "focusVocab": ["jump", "run", "play", "stop", "go"],
+      "focusGrammar": ["Let's ~", "Don't ~", "Can you ~?"]
+    }
+  ]
+}

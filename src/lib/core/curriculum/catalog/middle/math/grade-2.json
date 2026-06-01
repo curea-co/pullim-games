@@ -1,0 +1,71 @@
+{
+  "gradeBand": "middle",
+  "subject": "math",
+  "grade": 2,
+  "gradeName": "중학교 2학년",
+  "units": [
+    {
+      "unitId": "rational-irrational-numbers",
+      "unitName": "유리수와 순환소수",
+      "achievementCodes": ["[9수01-05]"],
+      "achievementText": "유리수와 순환소수의 관계를 이해하고 순환소수를 분수로 나타낼 수 있다.",
+      "suggestedKinds": ["multiple-choice", "blank", "typing"],
+      "focusVocab": ["순환소수", "순환마디", "유한소수", "유리수"],
+      "focusGrammar": ["0.3333... = 1/3", "0.4545... = 5/11"]
+    },
+    {
+      "unitId": "exponent-laws",
+      "unitName": "단항식과 다항식",
+      "achievementCodes": ["[9수02-05]", "[9수02-06]"],
+      "achievementText": "지수법칙과 단항식·다항식의 사칙연산을 수행한다.",
+      "suggestedKinds": ["blank", "multiple-choice", "typing"],
+      "focusVocab": ["지수법칙", "단항식", "다항식", "전개", "동류항"],
+      "focusGrammar": ["a^m · a^n = a^(m+n)", "(ab)^n = a^n b^n"]
+    },
+    {
+      "unitId": "linear-equations-two-vars",
+      "unitName": "연립일차방정식",
+      "achievementCodes": ["[9수02-07]"],
+      "achievementText": "미지수가 두 개인 연립일차방정식을 가감법·대입법으로 푼다.",
+      "suggestedKinds": ["multiple-choice", "blank", "typing"],
+      "focusVocab": ["연립방정식", "가감법", "대입법", "미지수"],
+      "focusGrammar": ["x + y = 5, x - y = 1 → x=3, y=2"]
+    },
+    {
+      "unitId": "linear-functions",
+      "unitName": "일차함수와 그래프",
+      "achievementCodes": ["[9수03-03]", "[9수03-04]"],
+      "achievementText": "일차함수의 뜻과 그래프를 이해하고 기울기·절편을 구한다.",
+      "suggestedKinds": ["multiple-choice", "blank", "word-match"],
+      "focusVocab": ["일차함수", "기울기", "y절편", "x절편", "그래프"],
+      "focusGrammar": ["y = ax + b", "기울기 a = (y증가량)/(x증가량)"]
+    },
+    {
+      "unitId": "probability-basics",
+      "unitName": "확률과 그 기본 성질",
+      "achievementCodes": ["[9수05-03]"],
+      "achievementText": "사건의 확률 개념을 이해하고 기본 성질을 활용한다.",
+      "suggestedKinds": ["multiple-choice", "blank", "word-match"],
+      "focusVocab": ["사건", "표본공간", "확률", "여사건"],
+      "focusGrammar": ["P(A) = (사건 A의 경우) / (전체 경우)", "P(A) + P(Aᶜ) = 1"]
+    },
+    {
+      "unitId": "triangle-properties",
+      "unitName": "삼각형의 성질",
+      "achievementCodes": ["[9수04-03]", "[9수04-04]"],
+      "achievementText": "이등변삼각형·직각삼각형의 성질과 삼각형의 합동·닮음을 이해한다.",
+      "suggestedKinds": ["multiple-choice", "word-match", "blank"],
+      "focusVocab": ["이등변삼각형", "직각삼각형", "합동", "닮음", "변의 비"],
+      "focusGrammar": ["이등변삼각형의 두 밑각은 같다", "AA 닮음 조건"]
+    },
+    {
+      "unitId": "quadrilateral-properties",
+      "unitName": "사각형의 성질",
+      "achievementCodes": ["[9수04-05]"],
+      "achievementText": "평행사변형·마름모·직사각형·정사각형의 성질을 비교한다.",
+      "suggestedKinds": ["word-match", "multiple-choice", "blank"],
+      "focusVocab": ["평행사변형", "마름모", "직사각형", "정사각형", "대각선"],
+      "focusGrammar": ["평행사변형의 대각선은 서로 이등분", "정사각형 ⊂ 마름모 ∩ 직사각형"]
+    }
+  ]
+}
