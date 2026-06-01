@@ -51,7 +51,7 @@ export default async function OGImage() {
               width: 12,
               height: 12,
               borderRadius: 999,
-              background: "#00D4A1",
+              background: "#0362DA",
             }}
           />
           <div
@@ -107,7 +107,7 @@ export default async function OGImage() {
             }}
           >
             손으로
-            <span style={{ color: "#00D4A1" }}>.</span>
+            <span style={{ color: "#0362DA" }}>.</span>
           </div>
           <div
             style={{
@@ -140,7 +140,7 @@ export default async function OGImage() {
                   width: 14,
                   height: 14,
                   borderRadius: 4,
-                  background: i === 0 ? "#00D4A1" : "transparent",
+                  background: i === 0 ? "#0362DA" : "transparent",
                   border: i === 0 ? "none" : "1.5px solid #E5E5E5",
                 }}
               />

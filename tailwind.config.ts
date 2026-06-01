@@ -25,7 +25,7 @@ const config: Config = {
   				secondary: '#64748B'
   			},
   			accent: {
-  				positive: '#00D4A1',
+  				positive: '#0362DA',
   				negative: '#F87171'
   			},
   			'pullim-slate': {
@@ -41,13 +41,13 @@ const config: Config = {
   				'900': '#0F172A'
   			},
   			'pullim-blue': {
-  				'50': '#EFF6FF',
-  				'100': '#DBEAFE',
-  				'200': '#BFDBFE',
-  				'300': '#93C5FD',
-  				'500': '#3B82F6',
-  				'600': '#2563EB',
-  				'700': '#1D4ED8'
+  				'50': '#E5F0FB',
+  				'100': '#BFD7F4',
+  				'200': '#8FB7EB',
+  				'300': '#4D90DF',
+  				'500': '#0362DA',
+  				'600': '#0250B0',
+  				'700': '#033D85'
   			},
   			'pullim-danger': '#EF4444',
   			card: '#FFFFFF',
@@ -102,7 +102,7 @@ const config: Config = {
   		boxShadow: {
   			block: '0 1px 0 rgba(0,0,0,0.04)',
   			dragging: '0 8px 24px rgba(0,0,0,0.12)',
-  			glow: '0 0 24px rgba(0,212,161,0.4)',
+  			glow: '0 0 24px rgba(3,98,218,0.4)',
   			'pullim-sm': '0 1px 2px rgba(15, 23, 42, 0.08)'
   		},
   		transitionTimingFunction: {
