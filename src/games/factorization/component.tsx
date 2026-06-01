@@ -478,12 +478,12 @@ function AfterView({ factor, remainders }: AfterViewProps) {
       initial={{
         opacity: 0,
         scale: 0.92,
-        boxShadow: "0 0 24px rgba(0,212,161,0.4)",
+        boxShadow: "0 0 24px rgba(3,98,218,0.4)",
       }}
       animate={{
         opacity: 1,
         scale: 1,
-        boxShadow: "0 0 0 rgba(0,212,161,0)",
+        boxShadow: "0 0 0 rgba(3,98,218,0)",
       }}
       transition={{
         opacity: { duration: 0.18 },

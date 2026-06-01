@@ -1,7 +1,7 @@
 "use client";
 
 // 공통인수 추출 드롭 존 — SPEC §03.5 + §04.1 §04.4.
-// 기본: 점선 윤곽 hairline color, 8px radius. 드래그 시작 시 jade 실선으로 강조.
+// 기본: 점선 윤곽 hairline color, 8px radius. 드래그 시작 시 accent 실선으로 강조.
 // 변형 미리보기: 드래그 중일 때 결과 형태를 미세하게 표시 (SPEC §03.5).
 //
 // `proc/plan/2026-05-13_daily-execution.md` 트랙 A — forwardRef 로 부모가
@@ -11,7 +11,7 @@ import { forwardRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface DropZoneProps {
-  /** 드래그 진행 중인지. true 일 때 jade 강조 + 미리보기 표시. */
+  /** 드래그 진행 중인지. true 일 때 accent 강조 + 미리보기 표시. */
   active: boolean;
   /** 변형 미리보기 텍스트 — 드래그 중에만 노출. 예: "2(x + 2)" */
   previewText?: string;
@@ -26,8 +26,8 @@ export const DropZone = forwardRef<HTMLDivElement, DropZoneProps>(function DropZ
       ref={ref}
       className="rounded-dropzone px-5 py-3 text-center"
       animate={{
-        borderColor: active ? "#00D4A1" : "#E5E5E5",
-        backgroundColor: active ? "rgba(0,212,161,0.06)" : "rgba(0,0,0,0)",
+        borderColor: active ? "#0362DA" : "#E5E5E5",
+        backgroundColor: active ? "rgba(3,98,218,0.06)" : "rgba(0,0,0,0)",
       }}
       style={{
         borderWidth: 1,

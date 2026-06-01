@@ -28,7 +28,7 @@
 //
 // PR #92 Codex round 6 fix:
 //   - SPEC 08.10 focus ring 회귀 차단. chip 에 키보드 Tab 으로 진입한 뒤
-//     `:focus-visible` 상태에서 outline-width = 2px, outline-color = #00D4A1
+//     `:focus-visible` 상태에서 outline-width = 2px, outline-color = #0362DA
 //     (accent-positive) 가 적용되는지를 직접 검증.
 //   - 두 진입점 (허브 ModeChipsRow + 홈 RecommendationCard alt-modes) 양쪽 확인.
 
@@ -360,14 +360,14 @@ test("홈 (`/`) — RecommendationCard alt-modes 의 모든 chip 이 (gameId, mo
 // PR #92 Codex round 6 fix — SPEC 08.10 focus ring 회귀 차단.
 //
 // `:focus-visible` 상태에서 outline-width 가 2px 이상이고 outline-color 가
-// accent-positive (#00D4A1) 인지 확인. 전역 globals.css 의 :focus-visible 룰 + chip
+// accent-positive (#0362DA) 인지 확인. 전역 globals.css 의 :focus-visible 룰 + chip
 // 클래스의 명시적 focus-visible:outline-* 토큰이 둘 다 적용되도록 박혔는지 검증.
 //
 // `keyboard.press("Tab")` 으로 첫 chip 에 포커스가 갈 때까지 진행한 뒤
 // computed outlineWidth/outlineColor 를 확인.
 async function assertFocusRing(page: Page, locator: ReturnType<Page["locator"]>) {
   await locator.first().focus();
-  // SPEC 08.10: outline 2px solid #00D4A1; outline-offset 2px.
+  // SPEC 08.10: outline 2px solid #0362DA; outline-offset 2px.
   const style = await locator.first().evaluate((el) => {
     const cs = window.getComputedStyle(el);
     return {
@@ -381,8 +381,8 @@ async function assertFocusRing(page: Page, locator: ReturnType<Page["locator"]>)
   const widthPx = Number.parseFloat(style.outlineWidth);
   expect(Number.isFinite(widthPx)).toBe(true);
   expect(widthPx).toBeGreaterThanOrEqual(2);
-  // accent-positive #00D4A1 = rgb(0, 212, 161).
-  expect(style.outlineColor).toMatch(/rgba?\(\s*0\s*,\s*212\s*,\s*161/);
+  // accent-positive #0362DA = rgb(3, 98, 218).
+  expect(style.outlineColor).toMatch(/rgba?\(\s*3\s*,\s*98\s*,\s*218/);
   expect(style.outlineStyle).not.toBe("none");
 }
 
