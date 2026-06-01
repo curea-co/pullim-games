@@ -82,8 +82,23 @@ export function createPlayer(
   }
   // read-back: setItem 이 throw 안 해도 실제로 안 남는 환경(일부 private mode) 차단.
   if (!getPlayer()) return null;
-  setGuestCookie(true); // middleware 서버 게이트용 힌트.
+  // middleware 서버 게이트는 `pullim_games_guest` 쿠키 존재를 전제로 한다. 쿠키 쓰기가 조용히
+  // 무시되는 환경(쿠키 차단)이면 localStorage(=CSR 이동)는 되지만 새로고침·직접진입에서
+  // middleware 가 무신원으로 튕기는 split-brain 이 난다. 쿠키도 read-back 으로 확인하고,
+  // 안 박히면 게스트 신원 영속 실패로 보고 null 반환(Codex #114 R5). StartForm 이 안내한다.
+  setGuestCookie(true);
+  if (!hasGuestCookie()) {
+    clearPlayer(); // 부분 상태(player만 남음) 정리.
+    return null;
+  }
   return player;
+}
+
+function hasGuestCookie(): boolean {
+  if (typeof document === "undefined") return false;
+  return document.cookie
+    .split(";")
+    .some((c) => c.trim() === `${GUEST_COOKIE}=1`);
 }
 
 export function clearPlayer(): void {
