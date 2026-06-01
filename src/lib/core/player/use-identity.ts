@@ -4,6 +4,7 @@
 // plan: proc/plan/2026-06-01_arcade-entry-model.md. 게이트(/home·플레이)·랜딩 리다이렉트에 사용.
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { getPlayer, type Player } from "@/lib/core/player";
 import { getMe, type AuthUser } from "@/lib/auth/client";
 
@@ -17,6 +18,7 @@ export type Identity = {
 };
 
 export function useIdentity(): Identity {
+  const pathname = usePathname();
   const [state, setState] = useState<Identity>({
     ready: false,
     player: null,
@@ -24,9 +26,19 @@ export function useIdentity(): Identity {
     hasIdentity: false,
   });
 
+  // pathname 을 deps 에 넣어 네비게이션(예: 로그아웃 후 router.refresh→이동)마다 재판정한다.
+  // 그러지 않으면 hasIdentity 가 stale 하게 남아 보호 라우트가 계속 열려 있을 수 있다(Codex #114 R1).
   useEffect(() => {
     let cancelled = false;
     const player = getPlayer(); // localStorage — 동기
+
+    // 게스트 신원은 네트워크 비종속(spec/05 §5.2 "게스트 신원으로 즉시 입장"):
+    // player 가 있으면 getMe() 응답을 기다리지 않고 즉시 ready·입장 판정. 오프라인·지연에도 막히지 않음.
+    if (player) {
+      setState({ ready: true, player, authUser: null, hasIdentity: true });
+    }
+
+    // 계정 신원은 비동기로 덮어쓴다(게스트 없으면 이 결과가 판정 기준).
     getMe()
       .catch(() => null)
       .then((authUser) => {
@@ -41,7 +53,7 @@ export function useIdentity(): Identity {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [pathname]);
 
   return state;
 }

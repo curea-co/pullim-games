@@ -16,8 +16,12 @@ export type Grade = (typeof GRADES)[number];
 export type Player = {
   nickname: string;
   grade: Grade;
-  /** 만 14세 이상 자가확인(정통망법) — 미만이면 보호자 동의 간주. */
-  over14: boolean;
+  /**
+   * 동의 플래그(정통망법) — "만 14세 이상" 또는 "만 14세 미만이며 보호자 동의 완료"를 의미한다.
+   * over14 boolean 이 거짓 나이를 기록하던 문제(Codex #114 R1)를 피하려 honest 단일 동의로 둔다.
+   * 연령대 자체는 `grade` 로 보존(예: 초등은 만14세 미만으로 간주 → 보호자 동의 필요).
+   */
+  consent: boolean;
   createdAt: number;
 };
 
@@ -46,7 +50,7 @@ export function getPlayer(): Player | null {
     return {
       nickname: p.nickname,
       grade: p.grade,
-      over14: p.over14 === true,
+      consent: p.consent === true,
       createdAt: typeof p.createdAt === "number" ? p.createdAt : 0,
     };
   } catch {
@@ -54,14 +58,24 @@ export function getPlayer(): Player | null {
   }
 }
 
-/** 게스트 프로필 생성·저장. 실패해도 객체는 반환(휘발성). */
-export function createPlayer(nickname: string, grade: Grade, over14: boolean): Player {
-  const player: Player = { nickname, grade, over14, createdAt: nowMs() };
+/**
+ * 게스트 프로필 생성·저장. **localStorage 영속에 실패하면 `null` 반환**(Codex #114 R1):
+ * Safari private mode 등에서 write 가 조용히 무시되면, 저장 안 됐는데 성공처럼 진행 →
+ * /start→/home→무신원 재판정 무한루프가 난다. write 후 read-back 으로 실제 영속을 확인한다.
+ */
+export function createPlayer(
+  nickname: string,
+  grade: Grade,
+  consent: boolean,
+): Player | null {
+  const player: Player = { nickname, grade, consent, createdAt: nowMs() };
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(player));
   } catch {
-    /* localStorage 거부 — 휘발성 진행 */
+    return null; // 쓰기 거부 — 게스트 신원 영속 불가
   }
+  // read-back: setItem 이 throw 안 해도 실제로 안 남는 환경(일부 private mode) 차단.
+  if (!getPlayer()) return null;
   return player;
 }
 

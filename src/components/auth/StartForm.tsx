@@ -27,7 +27,7 @@ export function StartForm() {
   const { ready, hasIdentity } = useIdentity();
   const [nickname, setNickname] = useState("");
   const [grade, setGrade] = useState<Grade | "">("");
-  const [over14, setOver14] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // 이미 신원 있으면 온보딩 건너뜀.
@@ -47,7 +47,19 @@ export function StartForm() {
       setError("학년을 선택해주세요.");
       return;
     }
-    createPlayer(nameRes.value, grade, over14);
+    if (!consent) {
+      setError("동의가 필요해요. (만 14세 이상이거나 보호자 동의)");
+      return;
+    }
+    // createPlayer 가 localStorage 영속에 실패하면 null → 게이트가 무신원으로 되돌려 무한루프(Codex #114 R1).
+    // 실패 시 리다이렉트하지 않고 명확히 안내한다.
+    const created = createPlayer(nameRes.value, grade, consent);
+    if (!created) {
+      setError(
+        "이 브라우저에 기록을 저장할 수 없어요(시크릿 모드 등). 저장 허용 후 다시 시도하거나, 회원가입을 이용해주세요.",
+      );
+      return;
+    }
     router.push("/home");
     router.refresh();
   }
@@ -104,16 +116,17 @@ export function StartForm() {
 
             <div className="flex min-h-11 items-start gap-2 py-1">
               <Checkbox
-                id="over14"
-                checked={over14}
-                onCheckedChange={(v) => setOver14(v === true)}
+                id="consent"
+                checked={consent}
+                onCheckedChange={(v) => setConsent(v === true)}
                 className="mt-0.5 h-5 w-5"
               />
               <Label
-                htmlFor="over14"
+                htmlFor="consent"
                 className="text-sm font-normal leading-snug text-pullim-slate-700"
               >
-                만 14세 이상이에요. (미만이면 보호자 동의가 필요해요 — 보호자와 함께 체크해주세요.)
+                <strong>만 14세 이상</strong>이거나, 만 14세 미만이라면{" "}
+                <strong>보호자 동의를 받았어요.</strong> (학년 정보와 함께 저장돼요.)
               </Label>
             </div>
 
