@@ -19,9 +19,18 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "cron_secret_unset" }, { status: 503 });
   }
 
-  const removed = await purgeStaleActivity(Date.now());
-  return NextResponse.json(
-    { ok: true, removed },
-    { status: 200, headers: { "cache-control": "no-store" } },
-  );
+  try {
+    const removed = await purgeStaleActivity(Date.now());
+    return NextResponse.json(
+      { ok: true, removed },
+      { status: 200, headers: { "cache-control": "no-store" } },
+    );
+  } catch (err) {
+    // DB/마이그레이션 장애 → 구조화된 503(framework 500 으로 조용히 멈추지 않게). 다음 cron 에 재시도.
+    console.error("[sync/cleanup] backend 미가용", (err as Error).message);
+    return NextResponse.json(
+      { error: "backend_unavailable" },
+      { status: 503, headers: { "cache-control": "no-store" } },
+    );
+  }
 }

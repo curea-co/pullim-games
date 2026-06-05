@@ -10,10 +10,17 @@ export type ActivityInput = { gameId: string; date: string; count: number };
 export type ActivityAgg = { gameId: string; date: string; count: number };
 
 const RETENTION_DAYS = 14;
+// 로컬 규칙(activity-log.ts)은 **로컬 자정** 기준 14일. 서버는 클라 TZ 를 모르므로 UTC
+// date 버킷으로 자른다. UTC↔로컬 자정 경계(±1일)에서 서버가 클라보다 먼저 지우면 "브라우저에
+// 살아있는 활동이 sync 후 사라지는" 회귀가 난다(R4). → **GRACE 1일**을 더 둬서 서버 보존
+// window 가 로컬 14일의 상위집합이 되게 한다(서버는 절대 클라보다 덜 보존하지 않음). 클라는
+// 표시 시 자기 로컬 14일로 다시 prune 하므로 사용자에겐 정확히 14일.
+const GRACE_DAYS = 1;
 
-/** now(epoch ms) 기준 retention 하한 date 버킷("YYYY-MM-DD", UTC). 이 값 이상만 유효. */
+/** now(epoch ms) 기준 서버 retention 하한 date 버킷("YYYY-MM-DD", UTC, +1일 grace). 이 값 이상 보존. */
 export function retentionCutoffDate(now: number): string {
-  return new Date(now - RETENTION_DAYS * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  const ms = (RETENTION_DAYS + GRACE_DAYS) * 24 * 60 * 60 * 1000;
+  return new Date(now - ms).toISOString().slice(0, 10);
 }
 
 type AggRow = { game_id: string; date: string; total: string | number };
