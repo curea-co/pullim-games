@@ -124,18 +124,25 @@ CREATE TABLE IF NOT EXISTS streaks (
 -- own-count 를 덮어쓰지 않는다** — SUM 을 로컬에 쓰면 다음 flush 에 전체합 재업로드로
 -- 부풀려짐(B가 5 받고+1→6→3+6=9). push=own count 를 자기 device_id 행에 upsert(단조,
 -- 멱등), 표시=서버 SUM(읽기 전용, 별도 캐시 키), 로컬 own-count 는 SUM 으로 갱신 안 함.
--- D8: 14일 retention — push-time purge(best-effort) + **서버측 주기 cleanup(권위, R5)** 으로 보장.
+-- ⚠️ R6: `updated_at`(epoch ms) 컬럼 필수 — (1) 증분 pull: in-place count update 라
+-- since 비교 기준이 없으면 매번 14일 전량 재조회로 후퇴. (2) retention 기준: `date` 는
+-- 클라 로컬 버킷이라 서버 UTC `now-14d` 와 어긋나 14일이 하루 일찍/늦게 잘림 → epoch
+-- `updated_at` 으로 cutoff(TZ 무관). date 는 표시 버킷, updated_at 은 동기화·보존 기준.
+-- D8: 14일 retention — push-time purge(best-effort) + **서버측 주기 cleanup(권위, R5)**:
+--   DELETE WHERE updated_at < now-14d(epoch). 로그인 무관 보장.
 CREATE TABLE IF NOT EXISTS activity_log (
   user_id    TEXT   NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   game_id    TEXT   NOT NULL,
-  date       TEXT   NOT NULL,             -- "YYYY-MM-DD"
+  date       TEXT   NOT NULL,             -- "YYYY-MM-DD" (클라 로컬 표시 버킷)
   device_id  TEXT   NOT NULL,             -- 계정 동기화 전용 기기 식별자(랜덤 UUID, fingerprint 아님)
   count      INTEGER NOT NULL,            -- 이 기기의 해당 날짜 절대 활동 수
+  updated_at BIGINT NOT NULL,             -- epoch ms: 증분 pull(since) cursor + retention cutoff 기준
   PRIMARY KEY (user_id, game_id, date, device_id)
 );
 CREATE INDEX IF NOT EXISTS idx_activity_log_user ON activity_log(user_id);
-CREATE INDEX IF NOT EXISTS idx_activity_log_date ON activity_log(date);  -- 주기 cleanup(WHERE date<cutoff)용
+CREATE INDEX IF NOT EXISTS idx_activity_log_updated ON activity_log(updated_at);  -- since 증분 + cleanup(WHERE updated_at<cutoff)용
 -- 대시보드 조회: SELECT date, SUM(count) ... WHERE user_id=$1 GROUP BY date.
+-- 증분 pull: WHERE user_id=$1 AND updated_at > $since.
 
 -- 커스텀 콘텐츠. ✅ 2026-06-05: per-row 가 아니라 **사용자당 컬렉션 스냅샷**.
 -- 이유: per-row + updated_at 머지는 "삭제"가 다기기로 전파 안 됨(타 기기에 남은
@@ -186,7 +193,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | P3 | 동기화 API | `src/app/api/sync/route.ts` — **GET=증분 pull**(전체 아님), **POST=push 배치 델타(커스텀은 스냅샷 전량 포함)**. 단일 메서드 계약(PUT 미사용). zod 검증 + **401 인증 게이트**. 모든 쿼리 `WHERE user_id=me.id`(cross-user 0). **fingerprint 미사용(R5)**: sync write 키는 `device_id`(랜덤 UUID)뿐 — fingerprint 가 write 에 안 들어가므로 `fingerprint_links` first-writer-wins 소유권이 sync 로 훼손되지 않음(소유권은 흡수 단계서만 검사). **증분 pull 계약(R1/R2)**: 클라가 리소스별 `since`(마지막 동기화 `updated_at`)를 보내고 서버는 **단일 200 응답에 리소스별 변경분 + unchanged 마커**로 반환 — `{ srs:{changed:[...]}, custom:{unchanged:true}|{snapshot,...}, streak:..., activity:... }`. (HTTP 304 미사용 — 304는 응답 전체 상태라 "커스텀 unchanged + SRS changed" 공존 불가, R2.) 커스텀은 `updated_at` 미변경 시 `{unchanged:true}` 로 4MB 재전송 0. 리소스별 분리라 게임 오갈 때 대용량 반복 다운로드 없음. 🔒 **CSRF 가드(POST)**: 기존 `src/lib/server/http/csrf.ts` **stateless double-submit 쿠키** 헬퍼 재사용(billing HttpOnly nonce 아님 — 백그라운드 반복 flush엔 재사용 가능한 double-submit이 적합, R3). 흐름: `GET /api/sync/csrf`(또는 기존 `/api/auth/csrf`)가 토큰을 **non-HttpOnly 쿠키(Path=/, SameSite=Strict)** 로 set → 클라가 쿠키 읽어 POST `x-csrf-token` 헤더로 echo → 서버가 쿠키==헤더(constant-time) 검사. 1차 same-origin(Origin/Referer) + 2차 토큰 다층. 미적용 시 외부 사이트가 학습 상태 주입(R1). |
 | P4 | **클라 동기화 엔진(DRY)** | ✅ 단일 `src/lib/sync/engine.ts` — dirty 추적·**배치 debounce flush**(N초/세션종료/`visibilitychange`)·재시도·auth게이트·오프라인 폴백을 **한 곳**에. 리소스별 어댑터(머지fn+직렬화)만 4개. 4x 복붙 금지. **pull 은 로그인/세션 시작 시 1회 증분(`since`)** — 게임 전환마다 X(반복 대용량 다운로드 방지, R1). 이후 게임 시작은 **로컬 캐시만으로 즉시 렌더**. **read-through=비동기**: localStorage 즉시 서빙 → (세션 첫 진입만) 백그라운드 증분 fetch+머지 → 재렌더(블록·스피너 금지). **activity 어댑터는 pull 결과를 로컬에 머지하지 않음**(R2 — own count 유지). 🔒 **CSRF 흐름(R2/R3 — double-submit)**: 엔진은 매 flush 시 csrf 쿠키 값을 읽어 POST `x-csrf-token` 헤더로 echo(메모리 nonce 캐시 없음). 쿠키 부재 시 `GET /api/sync/csrf` 1회로 쿠키 set 후 진행, 403 시 재취득 후 1회 재시도. **게스트(비회원) 경로 무변화 보장**(토큰·pull·push 전부 skip — 계정 세션 없으면 동기화 코드 자체가 동작 안 함) |
 | P5 | 익명→계정 흡수(소유권 게이트 + 확인 후) | 첫 로그인 시 로컬 데이터 있으면 **① fingerprint 소유권 검사**(R4): `fingerprint_links` 조회 → 미귀속 또는 현재 user 소유면 진행, **타 계정 소유면 흡수 차단**(프롬프트 미노출/안내). **② 확인 프롬프트**(D5=c) → 동의 시에만 업로드. **③ blind upsert 아니라 머지 경유**(타 기기서 먼저 쌓인 서버 상태를 오래된 로컬이 덮지 않게). 멱등(`ON CONFLICT`+머지). first-writer-wins 흡수 단계까지 관철 |
-| P6 | 미성년·보존 | D7 CASCADE 확인, 계정삭제 시 4테이블 파기. **D8 activity_log 14일 retention = 서버측 주기 cleanup 으로 보장(R5)**: push-time purge 는 best-effort(재로그인 안 하면 잔존) → **권위 enforcer 는 일일 스케줄 삭제**(Supabase `pg_cron` 또는 Vercel Cron 라우트가 `DELETE FROM activity_log WHERE date < now-14d`). `idx_activity_log_date` 로 효율. 로그인 여부 무관 14일 보존 보장 |
+| P6 | 미성년·보존 | D7 CASCADE 확인, 계정삭제 시 4테이블 파기. **D8 activity_log 14일 retention = 서버측 주기 cleanup 으로 보장(R5)**: push-time purge 는 best-effort(재로그인 안 하면 잔존) → **권위 enforcer 는 일일 스케줄 삭제**(Supabase `pg_cron` 또는 Vercel Cron 라우트가 `DELETE FROM activity_log WHERE updated_at < now-14d`, **epoch 기준이라 클라 로컬 date 와 TZ 어긋남 없음**, R6). `idx_activity_log_updated` 로 효율. 로그인 여부 무관 14일 보존 보장 |
 | P7 | 테스트·검증 | §6 |
 
 > P4 는 기존 소스(`srs.ts`·`streak/index.ts`·`custom/storage.ts`)를 **수정**하므로 **games FREEZE 해제·다른 세션 충돌 점검 필수**. 별 worktree(base main)에서 작업. 기존 localStorage 키·직렬화 형식은 하위호환 유지(기존 익명 데이터가 그대로 읽혀야 함).
@@ -262,7 +269,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | **쓰기 증폭**(카드별 POST 폭주) | ✅ P4 배치 debounce flush(세션종료/visibilitychange), 단건 호출 금지 |
 | **게임 시작 지연**(서버 read-through 블록) | ✅ P4 비동기 read-through — localStorage 즉시 서빙, 스피너 0 |
 | **반복 대용량 pull**(게임 전환마다 4MB 다운로드) | ✅ R1: 증분 pull(`since`) + 세션 1회 + 커스텀 unchanged 마커. 게임 전환 추가 GET 0 |
-| **활동량 유실**(다기기 같은 날 max 머지) | ✅ R1: per-device(fingerprint) 절대 카운터 + 서버 SUM. 합산 무손실 |
+| **활동량 유실**(다기기 같은 날 max 머지) | ✅ R1/R5: per-device(`device_id`) 절대 카운터 + 서버 SUM. 합산 무손실 |
 | 흡수가 서버 신규 상태 덮어씀 | ✅ P5 머지 경유(blind upsert 금지) + 회귀 테스트 |
 | 학습 행동 데이터 서버화로 PII 표면 확대 | §0 §5.6 개정 — 항목·보존·파기 명시, CASCADE, 계정 사용자 한정 |
 | 커스텀 콘텐츠 DB 비대화 | D6 용량 한도 + payload 바이트 상한(스냅샷 크기 가드 포함) |
