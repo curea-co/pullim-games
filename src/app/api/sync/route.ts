@@ -9,7 +9,7 @@ import {
 } from "@/lib/server/auth/session";
 import { isSameOriginRequest } from "@/lib/server/http/same-origin";
 import { SYNC_CSRF_HEADER, syncCsrf } from "@/lib/server/learning/sync-csrf";
-import { syncPushSchema, customSnapshotTooLarge } from "@/lib/server/learning/schemas";
+import { syncPushSchema, customSnapshotTooLarge, LIMITS } from "@/lib/server/learning/schemas";
 import { pullSrs, pushSrs } from "@/lib/server/learning/srs";
 import { pullStreak, pushStreak } from "@/lib/server/learning/streak";
 import { pullActivityAggregate, pushActivity } from "@/lib/server/learning/activity";
@@ -88,6 +88,12 @@ export async function POST(request: Request) {
   }
   if (!userId) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401, headers: NO_STORE });
+  }
+
+  // body 상한 — 파싱 전 Content-Length 로 거대 배치를 우리 413 으로 차단(인프라 413/500 회피, R6).
+  const contentLength = Number(request.headers.get("content-length") ?? "0");
+  if (Number.isFinite(contentLength) && contentLength > LIMITS.bodyBytes) {
+    return NextResponse.json({ error: "payload_too_large" }, { status: 413, headers: NO_STORE });
   }
 
   let body: unknown;
