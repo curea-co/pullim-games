@@ -13,7 +13,22 @@ export const LIMITS = {
 } as const;
 
 const epochMs = z.number().int().nonnegative();
-const dateBucket = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "YYYY-MM-DD");
+
+// "YYYY-MM-DD" — 포맷 + **실제 달력 날짜**까지 검증(R5). 정규식만으로는 2026-99-99 통과 →
+// 문자열 비교 로직(activity purge / streak 머지)에서 미래 버킷처럼 취급돼 오염될 수 있다.
+function isRealCalendarDate(s: string): boolean {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s);
+  if (!m) return false;
+  const [, y, mo, d] = m.map(Number) as [number, number, number, number];
+  if (mo < 1 || mo > 12 || d < 1 || d > 31) return false;
+  // UTC 로 구성해 month/date round-trip 일치 확인(2월 30일 등 거부).
+  const dt = new Date(Date.UTC(y, mo - 1, d));
+  return dt.getUTCFullYear() === y && dt.getUTCMonth() === mo - 1 && dt.getUTCDate() === d;
+}
+const dateBucket = z
+  .string()
+  .regex(/^\d{4}-\d{2}-\d{2}$/, "YYYY-MM-DD")
+  .refine(isRealCalendarDate, "유효한 날짜가 아닙니다 (YYYY-MM-DD)");
 
 // SRS — 클라 SerializedState(fsrsCard 직렬화) 1장. fsrsCard 내부는 ts-fsrs Card 라
 // 형태가 넓어 passthrough 객체로 받되 직렬화 바이트 상한을 카드별로 강제한다(남용 방어).

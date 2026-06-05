@@ -17,9 +17,13 @@ const RETENTION_DAYS = 14;
 // 표시 시 자기 로컬 14일로 다시 prune 하므로 사용자에겐 정확히 14일.
 const GRACE_DAYS = 1;
 
-/** now(epoch ms) 기준 서버 retention 하한 date 버킷("YYYY-MM-DD", UTC, +1일 grace). 이 값 이상 보존. */
+/**
+ * now(epoch ms) 기준 서버 retention 하한 date 버킷("YYYY-MM-DD", UTC). 이 값 이상(inclusive) 보존.
+ * inclusive `date >= cutoff` 비교라 `RETENTION_DAYS + GRACE_DAYS - 1` 일 전을 잡아야
+ * 정확히 (14 로컬 + 1 grace) = 15개 버킷이 보존된다(R5 — -1 안 하면 16개로 한 칸 초과).
+ */
 export function retentionCutoffDate(now: number): string {
-  const ms = (RETENTION_DAYS + GRACE_DAYS) * 24 * 60 * 60 * 1000;
+  const ms = (RETENTION_DAYS + GRACE_DAYS - 1) * 24 * 60 * 60 * 1000;
   return new Date(now - ms).toISOString().slice(0, 10);
 }
 
