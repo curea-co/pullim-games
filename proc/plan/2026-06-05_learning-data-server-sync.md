@@ -159,12 +159,12 @@ CREATE TABLE IF NOT EXISTS custom_content (
 
 ### 4.3 머지 규칙 (자동 머지)
 
-- **SRS**: 같은 `(game_id, card_id)` 충돌 시 **서버 `updated_at`(서버 write 시각, R7) 더 큰 쪽 채택**. (`last_review_at` 은 FSRS 도메인 필드로 보존하되, 충돌 해소 권위는 클라 시계가 아닌 서버 `updated_at` — 클럭 스큐로 빠른 시계가 이기는 것 방지.)
+- **SRS**: 같은 `(game_id, card_id)` 충돌 시 **데이터 recency(`last_review_at`) 기준 조건부 — 더 오래된 payload 는 무시(롤백 금지)**(#117 R8 정정). 무조건 last-arriving-write 가 이기면(서버 updated_at LWW) 오프라인이던 기기의 오래된 SRS 가 늦게 도착할 때 최신 진도를 롤백한다(데이터 손실). → 기존 미리뷰(null)거나 들어온 `last_review_at` 이 기존 이상일 때만 갱신. 클럭 스큐 방지: `last_review_at` 미래값(now+1d 초과)은 schema 에서 거부(먼 미래가 영구 "최신"으로 굳는 것 차단). `updated_at` 은 증분 pull cursor 용.
   > ⚠️ **KNOWN-TRADE-OFF (2026-06-05 eng-review): timestamp Last-Write-Wins 는 FSRS 를 정확히 머지하지 못한다.** FSRS 상태는 *복습 이력의 함수*지 timestamp 스냅샷이 아니다. 두 기기가 같은 카드를 각자 오프라인 복습하면, "더 늦은 복습"의 상태만 남고 다른 기기의 복습은 사라진다(게다가 stale base 에서 계산된 값). 즉 다기기 동시 학습 시 **복습 1회 손실·스케줄 약간 어긋남이 발생할 수 있다.** K-12 = 계정당 학습자 보통 1명이라 동시 다기기 충돌 빈도가 낮아 수용. 정확한 머지가 필요해지면 후속 phase 에서 **복습 이벤트 로그 리플레이**(이벤트 소싱 — 복습 이벤트를 append-only 로 적재 후 시간순 재계산)로 승격. 근거 plan: 본 문서.
 - **스트릭**: `longest = max(local, server)`, `(current, last_active_date)` 는 `last_active_date` 더 최신인 쪽. 같은 날이면 `current = max`. **best-effort**(연속성 복원은 근사 — 스트릭은 하이퍼캐주얼 비경쟁 지표라 손실 허용).
 - **활동 로그**: ✅ **per-device(`device_id`, fingerprint 아님 — R5) 절대 카운터**(R1/R2/R5). push = 본인 기기 own count 를 `(game_id, date, device_id)` 행에 upsert(단조 증가, 멱등). **대시보드 표시값 = `SUM(count)` (user×date 합산, 읽기 전용)** → 다기기 같은 날 학습량 손실 없이 합산. **⚠️ pull 은 로컬 own-count 키를 덮어쓰지 않는다**(SRS·스트릭과 다름) — SUM 을 own-count 에 쓰면 다음 flush 에 전체합 재업로드로 부풀려짐. `max` 머지 폐기. **device_id = 브라우저별 랜덤 UUID(소유권 의미 0), fingerprint 와 분리** — sync write 에 fingerprint 안 써서 명의 혼입 차단.
   > **대시보드 read model(R4/R7)**: own-count 키(`pullim-games:activity-log:<gameId>`, push 소스)와 **집계 표시를 분리**한다. 서버는 `SUM(count) GROUP BY game_id, date` 로 **game_id 차원을 보존**해 반환(R7 — 단일 total 로 뭉개면 게임별 heatmap 불가, 기존 로컬 API `loadActivity(gameId)`·`loadActivityForGames()` 와도 어긋남). 별도 읽기전용 캐시 `pullim-games:activity-log-agg`(**game_id별 맵 형태**, own-count 키 아님)에 세션 pull 시 저장. **실제 소비자 = `src/lib/core/dashboard/stats.ts`** — 현재 이 모듈은 activity-log 를 직접 안 읽으므로, **P4 에서 이 모듈이 agg 캐시(또는 loadActivity*)를 읽도록 연결**해야 함(안 그러면 캐시만 쓰고 UI 미반영). 이래야 secondary 기기 합산값이 게임별로 UI 에 뜨고 새로고침 후 유지(부풀림 0 + 표시 정확 + game 차원 보존).
-- **커스텀**: ✅ **컬렉션 스냅샷 전량 교체** — `updated_at` 더 최신인 스냅샷이 통째로 이김. 삭제는 스냅샷에서 빠지는 것으로 자연 전파(tombstone 불필요). 트레이드오프: 다기기 동시 편집 시 스냅샷 단위 LWW(마지막 저장이 통짜로 이김, 항목 단위 병합 없음) — 커스텀은 단일 사용자 편집이 일반적이라 수용.
+- **커스텀**: ✅ **컬렉션 스냅샷 전량 교체 — `exportedAt`(클라 export revision) 기준 조건부**(#117 R8 정정). 들어온 `exportedAt` 이 기존 이상일 때만 교체, 더 오래된 스냅샷은 무시(롤백 금지). 무조건 교체면 늦게 도착한 stale 세션이 최신 편집을 통째로 덮음(데이터 손실). 삭제는 스냅샷에서 빠지는 것으로 자연 전파(tombstone 불필요). 미래 `exportedAt` 거부(굳음 방지). 트레이드오프: 항목 단위 병합은 없음(컬렉션 단위) — 커스텀은 단일 사용자 편집이 일반적이라 수용.
 
 ### 4.4 커스텀 콘텐츠 용량 한도 (D6 확정 — 2026-06-05)
 

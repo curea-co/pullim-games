@@ -6,6 +6,7 @@ import { query } from "@/lib/server/db/client";
 
 export type CustomSnapshot = {
   version: 1;
+  exportedAt: string; // ISO — 조건부 교체 revision(오래된 스냅샷 거부용).
   subjects: unknown[];
   curriculum: unknown[];
   cards: unknown[];
@@ -30,7 +31,12 @@ export async function pullCustom(
   return { snapshot: row.snapshot, cursor: updatedAt };
 }
 
-/** 스냅샷 전량 교체(LWW). updated_at = 서버 now. */
+/**
+ * 스냅샷 전량 교체 — **exportedAt revision 기준 조건부**(R8). 무조건 교체하면 오래된
+ * 브라우저 세션의 스냅샷이 늦게 도착할 때 최신 편집을 통째로 덮는다(데이터 손실).
+ * → 들어온 exportedAt 이 기존 이상일 때만 교체. 더 오래된 스냅샷은 무시(no-op).
+ * exportedAt 미래값은 schema 에서 거부. ISO 문자열 사전식 비교(YYYY-…) 정렬 일치.
+ */
 export async function pushCustom(
   userId: string,
   snapshot: CustomSnapshot,
@@ -41,7 +47,9 @@ export async function pushCustom(
      VALUES ($1, $2, $3)
      ON CONFLICT (user_id) DO UPDATE SET
        snapshot   = EXCLUDED.snapshot,
-       updated_at = EXCLUDED.updated_at`,
+       updated_at = EXCLUDED.updated_at
+     WHERE COALESCE(custom_content.snapshot->>'exportedAt', '')
+           <= EXCLUDED.snapshot->>'exportedAt'`,
     [userId, JSON.stringify(snapshot), now],
   );
 }

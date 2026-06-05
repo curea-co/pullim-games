@@ -14,7 +14,13 @@ export const LIMITS = {
   bodyBytes: Math.floor(4.5 * 1024 * 1024), // 전체 요청 body 상한(Vercel 함수 한도 정렬, R6).
 } as const;
 
-const epochMs = z.number().int().nonnegative();
+// epoch ms. 먼 미래(clock skew/오염) 거부 — recency 기준 조건부 머지에서 미래값이 영구
+// "최신"으로 굳어 정상 업데이트를 막는 것 방지(오늘+1일 grace 까지 허용, R8).
+const epochMs = z
+  .number()
+  .int()
+  .nonnegative()
+  .refine((v) => v <= Date.now() + 24 * 60 * 60 * 1000, "미래 시각은 허용되지 않습니다");
 // Postgres int4 컬럼(review_count·current·longest·count)로 내려가므로 상한 cap(R6).
 // 없으면 3e9 같은 값이 zod 통과 후 DB overflow → 503 으로 뭉개짐. 클라 오염을 422 로 정규화.
 const int4NonNeg = z.number().int().nonnegative().max(2_147_483_647);
@@ -87,10 +93,16 @@ const activityInput = z.object({
   count: int4NonNeg.refine((n) => n > 0, "count 는 1 이상"),
 });
 
-// 커스텀 — CustomDataExport 스냅샷 전량. 항목 수 한도 적용.
+// 커스텀 — CustomDataExport 스냅샷 전량. 항목 수 한도 + exportedAt revision.
+// exportedAt(클라 export 시각, ISO)을 server 가 비교해 **오래된 스냅샷은 거부**(R8) —
+// 없으면 늦게 도착한 stale 세션이 최신 편집을 통째로 덮음. 미래값은 거부(굳음 방지).
 const customSnapshot = z
   .object({
     version: z.literal(1),
+    exportedAt: isoDate.refine(
+      (s) => Date.parse(s) <= Date.now() + 24 * 60 * 60 * 1000,
+      "미래 시각은 허용되지 않습니다",
+    ),
     subjects: z.array(z.record(z.unknown())).max(LIMITS.subjects),
     curriculum: z.array(z.record(z.unknown())).max(LIMITS.curriculum),
     cards: z.array(z.record(z.unknown())).max(LIMITS.cards),

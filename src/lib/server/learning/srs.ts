@@ -48,7 +48,12 @@ export async function pullSrs(
   return { changed: rows.map(rowToPayload), cursor };
 }
 
-/** 카드 배치 upsert. 서버 now 로 updated_at stamp(LWW). 멱등. */
+/**
+ * 카드 배치 upsert — **데이터 recency(last_review_at) 기준 조건부**(R8). 무조건 덮어쓰면
+ * 오프라인이던 기기의 오래된 SRS 가 늦게 도착할 때 최신 진도를 롤백한다(데이터 손실).
+ * → 기존이 미리뷰(null)거나, 들어온 last_review_at 이 기존 이상일 때만 갱신. 더 오래된
+ * payload 는 무시(no-op). last_review_at 미래값은 schema 에서 거부(굳음 방지). 멱등.
+ */
 export async function pushSrs(
   userId: string,
   cards: SrsCardPayload[],
@@ -65,7 +70,10 @@ export async function pushSrs(
            fsrs_card      = EXCLUDED.fsrs_card,
            review_count   = EXCLUDED.review_count,
            last_review_at = EXCLUDED.last_review_at,
-           updated_at     = EXCLUDED.updated_at`,
+           updated_at     = EXCLUDED.updated_at
+         WHERE srs_states.last_review_at IS NULL
+            OR (EXCLUDED.last_review_at IS NOT NULL
+                AND EXCLUDED.last_review_at >= srs_states.last_review_at)`,
         [userId, c.gameId, c.cardId, JSON.stringify(c.fsrsCard), c.reviewCount, c.lastReviewAt, now],
       );
     }
