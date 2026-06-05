@@ -107,17 +107,23 @@ CREATE TABLE IF NOT EXISTS streaks (
   updated_at       BIGINT NOT NULL
 );
 
--- 활동 로그(대시보드용). PK=(user_id, game_id, date).
--- ✅ D8(2026-06-05): 14일 retention — push/머지 시 cutoff(now-14d) 이전 행 purge.
---   로컬 14일 룰(activity-log.ts)을 서버에서도 미러. SRS·스트릭·커스텀은 무기한.
+-- 활동 로그(대시보드용). ✅ 2026-06-05 R1: PK 에 fingerprint 추가 —
+-- **per-device(브라우저) 절대 카운터**. 이유: count=max 머지는 다기기 같은 날
+-- 학습량을 합산 못 하고 큰 쪽만 남겨 실제 활동량이 유실됨(A 3회+B 2회→3만 남음).
+-- 이건 SRS 같은 근사 허용 지표가 아니라 대시보드 활동량이라 왜곡이 사용자에 직접 노출.
+-- 해결: 기기별(fingerprint) 절대 카운터를 따로 저장, 대시보드 표시값 = SUM(count).
+-- 각 기기는 자기 fingerprint 행에 본인 절대값을 upsert(단조 증가) → 합산 무손실·멱등.
+-- D8: 14일 retention — push/머지 시 cutoff(now-14d) 이전 행 purge. SRS·스트릭·커스텀은 무기한.
 CREATE TABLE IF NOT EXISTS activity_log (
-  user_id  TEXT   NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-  game_id  TEXT   NOT NULL,
-  date     TEXT   NOT NULL,               -- "YYYY-MM-DD"
-  count    INTEGER NOT NULL,
-  PRIMARY KEY (user_id, game_id, date)
+  user_id     TEXT   NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+  game_id     TEXT   NOT NULL,
+  date        TEXT   NOT NULL,            -- "YYYY-MM-DD"
+  fingerprint TEXT   NOT NULL,            -- per-device 카운터 키(브라우저)
+  count       INTEGER NOT NULL,           -- 이 기기의 해당 날짜 절대 활동 수
+  PRIMARY KEY (user_id, game_id, date, fingerprint)
 );
 CREATE INDEX IF NOT EXISTS idx_activity_log_user ON activity_log(user_id);
+-- 대시보드 조회: SELECT date, SUM(count) ... WHERE user_id=$1 GROUP BY date.
 
 -- 커스텀 콘텐츠. ✅ 2026-06-05: per-row 가 아니라 **사용자당 컬렉션 스냅샷**.
 -- 이유: per-row + updated_at 머지는 "삭제"가 다기기로 전파 안 됨(타 기기에 남은
@@ -136,7 +142,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 - **SRS**: 같은 `(game_id, card_id)` 충돌 시 `last_review_at`(없으면 `updated_at`) 더 큰 쪽 채택.
   > ⚠️ **KNOWN-TRADE-OFF (2026-06-05 eng-review): timestamp Last-Write-Wins 는 FSRS 를 정확히 머지하지 못한다.** FSRS 상태는 *복습 이력의 함수*지 timestamp 스냅샷이 아니다. 두 기기가 같은 카드를 각자 오프라인 복습하면, "더 늦은 복습"의 상태만 남고 다른 기기의 복습은 사라진다(게다가 stale base 에서 계산된 값). 즉 다기기 동시 학습 시 **복습 1회 손실·스케줄 약간 어긋남이 발생할 수 있다.** K-12 = 계정당 학습자 보통 1명이라 동시 다기기 충돌 빈도가 낮아 수용. 정확한 머지가 필요해지면 후속 phase 에서 **복습 이벤트 로그 리플레이**(이벤트 소싱 — 복습 이벤트를 append-only 로 적재 후 시간순 재계산)로 승격. 근거 plan: 본 문서.
 - **스트릭**: `longest = max(local, server)`, `(current, last_active_date)` 는 `last_active_date` 더 최신인 쪽. 같은 날이면 `current = max`. **best-effort**(연속성 복원은 근사 — 스트릭은 하이퍼캐주얼 비경쟁 지표라 손실 허용).
-- **활동 로그**: 같은 `(game_id, date)` 는 `count = max`(중복 카운트 방지).
+- **활동 로그**: ✅ **per-device(fingerprint) 절대 카운터**(R1 수정). 같은 `(game_id, date, fingerprint)` 는 본인 기기의 최신 절대값으로 upsert(단조 증가). **대시보드 표시값 = `SUM(count)` (user×date 합산)** → 다기기 같은 날 학습량이 손실 없이 합산. `max` 머지(다른 기기 카운트 유실) 폐기.
 - **커스텀**: ✅ **컬렉션 스냅샷 전량 교체** — `updated_at` 더 최신인 스냅샷이 통째로 이김. 삭제는 스냅샷에서 빠지는 것으로 자연 전파(tombstone 불필요). 트레이드오프: 다기기 동시 편집 시 스냅샷 단위 LWW(마지막 저장이 통짜로 이김, 항목 단위 병합 없음) — 커스텀은 단일 사용자 편집이 일반적이라 수용.
 
 ### 4.4 커스텀 콘텐츠 용량 한도 (D6 확정 — 2026-06-05)
@@ -164,29 +170,31 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | P0 | (선결) D1 spec 합의 + D6~D8 결정 확정 | spec §5.2·§5.5·§5.6 개정 커밋 |
 | P1 | DB 마이그레이션 | `migrations/0002_learning_data.sql` (4 테이블: srs_states·streaks·activity_log·custom_content) |
 | P2 | 서버 모듈 + 순수 머지 | `src/lib/server/learning/{srs,streak,activity,custom}.ts`. **머지는 순수 함수로 분리**(`mergeSrs`·`mergeStreak`·`mergeActivity`·`replaceCustomSnapshot`) → 단위테스트 100% 대상 |
-| P3 | 동기화 API | `src/app/api/sync/route.ts` — **GET=pull 전체, POST=push 배치 델타(커스텀은 스냅샷 전량 포함)**. 단일 메서드 계약(PUT 미사용). zod 검증 + **401 인증 게이트**. 모든 쿼리 `WHERE user_id=me.id`(cross-user 0). 🔒 **CSRF 가드 필수**: POST 는 인증 쿠키 기반 쓰기 엔드포인트라 기존 auth/logout/billing 라우트와 **동형의 same-origin(Origin/Referer) + double-submit CSRF 토큰(SameSite=Strict)** 적용 — 미적용 시 외부 사이트가 사용자 브라우저로 학습 상태를 주입하는 CSRF 표면 발생(Codex #116 R1 지적) |
-| P4 | **클라 동기화 엔진(DRY)** | ✅ 단일 `src/lib/sync/engine.ts` — dirty 추적·**배치 debounce flush**(N초/세션종료/`visibilitychange`)·재시도·auth게이트·오프라인 폴백을 **한 곳**에. 리소스별 어댑터(머지fn+직렬화)만 4개. 4x 복붙 금지. **read-through=비동기**: localStorage 즉시 서빙 → 백그라운드 fetch+머지 → 재렌더(게임시작 블록·스피너 금지). **비로그인 경로 무변화 보장** |
+| P3 | 동기화 API | `src/app/api/sync/route.ts` — **GET=증분 pull**(전체 아님), **POST=push 배치 델타(커스텀은 스냅샷 전량 포함)**. 단일 메서드 계약(PUT 미사용). zod 검증 + **401 인증 게이트**. 모든 쿼리 `WHERE user_id=me.id`(cross-user 0). 🔒 **CSRF 가드 필수**(POST): auth/logout/billing 동형의 same-origin(Origin/Referer) + double-submit CSRF 토큰(SameSite=Strict). 미적용 시 외부 사이트가 학습 상태 주입(Codex #116 R1). **증분 pull 계약(R1)**: 클라가 리소스별 `since`(마지막 동기화 `updated_at`)를 보내고 서버는 **변경분만** 반환 — SRS=since 이후 변경 카드만, 커스텀 스냅샷=`updated_at` 미변경 시 304/빈응답(4MB 매번 다운로드 금지), 스트릭/activity=since 이후만. 리소스별 분리 응답이라 게임 오갈 때 대용량 반복 다운로드 없음 |
+| P4 | **클라 동기화 엔진(DRY)** | ✅ 단일 `src/lib/sync/engine.ts` — dirty 추적·**배치 debounce flush**(N초/세션종료/`visibilitychange`)·재시도·auth게이트·오프라인 폴백을 **한 곳**에. 리소스별 어댑터(머지fn+직렬화)만 4개. 4x 복붙 금지. **pull 은 로그인/세션 시작 시 1회 증분(`since`)** — 게임 전환마다 X(반복 대용량 다운로드 방지, R1). 이후 게임 시작은 **로컬 캐시만으로 즉시 렌더**. **read-through=비동기**: localStorage 즉시 서빙 → (세션 첫 진입만) 백그라운드 증분 fetch+머지 → 재렌더(블록·스피너 금지). **비로그인 경로 무변화 보장** |
 | P5 | 익명→계정 흡수(확인 후) | 첫 로그인 시 로컬 데이터 있으면 **확인 프롬프트**(D5=c) → 동의 시에만 업로드. **blind upsert 아니라 머지 경유**(타 기기서 먼저 쌓인 서버 상태를 오래된 로컬이 덮지 않게). 멱등(`ON CONFLICT`+머지) |
 | P6 | 미성년·보존 | D7 CASCADE 확인, D8 보존정책, 계정삭제 시 4테이블 파기 동작 |
 | P7 | 테스트·검증 | §6 |
 
 > P4 는 기존 소스(`srs.ts`·`streak/index.ts`·`custom/storage.ts`)를 **수정**하므로 **games FREEZE 해제·다른 세션 충돌 점검 필수**. 별 worktree(base main)에서 작업. 기존 localStorage 키·직렬화 형식은 하위호환 유지(기존 익명 데이터가 그대로 읽혀야 함).
 
-### P4 데이터 흐름 (게임 시작 시 read-through — 블록 금지)
+### P4 데이터 흐름 (read-through — 블록 금지, pull은 세션 1회 증분)
 
 ```
-게임 시작
+세션/로그인 시작 (게임 전환마다 X — 1회만)
    │
-   ├─▶ localStorage 즉시 로드 ──▶ 즉시 렌더(기존과 동일, 0ms 대기)
-   │
-   └─▶ (로그인 상태면) 백그라운드 GET /api/sync
+   └─▶ (로그인 상태면) 백그라운드 GET /api/sync?since=<리소스별 마지막 updated_at>
                 │
-                ▼
-        mergeSrs/Streak/Activity + replaceCustomSnapshot
+                ▼   서버는 변경분만 반환(SRS 변경카드 / 커스텀 미변경시 304 / 스트릭·activity since 이후)
+        mergeSrs/Streak/Activity(SUM) + replaceCustomSnapshot
                 │
                 ▼
         병합 결과 localStorage 반영 + 조용히 재렌더
         (비로그인이면 이 가지 전체 skip → 네트워크 0)
+
+게임 시작 (매번)
+   │
+   └─▶ localStorage 즉시 로드 ──▶ 즉시 렌더(기존과 동일, 0ms 대기, 네트워크 0)
 
 쓰기(복습/커스텀 변경)
    │
@@ -205,7 +213,8 @@ CREATE TABLE IF NOT EXISTS custom_content (
 서버 머지(순수→단위 100%)                사용자 플로우
 [+] mergeSrs        local만/server만/충돌/tie-break   [+] 다기기 복구  [→E2E]
 [+] mergeStreak     max(longest)+최신일/동일날        [+] 흡수 동의/거부 [→E2E]
-[+] mergeActivity   max(count)                        [+] 오프라인→온라인 flush
+[+] mergeActivity   per-device SUM(다기기 합산 무손실)  [+] 오프라인→온라인 flush
+[+] 증분 pull       since 이후만/커스텀 304/세션1회      [+] 게임전환 시 추가 pull 0
 [+] replaceCustomSnapshot  최신 스냅샷 이김/삭제 전파
 [+] engine          dirty·배치 flush·재시도·auth게이트·오프라인 큐
                                                       [+] 회귀(최우선)
@@ -218,6 +227,8 @@ CREATE TABLE IF NOT EXISTS custom_content (
 - **격리**: user A 로 user B 데이터 접근 불가 — 모든 쿼리 `WHERE user_id`. **cross-user 노출 0 회귀 테스트**(하이퍼캐주얼 §0 경계 강제).
 - **🔴 CRITICAL 회귀(IRON RULE)**: **비로그인 플레이 시 `/api/sync` 호출 0, localStorage만 사용.** 비로그인이 games 기본 경험 — 이 동기화가 익명 플로우를 깨뜨리지 않음을 증명. 깨지면 전체 회귀.
 - **read-through 비블록**: 게임 시작이 서버 응답을 기다리지 않음(로딩 스피너 0). 동기 localStorage 렌더 후 백그라운드 머지.
+- **활동량 합산 무손실**: 다기기 같은 날 학습(A 3회+B 2회) → 대시보드 5회(SUM). max 머지 유실 회귀 가드.
+- **증분 pull 비용**: 세션 1회 pull + 게임 전환 시 추가 GET 0. 커스텀 미변경 시 304(4MB 재다운로드 0).
 - **다기기 E2E**: 기기1 학습 → 기기2 로그인 → 진도 복구(Playwright, 2 컨텍스트).
 - **CASCADE(연쇄 삭제)**: 계정 삭제 시 4 테이블 전부 파기.
 
@@ -232,6 +243,8 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | **공유 기기(학교 PC) 명의오염** — 익명 데이터가 남 계정에 흡수 | ✅ D5=(c) 확인 후 흡수. 자동 흡수 금지. 실DB 명의격리 보존 |
 | **쓰기 증폭**(카드별 POST 폭주) | ✅ P4 배치 debounce flush(세션종료/visibilitychange), 단건 호출 금지 |
 | **게임 시작 지연**(서버 read-through 블록) | ✅ P4 비동기 read-through — localStorage 즉시 서빙, 스피너 0 |
+| **반복 대용량 pull**(게임 전환마다 4MB 다운로드) | ✅ R1: 증분 pull(`since`) + 세션 1회 + 커스텀 304. 게임 전환 추가 GET 0 |
+| **활동량 유실**(다기기 같은 날 max 머지) | ✅ R1: per-device(fingerprint) 절대 카운터 + 서버 SUM. 합산 무손실 |
 | 흡수가 서버 신규 상태 덮어씀 | ✅ P5 머지 경유(blind upsert 금지) + 회귀 테스트 |
 | 학습 행동 데이터 서버화로 PII 표면 확대 | §0 §5.6 개정 — 항목·보존·파기 명시, CASCADE, 계정 사용자 한정 |
 | 커스텀 콘텐츠 DB 비대화 | D6 용량 한도 + payload 바이트 상한(스냅샷 크기 가드 포함) |
