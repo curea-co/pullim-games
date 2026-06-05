@@ -27,19 +27,20 @@ CREATE TABLE IF NOT EXISTS streaks (
 );
 
 -- 활동 로그(대시보드용). PK 에 device_id(fingerprint 아님 — 소유권 의미 분리, R5).
--- per-device 절대 카운터: 대시보드 표시값 = SUM(count). updated_at = 증분/retention 기준(R6).
--- 14일 retention: 서버측 주기 cleanup(DELETE WHERE updated_at < now-14d, R5).
+-- per-device 절대 카운터: 대시보드 표시값 = SUM(count).
+-- 14일 retention·집계 window 는 **date 버킷 기준**(R3 — updated_at 기준이면 오래된 date 가
+-- 재동기화만으로 retention 연장·heatmap 재등장). updated_at 은 LWW write 시각 기록용.
 CREATE TABLE IF NOT EXISTS activity_log (
   user_id    TEXT    NOT NULL REFERENCES users(id) ON DELETE CASCADE,
   game_id    TEXT    NOT NULL,
-  date       TEXT    NOT NULL,            -- "YYYY-MM-DD" (클라 로컬 표시 버킷)
+  date       TEXT    NOT NULL,            -- "YYYY-MM-DD" (클라 로컬 활동일 = retention/집계 기준)
   device_id  TEXT    NOT NULL,            -- 동기화 전용 랜덤 UUID (fingerprint 아님)
   count      INTEGER NOT NULL,            -- 이 기기의 해당 날짜 절대 활동 수
-  updated_at BIGINT  NOT NULL,            -- 서버 write 시각(epoch ms). 증분 cursor + retention cutoff.
+  updated_at BIGINT  NOT NULL,            -- 서버 write 시각(epoch ms). LWW 기록용.
   PRIMARY KEY (user_id, game_id, date, device_id)
 );
-CREATE INDEX IF NOT EXISTS idx_activity_log_user ON activity_log(user_id);
-CREATE INDEX IF NOT EXISTS idx_activity_log_updated ON activity_log(updated_at);
+CREATE INDEX IF NOT EXISTS idx_activity_log_user_date ON activity_log(user_id, date);
+CREATE INDEX IF NOT EXISTS idx_activity_log_date ON activity_log(date);  -- 주기 cleanup(WHERE date<cutoff)용
 
 -- 커스텀 콘텐츠. 사용자당 컬렉션 스냅샷 1행(삭제 전파 위해 per-row 아님, R-커스텀).
 -- snapshot = { version, subjects[], curriculum[], cards[] }(CustomDataExport).
