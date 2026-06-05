@@ -16,11 +16,16 @@ const epochMs = z.number().int().nonnegative();
 const dateBucket = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "YYYY-MM-DD");
 
 // SRS — 클라 SerializedState(fsrsCard 직렬화) 1장. fsrsCard 내부는 ts-fsrs Card 라
-// 형태가 넓어 passthrough 객체로 받되 바이트 상한만 건다.
+// 형태가 넓어 passthrough 객체로 받되 직렬화 바이트 상한을 카드별로 강제한다(남용 방어).
 const srsCardInput = z.object({
   gameId: z.string().min(1).max(128),
   cardId: z.string().min(1).max(256),
-  fsrsCard: z.record(z.unknown()),
+  fsrsCard: z
+    .record(z.unknown())
+    .refine(
+      (v) => Buffer.byteLength(JSON.stringify(v), "utf8") <= LIMITS.cardPayloadBytes,
+      `카드 데이터가 너무 큽니다 (${LIMITS.cardPayloadBytes}바이트 이하)`,
+    ),
   reviewCount: z.number().int().nonnegative(),
   lastReviewAt: epochMs.nullable(),
 });

@@ -37,8 +37,13 @@ export async function pullStreak(
 }
 
 /**
- * 스트릭 머지 upsert. longest=GREATEST, (current,last_active_date)=last_active_date 더 최신인 쪽.
- * 기존 행 없으면 그대로 삽입. last_active_date null 은 가장 과거로 취급.
+ * 스트릭 머지 upsert.
+ *   longest          = GREATEST(both)
+ *   더 늦은 날짜      = incoming current/date 채택
+ *   같은 날짜(no-op)  = current 는 GREATEST(both) — 늦게 도착한 stale write(작은 current)가
+ *                      되돌리지 못하게(R1: A current=10 후 B current=3 동기화 시 10 유지)
+ *   더 이른 날짜      = 기존 값 유지
+ * last_active_date null 은 가장 과거로 취급(COALESCE '').
  */
 export async function pushStreak(
   userId: string,
@@ -51,11 +56,14 @@ export async function pushStreak(
      ON CONFLICT (user_id) DO UPDATE SET
        longest = GREATEST(streaks.longest, EXCLUDED.longest),
        current = CASE
-         WHEN COALESCE(EXCLUDED.last_active_date, '') >= COALESCE(streaks.last_active_date, '')
-         THEN EXCLUDED.current ELSE streaks.current END,
+         WHEN COALESCE(EXCLUDED.last_active_date, '') > COALESCE(streaks.last_active_date, '')
+           THEN EXCLUDED.current
+         WHEN COALESCE(EXCLUDED.last_active_date, '') = COALESCE(streaks.last_active_date, '')
+           THEN GREATEST(streaks.current, EXCLUDED.current)
+         ELSE streaks.current END,
        last_active_date = CASE
-         WHEN COALESCE(EXCLUDED.last_active_date, '') >= COALESCE(streaks.last_active_date, '')
-         THEN EXCLUDED.last_active_date ELSE streaks.last_active_date END,
+         WHEN COALESCE(EXCLUDED.last_active_date, '') > COALESCE(streaks.last_active_date, '')
+           THEN EXCLUDED.last_active_date ELSE streaks.last_active_date END,
        updated_at = EXCLUDED.updated_at`,
     [userId, incoming.current, incoming.longest, incoming.lastActiveDate, now],
   );
