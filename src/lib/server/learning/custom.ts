@@ -37,19 +37,16 @@ export async function pullCustom(
  * → 들어온 exportedAt 이 기존 이상일 때만 교체. 더 오래된 스냅샷은 무시(no-op).
  * exportedAt 미래값은 schema 에서 거부. ISO 문자열 사전식 비교(YYYY-…) 정렬 일치.
  */
-export async function pushCustom(
-  userId: string,
-  snapshot: CustomSnapshot,
-  now: number,
-): Promise<void> {
+export async function pushCustom(userId: string, snapshot: CustomSnapshot): Promise<void> {
+  // updated_at = nextval(시퀀스) — 단조 커서, 같은 ms 충돌 방지(#117 R8).
   await query(
     `INSERT INTO custom_content (user_id, snapshot, updated_at)
-     VALUES ($1, $2, $3)
+     VALUES ($1, $2, nextval('learning_sync_seq'))
      ON CONFLICT (user_id) DO UPDATE SET
        snapshot   = EXCLUDED.snapshot,
-       updated_at = EXCLUDED.updated_at
+       updated_at = nextval('learning_sync_seq')
      WHERE COALESCE(custom_content.snapshot->>'exportedAt', '')
            <= EXCLUDED.snapshot->>'exportedAt'`,
-    [userId, JSON.stringify(snapshot), now],
+    [userId, JSON.stringify(snapshot)],
   );
 }

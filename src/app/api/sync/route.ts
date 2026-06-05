@@ -116,18 +116,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "payload_too_large" }, { status: 413, headers: NO_STORE });
   }
 
-  const now = Date.now();
   try {
-    await pushSrs(userId, data.srs ?? [], now);
-    if (data.streak) await pushStreak(userId, data.streak, now);
-    await pushActivity(userId, data.deviceId, data.activity ?? [], now);
-    if (data.custom) await pushCustom(userId, data.custom as unknown as CustomSnapshot, now);
+    await pushSrs(userId, data.srs ?? []); // updated_at 은 서버 시퀀스로 self-stamp
+    if (data.streak) await pushStreak(userId, data.streak);
+    await pushActivity(userId, data.deviceId, data.activity ?? [], Date.now());
+    if (data.custom) await pushCustom(userId, data.custom as unknown as CustomSnapshot);
   } catch (err) {
     // DB/마이그레이션 장애 → 구조화된 재시도 가능 오류로 정규화(framework 500 회피).
     console.error("[sync] push backend 미가용", (err as Error).message);
     return NextResponse.json({ error: "backend_unavailable" }, { status: 503, headers: NO_STORE });
   }
 
-  // canonical updated_at = now → 클라가 since cursor 갱신(서버 시계 권위, R7).
-  return NextResponse.json({ ok: true, serverTime: now }, { status: 200, headers: NO_STORE });
+  // ⚠️ POST 는 pull cursor 를 돌려주지 않는다(#117 R8). stale payload 가 no-op 되면
+  // "방금 now" 를 커서로 전진시킬 때 서버의 더 최신 행(updated_at<=now)을 다음 GET 이
+  // 영구 건너뛰어 수렴이 깨진다. 클라는 **GET 응답의 리소스별 cursor 로만** 증분 cursor 를
+  // 전진시킨다. ok 만 반환(서버가 무엇을 커밋했는지는 다음 GET 이 권위).
+  return NextResponse.json({ ok: true }, { status: 200, headers: NO_STORE });
 }

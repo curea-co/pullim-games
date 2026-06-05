@@ -45,14 +45,11 @@ export async function pullStreak(
  *   더 이른 날짜      = 기존 값 유지
  * last_active_date null 은 가장 과거로 취급(COALESCE '').
  */
-export async function pushStreak(
-  userId: string,
-  incoming: StreakPayload,
-  now: number,
-): Promise<void> {
+export async function pushStreak(userId: string, incoming: StreakPayload): Promise<void> {
+  // updated_at = nextval(시퀀스) — 단조 커서, 같은 ms 충돌 방지(#117 R8).
   await query(
     `INSERT INTO streaks (user_id, current, longest, last_active_date, updated_at)
-     VALUES ($1, $2, $3, $4, $5)
+     VALUES ($1, $2, $3, $4, nextval('learning_sync_seq'))
      ON CONFLICT (user_id) DO UPDATE SET
        longest = GREATEST(streaks.longest, EXCLUDED.longest),
        current = CASE
@@ -64,7 +61,7 @@ export async function pushStreak(
        last_active_date = CASE
          WHEN COALESCE(EXCLUDED.last_active_date, '') > COALESCE(streaks.last_active_date, '')
            THEN EXCLUDED.last_active_date ELSE streaks.last_active_date END,
-       updated_at = EXCLUDED.updated_at`,
-    [userId, incoming.current, incoming.longest, incoming.lastActiveDate, now],
+       updated_at = nextval('learning_sync_seq')`,
+    [userId, incoming.current, incoming.longest, incoming.lastActiveDate],
   );
 }

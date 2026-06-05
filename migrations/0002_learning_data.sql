@@ -2,6 +2,11 @@
 -- 근거: proc/plan/2026-06-05_learning-data-server-sync.md §4.2 (Codex #116 9R 반영본).
 -- 익명/게스트는 localStorage 전용 — 본 테이블은 계정 사용자 전용. 전부 user_id CASCADE.
 
+-- 증분 pull 커서 = **단조 시퀀스**(벽시계 ms 아님, #117 R8). 같은 ms 에 두 write 가
+-- 같은 updated_at 을 받아 다음 pull 이 영구 누락하던 충돌 방지. srs/streak/custom 의
+-- updated_at 을 nextval 로 stamp(LWW 는 last_review_at/exportedAt 가 담당, updated_at 은 커서 전용).
+CREATE SEQUENCE IF NOT EXISTS learning_sync_seq;
+
 -- SRS 카드 상태. PK (user_id, game_id, card_id). fsrs_card 는 클라 SerializedState.fsrsCard 그대로.
 -- 충돌 해소: 서버 updated_at(서버 write 시각) LWW — 클라 시계 미사용(클럭 스큐 방어).
 CREATE TABLE IF NOT EXISTS srs_states (
