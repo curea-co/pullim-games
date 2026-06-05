@@ -47,17 +47,22 @@ export async function GET(request: Request) {
 
   const url = new URL(request.url);
   const now = Date.now();
-  const [srs, streak, activity, custom] = await Promise.all([
-    pullSrs(userId, parseSince(url, "srs_since")),
-    pullStreak(userId, parseSince(url, "streak_since")),
-    pullActivityAggregate(userId, now),
-    pullCustom(userId, parseSince(url, "custom_since")),
-  ]);
-
-  return NextResponse.json(
-    { srs, streak, activity: { aggregate: activity, cursor: now }, custom, serverTime: now },
-    { status: 200, headers: NO_STORE },
-  );
+  try {
+    const [srs, streak, activity, custom] = await Promise.all([
+      pullSrs(userId, parseSince(url, "srs_since")),
+      pullStreak(userId, parseSince(url, "streak_since")),
+      pullActivityAggregate(userId, now),
+      pullCustom(userId, parseSince(url, "custom_since")),
+    ]);
+    return NextResponse.json(
+      { srs, streak, activity: { aggregate: activity, cursor: now }, custom, serverTime: now },
+      { status: 200, headers: NO_STORE },
+    );
+  } catch (err) {
+    // DB/마이그레이션 장애 → 구조화된 재시도 가능 오류(auth 와 동일 계약). framework 500 회피.
+    console.error("[sync] pull backend 미가용", (err as Error).message);
+    return NextResponse.json({ error: "backend_unavailable" }, { status: 503, headers: NO_STORE });
+  }
 }
 
 // ── POST: push 배치 ─────────────────────────────────────────
@@ -106,10 +111,16 @@ export async function POST(request: Request) {
   }
 
   const now = Date.now();
-  await pushSrs(userId, data.srs ?? [], now);
-  if (data.streak) await pushStreak(userId, data.streak, now);
-  await pushActivity(userId, data.deviceId, data.activity ?? [], now);
-  if (data.custom) await pushCustom(userId, data.custom as unknown as CustomSnapshot, now);
+  try {
+    await pushSrs(userId, data.srs ?? [], now);
+    if (data.streak) await pushStreak(userId, data.streak, now);
+    await pushActivity(userId, data.deviceId, data.activity ?? [], now);
+    if (data.custom) await pushCustom(userId, data.custom as unknown as CustomSnapshot, now);
+  } catch (err) {
+    // DB/마이그레이션 장애 → 구조화된 재시도 가능 오류로 정규화(framework 500 회피).
+    console.error("[sync] push backend 미가용", (err as Error).message);
+    return NextResponse.json({ error: "backend_unavailable" }, { status: 503, headers: NO_STORE });
+  }
 
   // canonical updated_at = now → 클라가 since cursor 갱신(서버 시계 권위, R7).
   return NextResponse.json({ ok: true, serverTime: now }, { status: 200, headers: NO_STORE });
