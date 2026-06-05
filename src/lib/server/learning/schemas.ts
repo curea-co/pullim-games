@@ -30,22 +30,47 @@ function isRealCalendarDate(s: string): boolean {
   const dt = new Date(Date.UTC(y, mo - 1, d));
   return dt.getUTCFullYear() === y && dt.getUTCMonth() === mo - 1 && dt.getUTCDate() === d;
 }
+// 미래 날짜 상한 — 먼 미래 date 가 들어오면 streak.lastActiveDate 비교를 영구 막거나
+// activity 미래 버킷이 영구 보존/집계된다(R6). 클라 로컬이 UTC 보다 앞설 수 있어(TZ)
+// **오늘(UTC)+1일 grace** 까지만 허용, 그 너머(먼 미래=오염/악의)는 거부.
+function notFarFuture(s: string): boolean {
+  const max = new Date(Date.now() + 1 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+  return s <= max;
+}
 const dateBucket = z
   .string()
   .regex(/^\d{4}-\d{2}-\d{2}$/, "YYYY-MM-DD")
-  .refine(isRealCalendarDate, "유효한 날짜가 아닙니다 (YYYY-MM-DD)");
+  .refine(isRealCalendarDate, "유효한 날짜가 아닙니다 (YYYY-MM-DD)")
+  .refine(notFarFuture, "미래 날짜는 허용되지 않습니다");
 
-// SRS — 클라 SerializedState(fsrsCard 직렬화) 1장. fsrsCard 내부는 ts-fsrs Card 라
-// 형태가 넓어 passthrough 객체로 받되 직렬화 바이트 상한을 카드별로 강제한다(남용 방어).
+// fsrsCard — 클라 SerializedState.fsrsCard(ts-fsrs Card 직렬화). 임의 JSON 을 그대로
+// 받으면 손상된 payload 가 저장돼 다음 pull 에서 deserialize()(src/lib/core/storage/srs.ts)
+// 가 깨지므로(R6), 필수 키/타입을 명시 검증한다. due/last_review 는 ISO 문자열(파싱 가능).
+const isoDate = z.string().refine((s) => !Number.isNaN(Date.parse(s)), "ISO 날짜가 아닙니다");
+const fsrsCardSchema = z
+  .object({
+    due: isoDate,
+    stability: z.number(),
+    difficulty: z.number(),
+    elapsed_days: z.number(),
+    scheduled_days: z.number(),
+    reps: int4NonNeg,
+    lapses: int4NonNeg,
+    state: z.number().int().min(0).max(3),
+    last_review: isoDate.nullable().optional(),
+    learning_steps: z.number().int().nonnegative().optional(), // v4 데이터엔 누락 가능
+  })
+  .passthrough() // last_elapsed_days 등 ts-fsrs 부가 필드 허용(전방호환)
+  .refine(
+    (v) => Buffer.byteLength(JSON.stringify(v), "utf8") <= LIMITS.cardPayloadBytes,
+    `카드 데이터가 너무 큽니다 (${LIMITS.cardPayloadBytes}바이트 이하)`,
+  );
+
+// SRS — SerializedState 1장(서버 contract: lastReviewAt 은 epoch ms, fsrsCard 는 위 스키마).
 const srsCardInput = z.object({
   gameId: z.string().min(1).max(128),
   cardId: z.string().min(1).max(256),
-  fsrsCard: z
-    .record(z.unknown())
-    .refine(
-      (v) => Buffer.byteLength(JSON.stringify(v), "utf8") <= LIMITS.cardPayloadBytes,
-      `카드 데이터가 너무 큽니다 (${LIMITS.cardPayloadBytes}바이트 이하)`,
-    ),
+  fsrsCard: fsrsCardSchema,
   reviewCount: int4NonNeg,
   lastReviewAt: epochMs.nullable(),
 });
