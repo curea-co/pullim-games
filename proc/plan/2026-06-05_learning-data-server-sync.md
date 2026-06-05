@@ -2,7 +2,8 @@
 
 > 후속 phase. `2026-05-29_auth-login-signup.md` 가 "계정·세션·fingerprint 연결까지"로
 > 명시적으로 잘라둔 **비범위**(학습 데이터의 서버 흡수/다기기 동기화)를 잇는다.
-> 대상: **SRS(간격반복 카드상태) · 스트릭 · 커스텀 콘텐츠** 3종.
+> 대상: **SRS(간격반복 카드상태) · 스트릭 · 활동로그(activity_log) · 커스텀 콘텐츠** 4종.
+> (활동로그는 대시보드 활동량 — D8상 14일 retention, 나머지 3종은 무기한. 전 문서 4종 기준.)
 > 상태: **DRAFT — §0 거버넌스 합의 + §3 사용자 결정 전까지 코드 진입 금지.**
 
 ---
@@ -31,7 +32,7 @@ auth plan 과 동일하게, spec 우선 개정 → 코드 순서를 지킨다. �
 
 ## 1. 목표
 
-계정 사용자의 **SRS 카드상태 · 스트릭 · 커스텀 콘텐츠**를 games 전용 Postgres 에 영속하여, **기기를 바꾸거나 브라우저를 클리어해도 로그인하면 학습 진도가 복구**되게 한다. auth phase 에서 깔아둔 `fingerprint_links`(first-writer-wins 토대)를 활용해 **로그인 시 1회 익명 데이터 흡수**를 수행한다.
+계정 사용자의 **SRS 카드상태 · 스트릭 · 활동로그(activity_log) · 커스텀 콘텐츠**(4종)를 games 전용 Postgres 에 영속하여, **기기를 바꾸거나 브라우저를 클리어해도 로그인하면 학습 진도가 복구**되게 한다. auth phase 에서 깔아둔 `fingerprint_links`(first-writer-wins 토대)를 활용해 **로그인 시 1회 익명 데이터 흡수**를 수행한다.
 
 설계 원칙 (기존 spec 정신 보존):
 - **localStorage 우선(offline-first).** 서버는 백업/동기화 매체. 게스트(비회원) 경험은 0 변화.
@@ -61,7 +62,7 @@ auth plan 과 동일하게, spec 우선 개정 → 코드 순서를 지킨다. �
 | D2 | **동기화 모델** | (a) **로컬 우선 + 서버 백업**(읽기-통과/쓰기-통과) / (b) 서버 권위 / (c) 양방향 머지 | ✅ **(a) 확정** — 기존 "localStorage 우선" 정신·오프라인 내성 보존 |
 | D3 | **동기화 시점** | (a) 로그인 시 pull + 쓰기 **배치 debounce push** / (b) 주기적 폴링 / (c) 수동 버튼 | ✅ **(a) 확정** — 단 카드별 단건 X, **dirty 키 모아 배치 델타**(§5 P4). 무마찰 |
 | D4 | **다기기 충돌 해소** | per-데이터 머지 규칙(§4.3) 자동 / 사용자 선택 UI | ✅ **자동 머지 확정**. ⚠️ **SRS 는 timestamp LWW = best-effort**(동시학습 시 복습 손실 가능, §4.3 KNOWN-TRADE-OFF). 충돌 UI 는 과함 |
-| D5 | **익명→계정 흡수** | (a) 자동 / (b) 안 함 / (c) **사용자 확인 후** | ✅ **(c) 확정** — 공유 기기(학교 PC) 명의오염 차단. 첫 로그인 시 "이 기기 학습기록을 내 계정에 가져올까요?" 프롬프트 후에만 흡수. blind overwrite 아니라 **머지 경유**(§5 P5) |
+| D5 | **익명→계정 흡수** | (a) 자동 / (b) 안 함 / (c) **사용자 확인 후 + fingerprint 소유권 게이트** | ✅ **(c) 확정** — 공유 기기(학교 PC) 명의오염 차단. **흡수 전제(R4): `fingerprint`가 미귀속이거나 현재 계정 소유일 때만** 흡수 후보. 타 계정 소유면 흡수 차단(프롬프트 자체 미노출 또는 "이 기기 기록은 다른 계정 소유" 안내). 그 다음에야 "이 기기 학습기록을 내 계정에 가져올까요?" 확인 프롬프트 → 동의 시에만. blind overwrite 아니라 **머지 경유**(§5 P5). first-writer-wins 가 흡수 단계까지 관철됨 |
 | D6 | **커스텀 콘텐츠 용량 한도** | 사용자당 과목/단원/카드 N개 + payload 바이트 상한 | ✅ **확정(2026-06-05)** — 카드 **2,000** / 과목 **50** / 단원 **1,000** / 카드 1장 **16KB** / 스냅샷 총 **4MB**. 이중 가드(클라 안내 + **서버 zod 거부**). 상세 §4.4 |
 | D7 | **계정 삭제 시 학습 데이터** | `ON DELETE CASCADE`(users 삭제 시 전부 삭제) | ✅ **확정** — auth 스키마와 동일 패턴. 정통망법 파기 의무 정합 |
 | D8 | **보존 기간** | (a) 계정 유효 동안 무기한 / (b) activity-log 처럼 retention cutoff | ✅ **확정(2026-06-05)** — **activity_log 만 14일 retention**(로컬 룰 미러). SRS·스트릭·커스텀=계정 유효 동안 무기한 |
@@ -148,7 +149,8 @@ CREATE TABLE IF NOT EXISTS custom_content (
 - **SRS**: 같은 `(game_id, card_id)` 충돌 시 `last_review_at`(없으면 `updated_at`) 더 큰 쪽 채택.
   > ⚠️ **KNOWN-TRADE-OFF (2026-06-05 eng-review): timestamp Last-Write-Wins 는 FSRS 를 정확히 머지하지 못한다.** FSRS 상태는 *복습 이력의 함수*지 timestamp 스냅샷이 아니다. 두 기기가 같은 카드를 각자 오프라인 복습하면, "더 늦은 복습"의 상태만 남고 다른 기기의 복습은 사라진다(게다가 stale base 에서 계산된 값). 즉 다기기 동시 학습 시 **복습 1회 손실·스케줄 약간 어긋남이 발생할 수 있다.** K-12 = 계정당 학습자 보통 1명이라 동시 다기기 충돌 빈도가 낮아 수용. 정확한 머지가 필요해지면 후속 phase 에서 **복습 이벤트 로그 리플레이**(이벤트 소싱 — 복습 이벤트를 append-only 로 적재 후 시간순 재계산)로 승격. 근거 plan: 본 문서.
 - **스트릭**: `longest = max(local, server)`, `(current, last_active_date)` 는 `last_active_date` 더 최신인 쪽. 같은 날이면 `current = max`. **best-effort**(연속성 복원은 근사 — 스트릭은 하이퍼캐주얼 비경쟁 지표라 손실 허용).
-- **활동 로그**: ✅ **per-device(fingerprint) 절대 카운터**(R1/R2). push = 본인 기기 own count 를 `(game_id, date, fingerprint)` 행에 upsert(단조 증가, 멱등). **대시보드 표시값 = `SUM(count)` (user×date 합산, 읽기 전용)** → 다기기 같은 날 학습량 손실 없이 합산. **⚠️ pull 은 로컬 카운터를 덮어쓰지 않는다**(SRS·스트릭과 다름) — SUM 을 로컬에 쓰면 다음 flush 에 전체합 재업로드로 부풀려짐. `max` 머지 폐기.
+- **활동 로그**: ✅ **per-device(fingerprint) 절대 카운터**(R1/R2). push = 본인 기기 own count 를 `(game_id, date, fingerprint)` 행에 upsert(단조 증가, 멱등). **대시보드 표시값 = `SUM(count)` (user×date 합산, 읽기 전용)** → 다기기 같은 날 학습량 손실 없이 합산. **⚠️ pull 은 로컬 own-count 키를 덮어쓰지 않는다**(SRS·스트릭과 다름) — SUM 을 own-count 에 쓰면 다음 flush 에 전체합 재업로드로 부풀려짐. `max` 머지 폐기.
+  > **대시보드 read model(R4)**: own-count 키(`pullim-games:activity-log:<gameId>`, push 소스, 이 기기 카운트)와 **집계 표시를 분리**한다. 서버 SUM 을 **별도 읽기전용 캐시 키 `pullim-games:activity-log-agg`** 에 세션 pull 시 저장 → 대시보드(`stats.ts`)는 이 집계 캐시를 읽는다(own-count 키 아님). 이래야 secondary 기기에서 pull 한 합산값이 UI 에 뜨고 새로고침 후에도 유지된다(부풀림 0 + 표시 정확 동시 충족).
 - **커스텀**: ✅ **컬렉션 스냅샷 전량 교체** — `updated_at` 더 최신인 스냅샷이 통째로 이김. 삭제는 스냅샷에서 빠지는 것으로 자연 전파(tombstone 불필요). 트레이드오프: 다기기 동시 편집 시 스냅샷 단위 LWW(마지막 저장이 통짜로 이김, 항목 단위 병합 없음) — 커스텀은 단일 사용자 편집이 일반적이라 수용.
 
 ### 4.4 커스텀 콘텐츠 용량 한도 (D6 확정 — 2026-06-05)
@@ -178,7 +180,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | P2 | 서버 모듈 + 순수 머지 | `src/lib/server/learning/{srs,streak,activity,custom}.ts`. **머지는 순수 함수로 분리**(`mergeSrs`·`mergeStreak`·`mergeActivity`·`replaceCustomSnapshot`) → 단위테스트 100% 대상 |
 | P3 | 동기화 API | `src/app/api/sync/route.ts` — **GET=증분 pull**(전체 아님), **POST=push 배치 델타(커스텀은 스냅샷 전량 포함)**. 단일 메서드 계약(PUT 미사용). zod 검증 + **401 인증 게이트**. 모든 쿼리 `WHERE user_id=me.id`(cross-user 0). **증분 pull 계약(R1/R2)**: 클라가 리소스별 `since`(마지막 동기화 `updated_at`)를 보내고 서버는 **단일 200 응답에 리소스별 변경분 + unchanged 마커**로 반환 — `{ srs:{changed:[...]}, custom:{unchanged:true}|{snapshot,...}, streak:..., activity:... }`. (HTTP 304 미사용 — 304는 응답 전체 상태라 "커스텀 unchanged + SRS changed" 공존 불가, R2.) 커스텀은 `updated_at` 미변경 시 `{unchanged:true}` 로 4MB 재전송 0. 리소스별 분리라 게임 오갈 때 대용량 반복 다운로드 없음. 🔒 **CSRF 가드(POST)**: 기존 `src/lib/server/http/csrf.ts` **stateless double-submit 쿠키** 헬퍼 재사용(billing HttpOnly nonce 아님 — 백그라운드 반복 flush엔 재사용 가능한 double-submit이 적합, R3). 흐름: `GET /api/sync/csrf`(또는 기존 `/api/auth/csrf`)가 토큰을 **non-HttpOnly 쿠키(Path=/, SameSite=Strict)** 로 set → 클라가 쿠키 읽어 POST `x-csrf-token` 헤더로 echo → 서버가 쿠키==헤더(constant-time) 검사. 1차 same-origin(Origin/Referer) + 2차 토큰 다층. 미적용 시 외부 사이트가 학습 상태 주입(R1). |
 | P4 | **클라 동기화 엔진(DRY)** | ✅ 단일 `src/lib/sync/engine.ts` — dirty 추적·**배치 debounce flush**(N초/세션종료/`visibilitychange`)·재시도·auth게이트·오프라인 폴백을 **한 곳**에. 리소스별 어댑터(머지fn+직렬화)만 4개. 4x 복붙 금지. **pull 은 로그인/세션 시작 시 1회 증분(`since`)** — 게임 전환마다 X(반복 대용량 다운로드 방지, R1). 이후 게임 시작은 **로컬 캐시만으로 즉시 렌더**. **read-through=비동기**: localStorage 즉시 서빙 → (세션 첫 진입만) 백그라운드 증분 fetch+머지 → 재렌더(블록·스피너 금지). **activity 어댑터는 pull 결과를 로컬에 머지하지 않음**(R2 — own count 유지). 🔒 **CSRF 흐름(R2/R3 — double-submit)**: 엔진은 매 flush 시 csrf 쿠키 값을 읽어 POST `x-csrf-token` 헤더로 echo(메모리 nonce 캐시 없음). 쿠키 부재 시 `GET /api/sync/csrf` 1회로 쿠키 set 후 진행, 403 시 재취득 후 1회 재시도. **게스트(비회원) 경로 무변화 보장**(토큰·pull·push 전부 skip — 계정 세션 없으면 동기화 코드 자체가 동작 안 함) |
-| P5 | 익명→계정 흡수(확인 후) | 첫 로그인 시 로컬 데이터 있으면 **확인 프롬프트**(D5=c) → 동의 시에만 업로드. **blind upsert 아니라 머지 경유**(타 기기서 먼저 쌓인 서버 상태를 오래된 로컬이 덮지 않게). 멱등(`ON CONFLICT`+머지) |
+| P5 | 익명→계정 흡수(소유권 게이트 + 확인 후) | 첫 로그인 시 로컬 데이터 있으면 **① fingerprint 소유권 검사**(R4): `fingerprint_links` 조회 → 미귀속 또는 현재 user 소유면 진행, **타 계정 소유면 흡수 차단**(프롬프트 미노출/안내). **② 확인 프롬프트**(D5=c) → 동의 시에만 업로드. **③ blind upsert 아니라 머지 경유**(타 기기서 먼저 쌓인 서버 상태를 오래된 로컬이 덮지 않게). 멱등(`ON CONFLICT`+머지). first-writer-wins 흡수 단계까지 관철 |
 | P6 | 미성년·보존 | D7 CASCADE 확인, D8 보존정책, 계정삭제 시 4테이블 파기 동작 |
 | P7 | 테스트·검증 | §6 |
 
@@ -229,6 +231,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 
 - **단위**: 위 4 머지 함수 각 케이스 전수(로컬만/서버만/양쪽충돌/동률). SRS due 최신성, 커스텀 삭제 전파(스냅샷에서 빠지면 서버서도 사라짐).
 - **흡수 머지 경유**: 서버에 신규 상태가 있을 때 오래된 로컬 흡수가 **덮어쓰지 않음**(blind overwrite 회귀 가드).
+- **흡수 소유권 게이트(R4)**: 공유 기기에서 B 로그인 시, fingerprint 가 A 소유면 **흡수 차단**(B 계정에 A 기록 안 들어감). 미귀속/본인 소유일 때만 흡수.
 - **멱등(idempotent = 여러 번 실행해도 결과 동일)**: 동일 흡수/flush 2회 실행 시 중복·손상 0.
 - **격리**: user A 로 user B 데이터 접근 불가 — 모든 쿼리 `WHERE user_id`. **cross-user 노출 0 회귀 테스트**(하이퍼캐주얼 §0 경계 강제).
 - **🔴 CRITICAL 회귀(IRON RULE)**: **게스트(비회원) 플레이 시 `/api/sync` 호출 0, localStorage만 사용.** 입구 모델상 게스트가 games 기본 플레이 경로(spec §5.2) — 단순 랜딩 미진입뿐 아니라 **실제 게스트 신원으로 게임 플레이하는 경로**에서 동기화 코드가 새지 않음을 증명. 깨지면 전체 회귀.
@@ -248,7 +251,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 |---|---|
 | 하이퍼캐주얼 룰 침범(랭킹/비교로 변질) | §0 경계 — cross-user 쿼리 금지, 리뷰 게이트 + 격리 회귀 테스트로 강제 |
 | **SRS 다기기 동시학습 시 복습 손실**(LWW 한계) | §4.3 KNOWN-TRADE-OFF 수용(계정당 1학습자). 필요시 이벤트 리플레이로 승격 |
-| **공유 기기(학교 PC) 명의오염** — 익명 데이터가 남 계정에 흡수 | ✅ D5=(c) 확인 후 흡수. 자동 흡수 금지. 실DB 명의격리 보존 |
+| **공유 기기(학교 PC) 명의오염** — 익명 데이터가 남 계정에 흡수 | ✅ D5=(c) 확인 후 + **fingerprint 소유권 게이트(R4)**: 타 계정 소유 fingerprint 면 흡수 차단. 확인 프롬프트만으로는 부족 — first-writer-wins 를 흡수까지 관철. 자동 흡수 금지. 실DB 명의격리 보존 |
 | **쓰기 증폭**(카드별 POST 폭주) | ✅ P4 배치 debounce flush(세션종료/visibilitychange), 단건 호출 금지 |
 | **게임 시작 지연**(서버 read-through 블록) | ✅ P4 비동기 read-through — localStorage 즉시 서빙, 스피너 0 |
 | **반복 대용량 pull**(게임 전환마다 4MB 다운로드) | ✅ R1: 증분 pull(`since`) + 세션 1회 + 커스텀 unchanged 마커. 게임 전환 추가 GET 0 |
@@ -274,7 +277,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 
 | 기존 자산 | 본 plan 재사용 |
 |---|---|
-| `fingerprint_links`(auth) | 흡수 토대. 단 흡수는 fingerprint 가 아니라 **로그인 user 기준 + 확인 프롬프트**(D5) |
+| `fingerprint_links`(auth) | 흡수 **소유권 게이트**(R4): 흡수 전 fingerprint 가 미귀속/현재 user 소유인지 검사해 first-writer-wins 를 흡수까지 관철(타 계정 소유면 차단) + 확인 프롬프트(D5) |
 | `src/lib/server/db/client.ts` Pool + 마이그레이션 러너 | `0002_*.sql` 그대로 올림. 새 DB 인프라 0 |
 | auth 세션·`getCurrentUser` + same-origin/CSRF 가드(auth·billing 라우트 패턴) | `/api/sync` 의 401 인증 게이트 + POST CSRF 보호에 재사용(새 보안 로직 0) |
 | `/api/event` 흡수/이벤트 적재 패턴(리포 내부) | 흡수·이벤트-리플레이 설계 시 games 자체 기존 패턴 활용. **타 풀림 프로젝트 코드 참조 금지**(독립 프로젝트 원칙, CLAUDE.md §4·§7) |
