@@ -34,8 +34,8 @@ auth plan 과 동일하게, spec 우선 개정 → 코드 순서를 지킨다. �
 계정 사용자의 **SRS 카드상태 · 스트릭 · 커스텀 콘텐츠**를 games 전용 Postgres 에 영속하여, **기기를 바꾸거나 브라우저를 클리어해도 로그인하면 학습 진도가 복구**되게 한다. auth phase 에서 깔아둔 `fingerprint_links`(first-writer-wins 토대)를 활용해 **로그인 시 1회 익명 데이터 흡수**를 수행한다.
 
 설계 원칙 (기존 spec 정신 보존):
-- **localStorage 우선(offline-first).** 서버는 백업/동기화 매체. 비로그인 경험은 0 변화.
-- **계정은 여전히 선택.** 비로그인 사용자는 현행 그대로 동작(서버 호출 0).
+- **localStorage 우선(offline-first).** 서버는 백업/동기화 매체. 게스트(비회원) 경험은 0 변화.
+- **계정은 여전히 선택.** 게스트(비회원) 사용자는 현행 그대로 동작(서버 호출 0).
 - **읽기-통과/쓰기-통과(read-through/write-through).** 로컬을 1차 캐시로 유지, 서버에 비동기 반영.
 
 ---
@@ -45,7 +45,7 @@ auth plan 과 동일하게, spec 우선 개정 → 코드 순서를 지킨다. �
 - 랭킹·점수·재화·뱃지·리더보드 — **설계상 영구 금지**(§0 경계). 본 plan 과 무관하게 추가 안 함.
 - 풀림 플랫폼 통합 유저 테이블 federation — games 독립 계정 결정 유지.
 - 실시간 동기화(websocket/CRDT). 본 phase 는 **로그인 시 pull + 쓰기 시 debounce push** 수준. 실시간 협업 아님.
-- 익명(비로그인) 사용자의 서버 저장 — 현행 localStorage 전용 유지.
+- 게스트(비회원)·익명 사용자의 서버 저장 — 현행 localStorage 전용 유지.
 - 커스텀 콘텐츠의 서버측 LLM 재생성·공유·마켓플레이스 — 별 plan.
 - LLM quota(`pullim-games:llm-quota:*`)의 서버 강제 — 본 phase 비범위(클라 가드 유지, 서버 quota 는 별 plan). 단 §3 D7 에서 거론.
 
@@ -176,8 +176,8 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | P0 | (선결) D1 spec 합의 + D6~D8 결정 확정 | spec §5.2·§5.5·§5.6 개정 커밋 |
 | P1 | DB 마이그레이션 | `migrations/0002_learning_data.sql` (4 테이블: srs_states·streaks·activity_log·custom_content) |
 | P2 | 서버 모듈 + 순수 머지 | `src/lib/server/learning/{srs,streak,activity,custom}.ts`. **머지는 순수 함수로 분리**(`mergeSrs`·`mergeStreak`·`mergeActivity`·`replaceCustomSnapshot`) → 단위테스트 100% 대상 |
-| P3 | 동기화 API | `src/app/api/sync/route.ts` — **GET=증분 pull**(전체 아님), **POST=push 배치 델타(커스텀은 스냅샷 전량 포함)**. 단일 메서드 계약(PUT 미사용). zod 검증 + **401 인증 게이트**. 모든 쿼리 `WHERE user_id=me.id`(cross-user 0). **증분 pull 계약(R1/R2)**: 클라가 리소스별 `since`(마지막 동기화 `updated_at`)를 보내고 서버는 **단일 200 응답에 리소스별 변경분 + unchanged 마커**로 반환 — `{ srs:{changed:[...]}, custom:{unchanged:true}|{snapshot,...}, streak:..., activity:... }`. (HTTP 304 미사용 — 304는 응답 전체 상태라 "커스텀 unchanged + SRS changed" 공존 불가, R2.) 커스텀은 `updated_at` 미변경 시 `{unchanged:true}` 로 4MB 재전송 0. 리소스별 분리라 게임 오갈 때 대용량 반복 다운로드 없음. 🔒 **CSRF 가드(POST)**: auth/billing 동형 same-origin(Origin/Referer) + double-submit 토큰(SameSite=Strict). **토큰 발급 = `GET /api/sync/csrf`**(billing `…/csrf` 패턴 미러, 1회용 nonce·SameSite=Strict·HttpOnly·TTL). 미적용 시 외부 사이트가 학습 상태 주입(R1). |
-| P4 | **클라 동기화 엔진(DRY)** | ✅ 단일 `src/lib/sync/engine.ts` — dirty 추적·**배치 debounce flush**(N초/세션종료/`visibilitychange`)·재시도·auth게이트·오프라인 폴백을 **한 곳**에. 리소스별 어댑터(머지fn+직렬화)만 4개. 4x 복붙 금지. **pull 은 로그인/세션 시작 시 1회 증분(`since`)** — 게임 전환마다 X(반복 대용량 다운로드 방지, R1). 이후 게임 시작은 **로컬 캐시만으로 즉시 렌더**. **read-through=비동기**: localStorage 즉시 서빙 → (세션 첫 진입만) 백그라운드 증분 fetch+머지 → 재렌더(블록·스피너 금지). **activity 어댑터는 pull 결과를 로컬에 머지하지 않음**(R2 — own count 유지). 🔒 **CSRF 토큰 흐름(R2)**: 엔진이 첫 flush 전 `GET /api/sync/csrf` 로 토큰 1회 취득→메모리 캐시, POST 에 동봉. 403(만료/부재) 시 재발급 후 1회 재시도 — 백그라운드 flush 가 발급 경로 없이 막히지 않도록 엔진이 토큰 수명까지 책임. **비로그인 경로 무변화 보장**(토큰·pull·push 전부 skip) |
+| P3 | 동기화 API | `src/app/api/sync/route.ts` — **GET=증분 pull**(전체 아님), **POST=push 배치 델타(커스텀은 스냅샷 전량 포함)**. 단일 메서드 계약(PUT 미사용). zod 검증 + **401 인증 게이트**. 모든 쿼리 `WHERE user_id=me.id`(cross-user 0). **증분 pull 계약(R1/R2)**: 클라가 리소스별 `since`(마지막 동기화 `updated_at`)를 보내고 서버는 **단일 200 응답에 리소스별 변경분 + unchanged 마커**로 반환 — `{ srs:{changed:[...]}, custom:{unchanged:true}|{snapshot,...}, streak:..., activity:... }`. (HTTP 304 미사용 — 304는 응답 전체 상태라 "커스텀 unchanged + SRS changed" 공존 불가, R2.) 커스텀은 `updated_at` 미변경 시 `{unchanged:true}` 로 4MB 재전송 0. 리소스별 분리라 게임 오갈 때 대용량 반복 다운로드 없음. 🔒 **CSRF 가드(POST)**: 기존 `src/lib/server/http/csrf.ts` **stateless double-submit 쿠키** 헬퍼 재사용(billing HttpOnly nonce 아님 — 백그라운드 반복 flush엔 재사용 가능한 double-submit이 적합, R3). 흐름: `GET /api/sync/csrf`(또는 기존 `/api/auth/csrf`)가 토큰을 **non-HttpOnly 쿠키(Path=/, SameSite=Strict)** 로 set → 클라가 쿠키 읽어 POST `x-csrf-token` 헤더로 echo → 서버가 쿠키==헤더(constant-time) 검사. 1차 same-origin(Origin/Referer) + 2차 토큰 다층. 미적용 시 외부 사이트가 학습 상태 주입(R1). |
+| P4 | **클라 동기화 엔진(DRY)** | ✅ 단일 `src/lib/sync/engine.ts` — dirty 추적·**배치 debounce flush**(N초/세션종료/`visibilitychange`)·재시도·auth게이트·오프라인 폴백을 **한 곳**에. 리소스별 어댑터(머지fn+직렬화)만 4개. 4x 복붙 금지. **pull 은 로그인/세션 시작 시 1회 증분(`since`)** — 게임 전환마다 X(반복 대용량 다운로드 방지, R1). 이후 게임 시작은 **로컬 캐시만으로 즉시 렌더**. **read-through=비동기**: localStorage 즉시 서빙 → (세션 첫 진입만) 백그라운드 증분 fetch+머지 → 재렌더(블록·스피너 금지). **activity 어댑터는 pull 결과를 로컬에 머지하지 않음**(R2 — own count 유지). 🔒 **CSRF 흐름(R2/R3 — double-submit)**: 엔진은 매 flush 시 csrf 쿠키 값을 읽어 POST `x-csrf-token` 헤더로 echo(메모리 nonce 캐시 없음). 쿠키 부재 시 `GET /api/sync/csrf` 1회로 쿠키 set 후 진행, 403 시 재취득 후 1회 재시도. **게스트(비회원) 경로 무변화 보장**(토큰·pull·push 전부 skip — 계정 세션 없으면 동기화 코드 자체가 동작 안 함) |
 | P5 | 익명→계정 흡수(확인 후) | 첫 로그인 시 로컬 데이터 있으면 **확인 프롬프트**(D5=c) → 동의 시에만 업로드. **blind upsert 아니라 머지 경유**(타 기기서 먼저 쌓인 서버 상태를 오래된 로컬이 덮지 않게). 멱등(`ON CONFLICT`+머지) |
 | P6 | 미성년·보존 | D7 CASCADE 확인, D8 보존정책, 계정삭제 시 4테이블 파기 동작 |
 | P7 | 테스트·검증 | §6 |
@@ -191,12 +191,12 @@ CREATE TABLE IF NOT EXISTS custom_content (
    │
    └─▶ (로그인 상태면) 백그라운드 GET /api/sync?since=<리소스별 마지막 updated_at>
                 │
-                ▼   서버는 변경분만 반환(SRS 변경카드 / 커스텀 미변경시 304 / 스트릭·activity since 이후)
+                ▼   서버는 200 단일응답에 변경분+unchanged 마커(SRS 변경카드 / 커스텀 미변경시 {unchanged:true} / 스트릭·activity since 이후)
         mergeSrs/Streak/Activity(SUM) + replaceCustomSnapshot
                 │
                 ▼
         병합 결과 localStorage 반영 + 조용히 재렌더
-        (비로그인이면 이 가지 전체 skip → 네트워크 0)
+        (게스트/비회원이면 이 가지 전체 skip → 네트워크 0)
 
 게임 시작 (매번)
    │
@@ -220,23 +220,23 @@ CREATE TABLE IF NOT EXISTS custom_content (
 [+] mergeSrs        local만/server만/충돌/tie-break   [+] 다기기 복구  [→E2E]
 [+] mergeStreak     max(longest)+최신일/동일날        [+] 흡수 동의/거부 [→E2E]
 [+] mergeActivity   per-device SUM(다기기 합산 무손실)  [+] 오프라인→온라인 flush
-[+] 증분 pull       since 이후만/커스텀 304/세션1회      [+] 게임전환 시 추가 pull 0
+[+] 증분 pull       since 이후만/커스텀 unchanged마커/세션1회 [+] 게임전환 시 추가 pull 0
 [+] replaceCustomSnapshot  최신 스냅샷 이김/삭제 전파
 [+] engine          dirty·배치 flush·재시도·auth게이트·오프라인 큐
                                                       [+] 회귀(최우선)
-[CRITICAL 회귀] 비로그인 = /api/sync 호출 0, localStorage만
+[CRITICAL 회귀] 게스트(비회원) = /api/sync 호출 0, localStorage만
 ```
 
 - **단위**: 위 4 머지 함수 각 케이스 전수(로컬만/서버만/양쪽충돌/동률). SRS due 최신성, 커스텀 삭제 전파(스냅샷에서 빠지면 서버서도 사라짐).
 - **흡수 머지 경유**: 서버에 신규 상태가 있을 때 오래된 로컬 흡수가 **덮어쓰지 않음**(blind overwrite 회귀 가드).
 - **멱등(idempotent = 여러 번 실행해도 결과 동일)**: 동일 흡수/flush 2회 실행 시 중복·손상 0.
 - **격리**: user A 로 user B 데이터 접근 불가 — 모든 쿼리 `WHERE user_id`. **cross-user 노출 0 회귀 테스트**(하이퍼캐주얼 §0 경계 강제).
-- **🔴 CRITICAL 회귀(IRON RULE)**: **비로그인 플레이 시 `/api/sync` 호출 0, localStorage만 사용.** 비로그인이 games 기본 경험 — 이 동기화가 익명 플로우를 깨뜨리지 않음을 증명. 깨지면 전체 회귀.
+- **🔴 CRITICAL 회귀(IRON RULE)**: **게스트(비회원) 플레이 시 `/api/sync` 호출 0, localStorage만 사용.** 입구 모델상 게스트가 games 기본 플레이 경로(spec §5.2) — 단순 랜딩 미진입뿐 아니라 **실제 게스트 신원으로 게임 플레이하는 경로**에서 동기화 코드가 새지 않음을 증명. 깨지면 전체 회귀.
 - **read-through 비블록**: 게임 시작이 서버 응답을 기다리지 않음(로딩 스피너 0). 동기 localStorage 렌더 후 백그라운드 머지.
 - **활동량 합산 무손실**: 다기기 같은 날 학습(A 3회+B 2회) → 대시보드 5회(SUM). max 머지 유실 회귀 가드.
 - **활동 카운터 미덮어쓰기(R2)**: pull(SUM=5) 후 +1 → 서버에 6 아니라 본인 fingerprint 절대값만 반영(부풀림 회귀 가드).
 - **CSRF 가드(R2)**: 토큰 없는 POST /api/sync = 403. cross-origin POST 거부. `GET /api/sync/csrf` 발급 후 정상 통과.
-- **증분 pull 비용**: 세션 1회 pull + 게임 전환 시 추가 GET 0. 커스텀 미변경 시 304(4MB 재다운로드 0).
+- **증분 pull 비용**: 세션 1회 pull + 게임 전환 시 추가 GET 0. 커스텀 미변경 시 `{unchanged:true}`(4MB 재다운로드 0).
 - **다기기 E2E**: 기기1 학습 → 기기2 로그인 → 진도 복구(Playwright, 2 컨텍스트).
 - **CASCADE(연쇄 삭제)**: 계정 삭제 시 4 테이블 전부 파기.
 
@@ -251,7 +251,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | **공유 기기(학교 PC) 명의오염** — 익명 데이터가 남 계정에 흡수 | ✅ D5=(c) 확인 후 흡수. 자동 흡수 금지. 실DB 명의격리 보존 |
 | **쓰기 증폭**(카드별 POST 폭주) | ✅ P4 배치 debounce flush(세션종료/visibilitychange), 단건 호출 금지 |
 | **게임 시작 지연**(서버 read-through 블록) | ✅ P4 비동기 read-through — localStorage 즉시 서빙, 스피너 0 |
-| **반복 대용량 pull**(게임 전환마다 4MB 다운로드) | ✅ R1: 증분 pull(`since`) + 세션 1회 + 커스텀 304. 게임 전환 추가 GET 0 |
+| **반복 대용량 pull**(게임 전환마다 4MB 다운로드) | ✅ R1: 증분 pull(`since`) + 세션 1회 + 커스텀 unchanged 마커. 게임 전환 추가 GET 0 |
 | **활동량 유실**(다기기 같은 날 max 머지) | ✅ R1: per-device(fingerprint) 절대 카운터 + 서버 SUM. 합산 무손실 |
 | 흡수가 서버 신규 상태 덮어씀 | ✅ P5 머지 경유(blind upsert 금지) + 회귀 테스트 |
 | 학습 행동 데이터 서버화로 PII 표면 확대 | §0 §5.6 개정 — 항목·보존·파기 명시, CASCADE, 계정 사용자 한정 |
@@ -296,7 +296,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | `/api/sync` POST flush | 네트워크 타임아웃 | ✅ 오프라인 큐 테스트 | ✅ 큐 보관·재시도 | 조용히 나중에 동기화(로컬은 이미 저장) |
 | read-through GET 머지 | 서버 5xx | ✅ | ✅ 로컬 폴백 | 무변화(로컬 그대로 플레이) |
 | 흡수 머지 | 서버 신규 상태 존재 | ✅ blind-overwrite 회귀 | ✅ 머지 경유 | 손실 0 |
-| 비로그인 경로 | 동기화 코드가 익명에 누수 | 🔴 CRITICAL 회귀 | ✅ auth 게이트 | **반드시 무변화** |
+| 게스트(비회원) 경로 | 동기화 코드가 게스트 플레이에 누수 | 🔴 CRITICAL 회귀(게스트 기준) | ✅ auth 게이트 | **반드시 무변화** |
 | SRS 동시 다기기 | LWW 복습 손실 | ✅ 손실 케이스 명시 | △ 수용된 한계 | 드물게 복습 1회 유실(조용함) → **KNOWN-TRADE-OFF** |
 
 > **critical gap 점검**: "무테스트 + 무에러처리 + 조용한 실패" 조합은 없음. SRS LWW 손실만 조용하지만 테스트로 명시·문서화된 수용 한계라 critical 아님.
