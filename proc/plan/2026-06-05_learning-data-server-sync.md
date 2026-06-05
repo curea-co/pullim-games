@@ -107,12 +107,18 @@ CREATE TABLE IF NOT EXISTS streaks (
   updated_at       BIGINT NOT NULL
 );
 
--- 활동 로그(대시보드용). ✅ 2026-06-05 R1: PK 에 fingerprint 추가 —
+-- 활동 로그(대시보드용). ✅ 2026-06-05 R1/R2: PK 에 fingerprint 추가 —
 -- **per-device(브라우저) 절대 카운터**. 이유: count=max 머지는 다기기 같은 날
 -- 학습량을 합산 못 하고 큰 쪽만 남겨 실제 활동량이 유실됨(A 3회+B 2회→3만 남음).
 -- 이건 SRS 같은 근사 허용 지표가 아니라 대시보드 활동량이라 왜곡이 사용자에 직접 노출.
 -- 해결: 기기별(fingerprint) 절대 카운터를 따로 저장, 대시보드 표시값 = SUM(count).
--- 각 기기는 자기 fingerprint 행에 본인 절대값을 upsert(단조 증가) → 합산 무손실·멱등.
+--
+-- ⚠️ R2 핵심: **로컬 activity 카운터는 "이 기기 own count" 로 유지**(localStorage 는
+-- 원래 이 브라우저 카운트 = 이미 per-device). **pull 이 로컬 카운터를 덮어쓰지 않는다**
+-- (SRS·스트릭과 다름 — 그쪽은 로컬에 머지). 만약 pull 한 SUM 을 로컬에 쓰면, 다음 flush
+-- 때 그 SUM 을 자기 fingerprint 절대값으로 재업로드 → 서버 합계가 부풀려짐(B가 5 받고
+-- +1 → 6 업로드 → 3+6=9). 따라서: push=로컬 own count 를 자기 fingerprint 행에 upsert
+-- (단조 증가, 멱등), 표시=서버 SUM(읽기 전용 집계), 로컬은 절대 SUM 으로 갱신 안 함.
 -- D8: 14일 retention — push/머지 시 cutoff(now-14d) 이전 행 purge. SRS·스트릭·커스텀은 무기한.
 CREATE TABLE IF NOT EXISTS activity_log (
   user_id     TEXT   NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -142,7 +148,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 - **SRS**: 같은 `(game_id, card_id)` 충돌 시 `last_review_at`(없으면 `updated_at`) 더 큰 쪽 채택.
   > ⚠️ **KNOWN-TRADE-OFF (2026-06-05 eng-review): timestamp Last-Write-Wins 는 FSRS 를 정확히 머지하지 못한다.** FSRS 상태는 *복습 이력의 함수*지 timestamp 스냅샷이 아니다. 두 기기가 같은 카드를 각자 오프라인 복습하면, "더 늦은 복습"의 상태만 남고 다른 기기의 복습은 사라진다(게다가 stale base 에서 계산된 값). 즉 다기기 동시 학습 시 **복습 1회 손실·스케줄 약간 어긋남이 발생할 수 있다.** K-12 = 계정당 학습자 보통 1명이라 동시 다기기 충돌 빈도가 낮아 수용. 정확한 머지가 필요해지면 후속 phase 에서 **복습 이벤트 로그 리플레이**(이벤트 소싱 — 복습 이벤트를 append-only 로 적재 후 시간순 재계산)로 승격. 근거 plan: 본 문서.
 - **스트릭**: `longest = max(local, server)`, `(current, last_active_date)` 는 `last_active_date` 더 최신인 쪽. 같은 날이면 `current = max`. **best-effort**(연속성 복원은 근사 — 스트릭은 하이퍼캐주얼 비경쟁 지표라 손실 허용).
-- **활동 로그**: ✅ **per-device(fingerprint) 절대 카운터**(R1 수정). 같은 `(game_id, date, fingerprint)` 는 본인 기기의 최신 절대값으로 upsert(단조 증가). **대시보드 표시값 = `SUM(count)` (user×date 합산)** → 다기기 같은 날 학습량이 손실 없이 합산. `max` 머지(다른 기기 카운트 유실) 폐기.
+- **활동 로그**: ✅ **per-device(fingerprint) 절대 카운터**(R1/R2). push = 본인 기기 own count 를 `(game_id, date, fingerprint)` 행에 upsert(단조 증가, 멱등). **대시보드 표시값 = `SUM(count)` (user×date 합산, 읽기 전용)** → 다기기 같은 날 학습량 손실 없이 합산. **⚠️ pull 은 로컬 카운터를 덮어쓰지 않는다**(SRS·스트릭과 다름) — SUM 을 로컬에 쓰면 다음 flush 에 전체합 재업로드로 부풀려짐. `max` 머지 폐기.
 - **커스텀**: ✅ **컬렉션 스냅샷 전량 교체** — `updated_at` 더 최신인 스냅샷이 통째로 이김. 삭제는 스냅샷에서 빠지는 것으로 자연 전파(tombstone 불필요). 트레이드오프: 다기기 동시 편집 시 스냅샷 단위 LWW(마지막 저장이 통짜로 이김, 항목 단위 병합 없음) — 커스텀은 단일 사용자 편집이 일반적이라 수용.
 
 ### 4.4 커스텀 콘텐츠 용량 한도 (D6 확정 — 2026-06-05)
@@ -170,8 +176,8 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | P0 | (선결) D1 spec 합의 + D6~D8 결정 확정 | spec §5.2·§5.5·§5.6 개정 커밋 |
 | P1 | DB 마이그레이션 | `migrations/0002_learning_data.sql` (4 테이블: srs_states·streaks·activity_log·custom_content) |
 | P2 | 서버 모듈 + 순수 머지 | `src/lib/server/learning/{srs,streak,activity,custom}.ts`. **머지는 순수 함수로 분리**(`mergeSrs`·`mergeStreak`·`mergeActivity`·`replaceCustomSnapshot`) → 단위테스트 100% 대상 |
-| P3 | 동기화 API | `src/app/api/sync/route.ts` — **GET=증분 pull**(전체 아님), **POST=push 배치 델타(커스텀은 스냅샷 전량 포함)**. 단일 메서드 계약(PUT 미사용). zod 검증 + **401 인증 게이트**. 모든 쿼리 `WHERE user_id=me.id`(cross-user 0). 🔒 **CSRF 가드 필수**(POST): auth/logout/billing 동형의 same-origin(Origin/Referer) + double-submit CSRF 토큰(SameSite=Strict). 미적용 시 외부 사이트가 학습 상태 주입(Codex #116 R1). **증분 pull 계약(R1)**: 클라가 리소스별 `since`(마지막 동기화 `updated_at`)를 보내고 서버는 **변경분만** 반환 — SRS=since 이후 변경 카드만, 커스텀 스냅샷=`updated_at` 미변경 시 304/빈응답(4MB 매번 다운로드 금지), 스트릭/activity=since 이후만. 리소스별 분리 응답이라 게임 오갈 때 대용량 반복 다운로드 없음 |
-| P4 | **클라 동기화 엔진(DRY)** | ✅ 단일 `src/lib/sync/engine.ts` — dirty 추적·**배치 debounce flush**(N초/세션종료/`visibilitychange`)·재시도·auth게이트·오프라인 폴백을 **한 곳**에. 리소스별 어댑터(머지fn+직렬화)만 4개. 4x 복붙 금지. **pull 은 로그인/세션 시작 시 1회 증분(`since`)** — 게임 전환마다 X(반복 대용량 다운로드 방지, R1). 이후 게임 시작은 **로컬 캐시만으로 즉시 렌더**. **read-through=비동기**: localStorage 즉시 서빙 → (세션 첫 진입만) 백그라운드 증분 fetch+머지 → 재렌더(블록·스피너 금지). **비로그인 경로 무변화 보장** |
+| P3 | 동기화 API | `src/app/api/sync/route.ts` — **GET=증분 pull**(전체 아님), **POST=push 배치 델타(커스텀은 스냅샷 전량 포함)**. 단일 메서드 계약(PUT 미사용). zod 검증 + **401 인증 게이트**. 모든 쿼리 `WHERE user_id=me.id`(cross-user 0). **증분 pull 계약(R1/R2)**: 클라가 리소스별 `since`(마지막 동기화 `updated_at`)를 보내고 서버는 **단일 200 응답에 리소스별 변경분 + unchanged 마커**로 반환 — `{ srs:{changed:[...]}, custom:{unchanged:true}|{snapshot,...}, streak:..., activity:... }`. (HTTP 304 미사용 — 304는 응답 전체 상태라 "커스텀 unchanged + SRS changed" 공존 불가, R2.) 커스텀은 `updated_at` 미변경 시 `{unchanged:true}` 로 4MB 재전송 0. 리소스별 분리라 게임 오갈 때 대용량 반복 다운로드 없음. 🔒 **CSRF 가드(POST)**: auth/billing 동형 same-origin(Origin/Referer) + double-submit 토큰(SameSite=Strict). **토큰 발급 = `GET /api/sync/csrf`**(billing `…/csrf` 패턴 미러, 1회용 nonce·SameSite=Strict·HttpOnly·TTL). 미적용 시 외부 사이트가 학습 상태 주입(R1). |
+| P4 | **클라 동기화 엔진(DRY)** | ✅ 단일 `src/lib/sync/engine.ts` — dirty 추적·**배치 debounce flush**(N초/세션종료/`visibilitychange`)·재시도·auth게이트·오프라인 폴백을 **한 곳**에. 리소스별 어댑터(머지fn+직렬화)만 4개. 4x 복붙 금지. **pull 은 로그인/세션 시작 시 1회 증분(`since`)** — 게임 전환마다 X(반복 대용량 다운로드 방지, R1). 이후 게임 시작은 **로컬 캐시만으로 즉시 렌더**. **read-through=비동기**: localStorage 즉시 서빙 → (세션 첫 진입만) 백그라운드 증분 fetch+머지 → 재렌더(블록·스피너 금지). **activity 어댑터는 pull 결과를 로컬에 머지하지 않음**(R2 — own count 유지). 🔒 **CSRF 토큰 흐름(R2)**: 엔진이 첫 flush 전 `GET /api/sync/csrf` 로 토큰 1회 취득→메모리 캐시, POST 에 동봉. 403(만료/부재) 시 재발급 후 1회 재시도 — 백그라운드 flush 가 발급 경로 없이 막히지 않도록 엔진이 토큰 수명까지 책임. **비로그인 경로 무변화 보장**(토큰·pull·push 전부 skip) |
 | P5 | 익명→계정 흡수(확인 후) | 첫 로그인 시 로컬 데이터 있으면 **확인 프롬프트**(D5=c) → 동의 시에만 업로드. **blind upsert 아니라 머지 경유**(타 기기서 먼저 쌓인 서버 상태를 오래된 로컬이 덮지 않게). 멱등(`ON CONFLICT`+머지) |
 | P6 | 미성년·보존 | D7 CASCADE 확인, D8 보존정책, 계정삭제 시 4테이블 파기 동작 |
 | P7 | 테스트·검증 | §6 |
@@ -228,6 +234,8 @@ CREATE TABLE IF NOT EXISTS custom_content (
 - **🔴 CRITICAL 회귀(IRON RULE)**: **비로그인 플레이 시 `/api/sync` 호출 0, localStorage만 사용.** 비로그인이 games 기본 경험 — 이 동기화가 익명 플로우를 깨뜨리지 않음을 증명. 깨지면 전체 회귀.
 - **read-through 비블록**: 게임 시작이 서버 응답을 기다리지 않음(로딩 스피너 0). 동기 localStorage 렌더 후 백그라운드 머지.
 - **활동량 합산 무손실**: 다기기 같은 날 학습(A 3회+B 2회) → 대시보드 5회(SUM). max 머지 유실 회귀 가드.
+- **활동 카운터 미덮어쓰기(R2)**: pull(SUM=5) 후 +1 → 서버에 6 아니라 본인 fingerprint 절대값만 반영(부풀림 회귀 가드).
+- **CSRF 가드(R2)**: 토큰 없는 POST /api/sync = 403. cross-origin POST 거부. `GET /api/sync/csrf` 발급 후 정상 통과.
 - **증분 pull 비용**: 세션 1회 pull + 게임 전환 시 추가 GET 0. 커스텀 미변경 시 304(4MB 재다운로드 0).
 - **다기기 E2E**: 기기1 학습 → 기기2 로그인 → 진도 복구(Playwright, 2 컨텍스트).
 - **CASCADE(연쇄 삭제)**: 계정 삭제 시 4 테이블 전부 파기.
