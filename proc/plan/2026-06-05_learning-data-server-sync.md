@@ -121,7 +121,7 @@ CREATE INDEX IF NOT EXISTS idx_activity_log_user ON activity_log(user_id);
 
 -- 커스텀 콘텐츠. ✅ 2026-06-05: per-row 가 아니라 **사용자당 컬렉션 스냅샷**.
 -- 이유: per-row + updated_at 머지는 "삭제"가 다기기로 전파 안 됨(타 기기에 남은
--- 행이 부활). tombstone 도입 대신 전체 컬렉션을 한 스냅샷으로 PUT → 삭제가 자연히
+-- 행이 부활). tombstone 도입 대신 전체 컬렉션을 한 스냅샷으로 POST → 삭제가 자연히
 -- 반영(스냅샷에서 빠지면 끝). 커스텀은 사용자당 소량·소유라 통짜 교체가 단순·정확.
 -- snapshot = { subjects:[], curriculum:[], cards:[] } 원 JSON 그대로.
 CREATE TABLE IF NOT EXISTS custom_content (
@@ -134,14 +134,14 @@ CREATE TABLE IF NOT EXISTS custom_content (
 ### 4.3 머지 규칙 (자동 머지)
 
 - **SRS**: 같은 `(game_id, card_id)` 충돌 시 `last_review_at`(없으면 `updated_at`) 더 큰 쪽 채택.
-  > ⚠️ **KNOWN-TRADE-OFF (2026-06-05 eng-review): timestamp Last-Write-Wins 는 FSRS 를 정확히 머지하지 못한다.** FSRS 상태는 *복습 이력의 함수*지 timestamp 스냅샷이 아니다. 두 기기가 같은 카드를 각자 오프라인 복습하면, "더 늦은 복습"의 상태만 남고 다른 기기의 복습은 사라진다(게다가 stale base 에서 계산된 값). 즉 다기기 동시 학습 시 **복습 1회 손실·스케줄 약간 어긋남이 발생할 수 있다.** K-12 = 계정당 학습자 보통 1명이라 동시 다기기 충돌 빈도가 낮아 수용. 정확한 머지가 필요해지면 후속 phase 에서 **복습 이벤트 로그 리플레이**(arcade `game_sessions.events` 패턴)로 승격. 근거 plan: 본 문서.
+  > ⚠️ **KNOWN-TRADE-OFF (2026-06-05 eng-review): timestamp Last-Write-Wins 는 FSRS 를 정확히 머지하지 못한다.** FSRS 상태는 *복습 이력의 함수*지 timestamp 스냅샷이 아니다. 두 기기가 같은 카드를 각자 오프라인 복습하면, "더 늦은 복습"의 상태만 남고 다른 기기의 복습은 사라진다(게다가 stale base 에서 계산된 값). 즉 다기기 동시 학습 시 **복습 1회 손실·스케줄 약간 어긋남이 발생할 수 있다.** K-12 = 계정당 학습자 보통 1명이라 동시 다기기 충돌 빈도가 낮아 수용. 정확한 머지가 필요해지면 후속 phase 에서 **복습 이벤트 로그 리플레이**(이벤트 소싱 — 복습 이벤트를 append-only 로 적재 후 시간순 재계산)로 승격. 근거 plan: 본 문서.
 - **스트릭**: `longest = max(local, server)`, `(current, last_active_date)` 는 `last_active_date` 더 최신인 쪽. 같은 날이면 `current = max`. **best-effort**(연속성 복원은 근사 — 스트릭은 하이퍼캐주얼 비경쟁 지표라 손실 허용).
 - **활동 로그**: 같은 `(game_id, date)` 는 `count = max`(중복 카운트 방지).
 - **커스텀**: ✅ **컬렉션 스냅샷 전량 교체** — `updated_at` 더 최신인 스냅샷이 통째로 이김. 삭제는 스냅샷에서 빠지는 것으로 자연 전파(tombstone 불필요). 트레이드오프: 다기기 동시 편집 시 스냅샷 단위 LWW(마지막 저장이 통짜로 이김, 항목 단위 병합 없음) — 커스텀은 단일 사용자 편집이 일반적이라 수용.
 
 ### 4.4 커스텀 콘텐츠 용량 한도 (D6 확정 — 2026-06-05)
 
-스냅샷 교체(§4.3)는 변경마다 컬렉션 전체를 PUT 하므로, 한도는 **업로드가 무거워지지 않을 크기** + **DB 비대화 방지** 두 목적. 자연 천장: 커스텀은 이미 localStorage(오리진당 ~5MB, SRS·스트릭과 공유)에 살아 물리적으로 몇 MB를 못 넘음 → 서버 한도를 이 현실에 맞춤.
+스냅샷 교체(§4.3)는 변경마다 컬렉션 전체를 POST 하므로, 한도는 **업로드가 무거워지지 않을 크기** + **DB 비대화 방지** 두 목적. 자연 천장: 커스텀은 이미 localStorage(오리진당 ~5MB, SRS·스트릭과 공유)에 살아 물리적으로 몇 MB를 못 넘음 → 서버 한도를 이 현실에 맞춤.
 
 | 항목 | 한도 | 근거 |
 |---|---|---|
@@ -149,11 +149,11 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | 과목 | **50** | 학생당 5~10과목 + 헤드룸 |
 | 단원(트리) | **1,000** | 과목 50 × 단원 ~20 |
 | 카드 1장 payload | **16KB** | 정상 카드 <2KB. blank passage·word-match 8쌍 최대도 여유. **남용 방어선** |
-| 스냅샷 총량 | **4MB** | 서버 거부선. 스냅샷 PUT 비대화 차단 |
+| 스냅샷 총량 | **4MB** | 서버 거부선. 스냅샷 POST 비대화 차단 |
 
 **적용**: 이중 가드 —
 1. **클라**: 저장 직전 카운트 초과 시 "한도 도달" 안내(저장 차단). UX 친화.
-2. **서버(진짜 가드)**: `/api/sync` PUT 의 zod 스키마가 배열 길이·payload 바이트·스냅샷 총 바이트 검증 → 초과 시 413/422 거부. 클라 우회 불가. 스냅샷 모델이라 카운트 검증이 단순(배열 길이만 잼).
+2. **서버(진짜 가드)**: `/api/sync` POST 의 zod 스키마가 배열 길이·payload 바이트·스냅샷 총 바이트 검증 → 초과 시 413/422 거부. 클라 우회 불가. 스냅샷 모델이라 카운트 검증이 단순(배열 길이만 잼).
 
 ---
 
@@ -164,7 +164,7 @@ CREATE TABLE IF NOT EXISTS custom_content (
 | P0 | (선결) D1 spec 합의 + D6~D8 결정 확정 | spec §5.2·§5.5·§5.6 개정 커밋 |
 | P1 | DB 마이그레이션 | `migrations/0002_learning_data.sql` (4 테이블: srs_states·streaks·activity_log·custom_content) |
 | P2 | 서버 모듈 + 순수 머지 | `src/lib/server/learning/{srs,streak,activity,custom}.ts`. **머지는 순수 함수로 분리**(`mergeSrs`·`mergeStreak`·`mergeActivity`·`replaceCustomSnapshot`) → 단위테스트 100% 대상 |
-| P3 | 동기화 API | `src/app/api/sync/route.ts` (GET=pull 전체, POST=push 배치 델타) + zod. 전부 401 게이트, 모든 쿼리 `WHERE user_id=me.id`(cross-user 0) |
+| P3 | 동기화 API | `src/app/api/sync/route.ts` — **GET=pull 전체, POST=push 배치 델타(커스텀은 스냅샷 전량 포함)**. 단일 메서드 계약(PUT 미사용). zod 검증 + **401 인증 게이트**. 모든 쿼리 `WHERE user_id=me.id`(cross-user 0). 🔒 **CSRF 가드 필수**: POST 는 인증 쿠키 기반 쓰기 엔드포인트라 기존 auth/logout/billing 라우트와 **동형의 same-origin(Origin/Referer) + double-submit CSRF 토큰(SameSite=Strict)** 적용 — 미적용 시 외부 사이트가 사용자 브라우저로 학습 상태를 주입하는 CSRF 표면 발생(Codex #116 R1 지적) |
 | P4 | **클라 동기화 엔진(DRY)** | ✅ 단일 `src/lib/sync/engine.ts` — dirty 추적·**배치 debounce flush**(N초/세션종료/`visibilitychange`)·재시도·auth게이트·오프라인 폴백을 **한 곳**에. 리소스별 어댑터(머지fn+직렬화)만 4개. 4x 복붙 금지. **read-through=비동기**: localStorage 즉시 서빙 → 백그라운드 fetch+머지 → 재렌더(게임시작 블록·스피너 금지). **비로그인 경로 무변화 보장** |
 | P5 | 익명→계정 흡수(확인 후) | 첫 로그인 시 로컬 데이터 있으면 **확인 프롬프트**(D5=c) → 동의 시에만 업로드. **blind upsert 아니라 머지 경유**(타 기기서 먼저 쌓인 서버 상태를 오래된 로컬이 덮지 않게). 멱등(`ON CONFLICT`+머지) |
 | P6 | 미성년·보존 | D7 CASCADE 확인, D8 보존정책, 계정삭제 시 4테이블 파기 동작 |
@@ -255,8 +255,8 @@ CREATE TABLE IF NOT EXISTS custom_content (
 |---|---|
 | `fingerprint_links`(auth) | 흡수 토대. 단 흡수는 fingerprint 가 아니라 **로그인 user 기준 + 확인 프롬프트**(D5) |
 | `src/lib/server/db/client.ts` Pool + 마이그레이션 러너 | `0002_*.sql` 그대로 올림. 새 DB 인프라 0 |
-| auth 세션·`getCurrentUser`·CSRF | `/api/sync` 401 게이트에 재사용 |
-| arcade `game_sessions.events` + `/api/sessions/import` | 흡수/이벤트-리플레이 **패턴 참조**(코드 복사 X, 독립레포 룰) |
+| auth 세션·`getCurrentUser` + same-origin/CSRF 가드(auth·billing 라우트 패턴) | `/api/sync` 의 401 인증 게이트 + POST CSRF 보호에 재사용(새 보안 로직 0) |
+| `/api/event` 흡수/이벤트 적재 패턴(리포 내부) | 흡수·이벤트-리플레이 설계 시 games 자체 기존 패턴 활용. **타 풀림 프로젝트 코드 참조 금지**(독립 프로젝트 원칙, CLAUDE.md §4·§7) |
 | 기존 localStorage 모듈(srs/streak/activity/custom) | 키·직렬화 형식 유지, 동기화 훅만 추가. 병렬 저장소 신설 X |
 
 ### 9.2 NOT in scope (의도적 보류)
