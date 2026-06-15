@@ -50,3 +50,4 @@ yarn-error.log*
 /test-results
 /playwright/.cache
 .gstack/
+/daily_outcome/
