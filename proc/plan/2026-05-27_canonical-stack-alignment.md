@@ -97,6 +97,8 @@
 
 각 도메인 `package.json` + `CLAUDE.md` 정독 결과 (**2026-05-27 작성 시점 스냅샷** — 후속 PR 은 *현 시점* 워크스페이스 재확인 필요):
 
+> **games 열은 외부 비교용 참조일 뿐, games 의 정렬 기준·실행 backlog 가 아니다** (§0 carve-out). 루트 CLAUDE.md 독립 프로젝트 룰상 다른 도메인 열을 games 의사결정 근거로 삼지 않는다 — games 기준은 `proc/spec/01~10`.
+
 | 항목 | planner | Q | classbot | games | arcade |
 |---|---|---|---|---|---|
 | **레포** | `curea-co/pullim-planner` | `curea-co/pullim-Q` | `curea-co/pullim-classbot` | `curea-co/pullim-games` | `curea-co/pullim-arcade` |
@@ -125,7 +127,7 @@
 - **5 도메인 전체 — pnpm/i18n/Sentry/Redis/BullMQ/AWS SDK 0%**
 - **classbot — drizzle 채택**: 정본 TypeORM 과 ORM 충돌 (가장 큰 단일 이슈)
 - **classbot — bcryptjs ≠ bcrypt**: native bcrypt 로 전환 또는 본 plan 에서 예외 인정 결정 필요
-- **games — Next.js 15**: 정본 16 과 한 단계 lag
+- **games — Next.js 15**: 외부 제안 스택(16)과의 *차이*일 뿐 — **games 의 현행 정본 spec(`proc/spec/09 §9.1`, 루트 AGENTS.md) 그 자체이며 "갭/lag" 이 아니다.** (갭 표기 대상에서 제외)
 - **games — BE 없음**: 5 중 유일 (BE 신설 vs 영구 SPA 결정 필요)
 - **TanStack Query 보유는 classbot 만**: 정본 패턴이 아닌 채택임 (FE 데이터 계층 통합 시 일관성 확보 필요)
 
@@ -323,7 +325,7 @@
 | 1 | P0-1 | planner | `chore(planner): bun → pnpm 10.26.1 전환` | — |
 | 2 | P0-1 | Q | `chore(q): bun → pnpm 10.26.1 전환` | PR1 회고 |
 | 3 | P0-1 | classbot | `chore(classbot): D-Lite 모노레포 + pnpm 동시 적용` | PR1 회고 |
-| 4 | P0-1 | games | `chore(games): bun → pnpm + alignment Phase 0a 흡수` | PR1 회고 |
+| 4 | P0-1 | games | **(games 열 비실행) — 현행 spec(bun + Next 15 + Vercel) 고정. pnpm/Phase 0a 는 spec 선행 개정 후 별도 결정.** 실행 backlog 아님 | spec 선행 |
 | 5 | P0-1 | arcade | `chore(arcade): bun → pnpm 10.26.1` | PR1 회고 |
 | 6 | P0-2/3 | (인프라) | `infra: ECS cluster pullim-domains + RDS shared instance 셋업` | §8/§9 결정 후 |
 | 7 | P0-4 | 5 도메인 | `ci(<scope>): Vercel → Docker → ECR → ECS workflow` (5 PR) | PR6 |
@@ -342,7 +344,7 @@
 
 ## 14. 본 plan 완료 정의
 
-다음 모두 충족 시 `archive/` 이관 — PM 명시 시점에:
+다음 모두 충족 시 `archive/` 이관 — PM 명시 시점에. **단, games 는 아래 5 도메인 조건에서 제외된다** — games 는 현행 spec(bun + Next 15 + Vercel + 단일백본) 을 지키는 한 pnpm/ECS/JWT/DS/TanStack 항목 적용 의무가 없으며, 각 항목은 **games spec 선행 개정 시에만** games 에 적용된다 (그 전까지 games 의 본 plan 완료 조건은 "문서 참조본 배치" 로 충족):
 
 - [ ] 5 도메인 `package.json` 의 `packageManager` 가 `pnpm@10.26.1`
 - [ ] 5 도메인 모두 ECS Fargate 에서 dev 서비스 운영 (`pullim-<domain>-{web,backend}-dev` 패턴)
@@ -394,7 +396,7 @@
 
 | 결정 | 답 |
 |---|---|
-| 본 plan 배치 방식 | **옵션 B — 5 도메인 각 `proc/plan/` 에 바이블 배치** (분산 보관, 동기화 부담 인정. 추후 구조 변경 시 바이블로 작업 진행) |
+| 본 plan 배치 방식 | **옵션 B — 5 도메인 각 `proc/plan/` 에 참조본 배치** (분산 보관. games 사본은 **기록 보관용 참조본**일 뿐 — 실행 지침/상위 지침 아님. games 작업은 `proc/spec` → `CLAUDE.md` → `AGENTS.md` 라우팅을 따른다) |
 
 ### 16.2 명시적 보류 (사용자 직접 셋업 대기)
 
@@ -405,7 +407,7 @@
 | D-SEQ | cluster 결정 후 | 동일 | — |
 | D-DS (DS 외부 노출) | 본체팀 합의 필요 | 본체팀 외부 패키지 발행 정책 협의 | shadcn 유지 |
 | D-CB-ORM | classbot drizzle → TypeORM 마이그레이션 | Phase γ 진입 시 결정 | drizzle 유지 |
-| D-GM-BE | games BE 신설 | 이미 옵션 B (자체 NestJS) 결정됨 | — |
+| D-GM-BE | games BE 신설 | **games 내부 BE 미도입 — 단일 백본·SPA 유지(루트 AGENTS.md). BE 분리 필요 시 별 repo `pullim-api`.** (L366 과 동일 — 자체 NestJS 신설안은 폐기) | spec 선행 개정 후에만 |
 | D-GM-N16 | games Next 16 시점 | 진행 중 PR 마무리 후 | Next 15 유지 |
 | D-COST | AWS 청구 상한 | AWS 계정 셋업 후 | — |
 
