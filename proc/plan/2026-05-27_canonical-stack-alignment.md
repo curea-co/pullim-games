@@ -3,7 +3,7 @@
 **작성일**: 2026-05-27
 **작성자**: PM (박승훈) + 컨트롤타워 AI
 **적용 대상**: `pullim-planner` / `pullim-Q` / `pullim-classbot` / `pullim-games` / `pullim-games-arcade`
-**상태**: **PROPOSAL — 합의·게이트 대기 중. 실행 문서 아님.**
+**상태**: **DRAFT — 합의·게이트 대기 중. 실행 문서 아님.** (`proc/spec/01 §7` plan 상태 용어 일치 — 검토 대기 plan 은 DRAFT)
 **games repo 사본 한정**: 본 파일은 5 도메인 컨트롤타워 *참조 스냅샷*이며 games 의 SoT 가 아니다 (games SoT = `proc/spec/01~10`). 살아있는 컨트롤타워 원본은 games repo 밖(`.pullim-meta/`)에 있고, games 사본은 §16.1 결정에 따른 **기록 보관용 참조본**일 뿐 — 외부 도메인 스냅샷에 종속된 실행 지침이 아니다. games 작업은 본 문서가 아니라 `proc/spec` → `CLAUDE.md` → `AGENTS.md` 라우팅으로만 판단한다.
 **완료 정의**: §1 목표 충족 후 PM 명시 시점에 archive 이관
 
@@ -138,8 +138,8 @@
 
 | # | 영역 | 정본 | 5 도메인 평균 | 갭 크기 | 도메인별 차이 |
 |---|---|---|---|---|---|
-| G1 | 패키지 매니저 | pnpm 10.26.1 | bun 1.3.12 | **L** (lockfile/Dockerfile/workflow 동시 갱신) | 5 도메인 동일 — 5건 일괄 |
-| G2 | 모노레포 | Turborepo + apps/{web,backend} + packages/* | planner/Q/arcade 일부 / classbot·games 미완 | **M** | classbot/games 가 모노레포 전환 선행 필요 |
+| G1 | 패키지 매니저 | pnpm 10.26.1 | bun 1.3.12 | **L** (lockfile/Dockerfile/workflow 동시 갱신) | 외부 4건. **games 는 현행 bun 정본(spec/09 §9.1) — 비대상/참조** |
+| G2 | 모노레포 | Turborepo + apps/{web,backend} + packages/* | planner/Q/arcade 일부 / classbot 미완 | **M** | classbot 모노레포 선행 필요. **games 는 thin monorepo 별 트랙(PR #120) — 본 plan 정렬 대상 아님** |
 | G3 | Next.js | 16.1.2 | 16 (games 는 15 — **현행 정본 spec, 갭 아님**) | **games 비대상** | 외부 도메인만. games 는 `proc/spec/09 §9.1` 상 Next 15 정본 — upgrade/갭 대상 아님 |
 | G4 | BE 프레임워크 | NestJS 11 (common·config·database 표준 모듈) | planner/Q/classbot/arcade skeleton, games 부재 | **L** | games — BE 신설 결정 필요 |
 | G5 | ORM | TypeORM 0.3.28 + naming-strategies | classbot drizzle, 나머지 미적용 | **L** | classbot — drizzle → TypeORM 마이그레이션 |
@@ -152,7 +152,7 @@
 | G12 | AWS SDK | client-s3 + client-ses + s3-presigned | 0건 | **M** | 사용처별 — 5 도메인 모두 즉시 필요한지 평가 후 |
 | G13 | 배포 | AWS ECS Fargate + ECR + Secrets Manager + CW Logs | Vercel manual 5건 | **XL** (DNS/SSL/모니터링 재구성) | 5건 모두 전환, AWS cluster 결정 §8 |
 | G14 | CI/CD | GitHub Actions → Docker → ECR → ECS update | Vercel 자동 비활성, manual | **L** | 5건 모두 신규 작성 |
-| G15 | 패키지 분리 | packages/{types,api-client,auth} + (본체엔 analytics/config/logging/remote-config/ui) | placeholder 3건 (planner/Q), classbot·games 부재 | **M** | 5건 모두 packages 6개로 정렬 |
+| G15 | 패키지 분리 | packages/{types,api-client,auth} + (본체엔 analytics/config/logging/remote-config/ui) | placeholder 3건 (planner/Q), classbot 부재 | **M** | 외부 4건 packages 정렬. **games 제외 — thin monorepo(packages 미생성, BE 는 별 repo pullim-api)** |
 
 총 12+ 영역 갭. P0/P1/P2 분류는 §6.
 
@@ -349,7 +349,8 @@
 
 다음 모두 충족 시 `archive/` 이관 — PM 명시 시점에. **단, games 는 아래 5 도메인 조건에서 제외된다** — games 는 현행 spec(bun + Next 15 + Vercel + 단일백본) 을 지키는 한 pnpm/ECS/JWT/DS/TanStack 항목 적용 의무가 없으며, 각 항목은 **games spec 선행 개정 시에만** games 에 적용된다 (그 전까지 games 의 본 plan 완료 조건은 "문서 참조본 배치" 로 충족):
 
-- [ ] 5 도메인 `package.json` 의 `packageManager` 가 `pnpm@10.26.1`
+- [ ] (games 제외) 4 도메인 `package.json` 의 `packageManager` 가 `pnpm@10.26.1` (games 는 현행 Bun 정본 유지 — `proc/spec/09 §9.1`)
+- [ ] **(blocked) ECS/RDS/JWT 등 인프라 종속 항목은 §16.2 D-CLU/D-RDS 무기한 보류로 현재 충족 불가** — 인프라 토폴로지 결정 후에만 판정. 그 전까지 본 plan 완료 조건에서 제외
 - [ ] (games 제외) 4 도메인 모두 ECS Fargate 에서 dev 서비스 운영 (`pullim-<domain>-{web,backend}-dev` 패턴)
 - [ ] (games 제외) 4 도메인 모두 GitHub Actions → ECR → ECS 파이프라인 통과
 - [ ] (games 제외) 4 도메인 모두 JWT 인증 + Redis 연결 + Sentry DSN 활성
