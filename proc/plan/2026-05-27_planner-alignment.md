@@ -141,7 +141,7 @@ games 는 **Drizzle 이 없고**, `src/app/api/` 에는 `/api/event` 만 정의�
 | 단일 앱 → `apps/{games,backend?}/` + `packages/*` | 디렉토리 재편 | 중 (`gen:registry` 경로 갱신 동반) | 낮음 (import path 만 변경) | `gen:registry` 자동화 보존 필요 |
 | `gen:registry` predev/prebuild | games 특유 | 갱신 필요 (`apps/games/scripts/` 또는 `packages/games-registry/`) | 낮음 | **자동화 보존 의무** |
 | `ui:audit` HARD gate | games 특유 | 경로 갱신 필요 (모노레포 후 `apps/games/scripts/`) | 낮음 | **HARD gate 보존 의무** |
-| BE 부재 → BE 도입? | 옵션 결정 슬롯 (§3.2 / §10 슬롯 1) — §12.1 옵션 B 확정 | 옵션 A/B/C (§3.2) | n/a | 옵션 B 채택 시 정적 카탈로그 단순함 손실 가능 |
+| BE 부재 → BE 도입? | (SUPERSEDED) 구 옵션 B 폐기 — games 내부 BE 미도입(단일 백본), BE 는 별 repo `pullim-api` | n/a | n/a | 현행: SPA/단일백본 유지 |
 | 자체 SPEC `proc/spec/01~10` | games 권위 | 보존 vs 부분 흡수 (§5) | n/a | **자율성 보존 의무 — 사용자 합의 시까지** |
 | `ANTHROPIC_API_KEY` server route | games 특유 | BE 도입 옵션에 따라 이동 위치 결정 | n/a | management 자동 생성 흐름 보존 필요 |
 | `proc/audit/` (감사 폴더) | games 특유 (`knowhow/` 대신) | 보존 (모노레포 후에도 `apps/games/proc/audit/` 또는 root `proc/audit/`) | n/a | **감사 누적 history 보존 의무** |
@@ -167,7 +167,7 @@ games 의 현 상태는 BE 부재 + 정적 카탈로그 + client-side FSRS state
 - 풀림 생태계 사례를 *참고* 하되, games 의 `proc/spec/01~10` 요구사항에 맞춰 자체 NestJS 11 + TypeORM + Postgres 도입
 - entity 후보: `user`, `session`, `card-state` (FSRS), `event`, `streak` — **결제·`subscription` 은 제외**. `proc/spec/05 §5.7` 상 결제·구독은 V2 트랙(D1~D7 합의 끝난 항목만 정식 정책)이라, 가격모델·무료/유료 경계·환불 미합의 상태에서 초기 BE entity 로 굳히지 않는다. D1~D7 합의 후 별 슬롯으로 승격. 시그니처는 games 의 기존 client-side state (zustand store + localStorage) 에서 역추론 + 본 리포 spec 기준 재정의 (외부 리포 코드 직접 import·복사 금지)
 - common·bootstrap·filter·interceptor 등 NestJS 표준 패턴은 일반 NestJS 관례를 따르되, games 내부 spec 기준의 계약을 먼저 정의한 뒤 그 계약을 만족하는 형태로 구현 (외부 리포 코드 참조 금지 — 루트 `CLAUDE.md` 룰)
-- `apps/backend/` (또는 `apps/games-backend/`) 신설 → 본 plan 의 Phase β
+- (SUPERSEDED) 구안: `apps/backend/` 신설 → 현행 폐기. games 내부 BE 미도입, BE 는 별 repo `pullim-api`
 - **장점**: cross-device 동기화 가능, V2 결제 도메인 직결, 4 풀림 공통 NestJS 관용 패턴 유지
 - **단점**: 도입 비용 큼, 정적 카탈로그의 단순함 손실
 - **외부 사례와의 관계**: 스택만 동일, 도메인 entity·서비스 경계는 games 독립
@@ -327,7 +327,7 @@ games 는 자체 `proc/spec/01~10` 을 권위로 둔다. planner 정렬 시 다�
 
 → Phase 0a/0b/0c 머지 후 Phase α 진입.
 
-### Phase α — 모노레포 재편 — **✅ 완료 (thin monorepo, PR #120)**. 아래는 historical 설계 trace
+### Phase α — 모노레포 재편 — **별 PR #120 에서만 진행(이 브랜치 비활성 부록)**. 아래는 historical 설계 trace
 
 **목표**: 외부 사례를 *참고* 하되, games spec 기준으로 모노레포 재편. 동작 회귀 없이 구조만 재편.
 
@@ -355,7 +355,7 @@ games 는 자체 `proc/spec/01~10` 을 권위로 둔다. planner 정렬 시 다�
 - α-1 머지 후 분리된 PR 로 진행 (코드 변경 PR 과 컨벤션 변경 PR 의 리뷰 경계 보존)
 - **예외**: 만약 사용자가 §10 슬롯 4 에서 `apps/games/proc/` 이동을 선택한다면, *그 경우 α-1 / α-2 분리를 폐기* 하고 모노레포 재편 + proc 이동 + 컨벤션 문서 갱신을 단일 원자 PR 로 처리
 
-### Phase β — BE 도입 (옵션 B/C 합의 시만, 1~N PR)
+### Phase β — BE 도입 — **(SUPERSEDED) games 내부 BE 미도입(단일 백본). BE 는 별 repo `pullim-api`. 아래는 폐기된 구안의 historical 설계 trace 일 뿐 — 실행 계획 아님**
 
 **목표**: §3.2 옵션 B 채택 시 games spec 기준 자체 NestJS BE 도입 진행. 옵션 A 시 본 Phase 스킵, 옵션 C 시 pullim 본체 흡수 trace 만.
 
@@ -402,7 +402,7 @@ games 의 client-side FSRS state → server state 전환. 본 plan 에서는 상
 | R2 | **shadcn 재발급 시각 회귀** — `new-york → base-nova` + `slate → neutral` + `cssVar:false → true` 동시 전환 | 21 게임 전체 시각 회귀 (특히 dialog/button/input) | 0c | **PR 분할 의무** (컴포넌트 1개씩) + 매 컴포넌트 ui:audit + `proc/audit/` 누적 |
 | R3 | **Next.js 16 hydration 변경** — RSC 패턴 변경 시 `'use client'` 보유 게임 컴포넌트 hydration mismatch | 21 게임 중 client-only 컴포넌트 동작 회귀 | 0a | 21 게임 진입 회귀 검증 + `bun run test:e2e` 통과 의무. 회귀 1건이라도 발견 시 PR 차단 |
 | R4 | **`gen:registry` 경로 미갱신** — 모노레포 후 predev/prebuild 트리거 누락 시 dev 진입 자체 실패 | 모든 dev 진입 실패 | 0d / α | Phase α PR 의 `bun run dev` 정상 부팅이 완료 기준 — CI 에서 `bun run gen:registry && git diff --exit-code` 검증 |
-| R5 | **BE 옵션 결정과 Phase α 진입의 정렬** (현재 §12.1 옵션 B 확정으로 해소됨) | Phase α 후 BE 방향 변경 시 모노레포 구조 재재편 필요 | 0d ↔ α 사이 | §10 슬롯 1 큰 갈래는 Phase α 게이트, 세부 entity·common 패턴은 Phase β 게이트. 현 상태: 옵션 B 확정 → Phase α 진입 가능 |
+| R5 | **BE 옵션 결정과 Phase α 진입의 정렬** (SUPERSEDED — 구 옵션 B 폐기) | (historical) | — | 현행: games 내부 BE 미도입(단일 백본), BE 는 별 repo `pullim-api` → 모노레포(PR #120)는 BE 무관하게 thin 으로 완료 |
 | R6 | **자체 SPEC `01~10` 의도치 않은 변형** | games 권위 문서 표류 → claude·codex 판단 혼란 | 모든 Phase | 본 plan 작업 중 spec/01~10 직접 수정 금지. spec 갱신은 **별 PR + 정당한 명세 진화 경로** (`CLAUDE.md §9`) 만 허용 |
 | R7 | **codex review 회피 시도** — 모노레포·shadcn 재발급에서 룰북 회피 유혹 | AI 검증 거버넌스 위반 (`CLAUDE.md §9`) | 모든 Phase | 본 plan 명시 — 회피 금지. 정당한 명세 진화 경로만. PR 본문에 본 룰 링크 |
 | R8 | **viewport 4 audit 누락** — UI 변경 PR 에서 ui:audit 첨부 누락 시 HARD gate 위반 | `.pullim-meta/CONVENTION.md §8` 위반 | 0a, 0b, 0c, α | 각 PR 본문에 `bun run ui:audit <path>` 결과 첨부 의무. 본 plan PR 자체는 코드 변경 0 이라 면제 |
@@ -463,16 +463,16 @@ games 의 client-side FSRS state → server state 전환. 본 plan 에서는 상
 | 5 | **FE Container/Presenter 도입** (Phase γ) | 도입 / 보류 | 보류 | (미정 — default 유지) | Phase γ |
 | 6 | **`packages/ui/` 신설 여부** | 신설 / 미신설 | 미신설 (필요 시 옵션) | (미정 — default 유지) | Phase α |
 | 7 | **`packages/games-registry/` 신설 여부** | 슬롯 3 종속 — `packages/games-registry/` 선택 시 자동 신설 | 미신설 | (슬롯 3 종속) | Phase α |
-| 8 | **`ANTHROPIC_API_KEY` 흐름의 BE 이전 위치** (BE 옵션 B 시) | `apps/backend/src/modules/games/ai/` / `apps/games/` 의 서버 액션 경로 잔존 | `apps/backend/` (옵션 B 종속) | (활성화 — 옵션 B 확정으로) | Phase β |
+| 8 | **`ANTHROPIC_API_KEY` 흐름의 BE 이전 위치** | (historical) | n/a | **(비활성 — games 내부 BE 미도입. AI 흐름은 현행 서버 액션 경로 유지)** | — |
 | 9 | **본 plan 진입 시점** — 진행 중 별 PR 마무리 후 진입 확인 | 사용자 안내 대기 | (사용자 안내) | (대기) | Phase 0a |
 
-→ 본 plan PR 본문에 슬롯 1·2·9 의 합의 요청 명시. 슬롯 1 은 §12.1 에서 옵션 B 확정으로 해소됨.
+→ 본 plan PR 본문에 슬롯 2·9 의 합의 요청 명시. 슬롯 1(BE)은 SUPERSEDED — games 내부 BE 미도입(단일 백본), BE 는 별 repo `pullim-api`.
 
 ---
 
 ## (다음 단계 — §12.3 에 통합됨)
 
-본 plan 머지 + §10 슬롯 2·9 합의 후 — Phase 0a (Next.js 15→16) 진입. 진입 시 작업 순서는 §12.3 참조. 슬롯 1 은 §12.1 에서 옵션 B 확정.
+본 plan 머지 + §10 슬롯 2·9 합의 후 — Phase 0a (Next.js 15→16) 진입은 `proc/spec/09 §9.1` 선행 개정 합의 후에만. 슬롯 1(BE)은 SUPERSEDED — games 내부 BE 미도입.
 
 ---
 
@@ -482,7 +482,7 @@ games 의 client-side FSRS state → server state 전환. 본 plan 에서는 상
 
 ### 11.1 games 의 자율 운영 전제
 
-games 는 본 plan 의 §3·§5 결정 (BE 옵션, spec 권위 처리) 을 *독립적으로* 진행할 수 있는 위치라는 사용자 확인을 받았다. 즉, 본 plan 의 BE 옵션 B 확정과 spec 자율성 보존 (§5.1 옵션 A) 은 외부 도메인의 결정과 무관하게 games 시점에서 진행 가능하다.
+games 는 본 plan 의 §3·§5 결정을 *독립적으로* 진행할 수 있는 위치라는 사용자 확인을 받았다. (BE 관련 구 옵션 B 안은 SUPERSEDED — 현행은 games 내부 BE 미도입·단일 백본, BE 는 별 repo `pullim-api`.) spec 자율성 보존 (§5.1 옵션 A) 은 외부 도메인 결정과 무관하게 games 시점에서 진행 가능하다.
 
 ### 11.2 games 내부 운영 정책 (사용자 확정, 본 리포 작업에 직접 영향)
 
@@ -499,9 +499,9 @@ games 는 본 plan 의 §3·§5 결정 (BE 옵션, spec 권위 처리) 을 *독�
 - ❌ games 내부에 외부 디자인 시스템 패키지 import (§11.2 #3 결정으로 폐기)
 - ❌ games BE 의 cross-domain 데이터 export 채널 (§11.2 #1 결정으로 폐기)
 
-### 11.4 BE 옵션 — §12.1 에서 옵션 B 확정
+### 11.4 BE 옵션 — (SUPERSEDED) 구 옵션 B → 현행 games 내부 BE 미도입
 
-games 시점에서 게스트 우선 + 로그인 시 진척도 보관 정책을 만족하는 BE 옵션은 §12.1 에서 옵션 B 로 확정.
+(historical) 구안은 자체 NestJS BE(옵션 B)였으나 **폐기**. 현행: games 는 내부 BE 미도입(단일 백본, 루트 AGENTS.md), BE 분리 필요 시 별 repo `pullim-api`. 게스트 우선·비로그인이 현행 정책.
 
 ### 11.5 디자인 토큰 — games 는 수요자 인터페이스만 (구체 공급 방식은 본 plan 범위 밖)
 
@@ -509,7 +509,7 @@ games 의 의무는 외부에서 어떤 공급 방식이 결정되든 그것을 
 
 ### 11.6 다음 진입 단계 (games 한정)
 
-1. BE 옵션 A vs B 결정 (위 §11.4) — §12 에서 옵션 B 확정
+1. BE 옵션 (위 §11.4) — SUPERSEDED: games 내부 BE 미도입(단일 백본), BE 는 별 repo `pullim-api`
 2. 디자인 토큰 공급 방식 외부 결정 대기 (위 §11.5) — games 는 수요자 측 인터페이스만 준비
 3. Phase 0a (Next.js 15→16) 진입 — `proc/spec/09 §9.1` 변경 합의 + 진행 중 별 PR 마감 후
 
@@ -525,21 +525,10 @@ games 의 의무는 외부에서 어떤 공급 방식이 결정되든 그것을 
 |---|---|
 | games | **(SUPERSEDED) 구안: 자체 NestJS BE 도입. 현행 결정: games 내부 BE 미도입 — 단일 백본 유지(루트 AGENTS.md), BE 는 별 repo `pullim-api`.** |
 
-함의:
-- 게스트 모드 = localStorage (인증 없이 진척도 임시 저장)
-- 로그인 시 = 서버 진척도 + 디바이스 동기화 (`POST /api/progress/sync` 류 — 정식 라우트 시그니처는 별 spec PR)
-- 스택(BE 분리 시 — 상단 2026-06 갱신상 별 repo `pullim-api`): NestJS 11 + TypeORM + Postgres. **인증 방식(Mock 헤더/Cls/JWT 등)은 별 spec PR 에서 결정** — 현행 정책(`05 §5.2`)은 V1 fingerprint 비로그인. games 내부 BE 신설은 폐기(단일 백본).
-- games BE 는 본 리포 spec 기준 자체 정의 (§3.2 옵션 B 의 외부 코드 직접 참조 금지 원칙 재확인)
-
-진입 순서 (§6 의 상위 Phase 명명 유지, BE 도입 세부 작업은 Phase β 내부의 *하위 단계* 로 표기):
-- §6 의 상위 Phase: α (모노레포) → β (BE 도입) → γ (FE 컨벤션 재검토, 옵션) → δ (SPEC 권위 처리, 옵션) → ε~η (BE 도입 후 FE 전환, 옵션 B 진입 시)
-- Phase β 내부 하위 단계 (옵션 B 채택으로 신설):
-  - β-1: BE common 셋업 (NestJS bootstrap·filter·interceptor)
-  - β-2: entity 정의 (user·session·card-state·event·streak)
-  - β-3: read API (게스트·로그인 양쪽 동작)
-  - β-4: mutation API (진척도 sync·익명→로그인 마이그레이션)
-- FE 전환은 §6 의 ε~η 에서 진행 (Phase β 와 분리)
-- 게스트 모드는 β-2 이전에도 동작 — ε~η 완료까지 무로그인 사용 보장
+함의 (**SUPERSEDED** — 구 자체 BE 안의 설계 trace, 현행 무효):
+- **현행**: games 는 내부 BE 미도입(단일 백본, 루트 AGENTS.md). 게스트 우선·비로그인(`proc/spec/05 §5.2`)이 현행 정책 — 진척도는 localStorage.
+- BE 분리가 필요해지면 **별 repo `pullim-api`** 에서 다룬다 — 인증 방식·entity·read/mutation API 설계는 그쪽 spec 으로 결정. 본 문서엔 방향만 남기고 games 리포 내부 구현 단계는 두지 않는다.
+- (구안의 `POST /api/progress/sync`·NestJS bootstrap·`β-1~β-4` entity/API 하위 단계 상세는 git history 참조 — **현행 실행 계획 아님**.)
 
 ### 12.2 디자인 토큰 — games 는 수요자 인터페이스만 유지
 
@@ -550,7 +539,7 @@ games 시점의 의무는 단 하나: 외부에서 어떤 공급 방식이 결�
 | 단계 | 시점 |
 |---|---|
 | games Phase 0a (Next.js 15→16) | `proc/spec/09 §9.1` 변경 합의 + 진행 중 별 PR 마무리 후 |
-| games Phase α (모노레포) | Phase 0a/0b/0c/0d 머지 후, §10 슬롯 1 큰 갈래 합의 후 (현재 옵션 B 확정으로 충족) |
+| games Phase α (모노레포) | 별 PR #120 에서 thin monorepo 로 진행 (BE 무관 — games 내부 BE 미도입) |
 | games Phase β (BE common) | Phase α 머지 후 |
 
 (다른 도메인의 진입 시점은 본 plan 의 권위 범위 밖.)
@@ -559,6 +548,6 @@ games 시점의 의무는 단 하나: 외부에서 어떤 공급 방식이 결�
 
 - **BE 인프라 호스팅** (games BE) — Vercel Functions 부적합 (stateful) → AWS ECS / Fly.io / Render / Railway 중 결정 필요. §10 신설 슬롯 (예: 슬롯 10) 으로 게이트.
 - **DB 호스팅** (games BE) — RDS / Supabase / Neon / Vercel Postgres 중 결정. §10 신설 슬롯 (예: 슬롯 11).
-- **`ANTHROPIC_API_KEY` 흐름의 BE 이전 여부** — §10 슬롯 8 재확인 (옵션 B 확정으로 활성화).
+- **`ANTHROPIC_API_KEY` 흐름** — 현행 서버 액션 경로 유지 (games 내부 BE 미도입 — 슬롯 8 비활성).
 - **mock 헤더 → 정식 인증 전환 시점** (게스트 → 로그인) — Phase η 또는 별 plan.
 - 디자인 토큰 패키지의 호스팅 위치 등 *생태계 결정* 은 별도 상위 계획 문서.
