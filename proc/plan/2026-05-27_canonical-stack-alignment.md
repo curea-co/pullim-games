@@ -8,6 +8,6 @@
 
 - **SoT**: games SoT = `proc/spec/01~10`. 외부 정본 매트릭스를 games 기준선으로 삼지 않는다.
 - **현행 스택**: Bun + Next.js 15 + Vercel + **단일 백본**(내부 분리 BE 없음 — 루트 AGENTS.md). 디렉터리는 **현행 루트 `src/` 구조**(`src/app`·`src/games` …) — 모노레포 전환은 별 제안(PR #120, **미머지·본 브랜치 미반영**).
-- **외부 정렬 항목 비대상**: pnpm·ECS·Next 16·JWT·Redis·DS·i18n·Sentry·backend·packages 등은 games 현행 spec 미반영이라 **games 비대상**. 적용은 **spec 선행 개정 + G1/G3/G4 합의 후에만** — 본 문서로 games PR 범위를 열지 않는다.
+- **외부 정렬 항목 — 미반영분만 spec 선행 필요**: `pnpm`·`ECS`·`Next 16(major)`·`JWT`·`Redis`·`i18n`·`backend`·`packages` 는 games 현행 spec 미반영이라 **spec 선행 개정 + G1/G3/G4 합의 후에만** 적용. (구분: **`Sentry` 는 `proc/spec/09 §9.8`, 디자인 시스템(DS)은 `proc/spec/08` 에 이미 반영** — 위 미반영 목록과 별개.) 본 문서로 games PR 범위를 열지 않는다.
 - **AWS 인프라(ECS/RDS)**: 프로젝트 병합 토폴로지 확정 전까지 **무기한 보류**. games 는 그 기간 Vercel 사용.
 - **권위 순서(games)**: `proc/spec/01~10` → `CLAUDE.md` → `AGENTS.md`. 본 문서는 그 아래의 참조 판단 문서다.
