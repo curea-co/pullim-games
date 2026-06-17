@@ -59,36 +59,16 @@
 
 본체 리포(`curea-co/pullim`)의 `package.json`, `apps/web/package.json`, `apps/backend/package.json` 을 본 문서 작성 시점(2026-05-27)에 정독한 관찰값이다. 후속 PR 은 해당 본체의 *최신* commit 을 다시 확인해야 한다.
 
-| 영역 | 정본 값 | 본체 출처 |
-|---|---|---|
-| 모노레포 | Turborepo 2.7.4, `apps/{web,studio,backend,ai}` + `packages/*` | root package.json |
-| 패키지 매니저 | **pnpm 10.26.1** (`"packageManager": "pnpm@10.26.1"`) | root package.json |
-| FE 프레임워크 | **Next.js 16.1.2** + **React 19.2.3** + TypeScript 5.9.3 | apps/web |
-| FE 스타일 | **Tailwind 4.1.18** + `@tailwindcss/postcss` + `tw-animate-css` | apps/web |
-| FE i18n | **next-intl 4.1.0** (단일 `messages/{ko,en}.json`, namespace 없음) | apps/web + apps/web/CLAUDE.md |
-| FE 데이터 | **@tanstack/react-query 5.90.21** | apps/web |
-| FE 폼 | react-hook-form 7.72.1 + @hookform/resolvers 5.2.2 + zod 4.3.6 | apps/web |
-| FE 관측 | **@sentry/nextjs 10.34.0** + @sentry/browser | apps/web |
-| FE DS | **@pullim/design-system** (github tag, 현재 `v0.1.0`) — Button/Card/Dialog/Input/Tabs/Heading/Text/toast(sonner 재export) | apps/web |
-| FE 보조 | **Tiptap** (필요 도메인만 — classbot builder 후보), lottie-react, lucide-react, firebase, @tosspayments/tosspayments-sdk | apps/web |
-| BE 프레임워크 | **NestJS 11** (common 11.0.1 + core + platform-express) + TypeScript | apps/backend |
-| BE ORM | **TypeORM 0.3.28** + typeorm-naming-strategies + @nestjs/typeorm 11.0.0 | apps/backend |
-| BE DB | **PostgreSQL** (pg 8.20.0) | apps/backend |
-| BE 캐시/큐 | **ioredis 5.10.0** + BullMQ (BE 의존성 — pullim 본체에 BullMQ 가 직접 없으나 정본 표 명시) | apps/backend + 사용자 정본 표 |
-| BE 인증 | **@nestjs/passport 11.0.5** + **@nestjs/jwt 11.0.2** + passport 0.7.0 + passport-jwt 4.0.1 + bcrypt 6.0.0 | apps/backend |
-| BE Swagger | **@nestjs/swagger 11.2.6** | apps/backend |
-| BE 스케줄 | @nestjs/schedule 6.1.1 | apps/backend |
-| BE 로깅 | winston 3.19.0 + nest-winston 1.10.2 + morgan + helmet | apps/backend |
-| BE 컨텍스트 | **nestjs-cls 6.2.0** (request-scoped context) | apps/backend |
-| BE AWS SDK | **@aws-sdk/client-s3** 3.1032.0 + **client-ses** 3.1022.0 + s3-presigned-post + s3-request-presigner | apps/backend |
-| BE 검증 | class-validator 0.15.1 + class-transformer 0.5.1 + joi 18.0.2 | apps/backend |
-| BE 시간 | luxon 3.7.2 | apps/backend |
-| BE HTTP | @nestjs/axios 4.0.1 + axios 1.15.0 | apps/backend |
-| 배포 | **AWS ECS Fargate + ECR + Secrets Manager + CloudWatch Logs + RDS + S3 + SES** | 사용자 정본 표 |
-| CI/CD | GitHub Actions → Docker build → ECR push → ECS service update | 사용자 정본 표 |
-| dev ECS 서비스명 패턴 | `pullim-web-dev` / `pullim-backend-dev` | 사용자 정본 표 |
-| AWS 리전 | **ap-northeast-2** | 사용자 정본 표 |
-| 패키지 빌드 정책 | `pnpm.onlyBuiltDependencies: ["@pullim/design-system", "bcrypt"]` | root package.json |
+> **외부 본체 세부 버전/판정 표는 games 사본에 복제하지 않는다** (codex #109 — cross-domain drift 방지 + 루트 CLAUDE.md §7 독립 프로젝트 원칙). 정본 본체(`curea-co/pullim`)의 상세 의존성 매트릭스는 **컨트롤타워 원본**(games repo 밖 — `.pullim-meta/2026-05-27_canonical-stack-alignment.md §2`)에서만 관리한다. games 워크스페이스만으로 검증 불가능한 외부 버전 스냅샷을 본문에 고정하면 즉시 drift 가 나므로 카테고리 수준만 남긴다:
+
+| 영역 | 카테고리 (세부 버전은 원본 문서) |
+|---|---|
+| 모노레포·PM | Turborepo / pnpm |
+| FE | Next.js / React / Tailwind / next-intl / react-query / Sentry / @pullim/design-system |
+| BE | NestJS / TypeORM / PostgreSQL / ioredis·BullMQ / Passport·JWT / AWS SDK |
+| 배포 | AWS ECS·ECR·RDS·S3·SES (ap-northeast-2) |
+
+(정확한 버전·`apps/web`/`apps/backend` 출처 컬럼은 `.pullim-meta` 원본 §2 에서만 인용 — 후속 PR 은 원본 commit 기준으로 확인.)
 
 본 표는 **외부 본체(`curea-co/pullim`) 의 참조 스냅샷**이다. **games 의 기준선이 아니다** (§0 carve-out) — games SoT 는 `proc/spec/01~10`. 본 표를 games 후속 PR 의 정렬 목표/근거로 삼지 않는다. 갱신은 본체 PR 머지 시점에 본 plan 의 §2 를 먼저 정정한 뒤, **각 도메인은 자체 spec 갱신을 통해서만** 전파한다.
 
@@ -205,7 +185,7 @@
 | **P2-2** | AWS SDK (S3 / SES) 도입 | 사용처별 (classbot 봇 미디어, planner 리포트 PDF, Q 학습 자료 등) | presigned URL 패턴, SES verified sender |
 | **P2-3** | Tiptap 도입 | classbot builder, planner 메모 (필요 도메인만) | @tiptap/react + extensions |
 | **P2-4** | packages 6개 정렬 (analytics/config/logging/remote-config/ui/utils) | 5 도메인 각자 | placeholder → 실제 구현, types/api-client/auth 기존 3 + 신규 3 |
-| **P2-5** | Next.js 15 → 16 (games 한정) | games | next major bump, app router 검증, 21 게임 회귀 |
+| **P2-5** | Next.js 15 → 16 (games 한정) | games | **`proc/spec/09 §9.1` 선행 개정 + 사용자(G1) 합의 후에만 — 별 PR.** (현행 Next 15 가 games 정본 spec) 이후 next major bump, app router 검증, 21 게임 회귀 audit |
 
 > **games 적용 단서 (§0 carve-out 재확인):** 위 P0~P2 의 games 항목(pnpm·ECS·CI/CD 재작성·JWT·DS·i18n·**Next 16**·backend 등)은 모두 **games 현행 spec 미반영**이다. 특히 **Next.js 15 는 games 의 현행 정본 spec(`proc/spec/09 §9.1`) 이지 "갭/lag" 이 아니다** — 본 표의 "P2-5" 는 *외부 도메인 동기화 가정* 일 뿐, games 의 실행 계획이 아니다. games 는 이들을 **spec 선행 개정 + G1/G3/G4 합의 후에만** 착수한다.
 
@@ -219,23 +199,25 @@
 
 > **games 열 전체는 비실행 참조다** (§0 carve-out). 아래 표의 games 셀에 적힌 pnpm·ECS·JWT·DS·TanStack·Next 16·backend 작업은 **현행 games spec 미반영**이라 실행 backlog 가 아니며, 각 항목은 games spec 선행 개정 + G1/G3/G4 합의 후에만 적용된다. 이 표만 보고 games PR 범위를 열지 않는다.
 
-| Phase | planner (Phase β 진행) | Q (D-Lite 머지) | classbot (D-Lite 진행) | games (alignment PR #108) | arcade (Phase 1 머지) |
+> **games 열은 전부 `비실행`** 으로 통일한다 (아래). games 의 실제 작업은 본 표가 아니라 `proc/spec/01~10` + 사용자 합의로만 정해진다 — 본 표 games 셀을 backlog 로 읽지 않는다.
+
+| Phase | planner (Phase β 진행) | Q (D-Lite 머지) | classbot (D-Lite 진행) | games | arcade (Phase 1 머지) |
 |---|---|---|---|---|---|
-| P0-1 pnpm | 신규 적용 | 신규 적용 | D-Lite 모노레포 전환과 합쳐 1 PR | **비실행 — games 현행 bun 정본(spec/09 §9.1). pnpm 은 spec 선행 개정 후에만** | 신규 적용 |
-| P0-2 ECS | 신규 적용 | 신규 적용 | 신규 적용 | BE 신설 + ECS 동시 (§8 결정) | 신규 적용 |
-| P0-3 RDS | 기존 docker compose → RDS | 기존 docker compose → RDS | drizzle 분리 결정 + RDS | 신규 (BE 신설 시) | 기존 docker compose → RDS |
-| P0-4 CI/CD | Vercel workflow 폐기 | Vercel workflow 폐기 | Vercel workflow 폐기 | Vercel workflow 폐기 + codex-review.yml 유지 | Vercel workflow 폐기 |
-| P0-5 Secrets·Logs·S3·SES | 신규 적용 | 신규 적용 | 신규 적용 | 신규 적용 | 신규 적용 |
-| P1-1 JWT | Phase γ 의 BE 도입 시점 | BE 본격 시점 | bcryptjs → bcrypt + JWT | BE 신설 시 신규 | bcryptjs → bcrypt + JWT |
-| P1-2 Redis·BullMQ | BE 신규 | BE 신규 | BE 신규 + drizzle 호환성 검토 | BE 신설 시 | BE 신규 |
-| P1-3 DS | shadcn 28+ 컴포넌트 마이그레이션 | shadcn 마이그레이션 | shadcn 마이그레이션 + sonner | shadcn (new-york/slate) → DS (시각 회귀 위험 — `bun run ui:audit` 4 viewport 필수) | shadcn 마이그레이션 |
-| P1-4 i18n | hard-coded 한글 추출 (planner-home/reports/manage/onboarding 28+ 컴포넌트) | hard-coded 한글 추출 (q/{infinity,talk,analysis,review}) | hard-coded 한글 추출 (classbot/builder 13 파일) | hard-coded 한글 추출 (21 게임 + 셸 + 메커니즘) — **mock 한글 데이터는 예외 컨벤션 적용** | placeholder 라 비용 작음 |
-| P1-5 TanStack Query | 신규 | 신규 | **이미 보유 (5.100.1)** — 정본 5.90.21 과 minor 호환 확인 | 신규 (BE 신설 시) | 신규 |
-| P2-1 Sentry | 신규 | 신규 | 신규 | 신규 | 신규 |
-| P2-2 AWS SDK | 리포트 PDF S3 + 이메일 알림 SES | 학습 자료 S3 | 봇 미디어 S3 + 알림 SES | (사용처 평가 후 — 게임 콘텐츠 이미지는 정적 호스팅으로 우선) | 사용처 평가 후 |
-| P2-3 Tiptap | 메모/회고 영역 가능성 | (미적용 후보) | **봇 빌더 핵심** — 우선 도입 | (미적용 — 게임은 인터랙션 위주) | (미적용) |
-| P2-4 packages 6개 | placeholder 3 → 실 구현 + 3 추가 | placeholder 3 → 실 구현 + 3 추가 | 모노레포 전환 후 packages 신설 | 모노레포 전환 후 packages 신설 | packages 신설 |
-| P2-5 Next 15 → 16 | (해당 없음) | (해당 없음) | (해당 없음) | **단독 Phase** — 21 게임 회귀 audit (`proc/audit/`) 필수 | (해당 없음) |
+| P0-1 pnpm | 신규 적용 | 신규 적용 | D-Lite 모노레포 전환과 합쳐 1 PR | 비실행 (§0) | 신규 적용 |
+| P0-2 ECS | 신규 적용 | 신규 적용 | 신규 적용 | 비실행 (§0) | 신규 적용 |
+| P0-3 RDS | 기존 docker compose → RDS | 기존 docker compose → RDS | drizzle 분리 결정 + RDS | 비실행 (§0) | 기존 docker compose → RDS |
+| P0-4 CI/CD | Vercel workflow 폐기 | Vercel workflow 폐기 | Vercel workflow 폐기 | 비실행 (§0) | Vercel workflow 폐기 |
+| P0-5 Secrets·Logs·S3·SES | 신규 적용 | 신규 적용 | 신규 적용 | 비실행 (§0) | 신규 적용 |
+| P1-1 JWT | Phase γ 의 BE 도입 시점 | BE 본격 시점 | bcryptjs → bcrypt + JWT | 비실행 (§0) | bcryptjs → bcrypt + JWT |
+| P1-2 Redis·BullMQ | BE 신규 | BE 신규 | BE 신규 + drizzle 호환성 검토 | 비실행 (§0) | BE 신규 |
+| P1-3 DS | shadcn 28+ 컴포넌트 마이그레이션 | shadcn 마이그레이션 | shadcn 마이그레이션 + sonner | 비실행 (§0) | shadcn 마이그레이션 |
+| P1-4 i18n | hard-coded 한글 추출 (planner-home/reports/manage/onboarding 28+ 컴포넌트) | hard-coded 한글 추출 (q/{infinity,talk,analysis,review}) | hard-coded 한글 추출 (classbot/builder 13 파일) | 비실행 (§0) | placeholder 라 비용 작음 |
+| P1-5 TanStack Query | 신규 | 신규 | **이미 보유 (5.100.1)** — 정본 5.90.21 과 minor 호환 확인 | 비실행 (§0) | 신규 |
+| P2-1 Sentry | 신규 | 신규 | 신규 | 비실행 (§0) | 신규 |
+| P2-2 AWS SDK | 리포트 PDF S3 + 이메일 알림 SES | 학습 자료 S3 | 봇 미디어 S3 + 알림 SES | 비실행 (§0) | 사용처 평가 후 |
+| P2-3 Tiptap | 메모/회고 영역 가능성 | (미적용 후보) | **봇 빌더 핵심** — 우선 도입 | 비실행 (§0) | (미적용) |
+| P2-4 packages 6개 | placeholder 3 → 실 구현 + 3 추가 | placeholder 3 → 실 구현 + 3 추가 | 모노레포 전환 후 packages 신설 | 비실행 (§0) | packages 신설 |
+| P2-5 Next 15 → 16 | (해당 없음) | (해당 없음) | (해당 없음) | 비실행 (§0) — Next 15 는 games 현행 정본 spec | (해당 없음) |
 
 ---
 
@@ -295,7 +277,7 @@
 | R-VRC | P0-4 | Vercel → ECS: 도메인 cutover 시 DNS·SSL·모니터링 재구성 | H | maintenance window 사전 공지. Route53 alias TTL 단축 → ALB 전환 → TTL 복구 |
 | R-AUT | P1-1 | Mock → JWT: 토큰 발행/검증/refresh 흐름 신설, 기존 mock user 일관성 깨짐 | H | MockAuthProvider 인터페이스 유지 → JwtAuthProvider 구현으로 교체. `IAuthProvider` 추상화는 planner 가 packages/auth 에 이미 placeholder |
 | R-DS | P1-3 | shadcn → DS: UI 시각 회귀 (특히 games 의 toolset/spacing/border-radius 룰) | H | games 는 `bun run ui:audit` 4 viewport (320/390/768/1280) 머지 전 필수. critical overflow 0 까지 fix |
-| R-I18N | P1-4 | i18n 추출: 모든 텍스트 마이그레이션 — 시간 큼 (planner 28+, games 21 게임 + 셸) | H | 도메인별 별 PR. mock 데이터 한글 예외 컨벤션 (apps/web/CLAUDE.md 명시). `useTranslations` 검사 lint rule 도입 |
+| R-I18N | P1-4 | i18n 추출: 모든 텍스트 마이그레이션 — 시간 큼 (planner 28+, games 21 게임 + 셸) | H | 도메인별 별 PR. mock 한글 예외는 **각 도메인 자체 권위 문서 기준** — games 의 경우 spec 선행 필요(외부 `apps/web/CLAUDE.md` 인용은 games 로컬 SoT 에서 재현 불가라 제거). `useTranslations` 검사 lint rule 도입 |
 | R-TQ | P1-5 | TanStack Query: 데이터 패칭 일괄 전환. classbot 만 보유 → version drift | M | classbot 5.100.1 → 정본 5.90.21 호환성 확인. queryKey 컨벤션 5 도메인 통일 |
 | R-DS-EXT | P1-3 | `@pullim/design-system` 외부 노출 정책: 본체팀 발행·버전·breaking change 정책 부재 | H | 본체팀과 별 합의 PR — `@pullim/design-system` GitHub release tag pin 정책 + semver + 5 도메인 향한 deprecation lead time. 본 plan §8/§9 와 동급 미해결 |
 | R-DRIZ | P0-3 | classbot drizzle → TypeORM: schema 재작성. 기존 drizzle migrations 폐기 | H | classbot drizzle 보유분 SQL dump → TypeORM entities 재생성 + migration 첫 generate. data preserving plan 필요 |
