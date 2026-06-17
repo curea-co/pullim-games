@@ -2,6 +2,13 @@
 
 **상태**: **PROPOSAL — 정렬 목표 문서. 실행 게이트 아님. 코드 변경 0.**
 
+> **⚠ 2026-06-17 갱신 (본문 일부 supersede) — codex #108 누적 반영:**
+> 본 plan 작성(2026-05) 이후 사용자(G1) 결정·실제 진행으로 아래가 **본문 §3.2 / §10 슬롯1 / §11.1·§11.4 / §12 의 "games 자체 NestJS BE 도입(옵션 B 확정)" 표기를 대체**한다:
+> - **games 는 자체 백엔드를 두지 않는다.** 루트 AGENTS.md "단일 백본 + 분리 백엔드 없음" 원칙 유지. BE 관심사는 **별 repo `pullim-api`** 에 적재(사용자 결정). 즉 본문의 "옵션 B = games 내부 NestJS BE 신설"은 **폐기**, games 는 SPA/단일백본 유지가 현행.
+> - **모노레포 전환은 thin monorepo 로 완료**(`apps/games/`, `apps/backend`·`packages/*` 미생성). 근거: `proc/plan/2026-06-17_monorepo-restructure.md` (PR #120). 본문 Phase α 의 모노레포 목표는 이 형태로 확정.
+> - **Next.js 15 는 games 현행 정본 spec**(`proc/spec/09 §9.1`) — "갭/lag" 아님. Phase 0a(Next 16)·0b(Tailwind4)·0c(shadcn 재발급) 등 spec 충돌 항목은 **spec 선행 개정 + G1/G3/G4 합의 후에만** 착수(본문 §0·각 Phase 선행 게이트와 동일).
+> - 본 plan 의 외부(planner/Q/classbot) 비교는 **맥락 참고만** — games 의사결정 근거 아님(루트 CLAUDE.md 독립 프로젝트 룰).
+
 ## 0. 권위 우선순위 (Authority Order) — 반드시 먼저 읽을 것
 
 본 plan 은 games 도메인의 **외부 사례 비교 + 진화 로드맵 제안서** 다. 실행 게이트로 채택된 적은 없으며, 다음 우선순위로 해석한다:
@@ -45,7 +52,7 @@
 본 plan 의 **완료 정의** (이 plan 전체):
 - 본 plan 문서가 머지 + 사용자(G1/G3/G4) 1차 review
 - Phase 0a~0d → α → β → ... 의 진입 게이트가 본 plan 내 §6 에 명문화
-- §3 갭 매트릭스가 games 시점에서 추적 가능한 단일 source 로 정착
+- §3 갭 매트릭스가 games 시점에서 추적 가능한 **추적 보조 문서**로 정착 (SoT 아님 — games 의 유일 권위는 `proc/spec/01~10`. 본 plan 은 판단 기준이 될 수 없는 보조 추적 문서)
 - §10 "사용자 결정 필요" 9 항목 중 최소 1 항목(BE 도입 옵션 A/B/C) 합의 → 후속 Phase 진입
 
 ---
