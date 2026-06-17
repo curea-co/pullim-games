@@ -2,7 +2,7 @@
 
 **작성일**: 2026-06-17
 **작성자**: 사용자(G1) 지시 + claude
-**상태**: **APPROVED (2026-06-17 사용자 G1) — 실행 중.**
+**상태**: **실행 완료 — PR #120 (base `feat/curriculum-phase1`, stacked). codex review 대기.** 로컬 검증 green(typecheck·lint·build·471 tests·ui:audit·e2e subset).
 
 **사용자 결정 (2026-06-17)**:
 - D3/D4: **thin monorepo 확정.** backend는 **별도 repo `pullim-api`에 적재** → games엔 `apps/backend`·`packages/*` 영구 미생성.
