@@ -47,7 +47,7 @@
 
 `pullim-games` 는 풀림 4종(`planner` / `Q` / `classbot` / `games`) 중 **나머지 셋과 가장 갭이 큰 별개 종**이다. 4종 중 셋(planner/Q/classbot, 참고용 외부 사례) 은 `pullim-study-demo` 추출본·Next.js 16·Tailwind 4·shadcn `base-nova/neutral/cssVariables:true` 라인 위에 있다고 알려져 있고, planner 는 이미 bun workspace 모노레포 + NestJS BE 도입 단계에 진입했다는 *맥락 정보* 가 있다. games 는 **독립 origin**·**Next.js 15** (현 `proc/spec/09 §9.1`)·**Tailwind 3**·**shadcn `new-york/slate/cssVariables:false`**·**DB 없음**·**mock 없음**·**21 게임 카탈로그 + `gen:registry` 자동화**·**자체 `proc/spec/01~10` 권위**·**`ANTHROPIC_API_KEY` 외부 API 사용** (서버 액션 경로, §1.2 참조)·**포트 3033** (의도된 분리) — 외부 사례와의 차이가 가장 크다.
 
-따라서 본 plan 은 모노레포 전환(`Phase α`) 이전에 **Phase 0a~0d (마이그레이션 사전 단계)** 를 신설해 단계적으로 갭을 메운 뒤 진입한다. 단, 각 Phase 의 *진입 자체* 는 본 리포 `proc/spec/01~10` 변경에 대한 사용자 합의가 선행되어야 한다 (예: Phase 0a 의 Next.js 16 업그레이드는 `proc/spec/09 §9.1` 의 "표준 Next.js 15.5+" 변경 합의 후 진입). 동시에 games 의 강점(`gen:registry`, 21 게임 카탈로그, 자체 SPEC 권위)을 보존한다. BE 도입 옵션은 **§12.1 에서 옵션 B 로 확정** 되었으며 (초안 시점에는 미결정이었으나 §11·§12 사용자 결정으로 해소), §3 옵션 비교 + §10 슬롯 표의 "현재 상태" 컬럼이 실제 의사결정 상태이다.
+외부(planner/Q/classbot) 비교는 **배경 설명일 뿐**이며 본 plan 의 진입 사유가 아니다 (루트 CLAUDE.md 독립 프로젝트 룰). 모노레포 전환(`Phase α`) 및 사전 단계 **Phase 0a~0d** 의 진입 사유는 "다른 리포와 맞추기" 가 아니라 **games 자체 `proc/spec/01~10` 개정·운영 필요**이며, 각 Phase 진입은 그 spec 변경에 대한 사용자 합의에 선행 종속된다 (예: Phase 0a 의 Next.js 16 은 `proc/spec/09 §9.1` "표준 Next.js 15.5+" 변경 합의 후에만 — 현행 15 는 정본 spec, 갭 아님). games 의 강점(`gen:registry`, 21 게임 카탈로그, 자체 SPEC 권위)은 보존한다. **BE 는 상단 2026-06 갱신대로 games 내부 미도입(단일 백본·별 repo `pullim-api`) — 본문의 "옵션 B = 자체 NestJS BE" 표기는 폐기.**
 
 본 plan 의 **완료 정의** (이 plan 전체):
 - 본 plan 문서가 머지 + 사용자(G1/G3/G4) 1차 review
@@ -164,7 +164,7 @@ games 의 현 상태는 BE 부재 + 정적 카탈로그 + client-side FSRS state
 #### 옵션 B — 자체 BE 도입 (NestJS 스택 채택, games spec 기준 재정의)
 
 - 풀림 생태계 사례를 *참고* 하되, games 의 `proc/spec/01~10` 요구사항에 맞춰 자체 NestJS 11 + TypeORM + Postgres 도입
-- entity 후보: `user`, `session`, `card-state` (FSRS), `event`, `streak`, `subscription` (V2 결제) — 시그니처는 games 의 기존 client-side state (zustand store + localStorage) 에서 역추론 + 본 리포 spec 기준 재정의 (외부 리포 코드 직접 import·복사 금지)
+- entity 후보: `user`, `session`, `card-state` (FSRS), `event`, `streak` — **결제·`subscription` 은 제외**. `proc/spec/05 §5.7` 상 결제·구독은 V2 트랙(D1~D7 합의 끝난 항목만 정식 정책)이라, 가격모델·무료/유료 경계·환불 미합의 상태에서 초기 BE entity 로 굳히지 않는다. D1~D7 합의 후 별 슬롯으로 승격. 시그니처는 games 의 기존 client-side state (zustand store + localStorage) 에서 역추론 + 본 리포 spec 기준 재정의 (외부 리포 코드 직접 import·복사 금지)
 - common·bootstrap·filter·interceptor 등 NestJS 표준 패턴은 일반 NestJS 관례를 따르되, games 내부 spec 기준의 계약을 먼저 정의한 뒤 그 계약을 만족하는 형태로 구현 (외부 리포 코드 참조 금지 — 루트 `CLAUDE.md` 룰)
 - `apps/backend/` (또는 `apps/games-backend/`) 신설 → 본 plan 의 Phase β
 - **장점**: cross-device 동기화 가능, V2 결제 도메인 직결, 4 풀림 공통 NestJS 관용 패턴 유지
@@ -488,7 +488,7 @@ games 는 본 plan 의 §3·§5 결정 (BE 옵션, spec 권위 처리) 을 *독�
 | # | 영역 | games 시점 결정 |
 |---|---|---|
 | 1 | **games 의 데이터 경계** | games 의 사용자·진척도·FSRS state 는 본 리포 내부 자산. 외부 도메인과의 데이터 교환 채널 미도입 (= 본 plan 의 Phase β BE 설계 시 cross-domain 데이터 export 채널 신설하지 않음). |
-| 2 | **games 의 인증** | **게스트 우선** — 비로그인 사용 가능. 로그인은 진척도·디바이스 동기화 용도. 외부 SSO 의존 미도입 (= 본 plan 의 Phase β 인증은 자체 Mock 헤더 + Cls 로 시작). |
+| 2 | **games 의 인증** | **게스트 우선** — 비로그인 사용 가능 (`proc/spec/05 §5.2` V1 fingerprint 비로그인 정합). 로그인은 진척도·디바이스 동기화 용도. 외부 SSO 의존 미도입. **인증 구현 방식(Mock 헤더/Cls/magic link/JWT 등)은 별 spec PR 에서 결정** — 본 plan 에서 확정 전제로 삼지 않음. |
 | 3 | **games 의 디자인 시스템 의존성** | shadcn 컴포넌트는 자체 보유. games 내부에 외부 디자인 시스템 패키지 의존성 미도입 (= 본 plan 의 Phase 0b·0c 에서 외부 DS 패키지 import 안 함). |
 
 ### 11.3 자동 폐기된 옵션 (games 의 후속 작업 결정에 영향)
@@ -527,7 +527,7 @@ games 의 의무는 외부에서 어떤 공급 방식이 결정되든 그것을 
 함의:
 - 게스트 모드 = localStorage (인증 없이 진척도 임시 저장)
 - 로그인 시 = 서버 진척도 + 디바이스 동기화 (`POST /api/progress/sync` 류 — 정식 라우트 시그니처는 별 spec PR)
-- 스택: NestJS 11 + TypeORM + Postgres. 인증은 Mock 헤더 + Cls 시작, **Redis·JWT 는 후속 결정**.
+- 스택(BE 분리 시 — 상단 2026-06 갱신상 별 repo `pullim-api`): NestJS 11 + TypeORM + Postgres. **인증 방식(Mock 헤더/Cls/JWT 등)은 별 spec PR 에서 결정** — 현행 정책(`05 §5.2`)은 V1 fingerprint 비로그인. games 내부 BE 신설은 폐기(단일 백본).
 - games BE 는 본 리포 spec 기준 자체 정의 (§3.2 옵션 B 의 외부 코드 직접 참조 금지 원칙 재확인)
 
 진입 순서 (§6 의 상위 Phase 명명 유지, BE 도입 세부 작업은 Phase β 내부의 *하위 단계* 로 표기):
