@@ -11,7 +11,7 @@
 | 권위 / SoT | `proc/spec/01~10` (독립 프로젝트). 외부 풀림 스택은 의사결정 근거 아님. |
 | 런타임 | **Bun + Next.js 15 + Vercel** — 현행 정본 spec(`proc/spec/09 §9.1`). "갭/lag" 아님. major 변경(예: Next 16, pnpm)은 spec 선행 개정 + G1/G3/G4 합의 후에만. |
 | 디렉터리 구조 | **현행: 루트 `src/` 구조** (`src/app`, `src/games`, `src/lib` …). 모노레포 전환은 별 제안(PR #120) — **미머지, 본 브랜치 미반영**. |
-| 백엔드 | games 내부 분리 백엔드 없음 — **단일 백본**(루트 AGENTS.md). 새 백본 추가·분리는 메모리 룰상 **비결정 사안**(별 spec 합의 전엔 단정하지 않음). |
+| 백엔드 | games 내부 분리 백엔드 없음 — **단일 백본**(루트 AGENTS.md). **새 백본 추가·분리 제안은 현행 규칙상 금지**(메모리 룰 `project_architecture_decision`·`feedback_scale_hypercasual`) — 별 spec 합의 없이는 검토 대상이 아니다. |
 | 인증 | 게스트 우선·비로그인(`proc/spec/05 §5.2`). 구현 방식은 별 spec PR. |
 | 결제·랭킹·RPG | 하이퍼캐주얼 룰상 도입 X (단일 백본 + 단순 진행도). |
 | AI 흐름 | `ANTHROPIC_API_KEY` 는 서버 액션(`src/app/manage/content/actions.ts` → `src/lib/server/ai/anthropic.ts`) 경로. |
