@@ -1,12 +1,12 @@
 # 2026-05-27 — games 도메인 진화 plan (외부 사례 비교 포함)
 
 **상태**: **SUPERSEDED (2026-06-17) — 기록 보관용 historical draft. 활성 plan 아님.**
-본문의 BE 옵션 B(자체 NestJS)·Phase α 모노레포(미래)·cross-domain 정렬 서술은 모두 **2026-06 결정/실제 구현으로 대체된 초안 trace**다 — 실행 근거로 쓰지 않는다. **games 현행 기준은 `proc/spec/01~10` + `proc/plan/2026-06-17_monorepo-restructure.md`(PR #120, thin monorepo 완료) + BE 는 별 repo `pullim-api`(games 내부 미도입, 단일 백본).** 아래 본문은 이 상태 표기 아래에서만 historical 로 읽는다.
+본문의 BE 옵션 B(자체 NestJS)·Phase α 모노레포(미래)·cross-domain 정렬 서술은 모두 **2026-06 결정으로 대체된 초안 trace**다 — 실행 근거로 쓰지 않는다. **games 현행 기준은 `proc/spec/01~10` + 루트 `CLAUDE.md`/`AGENTS.md`.** (모노레포 전환은 **별 PR #120** 에서 thin monorepo 방향으로 진행 중 — *이 브랜치엔 미반영*, `apps/games/`·restructure plan 은 PR #120 머지 후 존재. BE 는 별 repo `pullim-api`, games 내부 미도입·단일 백본.) 아래 본문은 이 상태 표기 아래에서만 historical 로 읽는다.
 
 > **⚠ 2026-06-17 갱신 (본문 일부 supersede) — codex #108 누적 반영:**
 > 본 plan 작성(2026-05) 이후 사용자(G1) 결정·실제 진행으로 아래가 **본문 §3.2 / §10 슬롯1 / §11.1·§11.4 / §12 의 "games 자체 NestJS BE 도입(옵션 B 확정)" 표기를 대체**한다:
 > - **games 는 자체 백엔드를 두지 않는다.** 루트 AGENTS.md "단일 백본 + 분리 백엔드 없음" 원칙 유지. BE 관심사는 **별 repo `pullim-api`** 에 적재(사용자 결정). 즉 본문의 "옵션 B = games 내부 NestJS BE 신설"은 **폐기**, games 는 SPA/단일백본 유지가 현행.
-> - **모노레포 전환은 thin monorepo 로 완료**(`apps/games/`, `apps/backend`·`packages/*` 미생성). 근거: `proc/plan/2026-06-17_monorepo-restructure.md` (PR #120). 본문 Phase α 의 모노레포 목표는 이 형태로 확정.
+> - **모노레포 전환 방향은 thin monorepo** (`apps/games/` + `apps/backend`·`packages/*` 미생성) — **별 PR #120 에서 진행 중이며 이 브랜치(`docs/alignment-plan`)에는 미반영**. 본문 Phase α 의 목표 형태만 이로 확정 (실제 `apps/` 구조·`proc/plan/2026-06-17_monorepo-restructure.md` 는 PR #120 머지 기준 — 이 브랜치에서는 검증 대상 아님).
 > - **Next.js 15 는 games 현행 정본 spec**(`proc/spec/09 §9.1`) — "갭/lag" 아님. Phase 0a(Next 16)·0b(Tailwind4)·0c(shadcn 재발급) 등 spec 충돌 항목은 **spec 선행 개정 + G1/G3/G4 합의 후에만** 착수(본문 §0·각 Phase 선행 게이트와 동일).
 > - 본 plan 의 외부(planner/Q/classbot) 비교는 **맥락 참고만** — games 의사결정 근거 아님(루트 CLAUDE.md 독립 프로젝트 룰).
 
@@ -31,7 +31,7 @@
 
 ---
 
-> **상태**: DRAFT (2026-05-27). 본 plan 은 코드 변경 0 — 정렬 로드맵 문서화만. 진입은 진행 중인 별 PR 마감 후.
+> **상태 (2026-05-27 원문 당시)**: DRAFT — *historical*. **현행 상태는 문서 최상단 SUPERSEDED 표기를 따른다** (본 블록은 2026-05 작성 시점의 과거 상태 기록일 뿐). 본 plan 은 코드 변경 0.
 > **본 리포의 유일한 권위 문서**:
 > - `proc/spec/01-AI-명령지침.md` ~ `proc/spec/10-개발-로드맵.md` (games 자체 SPEC, 10건)
 > - 루트 `CLAUDE.md`, `AGENTS.md` (운영 규칙)
