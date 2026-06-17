@@ -1,6 +1,7 @@
 # 2026-05-27 — games 도메인 진화 plan (외부 사례 비교 포함)
 
-**상태**: **PROPOSAL — 정렬 목표 문서. 실행 게이트 아님. 코드 변경 0.**
+**상태**: **SUPERSEDED (2026-06-17) — 기록 보관용 historical draft. 활성 plan 아님.**
+본문의 BE 옵션 B(자체 NestJS)·Phase α 모노레포(미래)·cross-domain 정렬 서술은 모두 **2026-06 결정/실제 구현으로 대체된 초안 trace**다 — 실행 근거로 쓰지 않는다. **games 현행 기준은 `proc/spec/01~10` + `proc/plan/2026-06-17_monorepo-restructure.md`(PR #120, thin monorepo 완료) + BE 는 별 repo `pullim-api`(games 내부 미도입, 단일 백본).** 아래 본문은 이 상태 표기 아래에서만 historical 로 읽는다.
 
 > **⚠ 2026-06-17 갱신 (본문 일부 supersede) — codex #108 누적 반영:**
 > 본 plan 작성(2026-05) 이후 사용자(G1) 결정·실제 진행으로 아래가 **본문 §3.2 / §10 슬롯1 / §11.1·§11.4 / §12 의 "games 자체 NestJS BE 도입(옵션 B 확정)" 표기를 대체**한다:
@@ -101,7 +102,7 @@ games: `proc/spec/01-AI-명령지침.md` ~ `10-개발-로드맵.md` (10개) — 
 
 ### 1.4 BE 부재의 함의
 
-참고: 외부 사례 (planner 등) 는 이미 9 endpoint(`GET /api/me`, 도메인 CRUD 등) + Postgres 가 동작 중인 상태에서 NestJS 도입을 진행했다는 *맥락 정보* 가 있다 — games 와는 출발점이 다름.
+참고: games 는 BE·DB 부재 상태에서 출발하므로 외부 도메인과 출발점이 다르다. (외부 프로젝트의 구체 endpoint·CRUD·DB 계약 묘사는 본 문서에 기록하지 않는다 — 루트 CLAUDE.md 독립 프로젝트 룰.)
 games 는 **Drizzle 이 없고**, `src/app/api/` 에는 `/api/event` 만 정의돼 있을 뿐 (Vercel Analytics + 자체 이벤트 로그용). Anthropic 호출은 별도 API 라우트가 아니라 `src/app/manage/content/actions.ts` 서버 액션 → `src/lib/server/ai/anthropic.ts` 흐름이다. 사용자 별 server state 는 거의 없고 FSRS state·streak 도 localStorage 기반. 따라서 BE 도입은 외부 사례와 직접 비교 불가한 결정 (§3 옵션).
 
 ### 1.5 진행 중 별 PR — 본 plan 의 진입 전제
@@ -326,7 +327,7 @@ games 는 자체 `proc/spec/01~10` 을 권위로 둔다. planner 정렬 시 다�
 
 → Phase 0a/0b/0c 머지 후 Phase α 진입.
 
-### Phase α — 모노레포 재편 (구조 재편 1 PR + 컨벤션 문서 갱신 1 PR, 분리 의무)
+### Phase α — 모노레포 재편 — **✅ 완료 (thin monorepo, PR #120)**. 아래는 historical 설계 trace
 
 **목표**: 외부 사례를 *참고* 하되, games spec 기준으로 모노레포 재편. 동작 회귀 없이 구조만 재편.
 
@@ -416,7 +417,7 @@ games 의 client-side FSRS state → server state 전환. 본 plan 에서는 상
 |---|---|
 | Phase 0a/0b/0c 순서 = Next.js → Tailwind → shadcn | 의존성 방향: shadcn 은 Tailwind 4 호환 필요, Tailwind 4 는 Next.js postcss pipeline 의존 |
 | Phase 0d 는 결정만, 실제 적용은 Phase α PR 에 합침 | 단독 PR 가치 낮음 (변경 0). 결정 trace 만 보존 |
-| 본 plan 초안 default BE 옵션 = A (정렬 비용 최소화 기준). **현재 상태**: §12.1 사용자 결정으로 옵션 B 확정 | 옵션 B 채택은 사용자 G1 합의 (§12.1) 로 확정. default 표기는 초안 의사결정 trace 보존 |
+| 본 plan 초안 default BE 옵션 = A. **현재 상태(SUPERSEDED)**: 구 §12.1 "옵션 B" 는 폐기 — games 내부 BE 미도입(단일 백본), BE 는 별 repo `pullim-api` | 초안 trace 보존용. 실행 근거 아님 |
 | 본 plan default `proc/spec/01~10` 처리 = 옵션 A (그대로 유지) | 자율성 보존 우선 |
 | 본 plan default `gen:registry` 위치 = `apps/games/scripts/` | 단순성 우선. `packages/games-registry/` 는 다른 풀림이 이 registry 를 import 할 때만 의미 있음 — 현 4 풀림 중 그런 사례 없음 |
 
@@ -455,7 +456,7 @@ games 의 client-side FSRS state → server state 전환. 본 plan 에서는 상
 
 | # | 슬롯 | 옵션 | default (원안) | 현재 상태 | 진입 차단 Phase |
 |---|---|---|---|---|---|
-| 1 | **BE 도입 옵션** (§3.2) | A (미도입) / B (자체 NestJS BE) / C (pullim 본체 흡수) | A | **B 확정** (§12.1, C 폐기 §11.3) | Phase β |
+| 1 | **BE 도입 옵션** (§3.2) | A (미도입) / B (자체 NestJS BE) / C (pullim 본체 흡수) | A | **(SUPERSEDED) games 내부 BE 미도입 — 단일 백본 유지(루트 AGENTS.md). BE 는 별 repo `pullim-api`. 구 "B 확정" 은 폐기된 historical** | — |
 | 2 | **`proc/spec/01~10` 권위 처리** (§5) | A (유지) / B (부분 흡수) / C (전체 흡수) | A | (미정 — default 유지) | Phase δ |
 | 3 | **`gen:registry` 위치** (Phase 0d) | `apps/games/scripts/` / `packages/games-registry/` | `apps/games/scripts/` | (미정 — default 유지) | Phase α |
 | 4 | **`proc/` 위치** (Phase α, 권위 문서 라우팅 정합) | root `proc/` 유지 / `apps/games/proc/` 이동 | **root `proc/` 유지** (권위 라우팅 원자성) | (미정 — default 유지) | Phase α |
@@ -518,11 +519,11 @@ games 의 의무는 외부에서 어떤 공급 방식이 결정되든 그것을 
 
 > **범위**: 본 절은 games 의 후속 작업 결정만 기록한다. 다른 도메인의 같은 종류 결정은 본 리포의 권위 범위가 아니므로 별도 상위 계획 문서로 이관.
 
-### 12.1 games BE 옵션 — 옵션 B 확정
+### 12.1 games BE 옵션 — (SUPERSEDED) 구 옵션 B → 현행: games 내부 BE 미도입
 
 | 도메인 | 결정 |
 |---|---|
-| games | **B. 자체 NestJS BE 도입** (§3.2 옵션 B) |
+| games | **(SUPERSEDED) 구안: 자체 NestJS BE 도입. 현행 결정: games 내부 BE 미도입 — 단일 백본 유지(루트 AGENTS.md), BE 는 별 repo `pullim-api`.** |
 
 함의:
 - 게스트 모드 = localStorage (인증 없이 진척도 임시 저장)
