@@ -14,7 +14,7 @@
 - **Typing** — 타이핑 입력
 - **WordMatch** — 짝 맞추기
 
-**21개 게임** (`src/games/`):
+**21개 게임** (`apps/games/src/games/`):
 ```
 bio-taxonomy            chemistry-balance       cloze-multi
 custom-blank            custom-multiple-choice  custom-typing
@@ -29,34 +29,30 @@ math-quick-quiz         physics-vector          vocab-typing
 
 ## 구조
 
+**Turborepo 모노레포** (2026-06-17~) — planner/Q 와 동형 토폴로지. 앱은 `apps/games/`.
+thin monorepo: `apps/backend`·`packages/*` 미생성(BE 는 별 repo `pullim-api`).
+
 ```
-pullim-games/
+pullim-games/                    # 모노레포 루트
+├── package.json                 # workspaces:["apps/*","packages/*"], scripts=turbo
+├── turbo.json · tsconfig.base.json
+├── docker-compose.yml · bun.lock
 ├── input/             # 입력 자산 (아이콘 시안, 로고)
-├── proc/              # SPARK 워크플로우
-│   ├── spec/            # 01~10 정식 SPEC (권위 문서)
-│   ├── plan/            # 작업 계획
-│   ├── archive/         # 완료 plan + design-audit 아카이브
-│   ├── research/        # 조사·분석
-│   └── audit/           # 게임 카탈로그 정기 감사 (games 고유)
 ├── output/            # 산출물
-├── e2e/               # playwright e2e
-├── scripts/
-│   └── generate-registry.ts   # 게임 레지스트리 자동 생성 (predev/prebuild)
+├── proc/              # SPARK 워크플로우 (spec/plan/archive/research/audit)
 ├── daily_outcome/     # PM 일일 보고 (CONVENTION.md 기반)
-└── src/
-    ├── app/
-    │   ├── games/, manage/, api/
-    │   ├── layout.tsx, page.tsx
-    │   ├── manifest.ts, opengraph-image.tsx, twitter-image.tsx
-    │   └── globals.css
-    ├── components/
-    │   ├── shell/, game-shell/                  # 셸
-    │   ├── game-hub/, dashboard/, GameCard, RecommendationCard/  # 허브·카탈로그
-    │   ├── game-mechanics/{Blank,QuickQuiz,Typing,WordMatch}Component.tsx
-    │   ├── manage/                              # 관리 UI
-    │   └── ui/                                  # shadcn/ui
-    ├── games/{21개 게임}/                       # 각 게임별 components/, content/, schema/, checkAnswer
-    └── lib/{core,games,server,utils.ts}/
+├── .github/workflows/ # ci · e2e-nightly · codex-review
+└── apps/
+    └── games/                   # ← 앱 본체 (@pullim-games/games, 포트 3033)
+        ├── package.json next.config.ts tsconfig.json tailwind.config.ts
+        ├── e2e/                 # playwright e2e
+        ├── scripts/generate-registry.ts   # 레지스트리 자동 생성 (predev/prebuild)
+        ├── public/
+        └── src/
+            ├── app/             # games/, manage/, api/ · layout/page · manifest 등
+            ├── components/      # shell·game-shell·game-hub·dashboard·game-mechanics·manage·ui
+            ├── games/{21개 게임}/   # 게임별 components/, content/, schema/, checkAnswer
+            └── lib/{core,games,server,utils.ts}/
 ```
 
 ## 시작
@@ -72,7 +68,7 @@ bun dev          # http://localhost:3033 — predev에서 gen:registry 자동 �
 bun dev               # 개발 서버 (포트 3033)
 bun run build         # production 빌드
 bun run gen:registry  # 게임 레지스트리 수동 갱신
-bun typecheck         # tsc --noEmit
+bun run typecheck     # turbo → tsc --noEmit (apps/games)
 bun run lint          # eslint
 bun test              # vitest
 bun run test:e2e      # playwright

@@ -9,6 +9,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# 모노레포 계약: dev/build/test 의 "진입점"은 루트 turbo (AGENTS.md·CLAUDE.md 명시).
+# 따라서 typecheck/lint/build/e2e 는 루트에서 `bun run <script>`(=turbo) 로 호출한다.
+# 앱 하위 경로가 실제로 필요한 step(registry diff·게임별 vitest 샤딩·playwright 툴링)만
+# 그 step 에 한해 working-directory: apps/games 를 준다. (codex PR #120 지적 반영)
 jobs:
   validate:
     name: validate (typecheck + lint + registry sync)
@@ -26,10 +30,10 @@ jobs:
       - name: Generate game registry
         run: bun run gen:registry
 
-      # Plan R §5.3 가드 — manifest 와 generated 파일 sync 검증
+      # Plan R §5.3 가드 — manifest 와 generated 파일 sync 검증 (루트 기준 전체 경로).
       - name: Verify registry.generated.ts is in sync
         run: |
-          if ! git diff --exit-code src/lib/games/registry.generated.ts; then
+          if ! git diff --exit-code apps/games/src/lib/games/registry.generated.ts; then
             echo "::error::registry.generated.ts is out of sync. Run 'bun run gen:registry' and commit." >&2
             exit 1
           fi
@@ -57,17 +61,21 @@ jobs:
         uses: dorny/paths-filter@v3
         with:
           list-files: shell
+          # paths-filter 는 리포 루트 기준 glob. 모노레포 전환으로 apps/games/ prefix.
           filters: |
             core:
-              - 'src/lib/core/**'
-              - 'src/lib/games/**'
-              - 'scripts/**'
+              - 'apps/games/src/lib/core/**'
+              - 'apps/games/src/lib/games/**'
+              - 'apps/games/scripts/**'
+              - 'apps/games/package.json'
+              - 'apps/games/tsconfig.json'
+              - 'apps/games/vitest.config.ts'
               - 'package.json'
               - 'bun.lock'
-              - 'tsconfig.json'
-              - 'vitest.config.ts'
+              - 'turbo.json'
+              - 'tsconfig.base.json'
             games:
-              - added|modified: 'src/games/**'
+              - added|modified: 'apps/games/src/games/**'
 
       - id: resolve
         env:
@@ -76,19 +84,23 @@ jobs:
           GAME_FILES: ${{ steps.filter.outputs.games_files }}
         run: |
           set -euo pipefail
-          ALL_GAMES=$(ls src/games | sort | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          # 게임 카탈로그는 앱 하위 경로 — 루트 기준 전체 경로로 나열.
+          ALL_GAMES=$(ls apps/games/src/games | sort | jq -R -s -c 'split("\n") | map(select(length > 0))')
           if [ "$EVENT" = "push" ] || [ "$CORE" = "true" ]; then
             echo "core_changed=true" >> "$GITHUB_OUTPUT"
             echo "games=$ALL_GAMES" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          IDS=$(echo "$GAME_FILES" | tr ' ' '\n' | awk -F/ 'NF>=3 && $1=="src" && $2=="games" {print $3}' | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          # GAME_FILES 는 리포 루트 기준 경로: apps/games/src/games/<id>/...
+          IDS=$(echo "$GAME_FILES" | tr ' ' '\n' | awk -F/ 'NF>=5 && $1=="apps" && $2=="games" && $3=="src" && $4=="games" {print $5}' | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
           if [ "$IDS" = "[]" ] || [ -z "$IDS" ]; then
             IDS='[]'
           fi
           echo "core_changed=false" >> "$GITHUB_OUTPUT"
           echo "games=$IDS" >> "$GITHUB_OUTPUT"
 
+  # 게임별 vitest 샤딩 — 특정 앱 경로(src/games/<id>)만 실행하는 app-scoped job.
+  # codex 지적상 "앱 하위 경로가 꼭 필요한" 경우라 step 에서 app cwd 사용.
   test-core:
     name: test (lib/core)
     needs: detect-changes
@@ -102,6 +114,7 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run gen:registry
       - run: bunx vitest run src/lib/core
+        working-directory: apps/games
 
   test-game:
     name: test (game)
@@ -121,6 +134,7 @@ jobs:
       - run: bun run gen:registry
       # 테스트가 없는 게임은 vitest 가 exit 1 — passWithNoTests 로 허용.
       - run: bunx vitest run --passWithNoTests src/games/${{ matrix.game }}
+        working-directory: apps/games
 
   test-auth:
     name: test (auth)
@@ -135,6 +149,7 @@ jobs:
       # 인증 스택(password/session/csrf/same-origin/schemas/라우트) 단위·라우트 테스트.
       # DB 불필요(라우트 테스트는 DB 계층 mock). plan 완료조건의 회귀 가드.
       - run: bunx vitest run src/lib/server/http src/lib/server/auth src/app/api/auth
+        working-directory: apps/games
 
   build:
     name: build (Next.js)
@@ -146,6 +161,7 @@ jobs:
         with:
           bun-version: latest
       - run: bun install --frozen-lockfile
+      # 루트 turbo 진입점 — prebuild(gen:registry) 포함.
       - run: bun run build
 
   # Plan QA §4.6 — Playwright e2e (10 official 게임 × 6 viewport = 60 케이스).
@@ -162,8 +178,10 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run gen:registry
 
+      # @playwright/test 바이너리는 앱 workspace(isolated linker) 에 설치 — app cwd 필요.
       - name: Resolve Playwright version
         id: pw
+        working-directory: apps/games
         run: |
           VERSION=$(node -p "require('@playwright/test/package.json').version")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
@@ -176,8 +194,10 @@ jobs:
           key: pw-${{ runner.os }}-${{ steps.pw.outputs.version }}
 
       - name: Install Playwright Chromium + system deps
+        working-directory: apps/games
         run: bunx playwright install --with-deps chromium
 
+      # 루트 turbo 진입점(=`bun --filter @pullim-games/games test:e2e`).
       - name: Run e2e
         run: bun run test:e2e
 
@@ -185,7 +205,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
+          # upload-artifact 는 리포 루트 기준 경로.
           path: |
-            playwright-report/
-            test-results/
+            apps/games/playwright-report/
+            apps/games/test-results/
           retention-days: 7

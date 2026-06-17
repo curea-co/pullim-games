@@ -6,16 +6,18 @@
 
 > **공통 운영 규칙은 `~/dev_git/.pullim-meta/CONVENTION.md` 참조** (게이트키퍼 G1~G4 정의, daily_outcome 양식, 명령 표준, 배포 정책).
 
+> **모노레포 구조 (2026-06-17~)**: 앱은 `apps/games/` 에 위치 (Turborepo, planner/Q 와 동형 토폴로지). 본 문서의 `apps/games/src/...`·`apps/games/scripts/...` 등 앱 경로는 **모노레포 루트 기준**. dev/build/test 는 루트에서 turbo 로 실행 (`bun dev` = `turbo dev`, `bun run build`·`bun run test`). backend·packages 는 thin monorepo 정책상 미생성 — BE 는 별 repo `pullim-api`. 근거: `proc/plan/2026-06-17_monorepo-restructure.md`.
+
 ## 1. 도메인 범위
 
 | 영역 | 경로 |
 |---|---|
-| **게임 라우트** | `src/app/games/`, `src/app/manage/` (관리) |
-| **게임 카탈로그** | `src/games/{21개 게임}/` |
-| **메커니즘 컴포넌트** | `src/components/game-mechanics/{Blank,QuickQuiz,Typing,WordMatch}Component.tsx`, `useAttemptCounter.ts` |
-| **게임 셸·허브** | `src/components/{game-shell,game-hub,dashboard,GameCard,RecommendationCard}/` |
-| **공유 lib** | `src/lib/{core,games,server,utils.ts}/` |
-| **레지스트리 자동화** | `scripts/generate-registry.ts` (predev/prebuild에서 실행) |
+| **게임 라우트** | `apps/games/src/app/games/`, `apps/games/src/app/manage/` (관리) |
+| **게임 카탈로그** | `apps/games/src/games/{21개 게임}/` |
+| **메커니즘 컴포넌트** | `apps/games/src/components/game-mechanics/{Blank,QuickQuiz,Typing,WordMatch}Component.tsx`, `useAttemptCounter.ts` |
+| **게임 셸·허브** | `apps/games/src/components/{game-shell,game-hub,dashboard,GameCard,RecommendationCard}/` |
+| **공유 lib** | `apps/games/src/lib/{core,games,server,utils.ts}/` |
+| **레지스트리 자동화** | `apps/games/scripts/generate-registry.ts` (predev/prebuild에서 실행) |
 
 ### 21개 게임 (2026-05-15 기준)
 
@@ -36,11 +38,12 @@
 
 | 영역 | 경로 | 주의 |
 |---|---|---|
-| 게임 셸 | `src/components/shell/`, `src/components/game-shell/` | 21개 게임 공통 셸 — 수정 시 전 게임 영향 |
-| UI 프리미티브 | `src/components/ui/` | shadcn/ui + Radix |
+| 게임 셸 | `apps/games/src/components/shell/`, `apps/games/src/components/game-shell/` | 21개 게임 공통 셸 — 수정 시 전 게임 영향 |
+| UI 프리미티브 | `apps/games/src/components/ui/` | shadcn/ui + Radix |
 | 디자인 시스템 | `proc/spec/08-디자인-시스템.md` (read only) | |
-| 게임 lib | `src/lib/core/`, `src/lib/games/` | FSRS·checkAnswer 등 핵심 로직 |
-| 설정 | `next.config.ts`, `eslint.config.mjs`, `package.json`, `tsconfig.json`, `tailwind.config.ts` | |
+| 게임 lib | `apps/games/src/lib/core/`, `apps/games/src/lib/games/` | FSRS·checkAnswer 등 핵심 로직 |
+| 앱 설정 | `apps/games/{next.config.ts, eslint.config.mjs, package.json, tsconfig.json, tailwind.config.ts}` | |
+| 모노레포 설정 | 루트 `package.json`(workspaces), `turbo.json`, `tsconfig.base.json` | 전 앱 영향 |
 
 ## 3. 권위 문서 (read only)
 
@@ -65,18 +68,18 @@
 
 ### 해도 되는 것
 
-- 21개 게임 중 단일 게임 작업: `src/games/<game-name>/` 신규·수정
-- 4 메커니즘 컴포넌트 보강 (`src/components/game-mechanics/`)
-- `src/games/<game-name>/`에서 메커니즘 import해서 콘텐츠·스키마·distractor 추가
+- 21개 게임 중 단일 게임 작업: `apps/games/src/games/<game-name>/` 신규·수정
+- 4 메커니즘 컴포넌트 보강 (`apps/games/src/components/game-mechanics/`)
+- `apps/games/src/games/<game-name>/`에서 메커니즘 import해서 콘텐츠·스키마·distractor 추가
 - `proc/audit/`에 카탈로그 정기 감사 산출물 추가 (다른 풀림 프로젝트의 `proc/knowhow/`에 대응되는 자리)
 - 새 게임 추가 후 `bun run gen:registry`로 레지스트리 갱신
 
 ### 사용자 명시 확인 후
 
 - 게임 셸·메커니즘 컴포넌트 시그니처 변경 → 21개 게임 영향
-- `src/lib/core/`, `src/lib/games/` 공통 로직 수정 (checkAnswer, FSRS 등)
+- `apps/games/src/lib/core/`, `apps/games/src/lib/games/` 공통 로직 수정 (checkAnswer, FSRS 등)
 - `proc/spec/01~10` 권위 문서 수정 — G1/G3/G4 합의 필요
-- `scripts/generate-registry.ts` 수정 → predev/prebuild 자동 트리거
+- `apps/games/scripts/generate-registry.ts` 수정 → predev/prebuild 자동 트리거
 
 ### 하면 안 되는 것
 
@@ -88,7 +91,7 @@
 | 상황 | 명령 |
 |---|---|
 | 개발 (dev) | `bun dev` → http://localhost:**3033** (다른 풀림은 3030, games만 3033) |
-| 정적 검증 | `bunx tsc --noEmit && bun run lint` |
+| 정적 검증 | `bun run typecheck && bun run lint` (루트 turbo — 앱 tsconfig 은 apps/games) |
 | 빌드 | `bun run build` (predev/prebuild에서 `gen:registry` 자동 실행) |
 | 단위 테스트 | `bun test` (vitest) |
 | e2e | `bun run test:e2e` (playwright) |
