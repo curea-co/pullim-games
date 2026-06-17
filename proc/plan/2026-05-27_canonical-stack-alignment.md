@@ -4,6 +4,7 @@
 **작성자**: PM (박승훈) + 컨트롤타워 AI
 **적용 대상**: `pullim-planner` / `pullim-Q` / `pullim-classbot` / `pullim-games` / `pullim-games-arcade`
 **상태**: **PROPOSAL — 합의·게이트 대기 중. 실행 문서 아님.**
+**games repo 사본 한정**: 본 파일은 5 도메인 컨트롤타워 *참조 스냅샷*이며 games 의 SoT 가 아니다 (games SoT = `proc/spec/01~10`). 살아있는 컨트롤타워 원본은 games repo 밖(`.pullim-meta/`)에 있고, games 사본은 §16.1 결정에 따른 **기록 보관용 참조본**일 뿐 — 외부 도메인 스냅샷에 종속된 실행 지침이 아니다. games 작업은 본 문서가 아니라 `proc/spec` → `CLAUDE.md` → `AGENTS.md` 라우팅으로만 판단한다.
 **완료 정의**: §1 목표 충족 후 PM 명시 시점에 archive 이관
 
 ---
@@ -139,7 +140,7 @@
 |---|---|---|---|---|---|
 | G1 | 패키지 매니저 | pnpm 10.26.1 | bun 1.3.12 | **L** (lockfile/Dockerfile/workflow 동시 갱신) | 5 도메인 동일 — 5건 일괄 |
 | G2 | 모노레포 | Turborepo + apps/{web,backend} + packages/* | planner/Q/arcade 일부 / classbot·games 미완 | **M** | classbot/games 가 모노레포 전환 선행 필요 |
-| G3 | Next.js | 16.1.2 | 16 (games 만 15) | **S** (games 만 1 단계) | games — Next 15 → 16 |
+| G3 | Next.js | 16.1.2 | 16 (games 는 15 — **현행 정본 spec, 갭 아님**) | **games 비대상** | 외부 도메인만. games 는 `proc/spec/09 §9.1` 상 Next 15 정본 — upgrade/갭 대상 아님 |
 | G4 | BE 프레임워크 | NestJS 11 (common·config·database 표준 모듈) | planner/Q/classbot/arcade skeleton, games 부재 | **L** | games — BE 신설 결정 필요 |
 | G5 | ORM | TypeORM 0.3.28 + naming-strategies | classbot drizzle, 나머지 미적용 | **L** | classbot — drizzle → TypeORM 마이그레이션 |
 | G6 | 인증 | Passport/JWT + bcrypt | Mock 4건, arcade bcryptjs, games 없음 | **L** | 5건 모두 JWT 도입 |
@@ -214,11 +215,13 @@
 
 ## 7. 도메인별 적용 매트릭스
 
-각 도메인이 어디서 출발해서 어디까지 가는지:
+각 도메인이 어디서 출발해서 어디까지 가는지 (**외부 도메인 위주 — games 열은 비실행/참조 제외**):
+
+> **games 열 전체는 비실행 참조다** (§0 carve-out). 아래 표의 games 셀에 적힌 pnpm·ECS·JWT·DS·TanStack·Next 16·backend 작업은 **현행 games spec 미반영**이라 실행 backlog 가 아니며, 각 항목은 games spec 선행 개정 + G1/G3/G4 합의 후에만 적용된다. 이 표만 보고 games PR 범위를 열지 않는다.
 
 | Phase | planner (Phase β 진행) | Q (D-Lite 머지) | classbot (D-Lite 진행) | games (alignment PR #108) | arcade (Phase 1 머지) |
 |---|---|---|---|---|---|
-| P0-1 pnpm | 신규 적용 | 신규 적용 | D-Lite 모노레포 전환과 합쳐 1 PR | alignment plan 의 Phase 0a 로 흡수 | 신규 적용 |
+| P0-1 pnpm | 신규 적용 | 신규 적용 | D-Lite 모노레포 전환과 합쳐 1 PR | **비실행 — games 현행 bun 정본(spec/09 §9.1). pnpm 은 spec 선행 개정 후에만** | 신규 적용 |
 | P0-2 ECS | 신규 적용 | 신규 적용 | 신규 적용 | BE 신설 + ECS 동시 (§8 결정) | 신규 적용 |
 | P0-3 RDS | 기존 docker compose → RDS | 기존 docker compose → RDS | drizzle 분리 결정 + RDS | 신규 (BE 신설 시) | 기존 docker compose → RDS |
 | P0-4 CI/CD | Vercel workflow 폐기 | Vercel workflow 폐기 | Vercel workflow 폐기 | Vercel workflow 폐기 + codex-review.yml 유지 | Vercel workflow 폐기 |
@@ -347,10 +350,10 @@
 다음 모두 충족 시 `archive/` 이관 — PM 명시 시점에. **단, games 는 아래 5 도메인 조건에서 제외된다** — games 는 현행 spec(bun + Next 15 + Vercel + 단일백본) 을 지키는 한 pnpm/ECS/JWT/DS/TanStack 항목 적용 의무가 없으며, 각 항목은 **games spec 선행 개정 시에만** games 에 적용된다 (그 전까지 games 의 본 plan 완료 조건은 "문서 참조본 배치" 로 충족):
 
 - [ ] 5 도메인 `package.json` 의 `packageManager` 가 `pnpm@10.26.1`
-- [ ] 5 도메인 모두 ECS Fargate 에서 dev 서비스 운영 (`pullim-<domain>-{web,backend}-dev` 패턴)
-- [ ] 5 도메인 모두 GitHub Actions → ECR → ECS 파이프라인 통과
-- [ ] 5 도메인 모두 JWT 인증 + Redis 연결 + Sentry DSN 활성
-- [ ] 5 도메인 모두 `@pullim/design-system` 사용 + `messages/{ko,en}.json` 단일 파일 + TanStack Query QueryClient 활성
+- [ ] (games 제외) 4 도메인 모두 ECS Fargate 에서 dev 서비스 운영 (`pullim-<domain>-{web,backend}-dev` 패턴)
+- [ ] (games 제외) 4 도메인 모두 GitHub Actions → ECR → ECS 파이프라인 통과
+- [ ] (games 제외) 4 도메인 모두 JWT 인증 + Redis 연결 + Sentry DSN 활성
+- [ ] (games 제외) 4 도메인 모두 `@pullim/design-system` 사용 + `messages/{ko,en}.json` 단일 파일 + TanStack Query QueryClient 활성
 - [ ] §8/§9/§10 결정 사항이 본 plan 본문에 반영 + DECISIONS.md 결정 이력 누적
 - [ ] §11 모든 H 리스크 mitigation 적용 완료 또는 잔여 리스크 별 plan 으로 이관
 
@@ -432,6 +435,6 @@
 
 ### 16.4 코덱스 review 통과 정책 (확인)
 
-사용자 직접 명시 (2026-05-27): **"코덱스 리뷰는 받아야지"** — close / 강제 머지 / 보류 모두 거부. **PR 머지는 코덱스 APPROVE 후에만**. 룰: `~/.claude/projects/-Users-curea/memory/feedback_codex_review_required.md` 와 일치.
+사용자 직접 명시 (2026-05-27): **"코덱스 리뷰는 받아야지"** — close / 강제 머지 / 보류 모두 거부. **PR 머지는 코덱스 APPROVE 후에만**. 근거(리포 내 권위 문서): 루트 `CLAUDE.md §9`(AI 검증 거버넌스) + `AGENTS.md`. (재현 불가능한 로컬 메모리 경로 인용은 제거 — 리포 내 plan/spec/archive 만 근거.)
 
 → 진행 중 3 alignment PR (#101, #82, #108) 처리는 별 사안 — 코덱스가 매 round 새 지적 발견 패턴이라 *어떤 정상 흐름이 가능한지* 사용자 명확화 필요 (close X · 강제 X · 보류 X 모두 잘못된 선택지로 인식).
