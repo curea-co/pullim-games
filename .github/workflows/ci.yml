@@ -13,6 +13,10 @@ jobs:
   validate:
     name: validate (typecheck + lint + registry sync)
     runs-on: ubuntu-latest
+    # 모노레포 전환: 앱은 apps/games. run 스텝은 앱 디렉토리 기준.
+    defaults:
+      run:
+        working-directory: apps/games
     steps:
       - uses: actions/checkout@v4
 
@@ -45,6 +49,9 @@ jobs:
   detect-changes:
     name: detect changes (path filter)
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/games
     outputs:
       games: ${{ steps.resolve.outputs.games }}
       core_changed: ${{ steps.resolve.outputs.core_changed }}
@@ -57,17 +64,21 @@ jobs:
         uses: dorny/paths-filter@v3
         with:
           list-files: shell
+          # paths-filter 는 리포 루트 기준 glob. 모노레포 전환으로 apps/games/ prefix.
           filters: |
             core:
-              - 'src/lib/core/**'
-              - 'src/lib/games/**'
-              - 'scripts/**'
+              - 'apps/games/src/lib/core/**'
+              - 'apps/games/src/lib/games/**'
+              - 'apps/games/scripts/**'
+              - 'apps/games/package.json'
+              - 'apps/games/tsconfig.json'
+              - 'apps/games/vitest.config.ts'
               - 'package.json'
               - 'bun.lock'
-              - 'tsconfig.json'
-              - 'vitest.config.ts'
+              - 'turbo.json'
+              - 'tsconfig.base.json'
             games:
-              - added|modified: 'src/games/**'
+              - added|modified: 'apps/games/src/games/**'
 
       - id: resolve
         env:
@@ -82,7 +93,8 @@ jobs:
             echo "games=$ALL_GAMES" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          IDS=$(echo "$GAME_FILES" | tr ' ' '\n' | awk -F/ 'NF>=3 && $1=="src" && $2=="games" {print $3}' | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          # GAME_FILES 는 리포 루트 기준 경로: apps/games/src/games/<id>/...
+          IDS=$(echo "$GAME_FILES" | tr ' ' '\n' | awk -F/ 'NF>=5 && $1=="apps" && $2=="games" && $3=="src" && $4=="games" {print $5}' | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
           if [ "$IDS" = "[]" ] || [ -z "$IDS" ]; then
             IDS='[]'
           fi
@@ -94,6 +106,9 @@ jobs:
     needs: detect-changes
     if: needs.detect-changes.outputs.core_changed == 'true'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/games
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -108,6 +123,9 @@ jobs:
     needs: detect-changes
     if: needs.detect-changes.outputs.games != '[]'
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/games
     strategy:
       fail-fast: false
       matrix:
@@ -125,6 +143,9 @@ jobs:
   test-auth:
     name: test (auth)
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/games
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -140,6 +161,9 @@ jobs:
     name: build (Next.js)
     needs: validate
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/games
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -154,6 +178,9 @@ jobs:
     name: e2e (Playwright)
     needs: validate
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/games
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
@@ -185,7 +212,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: playwright-report
+          # upload-artifact 는 working-directory 미적용 → 리포 루트 기준 명시.
           path: |
-            playwright-report/
-            test-results/
+            apps/games/playwright-report/
+            apps/games/test-results/
           retention-days: 7
