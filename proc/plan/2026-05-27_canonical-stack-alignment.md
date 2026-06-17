@@ -12,12 +12,20 @@
 
 본 문서는 **5 도메인 공통 정본 스택 제안서** 다. 실행 기준으로 채택된 적은 없으며, 각 리포의 기존 권위 문서를 **덮어쓰지 않는다**.
 
-다음 우선순위로 해석한다 (위가 강함):
+다음 우선순위로 해석한다 (위가 강함). **games 의 실제 라우팅 순서(루트 AGENTS.md §"권위 문서 라우팅")를 그대로 따른다 — `proc/spec/` 가 1순위:**
 
-1. **각 리포 루트 `AGENTS.md` / `CLAUDE.md`** — 현행 운영 규칙. 본 문서가 충돌하는 항목은 항상 패배한다.
-2. **각 리포 `proc/spec/`** — 도메인 SOT. 본 문서는 spec 변경 제안일 뿐, spec 자체가 아니다.
-3. **각 리포 `proc/plan/2026-05-26_pullim-be-adoption.md` / `2026-05-26_container-presenter-adoption.md`** — 이미 채택된 BE/FE 정본 plan. 본 문서가 충돌하는 항목은 패배한다.
-4. **본 문서** — PROPOSAL. §15 게이트(G1/G3/G4) 합의 + 각 리포의 spec 갱신 PR이 머지된 뒤에만 실행 게이트로 승격된다.
+1. **각 리포 `proc/spec/`** — 도메인 SOT. 본 문서는 spec 변경 제안일 뿐, spec 자체가 아니다. (games: `proc/spec/01~10` 이 **유일 권위** — 루트 AGENTS.md 가 1순위로 명시)
+2. **각 리포 루트 `CLAUDE.md`** — 리포 작업 가이드. (games 라우팅 2순위)
+3. **각 리포 루트 `AGENTS.md`** — 외부 AI·요약 룰. (games 라우팅 3순위)
+4. **각 리포 `proc/plan/2026-05-26_pullim-be-adoption.md` / `2026-05-26_container-presenter-adoption.md`** — 이미 채택된 BE/FE 정본 plan. 본 문서가 충돌하는 항목은 패배한다.
+5. **본 문서** — PROPOSAL. §15 게이트(G1/G3/G4) 합의 + 각 리포의 spec 갱신 PR이 머지된 뒤에만 실행 게이트로 승격된다.
+
+> **⚠ games 거버넌스 carve-out (codex #109 누적 반영 — 반드시 우선):**
+> games 는 **독립 프로젝트**다 (루트 CLAUDE.md — 다른 풀림 프로젝트 코드·페이지·mock 참조 금지). 본 문서의 어떤 항목도 **games 의 실행 근거가 아니다**. 구체적으로:
+> - **외부 본체(`curea-co/pullim`) 매트릭스(§2)는 games 의 기준선이 아니다.** games SoT 는 `proc/spec/01~10` 뿐. 본 문서의 외부 비교는 *참조 스냅샷*일 뿐, games 정렬 목표가 아니다.
+> - **games 의 `bun`·`Next.js 15`·`Vercel` 은 현행 spec(`proc/spec/09 §9.1, §9.4`) 그 자체**다 — "정본 대비 lag/갭" 이 아니다. pnpm·ECS·Next 16 전환은 **현행 spec 미반영**이라, `proc/spec/01 §2`(명세 우선) + `CLAUDE.md §9` 경로로 **spec 선행 개정 + G1/G3/G4 합의 후에만** 가능. 본 문서로 실행/정당화되지 않는다.
+> - **games backend 신설·점수·랭킹은 루트 AGENTS.md(단일 백본·분리 백엔드 없음) + 하이퍼캐주얼 룰(랭킹 금지)과 충돌** — 본 문서에서 기본 전제로 깔 수 없다. 필요 시 spec 진화 plan 에서 단일백본·하이퍼캐주얼 항목을 먼저 해소해야 한다.
+> - games 의 본 문서 채택은 **games 의 spec 갱신 PR 을 통해서만**. 본 PR(문서 배치) 머지는 §16.1 "옵션 B 바이블 배치"의 *기록 보관*일 뿐 실행 게이트가 아니다.
 
 **구체 패배 사례** (현재 권위 우선 항목 — 본 문서가 다르게 적었더라도 무시):
 
@@ -81,7 +89,7 @@
 | AWS 리전 | **ap-northeast-2** | 사용자 정본 표 |
 | 패키지 빌드 정책 | `pnpm.onlyBuiltDependencies: ["@pullim/design-system", "bcrypt"]` | root package.json |
 
-본 표가 5 도메인 정합의 기준선. 갱신은 본체 PR 머지 시점에 본 plan 의 §2 를 먼저 정정한 뒤 5 도메인에 전파한다.
+본 표는 **외부 본체(`curea-co/pullim`) 의 참조 스냅샷**이다. **games 의 기준선이 아니다** (§0 carve-out) — games SoT 는 `proc/spec/01~10`. 본 표를 games 후속 PR 의 정렬 목표/근거로 삼지 않는다. 갱신은 본체 PR 머지 시점에 본 plan 의 §2 를 먼저 정정한 뒤, **각 도메인은 자체 spec 갱신을 통해서만** 전파한다.
 
 ---
 
@@ -195,6 +203,8 @@
 | **P2-3** | Tiptap 도입 | classbot builder, planner 메모 (필요 도메인만) | @tiptap/react + extensions |
 | **P2-4** | packages 6개 정렬 (analytics/config/logging/remote-config/ui/utils) | 5 도메인 각자 | placeholder → 실제 구현, types/api-client/auth 기존 3 + 신규 3 |
 | **P2-5** | Next.js 15 → 16 (games 한정) | games | next major bump, app router 검증, 21 게임 회귀 |
+
+> **games 적용 단서 (§0 carve-out 재확인):** 위 P0~P2 의 games 항목(pnpm·ECS·CI/CD 재작성·JWT·DS·i18n·**Next 16**·backend 등)은 모두 **games 현행 spec 미반영**이다. 특히 **Next.js 15 는 games 의 현행 정본 spec(`proc/spec/09 §9.1`) 이지 "갭/lag" 이 아니다** — 본 표의 "P2-5" 는 *외부 도메인 동기화 가정* 일 뿐, games 의 실행 계획이 아니다. games 는 이들을 **spec 선행 개정 + G1/G3/G4 합의 후에만** 착수한다.
 
 **총 Phase 수**: P0=5, P1=5, P2=5 → **15 Phase**
 
@@ -353,7 +363,7 @@
 | **D-SEQ** | 출시 시퀀스 (옵션 A/B/C) | G1 | 본 plan 합의 시 | **옵션 C** — planner 선행 → 4 도메인 병렬 |
 | **D-DS** | `@pullim/design-system` 외부 노출·발행·deprecation 정책 | 본체팀 + G4 | P1-3 시작 | GitHub release tag pin + semver + 5 도메인 deprecation lead time 1 sprint |
 | **D-CB-ORM** | classbot drizzle → TypeORM 전환 방식 (data migration) | G3 | P0-3 시작 | drizzle schema SQL dump → TypeORM entities 재생성 + 첫 migration generate |
-| **D-GM-BE** | games BE 신설 여부 (5 중 유일 BE 없음) | G1 + G3 | P0-2 + alignment plan #108 정합 | 신설 — 추후 진척·점수·랭킹·콘텐츠 메타 backend 후보. SPA 유지는 옵션 |
+| **D-GM-BE** | games BE 신설 여부 (5 중 유일 BE 없음) | G1 + G3 | P0-2 + alignment plan #108 정합 | **games 현행: 단일 백본·분리 BE 없음(루트 AGENTS.md). 점수·랭킹 용도는 하이퍼캐주얼 룰(랭킹 금지) 위반이라 제외.** BE 신설은 단일백본·하이퍼캐주얼 spec 선행 개정 후에만 가능 — 현행은 SPA 유지. (BE 분리 시 별 repo `pullim-api` 후보) |
 | **D-GM-N16** | games Next 15 → 16 시점 | G4 + games audit T5 | P2-5 | P1 완료 후 별 PR. 21 게임 회귀 audit 필수 |
 | **D-COST** | 월 AWS 청구 상한선 (CW Logs retention, S3 lifecycle, RDS 인스턴스 사이즈) | G1 | P0-5 | retention 7d, S3 90d → IA → 1y Glacier, RDS db.t4g.small 시작 |
 
