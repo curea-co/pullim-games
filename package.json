@@ -17,6 +17,7 @@
     "test": "turbo test",
     "gen:registry": "bun --filter @pullim-games/games gen:registry",
     "test:e2e": "bun --filter @pullim-games/games test:e2e",
+    "test:e2e:ui": "bun --filter @pullim-games/games test:e2e:ui",
     "ui:audit": "bun --filter @pullim-games/games ui:audit",
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
