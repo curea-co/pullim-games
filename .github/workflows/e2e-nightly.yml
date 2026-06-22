@@ -52,10 +52,7 @@ jobs:
       group: curea-runner-groups-2
     # 사전 sweep: 게임별 30분 상한. 21 게임 × 30 = 1 job 격리 hang 방지.
     timeout-minutes: 30
-    # 모노레포 전환: 앱은 apps/games. run 스텝(playwright)은 앱 디렉토리 기준.
-    defaults:
-      run:
-        working-directory: apps/games
+    # 모노레포: install/gen:registry 는 루트 진입점, playwright 실행 step 만 app cwd (codex #122).
     strategy:
       # 한 게임 실패가 다른 게임 회귀 검출을 막지 않도록 fail-fast 끔.
       fail-fast: false
@@ -101,6 +98,7 @@ jobs:
       # ci.yml 의 e2e job 과 동일 — playwright 버전 해석 후 캐시.
       - name: Resolve Playwright version
         id: pw
+        working-directory: apps/games
         run: |
           VERSION=$(node -p "require('@playwright/test/package.json').version")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
@@ -114,6 +112,7 @@ jobs:
 
       # proc/spec/09 §9.1 — Bun 단일 매니저. bunx 만 사용 (npm/npx/pnpm 금지).
       - name: Install Playwright Chromium + system deps
+        working-directory: apps/games
         run: bunx playwright install --with-deps chromium
 
       # Step 1) 게임 전용 spec 파일 매핑 — title 에 game ID 가 없는 케이스 보강.
@@ -158,6 +157,7 @@ jobs:
       #     (앞 `-` 가 [a-z0-9-] 에 포함되어 lookbehind 가 차단).
       #     english-vocab-typing → 자기 자신만 매치.
       - name: Run e2e (loop specs filtered by game)
+        working-directory: apps/games
         env:
           GAME: ${{ matrix.game }}
         run: |
@@ -175,6 +175,7 @@ jobs:
       # extras 가 없는 게임 (17 게임) 은 step 자체가 no-op (조건 가드).
       - name: Run e2e (per-game extras spec files)
         if: steps.extras.outputs.specs != ''
+        working-directory: apps/games
         env:
           EXTRAS: ${{ steps.extras.outputs.specs }}
         run: |
@@ -213,10 +214,7 @@ jobs:
     runs-on:
       group: curea-runner-groups-2
     timeout-minutes: 30
-    # 모노레포 전환: 앱은 apps/games. run 스텝(playwright)은 앱 디렉토리 기준.
-    defaults:
-      run:
-        working-directory: apps/games
+    # 모노레포: install/gen:registry 는 루트 진입점, playwright 실행 step 만 app cwd (codex #122).
     steps:
       - uses: actions/checkout@v4
         with:
@@ -234,6 +232,7 @@ jobs:
 
       - name: Resolve Playwright version
         id: pw
+        working-directory: apps/games
         run: |
           VERSION=$(node -p "require('@playwright/test/package.json').version")
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
@@ -246,6 +245,7 @@ jobs:
           key: pw-${{ runner.os }}-${{ steps.pw.outputs.version }}
 
       - name: Install Playwright Chromium + system deps
+        working-directory: apps/games
         run: bunx playwright install --with-deps chromium
 
       # 명시적 path — per-game job 의 spec 파일 집합과 disjoint.
@@ -253,6 +253,7 @@ jobs:
       # cross-cutting 1 케이스만 따로 grep. sample 4 게임 mode 케이스 8건은
       # per-game (math-quick-quiz·english-blank·factorization·chemistry-balance) 에서 자연 커버.
       - name: Run e2e (cross-cutting spec files)
+        working-directory: apps/games
         run: |
           bunx playwright test \
             e2e/activity-heatmap.spec.ts \
@@ -262,6 +263,7 @@ jobs:
             e2e/streak.spec.ts
 
       - name: Run e2e (mode-review-queue cross-cutting only)
+        working-directory: apps/games
         run: |
           bunx playwright test e2e/mode-review-queue.spec.ts --grep "잘못된 mode 값"
 
