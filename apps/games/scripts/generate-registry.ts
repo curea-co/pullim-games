@@ -2,7 +2,7 @@
 /**
  * 풀림 게임즈 — Game Registry 자동 생성 스크립트.
  *
- * src/games/<id>/manifest.ts 를 glob 스캔해서 src/lib/games/registry.generated.ts 작성.
+ * games/<id>/manifest.ts 를 glob 스캔해서 lib/games/registry.generated.ts 작성.
  *
  * 트리거:
  *   - bun run dev (predev 훅)
@@ -19,17 +19,18 @@ import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const PROJECT_ROOT = resolve(process.cwd());
-const OUTPUT_PATH = resolve(PROJECT_ROOT, "src/lib/games/registry.generated.ts");
+const OUTPUT_PATH = resolve(PROJECT_ROOT, "lib/games/registry.generated.ts");
 
 // 게임 매니페스트 발견 — alphabetical 정렬로 머지 충돌 최소화
 const manifestPaths = fastGlob
-  .sync("src/games/*/manifest.ts", { cwd: PROJECT_ROOT })
+  .sync("games/*/manifest.ts", { cwd: PROJECT_ROOT })
   .sort();
 
 const ids = manifestPaths
   .map((path) => {
+    // games/<id>/manifest.ts → segments[1] 이 게임 id
     const segments = path.split("/");
-    return segments[2];
+    return segments[1];
   })
   .filter((id): id is string => Boolean(id));
 

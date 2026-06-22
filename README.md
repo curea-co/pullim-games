@@ -14,7 +14,7 @@
 - **Typing** — 타이핑 입력
 - **WordMatch** — 짝 맞추기
 
-**21개 게임** (`apps/games/src/games/`):
+**21개 게임** (`apps/games/games/`):
 ```
 bio-taxonomy            chemistry-balance       cloze-multi
 custom-blank            custom-multiple-choice  custom-typing
@@ -48,11 +48,10 @@ pullim-games/                    # 모노레포 루트
         ├── e2e/                 # playwright e2e
         ├── scripts/generate-registry.ts   # 레지스트리 자동 생성 (predev/prebuild)
         ├── public/
-        └── src/
-            ├── app/             # games/, manage/, api/ · layout/page · manifest 등
-            ├── components/      # shell·game-shell·game-hub·dashboard·game-mechanics·manage·ui
-            ├── games/{21개 게임}/   # 게임별 components/, content/, schema/, checkAnswer
-            └── lib/{core,games,server,utils.ts}/
+        ├── app/                 # games/, manage/, api/ · layout/page · manifest 등 (src/ 래퍼 없음 — Q/planner 정합)
+        ├── components/          # shell·game-shell·game-hub·dashboard·game-mechanics·manage·ui
+        ├── games/{21개 게임}/    # 게임별 components/, content/, schema/, checkAnswer
+        └── lib/{core,games,server,utils.ts}/
 ```
 
 ## 시작

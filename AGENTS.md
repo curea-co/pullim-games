@@ -14,20 +14,20 @@
 
 ## 모노레포 구조 (2026-06-17~)
 
-본 리포는 Turborepo 모노레포. 앱은 `apps/games/` (planner/Q 와 동형 토폴로지). 본 문서의 `apps/games/src/...`·`apps/games/tailwind.config.ts` 등 앱 경로는 **모노레포 루트 기준**. 루트엔 `package.json`(workspaces)·`turbo.json`·`tsconfig.base.json`. 앱 내부는 `src/` 유지(`@/* → ./src/*`). thin monorepo — `apps/backend`·`packages/*` 미생성(BE 는 별 repo `pullim-api`). dev/build/test 는 루트 turbo. 근거: `proc/plan/2026-06-17_monorepo-restructure.md`.
+본 리포는 Turborepo 모노레포. 앱은 `apps/games/` (planner/Q 와 동형 토폴로지). 본 문서의 `apps/games/...`·`apps/games/tailwind.config.ts` 등 앱 경로는 **모노레포 루트 기준**. 루트엔 `package.json`(workspaces)·`turbo.json`·`tsconfig.base.json`. 앱 내부는 **`src/` 래퍼 없음** — `apps/games/{app,components,games,lib}` 직접 (Q/planner 정합, `@/* → ./*`). thin monorepo — `apps/backend`·`packages/*` 미생성(BE 는 별 repo `pullim-api`). dev/build/test 는 루트 turbo. 근거: `proc/plan/2026-06-17_monorepo-restructure.md`.
 
 ## 아키텍처 — 단일 백본 + 다중 게임 모드
 
 **메모리 룰 출처**: `project_architecture_decision`. 본 리포는 21 게임이 분리된 백본을 갖지 않고, FSRS 알고리즘·스트릭·활동 로그·변별력 distractor helper 의 **단일 백본** 위에서 mode wrapper (`default`·`review-queue`·`time-attack`·`deep-recall`) 로만 다양화한다.
 
-- 백본 위치: `apps/games/src/lib/core/fsrs/` (FSRS-6, ts-fsrs 5.3.3), `apps/games/src/lib/core/fsrs/modes/` (mode wrapper), `apps/games/src/lib/core/distractor/buildDistractors.ts` (변별력)
+- 백본 위치: `apps/games/lib/core/fsrs/` (FSRS-6, ts-fsrs 5.3.3), `apps/games/lib/core/fsrs/modes/` (mode wrapper), `apps/games/lib/core/distractor/buildDistractors.ts` (변별력)
 - 분리된 게임 백엔드·스튜디오·점수 시스템 없음. 새 백본 추가·분리 제안은 메모리 룰 위반 (`feedback_scale_hypercasual` 도 같이 위반)
 - 모드 진입은 URL `?mode=<mode>` 패턴 (PR #85 Phase 2 정착). selectCardsForMode·useGameMode hook 으로 통합
 - 신규 모드 추가 시: `GameMode` enum 갱신 → `resolveRating(mode, outcome)` 분기 정식화 → silent fallback 금지
 
 ## 4 메커니즘 컴포넌트 — 직접 게임 컴포넌트 작성 금지
 
-`apps/games/src/components/game-mechanics/` 4 메커니즘 (`QuickQuizComponent`·`BlankComponent`·`TypingComponent`·`WordMatchComponent`) 을 활용 가능하면 **반드시 활용**한다. 신규 게임은 콘텐츠·스키마·distractor 만 작성하고 메커니즘 컴포넌트를 import — 게임 전용 풀-스택 컴포넌트 작성은 회피.
+`apps/games/components/game-mechanics/` 4 메커니즘 (`QuickQuizComponent`·`BlankComponent`·`TypingComponent`·`WordMatchComponent`) 을 활용 가능하면 **반드시 활용**한다. 신규 게임은 콘텐츠·스키마·distractor 만 작성하고 메커니즘 컴포넌트를 import — 게임 전용 풀-스택 컴포넌트 작성은 회피.
 
 - 메커니즘 활용 게임 (현재): `custom-*` 4 종 · `english-blank/vocab-typing/word-match` · `math-quick-quiz` · `vocab-typing` 등 9 게임 + extras path
 - 직접 컴포넌트 게임 (현재 12 종): `bio-taxonomy`·`chemistry-balance`·`factorization`·`genetics-punnett`·`history-timeline`·`image-hotspot`·`korean-pos-tagging`·`letter-assembly`·`math-graph-shift`·`physics-vector`·`cloze-multi`·`english-order` — 이들도 신규 작업 시 메커니즘 위로 통합 가능성 우선 평가
@@ -55,7 +55,7 @@
 
 **룰 출처**: `~/dev_git/.pullim-meta/CONVENTION.md §8`.
 
-`apps/games/src/components/{game-mechanics,game-shell,game-hub,shell,dashboard,RecommendationCard,GameCard,manage}/` · `apps/games/src/components/ui/` · `apps/games/src/app/**/page.tsx|layout.tsx` · `apps/games/src/games/*/component.tsx` · `apps/games/tailwind.config.ts` 변경 PR 은 머지 전 `bun run ui:audit <path>` 실행 + 결과 PR body 첨부 의무.
+`apps/games/components/{game-mechanics,game-shell,game-hub,shell,dashboard,RecommendationCard,GameCard,manage}/` · `apps/games/components/ui/` · `apps/games/app/**/page.tsx|layout.tsx` · `apps/games/games/*/component.tsx` · `apps/games/tailwind.config.ts` 변경 PR 은 머지 전 `bun run ui:audit <path>` 실행 + 결과 PR body 첨부 의무.
 
 - 4 viewport: **320×568** (iPhone SE) · **390×844** (iPhone 13/14/15) · **768×1024** (iPad portrait) · **1280×800** (desktop)
 - critical overflow (`right > vw + 1` 또는 `bottom > vh + 1`) 0 까지 fix 후 머지 (HARD gate). informational 은 경고만 (form 내·sticky·fixed)

@@ -33,7 +33,7 @@ jobs:
       # Plan R §5.3 가드 — manifest 와 generated 파일 sync 검증 (루트 기준 전체 경로).
       - name: Verify registry.generated.ts is in sync
         run: |
-          if ! git diff --exit-code apps/games/src/lib/games/registry.generated.ts; then
+          if ! git diff --exit-code apps/games/lib/games/registry.generated.ts; then
             echo "::error::registry.generated.ts is out of sync. Run 'bun run gen:registry' and commit." >&2
             exit 1
           fi
@@ -64,8 +64,8 @@ jobs:
           # paths-filter 는 리포 루트 기준 glob. 모노레포 전환으로 apps/games/ prefix.
           filters: |
             core:
-              - 'apps/games/src/lib/core/**'
-              - 'apps/games/src/lib/games/**'
+              - 'apps/games/lib/core/**'
+              - 'apps/games/lib/games/**'
               - 'apps/games/scripts/**'
               - 'apps/games/package.json'
               - 'apps/games/tsconfig.json'
@@ -75,7 +75,7 @@ jobs:
               - 'turbo.json'
               - 'tsconfig.base.json'
             games:
-              - added|modified: 'apps/games/src/games/**'
+              - added|modified: 'apps/games/games/**'
 
       - id: resolve
         env:
@@ -85,21 +85,21 @@ jobs:
         run: |
           set -euo pipefail
           # 게임 카탈로그는 앱 하위 경로 — 루트 기준 전체 경로로 나열.
-          ALL_GAMES=$(ls apps/games/src/games | sort | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          ALL_GAMES=$(ls apps/games/games | sort | jq -R -s -c 'split("\n") | map(select(length > 0))')
           if [ "$EVENT" = "push" ] || [ "$CORE" = "true" ]; then
             echo "core_changed=true" >> "$GITHUB_OUTPUT"
             echo "games=$ALL_GAMES" >> "$GITHUB_OUTPUT"
             exit 0
           fi
-          # GAME_FILES 는 리포 루트 기준 경로: apps/games/src/games/<id>/...
-          IDS=$(echo "$GAME_FILES" | tr ' ' '\n' | awk -F/ 'NF>=5 && $1=="apps" && $2=="games" && $3=="src" && $4=="games" {print $5}' | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
+          # GAME_FILES 는 리포 루트 기준 경로: apps/games/games/<id>/...
+          IDS=$(echo "$GAME_FILES" | tr ' ' '\n' | awk -F/ 'NF>=4 && $1=="apps" && $2=="games" && $3=="games" {print $4}' | sort -u | jq -R -s -c 'split("\n") | map(select(length > 0))')
           if [ "$IDS" = "[]" ] || [ -z "$IDS" ]; then
             IDS='[]'
           fi
           echo "core_changed=false" >> "$GITHUB_OUTPUT"
           echo "games=$IDS" >> "$GITHUB_OUTPUT"
 
-  # 게임별 vitest 샤딩 — 특정 앱 경로(src/games/<id>)만 실행하는 app-scoped job.
+  # 게임별 vitest 샤딩 — 특정 앱 경로(games/<id>)만 실행하는 app-scoped job.
   # codex 지적상 "앱 하위 경로가 꼭 필요한" 경우라 step 에서 app cwd 사용.
   test-core:
     name: test (lib/core)
@@ -113,7 +113,7 @@ jobs:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun run gen:registry
-      - run: bunx vitest run src/lib/core
+      - run: bunx vitest run lib/core
         working-directory: apps/games
 
   test-game:
@@ -133,7 +133,7 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run gen:registry
       # 테스트가 없는 게임은 vitest 가 exit 1 — passWithNoTests 로 허용.
-      - run: bunx vitest run --passWithNoTests src/games/${{ matrix.game }}
+      - run: bunx vitest run --passWithNoTests games/${{ matrix.game }}
         working-directory: apps/games
 
   test-auth:
@@ -148,7 +148,7 @@ jobs:
       - run: bun run gen:registry
       # 인증 스택(password/session/csrf/same-origin/schemas/라우트) 단위·라우트 테스트.
       # DB 불필요(라우트 테스트는 DB 계층 mock). plan 완료조건의 회귀 가드.
-      - run: bunx vitest run src/lib/server/http src/lib/server/auth src/app/api/auth
+      - run: bunx vitest run lib/server/http lib/server/auth app/api/auth
         working-directory: apps/games
 
   build:

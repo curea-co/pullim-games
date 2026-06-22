@@ -33,7 +33,7 @@
 //   - 두 진입점 (허브 ModeChipsRow + 홈 RecommendationCard alt-modes) 양쪽 확인.
 
 import { test, expect, type Page } from "@playwright/test";
-import { games } from "../src/lib/games/registry";
+import { games } from "../lib/games/registry";
 
 // registry 도출 — manifest.meta.mechanismComponent 단일 진실원.
 const mechanismGameIds = new Set(

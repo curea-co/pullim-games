@@ -60,7 +60,7 @@ jobs:
       # 한 게임 실패가 다른 게임 회귀 검출을 막지 않도록 fail-fast 끔.
       fail-fast: false
       matrix:
-        # 21 게임 — src/games/ 하위 카탈로그. CLAUDE.md §1 와 동기 의무.
+        # 21 게임 — games/ 하위 카탈로그. CLAUDE.md §1 와 동기 의무.
         game:
           - bio-taxonomy
           - chemistry-balance

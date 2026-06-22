@@ -10,7 +10,7 @@ export default tseslint.config(
       ".next/**",
       ".next-dev/**", // dev distDir (next.config.ts NODE_ENV 분기)
       "node_modules/**",
-      "src/lib/games/registry.generated.ts", // auto-generated
+      "lib/games/registry.generated.ts", // auto-generated
       "next-env.d.ts",
     ],
   },
@@ -47,7 +47,7 @@ export default tseslint.config(
   },
   {
     // lib/core 내부에서는 internal import 허용 (자기 자신 참조 위해)
-    files: ["src/lib/core/**"],
+    files: ["lib/core/**"],
     rules: {
       "no-restricted-imports": "off",
     },
