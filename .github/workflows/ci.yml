@@ -66,10 +66,20 @@ jobs:
             core:
               - 'apps/games/lib/core/**'
               - 'apps/games/lib/games/**'
+              # 공유 컴포넌트(메커니즘·셸·허브·ui 등) — 전 게임 영향이므로 core (codex #122)
+              - 'apps/games/components/**'
+              - 'apps/games/middleware.ts'
               - 'apps/games/scripts/**'
+              # 전역 영향 config — 변경 시 전 게임 회귀 검증 필요
               - 'apps/games/package.json'
               - 'apps/games/tsconfig.json'
+              - 'apps/games/next.config.ts'
               - 'apps/games/vitest.config.ts'
+              - 'apps/games/tailwind.config.ts'
+              - 'apps/games/eslint.config.mjs'
+              - 'apps/games/postcss.config.mjs'
+              - 'apps/games/playwright.config.ts'
+              - 'apps/games/components.json'
               - 'package.json'
               - 'bun.lock'
               - 'turbo.json'
