@@ -11,7 +11,8 @@
 //
 // 출력: 4 viewport 결과 JSON + 화면 PNG 파일 경로 + overflow 발견 시 종료 코드 1.
 
-import { chromium, devices } from "playwright";
+// 선언된 의존성은 @playwright/test (standalone "playwright" 미선언). chromium·devices 재export 사용.
+import { chromium, devices } from "@playwright/test";
 import { mkdirSync, writeFileSync } from "node:fs";
 
 const args = process.argv.slice(2);
