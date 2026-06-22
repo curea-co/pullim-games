@@ -1,5 +1,5 @@
 // 다항식 공통인수 추출 — Polynomial 레벨.
-// UI 레벨의 Term/Part 변환은 src/games/factorization/logic/ 가 담당.
+// UI 레벨의 Term/Part 변환은 games/factorization/logic/ 가 담당.
 
 import type { Polynomial, PolynomialTerm } from "./types";
 

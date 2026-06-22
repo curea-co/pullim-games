@@ -6,7 +6,7 @@
 //     브라우저 스케줄링이 밀리면 기능은 정상이어도 `0s` 로 읽혀 flaky 가 된다.
 //   - e2e 에서는 `time-attack-seconds` testid 가 노출되고 `<숫자>s` 포맷이 맞는지만
 //     검증하고, 실제 시간 경과 성질 (감소·만료) 은 단위 테스트로 위임
-//     (src/components/game-mechanics/TimeAttackTimer.test.ts §"초 포맷").
+//     (apps/games/components/game-mechanics/TimeAttackTimer.test.ts §"초 포맷").
 
 import { test, expect } from "@playwright/test";
 

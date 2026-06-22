@@ -200,7 +200,7 @@ test("URL 직접 진입 가드 — 비지원 게임 ?mode=deep-recall 진입 시
 // 홈에서도 (1) alt-modes nav (2) chip URL (3) 비지원 모드 미노출 계약을 검증.
 //
 // 시드 방법: localStorage 의 `pullim-games:srs:<gameId>:<cardId>` 키에 SerializedState
-// (`reviewCount > 0`) 직접 주입 — `src/lib/core/storage/srs.ts` 의 serialize 와 동일 포맷.
+// (`reviewCount > 0`) 직접 주입 — `apps/games/lib/core/storage/srs.ts` 의 serialize 와 동일 포맷.
 // 실 게임 1판 자동화보다 결정적 + 빠름.
 
 interface SerializedSrsState {

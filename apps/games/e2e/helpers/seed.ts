@@ -5,7 +5,7 @@
 // 본 seed 는 각 kind 별 최소 1장 카드 + 1개 curriculum + 1개 subject 를 주입해
 // CUSTOM_GAMES (e2e/helpers/games.ts) 가 official 과 동일하게 viewport.spec 매트릭스에 들어가게.
 //
-// 키 (src/lib/core/custom/storage.ts):
+// 키 (apps/games/lib/core/custom/storage.ts):
 //   pullim-games:custom:subjects
 //   pullim-games:custom:curriculum
 //   pullim-games:custom:cards

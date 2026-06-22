@@ -7,9 +7,9 @@
 
 ## 시작하기
 
-1. **이 디렉토리만 작업하세요.** `src/lib/core/` 변경이 필요하면 별도 PR.
+1. **이 디렉토리만 작업하세요.** `apps/games/lib/core/` 변경이 필요하면 별도 PR.
 2. `bun run dev` → `http://localhost:3033/games/factorization` 에서 확인.
-3. 테스트: `bun run test -- src/games/factorization/`
+3. 테스트: `bun run test -- games/factorization/`
 
 ## 의존성
 
@@ -61,6 +61,6 @@ factorization/
 
 ## 트러블슈팅
 
-- 게임이 메인페이지에 안 보임 → `bun run gen:registry` 실행 후 `src/lib/games/registry.generated.ts` 확인
+- 게임이 메인페이지에 안 보임 → `bun run gen:registry` 실행 후 `apps/games/lib/games/registry.generated.ts` 확인
 - TypeScript 에러 → `manifest.ts` 의 export default가 `GameManifest` 타입 만족하는지 확인
 - 동적 import 실패 → `loadComponent` 의 import 경로가 정확한지 확인

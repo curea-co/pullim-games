@@ -69,7 +69,7 @@ export interface GameMeta {
   /**
    * 4 메커니즘 컴포넌트 통합 식별자 — Plan E Phase 5 / PR #92 Codex round 4 fix.
    *
-   * `src/games/<id>/component.tsx` 가 `BlankComponent`·`QuickQuizComponent`·
+   * `games/<id>/component.tsx` 가 `BlankComponent`·`QuickQuizComponent`·
    * `TypingComponent`·`WordMatchComponent` 중 하나를 직접 render 한다면 그 이름을 명시.
    * 직접 게임(factorization, image-hotspot 등)은 누락 (`undefined`) 으로 둔다.
    *
@@ -88,7 +88,7 @@ export interface GameMeta {
 /**
  * 게임 모듈 매니페스트.
  * 자동 발견 (scripts/generate-registry.ts) 의 대상이며,
- * 각 src/games/<id>/manifest.ts 가 default export 해야 한다.
+ * 각 games/<id>/manifest.ts 가 default export 해야 한다.
  *
  * loadComponent 는 동적 import 팩토리 — Next.js 가 게임별 청크 분할에 사용.
  */

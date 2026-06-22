@@ -4,8 +4,8 @@
 // 이 파일은 generated 를 re-export 하며 조회 헬퍼 추가.
 //
 // 새 게임 추가 절차 (중앙 파일 수정 0회):
-//   1. src/games/<id>/manifest.ts 작성 (default export = GameManifest)
-//   2. src/games/<id>/component.tsx 작성
+//   1. games/<id>/manifest.ts 작성 (default export = GameManifest)
+//   2. games/<id>/component.tsx 작성
 //   3. 끝. predev/prebuild 훅이 registry.generated.ts 자동 갱신.
 //
 // 상세: proc/plan/2026-05-08_parallel-game-architecture.md
