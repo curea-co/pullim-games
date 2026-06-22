@@ -75,7 +75,8 @@ jobs:
               - 'turbo.json'
               - 'tsconfig.base.json'
             games:
-              - added|modified: 'apps/games/games/**'
+              # renamed 포함 — git mv(경로 이동) PR 도 영향 게임으로 잡아 test-game 매트릭스 실행 (codex #121)
+              - added|modified|renamed: 'apps/games/games/**'
 
       - id: resolve
         env:
