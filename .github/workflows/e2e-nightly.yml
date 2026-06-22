@@ -52,11 +52,15 @@ jobs:
       group: curea-runner-groups-2
     # 사전 sweep: 게임별 30분 상한. 21 게임 × 30 = 1 job 격리 hang 방지.
     timeout-minutes: 30
+    # 모노레포 전환: 앱은 apps/games. run 스텝(playwright)은 앱 디렉토리 기준.
+    defaults:
+      run:
+        working-directory: apps/games
     strategy:
       # 한 게임 실패가 다른 게임 회귀 검출을 막지 않도록 fail-fast 끔.
       fail-fast: false
       matrix:
-        # 21 게임 — src/games/ 하위 카탈로그. CLAUDE.md §1 와 동기 의무.
+        # 21 게임 — games/ 하위 카탈로그. CLAUDE.md §1 와 동기 의무.
         game:
           - bio-taxonomy
           - chemistry-balance
@@ -184,14 +188,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: nightly-report-${{ matrix.game }}-${{ github.run_id }}
-          path: playwright-report/
+          path: apps/games/playwright-report/
           retention-days: 14
 
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: nightly-results-${{ matrix.game }}-${{ github.run_id }}
-          path: test-results/
+          path: apps/games/test-results/
           retention-days: 7
 
   # Cross-cutting spec 커버 — 게임 종속 X.
@@ -209,6 +213,10 @@ jobs:
     runs-on:
       group: curea-runner-groups-2
     timeout-minutes: 30
+    # 모노레포 전환: 앱은 apps/games. run 스텝(playwright)은 앱 디렉토리 기준.
+    defaults:
+      run:
+        working-directory: apps/games
     steps:
       - uses: actions/checkout@v4
         with:
@@ -261,12 +269,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: nightly-report-shared-${{ github.run_id }}
-          path: playwright-report/
+          path: apps/games/playwright-report/
           retention-days: 14
 
       - if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: nightly-results-shared-${{ github.run_id }}
-          path: test-results/
+          path: apps/games/test-results/
           retention-days: 7

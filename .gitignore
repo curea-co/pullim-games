@@ -1,11 +1,14 @@
-# dependencies
-/node_modules
+# dependencies — monorepo: root + apps/*/node_modules
+node_modules/
 
-# next.js
-/.next/
-/.next-dev/
-/out/
-/build
+# turborepo
+.turbo/
+
+# next.js — anchored 제거: apps/games/.next 등 중첩 빌드물도 무시
+.next/
+.next-dev/
+out/
+build/
 
 # typescript
 *.tsbuildinfo
@@ -45,8 +48,11 @@ yarn-error.log*
 /input
 /output
 
-# playwright e2e artifacts
-/playwright-report
-/test-results
-/playwright/.cache
+# playwright e2e artifacts (apps/games 중첩 포함)
+playwright-report/
+test-results/
+**/playwright/.cache
 .gstack/
+
+# claude agent worktrees (embedded repos, not tracked)
+/.claude/worktrees/
