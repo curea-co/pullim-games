@@ -121,13 +121,13 @@ export async function computeDashboardStats(
       }
     }
 
-    if (cardsTouched > 0) gamesPlayed += 1;
-
-    // perGame 은 /home CompactActivity 의 **노출 표면**(untouchedCount/totalGames + 카드 렌더).
-    // 보관(stage:"high") 게임은 여기서 빼야 허브·추천·about 에서 숨긴 고등 게임이 대시보드로
-    // 다시 새어 나오지 않는다(Codex #125). 단, 총합 KPI(아래 totalAttempts 등)는 전체 games
-    // 기준 유지 — 직접 URL 로 플레이한 기록은 누락 없이 집계.
+    // 노출(visible) 게임 기준 — gamesPlayed·perGame 둘 다 /home 의 **노출 표면**이다:
+    //   - gamesPlayed → 헤더 "N개 게임을 만났어요" + EmptyDashboard 판정
+    //   - perGame    → CompactActivity 카드 목록 + untouchedCount/totalGames
+    // 둘이 같은 기준(보관 stage:"high" 제외)이어야 "보관 게임만 플레이 → N개 만났다는데 목록은
+    // 빈" 모순이 안 생긴다(Codex #125 R2·R3). 총합 KPI(아래)는 전체 games 유지.
     if (g.meta.stage !== "high") {
+      if (cardsTouched > 0) gamesPlayed += 1;
       const correct = Math.max(0, attempts - lapses);
       perGame.push({
         gameId: g.meta.id,
@@ -144,6 +144,8 @@ export async function computeDashboardStats(
       });
     }
 
+    // 총합 magnitude KPI 는 전체 games 기준 — 보관 게임을 직접 URL 로 플레이한 기록도
+    // totalAttempts/Lapses(및 위 todayAttempts/dueSoonCount)에 누락 없이 집계(Codex #125 R1).
     totalAttempts += attempts;
     totalLapses += lapses;
   }

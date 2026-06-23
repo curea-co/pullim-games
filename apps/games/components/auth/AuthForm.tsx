@@ -28,7 +28,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [grade, setGrade] = useState<Grade | "">("");
-  const [over14, setOver14] = useState(false);
+  const [consent, setConsent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -41,13 +41,13 @@ export function AuthForm({ mode }: { mode: Mode }) {
       setError("학년을 선택해주세요.");
       return;
     }
-    if (isSignup && !over14) {
-      setError("만 14세 이상만 가입할 수 있어요.");
+    if (isSignup && !consent) {
+      setError("동의가 필요해요. (만 14세 이상이거나 보호자 동의)");
       return;
     }
     setPending(true);
     const result = isSignup
-      ? await signup(email, password, over14, grade as Grade)
+      ? await signup(email, password, consent, grade as Grade)
       : await login(email, password);
     setPending(false);
 
@@ -143,17 +143,18 @@ export function AuthForm({ mode }: { mode: Mode }) {
               // spec/08 §8.10: 토큰화 + focus ring + 44×44 터치 영역(min-h-11 행 + 라벨 클릭).
               <div className="flex min-h-11 items-start gap-2 py-1">
                 <Checkbox
-                  id="over14"
-                  checked={over14}
-                  onCheckedChange={(v) => setOver14(v === true)}
+                  id="consent"
+                  checked={consent}
+                  onCheckedChange={(v) => setConsent(v === true)}
                   className="mt-0.5 h-5 w-5"
                 />
                 <Label
-                  htmlFor="over14"
+                  htmlFor="consent"
                   className="text-sm font-normal leading-snug text-pullim-slate-700"
                 >
-                  만 14세 이상이며, 이메일·비밀번호와 기기 식별값(fingerprint) 저장에
-                  동의해요.
+                  <strong>만 14세 이상</strong>이거나, 만 14세 미만이라면{" "}
+                  <strong>보호자 동의를 받았어요.</strong> 이메일·비밀번호와 기기
+                  식별값(fingerprint) 저장에 동의해요.
                 </Label>
               </div>
             )}

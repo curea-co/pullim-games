@@ -39,9 +39,11 @@ export const SignupSchema = z
   .object({
     email: emailSchema,
     password: passwordSchema,
-    // 정보통신망법: 로그인 도입 시 만 14세 이상 확인 (spec §5.6).
-    over14: z.literal(true, {
-      errorMap: () => ({ message: "만 14세 이상만 가입할 수 있어요" }),
+    // 정보통신망법 동의(spec §5.6, 2026-06-23 개정): 게스트(§5.2)와 동일 honest 단일 동의 —
+    // "만 14세 이상" 또는 "만 14세 미만 + 보호자 동의". 중등 타겟엔 14세 미만(중1 등)이 포함되어
+    // over14 단순 나이 게이트는 타겟 사용자를 차단하므로 동의 모델로 통일(Codex #125 R3, G1 승인).
+    consent: z.literal(true, {
+      errorMap: () => ({ message: "만 14세 이상이거나 보호자 동의가 필요해요" }),
     }),
     grade: gradeSchema,
     fingerprint: fingerprintSchema,

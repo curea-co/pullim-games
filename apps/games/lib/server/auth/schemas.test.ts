@@ -2,7 +2,7 @@
 import { describe, expect, it } from "vitest";
 import { LoginSchema, SignupSchema } from "./schemas";
 
-const base = { email: "a@b.com", password: "abcd1234", over14: true as const, grade: "중2" };
+const base = { email: "a@b.com", password: "abcd1234", consent: true as const, grade: "중2" };
 
 describe("SignupSchema", () => {
   it("유효 입력 통과 + 이메일 소문자 정규화", () => {
@@ -21,9 +21,9 @@ describe("SignupSchema", () => {
     const pw = "가".repeat(25) + "1a"; // 77 bytes
     expect(SignupSchema.safeParse({ ...base, password: pw }).success).toBe(false);
   });
-  it("over14 누락/false 거부", () => {
+  it("consent 누락/false 거부", () => {
     expect(SignupSchema.safeParse({ email: base.email, password: base.password }).success).toBe(false);
-    expect(SignupSchema.safeParse({ ...base, over14: false }).success).toBe(false);
+    expect(SignupSchema.safeParse({ ...base, consent: false }).success).toBe(false);
   });
   it("grade 누락 거부 + 중등 외(초·고) 학년 거부", () => {
     const { grade: _omit, ...noGrade } = base;

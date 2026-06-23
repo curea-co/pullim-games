@@ -41,7 +41,7 @@ function makeReq(body: unknown, opts: { origin?: boolean; csrf?: boolean } = {})
   });
 }
 
-const VALID = { email: "a@b.com", password: "abcd1234", over14: true, grade: "중2" };
+const VALID = { email: "a@b.com", password: "abcd1234", consent: true, grade: "중2" };
 
 beforeEach(() => {
   resetRateLimitForTests();

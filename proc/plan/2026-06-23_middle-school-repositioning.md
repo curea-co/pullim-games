@@ -48,12 +48,15 @@
   - **마이그레이션(Codex #125)**: 구 grade(초·고) 또는 손상 프로필 감지 시 `getPlayer()` 가 `clearPlayer()` 호출 — 스토리지+`pullim_games_guest` 쿠키 동시 정리. 안 그러면 middleware 가 stale 쿠키로 보호 라우트 통과 + 클라만 무신원 = split-brain(+ auth 장애 시 fail-open 노출). `player.test.ts` 신설로 잠금.
 - [x] 게임 노출 제어: `GameMeta.stage?: "middle" | "high"` 추가 + `registry.visibleGames`(stage:"high" 제외). **발견(discovery) 표면만 전환** — 허브(`GameHubPage`)·추천(`RecommendationCard`)·소개(`about`). 라우팅(`getGameById`/`getAllGameIds`)·custom 관리·**대시보드 총합 KPI는 전체 `games` 유지**(보관 게임 직접 URL 플레이 기록도 총계 포함). 단 `dashboard/stats`의 **`perGame`(노출 카드 목록)은 보관 제외** — /home CompactActivity 로 고등 게임 재노출 차단(Codex #125 R2). `physics-vector`·`chemistry-balance` = `stage:"high"`. `registry.test.ts` 신설.
 - [x] **회원가입(/signup) 학년 수집(Codex #125 R2)**: `AuthForm` grade `<select>`(중1~중3, StartForm 미러) + `SignupSchema.grade`(`isGrade` refine) + `createUser(grade)` + `migrations/0003_user_grade.sql`(users.grade nullable) + `toPublicUser`/`/me` 노출. 게스트(/start)·회원(/signup) **양 진입점에서 중등 학년 수집·검증** → "중등만 대상" 계약을 회원 경로에서도 판정 가능. `data-cta-priority` 로 보조 footer 링크 audit 통과.
+- [x] **회원가입 연령/동의 모델 통일(Codex #125 R3, G1 승인 Option A)**: `over14`(만14세 이상 only) → **`consent`**(게스트 §5.2 와 동일 honest 단일 동의 — "만14세 이상" 또는 "14세 미만+보호자 동의"). 중등 타겟엔 만14세 미만(중1 등) 포함이라 구 게이트가 타겟 사용자 회원 경로 영구 차단하던 문제 해소. `AuthForm`/`schemas`/`client` 동기 변경, 체크박스 카피 StartForm 미러.
+- [x] **대시보드 `gamesPlayed` 보관 제외(Codex #125 R3)**: 헤더("N개 게임 만났어요")·EmptyDashboard 판정을 구동하므로 `perGame` 과 동일 기준(visible). 보관 게임만 플레이 시 "N개 만났다는데 목록 빈" 모순 차단. 총합 magnitude KPI(totalAttempts 등)는 전체 games 유지.
 - [ ] 게임 콘텐츠 중등 재보정 — **게임별 후속 PR**(점진, 본 plan 범위는 분류·골격·노출제어까지).
 
 ### 2.2 권위 문서 (spec — G1 승인 "이제 개발 들어가" 2026-06-23)
 - [x] `spec/02-제품-정의.md`: §2.1 "고등 전과목"→"중등 전과목", §2.4 Primary "고등학생"→"중학생"+민서(고1 17세)→민서(중2 14세), §2.5 V1 단원 "고1 공통수학 인수분해"→"중3 수학 인수분해", 수능→시험.
 - [x] `spec/10-개발-로드맵.md`: "고등학생 5명/20명" → 중학생.
 - [x] `spec/07-브랜딩.md`: 학령 직접 언급 없음(grep 0) — 검토만, 수정 불요.
+- [x] `spec/05-비즈니스-정책.md §5.6`: 계정 가입 정책 `over14`-only → **honest consent**(게스트와 동일, 만14세 미만+보호자 동의 허용). 중등 타겟 정합 + Codex #125 R3 (G1 승인 2026-06-23). 구 정책(Codex #114 R3)은 본 개정으로 대체. 실효적 법정대리인 동의 검증은 pullim-api ADR-033 중앙 위임 시 정착.
 
 ### 2.3 정합성
 - [ ] #124 pullim-api 핸드오프(별 PR): (a) "games = 플랫폼 `games` 패키지·서비스, `junior`(주니어) 아님" 1줄, (b) **회원 프로필에 `grade`(중1~중3) 필드** 추가 — games-local `users.grade`(0003)는 P4 중앙 인증 이관 시 pullim-api 회원 프로필로 이동. 학습데이터 위임 시 학령 혼선 방지.
