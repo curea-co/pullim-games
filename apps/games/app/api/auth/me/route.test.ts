@@ -6,7 +6,11 @@ vi.mock("@/lib/server/auth/session", () => ({
   getUserFromSessionToken: vi.fn(),
 }));
 vi.mock("@/lib/server/auth/users", () => ({
-  toPublicUser: (u: { id: string; email: string }) => ({ id: u.id, email: u.email }),
+  toPublicUser: (u: { id: string; email: string; grade: string | null }) => ({
+    id: u.id,
+    email: u.email,
+    grade: u.grade ?? null,
+  }),
 }));
 
 import { GET } from "./route";
@@ -33,14 +37,15 @@ describe("GET /api/auth/me", () => {
     expect(await res.json()).toEqual({ user: null });
   });
 
-  it("유효 세션이면 공개 사용자 반환", async () => {
+  it("유효 세션이면 공개 사용자 반환 (grade 포함)", async () => {
     vi.mocked(readSessionTokenFromCookie).mockReturnValue("tok");
     vi.mocked(getUserFromSessionToken).mockResolvedValue({
       id: "u1",
       email: "a@b.com",
+      grade: "중2",
     } as never);
     const res = await GET(req("pullim_games_session=tok"));
-    expect(await res.json()).toEqual({ user: { id: "u1", email: "a@b.com" } });
+    expect(await res.json()).toEqual({ user: { id: "u1", email: "a@b.com", grade: "중2" } });
   });
 
   it("토큰 있는데 DB 장애 → 503 + unavailable (미확정, 게이트 fail-open 근거)", async () => {

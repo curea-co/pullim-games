@@ -5,7 +5,11 @@ vi.mock("@/lib/server/auth/users", () => ({
   findUserByEmail: vi.fn(),
   linkFingerprint: vi.fn(),
   touchLastSeen: vi.fn(),
-  toPublicUser: (u: { id: string; email: string }) => ({ id: u.id, email: u.email }),
+  toPublicUser: (u: { id: string; email: string; grade: string | null }) => ({
+    id: u.id,
+    email: u.email,
+    grade: u.grade ?? null,
+  }),
 }));
 vi.mock("@/lib/server/auth/session", () => ({
   createSession: vi.fn(),
@@ -49,16 +53,19 @@ beforeEach(() => {
     id: "u1",
     email: "a@b.com",
     password_hash: "h",
+    grade: "중2",
   } as never);
   vi.mocked(verifyPasswordConstantTime).mockResolvedValue(true);
   vi.mocked(createSession).mockResolvedValue({ token: "s", expiresAt: Date.now() + 1000 });
 });
 
 describe("POST /api/auth/login", () => {
-  it("정상 로그인 → 200 + 세션 쿠키", async () => {
+  it("정상 로그인 → 200 + 세션 쿠키 + 응답에 grade", async () => {
     const res = await POST(makeReq(VALID));
     expect(res.status).toBe(200);
     expect(res.headers.get("set-cookie")).toContain("pullim_games_session");
+    const body = (await res.json()) as { user: { grade: string | null } };
+    expect(body.user.grade).toBe("중2"); // grade 계약이 login 응답에서 빠지면 잡도록 잠금
   });
   it("틀린 비번 → 401", async () => {
     vi.mocked(verifyPasswordConstantTime).mockResolvedValue(false);

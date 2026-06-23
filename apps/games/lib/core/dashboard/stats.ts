@@ -28,16 +28,10 @@ export interface PerGameStat {
 export interface DashboardStats {
   /**
    * 카드를 한 번이라도 본 적 있는 게임 수 — **전체 games 기준**(보관 게임 직접 URL 플레이 포함).
-   * 실제 학습 이력 총계. 홈 EmptyDashboard(첫 사용자) 판정에 쓴다 — 보관 게임만
-   * 플레이한 사용자도 빈 상태로 되돌리지 않게(단일 백본, Codex #125 R9).
+   * 실제 학습 이력 총계. 홈 EmptyDashboard(첫 사용자) 판정 + 헤더 문구에 쓴다 — 보관 게임만
+   * 플레이한 사용자도 빈 상태로 되돌리지 않고, 그 게임이 `perGame`(재진입)에도 남는다(R9·R10).
    */
   gamesPlayed: number;
-  /**
-   * 카드를 본 적 있는 **노출(visible) 게임 수** — 보관(stage:"high") 제외.
-   * /home **헤더 문구**("N개 게임 만났어요")용 — discovery 표면이라 `perGame`(노출 카드 목록)과
-   * 동일 기준. (빈 상태 판정은 위 `gamesPlayed` 전체 기준, 헤더·목록만 visible — Codex #125 R8·R9.)
-   */
-  visibleGamesPlayed: number;
   /** 풀이 시도 총합 (모든 게임 reps 합). */
   totalAttempts: number;
   /** 정답 횟수 (attempts - lapses). */
@@ -90,7 +84,6 @@ export async function computeDashboardStats(
   let todayAttempts = 0;
   let dueSoonCount = 0;
   let gamesPlayed = 0;
-  let visibleGamesPlayed = 0;
 
   // 학습 집계는 전체 games 기준 — 보관(stage:"high") 게임도 직접 URL 로 플레이 가능하므로
   // 그 SRS/활동 기록은 총계에 포함돼야 한다(노출 숨김 ≠ 학습 기록 제외). Codex #125.
@@ -137,12 +130,14 @@ export async function computeDashboardStats(
     // todayAttempts/dueSoonCount)는 보관 게임을 직접 URL 로 플레이한 기록도 누락 없이 반영한다.
     if (cardsTouched > 0) gamesPlayed += 1;
 
-    // 단, `perGame`(=/home CompactActivity 카드 목록 — **노출/발견 표면**)만 보관(stage:"high")
-    // 제외 → 허브·about 에서 숨긴 고등 게임이 대시보드 카드로 재노출되지 않게(Codex #125 R2).
-    // (헤더 magnitude 와 카드 목록의 기준 차이는 보관 게임만 플레이한 degenerate 케이스에서만
-    //  발생 — 단일 백본 보존을 우선해 magnitude 는 전체 유지.)
-    if (g.meta.stage !== "high") {
-      if (cardsTouched > 0) visibleGamesPlayed += 1; // /home 헤더·empty 판정 — perGame 과 동일 기준
+    // `perGame`(=/home CompactActivity 카드 목록) 규칙:
+    //   - 보관(stage:"high") **미플레이** 게임은 제외 → 허브·about 에서 숨긴 고등 게임이 "시작
+    //     해보세요" 카드로 재노출(discovery)되지 않게(Codex #125 R2).
+    //   - 단 **이미 플레이한** 보관 게임(cardsTouched>0)은 **유지** → 그 학습자의 활동/재진입
+    //     링크를 홈에서 빼앗지 않는다(라우트·콘텐츠 유지와 정합, Codex #125 R10).
+    // 이 규칙이면 `gamesPlayed`(전체, 플레이한 보관 게임 포함)와 카드 목록이 일치 — 헤더·게이트·
+    // 목록이 서로 모순되지 않는다(R8 의 "N개 만났는데 목록 빈" 해소를 숨김이 아니라 재진입 유지로).
+    if (g.meta.stage !== "high" || cardsTouched > 0) {
       const correct = Math.max(0, attempts - lapses);
       perGame.push({
         gameId: g.meta.id,
@@ -167,7 +162,6 @@ export async function computeDashboardStats(
 
   return {
     gamesPlayed,
-    visibleGamesPlayed,
     totalAttempts,
     totalCorrect,
     totalLapses,
