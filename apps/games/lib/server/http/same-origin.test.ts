@@ -34,8 +34,8 @@ describe("isSameOriginRequest (production)", () => {
   });
   it("prod + NEXT_PUBLIC_SITE_ORIGIN 일치하면 허용", () => {
     vi.stubEnv("NODE_ENV", "production");
-    vi.stubEnv("NEXT_PUBLIC_SITE_ORIGIN", "https://games.pullim.app");
-    expect(isSameOriginRequest(req({ origin: "https://games.pullim.app" }))).toBe(true);
+    vi.stubEnv("NEXT_PUBLIC_SITE_ORIGIN", "https://games.pullim.ai");
+    expect(isSameOriginRequest(req({ origin: "https://games.pullim.ai" }))).toBe(true);
   });
   it("prod + 요청 Host 도 allowlist 도 아닌 외부 origin 이면 거부", () => {
     vi.stubEnv("NODE_ENV", "production");

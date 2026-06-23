@@ -7,7 +7,7 @@
 //   bun run ui:audit /games/math-quick-quiz
 //   bun run ui:audit /manage/billing
 //   bun run ui:audit /                  (홈)
-//   bun run ui:audit /games/factorization --base https://pullim-games.vercel.app
+//   bun run ui:audit /games/factorization --base https://games.pullim.ai
 //
 // 출력: 4 viewport 결과 JSON + 화면 PNG 파일 경로 + overflow 발견 시 종료 코드 1.
 

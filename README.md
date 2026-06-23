@@ -72,7 +72,8 @@ bun run lint          # eslint
 bun test              # vitest
 bun run test:e2e      # playwright
 bun run test:e2e:ui   # playwright UI 모드
-bunx vercel --prod    # production 배포 (수동 — webhook 자동 배포 사용 안 함)
+                      # 배포: main/dev push → Vercel 자동 배포 (games.pullim.ai / dev-games.pullim.ai)
+bunx vercel --prod    # 수동 배포 (fallback)
 ```
 
 ## 기술 스택
@@ -105,4 +106,8 @@ cross-domain 의존 금지 — games 안에서 다른 풀림 프로젝트의 코
 
 ## 배포
 
-`bunx vercel --prod` 수동 배포가 공식 프로세스. GitHub webhook 자동 배포는 Vercel admin 권한 이슈로 사용 안 함. **PR 머지 ≠ production 반영** — 수동 배포 완료까지가 1사이클.
+**Vercel Git 연동 자동 배포** (공용계정):
+- `main` push → **production** [`https://games.pullim.ai`](https://games.pullim.ai)
+- `dev` push → **dev** [`https://dev-games.pullim.ai`](https://dev-games.pullim.ai)
+
+**push = 배포** (Root Directory = `apps/games`). 환경변수(`NEXT_PUBLIC_SITE_URL`·`NEXT_PUBLIC_SITE_ORIGIN`·`DATABASE_URL`·`ANTHROPIC_API_KEY`·`CRON_SECRET`)는 Vercel 에 Production/Preview 분리 설정. 수동 배포 `bunx vercel --prod` 는 fallback.
