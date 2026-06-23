@@ -5,7 +5,11 @@ vi.mock("@/lib/server/auth/users", () => ({
   findUserByEmail: vi.fn(),
   createUser: vi.fn(),
   linkFingerprint: vi.fn(),
-  toPublicUser: (u: { id: string; email: string }) => ({ id: u.id, email: u.email }),
+  toPublicUser: (u: { id: string; email: string; grade: string | null }) => ({
+    id: u.id,
+    email: u.email,
+    grade: u.grade ?? null,
+  }),
 }));
 vi.mock("@/lib/server/auth/session", () => ({
   createSession: vi.fn(),
@@ -47,15 +51,20 @@ beforeEach(() => {
   resetRateLimitForTests();
   vi.clearAllMocks();
   vi.mocked(findUserByEmail).mockResolvedValue(null);
-  vi.mocked(createUser).mockResolvedValue({ id: "u1", email: "a@b.com" } as never);
+  vi.mocked(createUser).mockResolvedValue({ id: "u1", email: "a@b.com", grade: "중2" } as never);
   vi.mocked(createSession).mockResolvedValue({ token: "s", expiresAt: Date.now() + 1000 });
 });
 
 describe("POST /api/auth/signup", () => {
-  it("정상 가입 → 201 + 세션 쿠키", async () => {
+  it("정상 가입 → 201 + 세션 쿠키 + grade 가 DB·응답까지 전달", async () => {
     const res = await POST(makeReq(VALID));
     expect(res.status).toBe(201);
     expect(res.headers.get("set-cookie")).toContain("pullim_games_session");
+    // grade 가 createUser(email, passwordHash, grade, tx) 3번째 인자로 전달되는지 잠금.
+    expect(vi.mocked(createUser).mock.calls[0]?.[2]).toBe("중2");
+    // 공개 응답(user)에 grade 노출 잠금.
+    const body = (await res.json()) as { user: { grade: string | null } };
+    expect(body.user.grade).toBe("중2");
   });
   it("Origin 없음 → 403", async () => {
     expect((await POST(makeReq(VALID, { origin: false }))).status).toBe(403);
