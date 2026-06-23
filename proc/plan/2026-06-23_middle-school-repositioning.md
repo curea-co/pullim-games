@@ -53,7 +53,7 @@
   - **학습 magnitude 집계(전체 `games`)** — `gamesPlayed`·`totalAttempts`/`Lapses`·`todayAttempts`·`dueSoonCount`·sync. 보관 게임 직접 URL 플레이 기록도 누락 없이 반영(단일 FSRS 백본 불변).
   - **발견(discovery) 노출(visible)** — 허브 그리드·**오늘의 추천 후보 선택**(`RecommendationCard`)·about 쇼케이스·stats `perGame`(노출 카드 목록). 추천은 `GameMeta.stage` 계약상 발견 표면이라 보관 게임을 /home·/games 히어로로 재노출하지 않음.
   - (수렴 과정: R3 gamesPlayed visible 축소 → R4 magnitude 전체 복원 → R5 추천만 visible → R8 empty-state 카운트 분리. 최종 = 집계 전체 / 발견 노출 visible.)
-  - **R8**: `DashboardStats.visibleGamesPlayed`(노출 게임 플레이 수) 신설 — /home 헤더·EmptyDashboard 판정용(perGame 과 동일 기준). `gamesPlayed`(전체, 실제 이력)와 분리해 "보관만 플레이 → N개 만났다는데 활동 빈" 비정합 차단. `/about` 도 `kind==="official"` 추가(custom-* 게임이 소개 게임 수·메커닉 쇼케이스 부풀리지 않게).
+  - **R8·R9 (홈 판정 분리 최종)**: `DashboardStats.visibleGamesPlayed`(노출 게임 플레이 수) 신설. **빈 상태(첫 사용자) 판정 = 전체 `gamesPlayed`**(실제 이력 — 보관만 플레이한 사용자도 빈 상태로 안 되돌림, R9), **헤더 문구·활동 목록만 `visibleGamesPlayed`/`perGame`**(discovery, R8 의 "false N개 만났어요" 차단). `/about` 도 `kind==="official"` 추가(custom-* 게임이 소개 게임 수·메커닉 쇼케이스 부풀리지 않게).
 - [ ] 게임 콘텐츠 중등 재보정 — **게임별 후속 PR**(점진, 본 plan 범위는 분류·골격·노출제어까지).
 
 ### 2.2 권위 문서 (spec — G1 승인 "이제 개발 들어가" 2026-06-23)

@@ -28,13 +28,14 @@ export interface PerGameStat {
 export interface DashboardStats {
   /**
    * 카드를 한 번이라도 본 적 있는 게임 수 — **전체 games 기준**(보관 게임 직접 URL 플레이 포함).
-   * 실제 학습 이력 총계. /home 노출 판정엔 쓰지 말 것(아래 `visibleGamesPlayed` 사용).
+   * 실제 학습 이력 총계. 홈 EmptyDashboard(첫 사용자) 판정에 쓴다 — 보관 게임만
+   * 플레이한 사용자도 빈 상태로 되돌리지 않게(단일 백본, Codex #125 R9).
    */
   gamesPlayed: number;
   /**
    * 카드를 본 적 있는 **노출(visible) 게임 수** — 보관(stage:"high") 제외.
-   * /home 헤더("N개 게임 만났어요")·EmptyDashboard 판정용 — `perGame`(노출 카드 목록)과
-   * 동일 기준이라 "N개 만났다는데 활동 목록은 빈" 비정합을 차단(Codex #125 R8).
+   * /home **헤더 문구**("N개 게임 만났어요")용 — discovery 표면이라 `perGame`(노출 카드 목록)과
+   * 동일 기준. (빈 상태 판정은 위 `gamesPlayed` 전체 기준, 헤더·목록만 visible — Codex #125 R8·R9.)
    */
   visibleGamesPlayed: number;
   /** 풀이 시도 총합 (모든 게임 reps 합). */
