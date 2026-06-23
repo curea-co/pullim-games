@@ -10,7 +10,9 @@ export const contentType = "image/png";
 export default async function OGImage() {
   // 표시 도메인 — layout 과 동일한 공개 도메인 규칙(@/lib/site-url). dev→dev-games.pullim.ai
   // 등 실제 공개 호스트와 카드 표기를 일치 (codex #123).
-  const host = getSiteHost();
+  // OG 카드 폭(1200px) 보호 — preview 의 긴 VERCEL_URL slug 가 넘치지 않게 축약.
+  const rawHost = getSiteHost();
+  const host = rawHost.length > 32 ? `${rawHost.slice(0, 31)}…` : rawHost;
   return new ImageResponse(
     (
       <div
@@ -167,6 +169,9 @@ export default async function OGImage() {
               fontWeight: 600,
               letterSpacing: 1.5,
               color: "#64748B",
+              maxWidth: 1040,
+              overflow: "hidden",
+              whiteSpace: "nowrap",
             }}
           >
             {host}
