@@ -84,7 +84,7 @@
 ### 하면 안 되는 것
 
 - 다른 풀림 프로젝트(planner/Q/classbot)의 코드·페이지·mock 참조 — **독립 프로젝트**이므로 cross-domain 의존 금지
-- **Vercel Git 연동 자동 배포**: `main` push → production `games.pullim.ai`, `dev` push → `dev-games.pullim.ai` (Root Directory = `apps/games`). **main 머지 = production 자동 배포**이므로 머지 전 검증이 곧 배포 전 검증 — 깨진 채 머지 금지. (수동 `vercel --prod` 는 fallback)
+- **Vercel Git 연동 자동 배포**: `main` push → production `games.pullim.ai`, `dev` push → `dev-games.pullim.ai` (Root Directory = `apps/games`). **main 머지 = production 자동 배포**이므로 머지 전 검증이 곧 배포 전 검증 — 깨진 채 머지 금지. (수동 `vercel --prod` 는 fallback) 근거: `proc/plan/2026-06-23_domain-branch-topology.md` (G1 결정)
 
 ## 5. 도구 보조
 
