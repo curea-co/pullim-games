@@ -49,7 +49,10 @@
 - [x] 게임 노출 제어: `GameMeta.stage?: "middle" | "high"` 추가 + `registry.visibleGames`(stage:"high" 제외). **발견(discovery) 표면만 전환** — 허브(`GameHubPage`)·추천(`RecommendationCard`)·소개(`about`). 라우팅(`getGameById`/`getAllGameIds`)·custom 관리·**대시보드 총합 KPI는 전체 `games` 유지**(보관 게임 직접 URL 플레이 기록도 총계 포함). 단 `dashboard/stats`의 **`perGame`(노출 카드 목록)은 보관 제외** — /home CompactActivity 로 고등 게임 재노출 차단(Codex #125 R2). `physics-vector`·`chemistry-balance` = `stage:"high"`. `registry.test.ts` 신설.
 - [x] **회원가입(/signup) 학년 수집(Codex #125 R2)**: `AuthForm` grade `<select>`(중1~중3, StartForm 미러) + `SignupSchema.grade`(`isGrade` refine) + `createUser(grade)` + `migrations/0003_user_grade.sql`(users.grade nullable) + `toPublicUser`/`/me` 노출. 게스트(/start)·회원(/signup) **양 진입점에서 중등 학년 수집·검증** → "중등만 대상" 계약을 회원 경로에서도 판정 가능. `data-cta-priority` 로 보조 footer 링크 audit 통과.
 - [x] **회원가입 연령/동의 모델 통일(Codex #125 R3, G1 승인 Option A)**: `over14`(만14세 이상 only) → **`consent`**(게스트 §5.2 와 동일 honest 단일 동의 — "만14세 이상" 또는 "14세 미만+보호자 동의"). 중등 타겟엔 만14세 미만(중1 등) 포함이라 구 게이트가 타겟 사용자 회원 경로 영구 차단하던 문제 해소. `AuthForm`/`schemas`/`client` 동기 변경, 체크박스 카피 StartForm 미러.
-- [x] **보관 게임 = 발견 표면만 숨김, 단일 FSRS 백본 불변(Codex #125 R1·R4 수렴)**: 학습 magnitude(`gamesPlayed`·`totalAttempts`/`Lapses`·`todayAttempts`·`dueSoonCount`)·**오늘의 추천 입력 스냅샷**은 전체 `games` 유지 — 보관 게임 직접 URL 플레이 기록도 왜곡 없이 반영. 보관 제외는 **발견 렌더 표면**에만: 허브 그리드·about 쇼케이스·stats `perGame`(노출 카드 목록). (R3 에서 시도한 gamesPlayed/추천 visible 축소는 백본 분절 → R4 에서 되돌림. degenerate "보관만 플레이" 케이스는 magnitude 우선.)
+- [x] **보관 게임: "집계는 전체, 발견 노출만 visible"(Codex #125 R1·R2·R4·R5 수렴)**:
+  - **학습 magnitude 집계(전체 `games`)** — `gamesPlayed`·`totalAttempts`/`Lapses`·`todayAttempts`·`dueSoonCount`·sync. 보관 게임 직접 URL 플레이 기록도 누락 없이 반영(단일 FSRS 백본 불변).
+  - **발견(discovery) 노출(visible)** — 허브 그리드·**오늘의 추천 후보 선택**(`RecommendationCard`)·about 쇼케이스·stats `perGame`(노출 카드 목록). 추천은 `GameMeta.stage` 계약상 발견 표면이라 보관 게임을 /home·/games 히어로로 재노출하지 않음.
+  - (수렴 과정: R3 에서 gamesPlayed 까지 visible 축소 → R4 에서 magnitude 는 전체로 복원 → R5 에서 추천 선택만 다시 visible 로 한정. 최종 = 집계 전체 / 발견 노출 visible.)
 - [ ] 게임 콘텐츠 중등 재보정 — **게임별 후속 PR**(점진, 본 plan 범위는 분류·골격·노출제어까지).
 
 ### 2.2 권위 문서 (spec — G1 승인 "이제 개발 들어가" 2026-06-23)

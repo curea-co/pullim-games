@@ -17,12 +17,12 @@ export { games };
 
 /**
  * 사용자 노출용 게임 목록 — 보관(`stage:"high"`, 고등 전용) 제외.
- * **발견(discovery) 렌더 표면만** 이 목록을 쓴다 — 허브 그리드(`GameHubPage`)·about 쇼케이스
- * + stats 의 `perGame`(노출 카드 목록).
- * **단일 FSRS 백본은 끊지 않는다**: 라우팅(`getGameById`/`getAllGameIds`)·custom 관리·대시보드
- * 총합 magnitude KPI(`gamesPlayed`/`totalAttempts` 등)·**오늘의 추천 입력 스냅샷**은 전체
- * `games` 유지 — 보관 게임도 직접 URL 플레이가 살아있어(삭제 아님) 그 학습 상태를 왜곡 없이
- * 반영해야 한다(Codex #125 R1·R4).
+ * **발견(discovery) 표면**이 이 목록을 쓴다 — 허브 그리드(`GameHubPage`)·**오늘의 추천 후보
+ * 선택**(`RecommendationCard`)·about 쇼케이스 + stats 의 `perGame`(노출 카드 목록).
+ * **학습 상태 magnitude 집계는 전체 `games` 유지**(단일 FSRS 백본 불변): 라우팅
+ * (`getGameById`/`getAllGameIds`)·custom 관리·대시보드 총합 KPI(`gamesPlayed`/`totalAttempts`
+ * 등)·sync. 보관 게임도 직접 URL 플레이가 살아있어(삭제 아님) 그 학습 기록은 누락 없이 집계.
+ * 즉 **집계는 전체, 발견 노출만 visible**(Codex #125 R1·R2·R4·R5 수렴).
  * 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
  */
 export const visibleGames: GameManifest[] = games.filter(
