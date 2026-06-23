@@ -52,7 +52,14 @@ export function getPlayer(): Player | null {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const p = JSON.parse(raw) as Partial<Player>;
-    if (typeof p.nickname !== "string" || !isGrade(p.grade)) return null;
+    if (typeof p.nickname !== "string" || !isGrade(p.grade)) {
+      // 저장된 프로필이 무효(구 grade 초·고 등) — 스토리지뿐 아니라 게스트 쿠키도 함께
+      // 정리한다(Codex #125). 안 그러면 서버 middleware 는 stale `pullim_games_guest`
+      // 쿠키로 보호 라우트를 통과시키는데 클라만 무신원으로 튕기는 split-brain 이 나고,
+      // auth 일시 장애 시 useIdentity fail-open + stale cookie 로 라우트가 열릴 수 있다.
+      clearPlayer();
+      return null;
+    }
     return {
       nickname: p.nickname,
       grade: p.grade,
@@ -60,6 +67,8 @@ export function getPlayer(): Player | null {
       createdAt: typeof p.createdAt === "number" ? p.createdAt : 0,
     };
   } catch {
+    // 파싱 불가(손상) 프로필도 동일하게 신원 상태를 정리한다(쿠키-스토리지 일치).
+    clearPlayer();
     return null;
   }
 }

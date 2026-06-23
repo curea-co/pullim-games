@@ -1,0 +1,93 @@
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+
+import { GRADES, GUEST_COOKIE, getPlayer } from "./index";
+
+// 중등 재포지셔닝(2026-06-23) — GRADES 축소에 따른 신원 마이그레이션.
+// 근거: proc/plan/2026-06-23_middle-school-repositioning.md + Codex #125.
+// 본 리포 vitest 기본 env = node(jsdom 미사용) → window/document 를 최소 stub.
+const STORAGE_KEY = "pullim-games:player";
+
+function makeStorage() {
+  const m = new Map<string, string>();
+  return {
+    getItem: (k: string) => (m.has(k) ? m.get(k)! : null),
+    setItem: (k: string, v: string) => void m.set(k, String(v)),
+    removeItem: (k: string) => void m.delete(k),
+    clear: () => m.clear(),
+    get length() {
+      return m.size;
+    },
+    key: (i: number) => Array.from(m.keys())[i] ?? null,
+  };
+}
+
+// 단일 쿠키 키만 추적하는 최소 cookie jar(본 테스트 범위).
+function makeDocument(initial = "") {
+  let jar = initial;
+  return {
+    get cookie() {
+      return jar;
+    },
+    set cookie(v: string) {
+      const seg = v.split(";")[0];
+      const eq = seg.indexOf("=");
+      const k = seg.slice(0, eq).trim();
+      const val = seg.slice(eq + 1).trim();
+      jar = /max-age=0/i.test(v) || val === "" ? "" : `${k}=${val}`;
+    },
+  };
+}
+
+describe("player — GRADES 중등 한정", () => {
+  it("GRADES 는 중1·중2·중3 만 포함(초·고 제외)", () => {
+    expect([...GRADES]).toEqual(["중1", "중2", "중3"]);
+  });
+});
+
+describe("getPlayer — 무효 프로필 마이그레이션(split-brain 차단)", () => {
+  let storage: ReturnType<typeof makeStorage>;
+  let doc: ReturnType<typeof makeDocument>;
+
+  beforeEach(() => {
+    storage = makeStorage();
+    doc = makeDocument(`${GUEST_COOKIE}=1`);
+    vi.stubGlobal("window", { localStorage: storage, location: { protocol: "http:" } });
+    vi.stubGlobal("document", doc);
+  });
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("구 grade(고1) 프로필은 null + 스토리지·게스트 쿠키 정리", () => {
+    storage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ nickname: "민서", grade: "고1", consent: true, createdAt: 1 }),
+    );
+    expect(getPlayer()).toBeNull();
+    expect(storage.getItem(STORAGE_KEY)).toBeNull(); // 스토리지 정리
+    expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(false); // 쿠키 정리
+  });
+
+  it("유효 grade(중2) 프로필은 그대로 반환", () => {
+    storage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ nickname: "민서", grade: "중2", consent: true, createdAt: 1 }),
+    );
+    expect(getPlayer()?.grade).toBe("중2");
+    expect(storage.getItem(STORAGE_KEY)).not.toBeNull();
+    expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(true); // 유효 → 쿠키 보존
+  });
+
+  it("손상(파싱 불가) 프로필도 스토리지·쿠키 정리", () => {
+    storage.setItem(STORAGE_KEY, "{not-json");
+    expect(getPlayer()).toBeNull();
+    expect(storage.getItem(STORAGE_KEY)).toBeNull();
+    expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(false);
+  });
+
+  it("프로필 없음(쿠키만)은 정리 없이 null", () => {
+    expect(getPlayer()).toBeNull();
+    // raw 자체가 없으면 clear 미호출 — 쿠키 보존(정상 무신원 경로).
+    expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(true);
+  });
+});

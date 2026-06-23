@@ -44,8 +44,9 @@
 ## 2. 변경 항목
 
 ### 2.1 코드 (games repo — 본 plan 트랙)
-- [x] `lib/core/player/index.ts` `GRADES`: `초1~고3` → **`중1·중2·중3`**. `Grade` 타입 자동 축소. 구 grade 값(초·고) 보유 게스트는 `isGrade` 거부 → `getPlayer` null → 온보딩 재선택(프리런치라 실사용 영향 0). `StartForm` 드롭다운 자동 중등화. catalog-loader 는 독립 `CatalogGradeBand` 사용 — 비영향 확인.
-- [x] 게임 노출 제어: `GameMeta.stage?: "middle" | "high"` 추가 + `registry.visibleGames`(stage:"high" 제외). 노출 표면 일괄 전환 — 허브(`GameHubPage`)·추천(`RecommendationCard`)·소개(`about`)·대시보드 집계(`stats`). 라우팅(`getGameById`/`getAllGameIds`)·custom 관리는 전체 `games` 유지(보관=직접 URL 생존). `physics-vector`·`chemistry-balance` = `stage:"high"`. `registry.test.ts` 신설.
+- [x] `lib/core/player/index.ts` `GRADES`: `초1~고3` → **`중1·중2·중3`**. `Grade` 타입 자동 축소. `StartForm` 드롭다운 자동 중등화. catalog-loader 는 독립 `CatalogGradeBand` 사용 — 비영향.
+  - **마이그레이션(Codex #125)**: 구 grade(초·고) 또는 손상 프로필 감지 시 `getPlayer()` 가 `clearPlayer()` 호출 — 스토리지+`pullim_games_guest` 쿠키 동시 정리. 안 그러면 middleware 가 stale 쿠키로 보호 라우트 통과 + 클라만 무신원 = split-brain(+ auth 장애 시 fail-open 노출). `player.test.ts` 신설로 잠금.
+- [x] 게임 노출 제어: `GameMeta.stage?: "middle" | "high"` 추가 + `registry.visibleGames`(stage:"high" 제외). **발견(discovery) 표면만 전환** — 허브(`GameHubPage`)·추천(`RecommendationCard`)·소개(`about`). 라우팅(`getGameById`/`getAllGameIds`)·custom 관리·**학습 집계(`dashboard/stats`)는 전체 `games` 유지** — 보관 게임도 직접 URL 플레이 가능하므로 그 SRS/활동 기록은 총계에 포함(노출 숨김 ≠ 학습 제외, Codex #125). `physics-vector`·`chemistry-balance` = `stage:"high"`. `registry.test.ts` 신설.
 - [ ] 게임 콘텐츠 중등 재보정 — **게임별 후속 PR**(점진, 본 plan 범위는 분류·골격·노출제어까지).
 
 ### 2.2 권위 문서 (spec — G1 승인 "이제 개발 들어가" 2026-06-23)

@@ -17,9 +17,10 @@ export { games };
 
 /**
  * 사용자 노출용 게임 목록 — 보관(`stage:"high"`, 고등 전용) 제외.
- * 허브·추천·about·대시보드 집계 등 **노출 표면은 이 목록을 쓴다**.
- * 라우팅(`getGameById`/`getAllGameIds`)·관리(custom)는 전체 `games` 유지 —
- * 보관 게임도 직접 URL 진입은 살아있음(삭제 아님).
+ * **발견(discovery) 표면만** 이 목록을 쓴다 — 허브 그리드·오늘의 추천·about 쇼케이스.
+ * 라우팅(`getGameById`/`getAllGameIds`)·custom 관리·**학습 집계(대시보드 stats)**는
+ * 전체 `games` 유지 — 보관 게임도 직접 URL 진입·플레이가 살아있어(삭제 아님) 그
+ * 학습 기록은 총계에 포함돼야 한다(Codex #125).
  * 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
  */
 export const visibleGames: GameManifest[] = games.filter(
