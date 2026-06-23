@@ -121,13 +121,16 @@ export async function computeDashboardStats(
       }
     }
 
-    // 노출(visible) 게임 기준 — gamesPlayed·perGame 둘 다 /home 의 **노출 표면**이다:
-    //   - gamesPlayed → 헤더 "N개 게임을 만났어요" + EmptyDashboard 판정
-    //   - perGame    → CompactActivity 카드 목록 + untouchedCount/totalGames
-    // 둘이 같은 기준(보관 stage:"high" 제외)이어야 "보관 게임만 플레이 → N개 만났다는데 목록은
-    // 빈" 모순이 안 생긴다(Codex #125 R2·R3). 총합 KPI(아래)는 전체 games 유지.
+    // 단일 FSRS 백본 — 학습 이력 magnitude 는 보관 여부와 무관하게 전체 games 기준(Codex #125
+    // R1·R4). `gamesPlayed`(실제 플레이 게임 수, /home empty 판정)·totalAttempts/Lapses(및 위
+    // todayAttempts/dueSoonCount)는 보관 게임을 직접 URL 로 플레이한 기록도 누락 없이 반영한다.
+    if (cardsTouched > 0) gamesPlayed += 1;
+
+    // 단, `perGame`(=/home CompactActivity 카드 목록 — **노출/발견 표면**)만 보관(stage:"high")
+    // 제외 → 허브·about 에서 숨긴 고등 게임이 대시보드 카드로 재노출되지 않게(Codex #125 R2).
+    // (헤더 magnitude 와 카드 목록의 기준 차이는 보관 게임만 플레이한 degenerate 케이스에서만
+    //  발생 — 단일 백본 보존을 우선해 magnitude 는 전체 유지.)
     if (g.meta.stage !== "high") {
-      if (cardsTouched > 0) gamesPlayed += 1;
       const correct = Math.max(0, attempts - lapses);
       perGame.push({
         gameId: g.meta.id,
@@ -144,8 +147,6 @@ export async function computeDashboardStats(
       });
     }
 
-    // 총합 magnitude KPI 는 전체 games 기준 — 보관 게임을 직접 URL 로 플레이한 기록도
-    // totalAttempts/Lapses(및 위 todayAttempts/dueSoonCount)에 누락 없이 집계(Codex #125 R1).
     totalAttempts += attempts;
     totalLapses += lapses;
   }

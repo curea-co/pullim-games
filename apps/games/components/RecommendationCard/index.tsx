@@ -35,7 +35,7 @@ import {
   type GameSrsSnapshot,
   type Recommendation,
 } from "@/lib/core";
-import { games, visibleGames } from "@/lib/games/registry";
+import { games } from "@/lib/games/registry";
 import { isModeSupportedFor } from "@/lib/games/supported-modes";
 import { Card } from "@/components/ui/card";
 
@@ -59,7 +59,10 @@ export function RecommendationCard() {
   });
 
   useEffect(() => {
-    const snapshots: GameSrsSnapshot[] = visibleGames
+    // 추천 입력 스냅샷은 **전체 games**(단일 FSRS 백본) — 보관(stage:"high") 게임을 직접 URL 로
+    // 플레이해 due 카드가 쌓인 경우에도 추천이 그 학습 상태를 왜곡 없이 반영(Codex #125 R4).
+    // 보관 게임은 발견 표면(허브·about)에서만 숨긴다 — 추천 백본 입력은 끊지 않는다.
+    const snapshots: GameSrsSnapshot[] = games
       .filter((g) => g.meta.status === "available")
       .map((g) => ({
         gameId: g.meta.id,
