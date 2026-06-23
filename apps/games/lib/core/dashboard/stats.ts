@@ -123,20 +123,26 @@ export async function computeDashboardStats(
 
     if (cardsTouched > 0) gamesPlayed += 1;
 
-    const correct = Math.max(0, attempts - lapses);
-    perGame.push({
-      gameId: g.meta.id,
-      title: g.meta.title,
-      cardsTouched,
-      cardsTotal,
-      attempts,
-      correct,
-      failed: lapses,
-      accuracy: attempts > 0 ? correct / attempts : 0,
-      lastReviewAt,
-      kind: g.meta.kind ?? "official",
-      icon: g.meta.icon,
-    });
+    // perGame 은 /home CompactActivity 의 **노출 표면**(untouchedCount/totalGames + 카드 렌더).
+    // 보관(stage:"high") 게임은 여기서 빼야 허브·추천·about 에서 숨긴 고등 게임이 대시보드로
+    // 다시 새어 나오지 않는다(Codex #125). 단, 총합 KPI(아래 totalAttempts 등)는 전체 games
+    // 기준 유지 — 직접 URL 로 플레이한 기록은 누락 없이 집계.
+    if (g.meta.stage !== "high") {
+      const correct = Math.max(0, attempts - lapses);
+      perGame.push({
+        gameId: g.meta.id,
+        title: g.meta.title,
+        cardsTouched,
+        cardsTotal,
+        attempts,
+        correct,
+        failed: lapses,
+        accuracy: attempts > 0 ? correct / attempts : 0,
+        lastReviewAt,
+        kind: g.meta.kind ?? "official",
+        icon: g.meta.icon,
+      });
+    }
 
     totalAttempts += attempts;
     totalLapses += lapses;

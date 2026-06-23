@@ -1,5 +1,12 @@
 // games 인증 입력 검증 (zod). 근거: proc/plan/2026-05-29_auth-login-signup.md.
 import { z } from "zod";
+import { isGrade } from "@/lib/core/player";
+
+// 중등 타겟(2026-06-23) — 가입 시 학년 수집·검증. 게스트(/start)와 동일 GRADES(중1~중3).
+// isGrade 단일 출처 재사용(드리프트 차단). 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
+const gradeSchema = z
+  .string({ required_error: "학년을 선택해주세요" })
+  .refine(isGrade, "중등(중1~중3) 학년만 선택할 수 있어요");
 
 // bcrypt 72바이트 한계 — 초과 시 뒤가 조용히 잘려 입력≠해시대상. 가입·로그인 공통 적용.
 const within72Bytes = (v: string) => new TextEncoder().encode(v).length <= 72;
@@ -36,6 +43,7 @@ export const SignupSchema = z
     over14: z.literal(true, {
       errorMap: () => ({ message: "만 14세 이상만 가입할 수 있어요" }),
     }),
+    grade: gradeSchema,
     fingerprint: fingerprintSchema,
   })
   .strict();

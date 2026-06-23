@@ -66,11 +66,12 @@ export async function signup(
   email: string,
   password: string,
   over14: boolean,
+  grade: string,
 ): Promise<AuthResult> {
   const csrf = await ensureCsrf();
   return postAuth(
     "/api/auth/signup",
-    { email, password, over14, fingerprint: getFingerprint() ?? undefined },
+    { email, password, over14, grade, fingerprint: getFingerprint() ?? undefined },
     csrf,
   );
 }

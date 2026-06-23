@@ -46,7 +46,8 @@
 ### 2.1 코드 (games repo — 본 plan 트랙)
 - [x] `lib/core/player/index.ts` `GRADES`: `초1~고3` → **`중1·중2·중3`**. `Grade` 타입 자동 축소. `StartForm` 드롭다운 자동 중등화. catalog-loader 는 독립 `CatalogGradeBand` 사용 — 비영향.
   - **마이그레이션(Codex #125)**: 구 grade(초·고) 또는 손상 프로필 감지 시 `getPlayer()` 가 `clearPlayer()` 호출 — 스토리지+`pullim_games_guest` 쿠키 동시 정리. 안 그러면 middleware 가 stale 쿠키로 보호 라우트 통과 + 클라만 무신원 = split-brain(+ auth 장애 시 fail-open 노출). `player.test.ts` 신설로 잠금.
-- [x] 게임 노출 제어: `GameMeta.stage?: "middle" | "high"` 추가 + `registry.visibleGames`(stage:"high" 제외). **발견(discovery) 표면만 전환** — 허브(`GameHubPage`)·추천(`RecommendationCard`)·소개(`about`). 라우팅(`getGameById`/`getAllGameIds`)·custom 관리·**학습 집계(`dashboard/stats`)는 전체 `games` 유지** — 보관 게임도 직접 URL 플레이 가능하므로 그 SRS/활동 기록은 총계에 포함(노출 숨김 ≠ 학습 제외, Codex #125). `physics-vector`·`chemistry-balance` = `stage:"high"`. `registry.test.ts` 신설.
+- [x] 게임 노출 제어: `GameMeta.stage?: "middle" | "high"` 추가 + `registry.visibleGames`(stage:"high" 제외). **발견(discovery) 표면만 전환** — 허브(`GameHubPage`)·추천(`RecommendationCard`)·소개(`about`). 라우팅(`getGameById`/`getAllGameIds`)·custom 관리·**대시보드 총합 KPI는 전체 `games` 유지**(보관 게임 직접 URL 플레이 기록도 총계 포함). 단 `dashboard/stats`의 **`perGame`(노출 카드 목록)은 보관 제외** — /home CompactActivity 로 고등 게임 재노출 차단(Codex #125 R2). `physics-vector`·`chemistry-balance` = `stage:"high"`. `registry.test.ts` 신설.
+- [x] **회원가입(/signup) 학년 수집(Codex #125 R2)**: `AuthForm` grade `<select>`(중1~중3, StartForm 미러) + `SignupSchema.grade`(`isGrade` refine) + `createUser(grade)` + `migrations/0003_user_grade.sql`(users.grade nullable) + `toPublicUser`/`/me` 노출. 게스트(/start)·회원(/signup) **양 진입점에서 중등 학년 수집·검증** → "중등만 대상" 계약을 회원 경로에서도 판정 가능. `data-cta-priority` 로 보조 footer 링크 audit 통과.
 - [ ] 게임 콘텐츠 중등 재보정 — **게임별 후속 PR**(점진, 본 plan 범위는 분류·골격·노출제어까지).
 
 ### 2.2 권위 문서 (spec — G1 승인 "이제 개발 들어가" 2026-06-23)
@@ -55,8 +56,8 @@
 - [x] `spec/07-브랜딩.md`: 학령 직접 언급 없음(grep 0) — 검토만, 수정 불요.
 
 ### 2.3 정합성
-- [ ] #124 pullim-api 핸드오프: "games = 플랫폼 `games` 패키지·서비스, `junior`(주니어) 아님" 1줄 명시 → 학습데이터 위임 시 학령 혼선 방지.
-- [ ] 학년 입력 진입점 정합: `StartForm`(게스트)은 학년 입력 보유, **회원가입(signup)엔 부재** → 회원가입에도 학년 수집 추가 필요(단 회원 학년 저장 위치는 pullim-api 중앙 인증 위임 트랙과 연계 — 본 plan 은 게스트 로컬 학년까지, 회원 학년은 통합 트랙 §A 와 합류).
+- [ ] #124 pullim-api 핸드오프(별 PR): (a) "games = 플랫폼 `games` 패키지·서비스, `junior`(주니어) 아님" 1줄, (b) **회원 프로필에 `grade`(중1~중3) 필드** 추가 — games-local `users.grade`(0003)는 P4 중앙 인증 이관 시 pullim-api 회원 프로필로 이동. 학습데이터 위임 시 학령 혼선 방지.
+- [x] 학년 입력 진입점 정합: `StartForm`(게스트)·`AuthForm`(회원가입) **양쪽 모두 학년 수집** 완료. 회원 학년은 games-local `users.grade` 에 임시 저장(P4 시 pullim-api 이관).
 
 ## 3. 비목표 / 주의
 - 게임 **삭제 없음** — 고등 전용도 보관(`지우지 말 것`, G1).

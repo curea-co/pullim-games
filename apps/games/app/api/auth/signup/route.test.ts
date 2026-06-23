@@ -41,7 +41,7 @@ function makeReq(body: unknown, opts: { origin?: boolean; csrf?: boolean } = {})
   });
 }
 
-const VALID = { email: "a@b.com", password: "abcd1234", over14: true };
+const VALID = { email: "a@b.com", password: "abcd1234", over14: true, grade: "중2" };
 
 beforeEach(() => {
   resetRateLimitForTests();
@@ -65,6 +65,11 @@ describe("POST /api/auth/signup", () => {
   });
   it("약한 비번 → 422", async () => {
     expect((await POST(makeReq({ ...VALID, password: "x" }))).status).toBe(422);
+  });
+  it("중등 외 학년(고1)·학년 누락 → 422 (중등 타겟 강제)", async () => {
+    expect((await POST(makeReq({ ...VALID, grade: "고1" }))).status).toBe(422);
+    const { grade: _omit, ...noGrade } = VALID;
+    expect((await POST(makeReq(noGrade))).status).toBe(422);
   });
   it("이미 가입된 이메일 → 409", async () => {
     vi.mocked(findUserByEmail).mockResolvedValue({ id: "u1" } as never);

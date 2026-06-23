@@ -7,6 +7,8 @@ export type UserRow = {
   id: string;
   email: string;
   password_hash: string;
+  /** 중등 학년(중1~중3) — 가입 시 수집. 레거시 회원은 null(migration 0003). */
+  grade: string | null;
   created_at: number;
   updated_at: number;
   last_seen_at: number | null;
@@ -15,10 +17,12 @@ export type UserRow = {
 export type PublicUser = {
   id: string;
   email: string;
+  /** 중등 학년(중1~중3). 레거시 회원은 null. 프로필 뱃지·학년별 게임 노출에 사용. */
+  grade: string | null;
 };
 
 export function toPublicUser(u: UserRow): PublicUser {
-  return { id: u.id, email: u.email };
+  return { id: u.id, email: u.email, grade: u.grade ?? null };
 }
 
 export async function findUserByEmail(email: string): Promise<UserRow | null> {
@@ -41,15 +45,16 @@ export async function findUserById(id: string): Promise<UserRow | null> {
 export async function createUser(
   email: string,
   passwordHash: string,
+  grade: string,
   exec: QueryFn = query,
 ): Promise<UserRow> {
   const now = Date.now();
   const id = randomUUID();
   const { rows } = await exec<UserRow>(
-    `INSERT INTO users (id, email, password_hash, created_at, updated_at, last_seen_at)
-     VALUES ($1, $2, $3, $4, $4, $4)
+    `INSERT INTO users (id, email, password_hash, grade, created_at, updated_at, last_seen_at)
+     VALUES ($1, $2, $3, $4, $5, $5, $5)
      RETURNING *`,
-    [id, email.trim().toLowerCase(), passwordHash, now],
+    [id, email.trim().toLowerCase(), passwordHash, grade, now],
   );
   return rows[0];
 }
