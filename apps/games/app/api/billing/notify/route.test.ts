@@ -390,10 +390,10 @@ describe("POST /api/billing/notify — same-origin 가드 (round 3 fix)", () => 
   });
 
   it("NEXT_PUBLIC_SITE_ORIGIN 일치 → 통과", async () => {
-    process.env.NEXT_PUBLIC_SITE_ORIGIN = "https://pullim-games.app";
+    process.env.NEXT_PUBLIC_SITE_ORIGIN = "https://games.pullim.ai";
     const res = await POST(
       makePostRequest(basePayload(), {
-        origin: "https://pullim-games.app",
+        origin: "https://games.pullim.ai",
       }),
     );
     expect(res.status).toBe(200);

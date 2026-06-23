@@ -165,7 +165,7 @@ export default async function OGImage() {
               color: "#64748B",
             }}
           >
-            pullim-games.vercel.app
+            games.pullim.ai
           </div>
         </div>
       </div>

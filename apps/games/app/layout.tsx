@@ -8,7 +8,7 @@ const DESCRIPTION =
   "5분, 손가락으로 푸는 학습 게임. 단일 FSRS 백본 위에 인수분해부터 시작하는 풀림 게임즈 — 푸는 동작이 곧 학습 메커니즘이 되도록 설계된 모바일 웹 학습 게임.";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://pullim-games.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://games.pullim.ai";
 const ENTRY_PATH = "/games";
 
 export const metadata: Metadata = {

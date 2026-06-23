@@ -84,7 +84,7 @@
 ### 하면 안 되는 것
 
 - 다른 풀림 프로젝트(planner/Q/classbot)의 코드·페이지·mock 참조 — **독립 프로젝트**이므로 cross-domain 의존 금지
-- `vercel --prod` 수동 배포 전에 production 검증 보고 — 머지 ≠ 배포
+- **Vercel Git 연동 자동 배포**: `main` push → production `games.pullim.ai`, `dev` push → `dev-games.pullim.ai` (Root Directory = `apps/games`). **main 머지 = production 자동 배포**이므로 머지 전 검증이 곧 배포 전 검증 — 깨진 채 머지 금지. (수동 `vercel --prod` 는 fallback)
 
 ## 5. 도구 보조
 
@@ -96,7 +96,7 @@
 | 단위 테스트 | `bun test` (vitest) |
 | e2e | `bun run test:e2e` (playwright) |
 | 게임 레지스트리 수동 갱신 | `bun run gen:registry` |
-| 배포 (수동) | `bunx vercel --prod` |
+| 배포 | `main`/`dev` push → Vercel 자동 (games.pullim.ai / dev-games.pullim.ai). 수동 fallback: `bunx vercel --prod` |
 
 ## 6. proc/ 폴더 구조
 
