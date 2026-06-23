@@ -66,16 +66,16 @@ function HomeDashboard() {
         <h1 className="mt-1 text-2xl font-bold leading-tight tracking-tight text-type-primary">
           {hello || "안녕하세요"}
         </h1>
-        {stats && stats.gamesPlayed > 0 && (
+        {stats && stats.visibleGamesPlayed > 0 && (
           <p className="mt-1.5 text-label text-type-secondary tabular">
-            {stats.gamesPlayed}개 게임을 만났어요
+            {stats.visibleGamesPlayed}개 게임을 만났어요
           </p>
         )}
       </header>
 
       {!stats ? (
         <DashboardSkeleton />
-      ) : stats.gamesPlayed === 0 ? (
+      ) : stats.visibleGamesPlayed === 0 ? (
         <EmptyDashboard />
       ) : (
         <Dashboard stats={stats} />

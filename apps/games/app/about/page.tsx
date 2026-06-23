@@ -83,7 +83,11 @@ const MECHANICS: Array<{
 ];
 
 export default function AboutPage() {
-  const officialGames = visibleGames.filter((g) => g.meta.status === "available");
+  // 공개 소개면 발견 표면 — 노출(visible) + official 만. custom-* (사용자 전용)은 GameHubPage
+  // 와 동일하게 제외해 소개 문구 게임 수·메커닉 쇼케이스가 부풀지 않게(Codex #125 R8).
+  const officialGames = visibleGames.filter(
+    (g) => g.meta.status === "available" && (g.meta.kind ?? "official") === "official",
+  );
 
   // 메커닉 결별로 게임 그룹화
   const byMechanic = MECHANICS.map((m) => ({

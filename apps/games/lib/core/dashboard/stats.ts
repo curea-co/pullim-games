@@ -26,8 +26,17 @@ export interface PerGameStat {
 }
 
 export interface DashboardStats {
-  /** 카드를 한 번이라도 본 적 있는 게임 수. */
+  /**
+   * 카드를 한 번이라도 본 적 있는 게임 수 — **전체 games 기준**(보관 게임 직접 URL 플레이 포함).
+   * 실제 학습 이력 총계. /home 노출 판정엔 쓰지 말 것(아래 `visibleGamesPlayed` 사용).
+   */
   gamesPlayed: number;
+  /**
+   * 카드를 본 적 있는 **노출(visible) 게임 수** — 보관(stage:"high") 제외.
+   * /home 헤더("N개 게임 만났어요")·EmptyDashboard 판정용 — `perGame`(노출 카드 목록)과
+   * 동일 기준이라 "N개 만났다는데 활동 목록은 빈" 비정합을 차단(Codex #125 R8).
+   */
+  visibleGamesPlayed: number;
   /** 풀이 시도 총합 (모든 게임 reps 합). */
   totalAttempts: number;
   /** 정답 횟수 (attempts - lapses). */
@@ -80,6 +89,7 @@ export async function computeDashboardStats(
   let todayAttempts = 0;
   let dueSoonCount = 0;
   let gamesPlayed = 0;
+  let visibleGamesPlayed = 0;
 
   // 학습 집계는 전체 games 기준 — 보관(stage:"high") 게임도 직접 URL 로 플레이 가능하므로
   // 그 SRS/활동 기록은 총계에 포함돼야 한다(노출 숨김 ≠ 학습 기록 제외). Codex #125.
@@ -131,6 +141,7 @@ export async function computeDashboardStats(
     // (헤더 magnitude 와 카드 목록의 기준 차이는 보관 게임만 플레이한 degenerate 케이스에서만
     //  발생 — 단일 백본 보존을 우선해 magnitude 는 전체 유지.)
     if (g.meta.stage !== "high") {
+      if (cardsTouched > 0) visibleGamesPlayed += 1; // /home 헤더·empty 판정 — perGame 과 동일 기준
       const correct = Math.max(0, attempts - lapses);
       perGame.push({
         gameId: g.meta.id,
@@ -155,6 +166,7 @@ export async function computeDashboardStats(
 
   return {
     gamesPlayed,
+    visibleGamesPlayed,
     totalAttempts,
     totalCorrect,
     totalLapses,
