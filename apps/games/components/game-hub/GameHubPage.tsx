@@ -12,7 +12,7 @@ import {
   type FilterState,
   type ProgressLookup,
 } from "@/lib/games/filter";
-import { games } from "@/lib/games/registry";
+import { visibleGames } from "@/lib/games/registry";
 import {
   computeDashboardStats,
   type DashboardStats,
@@ -147,9 +147,10 @@ export function GameHubPage() {
     ? buildProgressLookup(stats.perGame)
     : undefined;
 
-  // 메인 그리드는 official 만 (custom 은 CustomGamesSection 분리)
+  // 메인 그리드는 official 만 (custom 은 CustomGamesSection 분리).
+  // visibleGames = 보관(고등 전용) 제외 — 중등 타겟 노출.
   const officialGames = useMemo(
-    () => games.filter((g) => (g.meta.kind ?? "official") === "official"),
+    () => visibleGames.filter((g) => (g.meta.kind ?? "official") === "official"),
     [],
   );
 
@@ -248,7 +249,7 @@ export function GameHubPage() {
 
 interface ResultViewProps {
   view: GameHubView;
-  games: typeof games;
+  games: typeof visibleGames;
   progress?: ProgressLookup;
   perGame?: DashboardStats["perGame"];
 }

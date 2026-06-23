@@ -12,7 +12,7 @@ import {
   MessageCircle,
   Smartphone,
 } from "lucide-react";
-import { games } from "@/lib/games/registry";
+import { visibleGames } from "@/lib/games/registry";
 import type { GameMechanic } from "@/lib/games/types";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -83,7 +83,7 @@ const MECHANICS: Array<{
 ];
 
 export default function AboutPage() {
-  const officialGames = games.filter((g) => g.meta.status === "available");
+  const officialGames = visibleGames.filter((g) => g.meta.status === "available");
 
   // 메커닉 결별로 게임 그룹화
   const byMechanic = MECHANICS.map((m) => ({

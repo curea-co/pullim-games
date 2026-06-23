@@ -16,6 +16,17 @@ import type { GameManifest } from "./types";
 export { games };
 
 /**
+ * 사용자 노출용 게임 목록 — 보관(`stage:"high"`, 고등 전용) 제외.
+ * 허브·추천·about·대시보드 집계 등 **노출 표면은 이 목록을 쓴다**.
+ * 라우팅(`getGameById`/`getAllGameIds`)·관리(custom)는 전체 `games` 유지 —
+ * 보관 게임도 직접 URL 진입은 살아있음(삭제 아님).
+ * 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
+ */
+export const visibleGames: GameManifest[] = games.filter(
+  (g) => g.meta.stage !== "high",
+);
+
+/**
  * gameId 로 게임 매니페스트 조회. 없으면 undefined.
  * /games/[gameId] 동적 라우트에서 사용.
  */

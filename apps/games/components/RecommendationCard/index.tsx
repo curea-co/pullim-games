@@ -35,7 +35,7 @@ import {
   type GameSrsSnapshot,
   type Recommendation,
 } from "@/lib/core";
-import { games } from "@/lib/games/registry";
+import { games, visibleGames } from "@/lib/games/registry";
 import { isModeSupportedFor } from "@/lib/games/supported-modes";
 import { Card } from "@/components/ui/card";
 
@@ -59,7 +59,7 @@ export function RecommendationCard() {
   });
 
   useEffect(() => {
-    const snapshots: GameSrsSnapshot[] = games
+    const snapshots: GameSrsSnapshot[] = visibleGames
       .filter((g) => g.meta.status === "available")
       .map((g) => ({
         gameId: g.meta.id,

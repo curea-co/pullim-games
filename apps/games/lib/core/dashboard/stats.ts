@@ -2,7 +2,7 @@
 // `2026-05-08_home-dashboard-redesign.md` §5 따름 (PerGameStat 보강).
 
 import type { LucideIcon } from "lucide-react";
-import { games } from "@/lib/games/registry";
+import { visibleGames } from "@/lib/games/registry";
 import { loadAllSrsStates } from "../storage/srs";
 import { loadStreak, type StreakState } from "../streak";
 
@@ -81,7 +81,7 @@ export async function computeDashboardStats(
   let dueSoonCount = 0;
   let gamesPlayed = 0;
 
-  for (const g of games) {
+  for (const g of visibleGames) {
     const cardsTotal = await getCardsTotal(g.meta.id);
     const states = loadAllSrsStates(g.meta.id);
 

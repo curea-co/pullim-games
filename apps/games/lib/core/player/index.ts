@@ -11,11 +11,11 @@ const GUEST_TTL_DAYS = 180;
 // 게스트 신원에 묶인 모든 로컬 데이터 prefix — "다른 사용자로 시작" 시 일괄 초기화.
 const LOCAL_PREFIX = "pullim-games:";
 
-export const GRADES = [
-  "초1", "초2", "초3", "초4", "초5", "초6",
-  "중1", "중2", "중3",
-  "고1", "고2", "고3",
-] as const;
+// 타겟 학령 = 중등(중1~중3). 초등은 풀림 주니어(별도 앱), 고등은 대상 아님.
+// 근거: proc/plan/2026-06-23_middle-school-repositioning.md (G1 결정 2026-06-23).
+// 구 grade 값(초·고)을 보유한 기존 게스트는 isGrade 가 거부 → getPlayer null →
+// 온보딩 재선택으로 자연 마이그레이션(프리런치라 실사용자 영향 없음).
+export const GRADES = ["중1", "중2", "중3"] as const;
 
 export type Grade = (typeof GRADES)[number];
 
@@ -25,7 +25,7 @@ export type Player = {
   /**
    * 동의 플래그(정통망법) — "만 14세 이상" 또는 "만 14세 미만이며 보호자 동의 완료"를 의미한다.
    * over14 boolean 이 거짓 나이를 기록하던 문제(Codex #114 R1)를 피하려 honest 단일 동의로 둔다.
-   * 연령대 자체는 `grade` 로 보존(예: 초등은 만14세 미만으로 간주 → 보호자 동의 필요).
+   * 연령대 자체는 `grade` 로 보존(예: 중1≈13세는 만14세 미만일 수 있어 보호자 동의 필요).
    */
   consent: boolean;
   createdAt: number;
