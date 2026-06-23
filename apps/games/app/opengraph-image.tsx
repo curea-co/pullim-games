@@ -7,6 +7,12 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default async function OGImage() {
+  // 표시 도메인 — 배포별 호스트(layout 의 SITE_URL 규칙과 동일). preview/dev 에서
+  // 실제 공유 호스트와 카드 표기를 일치시킨다 (codex #123).
+  const host =
+    process.env.NEXT_PUBLIC_SITE_URL?.replace(/^https?:\/\//, "") ??
+    process.env.VERCEL_URL ??
+    "games.pullim.ai";
   return new ImageResponse(
     (
       <div
@@ -165,7 +171,7 @@ export default async function OGImage() {
               color: "#64748B",
             }}
           >
-            games.pullim.ai
+            {host}
           </div>
         </div>
       </div>

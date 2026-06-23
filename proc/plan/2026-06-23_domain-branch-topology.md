@@ -30,4 +30,5 @@
 
 ## 4. Vercel 환경변수 (Production/Preview 분리 — 사용자 설정)
 
-`NEXT_PUBLIC_SITE_URL`·`NEXT_PUBLIC_SITE_ORIGIN`: prod=`https://games.pullim.ai` / dev=`https://dev-games.pullim.ai`. `DATABASE_URL`·`ANTHROPIC_API_KEY`·`CRON_SECRET`: 환경별.
+- `NEXT_PUBLIC_SITE_URL`·`NEXT_PUBLIC_SITE_ORIGIN`: **Production 만 고정**(`https://games.pullim.ai`). **Preview 는 설정하지 않음** — `layout.tsx`/`same-origin.ts` 가 `VERCEL_URL`(배포별 호스트)로 폴백. ※ Vercel Preview env 는 `dev` 브랜치 + 모든 PR preview 가 **공유**하므로 `dev-games.pullim.ai` 로 고정하면 PR preview 까지 그 값으로 굳어 실제 호스트와 어긋남(codex #123). dev 브랜치는 **도메인 할당**(dev-games.pullim.ai)으로 서빙되고, metadata 는 배포별 VERCEL_URL 로 정합.
+- `DATABASE_URL`·`ANTHROPIC_API_KEY`·`CRON_SECRET`: 환경별 값.
