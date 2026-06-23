@@ -50,7 +50,13 @@ export function getPlayer(): Player | null {
   if (typeof window === "undefined") return null;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
+    if (!raw) {
+      // 프로필은 없는데 게스트 쿠키만 남은 stale 상태(스토리지 외부 삭제·브라우저 eviction).
+      // middleware 는 쿠키 존재만으로 /home·/games/[id] 를 통과시키므로 그대로 두면 무프로필
+      // split-brain(+ auth 장애 시 fail-open). 쿠키가 있으면 함께 정리해 신원 상태를 일치시킨다(R7).
+      if (hasGuestCookie()) clearPlayer();
+      return null;
+    }
     const p = JSON.parse(raw) as Partial<Player>;
     if (typeof p.nickname !== "string" || !isGrade(p.grade)) {
       // 저장된 프로필이 무효(구 grade 초·고 등) — 스토리지뿐 아니라 게스트 쿠키도 함께

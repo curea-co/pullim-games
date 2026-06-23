@@ -85,9 +85,16 @@ describe("getPlayer — 무효 프로필 마이그레이션(split-brain 차단)"
     expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(false);
   });
 
-  it("프로필 없음(쿠키만)은 정리 없이 null", () => {
+  it("프로필 없음 + 게스트 쿠키 잔존 → 쿠키도 정리(stale split-brain 차단)", () => {
+    // beforeEach: storage 빈 + 쿠키=1. 프로필 없는데 쿠키만 남은 stale 상태.
     expect(getPlayer()).toBeNull();
-    // raw 자체가 없으면 clear 미호출 — 쿠키 보존(정상 무신원 경로).
-    expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(true);
+    expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(false); // 쿠키 정리됨
+  });
+
+  it("프로필·쿠키 모두 없음(완전 무신원) → null, 불필요한 부작용 없음", () => {
+    doc = makeDocument(""); // 쿠키도 없음
+    vi.stubGlobal("document", doc);
+    expect(getPlayer()).toBeNull();
+    expect(doc.cookie).toBe(""); // 쿠키가 애초에 없으면 건드리지 않음
   });
 });
