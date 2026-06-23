@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { AppShell } from "@/components/shell/app-shell";
+import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const BRAND = "풀림 게임즈";
@@ -7,13 +8,9 @@ const TAGLINE = "푸는 게 곧 배우는 거예요";
 const DESCRIPTION =
   "5분, 손가락으로 푸는 학습 게임. 단일 FSRS 백본 위에 인수분해부터 시작하는 풀림 게임즈 — 푸는 동작이 곧 학습 메커니즘이 되도록 설계된 모바일 웹 학습 게임.";
 
-// 우선순위: 명시 env → 배포별 자동 호스트(VERCEL_URL, preview/dev 정합) → production 폴백.
-// env 미설정 preview 에서 production 도메인으로 굳는 것 방지 (codex #123).
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  (process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "https://games.pullim.ai");
+// 공개 도메인 정합(main→games.pullim.ai, dev→dev-games.pullim.ai, PR preview→자기 호스트).
+// 상세 규칙: @/lib/site-url (VERCEL_ENV/VERCEL_GIT_COMMIT_REF 기반 — codex #123).
+const SITE_URL = getSiteUrl();
 const ENTRY_PATH = "/games";
 
 export const metadata: Metadata = {

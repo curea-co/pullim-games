@@ -17,7 +17,7 @@
 
 ## 2. 이 결정에서 파생되는 정합 작업 (PR #123)
 
-- **코드**: `app/layout.tsx` metadataBase(VERCEL_URL 우선 → prod 폴백), `app/opengraph-image.tsx`, `.env.example`(env 환경별 문서화), `scripts/capture-ui-audit.mjs` 예시 — 옛 `pullim-games.vercel.app` → `games.pullim.ai`.
+- **코드**: `lib/site-url.ts` 신설 — `VERCEL_ENV`/`VERCEL_GIT_COMMIT_REF` 로 공개 도메인 매핑(production→games.pullim.ai, dev 브랜치→dev-games.pullim.ai, PR preview→자기 VERCEL_URL). `app/layout.tsx`(metadataBase)·`app/opengraph-image.tsx`(카드 호스트 표기) 가 이를 사용. `scripts/capture-ui-audit.mjs` 예시 → `games.pullim.ai`.
 - **테스트**: `same-origin.test`·`billing/notify test` fixture 도메인 → `games.pullim.ai`.
 - **권위 문서(spec)**: `spec/04`(시나리오 링크), `spec/07`(브랜딩 도메인), `spec/09 §9.x`(Production/dev URL), `spec/10`(도메인 결정 체크) — 본 plan 근거로 갱신.
 - **운영 문서**: `CLAUDE.md`(배포 룰: 머지 ≠ 배포 → main 머지 = 자동 배포), `README.md`(배포 섹션).
@@ -30,5 +30,5 @@
 
 ## 4. Vercel 환경변수 (Production/Preview 분리 — 사용자 설정)
 
-- `NEXT_PUBLIC_SITE_URL`·`NEXT_PUBLIC_SITE_ORIGIN`: **Production 만 고정**(`https://games.pullim.ai`). **Preview 는 설정하지 않음** — `layout.tsx`/`same-origin.ts` 가 `VERCEL_URL`(배포별 호스트)로 폴백. ※ Vercel Preview env 는 `dev` 브랜치 + 모든 PR preview 가 **공유**하므로 `dev-games.pullim.ai` 로 고정하면 PR preview 까지 그 값으로 굳어 실제 호스트와 어긋남(codex #123). dev 브랜치는 **도메인 할당**(dev-games.pullim.ai)으로 서빙되고, metadata 는 배포별 VERCEL_URL 로 정합.
-- `DATABASE_URL`·`ANTHROPIC_API_KEY`·`CRON_SECRET`: 환경별 값.
+- **공개 도메인은 코드(`lib/site-url.ts`)가 배포 컨텍스트로 자동 매핑** → metadata/OG/canonical 이 각 공개 도메인과 정합. 따라서 도메인 목적의 env 설정은 **불필요**(별도 설정 안 해도 main→games.pullim.ai, dev→dev-games.pullim.ai 정합). `NEXT_PUBLIC_SITE_URL`·`NEXT_PUBLIC_SITE_ORIGIN` 은 선택적 override 로만(특정 호스트 강제 시). ※ `VERCEL_URL` 은 배포별 `*.vercel.app`(커스텀 도메인 아님)이라 dev/prod 공개 도메인 기준으로 쓰지 않는다.
+- `DATABASE_URL`·`ANTHROPIC_API_KEY`·`CRON_SECRET`: 환경별 값(시크릿).
