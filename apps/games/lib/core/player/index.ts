@@ -99,12 +99,6 @@ export function createPlayer(
   grade: Grade,
   consent: boolean,
 ): Player | null {
-  // 새 게스트 신원 확립 = 클린 슬레이트. 이전(무효화된 구 grade·다른 사용자)의 게스트 진행도가
-  // localStorage 에 남아 있으면 새 프로필이 그걸 이어받는 교차 사용자 노출이 된다 → 쓰기 전에
-  // `pullim-games:*` 진행도를 비운다(Codex #125 R13). **여기가 wipe 의 안전한 위치**: createPlayer
-  // 는 게스트 온보딩(StartForm) 전용이라 회원은 호출하지 않는다(회원 로그인은 clearPlayer 로
-  // 진행도 보존 — getPlayer 도 wipe 안 함, R14). 로그인 시 익명→회원 데이터 승계는 영향 없음.
-  resetGuestSession();
   const player: Player = { nickname, grade, consent, createdAt: nowMs() };
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(player));
@@ -122,7 +116,27 @@ export function createPlayer(
     clearPlayer(); // 부분 상태(player만 남음) 정리.
     return null;
   }
+  // 새 게스트 신원 = 클린 슬레이트. 이전(무효화된 구 grade·다른 사용자)의 게스트 진행도가 남아
+  // 있으면 새 프로필이 그걸 이어받는 교차 사용자 노출이 되므로 비운다(Codex #125 R13).
+  // **반드시 프로필+쿠키 영속이 확인된 뒤에** — 생성이 실패(저장 거부·쿠키 차단)하면 위에서
+  // null 로 빠져 여기 도달 안 하므로 기존 진행도가 보존된다(R15 — 생성 실패 시 데이터 손실 방지).
+  // 방금 만든 프로필 키(STORAGE_KEY)는 보존하고 나머지 `pullim-games:*` 진행도만 제거한다.
+  clearLearningProgress();
   return player;
+}
+
+/** `pullim-games:*` 진행도 제거 — 단 현재 프로필 키(STORAGE_KEY)는 보존. createPlayer 클린 슬레이트용. */
+function clearLearningProgress(): void {
+  try {
+    const keys: string[] = [];
+    for (let i = 0; i < window.localStorage.length; i += 1) {
+      const k = window.localStorage.key(i);
+      if (k && k.startsWith(LOCAL_PREFIX) && k !== STORAGE_KEY) keys.push(k);
+    }
+    keys.forEach((k) => window.localStorage.removeItem(k));
+  } catch {
+    /* noop */
+  }
 }
 
 function hasGuestCookie(): boolean {

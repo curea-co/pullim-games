@@ -125,14 +125,26 @@ describe("createPlayer — 새 게스트 = 클린 슬레이트(교차 사용자 
   });
   afterEach(() => vi.unstubAllGlobals());
 
-  it("이전 게스트의 잔여 진행도를 쓰기 전에 비우고 새 프로필을 만든다", () => {
-    // 이전(무효화된/다른 사용자) 게스트의 진행도가 남아 있는 상태.
+  it("성공 시: 이전 게스트 진행도를 비우고 새 프로필 생성(프로필 키는 보존)", () => {
     storage.setItem("pullim-games:srs:factorization", '{"old":"state"}');
     storage.setItem("pullim-games:streak", '{"current":9}');
     const p = createPlayer("새사람", "중2", true);
     expect(p?.grade).toBe("중2");
+    expect(getPlayer()?.grade).toBe("중2"); // 새 프로필 키 보존
     expect(storage.getItem("pullim-games:srs:factorization")).toBeNull(); // 이전 진행도 정리
     expect(storage.getItem("pullim-games:streak")).toBeNull();
     expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(true); // 새 게스트 쿠키 설정
+  });
+
+  it("실패 시(쿠키 차단): null 반환 + 기존 진행도 보존(R15 — 생성 실패 데이터 손실 방지)", () => {
+    // 쿠키 쓰기가 무시되는 환경 — setGuestCookie 해도 hasGuestCookie=false → createPlayer null.
+    const blocked = { get cookie() { return ""; }, set cookie(_v: string) {} };
+    vi.stubGlobal("document", blocked);
+    storage.setItem("pullim-games:srs:factorization", '{"old":"state"}');
+    storage.setItem("pullim-games:streak", '{"current":9}');
+    expect(createPlayer("새사람", "중2", true)).toBeNull(); // 신원 생성 실패
+    // 생성 실패했으므로 진행도 wipe 미도달 → 기존 데이터 보존.
+    expect(storage.getItem("pullim-games:srs:factorization")).not.toBeNull();
+    expect(storage.getItem("pullim-games:streak")).not.toBeNull();
   });
 });
