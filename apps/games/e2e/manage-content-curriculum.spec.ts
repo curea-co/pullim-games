@@ -42,14 +42,11 @@ async function pickSelect(page: Page, triggerIndex: number, optionText: string) 
   await page.locator(`[role="option"]:has-text("${optionText}")`).first().click();
 }
 
-// SKIP (2026-06-23 중등 재포지셔닝): 이 3 테스트는 고등 1학년(다항식의 인수분해 seedRef)·
-// 초등 4학년(영어 캐시 시드) 단원을 picker 로 선택해 seed/cache/quota 동작을 검증한다. 그런데
-// 본 PR(§0 계약)이 manage picker 를 중등(middle) 밴드로 한정하면서 고등·초등 단원이 더 이상
-// 선택 불가 → 이 테스트들이 의존하는 단원·시드가 사라진다. 중등 seedRef/캐시 fixture 는 콘텐츠
-// 재보정 후속 PR(plan §1.1)에서 추가되며, 그때 중등 단원으로 복원한다.
-// (현 seedRef 보유 단원은 고등 factorization 하나뿐 — 중등 대체 시드 미존재.)
-// 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
-test.describe.skip("/manage/content — 교육과정 통합 picker", () => {
+// 2026-06-23 중등 재포지셔닝: picker 가 middle 밴드로 한정됨(§0 계약). 본 spec 은 중등 단원으로
+// 이전됨 — (1) 중학교 3학년 수학 "다항식의 인수분해"(seedRef 재사용, source=curriculum-seed),
+// (2)(3) 중학교 1학년 영어 "자기소개 확장"(seedRef 없는 단원 + cache/quota). 고등/초등 진입은
+// picker 에서 제거. 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
+test.describe("/manage/content — 교육과정 통합 picker", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/manage/content", { waitUntil: "networkidle" });
     await seedUserData(page);
@@ -62,9 +59,9 @@ test.describe.skip("/manage/content — 교육과정 통합 picker", () => {
     await page.locator('button:has-text("타이핑")').first().click();
     await pickSelect(page, 0, "E2E");
     await pickSelect(page, 1, "AI 검증");
-    await pickSelect(page, 2, "고등");
+    await pickSelect(page, 2, "중학교");
     await pickSelect(page, 3, "수학");
-    await pickSelect(page, 4, "고등 1학년 (공통수학)");
+    await pickSelect(page, 4, "중학교 3학년");
     await pickSelect(page, 5, "다항식의 인수분해");
 
     // 서브토글 노출 ("정적 변환" 기본 활성)
@@ -109,11 +106,11 @@ test.describe.skip("/manage/content — 교육과정 통합 picker", () => {
   test("(2) catalog-ai 캐시 hit — 사전 캐시 시드 → LLM 미호출 + 캐시 라벨/다시 생성 노출", async ({
     page,
   }) => {
-    // 캐시 시드 — 영어 초4 "안녕! 만나서 반가워" / 객관식 / 10장 (page default count=10 매칭)
+    // 캐시 시드 — 영어 중1 "자기소개 확장" / 객관식 / 10장 (page default count=10 매칭)
     await page.evaluate(() => {
       const now = new Date().toISOString();
       const cacheKey =
-        "pullim-games:llm-cache:elementary::english::4::greetings-introductions::multiple-choice::10";
+        "pullim-games:llm-cache:middle::english::1::more-about-myself::multiple-choice::10";
       localStorage.setItem(
         cacheKey,
         JSON.stringify({
@@ -143,10 +140,10 @@ test.describe.skip("/manage/content — 교육과정 통합 picker", () => {
     await page.locator('button:has-text("객관식")').first().click();
     await pickSelect(page, 0, "E2E");
     await pickSelect(page, 1, "AI 검증");
-    await pickSelect(page, 2, "초등");
+    await pickSelect(page, 2, "중학교");
     await pickSelect(page, 3, "영어");
-    await pickSelect(page, 4, "초등 4학년");
-    await pickSelect(page, 5, "안녕! 만나서 반가워");
+    await pickSelect(page, 4, "중학교 1학년");
+    await pickSelect(page, 5, "자기소개 확장");
 
     // 서브토글 미노출 (seedRef 없는 단원)
     await expect(page.locator('button[aria-label="정적 변환"]')).toHaveCount(0);
@@ -180,10 +177,10 @@ test.describe.skip("/manage/content — 교육과정 통합 picker", () => {
     await page.locator('button:has-text("객관식")').first().click();
     await pickSelect(page, 0, "E2E");
     await pickSelect(page, 1, "AI 검증");
-    await pickSelect(page, 2, "초등");
+    await pickSelect(page, 2, "중학교");
     await pickSelect(page, 3, "영어");
-    await pickSelect(page, 4, "초등 4학년");
-    await pickSelect(page, 5, "안녕! 만나서 반가워");
+    await pickSelect(page, 4, "중학교 1학년");
+    await pickSelect(page, 5, "자기소개 확장");
 
     // quota 카운터 "0 / 30" 노출
     await expect(page.locator("text=/오늘 AI 호출 남음: 0 \\/ 30/")).toBeVisible();

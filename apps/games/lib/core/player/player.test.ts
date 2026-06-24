@@ -58,20 +58,28 @@ describe("getPlayer — 무효 프로필 마이그레이션(split-brain 차단)"
     vi.unstubAllGlobals();
   });
 
-  it("구 grade(고1) 프로필은 null + 프로필·쿠키만 정리, 학습 데이터는 보존(R12)", () => {
+  it("구 grade(고1) 게스트 프로필 — null + 프로필·쿠키·진행도 전부 정리(게스트 전용, 교차사용자 차단)", () => {
     storage.setItem(
       STORAGE_KEY,
       JSON.stringify({ nickname: "민서", grade: "고1", consent: true, createdAt: 1 }),
     );
-    // 학습 데이터(SRS·스트릭 등)는 유일 런타임 저장소 — 무효 프로필 정리로 비가역 삭제하면
-    // 회원 데이터까지 날아간다. 정리는 프로필+쿠키만, 데이터 wipe 는 명시적 핸드오프에만(R12).
+    // 구 grade 게스트 프로필은 게스트 전용 경로(회원은 raw 부재) → 다음 사용자가 이전 게스트의
+    // 진행도를 이어받지 않게 SRS·스트릭까지 함께 비운다(R11·R13). 회원 비영향(게스트 전용).
     storage.setItem("pullim-games:srs:factorization", '{"some":"state"}');
     storage.setItem("pullim-games:streak", '{"current":3}');
     expect(getPlayer()).toBeNull();
     expect(storage.getItem(STORAGE_KEY)).toBeNull(); // 프로필 정리
     expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(false); // 쿠키 정리
+    expect(storage.getItem("pullim-games:srs:factorization")).toBeNull(); // 진행도 정리
+    expect(storage.getItem("pullim-games:streak")).toBeNull();
+  });
+
+  it("구조 손상 프로필(nickname 누락) — 프로필·쿠키만 정리, 진행도 보존(회원 안전, R12)", () => {
+    storage.setItem(STORAGE_KEY, JSON.stringify({ grade: "중2", consent: true }));
+    storage.setItem("pullim-games:srs:factorization", '{"some":"state"}');
+    expect(getPlayer()).toBeNull();
+    expect(storage.getItem(STORAGE_KEY)).toBeNull();
     expect(storage.getItem("pullim-games:srs:factorization")).not.toBeNull(); // 진행도 보존
-    expect(storage.getItem("pullim-games:streak")).not.toBeNull();
   });
 
   it("유효 grade(중2) 프로필은 그대로 반환", () => {

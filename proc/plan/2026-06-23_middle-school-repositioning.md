@@ -77,4 +77,6 @@
 
 ## 4. e2e 현황 (머지 판단용)
 - **e2e(Playwright)는 main 에서 이미 mass-red**(7370e03a=191 failed/17 passed) — 모노레포 재구조화(#120, 2026-06-17) 이후 webServer 셋업이 깨진 **선행 인프라 이슈**. 본 PR 과 무관하며, #120·#123 도 e2e red 상태로 머지됨(= e2e 는 하드 머지 게이트 아님). **별도 인프라 fix 트랙 필요.**
-- 본 PR 이 추가한 e2e delta: `manage-content-curriculum.spec` 3 테스트(고등/초등 picker 선택 의존) → §0 계약상 중등 한정으로 선택 불가 → **`test.describe.skip`** 처리(중등 seedRef/캐시 fixture 는 콘텐츠 재보정 후속 PR 에서 추가 후 복원). codex APPROVED + 25 단위/빌드/lint 잡 green.
+- 본 PR 이 추가한 e2e delta: `manage-content-curriculum.spec` 3 테스트가 고등/초등 picker 선택에 의존했음 → **중등 단원으로 이전**(R13): (1) 중학교 3학년 수학 "다항식의 인수분해"(신규 `middle/math/grade-3.json` + 기존 factorization seedRef 재사용), (2)(3) 중학교 1학년 영어 "자기소개 확장"(cache/quota). skip 아닌 정상 spec 유지(커버리지 보존).
+- **중3 catalog 추가(R13)**: spec/02 가 V1 단원을 "중3 인수분해"로 바꿨으나 catalog 에 중3 수학이 없어 manage UI 로 그 타깃 카드를 만들 수 없던 갭 해소. `middle/math/grade-3.json`(인수분해, seedRef 재사용) 신설 → picker middle-only 가 중3 인수분해를 실제 생성 가능. (고등 factorization 단원은 보관 — picker 미노출.)
+- codex APPROVED(직전) + 25 단위/빌드/lint 잡 green.

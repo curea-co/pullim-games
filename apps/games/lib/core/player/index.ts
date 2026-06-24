@@ -61,11 +61,18 @@ export function getPlayer(): Player | null {
       return null;
     }
     const p = JSON.parse(raw) as Partial<Player>;
-    if (typeof p.nickname !== "string" || !isGrade(p.grade)) {
-      // 무효 프로필(구 grade 초·고 등) — **프로필+게스트 쿠키만** 정리해 stale 쿠키 split-brain
-      // 차단(R2). 학습 데이터는 보존(R12 — 동일인의 학년 재선택일 수 있고, 회원 데이터 비가역
-      // 손실 방지). 공용 기기 핸드오프(다른 사람)는 "다른 사용자로 시작"(resetGuestSession)이 처리.
+    if (typeof p.nickname !== "string") {
+      // 구조 손상 프로필 — 회원 여부 단정 불가하므로 **프로필+쿠키만** 정리(데이터 보존, R12).
       clearPlayer();
+      return null;
+    }
+    if (!isGrade(p.grade)) {
+      // 구 grade(초·고) 게스트 프로필 — 지원 학년 아님. **이 경로는 게스트 전용**: 회원은 가입 시
+      // clearPlayer 로 게스트 프로필이 지워져 `raw` 가 없어(위 !raw 분기) 여기 도달 불가. 따라서
+      // 프로필·쿠키뿐 아니라 그 게스트 신원에 묶인 로컬 진행도(`pullim-games:*`)까지 비운다
+      // (resetGuestSession) — 공용 기기에서 다음 사용자가 이전 게스트의 SRS·스트릭·커스텀을
+      // 이어받는 교차 사용자 노출 차단(R11·R13). 회원 데이터 비가역 손실 위험 없음(게스트 전용).
+      resetGuestSession();
       return null;
     }
     return {

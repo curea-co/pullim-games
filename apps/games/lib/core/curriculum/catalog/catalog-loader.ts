@@ -9,6 +9,7 @@ import middleEnglishGrade1 from "./middle/english/grade-1.json";
 import middleEnglishGrade2 from "./middle/english/grade-2.json";
 import middleMathGrade1 from "./middle/math/grade-1.json";
 import middleMathGrade2 from "./middle/math/grade-2.json";
+import middleMathGrade3 from "./middle/math/grade-3.json";
 import middleKoreanGrade1 from "./middle/korean/grade-1.json";
 import middleKoreanGrade2 from "./middle/korean/grade-2.json";
 import highMathGrade1 from "./high/math/grade-1.json";
@@ -30,6 +31,7 @@ const FILES: CatalogGradeFile[] = [
   middleEnglishGrade2 as CatalogGradeFile,
   middleMathGrade1 as CatalogGradeFile,
   middleMathGrade2 as CatalogGradeFile,
+  middleMathGrade3 as CatalogGradeFile,
   middleKoreanGrade1 as CatalogGradeFile,
   middleKoreanGrade2 as CatalogGradeFile,
   highMathGrade1 as CatalogGradeFile,
