@@ -125,14 +125,19 @@ describe("createPlayer — 새 게스트 = 클린 슬레이트(교차 사용자 
   });
   afterEach(() => vi.unstubAllGlobals());
 
-  it("성공 시: 이전 게스트 진행도를 비우고 새 프로필 생성(프로필 키는 보존)", () => {
+  it("성공 시: 신원 종속 진행도만 정리, 비용 가드(quota/cache)·프로필은 보존", () => {
     storage.setItem("pullim-games:srs:factorization", '{"old":"state"}');
     storage.setItem("pullim-games:streak", '{"current":9}');
+    // 기기 단위 비용 가드 — 새 게스트 재생성으로 리셋되면 일일 한도 우회(R17). 보존돼야 함.
+    storage.setItem("pullim-games:llm-quota:2026-06-24", "30");
+    storage.setItem("pullim-games:llm-cache:middle::english::1::x::multiple-choice::10", "{}");
     const p = createPlayer("새사람", "중2", true);
     expect(p?.grade).toBe("중2");
     expect(getPlayer()?.grade).toBe("중2"); // 새 프로필 키 보존
-    expect(storage.getItem("pullim-games:srs:factorization")).toBeNull(); // 이전 진행도 정리
+    expect(storage.getItem("pullim-games:srs:factorization")).toBeNull(); // 신원 진행도 정리
     expect(storage.getItem("pullim-games:streak")).toBeNull();
+    expect(storage.getItem("pullim-games:llm-quota:2026-06-24")).toBe("30"); // 비용 가드 보존
+    expect(storage.getItem("pullim-games:llm-cache:middle::english::1::x::multiple-choice::10")).not.toBeNull();
     expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(true); // 새 게스트 쿠키 설정
   });
 

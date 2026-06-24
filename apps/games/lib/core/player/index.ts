@@ -125,13 +125,24 @@ export function createPlayer(
   return player;
 }
 
-/** `pullim-games:*` 진행도 제거 — 단 현재 프로필 키(STORAGE_KEY)는 보존. createPlayer 클린 슬레이트용. */
+// 기기 단위 정책 키 — 신원이 바뀌어도 보존해야 하는 **비용 가드**(Codex #125 R17).
+// `llm-quota`(일일 30회 한도)·`llm-cache`(생성 캐시)는 날짜·경로 키라 신원 종속이 아니며,
+// 새 게스트 재생성만으로 초기화되면 한도/캐시를 우회할 수 있다.
+const DEVICE_POLICY_PREFIXES = ["pullim-games:llm-quota:", "pullim-games:llm-cache:"];
+
+/**
+ * **신원 종속 진행도만** 제거(SRS·스트릭·활동·커스텀 등) — createPlayer 클린 슬레이트용.
+ * 보존: 현재 프로필 키(STORAGE_KEY) + 기기 정책 키(llm-quota/llm-cache). 후자를 지우면 일일
+ * LLM 한도·캐시가 새 게스트 재생성으로 리셋되어 비용 가드를 우회한다(Codex #125 R17).
+ */
 function clearLearningProgress(): void {
   try {
     const keys: string[] = [];
     for (let i = 0; i < window.localStorage.length; i += 1) {
       const k = window.localStorage.key(i);
-      if (k && k.startsWith(LOCAL_PREFIX) && k !== STORAGE_KEY) keys.push(k);
+      if (!k || !k.startsWith(LOCAL_PREFIX) || k === STORAGE_KEY) continue;
+      if (DEVICE_POLICY_PREFIXES.some((p) => k.startsWith(p))) continue; // 비용 가드 보존
+      keys.push(k);
     }
     keys.forEach((k) => window.localStorage.removeItem(k));
   } catch {
