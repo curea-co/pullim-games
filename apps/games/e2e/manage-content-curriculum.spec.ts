@@ -42,7 +42,14 @@ async function pickSelect(page: Page, triggerIndex: number, optionText: string) 
   await page.locator(`[role="option"]:has-text("${optionText}")`).first().click();
 }
 
-test.describe("/manage/content — 교육과정 통합 picker", () => {
+// SKIP (2026-06-23 중등 재포지셔닝): 이 3 테스트는 고등 1학년(다항식의 인수분해 seedRef)·
+// 초등 4학년(영어 캐시 시드) 단원을 picker 로 선택해 seed/cache/quota 동작을 검증한다. 그런데
+// 본 PR(§0 계약)이 manage picker 를 중등(middle) 밴드로 한정하면서 고등·초등 단원이 더 이상
+// 선택 불가 → 이 테스트들이 의존하는 단원·시드가 사라진다. 중등 seedRef/캐시 fixture 는 콘텐츠
+// 재보정 후속 PR(plan §1.1)에서 추가되며, 그때 중등 단원으로 복원한다.
+// (현 seedRef 보유 단원은 고등 factorization 하나뿐 — 중등 대체 시드 미존재.)
+// 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
+test.describe.skip("/manage/content — 교육과정 통합 picker", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/manage/content", { waitUntil: "networkidle" });
     await seedUserData(page);

@@ -74,3 +74,7 @@
 - 초등 콘텐츠 **신설 없음** — 풀림 주니어 영역.
 - spec 수정은 G1 승인 전 금지(권위문서). 본 plan 은 델타 스테이징까지.
 - 학령 게이트 vs 자동필터 UX: 초등 동기 소멸로 우선순위 낮음. 채택 시 "전체 노출 + 사용자 학년 자동 기본필터(변경 가능)" 안(B) 권장.
+
+## 4. e2e 현황 (머지 판단용)
+- **e2e(Playwright)는 main 에서 이미 mass-red**(7370e03a=191 failed/17 passed) — 모노레포 재구조화(#120, 2026-06-17) 이후 webServer 셋업이 깨진 **선행 인프라 이슈**. 본 PR 과 무관하며, #120·#123 도 e2e red 상태로 머지됨(= e2e 는 하드 머지 게이트 아님). **별도 인프라 fix 트랙 필요.**
+- 본 PR 이 추가한 e2e delta: `manage-content-curriculum.spec` 3 테스트(고등/초등 picker 선택 의존) → §0 계약상 중등 한정으로 선택 불가 → **`test.describe.skip`** 처리(중등 seedRef/캐시 fixture 는 콘텐츠 재보정 후속 PR 에서 추가 후 복원). codex APPROVED + 25 단위/빌드/lint 잡 green.
