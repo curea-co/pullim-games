@@ -44,8 +44,9 @@
 ## 2. 변경 항목
 
 ### 2.1 코드 (games repo — 본 plan 트랙)
-- [x] `lib/core/player/index.ts` `GRADES`: `초1~고3` → **`중1·중2·중3`**. `Grade` 타입 자동 축소. `StartForm` 드롭다운 자동 중등화. catalog-loader 는 독립 `CatalogGradeBand` 사용 — 비영향.
-  - **마이그레이션(Codex #125)**: 구 grade(초·고) 또는 손상 프로필 감지 시 `getPlayer()` 가 `clearPlayer()` 호출 — 스토리지+`pullim_games_guest` 쿠키 동시 정리. 안 그러면 middleware 가 stale 쿠키로 보호 라우트 통과 + 클라만 무신원 = split-brain(+ auth 장애 시 fail-open 노출). `player.test.ts` 신설로 잠금.
+- [x] `lib/core/player/index.ts` `GRADES`: `초1~고3` → **`중1·중2·중3`**. `Grade` 타입 자동 축소. `StartForm` 드롭다운 자동 중등화.
+  - **마이그레이션(Codex #125 R2·R7·R11)**: 구 grade(초·고)·손상 프로필·stale 쿠키(무프로필) 감지 시 `getPlayer()` 가 **`resetGuestSession()`** 호출 — 프로필+`pullim_games_guest` 쿠키 **+ 그 신원에 묶인 모든 로컬 진행도(`pullim-games:*` SRS·스트릭·활동·커스텀)** 까지 정리. `clearPlayer` 만 쓰면 (a) stale 쿠키로 middleware 가 보호 라우트 통과하는 split-brain, (b) 새 중등 프로필이 이전(고1 등) 진행도를 이어받아 보관 고등 게임 기록이 홈에 재등장하는 교차 신원 혼입 — 둘 다 발생. `player.test.ts` 로 잠금.
+  - **manage 콘텐츠 picker 중등 한정(Codex #125 R11)**: `/manage/content` `CurriculumPicker` 가 `listCatalog()` 전체(초·중·고)를 노출 → `courseCatalog` 를 `gradeBand==="middle"` 필터. 비중등 커스텀 카드 생성 차단(§0 계약). catalog elementary/high JSON 은 보관(로드되나 picker 미노출). (구 기재 "catalog-loader 비영향" 은 picker 노출 간과 → 정정.)
 - [x] 게임 노출 제어: `GameMeta.stage?: "middle" | "high"` 추가 + `registry.visibleGames`(stage:"high" 제외). **발견(discovery) 표면만 전환** — 허브(`GameHubPage`)·추천(`RecommendationCard`)·소개(`about`). 라우팅(`getGameById`/`getAllGameIds`)·custom 관리·**대시보드 총합 KPI는 전체 `games` 유지**(보관 게임 직접 URL 플레이 기록도 총계 포함). 단 `dashboard/stats`의 **`perGame`(노출 카드 목록)은 보관 제외** — /home CompactActivity 로 고등 게임 재노출 차단(Codex #125 R2). `physics-vector`·`chemistry-balance` = `stage:"high"`. `registry.test.ts` 신설.
 - [x] **회원가입(/signup) 학년 수집(Codex #125 R2)**: `AuthForm` grade `<select>`(중1~중3, StartForm 미러) + `SignupSchema.grade`(`isGrade` refine) + `createUser(grade)` + `migrations/0003_user_grade.sql`(users.grade nullable) + `toPublicUser`/`/me` 노출. 게스트(/start)·회원(/signup) **양 진입점에서 중등 학년 수집·검증** → "중등만 대상" 계약을 회원 경로에서도 판정 가능. `data-cta-priority` 로 보조 footer 링크 audit 통과.
 - [x] **회원가입 연령/동의 모델 통일(Codex #125 R3, G1 승인 Option A)**: `over14`(만14세 이상 only) → **`consent`**(게스트 §5.2 와 동일 honest 단일 동의 — "만14세 이상" 또는 "14세 미만+보호자 동의"). 중등 타겟엔 만14세 미만(중1 등) 포함이라 구 게이트가 타겟 사용자 회원 경로 영구 차단하던 문제 해소. `AuthForm`/`schemas`/`client` 동기 변경, 체크박스 카피 StartForm 미러.

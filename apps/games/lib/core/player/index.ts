@@ -53,17 +53,18 @@ export function getPlayer(): Player | null {
     if (!raw) {
       // 프로필은 없는데 게스트 쿠키만 남은 stale 상태(스토리지 외부 삭제·브라우저 eviction).
       // middleware 는 쿠키 존재만으로 /home·/games/[id] 를 통과시키므로 그대로 두면 무프로필
-      // split-brain(+ auth 장애 시 fail-open). 쿠키가 있으면 함께 정리해 신원 상태를 일치시킨다(R7).
-      if (hasGuestCookie()) clearPlayer();
+      // split-brain(+ auth 장애 시 fail-open). 쿠키 + 잔여 로컬 진행도까지 정리한다(R7·R11).
+      if (hasGuestCookie()) resetGuestSession();
       return null;
     }
     const p = JSON.parse(raw) as Partial<Player>;
     if (typeof p.nickname !== "string" || !isGrade(p.grade)) {
-      // 저장된 프로필이 무효(구 grade 초·고 등) — 스토리지뿐 아니라 게스트 쿠키도 함께
-      // 정리한다(Codex #125). 안 그러면 서버 middleware 는 stale `pullim_games_guest`
-      // 쿠키로 보호 라우트를 통과시키는데 클라만 무신원으로 튕기는 split-brain 이 나고,
-      // auth 일시 장애 시 useIdentity fail-open + stale cookie 로 라우트가 열릴 수 있다.
-      clearPlayer();
+      // 저장된 프로필이 무효(구 grade 초·고 등) — **프로필·쿠키뿐 아니라 그 신원에 묶인 모든
+      // 로컬 진행도(SRS·스트릭·활동·커스텀, `pullim-games:*`)까지 비운다**(resetGuestSession, R11).
+      // clearPlayer 만 쓰면 학습 데이터가 남아, 온보딩을 다시 한 새 중등 프로필이 이전(고1 등)
+      // 사용자의 진행도를 그대로 이어받아 신원·학습 기록이 섞이고 보관한 고등 게임 기록이 홈에
+      // 재등장한다. + 무효 프로필이 남기던 stale 쿠키 split-brain(Codex #125) 도 함께 해소.
+      resetGuestSession();
       return null;
     }
     return {
@@ -73,8 +74,8 @@ export function getPlayer(): Player | null {
       createdAt: typeof p.createdAt === "number" ? p.createdAt : 0,
     };
   } catch {
-    // 파싱 불가(손상) 프로필도 동일하게 신원 상태를 정리한다(쿠키-스토리지 일치).
-    clearPlayer();
+    // 파싱 불가(손상) 프로필도 동일하게 신원+로컬 진행도를 전부 정리한다(교차 신원 혼입 차단).
+    resetGuestSession();
     return null;
   }
 }

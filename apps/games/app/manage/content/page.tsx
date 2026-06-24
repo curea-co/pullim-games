@@ -104,7 +104,13 @@ export default function ContentPage() {
   const [cacheLabel, setCacheLabel] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
 
-  const courseCatalog = useMemo<CatalogGradeBand[]>(() => listCatalog(), []);
+  // 중등 재포지셔닝(plan §0) — 콘텐츠 생성도 **중등(middle) 밴드만** 노출. 초등=풀림 주니어,
+  // 고등=대상 아님이라 catalog 의 elementary/high 로 커스텀 카드를 만들지 못하게 picker 입력에서
+  // 거른다(elementary/high JSON 은 보관 — 로드는 되나 미노출). Codex #125 R11.
+  const courseCatalog = useMemo<CatalogGradeBand[]>(
+    () => listCatalog().filter((b) => b.gradeBand === "middle"),
+    [],
+  );
   const selectedCatalogUnit = useMemo(() => {
     if (!isCatalogPathComplete(curriculumPath)) return undefined;
     return findCatalogUnit(curriculumPath);
