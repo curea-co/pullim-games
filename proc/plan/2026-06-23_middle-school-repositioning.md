@@ -49,7 +49,7 @@
     - `getPlayer()`(읽기·동기): 구 grade·손상·stale 쿠키 감지 시 **`clearPlayer()`만** — 프로필+`pullim_games_guest` 쿠키만 정리(split-brain 차단). **진행도(`pullim-games:*`)는 절대 건드리지 않음** — 동기 호출이라 httpOnly 세션 확인 불가 → 세션 살아있는 회원 + stale guest profile 동거 시 회원 데이터 비가역 삭제 위험(R14). 클라 sync 미연결로 localStorage 가 유일 저장소(spec/05).
     - `createPlayer()`(신원 확립·게스트 전용): **프로필+쿠키 영속이 확인된 뒤** `clearLearningProgress()`(프로필 키 STORAGE_KEY 보존, 나머지 `pullim-games:*` 제거)로 이전 게스트 진행도를 비워 **클린 슬레이트** → 교차 사용자 노출 차단(R13). 생성 실패(저장 거부·쿠키 차단)면 wipe 미도달 → 기존 진행도 보존(R15). 회원은 createPlayer 미호출(로그인=clearPlayer, 진행도 보존).
     - `player.test.ts`: getPlayer 정리=프로필·쿠키(진행도 보존) / createPlayer=클린 슬레이트 잠금.
-  - **manage 콘텐츠 picker 중등 한정(Codex #125 R11)**: `/manage/content` `CurriculumPicker` 가 `listCatalog()` 전체(초·중·고)를 노출 → `courseCatalog` 를 `gradeBand==="middle"` 필터. 비중등 커스텀 카드 생성 차단(§0 계약). catalog elementary/high JSON 은 보관(로드되나 picker 미노출). (구 기재 "catalog-loader 비영향" 은 picker 노출 간과 → 정정.)
+  - **manage 콘텐츠 밴드 제한 — 본 PR 보류, 콘텐츠 트랙으로 이관(Codex #125 R11→R16)**: 처음엔 `/manage/content` picker 를 `gradeBand==="middle"` 로 필터했으나(R11), 이는 (a) 중3 catalog 부재(R13), (b) 현 factorization seed 가 x³·판별식·인수정리 등 **고등 내용** 포함(R16), (c) 서버 액션 미검증(R16)으로 **중등 전용 콘텐츠 없이 정책만 앞서간** 상태였다. → picker 전체 밴드 유지로 되돌림(R13 권고 "중3 준비 전 기존 진입 유지"). **§0 manage 콘텐츠 생성 밴드 제한은 콘텐츠 재보정 PR(§1.1)에서 [중등 전용 seed + 서버 middle-band/seed 검증 + spec/06 카드풀 갱신]과 함께** 닫는다. (게임 발견 표면 hide 는 본 PR 그대로 — 그건 콘텐츠 의존 없음.)
 - [x] 게임 노출 제어: `GameMeta.stage?: "middle" | "high"` 추가 + `registry.visibleGames`(stage:"high" 제외). **발견(discovery) 표면만 전환** — 허브(`GameHubPage`)·추천(`RecommendationCard`)·소개(`about`). 라우팅(`getGameById`/`getAllGameIds`)·custom 관리·**대시보드 총합 KPI는 전체 `games` 유지**(보관 게임 직접 URL 플레이 기록도 총계 포함). 단 `dashboard/stats`의 **`perGame`(노출 카드 목록)은 보관 제외** — /home CompactActivity 로 고등 게임 재노출 차단(Codex #125 R2). `physics-vector`·`chemistry-balance` = `stage:"high"`. `registry.test.ts` 신설.
 - [x] **회원가입(/signup) 학년 수집(Codex #125 R2)**: `AuthForm` grade `<select>`(중1~중3, StartForm 미러) + `SignupSchema.grade`(`isGrade` refine) + `createUser(grade)` + `migrations/0003_user_grade.sql`(users.grade nullable) + `toPublicUser`/`/me` 노출. 게스트(/start)·회원(/signup) **양 진입점에서 중등 학년 수집·검증** → "중등만 대상" 계약을 회원 경로에서도 판정 가능. `data-cta-priority` 로 보조 footer 링크 audit 통과.
 - [x] **회원가입 연령/동의 모델 통일(Codex #125 R3, G1 승인 Option A)**: `over14`(만14세 이상 only) → **`consent`**(게스트 §5.2 와 동일 honest 단일 동의 — "만14세 이상" 또는 "14세 미만+보호자 동의"). 중등 타겟엔 만14세 미만(중1 등) 포함이라 구 게이트가 타겟 사용자 회원 경로 영구 차단하던 문제 해소. `AuthForm`/`schemas`/`client` 동기 변경, 체크박스 카피 StartForm 미러.
@@ -80,6 +80,5 @@
 
 ## 4. e2e 현황 (머지 판단용)
 - **e2e(Playwright)는 main 에서 이미 mass-red**(7370e03a=191 failed/17 passed) — 모노레포 재구조화(#120, 2026-06-17) 이후 webServer 셋업이 깨진 **선행 인프라 이슈**. 본 PR 과 무관하며, #120·#123 도 e2e red 상태로 머지됨(= e2e 는 하드 머지 게이트 아님). **별도 인프라 fix 트랙 필요.**
-- 본 PR 이 추가한 e2e delta: `manage-content-curriculum.spec` 3 테스트가 고등/초등 picker 선택에 의존했음 → **중등 단원으로 이전**(R13): (1) 중학교 3학년 수학 "다항식의 인수분해"(신규 `middle/math/grade-3.json` + 기존 factorization seedRef 재사용), (2)(3) 중학교 1학년 영어 "자기소개 확장"(cache/quota). skip 아닌 정상 spec 유지(커버리지 보존).
-- **중3 catalog 추가(R13)**: spec/02 가 V1 단원을 "중3 인수분해"로 바꿨으나 catalog 에 중3 수학이 없어 manage UI 로 그 타깃 카드를 만들 수 없던 갭 해소. `middle/math/grade-3.json`(인수분해, seedRef 재사용) 신설 → picker middle-only 가 중3 인수분해를 실제 생성 가능. (고등 factorization 단원은 보관 — picker 미노출.)
-- codex APPROVED(직전) + 25 단위/빌드/lint 잡 green.
+- 본 PR 의 e2e delta = **0**: manage 콘텐츠 밴드 제한을 보류(위)하면서 `manage-content-curriculum.spec` 을 origin/main 원본으로 복원(고등/초등 selection). 191-red 는 모두 선행 인프라.
+- 25 단위/빌드/lint 잡 green.
