@@ -52,19 +52,20 @@ export function getPlayer(): Player | null {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) {
       // 프로필은 없는데 게스트 쿠키만 남은 stale 상태(스토리지 외부 삭제·브라우저 eviction).
-      // middleware 는 쿠키 존재만으로 /home·/games/[id] 를 통과시키므로 그대로 두면 무프로필
-      // split-brain(+ auth 장애 시 fail-open). 쿠키 + 잔여 로컬 진행도까지 정리한다(R7·R11).
-      if (hasGuestCookie()) resetGuestSession();
+      // middleware 가 쿠키 존재만으로 보호 라우트를 통과시키는 split-brain 을 막기 위해 **쿠키·
+      // 프로필만** 정리한다(R7). ⚠️ 학습 데이터(`pullim-games:*` SRS·스트릭·활동·커스텀)는
+      // 건드리지 않는다 — 로그인 사용자도 이 데이터가 유일 런타임 저장소(클라 sync 미연결,
+      // spec/05)라 비가역 손실 위험. 전체 wipe 는 명시적 "다른 사용자로 시작"(resetGuestSession)
+      // 에만 둔다(Codex #125 R12).
+      if (hasGuestCookie()) clearPlayer();
       return null;
     }
     const p = JSON.parse(raw) as Partial<Player>;
     if (typeof p.nickname !== "string" || !isGrade(p.grade)) {
-      // 저장된 프로필이 무효(구 grade 초·고 등) — **프로필·쿠키뿐 아니라 그 신원에 묶인 모든
-      // 로컬 진행도(SRS·스트릭·활동·커스텀, `pullim-games:*`)까지 비운다**(resetGuestSession, R11).
-      // clearPlayer 만 쓰면 학습 데이터가 남아, 온보딩을 다시 한 새 중등 프로필이 이전(고1 등)
-      // 사용자의 진행도를 그대로 이어받아 신원·학습 기록이 섞이고 보관한 고등 게임 기록이 홈에
-      // 재등장한다. + 무효 프로필이 남기던 stale 쿠키 split-brain(Codex #125) 도 함께 해소.
-      resetGuestSession();
+      // 무효 프로필(구 grade 초·고 등) — **프로필+게스트 쿠키만** 정리해 stale 쿠키 split-brain
+      // 차단(R2). 학습 데이터는 보존(R12 — 동일인의 학년 재선택일 수 있고, 회원 데이터 비가역
+      // 손실 방지). 공용 기기 핸드오프(다른 사람)는 "다른 사용자로 시작"(resetGuestSession)이 처리.
+      clearPlayer();
       return null;
     }
     return {
@@ -74,8 +75,8 @@ export function getPlayer(): Player | null {
       createdAt: typeof p.createdAt === "number" ? p.createdAt : 0,
     };
   } catch {
-    // 파싱 불가(손상) 프로필도 동일하게 신원+로컬 진행도를 전부 정리한다(교차 신원 혼입 차단).
-    resetGuestSession();
+    // 파싱 불가(손상) 프로필도 프로필+쿠키만 정리한다(학습 데이터 보존 — R12).
+    clearPlayer();
     return null;
   }
 }

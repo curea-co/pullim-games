@@ -58,20 +58,20 @@ describe("getPlayer — 무효 프로필 마이그레이션(split-brain 차단)"
     vi.unstubAllGlobals();
   });
 
-  it("구 grade(고1) 프로필은 null + 프로필·쿠키·로컬 진행도 전부 정리(교차 신원 혼입 차단)", () => {
+  it("구 grade(고1) 프로필은 null + 프로필·쿠키만 정리, 학습 데이터는 보존(R12)", () => {
     storage.setItem(
       STORAGE_KEY,
       JSON.stringify({ nickname: "민서", grade: "고1", consent: true, createdAt: 1 }),
     );
-    // 이전(고1) 신원의 학습 데이터 — resetGuestSession 으로 함께 비워져야 새 중등 프로필에
-    // 섞이지 않는다(Codex #125 R11).
+    // 학습 데이터(SRS·스트릭 등)는 유일 런타임 저장소 — 무효 프로필 정리로 비가역 삭제하면
+    // 회원 데이터까지 날아간다. 정리는 프로필+쿠키만, 데이터 wipe 는 명시적 핸드오프에만(R12).
     storage.setItem("pullim-games:srs:factorization", '{"some":"state"}');
     storage.setItem("pullim-games:streak", '{"current":3}');
     expect(getPlayer()).toBeNull();
     expect(storage.getItem(STORAGE_KEY)).toBeNull(); // 프로필 정리
-    expect(storage.getItem("pullim-games:srs:factorization")).toBeNull(); // 진행도 정리
-    expect(storage.getItem("pullim-games:streak")).toBeNull();
     expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(false); // 쿠키 정리
+    expect(storage.getItem("pullim-games:srs:factorization")).not.toBeNull(); // 진행도 보존
+    expect(storage.getItem("pullim-games:streak")).not.toBeNull();
   });
 
   it("유효 grade(중2) 프로필은 그대로 반환", () => {
