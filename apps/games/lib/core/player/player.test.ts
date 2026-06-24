@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { GRADES, GUEST_COOKIE, getPlayer } from "./index";
+import { GRADES, GUEST_COOKIE, createPlayer, getPlayer } from "./index";
 
 // 중등 재포지셔닝(2026-06-23) — GRADES 축소에 따른 신원 마이그레이션.
 // 근거: proc/plan/2026-06-23_middle-school-repositioning.md + Codex #125.
@@ -58,20 +58,20 @@ describe("getPlayer — 무효 프로필 마이그레이션(split-brain 차단)"
     vi.unstubAllGlobals();
   });
 
-  it("구 grade(고1) 게스트 프로필 — null + 프로필·쿠키·진행도 전부 정리(게스트 전용, 교차사용자 차단)", () => {
+  it("구 grade(고1) 프로필 — null + 프로필·쿠키만 정리, 진행도는 보존(R14 회원 안전)", () => {
     storage.setItem(
       STORAGE_KEY,
       JSON.stringify({ nickname: "민서", grade: "고1", consent: true, createdAt: 1 }),
     );
-    // 구 grade 게스트 프로필은 게스트 전용 경로(회원은 raw 부재) → 다음 사용자가 이전 게스트의
-    // 진행도를 이어받지 않게 SRS·스트릭까지 함께 비운다(R11·R13). 회원 비영향(게스트 전용).
+    // getPlayer 는 동기 호출이라 회원 세션 확인 불가 → 진행도 wipe 금지(세션 살아있는 회원 +
+    // stale guest profile 동거 시 회원 데이터 비가역 삭제). 교차사용자 차단은 createPlayer 가 처리.
     storage.setItem("pullim-games:srs:factorization", '{"some":"state"}');
     storage.setItem("pullim-games:streak", '{"current":3}');
     expect(getPlayer()).toBeNull();
     expect(storage.getItem(STORAGE_KEY)).toBeNull(); // 프로필 정리
     expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(false); // 쿠키 정리
-    expect(storage.getItem("pullim-games:srs:factorization")).toBeNull(); // 진행도 정리
-    expect(storage.getItem("pullim-games:streak")).toBeNull();
+    expect(storage.getItem("pullim-games:srs:factorization")).not.toBeNull(); // 진행도 보존
+    expect(storage.getItem("pullim-games:streak")).not.toBeNull();
   });
 
   it("구조 손상 프로필(nickname 누락) — 프로필·쿠키만 정리, 진행도 보존(회원 안전, R12)", () => {
@@ -110,5 +110,29 @@ describe("getPlayer — 무효 프로필 마이그레이션(split-brain 차단)"
     vi.stubGlobal("document", doc);
     expect(getPlayer()).toBeNull();
     expect(doc.cookie).toBe(""); // 쿠키가 애초에 없으면 건드리지 않음
+  });
+});
+
+describe("createPlayer — 새 게스트 = 클린 슬레이트(교차 사용자 차단, R13)", () => {
+  let storage: ReturnType<typeof makeStorage>;
+  let doc: ReturnType<typeof makeDocument>;
+
+  beforeEach(() => {
+    storage = makeStorage();
+    doc = makeDocument("");
+    vi.stubGlobal("window", { localStorage: storage, location: { protocol: "http:" } });
+    vi.stubGlobal("document", doc);
+  });
+  afterEach(() => vi.unstubAllGlobals());
+
+  it("이전 게스트의 잔여 진행도를 쓰기 전에 비우고 새 프로필을 만든다", () => {
+    // 이전(무효화된/다른 사용자) 게스트의 진행도가 남아 있는 상태.
+    storage.setItem("pullim-games:srs:factorization", '{"old":"state"}');
+    storage.setItem("pullim-games:streak", '{"current":9}');
+    const p = createPlayer("새사람", "중2", true);
+    expect(p?.grade).toBe("중2");
+    expect(storage.getItem("pullim-games:srs:factorization")).toBeNull(); // 이전 진행도 정리
+    expect(storage.getItem("pullim-games:streak")).toBeNull();
+    expect(doc.cookie.includes(`${GUEST_COOKIE}=1`)).toBe(true); // 새 게스트 쿠키 설정
   });
 });

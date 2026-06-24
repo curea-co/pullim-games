@@ -67,12 +67,13 @@ export function getPlayer(): Player | null {
       return null;
     }
     if (!isGrade(p.grade)) {
-      // 구 grade(초·고) 게스트 프로필 — 지원 학년 아님. **이 경로는 게스트 전용**: 회원은 가입 시
-      // clearPlayer 로 게스트 프로필이 지워져 `raw` 가 없어(위 !raw 분기) 여기 도달 불가. 따라서
-      // 프로필·쿠키뿐 아니라 그 게스트 신원에 묶인 로컬 진행도(`pullim-games:*`)까지 비운다
-      // (resetGuestSession) — 공용 기기에서 다음 사용자가 이전 게스트의 SRS·스트릭·커스텀을
-      // 이어받는 교차 사용자 노출 차단(R11·R13). 회원 데이터 비가역 손실 위험 없음(게스트 전용).
-      resetGuestSession();
+      // 구 grade(초·고) 게스트 프로필 — 지원 학년 아님. **프로필·쿠키만** 정리한다(clearPlayer).
+      // ⚠️ 여기서 진행도(`pullim-games:*`)까지 비우면 안 된다(Codex #125 R14): getPlayer 는
+      // 동기 호출이라 httpOnly 세션 쿠키를 못 읽어 회원 여부 확인 불가. 세션이 살아있는 회원
+      // 브라우저에 stale guest profile 이 함께 남아 있으면 회원의 SRS·스트릭·커스텀(현재 유일
+      // 저장소=localStorage)까지 비가역 삭제된다. 교차 사용자 노출 차단은 신원 확립 시점인
+      // **createPlayer**(게스트 전용)에서 클린 슬레이트로 처리한다(R13).
+      clearPlayer();
       return null;
     }
     return {
@@ -98,6 +99,12 @@ export function createPlayer(
   grade: Grade,
   consent: boolean,
 ): Player | null {
+  // 새 게스트 신원 확립 = 클린 슬레이트. 이전(무효화된 구 grade·다른 사용자)의 게스트 진행도가
+  // localStorage 에 남아 있으면 새 프로필이 그걸 이어받는 교차 사용자 노출이 된다 → 쓰기 전에
+  // `pullim-games:*` 진행도를 비운다(Codex #125 R13). **여기가 wipe 의 안전한 위치**: createPlayer
+  // 는 게스트 온보딩(StartForm) 전용이라 회원은 호출하지 않는다(회원 로그인은 clearPlayer 로
+  // 진행도 보존 — getPlayer 도 wipe 안 함, R14). 로그인 시 익명→회원 데이터 승계는 영향 없음.
+  resetGuestSession();
   const player: Player = { nickname, grade, consent, createdAt: nowMs() };
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(player));
