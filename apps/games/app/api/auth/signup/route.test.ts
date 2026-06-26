@@ -75,8 +75,8 @@ describe("POST /api/auth/signup", () => {
   it("약한 비번 → 422", async () => {
     expect((await POST(makeReq({ ...VALID, password: "x" }))).status).toBe(422);
   });
-  it("중등 외 학년(고1)·학년 누락 → 422 (중등 타겟 강제)", async () => {
-    expect((await POST(makeReq({ ...VALID, grade: "고1" }))).status).toBe(422);
+  it("초등(범위 밖)·학년 누락 → 422 (중·고 타겟 강제)", async () => {
+    expect((await POST(makeReq({ ...VALID, grade: "초5" }))).status).toBe(422);
     const { grade: _omit, ...noGrade } = VALID;
     expect((await POST(makeReq(noGrade))).status).toBe(422);
   });

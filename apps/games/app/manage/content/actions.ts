@@ -47,6 +47,11 @@ export async function generateFromCurriculumAction(input: {
   if (count <= 0) {
     return { ok: false, error: "카드 수는 1 이상이어야 해요." };
   }
+  // 타겟은 중·고등 — 초등은 풀림 주니어(별도 앱) 영역이라 생성 차단. picker(클라) 필터의
+  // 서버측 강제(crafted·stale 요청 대비). 근거: proc/plan/2026-06-26_middle-high-target.md.
+  if (catalogPath?.gradeBand === "elementary") {
+    return { ok: false, error: "초등 콘텐츠는 풀림 주니어 영역이라 여기서 만들 수 없어요." };
+  }
 
   // 1) seed-first: subject+unit 명시되면 정적 변환 시도. seed 없으면 catalog fallback.
   if (seedSubjectId && seedUnitId) {

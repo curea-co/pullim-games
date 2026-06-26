@@ -148,7 +148,7 @@ export function GameHubPage() {
     : undefined;
 
   // 메인 그리드는 official 만 (custom 은 CustomGamesSection 분리).
-  // visibleGames = 보관(고등 전용) 제외 — 중등 타겟 노출.
+  // visibleGames = 발견 표면 목록(중·고 둘 다 노출이라 현재 보관 게임 0 → 전 게임).
   const officialGames = useMemo(
     () => visibleGames.filter((g) => (g.meta.kind ?? "official") === "official"),
     [],

@@ -39,8 +39,8 @@ function makeDocument(initial = "") {
 }
 
 describe("player — GRADES 중등 한정", () => {
-  it("GRADES 는 중1·중2·중3 만 포함(초·고 제외)", () => {
-    expect([...GRADES]).toEqual(["중1", "중2", "중3"]);
+  it("GRADES 는 중·고(중1~고3) 포함, 초등 제외", () => {
+    expect([...GRADES]).toEqual(["중1", "중2", "중3", "고1", "고2", "고3"]);
   });
 });
 
@@ -58,10 +58,10 @@ describe("getPlayer — 무효 프로필 마이그레이션(split-brain 차단)"
     vi.unstubAllGlobals();
   });
 
-  it("구 grade(고1) 프로필 — null + 프로필·쿠키만 정리, 진행도는 보존(R14 회원 안전)", () => {
+  it("구 grade(초5, 범위 밖) 프로필 — null + 프로필·쿠키만 정리, 진행도는 보존(R14 회원 안전)", () => {
     storage.setItem(
       STORAGE_KEY,
-      JSON.stringify({ nickname: "민서", grade: "고1", consent: true, createdAt: 1 }),
+      JSON.stringify({ nickname: "민서", grade: "초5", consent: true, createdAt: 1 }),
     );
     // getPlayer 는 동기 호출이라 회원 세션 확인 불가 → 진행도 wipe 금지(세션 살아있는 회원 +
     // stale guest profile 동거 시 회원 데이터 비가역 삭제). 교차사용자 차단은 createPlayer 가 처리.
