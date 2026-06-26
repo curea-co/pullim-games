@@ -76,6 +76,10 @@ function HomeDashboard() {
       {!stats ? (
         <DashboardSkeleton />
       ) : stats.gamesPlayed === 0 ? (
+        // 빈 상태(첫 사용자) 판정 = 전체 gamesPlayed(실제 학습 이력) — 보관 게임만 직접 URL 로
+        // 플레이한 사용자도 SRS·스트릭·due 가 있으면 빈 상태로 되돌리지 않는다(단일 백본, R9).
+        // 활동 목록(perGame)은 이미 플레이한 보관 게임은 유지(재진입), 미플레이 보관 게임만
+        // 숨긴다(discovery 차단) — 헤더·게이트·목록이 모두 전체 gamesPlayed 기준으로 정합(R10).
         <EmptyDashboard />
       ) : (
         <Dashboard stats={stats} />

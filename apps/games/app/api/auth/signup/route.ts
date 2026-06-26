@@ -64,7 +64,7 @@ export async function POST(request: Request) {
       { status: 422 },
     );
   }
-  const { email, password, fingerprint } = parsed.data;
+  const { email, password, grade, fingerprint } = parsed.data;
 
   // 흔한 경우(이미 가입) 빠른 409. 경합은 아래 UNIQUE 위반 캐치가 처리.
   //
@@ -88,7 +88,7 @@ export async function POST(request: Request) {
   let expiresAt: number;
   try {
     const out = await withTx(async (q) => {
-      const u = await createUser(email, passwordHash, q);
+      const u = await createUser(email, passwordHash, grade, q);
       if (fingerprint) await linkFingerprint(fingerprint, u.id, q);
       const s = await createSession(u.id, q);
       return { u, s };

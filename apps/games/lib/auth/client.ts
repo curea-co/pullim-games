@@ -4,7 +4,9 @@
 
 import { getFingerprint } from "@/lib/core/fingerprint";
 
-export type AuthUser = { id: string; email: string };
+// 서버 PublicUser 와 동일 계약 — 가입 시 수집한 중등 학년(레거시 회원은 null).
+// signup·login·/me 응답이 모두 grade 를 싣는다(프로필 뱃지·학년별 노출용).
+export type AuthUser = { id: string; email: string; grade: string | null };
 
 export type AuthResult =
   | { ok: true; user: AuthUser }
@@ -65,12 +67,13 @@ async function ensureCsrf(): Promise<string | null> {
 export async function signup(
   email: string,
   password: string,
-  over14: boolean,
+  consent: boolean,
+  grade: string,
 ): Promise<AuthResult> {
   const csrf = await ensureCsrf();
   return postAuth(
     "/api/auth/signup",
-    { email, password, over14, fingerprint: getFingerprint() ?? undefined },
+    { email, password, consent, grade, fingerprint: getFingerprint() ?? undefined },
     csrf,
   );
 }

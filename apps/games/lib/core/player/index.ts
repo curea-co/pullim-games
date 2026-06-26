@@ -11,11 +11,11 @@ const GUEST_TTL_DAYS = 180;
 // 게스트 신원에 묶인 모든 로컬 데이터 prefix — "다른 사용자로 시작" 시 일괄 초기화.
 const LOCAL_PREFIX = "pullim-games:";
 
-export const GRADES = [
-  "초1", "초2", "초3", "초4", "초5", "초6",
-  "중1", "중2", "중3",
-  "고1", "고2", "고3",
-] as const;
+// 타겟 학령 = 중등(중1~중3). 초등은 풀림 주니어(별도 앱), 고등은 대상 아님.
+// 근거: proc/plan/2026-06-23_middle-school-repositioning.md (G1 결정 2026-06-23).
+// 구 grade 값(초·고)을 보유한 기존 게스트는 isGrade 가 거부 → getPlayer null →
+// 온보딩 재선택으로 자연 마이그레이션(프리런치라 실사용자 영향 없음).
+export const GRADES = ["중1", "중2", "중3"] as const;
 
 export type Grade = (typeof GRADES)[number];
 
@@ -25,7 +25,7 @@ export type Player = {
   /**
    * 동의 플래그(정통망법) — "만 14세 이상" 또는 "만 14세 미만이며 보호자 동의 완료"를 의미한다.
    * over14 boolean 이 거짓 나이를 기록하던 문제(Codex #114 R1)를 피하려 honest 단일 동의로 둔다.
-   * 연령대 자체는 `grade` 로 보존(예: 초등은 만14세 미만으로 간주 → 보호자 동의 필요).
+   * 연령대 자체는 `grade` 로 보존(예: 중1≈13세는 만14세 미만일 수 있어 보호자 동의 필요).
    */
   consent: boolean;
   createdAt: number;
@@ -50,9 +50,32 @@ export function getPlayer(): Player | null {
   if (typeof window === "undefined") return null;
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return null;
+    if (!raw) {
+      // 프로필은 없는데 게스트 쿠키만 남은 stale 상태(스토리지 외부 삭제·브라우저 eviction).
+      // middleware 가 쿠키 존재만으로 보호 라우트를 통과시키는 split-brain 을 막기 위해 **쿠키·
+      // 프로필만** 정리한다(R7). ⚠️ 학습 데이터(`pullim-games:*` SRS·스트릭·활동·커스텀)는
+      // 건드리지 않는다 — 로그인 사용자도 이 데이터가 유일 런타임 저장소(클라 sync 미연결,
+      // spec/05)라 비가역 손실 위험. 전체 wipe 는 명시적 "다른 사용자로 시작"(resetGuestSession)
+      // 에만 둔다(Codex #125 R12).
+      if (hasGuestCookie()) clearPlayer();
+      return null;
+    }
     const p = JSON.parse(raw) as Partial<Player>;
-    if (typeof p.nickname !== "string" || !isGrade(p.grade)) return null;
+    if (typeof p.nickname !== "string") {
+      // 구조 손상 프로필 — 회원 여부 단정 불가하므로 **프로필+쿠키만** 정리(데이터 보존, R12).
+      clearPlayer();
+      return null;
+    }
+    if (!isGrade(p.grade)) {
+      // 구 grade(초·고) 게스트 프로필 — 지원 학년 아님. **프로필·쿠키만** 정리한다(clearPlayer).
+      // ⚠️ 여기서 진행도(`pullim-games:*`)까지 비우면 안 된다(Codex #125 R14): getPlayer 는
+      // 동기 호출이라 httpOnly 세션 쿠키를 못 읽어 회원 여부 확인 불가. 세션이 살아있는 회원
+      // 브라우저에 stale guest profile 이 함께 남아 있으면 회원의 SRS·스트릭·커스텀(현재 유일
+      // 저장소=localStorage)까지 비가역 삭제된다. 교차 사용자 노출 차단은 신원 확립 시점인
+      // **createPlayer**(게스트 전용)에서 클린 슬레이트로 처리한다(R13).
+      clearPlayer();
+      return null;
+    }
     return {
       nickname: p.nickname,
       grade: p.grade,
@@ -60,6 +83,8 @@ export function getPlayer(): Player | null {
       createdAt: typeof p.createdAt === "number" ? p.createdAt : 0,
     };
   } catch {
+    // 파싱 불가(손상) 프로필도 프로필+쿠키만 정리한다(학습 데이터 보존 — R12).
+    clearPlayer();
     return null;
   }
 }
@@ -91,7 +116,38 @@ export function createPlayer(
     clearPlayer(); // 부분 상태(player만 남음) 정리.
     return null;
   }
+  // 새 게스트 신원 = 클린 슬레이트. 이전(무효화된 구 grade·다른 사용자)의 게스트 진행도가 남아
+  // 있으면 새 프로필이 그걸 이어받는 교차 사용자 노출이 되므로 비운다(Codex #125 R13).
+  // **반드시 프로필+쿠키 영속이 확인된 뒤에** — 생성이 실패(저장 거부·쿠키 차단)하면 위에서
+  // null 로 빠져 여기 도달 안 하므로 기존 진행도가 보존된다(R15 — 생성 실패 시 데이터 손실 방지).
+  // 방금 만든 프로필 키(STORAGE_KEY)는 보존하고 나머지 `pullim-games:*` 진행도만 제거한다.
+  clearLearningProgress();
   return player;
+}
+
+// 기기 단위 정책 키 — 신원이 바뀌어도 보존해야 하는 **비용 가드**(Codex #125 R17).
+// `llm-quota`(일일 30회 한도)·`llm-cache`(생성 캐시)는 날짜·경로 키라 신원 종속이 아니며,
+// 새 게스트 재생성만으로 초기화되면 한도/캐시를 우회할 수 있다.
+const DEVICE_POLICY_PREFIXES = ["pullim-games:llm-quota:", "pullim-games:llm-cache:"];
+
+/**
+ * **신원 종속 진행도만** 제거(SRS·스트릭·활동·커스텀 등) — createPlayer 클린 슬레이트용.
+ * 보존: 현재 프로필 키(STORAGE_KEY) + 기기 정책 키(llm-quota/llm-cache). 후자를 지우면 일일
+ * LLM 한도·캐시가 새 게스트 재생성으로 리셋되어 비용 가드를 우회한다(Codex #125 R17).
+ */
+function clearLearningProgress(): void {
+  try {
+    const keys: string[] = [];
+    for (let i = 0; i < window.localStorage.length; i += 1) {
+      const k = window.localStorage.key(i);
+      if (!k || !k.startsWith(LOCAL_PREFIX) || k === STORAGE_KEY) continue;
+      if (DEVICE_POLICY_PREFIXES.some((p) => k.startsWith(p))) continue; // 비용 가드 보존
+      keys.push(k);
+    }
+    keys.forEach((k) => window.localStorage.removeItem(k));
+  } catch {
+    /* noop */
+  }
 }
 
 function hasGuestCookie(): boolean {

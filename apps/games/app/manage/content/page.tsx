@@ -104,6 +104,11 @@ export default function ContentPage() {
   const [cacheLabel, setCacheLabel] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
 
+  // 중등 재포지셔닝의 manage 콘텐츠 생성 밴드 제한(middle-only)은 **별도 콘텐츠 트랙으로 보류**:
+  // 중등 전용 seed(현 factorization seed 는 x³·판별식·인수정리 등 고등 요소 포함, Codex #125 R16)
+  // + 서버 액션 검증 + spec/06 카드풀 갱신이 함께 가야 정책이 데이터/서버 레벨에서 닫힌다.
+  // 그 전까지는 picker 전체 밴드 유지(Codex #125 R13 — "중3 catalog/seed 준비 전엔 기존 진입 유지").
+  // 후속: proc/plan/2026-06-23_middle-school-repositioning.md §1.1 콘텐츠 재보정.
   const courseCatalog = useMemo<CatalogGradeBand[]>(() => listCatalog(), []);
   const selectedCatalogUnit = useMemo(() => {
     if (!isCatalogPathComplete(curriculumPath)) return undefined;

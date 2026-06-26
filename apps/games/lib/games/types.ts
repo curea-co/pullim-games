@@ -47,6 +47,17 @@ export interface GameMeta {
   status: "available" | "coming-soon";
 
   /**
+   * 학령대 — 타겟 노출 제어. (2026-06-23 중등 재포지셔닝)
+   *   'middle' = 중등(타겟). 미지정 시 기본값 — 노출.
+   *   'high'   = 고등 전용. **보관(hide)** — 콘텐츠·라우트는 유지하되 발견 표면(허브 그리드·
+   *              추천·about 쇼케이스)에서만 제외한다. `visibleGames`(registry.ts) 가 기준.
+   *              학습 집계(대시보드 stats)는 전체 games 기준 유지(보관 게임 기록도 포함).
+   * 초등은 풀림 주니어(별도 앱) 영역이라 games 에 두지 않는다.
+   * 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
+   */
+  stage?: "middle" | "high";
+
+  /**
    * 게임 출처 분류 (M5 추가):
    *   'official' = 풀림 게임즈 기본 제공 (factorization, math-quick-quiz 등)
    *   'custom'   = 사용자 콘텐츠 기반 (custom-* 게임)

@@ -14,6 +14,9 @@ const manifest: GameManifest = {
     tagline: "양변의 원자 수를 맞추면 반응식이 결합돼요",
     estimatedMinutes: 3,
     status: "available",
+    // 몰·반응식 균형 = 고등 편향(중등 부재) → 보관. 중등 재보정 시 stage 해제(후속).
+    // 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
+    stage: "high",
     icon: FlaskConical,
     mechanic: "manipulation",
     retrievalDepth: "deep",

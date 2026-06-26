@@ -19,7 +19,7 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Checkbox } from "@/components/ui/checkbox";
 import { authErrorMessage, login, signup } from "@/lib/auth/client";
-import { clearPlayer } from "@/lib/core/player";
+import { GRADES, clearPlayer, type Grade } from "@/lib/core/player";
 
 type Mode = "login" | "signup";
 
@@ -27,7 +27,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [over14, setOver14] = useState(false);
+  const [grade, setGrade] = useState<Grade | "">("");
+  const [consent, setConsent] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
 
@@ -36,13 +37,17 @@ export function AuthForm({ mode }: { mode: Mode }) {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
-    if (isSignup && !over14) {
-      setError("만 14세 이상만 가입할 수 있어요.");
+    if (isSignup && grade === "") {
+      setError("학년을 선택해주세요.");
+      return;
+    }
+    if (isSignup && !consent) {
+      setError("동의가 필요해요. (만 14세 이상이거나 보호자 동의)");
       return;
     }
     setPending(true);
     const result = isSignup
-      ? await signup(email, password, over14)
+      ? await signup(email, password, consent, grade as Grade)
       : await login(email, password);
     setPending(false);
 
@@ -110,20 +115,46 @@ export function AuthForm({ mode }: { mode: Mode }) {
             </div>
 
             {isSignup && (
+              // 중등 타겟 — 가입 시 학년 수집(StartForm 게스트 경로와 동일). spec/08 §8.10 토큰·focus ring.
+              <div className="flex flex-col gap-1.5">
+                <Label htmlFor="grade" className="text-pullim-slate-700">
+                  학년
+                </Label>
+                <select
+                  id="grade"
+                  required
+                  value={grade}
+                  onChange={(e) => setGrade(e.target.value as Grade)}
+                  className="h-11 rounded-md border border-pullim-slate-300 bg-card px-3 text-sm text-pullim-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-positive"
+                >
+                  <option value="" disabled>
+                    학년 선택
+                  </option>
+                  {GRADES.map((g) => (
+                    <option key={g} value={g}>
+                      {g}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
+
+            {isSignup && (
               // spec/08 §8.10: 토큰화 + focus ring + 44×44 터치 영역(min-h-11 행 + 라벨 클릭).
               <div className="flex min-h-11 items-start gap-2 py-1">
                 <Checkbox
-                  id="over14"
-                  checked={over14}
-                  onCheckedChange={(v) => setOver14(v === true)}
+                  id="consent"
+                  checked={consent}
+                  onCheckedChange={(v) => setConsent(v === true)}
                   className="mt-0.5 h-5 w-5"
                 />
                 <Label
-                  htmlFor="over14"
+                  htmlFor="consent"
                   className="text-sm font-normal leading-snug text-pullim-slate-700"
                 >
-                  만 14세 이상이며, 이메일·비밀번호와 기기 식별값(fingerprint) 저장에
-                  동의해요.
+                  <strong>만 14세 이상</strong>이거나, 만 14세 미만이라면{" "}
+                  <strong>보호자 동의를 받았어요.</strong> 이메일·비밀번호와 기기
+                  식별값(fingerprint) 저장에 동의해요.
                 </Label>
               </div>
             )}
@@ -143,14 +174,24 @@ export function AuthForm({ mode }: { mode: Mode }) {
             {isSignup ? (
               <>
                 이미 계정이 있나요?{" "}
-                <Link href="/login" className="text-pullim-blue-600 underline">
+                {/* 보조 네비 링크 — 1차 CTA(가입/로그인 버튼) 아님. 작은 뷰포트에서 폼 아래로
+                    자연 스크롤되는 게 정상이라 UI audit informational(스크롤 OK)로 표시. */}
+                <Link
+                  href="/login"
+                  data-cta-priority="informational"
+                  className="text-pullim-blue-600 underline"
+                >
                   로그인
                 </Link>
               </>
             ) : (
               <>
                 계정이 없나요?{" "}
-                <Link href="/signup" className="text-pullim-blue-600 underline">
+                <Link
+                  href="/signup"
+                  data-cta-priority="informational"
+                  className="text-pullim-blue-600 underline"
+                >
                   회원가입
                 </Link>
               </>

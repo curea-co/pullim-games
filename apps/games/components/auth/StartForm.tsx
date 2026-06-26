@@ -101,7 +101,7 @@ export function StartForm() {
                 required
                 value={grade}
                 onChange={(e) => setGrade(e.target.value as Grade)}
-                className="h-10 rounded-md border border-pullim-slate-300 bg-card px-3 text-sm text-pullim-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-positive"
+                className="h-11 rounded-md border border-pullim-slate-300 bg-card px-3 text-sm text-pullim-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-positive"
               >
                 <option value="" disabled>
                   학년 선택

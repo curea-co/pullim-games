@@ -1,5 +1,12 @@
 // games 인증 입력 검증 (zod). 근거: proc/plan/2026-05-29_auth-login-signup.md.
 import { z } from "zod";
+import { isGrade } from "@/lib/core/player";
+
+// 중등 타겟(2026-06-23) — 가입 시 학년 수집·검증. 게스트(/start)와 동일 GRADES(중1~중3).
+// isGrade 단일 출처 재사용(드리프트 차단). 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
+const gradeSchema = z
+  .string({ required_error: "학년을 선택해주세요" })
+  .refine(isGrade, "중등(중1~중3) 학년만 선택할 수 있어요");
 
 // bcrypt 72바이트 한계 — 초과 시 뒤가 조용히 잘려 입력≠해시대상. 가입·로그인 공통 적용.
 const within72Bytes = (v: string) => new TextEncoder().encode(v).length <= 72;
@@ -32,10 +39,13 @@ export const SignupSchema = z
   .object({
     email: emailSchema,
     password: passwordSchema,
-    // 정보통신망법: 로그인 도입 시 만 14세 이상 확인 (spec §5.6).
-    over14: z.literal(true, {
-      errorMap: () => ({ message: "만 14세 이상만 가입할 수 있어요" }),
+    // 정보통신망법 동의(spec §5.6, 2026-06-23 개정): 게스트(§5.2)와 동일 honest 단일 동의 —
+    // "만 14세 이상" 또는 "만 14세 미만 + 보호자 동의". 중등 타겟엔 14세 미만(중1 등)이 포함되어
+    // over14 단순 나이 게이트는 타겟 사용자를 차단하므로 동의 모델로 통일(Codex #125 R3, G1 승인).
+    consent: z.literal(true, {
+      errorMap: () => ({ message: "만 14세 이상이거나 보호자 동의가 필요해요" }),
     }),
+    grade: gradeSchema,
     fingerprint: fingerprintSchema,
   })
   .strict();
