@@ -58,7 +58,7 @@ export function LandingHero() {
           </h1>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-type-secondary lg:text-lg">
-            초·중등 교과를 게임으로 익히는 학습 놀이터예요. 개념을 풀고,
+            중·고등 교과를 게임으로 익히는 학습 놀이터예요. 개념을 풀고,
             틀린 건 다시 만나고, 진행은 솔직하게.{" "}
             <strong className="text-type-primary">점수·랭크·뱃지는 없어요.</strong>
           </p>

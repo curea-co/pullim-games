@@ -115,7 +115,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
             </div>
 
             {isSignup && (
-              // 중등 타겟 — 가입 시 학년 수집(StartForm 게스트 경로와 동일). spec/08 §8.10 토큰·focus ring.
+              // 중·고등 타겟 — 가입 시 학년 수집(StartForm 게스트 경로와 동일). spec/08 §8.10 토큰·focus ring.
               <div className="flex flex-col gap-1.5">
                 <Label htmlFor="grade" className="text-pullim-slate-700">
                   학년

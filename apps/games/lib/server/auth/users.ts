@@ -7,7 +7,7 @@ export type UserRow = {
   id: string;
   email: string;
   password_hash: string;
-  /** 중등 학년(중1~중3) — 가입 시 수집. 레거시 회원은 null(migration 0003). */
+  /** 중·고 학년(중1~고3) — 가입 시 수집. 레거시 회원은 null(migration 0003). */
   grade: string | null;
   created_at: number;
   updated_at: number;
@@ -17,7 +17,7 @@ export type UserRow = {
 export type PublicUser = {
   id: string;
   email: string;
-  /** 중등 학년(중1~중3). 레거시 회원은 null. 프로필 뱃지·학년별 게임 노출에 사용. */
+  /** 중·고 학년(중1~고3). 레거시 회원은 null. 프로필 뱃지·학년별 게임 노출에 사용. */
   grade: string | null;
 };
 
