@@ -102,11 +102,12 @@ test.describe("/manage/content — 교육과정 통합 picker", () => {
   test("(2) catalog-ai 캐시 hit — 사전 캐시 시드 → LLM 미호출 + 캐시 라벨/다시 생성 노출", async ({
     page,
   }) => {
-    // 캐시 시드 — 영어 초4 "안녕! 만나서 반가워" / 객관식 / 10장 (page default count=10 매칭)
+    // 캐시 시드 — 영어 중1 "자기소개 확장" / 객관식 / 10장 (page default count=10 매칭)
+    // (초등은 타겟 제외라 picker·server 에서 차단 — 중·고 단원으로 검증)
     await page.evaluate(() => {
       const now = new Date().toISOString();
       const cacheKey =
-        "pullim-games:llm-cache:elementary::english::4::greetings-introductions::multiple-choice::10";
+        "pullim-games:llm-cache:middle::english::1::more-about-myself::multiple-choice::10";
       localStorage.setItem(
         cacheKey,
         JSON.stringify({
@@ -136,10 +137,10 @@ test.describe("/manage/content — 교육과정 통합 picker", () => {
     await page.locator('button:has-text("객관식")').first().click();
     await pickSelect(page, 0, "E2E");
     await pickSelect(page, 1, "AI 검증");
-    await pickSelect(page, 2, "초등");
+    await pickSelect(page, 2, "중학교");
     await pickSelect(page, 3, "영어");
-    await pickSelect(page, 4, "초등 4학년");
-    await pickSelect(page, 5, "안녕! 만나서 반가워");
+    await pickSelect(page, 4, "중학교 1학년");
+    await pickSelect(page, 5, "자기소개 확장");
 
     // 서브토글 미노출 (seedRef 없는 단원)
     await expect(page.locator('button[aria-label="정적 변환"]')).toHaveCount(0);
@@ -173,10 +174,10 @@ test.describe("/manage/content — 교육과정 통합 picker", () => {
     await page.locator('button:has-text("객관식")').first().click();
     await pickSelect(page, 0, "E2E");
     await pickSelect(page, 1, "AI 검증");
-    await pickSelect(page, 2, "초등");
+    await pickSelect(page, 2, "중학교");
     await pickSelect(page, 3, "영어");
-    await pickSelect(page, 4, "초등 4학년");
-    await pickSelect(page, 5, "안녕! 만나서 반가워");
+    await pickSelect(page, 4, "중학교 1학년");
+    await pickSelect(page, 5, "자기소개 확장");
 
     // quota 카운터 "0 / 30" 노출
     await expect(page.locator("text=/오늘 AI 호출 남음: 0 \\/ 30/")).toBeVisible();

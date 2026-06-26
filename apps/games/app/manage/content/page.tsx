@@ -104,10 +104,14 @@ export default function ContentPage() {
   const [cacheLabel, setCacheLabel] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
 
-  // 타겟이 중·고등이라 picker 전체 밴드 노출이 정합(초등=풀림 주니어만 향후 제외 검토 대상).
-  // manage 콘텐츠 생성 밴드 정책(초등 제외 + 서버 액션 검증 + spec/06 카드풀)은 콘텐츠 트랙으로 보류
-  // (현 factorization seed 가 고등 요소 포함 — Codex #125 R16). 후속: proc/plan/2026-06-26_middle-high-target.md.
-  const courseCatalog = useMemo<CatalogGradeBand[]>(() => listCatalog(), []);
+  // 타겟 = 중·고등 → catalog 에서 **초등(풀림 주니어 영역) 제외**, 중·고 밴드만 노출.
+  // 서버 액션(actions.ts)도 elementary 를 차단(crafted/stale 요청 대비). 중·고는 콘텐츠 보유
+  // (고1 factorization seed + 중등 catalog)라 #125 의 middle-only 갭(중3 부재) 같은 문제 없음.
+  // 근거: proc/plan/2026-06-26_middle-high-target.md.
+  const courseCatalog = useMemo<CatalogGradeBand[]>(
+    () => listCatalog().filter((b) => b.gradeBand !== "elementary"),
+    [],
+  );
   const selectedCatalogUnit = useMemo(() => {
     if (!isCatalogPathComplete(curriculumPath)) return undefined;
     return findCatalogUnit(curriculumPath);
