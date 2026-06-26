@@ -14,9 +14,6 @@ const manifest: GameManifest = {
     tagline: "두 화살표를 잡으면 합벡터가 그려져요",
     estimatedMinutes: 3,
     status: "available",
-    // 벡터 = 고등 물리 (중등 교육과정 부재) → 보관. 노출 표면 제외, 라우트·콘텐츠 유지.
-    // 근거: proc/plan/2026-06-23_middle-school-repositioning.md.
-    stage: "high",
     icon: Move,
     mechanic: "manipulation",
     retrievalDepth: "deep",

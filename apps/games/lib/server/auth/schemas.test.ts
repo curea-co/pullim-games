@@ -25,12 +25,12 @@ describe("SignupSchema", () => {
     expect(SignupSchema.safeParse({ email: base.email, password: base.password }).success).toBe(false);
     expect(SignupSchema.safeParse({ ...base, consent: false }).success).toBe(false);
   });
-  it("grade 누락 거부 + 중등 외(초·고) 학년 거부", () => {
+  it("grade 누락·초등(범위 밖) 거부 + 중·고 학년 허용", () => {
     const { grade: _omit, ...noGrade } = base;
     expect(SignupSchema.safeParse(noGrade).success).toBe(false);
-    expect(SignupSchema.safeParse({ ...base, grade: "고1" }).success).toBe(false);
-    expect(SignupSchema.safeParse({ ...base, grade: "초5" }).success).toBe(false);
+    expect(SignupSchema.safeParse({ ...base, grade: "초5" }).success).toBe(false); // 초등=주니어 영역
     expect(SignupSchema.safeParse({ ...base, grade: "중3" }).success).toBe(true);
+    expect(SignupSchema.safeParse({ ...base, grade: "고1" }).success).toBe(true); // 고등도 타겟
   });
   it("잘못된 이메일 거부", () => {
     expect(SignupSchema.safeParse({ ...base, email: "not-an-email" }).success).toBe(false);
