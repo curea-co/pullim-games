@@ -47,7 +47,7 @@ games 는 별도 신규 인증 메커니즘이 **불필요** — 부모도메인
 
 games 의 **현행 sync 정본 설계를 그대로 이식**(아래는 신규 모델 제안이 아니라 `apps/games/app/api/sync/route.ts`·`apps/games/lib/server/learning/*` 의 실제 계약 기술 — pullim-api 는 이 semantics 를 보존해야 한다). 모든 엔드포인트 **user-scoped**. 핵심 3 불변식:
 - **`updated_at` = 서버 self-stamp 단조 시퀀스**(`nextval('learning_sync_seq')` — **벽시계 ms 아님**). 클라가 보내지 않는다 — pull 증분 **커서로만** 쓰인다. ⚠️ 컬럼명이 `updated_at` 이지만 값은 **시퀀스 정수**다: 같은 ms 에 여러 write 가 일어나도 행마다 고유·단조 증가값을 받아 `(updated_at, stable_id)` tie-breaker 없이도 **동일 ms 증분 pull 누락이 구조적으로 불가능**. 시퀀스를 epoch ms 로 바꾸면 이 보장을 잃는다. (srs/streak/custom 커서가 이 시퀀스. activity 만 전량 집계라 `serverTime(now)` 커서 사용 — 누락 무관.)
-- **충돌 해소는 리소스별로 다르다**(균일 LWW 아님): **SRS** = 클라 `last_review_at`(epoch ms) **recency 조건부 머지**(더 옛 리뷰는 무시), **custom** = 클라 `exportedAt`(ISO revision) 비교해 **오래된 스냅샷 거부**, **streak** = per-user LWW, **activity** = per-(user,game,date,device) 절대 count. → 늦게 도착한 stale payload 가 최신을 덮는 경쟁은 이 **클라측 recency 신호**(lastReviewAt/exportedAt)로 이미 막혀 있다(서버 updated_at 단독 판별에 의존하지 않음).
+- **충돌 해소는 리소스별로 다르다**(균일 LWW 아님): **SRS** = 클라 `last_review_at`(epoch ms) **recency 조건부 머지**(더 옛 리뷰는 무시), **custom** = 클라 `exportedAt`(ISO revision) 비교해 **오래된 스냅샷 거부**, **streak** = **field-wise 단조 머지**(LWW 아님 — `longest`=GREATEST, `current`=더 늦은 `last_active_date` 채택·**같은 날짜면 GREATEST**[stale 작은 current 가 되돌리지 못하게], `last_active_date`=늦은 날짜), **activity** = per-(user,game,date,device) **count=GREATEST(단조 증가)** + 대시보드 표시는 device 간 **SUM**. → 늦게 도착한 stale payload 가 최신을 덮는 경쟁은 이 **클라측 recency 신호 + 단조 머지**(lastReviewAt/exportedAt/GREATEST)로 이미 막혀 있다(서버 updated_at 단독 판별에 의존하지 않음).
 - **POST 는 cursor 를 돌려주지 않는다**(#117 R8). 클라는 증분 커서를 **GET 응답의 리소스별 cursor 로만** 전진시킨다 — push 후 "방금 now" 로 커서를 전진시키면 stale payload 가 no-op 됐을 때 서버의 더 최신 행을 다음 GET 이 영구 skip 해 수렴이 깨진다.
 
 ### B1. 데이터 모델 (현행 games schema)
@@ -55,8 +55,8 @@ games 의 **현행 sync 정본 설계를 그대로 이식**(아래는 신규 모
 | 엔티티 | 키 | 필드 | 동기화 단위 |
 |---|---|---|---|
 | **srs_state** | (user, game_id, card_id) | `fsrs_card`(JSON), `review_count`, `last_review_at`(**epoch ms**·nullable·머지 recency 기준), `updated_at`(**시퀀스값** `nextval`·커서) | per-card, 클라 `last_review_at` **recency 조건부 머지**(옛 리뷰 무시) |
-| **streak** | user | `current`, `longest`, `last_active_date`("YYYY-MM-DD"), `updated_at`(시퀀스값·커서) | per-user LWW |
-| **activity_log** | (user, game_id, date, device_id) | `count`(기기·날짜 절대값), `updated_at`(시퀀스값) | per-(기기,날짜,device) **절대 count** upsert. `date<cutoff` retention cleanup |
+| **streak** | user | `current`, `longest`, `last_active_date`("YYYY-MM-DD"), `updated_at`(시퀀스값·커서) | **field-wise 단조 머지**(longest=GREATEST, current=늦은 날짜 채택·동일 날짜 GREATEST, last_active_date=늦은 날짜) — LWW 아님 |
+| **activity_log** | (user, game_id, date, device_id) | `count`(기기·날짜 절대값), `updated_at`(=push `now`·벽시계) | per-(기기,날짜,device) **count=GREATEST(단조)** upsert, 집계=device 간 **SUM**. `date<cutoff` retention cleanup |
 | **custom_content** | user | `snapshot`(JSON, `exportedAt` 포함·머지 revision 기준), `updated_at`(시퀀스값·커서) | 컬렉션 스냅샷, 클라 `exportedAt` revision **오래된 것 거부** |
 
 - `device_id`: 동기화 전용 랜덤 UUID(fingerprint 아님) — 다기기 활동 합산용.
@@ -66,11 +66,11 @@ games 의 **현행 sync 정본 설계를 그대로 이식**(아래는 신규 모
 
 | 동작 | 메서드/경로(제안) | 설명 |
 |---|---|---|
-| push (upsert) | `POST /games/sync` | srs/streak/activity/custom 변경분 배치 upsert. 서버가 `updated_at` self-stamp. 충돌 해소는 **리소스별**(SRS=클라 `last_review_at` recency 머지, custom=클라 `exportedAt` revision reject-older, streak=LWW, activity=절대 count). **응답은 `{ok}` 만 — cursor 미반환**(클라가 커서를 과전진시켜 최신 행을 영구 skip 하는 것 방지, #117 R8) |
+| push (upsert) | `POST /games/sync` | srs/streak/activity/custom 변경분 배치 upsert. 서버가 `updated_at` self-stamp. 충돌 해소는 **리소스별**(SRS=클라 `last_review_at` recency 머지, custom=클라 `exportedAt` revision reject-older, streak=field-wise 단조 머지[GREATEST], activity=count GREATEST+device SUM). **응답은 `{ok}` 만 — cursor 미반환**(클라가 커서를 과전진시켜 최신 행을 영구 skip 하는 것 방지, #117 R8) |
 | pull (증분) | `GET /games/sync?srs_since=&streak_since=&custom_since=` | **리소스별 시퀀스 커서**(`updated_at` = `nextval('learning_sync_seq')` 단조값, **epoch ms 아님**). srs/streak/custom 은 `*_since`(시퀀스값) 이후 변경분, activity 는 집계 스냅샷 + `cursor=serverTime(now)`. 응답에 리소스별 cursor·`serverTime` 동봉 → 클라는 이 cursor 로만 다음 `*_since` 전진. **단일 opaque cursor 아님** |
 | cleanup(cron) | (내부 스케줄) activity_log `date < cutoff` 삭제 | games 의 `/api/sync/cleanup` cron 대체 — pullim-api 스케줄러로 |
 
-- 단일 `POST/GET /games/sync` 통합 vs 영역별 분리는 pullim-api 컨벤션 따름. **보존 필수 불변식**: ⒜ `updated_at` = 서버 **단조 시퀀스**(`nextval`, epoch ms 아님 — 동일 ms 누락 방지), ⒝ 리소스별 시퀀스 `*_since` 커서, ⒞ POST cursor 미반환(클라는 GET cursor 로만 전진), ⒟ 리소스별 충돌 머지(lastReviewAt recency / exportedAt revision), ⒠ device_id 활동 합산.
+- 단일 `POST/GET /games/sync` 통합 vs 영역별 분리는 pullim-api 컨벤션 따름. **보존 필수 불변식**: ⒜ `updated_at` = 서버 **단조 시퀀스**(`nextval`, epoch ms 아님 — 동일 ms 누락 방지), ⒝ 리소스별 시퀀스 `*_since` 커서, ⒞ POST cursor 미반환(클라는 GET cursor 로만 전진), ⒟ 리소스별 충돌 머지(SRS lastReviewAt recency / custom exportedAt revision / streak·activity **GREATEST 단조**), ⒠ activity device_id 별 카운터 + 집계 SUM.
 - ⚠️ **pullim-api 재구현 시 잔여 확인(P0)**: 위 불변식 보존 세부(**전역 단조 시퀀스 유지**·인스턴스별 시계 대체 금지·시퀀스 발급/커밋 순서·트랜잭션 격리)는 [P0 설계 TODO] 동시성 항목에서 pullim-api 와 확정. **단, 클라측 recency 신호(lastReviewAt/exportedAt)는 이미 계약에 존재** — "없는 토큰을 추가"가 아니라 "현 semantics(시퀀스 커서 포함) 보존"이 과제다.
 - 현행 games 동작 참조: `pullim-games` `apps/games/lib/server/learning/*` + `apps/games/app/api/sync/route.ts`.
 

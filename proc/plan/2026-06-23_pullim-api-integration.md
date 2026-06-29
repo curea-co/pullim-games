@@ -2,7 +2,7 @@
 
 **작성일**: 2026-06-23
 **작성자**: 사용자(G1) 결정 + claude
-**상태**: **P0 방향 제안 — 설계 + 핸드오프 초안.** 코드·spec 변경 0. (P0 산출물: 본 plan + 핸드오프. P1~ 은 ①선행 spec 개정 ②인증 계약 회신 후.)
+**상태**: **P0 이전 — 방향 제안 초안.** 코드·spec 변경 0. 본 plan + 핸드오프는 **P0(설계 확정) 합의를 위한 입력 초안**이지 P0 종료물이 아니다 — P0 종료 = 양 repo 합의 + pullim-api 측 plan/ADR(§6 표). 진행 순서: **선행 spec(spec/05 §5.2 개정) → P0 설계 합의 → P1+**. spec 미개정·P0 미합의 상태에서 본 plan 을 확정으로 취급하지 않는다.
 **근거**: 사용자(G1) 방향 제시 (2026-06-23) — 현황 분석(`proc/research` / 본 plan §1) 후.
 
 > ⚠️ **spec 우선 원칙(spec/01 §2 · CLAUDE.md §9)**: 본 plan 의 방향은 **권위 spec 개정 전제의 제안**이다. `proc/spec/05 §5.2` 는 현재 games 계정이 타 서비스와 **완전 독립**(계정 학습데이터도 games 전용 Postgres)이라고 못 박고 있다 — 아래 §1 방향(중앙 인증·데이터 위임)은 이 전제를 뒤집으므로, **먼저 spec/05 §5.2 를 G1/G3/G4 합의로 개정(선행 spec phase)** 한 뒤에야 P1+ 코드 착수가 가능하다. spec 미개정 상태에서 본 plan 을 확정 결정으로 취급하지 않는다.
@@ -78,14 +78,15 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 
 ## 6. Phase 분할 (안전·점진)
 
-| Phase | 내용 | 산출 |
-|---|---|---|
-| **P0** | 설계 확정 — pullim-api 인증 계약·games authz·데이터 모델 합의 (양 repo) | 본 plan 합의 + pullim-api 측 plan/ADR |
-| **P1** | pullim-api: games 모듈 학습데이터 엔드포인트 + authz (pullim-api repo) | API 배포(dev) |
-| **P2** | games: 인증 직접 호출 전환 — FE 가 `api.pullim.ai/auth/*` 직접 호출(같은 도메인 쿠키), games `/api/auth/*` 제거 + 라우트 게이팅 미들웨어 | games 로그인 동작(중앙 인증) |
-| **P3** | games: 학습데이터 직접 호출 전환 — FE 가 `api.pullim.ai/games/*` 직접 호출, games `/api/sync*` 제거 | 학습 동기화 동작 |
-| **P4** | games: 자체 BE 제거 — auth/learning 로직·db·migrations·`DATABASE_URL` 폐기 | games = FE+게이팅 proxy only |
-| ~~P5~~ | billing/event — **보류** (별 트랙, 결제 통합 시) | — |
+| Phase | 내용 | 산출 | 상태 |
+|---|---|---|---|
+| **선행 spec** | `spec/05 §5.2` 개정 (독립 계정·games 전용 DB → 중앙 위임) — G1/G3/G4 합의 | 개정된 spec/05 | 미착수 |
+| **P0** | 설계 확정 — pullim-api 인증 계약·games authz·데이터 모델 합의 (양 repo) | 본 plan 합의 + pullim-api 측 plan/ADR | **진행 전(본 plan+핸드오프 = 입력 초안)** |
+| **P1** | pullim-api: games 모듈 학습데이터 엔드포인트 + authz (pullim-api repo) | API 배포(dev) | 미착수 |
+| **P2** | games: 인증 직접 호출 전환 — FE 가 `api.pullim.ai/auth/*` 직접 호출(같은 도메인 쿠키), games `/api/auth/*` 제거 + 라우트 게이팅 미들웨어 | games 로그인 동작(중앙 인증) | 미착수 |
+| **P3** | games: 학습데이터 직접 호출 전환 — FE 가 `api.pullim.ai/games/*` 직접 호출, games `/api/sync*` 제거 | 학습 동기화 동작 | 미착수 |
+| **P4** | games: 자체 BE 제거 — auth/learning 로직·db·migrations·`DATABASE_URL` 폐기 | games = FE+게이팅 proxy only | 미착수 |
+| ~~P5~~ | billing/event — **보류** (별 트랙, 결제 통합 시) | — | 보류 |
 
 ## 7. 비목표 / 주의
 
