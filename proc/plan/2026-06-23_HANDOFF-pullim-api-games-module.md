@@ -74,10 +74,10 @@ games 의 현행 스키마/동기화 모델을 이식. **증분 동기화**: 각
 
 ## C. games 측이 처리(핸드오프 아님 — 참고)
 - 게스트(비로그인): localStorage 로컬 보관. 로그인 시 익명→회원 데이터 병합은 **명시적 사용자 확인 후에만** 수행하고 자동 흡수는 금지한다(공유 기기 명의오염 차단 — `proc/spec/05 §5.2` 계약). 즉 로그인했다고 게스트 진행도를 무확인 자동 마이그레이션하지 않고, "이 기기의 게스트 기록을 내 계정에 합칠까요?" 류 확인 단계를 거친다 — games FE 책임.
-- BFF 프록시·세션쿠키·CSRF/same-origin 1차 가드 — games.
+- 게이팅 proxy·세션쿠키·CSRF/same-origin 1차 가드 — games.
 - FSRS 알고리즘 자체는 games(클라) — pullim-api 는 `fsrs_card` JSON 을 불투명 저장.
 
 ## D. pullim-api 측 진행 (해당 repo 거버넌스)
 - `feature → dev → main`, PR-only, ADR/authz-matrix 갱신.
-- games 모듈: authz-sample/health 스켈레톤 → 위 학습데이터 모듈 배선.
-- 완료 시 games 에 **엔드포인트 계약(경로·요청/응답·인증 헤더/쿠키)** 회신 → games BFF 구현(P2/P3).
+- games 모듈: 현 스켈레톤 → 위 학습데이터 모듈 배선.
+- 완료 시 games 에 **엔드포인트 계약(경로·요청/응답·인증 헤더/쿠키)** 회신 → games 직접호출 연동 구현(P2/P3).

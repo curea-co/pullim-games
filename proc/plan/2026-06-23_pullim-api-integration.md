@@ -1,4 +1,4 @@
-# pullim-games → pullim-api 통합 (인증·학습데이터 위임, games=FE+BFF)
+# pullim-games → pullim-api 통합 (인증·학습데이터 위임, games=FE+게이팅 proxy)
 
 **작성일**: 2026-06-23
 **작성자**: 사용자(G1) 결정 + claude
@@ -15,7 +15,7 @@
 |---|---|
 | 1 | **인증 → pullim-api 중앙 인증으로 위임** (games 자체 email+pw 인증 폐기) |
 | 2 | **학습 데이터 → pullim-api `games` 모듈로 이전** (srs/streak/activity/custom) |
-| 3 | **pullim-games = FE + 얇은 BFF** (데이터·인증 로직 미보유, 프록시만) |
+| 3 | **pullim-games = FE + 얇은 라우트-게이팅 proxy** (데이터·인증 로직 미보유 — 인증/데이터 프록시 아님) |
 | 4 | (1~3 도출) **games 자체 Postgres 불필요** — `DATABASE_URL`·migrations·db client 제거 대상 |
 
 > 위 1~4 는 **spec/05 §5.2 개정 후 확정**. 선행 spec phase = `05 §5.2`(독립 계정·games 전용 DB 전제)를 "중앙 인증 위임·학습데이터 pullim-api 소유"로 개정.
@@ -45,11 +45,11 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 - `apps/games/lib/server/learning/*` (srs·streak·activity·custom·sync-csrf) — pullim-api games 모듈로 이전
 - `apps/games/lib/server/db/client.ts`, `apps/games/migrations/0001_init.sql`·`0002_learning_data.sql` — games DB 폐기
 - `DATABASE_URL` env (Vercel·`.env.example`)
-- `apps/games/app/api/auth/{login,signup,logout,me,csrf}` · `apps/games/app/api/sync*` (games 자체 인증/학습 BFF 라우트) — **제거.** 아래 정본 경로(직접 호출)로 대체.
+- `apps/games/app/api/auth/{login,signup,logout,me,csrf}` · `apps/games/app/api/sync*` (games 자체 인증/학습 라우트) — **제거.** 아래 정본 경로(직접 호출)로 대체.
 - DB 의존 단위/라우트 테스트
 
 ### 정본 경로 — **브라우저 직접 호출 (단일 경로 고정)**
-> 인증·학습데이터 요청은 **하나의 경로만** 둔다(이원화 금지 — CSRF·쿠키 스코프·오류 처리 기준 단일화). FE 가 pullim-api 를 **직접 호출**하는 것이 정본이고, games BFF 는 **인증/데이터 프록시가 아니다.**
+> 인증·학습데이터 요청은 **하나의 경로만** 둔다(이원화 금지 — CSRF·쿠키 스코프·오류 처리 기준 단일화). FE 가 pullim-api 를 **직접 호출**하는 것이 정본이고, games proxy 는 **인증/데이터 프록시가 아니다.**
 - **직접 호출(정본)**: 브라우저가 `api.pullim.ai/auth/*`(인증)·`api.pullim.ai/games/*`(학습데이터)를 `credentials:include` 로 직접 호출. CSRF·세션 쿠키 발급/검증은 **pullim-api 가 단독 소유**. games 에 `apps/games/app/api/auth/*`·`apps/games/app/api/sync*` 미보유.
 - **games proxy 의 역할 = 보호 라우트 진입 게이팅뿐**: 미들웨어가 쿠키 1차 필터 후 pullim-api introspection 으로 신원 확인해 라우트 통과/차단만 한다(요청 프록시 아님).
 - `apps/games/lib/server/http/{csrf,same-origin}` — 게이팅 미들웨어의 보조 가드로만 필요 최소 유지.
@@ -63,10 +63,10 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 
 > 사용자(G1) 결정: pullim-api 측은 claude 가 직접 코딩하지 않고 **핸드오프 문서**로 넘긴다 → **[`2026-06-23_HANDOFF-pullim-api-games-module.md`](./2026-06-23_HANDOFF-pullim-api-games-module.md)**. pullim-api 자체 거버넌스(AGENTS, ADR, `feature → dev → main`)로 수용·진행.
 
-- `src/games/modules/` 에 **학습데이터 엔드포인트** 신설 (현재 authz-sample·health 스켈레톤뿐):
+- pullim-api **`games` 모듈**(논리 단위 — 구체 위치·구조는 pullim-api repo 관할)에 **학습데이터 엔드포인트** 신설:
   - srs state sync(upsert/조회), streak, activity log(+retention cleanup), custom content
-  - 중앙 인증 authz 게이트 적용 (authz-matrix)
-- 데이터 모델: games 의 `srs_states`·`streaks`·`activity_log`·`custom_content` 스키마를 pullim-api `data-model` 로 이식
+  - 중앙 인증 authz 게이트 적용
+- 데이터 모델: games 의 `srs_states`·`streaks`·`activity_log`·`custom_content` 스키마를 pullim-api 데이터 모델로 이식
 - 인증: 기존 login/session/oauth 재사용 — games 전용 신규 인증 불필요(중앙)
 
 ## 5. 설계 — **same-site `.pullim.ai` 컨슈머 계약** (신규 설계 최소)
@@ -84,7 +84,7 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 | **P1** | pullim-api: games 모듈 학습데이터 엔드포인트 + authz (pullim-api repo) | API 배포(dev) |
 | **P2** | games: 인증 직접 호출 전환 — FE 가 `api.pullim.ai/auth/*` 직접 호출(같은 도메인 쿠키), games `/api/auth/*` 제거 + 라우트 게이팅 미들웨어 | games 로그인 동작(중앙 인증) |
 | **P3** | games: 학습데이터 직접 호출 전환 — FE 가 `api.pullim.ai/games/*` 직접 호출, games `/api/sync*` 제거 | 학습 동기화 동작 |
-| **P4** | games: 자체 BE 제거 — auth/learning 로직·db·migrations·`DATABASE_URL` 폐기 | games = FE+BFF only |
+| **P4** | games: 자체 BE 제거 — auth/learning 로직·db·migrations·`DATABASE_URL` 폐기 | games = FE+게이팅 proxy only |
 | ~~P5~~ | billing/event — **보류** (별 트랙, 결제 통합 시) | — |
 
 ## 7. 비목표 / 주의
