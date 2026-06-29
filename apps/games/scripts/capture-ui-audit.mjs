@@ -25,7 +25,7 @@ if (!path || path.startsWith("--")) {
 }
 
 const baseIdx = args.indexOf("--base");
-const base = baseIdx >= 0 ? args[baseIdx + 1] : "http://localhost:3033";
+const base = baseIdx >= 0 ? args[baseIdx + 1] : "http://localhost:3004";
 
 const outIdx = args.indexOf("--out");
 const outDir = outIdx >= 0 ? args[outIdx + 1] : "/tmp/ui-audit";

@@ -8,7 +8,7 @@
 ## 시작하기
 
 1. **이 디렉토리만 작업하세요.** `apps/games/lib/core/` 변경이 필요하면 별도 PR.
-2. `bun run dev` → `http://localhost:3033/games/cloze-multi`
+2. `bun run dev` → `http://localhost:3004/games/cloze-multi`
 3. 테스트: `bun run test -- games/cloze-multi/`
 
 ## 핵심 명제
