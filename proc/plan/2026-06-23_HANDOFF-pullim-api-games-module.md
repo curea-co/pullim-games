@@ -12,8 +12,8 @@
 
 ### [P0 설계 TODO] — 착수 시 pullim-api 공동 확정 (지금 단독 명세 X)
 - **CORS 계약**: 브라우저가 `api.pullim.ai` 를 `credentials:include` 로 직접 호출하므로 pullim-api CORS allowlist(`games.pullim.ai`·`dev-games.pullim.ai` 오리진 명시 허용)·허용 헤더/메서드·preflight 계약 필요(same-site 쿠키만으로 cross-origin fetch 안 열림). 미정의 시 dev/prod 에서 정본 직접호출 경로가 브라우저에서 바로 차단.
-- **쿠키 Domain 스코프**: "부모도메인 동일 → 쿠키 공유"는 **자동이 아니다** — 세션 쿠키가 `games.pullim.ai`↔`api.pullim.ai` 에서 함께 가려면 pullim-api 가 **`Domain=.pullim.ai` 를 명시**해 set 해야 한다. Domain·`Secure`·`SameSite`(cross-subdomain 이라 `SameSite=Lax/None` 판단) 계약을 확정. (위 product/환경 격리와 같이 — Domain 너무 넓으면 sibling 누수, 너무 좁으면 직접호출 인증 실패.)
-- **CSRF cross-subdomain**: 현 games 의 **double-submit CSRF** 패턴이 `games.pullim.ai`→`api.pullim.ai` 직접호출에서 어떻게 성립하는지 계약 필요 — CSRF 토큰 발급/검증 위치, 클라가 읽어 헤더로 되쏠 수 있는 쿠키(`Domain=.pullim.ai`, non-HttpOnly) 여부. cross-subdomain 에서 double-submit 이 깨지지 않게 토큰 모델 확정.
+- **쿠키 Domain 스코프 — 공유 vs 격리 긴장(미해결 계약)**: "부모도메인 동일 → 쿠키 자동 공유"는 **틀림**(자동 아님). 그렇다고 단순히 `Domain=.pullim.ai` 로 넓히면 **games↔api 뿐 아니라 `planner.pullim.ai`·`q.pullim.ai` 등 sibling 전부가 같은 세션 쿠키를 읽어** spec/05 §5.2 독립 계정·세션 격리가 **붕괴**한다(= 본문이 짚은 "세션 격리 붕괴"). 따라서 `Domain=.pullim.ai` 를 답으로 단정하지 않는다 — **계약으로 풀어야 할 긴장**: ⒜ host-scoped(좁은) 쿠키 + games 가 토큰을 명시 전송, ⒝ Domain 은 넓히되 **audience=`games` 스코프**로 sibling 이 읽어도 재사용 불가, ⒞ product 별 쿠키 네임스페이스 — 중 무엇으로 "games↔api 직접호출 인증은 되되 sibling 누수는 없게" 할지 pullim-api 와 확정. Domain·`Secure`·`SameSite`(cross-subdomain) 까지 묶어 계약(아래 product/환경 격리 항목과 연동).
+- **CSRF cross-subdomain**: 현 games 의 **double-submit CSRF** 패턴이 `games.pullim.ai`→`api.pullim.ai` 직접호출에서 어떻게 성립하는지 계약 필요 — CSRF 토큰 발급/검증 위치, 클라가 읽어 헤더로 되쏠 수 있는 non-HttpOnly 쿠키의 스코프(위 쿠키 Domain 긴장과 동일 — 넓은 Domain 은 sibling 노출이라 audience/네임스페이스로 제한). cross-subdomain 에서 double-submit 이 깨지지 않게 토큰 모델 확정.
 - **동기화 동시성**: 오프라인 다기기 LWW 가 서버 `updated_at` 만으로는 늦게 도착한 옛 payload 가 최신을 덮어쓰는 경쟁이 남음 → push payload 에 `client_updated_at`(또는 base revision) 포함 규약 필요. 증분 pull 커서도 `since=<updated_at>` 단일값은 동일 ms 배치에서 경계 누락 → `(updated_at, stable_id)` tie-breaker 또는 opaque `next_cursor` 필요.
 - **기존 회원 계정 마이그레이션**: games 자체 인증(email/pw, `users` 테이블)을 폐기하고 중앙 identity 로 옮길 때, **기존 games 회원 계정을 어떻게 이관/통합할지** 계약 필요 — 이메일 충돌·중복 식별자 매핑·재인증/재가입 정책·기존 학습데이터 귀속 유지. (계정 데이터 실재 여부는 §B3 확인 TODO 와 연동 — 데이터 있으면 마이그레이션, 없으면 신규.)
 - **계정 product-격리 + 환경 격리**: `.pullim.ai` 쿠키 공유 ≠ cross-product 계정 통합. ⒜ **product**: games 전용 세션 namespace/audience 격리(§A — `games`·`games-arcade` 완전 독립 계정 유지). ⒝ **환경**: dev/prod 쿠키·세션 스코프 분리(`dev-games↔dev-api` / `games↔api`)로 환경 간 세션 누수 차단.
@@ -26,7 +26,7 @@ pullim-games 가 자체 인증·학습데이터 BE 를 폐기하고 **pullim-api
 ## A. 인증 연동 — **same-site `.pullim.ai` 컨슈머 계약** (games.pullim.ai ↔ api.pullim.ai)
 
 games 는 별도 신규 인증 메커니즘이 **불필요** — 부모도메인 `.pullim.ai` 공유에 기반한 컨슈머 **계약**을 채택한다(메커니즘은 pullim-api 가 이미 소유):
-- **same-site `.pullim.ai` 쿠키 + CSRF (Domain 스코프·격리 계약 전제)**: games(`games.pullim.ai`/`dev-games.pullim.ai`) ↔ pullim-api(`api.pullim.ai`/`dev-api.pullim.ai`) 동일 부모도메인이라 쿠키 전송 공유 **가능** — 단 자동이 아니라 **`Domain=.pullim.ai` 명시 set** + cross-subdomain CSRF 성립 계약이 전제(아래 [P0 설계 TODO] 쿠키 Domain·CSRF 항목). **⚠️ 이 쿠키 공유는 전송 편의일 뿐 cross-product 계정 통합이 아니다** — spec/05 §5.2 가 `games`·`games-arcade` 등 **완전 독립 계정**을 요구하므로, **[계약 필요] games 전용 세션 namespace/audience 격리 규칙**(예: 토큰 audience=`games`, product-scoped 세션)을 명시해 sibling 서비스가 같은 세션을 재사용(묵시적 계정 통합)하지 못하게 한다. "어디까지 공유(전송)·어디서 격리(계정/audience)"를 계약화.
+- **same-site `.pullim.ai` 쿠키 + CSRF (Domain 스코프·격리 계약 전제)**: games(`games.pullim.ai`/`dev-games.pullim.ai`) ↔ pullim-api(`api.pullim.ai`/`dev-api.pullim.ai`) 동일 부모도메인이라 쿠키 전송 공유 **가능** — 단 자동이 아니며, **쿠키 Domain 스코프(공유↔sibling 격리 긴장) + cross-subdomain CSRF 성립 계약**이 먼저 풀려야 한다(아래 [P0 설계 TODO] 쿠키 Domain·CSRF 항목 — `Domain=.pullim.ai` 를 답으로 단정하지 않음). **⚠️ 이 쿠키 공유는 전송 편의일 뿐 cross-product 계정 통합이 아니다** — spec/05 §5.2 가 `games`·`games-arcade` 등 **완전 독립 계정**을 요구하므로, **[계약 필요] games 전용 세션 namespace/audience 격리 규칙**(예: 토큰 audience=`games`, product-scoped 세션)을 명시해 sibling 서비스가 같은 세션을 재사용(묵시적 계정 통합)하지 못하게 한다. "어디까지 공유(전송)·어디서 격리(계정/audience)"를 계약화.
 - FE 가 pullim-api `/auth/*`(login/signup/me/logout/refresh/csrf) 를 **직접 호출**(`credentials: include`). env `NEXT_PUBLIC_API_BASE_URL`(dev=`https://dev-api.pullim.ai`, prod=`https://api.pullim.ai`).
 - games 측 **얇은 proxy/middleware** 가 보호 라우트 진입 게이팅. **회원·게스트 두 진입을 분리**해 판별한다(spec/05 §5.2 게스트 우선 — 게스트도 보호 라우트 통과해야 함):
   - **회원 게이트**: pullim-api 세션 쿠키 → introspection(쿠키 1차 필터 후 pullim-api 확인). 풀 요청 프록시 아님.
@@ -62,8 +62,8 @@ games 의 현행 스키마/동기화 모델을 이식. **증분 동기화**: 각
 
 | 동작 | 메서드/경로(제안) | 설명 |
 |---|---|---|
-| push (upsert) | `POST /games/sync` | srs/streak/activity/custom 변경분 배치 upsert, **서버 updated_at 기준 LWW**(클라가 더 옛것이면 무시) |
-| pull (증분) | `GET /games/sync?since=<updated_at>` | `since` 이후 변경 레코드 반환(증분). srs/streak/activity/custom 전 영역 |
+| push (upsert) | `POST /games/sync` | srs/streak/activity/custom 변경분 배치 upsert, **`client_updated_at`/revision 토큰 기반 LWW**. ⚠️ 서버 `updated_at` **단독으로는** 오프라인 기기 A/B 중 최신 판별 불가(늦게 도착한 옛 payload 가 최신 덮어쓰는 경쟁) — push payload 에 `client_updated_at`(또는 base revision) **포함이 계약**(토큰 모델은 [P0 설계 TODO] 동시성 항목에서 확정) |
+| pull (증분) | `GET /games/sync?cursor=<opaque>` | 증분 변경 레코드 반환. ⚠️ 단일 `since=<updated_at>` 는 같은 ms 다중 레코드 배치에서 경계 충돌로 row 누락 가능 → **`(updated_at, stable_id)` tie-breaker 또는 opaque `next_cursor`** 가 계약(4개 엔티티 동시 반환이라 더 중요). srs/streak/activity/custom 전 영역 |
 | cleanup(cron) | (내부 스케줄) activity_log `date < cutoff(14일)` 삭제 | games 의 `/api/sync/cleanup` cron 대체 — pullim-api 스케줄러로 |
 
 - 단일 `POST/GET /games/sync` 통합 vs 영역별 분리는 pullim-api 컨벤션 따름. 핵심은 **LWW + 증분 커서 + device_id** 보존.
