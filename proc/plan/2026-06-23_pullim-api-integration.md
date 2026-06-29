@@ -32,6 +32,7 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 
 - **pullim-api** 소유: 인증(발급/검증/세션·CSRF), 학습데이터(srs·streak·activity·custom), DB.
 - **pullim-games** 소유: FE(21게임·UI) + **얇은 proxy**(라우트 게이팅·introspection — 쿠키 1차 필터 후 pullim-api introspection, 풀 요청 프록시 아님). **DB·인증로직·학습로직 미보유.** FE 는 pullim-api 를 `NEXT_PUBLIC_API_BASE_URL` 로 직접 호출.
+- **⚠️ 계정 product-격리 [계약 필요]**: `.pullim.ai` 공유 쿠키는 **전송 편의일 뿐 cross-product 세션/계정 통합이 아니다.** spec/05 §5.2 가 `games`·`games-arcade` 완전 독립 계정을 요구 → games 전용 **세션 namespace/audience 격리**(토큰 audience=`games` 등)를 못 박아 sibling 서비스가 같은 세션 재사용(묵시적 계정 통합)하지 못하게 한다. 선행 spec 개정에도 이 격리 규칙은 유지.
 
 (행동 계약은 본 문서 안에서 독립적으로 서술한다 — 타 풀림 프로젝트의 코드·파일 경로 참조 금지(CLAUDE.md §4). same-site 쿠키 SSO·introspection 게이트는 부모도메인 `.pullim.ai` 공유라는 **계약**이지 특정 레포 파일이 근거가 아니다.)
 
@@ -69,7 +70,7 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 ## 5. 설계 — **same-site `.pullim.ai` 컨슈머 계약** (신규 설계 최소)
 
 1. **세션·쿠키**: same-site `.pullim.ai` 쿠키 SSO + CSRF — **발급·검증은 pullim-api 가 단독 소유**. games 는 `NEXT_PUBLIC_API_BASE_URL`(dev/api.pullim.ai)로 pullim-api `/auth/*` 직접 호출(`credentials:include`). **games 로컬 세션 저장·검증 없음** (중앙 위임). (이 계약의 정당성은 games spec/contract + pullim-api 계약으로만 선다 — 타 풀림 프로젝트를 근거로 들지 않는다.)
-2. **얇은 proxy**: 보호 라우트 진입 게이팅만(풀 요청 프록시 아님). **회원·게스트 2 게이트 분리**(spec/05 §5.2 게스트 우선) — ⒜ 회원: 세션 쿠키 → pullim-api introspection, ⒝ 게스트: `pullim_games_guest` 쿠키(서버 가시) 존재로 진입 허용(게스트 학습데이터=localStorage라 introspection 불요). **회원 introspection 만으로 게이팅하면 게스트 `/home`·게임 플레이가 막히는 회귀** → P2 에서 게스트 게이트 반드시 유지. CSRF/same-origin 보조 가드는 필요 최소만.
+2. **얇은 proxy**: 보호 라우트 진입 게이팅만(풀 요청 프록시 아님). **회원·게스트 2 게이트 분리**(spec/05 §5.2 게스트 우선) — ⒜ 회원: 세션 쿠키 → pullim-api introspection, ⒝ 게스트: 진입 허용하되 **쿠키 존재만으로는 불가 [계약 필요]** — devtools 로 `pullim_games_guest` 만 심어 검증된 게스트 프로필(닉네임+학년+동의) 없이 우회하는 걸 막기 위해, **서버가 검증된 게스트 프로필 생성을 판별 가능한 서명 토큰/쿠키**를 게이트 요건으로 정의(게스트 학습데이터=localStorage라 데이터 introspection 은 불요지만 게이트는 서명 검증). **회원 게이트만 두면 게스트 `/home`·플레이 회귀** → P2 에서 게스트 서명 게이트 필수. CSRF/same-origin 보조 가드는 필요 최소만.
 3. **데이터 마이그레이션 [확인 TODO]**: 운영 `DATABASE_URL` 미설정처럼 보이나 **prod 데이터 0 은 단정 금지** — 실제 운영 DB 상태를 먼저 확인한다. spec/05 §5.2 가 계정 학습데이터 games Postgres 영속을 권위 정책으로 유지하므로, 데이터 부재 확인 후에만 클린 컷오버; 데이터가 있으면 마이그레이션 계획.
 4. **확인 필요(축소)**: ① games authz scope(authz-matrix), ② `/games/me` introspection vs `/auth/me` 재사용, ③ 게스트 흐름 vs dev KCB 강제 — **핸드오프 §A** 참조.
 
