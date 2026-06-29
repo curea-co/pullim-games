@@ -19,7 +19,7 @@ games 는 별도 신규 인증 메커니즘이 **불필요** — 부모도메인
 - FE 가 pullim-api `/auth/*`(login/signup/me/logout/refresh/csrf) 를 **직접 호출**(`credentials: include`). env `NEXT_PUBLIC_API_BASE_URL`(dev=`https://dev-api.pullim.ai`, prod=`https://api.pullim.ai`).
 - games 측 **얇은 proxy/middleware** 가 보호 라우트 진입 게이팅. **회원·게스트 두 진입을 분리**해 판별한다(spec/05 §5.2 게스트 우선 — 게스트도 보호 라우트 통과해야 함):
   - **회원 게이트**: pullim-api 세션 쿠키 → introspection(쿠키 1차 필터 후 pullim-api 확인). 풀 요청 프록시 아님.
-  - **게스트 게이트 [계약 필요 — 단순 플래그 금지]**: 회원 introspection 만으로 게이팅하면 게스트 `/home`·게임 플레이가 막히므로 게스트 경로를 별도 유지하되, **쿠키 "존재"만으로 통과시키면 안 된다** — devtools 로 `pullim_games_guest` 만 심어 검증된 게스트 프로필(spec/05 §5.2: 닉네임+학년+만14세 자가확인) 없이 진입하는 우회가 생긴다. 따라서 **서버가 "검증된 게스트 프로필이 실제 생성됐음"을 판별 가능한 서명 토큰/쿠키 계약**(예: 게스트 프로필 생성 시 발급되는 서명된 게스트 토큰)을 정의한다. 게스트 학습데이터 자체는 localStorage(클라) 보관이라 introspection 불요지만, 게이트 통과 요건은 서명 검증이어야 한다.
+  - **게스트 게이트 — local-only 유지(spec/05 §5.2/§5.6)**: 게스트 프로필(닉네임+학년+만14세 자가확인)은 **localStorage 전용·서버 전송 0**이 현행 권위 정책이다. 따라서 게스트 게이트는 **`pullim_games_guest` 쿠키(non-HttpOnly, 클라가 프로필 생성 시 set) 존재로 라우트 렌더 허용** + **실제 신원 검증은 클라(`getPlayer` 가 localStorage 프로필 확인)** 가 한다. 이 게이트가 가벼운 건 의도된 것 — **게스트는 서버 측 보호 리소스가 0**(학습데이터 전부 로컬)이라 쿠키만 심어 진입해도 노출될 타인 데이터가 없고, 무프로필이면 클라가 온보딩으로 되돌린다. ⚠️ **서버 서명 토큰 같은 강한 게이트는 도입하지 않는다** — 그건 게스트 신원을 서버로 전송/종속시켜 §5.2(local-only)·§5.6(서버 미전송)을 깨고 게스트 진입을 서버 가용성에 묶는 회귀다. **더 강한 게스트 검증이 필요하면 그건 별도 선행 spec 개정 사안**(§5.2 local-only 정책 변경)으로 승격해 결정.
 
 → 즉 **인증 메커니즘(쿠키·CSRF·발급/검증)은 pullim-api 가 단독 소유**. games 가 pullim-api 에 **추가로 필요한 것**은:
 1. **games authz scope** — games 사용자(학생)가 *자기* 학습데이터에만 접근하는 user-scoped 인가 (authz-matrix 에 games 추가).
