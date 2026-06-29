@@ -90,7 +90,7 @@
 
 | 상황 | 명령 |
 |---|---|
-| 개발 (dev) | `bun dev` → http://localhost:**3004** (풀림 로컬 포트 SoT: pullim-api `.claude/rules/local-ports.md` — games=3004. 옛 3033 cutover 2026-06-29) |
+| 개발 (dev) | `bun dev` → http://localhost:**3004** (풀림 로컬 포트 SoT: pullim-api `.claude/rules/local-ports.md` — games=3004. 옛 3033 → 3004 cutover 2026-06-29) |
 | 정적 검증 | `bun run typecheck && bun run lint` (루트 turbo — 앱 tsconfig 은 apps/games) |
 | 빌드 | `bun run build` (predev/prebuild에서 `gen:registry` 자동 실행) |
 | 단위 테스트 | `bun test` (vitest) |
