@@ -2,11 +2,19 @@
 
 **작성일**: 2026-06-23
 **From**: pullim-games (G1 방향 제안 — 인증·학습데이터를 pullim-api 로 위임하는 **제안**)
-**To**: pullim-api (`src/games/` 모듈 — 현재 authz-sample·health 스켈레톤)
+**To**: pullim-api `games` 모듈 (논리 단위 — 구체 경로는 pullim-api repo 관할)
 **상태**: HANDOFF DRAFT — **확정 계약 아님.** 선행 spec 개정 후 pullim-api 측 plan/ADR 로 수용 검토 요청
 **연계**: pullim-games `proc/plan/2026-06-23_pullim-api-integration.md`
 
 > ⚠️ **이 핸드오프는 미승인 제안이다 (확정 계약으로 받지 말 것)**: pullim-games 의 현행 권위 spec `proc/spec/05 §5.2` 는 games 계정·학습데이터가 **완전 독립**(games 전용 Postgres)이라고 아직 못 박고 있다. 아래 "위임" 방향은 그 전제를 뒤집으므로, **pullim-games 가 먼저 spec/05 §5.2 를 개정(G1/G3/G4 합의)** 해야 본 위임이 확정된다(spec 우선 — spec/01 §2 · CLAUDE.md §9). spec 미개정 상태에서 pullim-api 가 본 문서를 확정 작업지시로 착수하지 말 것 — 계약 합의 후 진행.
+
+> 🎯 **문서 범위 — 고수준 방향·요구만**: 본 핸드오프는 *무엇을 위임하고 무엇이 필요한지*(방향+요구사항)를 전한다. **세부 구현 계약은 단독 명세하지 않는다** — 아래 [P0 설계 TODO] 항목(CORS, 동기화 동시성, 세션 격리, 게스트 게이트 등)은 **통합 실제 착수(P0 설계) 시 pullim-api 와 공동 확정**한다. 미착수 통합의 세부를 지금 단정하면 양 repo 가 stale·불일치 위험. 아래 스펙은 **합의 출발점**이지 최종 계약이 아니다.
+
+### [P0 설계 TODO] — 착수 시 pullim-api 공동 확정 (지금 단독 명세 X)
+- **CORS 계약**: 브라우저가 `api.pullim.ai` 를 `credentials:include` 로 직접 호출하므로 pullim-api CORS allowlist(games 오리진)·허용 헤더/메서드·preflight 계약 필요(same-site 쿠키만으로 cross-origin fetch 안 열림). 미정의 시 dev/prod 에서 로그인·sync 차단.
+- **동기화 동시성**: 오프라인 다기기 LWW 가 서버 `updated_at` 만으로는 늦게 도착한 옛 payload 가 최신을 덮어쓰는 경쟁이 남음 → push payload 에 `client_updated_at`(또는 base revision) 포함 규약 필요. 증분 pull 커서도 `since=<updated_at>` 단일값은 동일 ms 배치에서 경계 누락 → `(updated_at, stable_id)` tie-breaker 또는 opaque `next_cursor` 필요.
+- **계정 product-격리**: `.pullim.ai` 쿠키 공유 ≠ cross-product 계정 통합. games 전용 세션 namespace/audience 격리 규칙(§A 참조).
+- **게스트 게이트**: games 기존 local-only 동작 유지(본 통합 범위 밖, §A). 게스트 모델 변경은 별도 spec/05 개정 사안.
 
 pullim-games 가 자체 인증·학습데이터 BE 를 폐기하고 **pullim-api 로 위임하는 방향을 제안**한다 (games = FE + 얇은 라우트-게이팅 proxy, 인증/데이터 프록시 아님). 확정 시 pullim-api `games` 모듈이 아래를 제공하면 games **FE 가 pullim-api 를 직접 호출**한다.
 
@@ -55,7 +63,8 @@ games 의 현행 스키마/동기화 모델을 이식. **증분 동기화**: 각
 | pull (증분) | `GET /games/sync?since=<updated_at>` | `since` 이후 변경 레코드 반환(증분). srs/streak/activity/custom 전 영역 |
 | cleanup(cron) | (내부 스케줄) activity_log `date < cutoff(14일)` 삭제 | games 의 `/api/sync/cleanup` cron 대체 — pullim-api 스케줄러로 |
 
-- 단일 `POST/GET /games/sync` 통합 vs 영역별 분리는 pullim-api 컨벤션 따름. 핵심은 **LWW + updated_at 커서 + device_id** 보존.
+- 단일 `POST/GET /games/sync` 통합 vs 영역별 분리는 pullim-api 컨벤션 따름. 핵심은 **LWW + 증분 커서 + device_id** 보존.
+- ⚠️ **위 LWW·`since` 커서는 출발점 — 동시성 세부는 단독 명세 X**: 다기기 경쟁(client_updated_at/revision)·커서 tie-breaker(`(updated_at, stable_id)`/opaque cursor)는 상단 **[P0 설계 TODO]** 로 착수 시 pullim-api 공동 확정. 현 표는 데이터 모델·방향 전달용.
 - 현행 games 동작 참조: `pullim-games` `apps/games/lib/server/learning/*` + `apps/games/app/api/sync/route.ts`.
 
 ### B3. 데이터 마이그레이션
