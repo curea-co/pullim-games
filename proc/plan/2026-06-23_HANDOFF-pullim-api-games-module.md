@@ -25,7 +25,7 @@ pullim-games 가 자체 인증·학습데이터 BE 를 폐기하고 **pullim-api
 
 ## A. 인증 연동 — **same-site `.pullim.ai` 컨슈머 계약** (games.pullim.ai ↔ api.pullim.ai)
 
-games 는 별도 신규 인증 메커니즘이 **불필요** — 부모도메인 `.pullim.ai` 공유에 기반한 컨슈머 **계약**을 채택한다(메커니즘은 pullim-api 가 이미 소유):
+games 는 별도 신규 인증 메커니즘을 **두지 않고**, 부모도메인 `.pullim.ai` 공유에 기반한 컨슈머 **계약**을 채택한다(인증 메커니즘 보유·형태는 pullim-api 관할 — 본 문서는 games 가 무엇을 요청·전제하는지만 기술):
 - **same-site `.pullim.ai` 쿠키 + CSRF (Domain 스코프·격리 계약 전제)**: games(`games.pullim.ai`/`dev-games.pullim.ai`) ↔ pullim-api(`api.pullim.ai`/`dev-api.pullim.ai`) 동일 부모도메인이라 쿠키 전송 공유 **가능** — 단 자동이 아니며, **쿠키 Domain 스코프(공유↔sibling 격리 긴장) + cross-subdomain CSRF 성립 계약**이 먼저 풀려야 한다(아래 [P0 설계 TODO] 쿠키 Domain·CSRF 항목 — `Domain=.pullim.ai` 를 답으로 단정하지 않음). **⚠️ 이 쿠키 공유는 전송 편의일 뿐 cross-product 계정 통합이 아니다** — spec/05 §5.2 가 `games`·`games-arcade` 등 **완전 독립 계정**을 요구하므로, sibling 서비스가 같은 세션을 재사용(묵시적 계정 통합)하지 못하게 막아야 한다. **단 세션 audience 격리만으로 "완전 독립 계정"이 충족되는지는 단정 금지** — audience 는 세션 토큰 격리일 뿐이고, 계정 레코드(식별자·프로필·자격) 분리까지 요구되는지는 [P0 설계 TODO] product-격리 항목에서 중앙 identity 단위(공유 identity+scope / product 별 독립 레코드 / cross-product 링크)를 계약으로 결정한다. "어디까지 공유(전송)·어디서 격리(세션 audience / 계정 레코드)"를 계약화.
 - FE 가 pullim-api `/auth/*`(login/signup/me/logout/refresh/csrf) 를 **직접 호출**(`credentials: include`). env `NEXT_PUBLIC_API_BASE_URL` — **로컬**=pullim-api 로컬(예 `http://localhost:<api-port>`, games dev 는 `localhost:3004`), **dev**=`https://dev-api.pullim.ai`, **prod**=`https://api.pullim.ai`. ⚠️ **로컬 주의(별도 인증 스킴은 불필요)**: 쿠키는 **포트를 무시하고 host 기준**이라 `localhost:3004`(games)↔`localhost:<api>`(api)는 **같은 host `localhost` 로 쿠키가 그대로 공유**된다(Domain 없는 host-only 쿠키면 충분 — 별도 로컬 쿠키 스킴 설계 불필요). 다만 **origin 은 포트 포함**이라 fetch 는 cross-origin → ⒜ CORS allowlist 에 `http://localhost:3004` 명시, ⒝ http 환경이라 쿠키 **`Secure` 플래그 off**(`Secure` 면 http 로컬에서 set 안 됨), ⒞ `SameSite=Lax`(localhost 동일 site) 가 필요. 이 CORS/Secure 처리가 빠지면 로컬 로그인·sync 가 막힌다(쿠키 "공유 불가" 때문이 아님).
 - games 측 **얇은 proxy/middleware** 가 보호 라우트 진입 게이팅. **회원·게스트 두 진입을 분리**해 판별한다(spec/05 §5.2 게스트 우선 — 게스트도 보호 라우트 통과해야 함):
@@ -85,7 +85,7 @@ games 의 **현행 sync 정본 설계를 그대로 이식**(아래는 신규 모
 - 게이팅 proxy·세션쿠키·CSRF/same-origin 1차 가드 — games.
 - FSRS 알고리즘 자체는 games(클라) — pullim-api 는 `fsrs_card` JSON 을 불투명 저장.
 
-## D. pullim-api 측 진행 (해당 repo 거버넌스)
-- `feature → dev → main`, PR-only, ADR/authz-matrix 갱신.
-- games 모듈: 현 스켈레톤 → 위 학습데이터 모듈 배선.
+## D. pullim-api 측 진행 (해당 repo 관할)
+- 수용 여부·구현·운영 방식(브랜치/ADR/authz 등)은 **pullim-api 자체 거버넌스에 따른다** — 본 문서가 외부 repo 운영을 규정하지 않는다.
+- games 가 요청하는 것: 위 §A·§B 의 학습데이터 엔드포인트 + authz 게이트 제공(내부 구조·현 구현 상태는 pullim-api 관할).
 - 완료 시 games 에 **엔드포인트 계약(경로·요청/응답·인증 헤더/쿠키)** 회신 → games 직접호출 연동 구현(P2/P3).

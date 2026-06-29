@@ -56,18 +56,18 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 - FE 전부 유지.
 
 ### 보류 (G1, 2026-06-23 — 이번 범위 밖)
-- `apps/games/app/api/billing/notify*` + `apps/games/lib/server/billing/*` (Resend) — **보류.** pullim-api 에 `billing` 도메인 + toss_payments 가 *언급*(dev API docs `dev-api.pullim.ai/api-docs`)되나 구현·운영 불명. 결제 통합은 별 트랙.
+- `apps/games/app/api/billing/notify*` + `apps/games/lib/server/billing/*` (Resend) — **보류.** 결제 통합은 본 통합 범위 밖(별 트랙) — games 측 결제 관련 라우트/로직은 이번에 손대지 않는다. (pullim-api 의 결제 도메인 보유·운영 여부는 외부 repo 사실이라 본 문서에 고정하지 않음.)
 - `apps/games/app/api/event` — **보류** (billing 과 함께 추후 판단).
 
 ## 4. pullim-api 변경 (별 repo — **핸드오프 문서로 전달**)
 
-> 사용자(G1) 결정: pullim-api 측은 claude 가 직접 코딩하지 않고 **핸드오프 문서**로 넘긴다 → **[`2026-06-23_HANDOFF-pullim-api-games-module.md`](./2026-06-23_HANDOFF-pullim-api-games-module.md)**. pullim-api 자체 거버넌스(AGENTS, ADR, `feature → dev → main`)로 수용·진행.
+> 사용자(G1) 결정: pullim-api 측은 claude 가 직접 코딩하지 않고 **핸드오프 문서**로 넘긴다 → **[`2026-06-23_HANDOFF-pullim-api-games-module.md`](./2026-06-23_HANDOFF-pullim-api-games-module.md)**. pullim-api 측 수용·진행은 **해당 repo 자체 거버넌스에 따른다**(구체 운영 방식은 pullim-api 관할 — 본 문서에 고정하지 않음).
 
 - pullim-api **`games` 모듈**(논리 단위 — 구체 위치·구조는 pullim-api repo 관할)에 **학습데이터 엔드포인트** 신설:
   - srs state sync(upsert/조회), streak, activity log(+retention cleanup), custom content
   - 중앙 인증 authz 게이트 적용
 - 데이터 모델: games 의 `srs_states`·`streaks`·`activity_log`·`custom_content` 스키마를 pullim-api 데이터 모델로 이식
-- 인증: 기존 login/session/oauth 재사용 — games 전용 신규 인증 불필요(중앙)
+- 인증: games 는 **전용 신규 인증 메커니즘을 요구하지 않는다** — 중앙 인증 재사용을 요청(중앙이 제공하는 인증 수단의 존재·형태는 pullim-api 회신 사안, 본 문서에 단정 X)
 
 ## 5. 설계 — **same-site `.pullim.ai` 컨슈머 계약** (신규 설계 최소)
 
