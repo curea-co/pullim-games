@@ -94,7 +94,7 @@ bunx vercel --prod    # 수동 배포 (fallback)
 |---|---|---|
 | origin | 독립 프로젝트 | `pullim-study-demo` 추출본 |
 | Next.js | 15 | 16 |
-| 포트 | 3004 | 3030 |
+| 포트 (local) | 3004 (`proc/spec/09 §9.1`) | 각 repo 관할 |
 | 권위 문서 | `proc/spec/01~10` | `input/docs-archive/*.md` |
 | proc 5번째 폴더 | `audit/` | `knowhow/` |
 
