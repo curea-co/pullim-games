@@ -11,7 +11,7 @@ import { POST } from "./route";
 import { destroySession } from "@/lib/server/auth/session";
 import { authCsrf } from "@/lib/server/auth/csrf";
 
-const ORIGIN = "http://localhost:3033";
+const ORIGIN = "http://localhost:3004";
 
 function makeReq(opts: { origin?: boolean; csrf?: boolean } = {}): Request {
   const { token } = authCsrf.issue();

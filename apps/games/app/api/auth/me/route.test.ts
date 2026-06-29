@@ -20,7 +20,7 @@ import {
 } from "@/lib/server/auth/session";
 
 function req(cookie?: string): Request {
-  return new Request("http://localhost:3033/api/auth/me", {
+  return new Request("http://localhost:3004/api/auth/me", {
     headers: cookie ? { cookie } : {},
   });
 }

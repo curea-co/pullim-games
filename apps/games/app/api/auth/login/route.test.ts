@@ -27,7 +27,7 @@ import { verifyPasswordConstantTime } from "@/lib/server/auth/password";
 import { authCsrf } from "@/lib/server/auth/csrf";
 import { resetRateLimitForTests } from "@/lib/server/rate-limit";
 
-const ORIGIN = "http://localhost:3033";
+const ORIGIN = "http://localhost:3004";
 
 function makeReq(body: unknown, opts: { origin?: boolean; csrf?: boolean } = {}): Request {
   const { token } = authCsrf.issue();

@@ -90,7 +90,7 @@
 
 | 상황 | 명령 |
 |---|---|
-| 개발 (dev) | `bun dev` → http://localhost:**3033** (다른 풀림은 3030, games만 3033) |
+| 개발 (dev) | `bun dev` → http://localhost:**3004** (풀림 로컬 포트 SoT: pullim-api `.claude/rules/local-ports.md` — games=3004. 옛 3033 cutover 2026-06-29) |
 | 정적 검증 | `bun run typecheck && bun run lint` (루트 turbo — 앱 tsconfig 은 apps/games) |
 | 빌드 | `bun run build` (predev/prebuild에서 `gen:registry` 자동 실행) |
 | 단위 테스트 | `bun test` (vitest) |
@@ -117,7 +117,7 @@ proc/
 |---|---|---|
 | origin | 독립 프로젝트 | `pullim-study-demo` 추출본 |
 | Next.js | 15 | 16 |
-| 포트 | 3033 | 3030 |
+| 포트 (local) | 3004 (풀림 포트 SoT) | planner 3006 등 |
 | 권위 문서 | `proc/spec/01~10` | `input/docs-archive/*.md` |
 | proc 5번째 | `audit/` | `knowhow/` |
 | 운영 규칙 | `.pullim-meta/CONVENTION.md` | `.pullim-meta/CONVENTION.md` |
