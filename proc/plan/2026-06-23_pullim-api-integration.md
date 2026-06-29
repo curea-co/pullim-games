@@ -33,7 +33,7 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 - **pullim-api** 소유: 인증(발급/검증/세션·CSRF), 학습데이터(srs·streak·activity·custom), DB.
 - **pullim-games** 소유: FE(21게임·UI) + **얇은 proxy**(라우트 게이팅·introspection — 쿠키 1차 필터 후 pullim-api introspection, 풀 요청 프록시 아님). **DB·인증로직·학습로직 미보유.** FE 는 pullim-api 를 `NEXT_PUBLIC_API_BASE_URL` 로 직접 호출.
 
-(행동 계약은 본 문서 안에서 독립적으로 서술한다 — 타 풀림 프로젝트(planner/Q)의 코드·파일 경로 참조 금지(CLAUDE.md §4). same-site 쿠키 SSO·introspection 게이트는 부모도메인 `.pullim.ai` 공유라는 **계약**이지 특정 레포 파일이 근거가 아니다.)
+(행동 계약은 본 문서 안에서 독립적으로 서술한다 — 타 풀림 프로젝트의 코드·파일 경로 참조 금지(CLAUDE.md §4). same-site 쿠키 SSO·introspection 게이트는 부모도메인 `.pullim.ai` 공유라는 **계약**이지 특정 레포 파일이 근거가 아니다.)
 
 ## 3. pullim-games 변경
 
@@ -66,9 +66,9 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 - 데이터 모델: games 의 `srs_states`·`streaks`·`activity_log`·`custom_content` 스키마를 pullim-api `data-model` 로 이식
 - 인증: 기존 login/session/oauth 재사용 — games 전용 신규 인증 불필요(중앙)
 
-## 5. BFF 설계 — **planner/Q 패턴 채택** (신규 설계 최소)
+## 5. 설계 — **same-site `.pullim.ai` 컨슈머 계약** (신규 설계 최소)
 
-1. **세션·쿠키**: same-site `.pullim.ai` 쿠키 SSO + CSRF (pullim-api 가 발급·검증, planner/Q 동작 중). games 는 `NEXT_PUBLIC_API_BASE_URL`(dev/api.pullim.ai)로 pullim-api `/auth/*` 직접 호출(`credentials:include`). **games 로컬 세션 저장·검증 없음** (중앙 위임).
+1. **세션·쿠키**: same-site `.pullim.ai` 쿠키 SSO + CSRF — **발급·검증은 pullim-api 가 단독 소유**. games 는 `NEXT_PUBLIC_API_BASE_URL`(dev/api.pullim.ai)로 pullim-api `/auth/*` 직접 호출(`credentials:include`). **games 로컬 세션 저장·검증 없음** (중앙 위임). (이 계약의 정당성은 games spec/contract + pullim-api 계약으로만 선다 — 타 풀림 프로젝트를 근거로 들지 않는다.)
 2. **얇은 proxy**: 보호 라우트 진입 게이팅만 — 쿠키 1차 필터 후 pullim-api introspection 으로 신원 확인. 풀 요청 프록시 아님. CSRF/same-origin 보조 가드는 필요 최소만.
 3. **데이터 마이그레이션**: games DB env 미설정 = **prod 데이터 없음 → 클린 컷오버**(이행 0). 배포 전 재확인.
 4. **확인 필요(축소)**: ① games authz scope(authz-matrix), ② `/games/me` introspection vs `/auth/me` 재사용, ③ 게스트 흐름 vs dev KCB 강제 — **핸드오프 §A** 참조.

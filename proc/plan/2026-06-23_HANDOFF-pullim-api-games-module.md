@@ -1,12 +1,14 @@
 # 핸드오프 → pullim-api: games 모듈 (인증 연동 + 학습데이터 API)
 
 **작성일**: 2026-06-23
-**From**: pullim-games (G1 결정 — 인증·학습데이터를 pullim-api 로 위임)
+**From**: pullim-games (G1 방향 제안 — 인증·학습데이터를 pullim-api 로 위임하는 **제안**)
 **To**: pullim-api (`src/games/` 모듈 — 현재 authz-sample·health 스켈레톤)
-**상태**: HANDOFF DRAFT — pullim-api 측 plan/ADR 로 수용해 진행 요청
+**상태**: HANDOFF DRAFT — **확정 계약 아님.** 선행 spec 개정 후 pullim-api 측 plan/ADR 로 수용 검토 요청
 **연계**: pullim-games `proc/plan/2026-06-23_pullim-api-integration.md`
 
-pullim-games 가 자체 인증·학습데이터 BE 를 폐기하고 **pullim-api 로 위임**한다 (games = FE + 얇은 BFF). pullim-api `games` 모듈이 아래를 제공해야 games BFF 가 프록시할 수 있다.
+> ⚠️ **이 핸드오프는 미승인 제안이다 (확정 계약으로 받지 말 것)**: pullim-games 의 현행 권위 spec `proc/spec/05 §5.2` 는 games 계정·학습데이터가 **완전 독립**(games 전용 Postgres)이라고 아직 못 박고 있다. 아래 "위임" 방향은 그 전제를 뒤집으므로, **pullim-games 가 먼저 spec/05 §5.2 를 개정(G1/G3/G4 합의)** 해야 본 위임이 확정된다(spec 우선 — spec/01 §2 · CLAUDE.md §9). spec 미개정 상태에서 pullim-api 가 본 문서를 확정 작업지시로 착수하지 말 것 — 계약 합의 후 진행.
+
+pullim-games 가 자체 인증·학습데이터 BE 를 폐기하고 **pullim-api 로 위임하는 방향을 제안**한다 (games = FE + 얇은 라우트-게이팅 proxy, 인증/데이터 프록시 아님). 확정 시 pullim-api `games` 모듈이 아래를 제공하면 games **FE 가 pullim-api 를 직접 호출**한다.
 
 ---
 
@@ -23,7 +25,7 @@ games 는 별도 신규 인증 메커니즘이 **불필요** — 부모도메인
 3. games 가 가입 권위(signup·KCB 본인인증)를 중앙에 위임하는지 — games 는 **게스트 우선**이라 가입 강제 X. dev KCB 강제 정책이 games 게스트 흐름과 충돌하지 않는지 확인.
 4. **회원 프로필에 `grade`(중1~고3) 필드** — games 가 가입 시 학년 수집(중·고등 타겟). games-local `users.grade` 를 중앙 위임 시 pullim-api 회원 프로필로 이관. (games=플랫폼 `games` 패키지·서비스, `junior`(초등 주니어) 아님 — 학령 혼선 방지.)
 
-(상세 계약은 pullim-api 자체 권위 문서(`docs/design/_platform/api.md`·`authz-matrix.md`)가 소유 — 타 풀림 프로젝트(planner/Q) 코드 경로는 본 핸드오프에서 참조하지 않는다(games 독립성 규칙, CLAUDE.md §4).)
+(상세 계약은 pullim-api 자체 권위 문서(`docs/design/_platform/api.md`·`authz-matrix.md`)가 소유 — 타 풀림 프로젝트 코드 경로는 본 핸드오프에서 참조하지 않는다(games 독립성 규칙, CLAUDE.md §4).)
 
 ---
 
