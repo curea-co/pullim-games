@@ -14,7 +14,7 @@
 - **CORS 계약**: 브라우저가 `api.pullim.ai` 를 `credentials:include` 로 직접 호출하므로 pullim-api CORS allowlist(`games.pullim.ai`·`dev-games.pullim.ai` 오리진 명시 허용)·허용 헤더/메서드·preflight 계약 필요(same-site 쿠키만으로 cross-origin fetch 안 열림). 미정의 시 dev/prod 에서 정본 직접호출 경로가 브라우저에서 바로 차단.
 - **쿠키 Domain 스코프 — 공유 vs 격리 긴장(미해결 계약)**: "부모도메인 동일 → 쿠키 자동 공유"는 **틀림**(자동 아님). 그렇다고 단순히 `Domain=.pullim.ai` 로 넓히면 **games↔api 뿐 아니라 `planner.pullim.ai`·`q.pullim.ai` 등 sibling 전부가 같은 세션 쿠키를 읽어** spec/05 §5.2 독립 계정·세션 격리가 **붕괴**한다(= 본문이 짚은 "세션 격리 붕괴"). 따라서 `Domain=.pullim.ai` 를 답으로 단정하지 않는다 — **계약으로 풀어야 할 긴장**: ⒜ host-scoped(좁은) 쿠키 + games 가 토큰을 명시 전송, ⒝ Domain 은 넓히되 **audience=`games` 스코프**로 sibling 이 읽어도 재사용 불가, ⒞ product 별 쿠키 네임스페이스 — 중 무엇으로 "games↔api 직접호출 인증은 되되 sibling 누수는 없게" 할지 pullim-api 와 확정. Domain·`Secure`·`SameSite`(cross-subdomain) 까지 묶어 계약(아래 product/환경 격리 항목과 연동).
 - **CSRF cross-subdomain**: 현 games 의 **double-submit CSRF** 패턴이 `games.pullim.ai`→`api.pullim.ai` 직접호출에서 어떻게 성립하는지 계약 필요 — CSRF 토큰 발급/검증 위치, 클라가 읽어 헤더로 되쏠 수 있는 non-HttpOnly 쿠키의 스코프(위 쿠키 Domain 긴장과 동일 — 넓은 Domain 은 sibling 노출이라 audience/네임스페이스로 제한). cross-subdomain 에서 double-submit 이 깨지지 않게 토큰 모델 확정.
-- **동기화 동시성**: 오프라인 다기기 LWW 가 서버 `updated_at` 만으로는 늦게 도착한 옛 payload 가 최신을 덮어쓰는 경쟁이 남음 → push payload 에 `client_updated_at`(또는 base revision) 포함 규약 필요. 증분 pull 커서도 `since=<updated_at>` 단일값은 동일 ms 배치에서 경계 누락 → `(updated_at, stable_id)` tie-breaker 또는 opaque `next_cursor` 필요.
+- **동기화 동시성 — 현 semantics 보존**: 다기기 stale 덮어쓰기는 현행 games 가 **클라측 recency 신호**(SRS `last_review_at` 조건부 머지, custom `exportedAt` revision reject-older)와 **POST cursor 미반환**(클라는 GET 응답 리소스별 cursor 로만 전진, #117 R8) 으로 이미 해소(§B 불변식 ⒜~⒟). pullim-api 재구현 시 과제는 "없는 토큰 추가"가 아니라 이 불변식을 **다중 인스턴스·다른 시계** 환경에서 보존하는 것 — 서버 `updated_at` stamp 단조성, 동일 ms 경계 정렬, 트랜잭션 격리를 확정.
 - **기존 회원 계정 마이그레이션**: games 자체 인증(email/pw, `users` 테이블)을 폐기하고 중앙 identity 로 옮길 때, **기존 games 회원 계정을 어떻게 이관/통합할지** 계약 필요 — 이메일 충돌·중복 식별자 매핑·재인증/재가입 정책·기존 학습데이터 귀속 유지. (계정 데이터 실재 여부는 §B3 확인 TODO 와 연동 — 데이터 있으면 마이그레이션, 없으면 신규.)
 - **계정 product-격리 + 환경 격리**: `.pullim.ai` 쿠키 공유 ≠ cross-product 계정 통합. ⒜ **product**: games 전용 세션 namespace/audience 격리(§A — `games`·`games-arcade` 완전 독립 계정 유지). ⒝ **환경**: dev/prod 쿠키·세션 스코프 분리(`dev-games↔dev-api` / `games↔api`)로 환경 간 세션 누수 차단.
 - **게스트 게이트**: games 기존 local-only 동작 유지(본 통합 범위 밖, §A). 게스트 모델 변경은 별도 spec/05 개정 사안.
@@ -45,29 +45,33 @@ games 는 별도 신규 인증 메커니즘이 **불필요** — 부모도메인
 
 ## B. 학습데이터 API (games 모듈 신설) — 스펙
 
-games 의 현행 스키마/동기화 모델을 이식. **증분 동기화**: 각 레코드 `updated_at`(epoch ms, 서버 write 시각) = pull 커서 + **LWW(last-write-wins)** 기준. 모든 엔드포인트 **user-scoped**(인증 사용자 기준).
+games 의 **현행 sync 정본 설계를 그대로 이식**(아래는 신규 모델 제안이 아니라 `apps/games/app/api/sync/route.ts`·`apps/games/lib/server/learning/*` 의 실제 계약 기술 — pullim-api 는 이 semantics 를 보존해야 한다). 모든 엔드포인트 **user-scoped**. 핵심 3 불변식:
+- **`updated_at` = 서버 self-stamp**(epoch ms, 서버 write 시각). 클라가 보내지 않는다 — pull 증분 **커서로만** 쓰인다.
+- **충돌 해소는 리소스별로 다르다**(균일 LWW 아님): **SRS** = 클라 `last_review_at`(epoch ms) **recency 조건부 머지**(더 옛 리뷰는 무시), **custom** = 클라 `exportedAt`(ISO revision) 비교해 **오래된 스냅샷 거부**, **streak** = per-user LWW, **activity** = per-(user,game,date,device) 절대 count. → 늦게 도착한 stale payload 가 최신을 덮는 경쟁은 이 **클라측 recency 신호**(lastReviewAt/exportedAt)로 이미 막혀 있다(서버 updated_at 단독 판별에 의존하지 않음).
+- **POST 는 cursor 를 돌려주지 않는다**(#117 R8). 클라는 증분 커서를 **GET 응답의 리소스별 cursor 로만** 전진시킨다 — push 후 "방금 now" 로 커서를 전진시키면 stale payload 가 no-op 됐을 때 서버의 더 최신 행을 다음 GET 이 영구 skip 해 수렴이 깨진다.
 
 ### B1. 데이터 모델 (현행 games schema)
 
 | 엔티티 | 키 | 필드 | 동기화 단위 |
 |---|---|---|---|
-| **srs_state** | (user, game_id, card_id) | `fsrs_card`(JSON), `review_count`, `last_review_at`(ms·nullable), `updated_at`(ms) | per-card LWW |
-| **streak** | user | `current`, `longest`, `last_active_date`("YYYY-MM-DD"), `updated_at` | per-user LWW |
-| **activity_log** | (user, game_id, date, device_id) | `count`(기기·날짜 절대값), `updated_at` | per-(기기,날짜) LWW. `date<cutoff` retention cleanup |
-| **custom_content** | user | `snapshot`(JSON), `updated_at` | 컬렉션 LWW |
+| **srs_state** | (user, game_id, card_id) | `fsrs_card`(JSON), `review_count`, `last_review_at`(ms·nullable), `updated_at`(ms·서버 stamp) | per-card, 클라 `last_review_at` **recency 조건부 머지**(옛 리뷰 무시) |
+| **streak** | user | `current`, `longest`, `last_active_date`("YYYY-MM-DD"), `updated_at`(서버 stamp) | per-user LWW |
+| **activity_log** | (user, game_id, date, device_id) | `count`(기기·날짜 절대값), `updated_at`(서버 stamp) | per-(기기,날짜,device) **절대 count** upsert. `date<cutoff` retention cleanup |
+| **custom_content** | user | `snapshot`(JSON, `exportedAt` 포함), `updated_at`(서버 stamp) | 컬렉션 스냅샷, 클라 `exportedAt` revision **오래된 것 거부** |
 
 - `device_id`: 동기화 전용 랜덤 UUID(fingerprint 아님) — 다기기 활동 합산용.
+- 입력 검증(현행): epoch ms/날짜 **미래값 거부**(clock skew 오염이 영구 "최신"으로 굳는 것 방지, 오늘+1일 grace), int4 상한 cap(DB overflow→503 방지), 달력 날짜 실재 검증. pullim-api 도 동일 가드 보존 권장.
 
 ### B2. 엔드포인트 (제안 — pullim-api 컨벤션에 맞게 조정)
 
 | 동작 | 메서드/경로(제안) | 설명 |
 |---|---|---|
-| push (upsert) | `POST /games/sync` | srs/streak/activity/custom 변경분 배치 upsert, **`client_updated_at`/revision 토큰 기반 LWW**. ⚠️ 서버 `updated_at` **단독으로는** 오프라인 기기 A/B 중 최신 판별 불가(늦게 도착한 옛 payload 가 최신 덮어쓰는 경쟁) — push payload 에 `client_updated_at`(또는 base revision) **포함이 계약**(토큰 모델은 [P0 설계 TODO] 동시성 항목에서 확정) |
-| pull (증분) | `GET /games/sync?cursor=<opaque>` | 증분 변경 레코드 반환. ⚠️ 단일 `since=<updated_at>` 는 같은 ms 다중 레코드 배치에서 경계 충돌로 row 누락 가능 → **`(updated_at, stable_id)` tie-breaker 또는 opaque `next_cursor`** 가 계약(4개 엔티티 동시 반환이라 더 중요). srs/streak/activity/custom 전 영역 |
-| cleanup(cron) | (내부 스케줄) activity_log `date < cutoff(14일)` 삭제 | games 의 `/api/sync/cleanup` cron 대체 — pullim-api 스케줄러로 |
+| push (upsert) | `POST /games/sync` | srs/streak/activity/custom 변경분 배치 upsert. 서버가 `updated_at` self-stamp. 충돌 해소는 **리소스별**(SRS=클라 `last_review_at` recency 머지, custom=클라 `exportedAt` revision reject-older, streak=LWW, activity=절대 count). **응답은 `{ok}` 만 — cursor 미반환**(클라가 커서를 과전진시켜 최신 행을 영구 skip 하는 것 방지, #117 R8) |
+| pull (증분) | `GET /games/sync?srs_since=&streak_since=&custom_since=` | **리소스별 정수 커서**(epoch ms `updated_at`). srs/streak/custom 은 `*_since` 이후 변경분, activity 는 집계 스냅샷 + `cursor=serverTime(now)`. 응답에 리소스별 cursor·`serverTime` 동봉 → 클라는 이 cursor 로만 다음 `*_since` 전진. **단일 opaque cursor 아님** |
+| cleanup(cron) | (내부 스케줄) activity_log `date < cutoff` 삭제 | games 의 `/api/sync/cleanup` cron 대체 — pullim-api 스케줄러로 |
 
-- 단일 `POST/GET /games/sync` 통합 vs 영역별 분리는 pullim-api 컨벤션 따름. 핵심은 **LWW + 증분 커서 + device_id** 보존.
-- ⚠️ **위 LWW·`since` 커서는 출발점 — 동시성 세부는 단독 명세 X**: 다기기 경쟁(client_updated_at/revision)·커서 tie-breaker(`(updated_at, stable_id)`/opaque cursor)는 상단 **[P0 설계 TODO]** 로 착수 시 pullim-api 공동 확정. 현 표는 데이터 모델·방향 전달용.
+- 단일 `POST/GET /games/sync` 통합 vs 영역별 분리는 pullim-api 컨벤션 따름. **보존 필수 불변식**: ⒜ `updated_at` 서버 self-stamp, ⒝ 리소스별 정수 `*_since` 커서, ⒞ POST cursor 미반환(클라는 GET cursor 로만 전진), ⒟ 리소스별 충돌 머지(lastReviewAt recency / exportedAt revision), ⒠ device_id 활동 합산.
+- ⚠️ **pullim-api 재구현 시 잔여 확인(P0)**: 위 불변식을 다중 인스턴스/다른 시계 환경에서 보존할 때의 세부(서버 stamp 단조성·동일 ms 경계 정렬·트랜잭션 격리)는 [P0 설계 TODO] 동시성 항목에서 pullim-api 와 확정. **단, 클라측 recency 신호(lastReviewAt/exportedAt)는 이미 계약에 존재** — "없는 토큰을 추가"가 아니라 "현 semantics 보존"이 과제다.
 - 현행 games 동작 참조: `pullim-games` `apps/games/lib/server/learning/*` + `apps/games/app/api/sync/route.ts`.
 
 ### B3. 데이터 마이그레이션
