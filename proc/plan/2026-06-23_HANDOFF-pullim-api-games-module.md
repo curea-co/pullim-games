@@ -17,13 +17,16 @@ pullim-games 가 자체 인증·학습데이터 BE 를 폐기하고 **pullim-api
 games 는 별도 신규 인증 메커니즘이 **불필요** — 부모도메인 `.pullim.ai` 공유에 기반한 컨슈머 **계약**을 채택한다(메커니즘은 pullim-api 가 이미 소유):
 - **same-site `.pullim.ai` 쿠키 SSO + CSRF**: games(`games.pullim.ai`/`dev-games.pullim.ai`) ↔ pullim-api(`api.pullim.ai`/`dev-api.pullim.ai`) 동일 부모도메인 → 인증 쿠키 공유.
 - FE 가 pullim-api `/auth/*`(login/signup/me/logout/refresh/csrf) 를 **직접 호출**(`credentials: include`). env `NEXT_PUBLIC_API_BASE_URL`(dev=`https://dev-api.pullim.ai`, prod=`https://api.pullim.ai`).
-- games 측 **얇은 proxy/middleware**가 보호 라우트 진입 게이팅 + 세션 introspection(쿠키 1차 필터 후 pullim-api 확인). 풀 요청 프록시 아님.
+- games 측 **얇은 proxy/middleware** 가 보호 라우트 진입 게이팅. **회원·게스트 두 진입을 분리**해 판별한다(spec/05 §5.2 게스트 우선 — 게스트도 보호 라우트 통과해야 함):
+  - **회원 게이트**: pullim-api 세션 쿠키 → introspection(쿠키 1차 필터 후 pullim-api 확인). 풀 요청 프록시 아님.
+  - **게스트 게이트**: **`pullim_games_guest` 쿠키(non-HttpOnly, 서버 가시)** 존재로 진입 허용 — 게스트 학습데이터는 localStorage(클라) 보관이라 introspection 불요. 회원 introspection 만으로 게이팅하면 게스트 `/home`·게임 플레이가 막히므로 이 게스트 경로를 반드시 별도 유지.
 
 → 즉 **인증 메커니즘(쿠키·CSRF·발급/검증)은 pullim-api 가 단독 소유**. games 가 pullim-api 에 **추가로 필요한 것**은:
 1. **games authz scope** — games 사용자(학생)가 *자기* 학습데이터에만 접근하는 user-scoped 인가 (authz-matrix 에 games 추가).
 2. **`GET /games/me`** introspection(헤더 프로필·세션 검증용) — 또는 기존 `/auth/me` 재사용 가능 여부 회신.
 3. games 가 가입 권위(signup·KCB 본인인증)를 중앙에 위임하는지 — games 는 **게스트 우선**이라 가입 강제 X. dev KCB 강제 정책이 games 게스트 흐름과 충돌하지 않는지 확인.
-4. **회원 프로필에 `grade`(중1~고3) 필드** — games 가 가입 시 학년 수집(중·고등 타겟). games-local `users.grade` 를 중앙 위임 시 pullim-api 회원 프로필로 이관. (games=플랫폼 `games` 패키지·서비스, `junior`(초등 주니어) 아님 — 학령 혼선 방지.)
+4. **회원 프로필 필드 — `grade` + `consent` 함께**(spec/05 §5.6 계정 가입 계약): `grade`(중1~고3, 중·고등 타겟) **및** `consent`("만 14세 이상" 또는 "만 14세 미만 + 보호자 동의" 자가확인) 를 가입 시 **함께** 수집·검증. pullim-api 가 `grade` 만 받으면 회원 가입이 곧 spec 위반 — consent 필드/검증 책임을 중앙에 명시. games-local `users.grade` 이관 시 동반. (games=플랫폼 `games` 패키지, `junior`(초등 주니어) 아님.)
+5. **`fingerprint_links` 귀속 규칙**(spec/05 §5.2): 로그인 시 현재 fingerprint 를 계정에 연결하되 그 귀속을 **first-writer-wins** 로 고정(공유 기기 명의오염 방지). 익명→계정 병합(C 참조, 명시적 사용자 확인 후)과 함께 이 소유권/충돌 규칙을 중앙 인증으로 이관해야 한다.
 
 (상세 계약은 pullim-api 자체 권위 문서(`docs/design/_platform/api.md`·`authz-matrix.md`)가 소유 — 타 풀림 프로젝트 코드 경로는 본 핸드오프에서 참조하지 않는다(games 독립성 규칙, CLAUDE.md §4).)
 
