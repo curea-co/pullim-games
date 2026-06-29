@@ -19,7 +19,7 @@ games 는 별도 신규 인증 메커니즘이 **불필요** — 부모도메인
 - FE 가 pullim-api `/auth/*`(login/signup/me/logout/refresh/csrf) 를 **직접 호출**(`credentials: include`). env `NEXT_PUBLIC_API_BASE_URL`(dev=`https://dev-api.pullim.ai`, prod=`https://api.pullim.ai`).
 - games 측 **얇은 proxy/middleware** 가 보호 라우트 진입 게이팅. **회원·게스트 두 진입을 분리**해 판별한다(spec/05 §5.2 게스트 우선 — 게스트도 보호 라우트 통과해야 함):
   - **회원 게이트**: pullim-api 세션 쿠키 → introspection(쿠키 1차 필터 후 pullim-api 확인). 풀 요청 프록시 아님.
-  - **게스트 게이트 — local-only 유지(spec/05 §5.2/§5.6)**: 게스트 프로필(닉네임+학년+만14세 자가확인)은 **localStorage 전용·서버 전송 0**이 현행 권위 정책이다. 따라서 게스트 게이트는 **`pullim_games_guest` 쿠키(non-HttpOnly, 클라가 프로필 생성 시 set) 존재로 라우트 렌더 허용** + **실제 신원 검증은 클라(`getPlayer` 가 localStorage 프로필 확인)** 가 한다. 이 게이트가 가벼운 건 의도된 것 — **게스트는 서버 측 보호 리소스가 0**(학습데이터 전부 로컬)이라 쿠키만 심어 진입해도 노출될 타인 데이터가 없고, 무프로필이면 클라가 온보딩으로 되돌린다. ⚠️ **서버 서명 토큰 같은 강한 게이트는 도입하지 않는다** — 그건 게스트 신원을 서버로 전송/종속시켜 §5.2(local-only)·§5.6(서버 미전송)을 깨고 게스트 진입을 서버 가용성에 묶는 회귀다. **더 강한 게스트 검증이 필요하면 그건 별도 선행 spec 개정 사안**(§5.2 local-only 정책 변경)으로 승격해 결정.
+  - **게스트 흐름 — 본 통합 범위 밖(games 기존 동작 보존)**: 본 통합은 **회원 인증/데이터만 pullim-api 로 위임**한다. 게스트(localStorage 전용 신원, spec/05 §5.2/§5.6)는 **games 의 기존 입구 게이트 동작 그대로** — 본 핸드오프가 게스트 게이트를 재설계하거나 게스트 신원을 서버로 옮기지 않는다(local-only·서버 전송 0 정책 불변). 위 회원 게이트(introspection)는 기존 게스트 미들웨어 **옆에 회원 경로만 추가**하는 것. 게스트 게이트의 현행 spec/05 정합은 games 가 이미 소유 — pullim-api 측 신규 작업 없음. (게스트 모델 자체를 바꾸려면 그건 별도 spec/05 개정 사안이며 본 통합 범위 아님.)
 
 → 즉 **인증 메커니즘(쿠키·CSRF·발급/검증)은 pullim-api 가 단독 소유**. games 가 pullim-api 에 **추가로 필요한 것**은:
 1. **games authz scope** — games 사용자(학생)가 *자기* 학습데이터에만 접근하는 user-scoped 인가 (authz-matrix 에 games 추가).
@@ -28,7 +28,7 @@ games 는 별도 신규 인증 메커니즘이 **불필요** — 부모도메인
 4. **회원 프로필 필드 — `grade` + `consent` 함께**(spec/05 §5.6 계정 가입 계약): `grade`(중1~고3, 중·고등 타겟) **및** `consent`("만 14세 이상" 또는 "만 14세 미만 + 보호자 동의" 자가확인) 를 가입 시 **함께** 수집·검증. pullim-api 가 `grade` 만 받으면 회원 가입이 곧 spec 위반 — consent 필드/검증 책임을 중앙에 명시. games-local `users.grade` 이관 시 동반. (games=플랫폼 `games` 패키지, `junior`(초등 주니어) 아님.)
 5. **`fingerprint_links` 귀속 규칙**(spec/05 §5.2): 로그인 시 현재 fingerprint 를 계정에 연결하되 그 귀속을 **first-writer-wins** 로 고정(공유 기기 명의오염 방지). 익명→계정 병합(C 참조, 명시적 사용자 확인 후)과 함께 이 소유권/충돌 규칙을 중앙 인증으로 이관해야 한다.
 
-(상세 계약은 pullim-api 자체 권위 문서(`docs/design/_platform/api.md`·`authz-matrix.md`)가 소유 — 타 풀림 프로젝트 코드 경로는 본 핸드오프에서 참조하지 않는다(games 독립성 규칙, CLAUDE.md §4).)
+(상세 계약은 **pullim-api 측 내부 권위 문서**가 소유한다 — 구체 경로는 pullim-api repo 가 관할하므로 본 핸드오프에서 외부 repo 내부 경로를 열거하지 않는다(games 독립성 규칙, CLAUDE.md §4).)
 
 ---
 

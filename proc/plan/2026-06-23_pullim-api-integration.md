@@ -70,7 +70,7 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 ## 5. 설계 — **same-site `.pullim.ai` 컨슈머 계약** (신규 설계 최소)
 
 1. **세션·쿠키**: same-site `.pullim.ai` 쿠키 SSO + CSRF — **발급·검증은 pullim-api 가 단독 소유**. games 는 `NEXT_PUBLIC_API_BASE_URL`(dev/api.pullim.ai)로 pullim-api `/auth/*` 직접 호출(`credentials:include`). **games 로컬 세션 저장·검증 없음** (중앙 위임). (이 계약의 정당성은 games spec/contract + pullim-api 계약으로만 선다 — 타 풀림 프로젝트를 근거로 들지 않는다.)
-2. **얇은 proxy**: 보호 라우트 진입 게이팅만(풀 요청 프록시 아님). **회원·게스트 2 게이트 분리**(spec/05 §5.2 게스트 우선, 회원 게이트만 두면 게스트 `/home`·플레이 회귀) — ⒜ 회원: 세션 쿠키 → pullim-api introspection, ⒝ 게스트: **`pullim_games_guest` 쿠키 존재로 라우트 렌더 허용 + 실제 검증은 클라(`getPlayer` localStorage 프로필)** = **local-only 유지**(§5.2 게스트 프로필 localStorage 전용·서버 전송 0). 게이트가 가벼운 건 의도 — 게스트는 서버 보호 리소스 0이라 쿠키 주입해도 노출 데이터 없고 무프로필이면 클라가 온보딩 복귀. **서버 서명 토큰 같은 강한 게스트 게이트는 도입 안 함**(게스트 신원 서버 종속 → §5.2/§5.6 위반·서버 가용성 종속 회귀). 강화 필요 시 **별도 선행 spec 개정**으로 승격. CSRF/same-origin 보조 가드는 필요 최소만.
+2. **얇은 proxy**: 보호 라우트 진입 게이팅만(풀 요청 프록시 아님). **회원 게이트만 본 통합 대상** — 회원: 세션 쿠키 → pullim-api introspection. **게스트 흐름은 범위 밖**: games 기존 입구 게이트(localStorage 신원, spec/05 §5.2/§5.6 local-only) 동작 그대로 보존하고, 회원 introspection 을 그 **옆에 추가**하는 것뿐이다. 게스트 게이트를 재설계하거나 게스트 신원을 서버로 옮기지 않는다(게스트 모델 변경 = 별도 spec/05 개정 사안, 본 통합 아님). CSRF/same-origin 보조 가드는 필요 최소만.
 3. **데이터 마이그레이션 [확인 TODO]**: 운영 `DATABASE_URL` 미설정처럼 보이나 **prod 데이터 0 은 단정 금지** — 실제 운영 DB 상태를 먼저 확인한다. spec/05 §5.2 가 계정 학습데이터 games Postgres 영속을 권위 정책으로 유지하므로, 데이터 부재 확인 후에만 클린 컷오버; 데이터가 있으면 마이그레이션 계획.
 4. **확인 필요(축소)**: ① games authz scope(authz-matrix), ② `/games/me` introspection vs `/auth/me` 재사용, ③ 게스트 흐름 vs dev KCB 강제 — **핸드오프 §A** 참조.
 
