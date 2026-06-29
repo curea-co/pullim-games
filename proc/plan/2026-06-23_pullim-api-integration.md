@@ -2,14 +2,14 @@
 
 **작성일**: 2026-06-23
 **작성자**: 사용자(G1) 결정 + claude
-**상태**: **P0 이전 — 방향 제안 초안.** 코드·spec 변경 0. 본 plan + 핸드오프는 **P0(설계 확정) 합의를 위한 입력 초안**이지 P0 종료물이 아니다 — P0 종료 = 양 repo 합의 + pullim-api 측 plan/ADR(§6 표). 진행 순서: **선행 spec(spec/05 §5.2 개정) → P0 설계 합의 → P1+**. spec 미개정·P0 미합의 상태에서 본 plan 을 확정으로 취급하지 않는다.
+**상태**: **P0 이전 — 방향 제안 초안.** 코드·spec 변경 0. 본 plan + 핸드오프는 **P0(설계 확정) 합의를 위한 입력 초안**이지 P0 종료물이 아니다 — P0 종료 = 양 repo 합의 + pullim-api 측 plan/ADR(§6 표). 진행 순서: **선행 spec(영향 절 전수 — `spec/05 §5.2`·`§5.6`·`spec/09 §9.1` 등 묶음 개정, §5.2 단독 아님) → P0 설계 합의 → P1+**. spec 미개정·P0 미합의 상태에서 본 plan 을 확정으로 취급하지 않는다.
 **근거**: 사용자(G1) 방향 제시 (2026-06-23) — 현황 분석(`proc/research` / 본 plan §1) 후.
 
-> ⚠️ **spec 우선 원칙(spec/01 §2 · CLAUDE.md §9)**: 본 plan 의 방향은 **권위 spec 개정 전제의 제안**이다. `proc/spec/05 §5.2` 는 현재 games 계정이 타 서비스와 **완전 독립**(계정 학습데이터도 games 전용 Postgres)이라고 못 박고 있다 — 아래 §1 방향(중앙 인증·데이터 위임)은 이 전제를 뒤집으므로, **먼저 spec/05 §5.2 를 G1/G3/G4 합의로 개정(선행 spec phase)** 한 뒤에야 P1+ 코드 착수가 가능하다. spec 미개정 상태에서 본 plan 을 확정 결정으로 취급하지 않는다.
+> ⚠️ **spec 우선 원칙(spec/01 §2 · CLAUDE.md §9)**: 본 plan 의 방향은 **권위 spec 개정 전제의 제안**이다. `proc/spec/05 §5.2` 는 현재 games 계정이 타 서비스와 **완전 독립**(계정 학습데이터도 games 전용 Postgres)이라고 못 박고 있다 — 아래 §1 방향(중앙 인증·데이터 위임)은 이 전제를 뒤집는다. **⚠️ 선행 spec 개정은 §5.2 하나로 한정되지 않는다**(한정하면 spec 이 부분 정합 상태로 남아 후속 구현이 충돌한다): 같은 위임으로 영향받는 권위 절 전부를 **한 묶음으로 sweep·개정**해야 한다 — 최소 ⒜ `spec/05 §5.2`(독립 계정·games 전용 DB), ⒝ `spec/05 §5.6`(계정 가입 계약 — 가입·본인인증 권위가 중앙으로 이동), ⒞ `spec/09 §9.1`(기술 환경 — `DATABASE_URL`·게임 DB 런타임 폐기), 그리고 §5 내 계정/데이터 소유 관련 잔여 조항. **이 영향 절 전수 점검 자체가 선행 spec phase 의 첫 작업**이며, G1/G3/G4 합의로 개정한 뒤에야 P1+ 코드 착수 가능. spec 미개정 상태에서 본 plan 을 확정 결정으로 취급하지 않는다.
 
 > 🎯 **문서 범위 — 고수준 방향+요구만**: 본 plan 은 방향·범위·단계(phase)를 잡는다. **세부 구현 계약은 단독 명세하지 않는다** — CORS, 동기화 동시성(LWW/커서), 세션 audience 격리, 게스트 게이트 등은 **통합 실제 착수(P0 설계) 시 pullim-api 와 공동 확정**(핸드오프 문서 상단 [P0 설계 TODO] 참조). 미착수 통합의 세부를 지금 단정하면 stale·불일치 위험이므로 합의 출발점만 둔다.
 
-## 1. 방향 제안 (G1, 2026-06-23 — spec/05 §5.2 개정 선행)
+## 1. 방향 제안 (G1, 2026-06-23 — 선행 spec 묶음 개정: spec/05 §5.2·§5.6·spec/09 §9.1)
 
 | # | 제안 |
 |---|---|
@@ -18,7 +18,7 @@
 | 3 | **pullim-games = FE + 얇은 라우트-게이팅 proxy** (데이터·인증 로직 미보유 — 인증/데이터 프록시 아님) |
 | 4 | (1~3 도출) **games 자체 Postgres 불필요** — `DATABASE_URL`·migrations·db client 제거 대상 |
 
-> 위 1~4 는 **spec/05 §5.2 개정 후 확정**. 선행 spec phase = `05 §5.2`(독립 계정·games 전용 DB 전제)를 "중앙 인증 위임·학습데이터 pullim-api 소유"로 개정.
+> 위 1~4 는 **선행 spec 묶음 개정 후 확정**. 선행 spec phase = `05 §5.2`(독립 계정·games 전용 DB)·`05 §5.6`(가입 계약 권위 중앙 이동)·`09 §9.1`(DB 런타임 폐기) + §5 잔여 계정/데이터 조항을 "중앙 인증 위임·학습데이터 pullim-api 소유"로 **일괄** 개정 — §5.2 단독 개정은 부분 정합이라 금지.
 
 ## 2. 목표 아키텍처
 
@@ -74,13 +74,13 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 1. **세션·쿠키**: same-site `.pullim.ai` 쿠키 SSO + CSRF — **발급·검증은 pullim-api 가 단독 소유**. games 는 `NEXT_PUBLIC_API_BASE_URL`(**로컬**=`http://localhost:<api>`·games dev `localhost:3004` / **dev**=`dev-api.pullim.ai` / **prod**=`api.pullim.ai`)로 pullim-api `/auth/*` 직접 호출(`credentials:include`). **games 로컬 세션 저장·검증 없음** (중앙 위임). ⚠️ **로컬은 `.pullim.ai` 부모도메인 부재** → same-site 쿠키 공유 불가, `localhost` 간 cross-origin CORS+host-only 쿠키 별도 스킴 필요(핸드오프 [P0 설계 TODO]). (이 계약의 정당성은 games spec/contract + pullim-api 계약으로만 선다 — 타 풀림 프로젝트를 근거로 들지 않는다.)
 2. **얇은 proxy**: 보호 라우트 진입 게이팅만(풀 요청 프록시 아님). **회원 게이트만 본 통합 대상** — 회원: 세션 쿠키 → pullim-api introspection. ⚠️ 미들웨어 1차 필터는 `games.pullim.ai`-readable 세션 존재 신호 전제(api host-scoped 쿠키면 못 읽어 회원 진입 불가 → presence 힌트 쿠키 동반, P0⑧). **게스트 흐름은 범위 밖**: games 기존 입구 게이트(**서버 Edge coarse gate** — 미들웨어가 `pullim_games_guest` 힌트 쿠키[non-HttpOnly, PII 없음]·`pullim_games_session` 존재만 판정, 신원 데이터는 localStorage·서버 전송 0; spec/05 §5.2/§5.6) 동작 그대로 보존하고, 회원 introspection 을 그 **옆에 추가**하는 것뿐이다. 게스트 게이트를 재설계하거나 게스트 신원을 서버로 옮기지 않는다(게스트 모델 변경 = 별도 spec/05 개정 사안, 본 통합 아님). CSRF/same-origin 보조 가드는 필요 최소만.
 3. **데이터 마이그레이션 [확인 TODO]**: 운영 `DATABASE_URL` 미설정처럼 보이나 **prod 데이터 0 은 단정 금지** — 실제 운영 DB 상태를 먼저 확인한다. spec/05 §5.2 가 계정 학습데이터 games Postgres 영속을 권위 정책으로 유지하므로, 데이터 부재 확인 후에만 클린 컷오버; 데이터가 있으면 마이그레이션 계획.
-4. **확인 필요·P0 설계 TODO**: ① games authz scope, ② `/games/me` introspection vs `/auth/me` 재사용, ③ 게스트 흐름 vs dev KCB 강제, ④ **CORS allowlist/헤더 계약**(직접 호출 전제), ⑤ **동기화 동시성 — 현 semantics 보존**(현행 games 는 ⓐ 커서 = `learning_sync_seq` **전역 단조 시퀀스**[`updated_at` 컬럼이지만 벽시계 ms 아님 — 동일 ms 누락 방지], ⓑ 클라 recency 신호 `last_review_at`/`exportedAt`, ⓒ POST cursor 미반환으로 해소 → pullim-api 는 다중 인스턴스에서 단일 전역 시퀀스로 이 불변식 보존, 인스턴스 시계 대체 금지), ⑥ **계정 product+환경 격리**(audience·dev/prod 스코프 — 단 "완전 독립 계정"[spec/05 §5.2]이 세션 audience 격리만으로 충족되는지 단정 X. 계정 레코드 분리 필요 여부 = 중앙 identity 단위 계약으로 결정), ⑦ **기존 회원 계정 마이그레이션**(중앙 identity 이관·이메일 충돌·재인증), ⑧ **쿠키 Domain 스코프 — 공유↔격리 긴장 + 미들웨어 게이트 충돌**(자동 공유 X. `Domain=.pullim.ai` 로 넓히면 sibling `planner/q` 누수 = 격리 붕괴. 반대로 host-scoped to `api.pullim.ai` 면 games 미들웨어가 `games.pullim.ai` 에서 세션 존재를 못 읽어 회원이 보호 라우트 진입 불가 → **games 도메인 readable presence 힌트 쿠키(게스트 패턴 동형) 동반 필수**. 쿠키 스코프 ↔ 미들웨어 게이트 함께 확정), ⑨ **CSRF cross-subdomain**(double-submit 이 games↔api 직접호출에서 성립하는 토큰 모델) — 모두 착수 시 pullim-api 공동 확정(**핸드오프 [P0 설계 TODO]·§A** 참조). 본 plan 은 방향만, 세부는 단독 명세 X.
+4. **확인 필요·P0 설계 TODO**: ① games authz scope, ② `/games/me` introspection vs `/auth/me` 재사용, ③ 게스트 흐름 vs dev KCB 강제, ④ **CORS allowlist/헤더 계약**(직접 호출 전제), ⑤ **동기화 동시성 — 현 semantics 보존**(현행 games 는 ⓐ srs/streak/custom 커서 = `learning_sync_seq` **전역 단조 시퀀스**[`updated_at` 컬럼이지만 벽시계 ms 아님 — 동일 ms 누락 방지]. **단 activity 는 예외 — 전량 집계라 증분 커서를 안 쓰고 `serverTime(now)` 스냅샷 커서**, ⓑ 클라 recency 신호 `last_review_at`/`exportedAt` + streak/activity GREATEST 단조 머지, ⓒ POST cursor 미반환으로 해소 → pullim-api 는 다중 인스턴스에서 단일 전역 시퀀스로 이 불변식 보존, 인스턴스 시계 대체 금지), ⑥ **계정 product+환경 격리**(audience·dev/prod 스코프 — 단 "완전 독립 계정"[spec/05 §5.2]이 세션 audience 격리만으로 충족되는지 단정 X. 계정 레코드 분리 필요 여부 = 중앙 identity 단위 계약으로 결정), ⑦ **기존 회원 계정 마이그레이션**(중앙 identity 이관·이메일 충돌·재인증), ⑧ **쿠키 Domain 스코프 — 공유↔격리 긴장 + 미들웨어 게이트 충돌**(자동 공유 X. `Domain=.pullim.ai` 로 넓히면 sibling `planner/q` 누수 = 격리 붕괴. 반대로 host-scoped to `api.pullim.ai` 면 games 미들웨어가 `games.pullim.ai` 에서 세션 존재를 못 읽어 회원이 보호 라우트 진입 불가 → **games 도메인 readable presence 힌트 쿠키(게스트 패턴 동형) 동반 필수**. 쿠키 스코프 ↔ 미들웨어 게이트 함께 확정), ⑨ **CSRF cross-subdomain**(double-submit 이 games↔api 직접호출에서 성립하는 토큰 모델) — 모두 착수 시 pullim-api 공동 확정(**핸드오프 [P0 설계 TODO]·§A** 참조). 본 plan 은 방향만, 세부는 단독 명세 X.
 
 ## 6. Phase 분할 (안전·점진)
 
 | Phase | 내용 | 산출 | 상태 |
 |---|---|---|---|
-| **선행 spec** | `spec/05 §5.2` 개정 (독립 계정·games 전용 DB → 중앙 위임) — G1/G3/G4 합의 | 개정된 spec/05 | 미착수 |
+| **선행 spec** | 영향 절 **전수 sweep + 묶음 개정**(독립 계정·games 전용 DB → 중앙 위임): `05 §5.2`·`05 §5.6`(가입 권위)·`09 §9.1`(DB 런타임) + §5 잔여 조항 — §5.2 단독 금지. G1/G3/G4 합의 | 개정된 spec/05·09 | 미착수 |
 | **P0** | 설계 확정 — pullim-api 인증 계약·games authz·데이터 모델 합의 (양 repo) | 본 plan 합의 + pullim-api 측 plan/ADR | **진행 전(본 plan+핸드오프 = 입력 초안)** |
 | **P1** | pullim-api: games 모듈 학습데이터 엔드포인트 + authz (pullim-api repo) | API 배포(dev) | 미착수 |
 | **P2** | games: 인증 직접 호출 전환 — FE 가 `api.pullim.ai/auth/*` 직접 호출(같은 도메인 쿠키), games `/api/auth/*` 제거 + 라우트 게이팅 미들웨어 | games 로그인 동작(중앙 인증) | 미착수 |

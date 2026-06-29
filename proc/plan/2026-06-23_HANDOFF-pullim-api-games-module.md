@@ -6,7 +6,7 @@
 **상태**: HANDOFF DRAFT — **확정 계약 아님.** 선행 spec 개정 후 pullim-api 측 plan/ADR 로 수용 검토 요청
 **연계**: pullim-games `proc/plan/2026-06-23_pullim-api-integration.md`
 
-> ⚠️ **이 핸드오프는 미승인 제안이다 (확정 계약으로 받지 말 것)**: pullim-games 의 현행 권위 spec `proc/spec/05 §5.2` 는 games 계정·학습데이터가 **완전 독립**(games 전용 Postgres)이라고 아직 못 박고 있다. 아래 "위임" 방향은 그 전제를 뒤집으므로, **pullim-games 가 먼저 spec/05 §5.2 를 개정(G1/G3/G4 합의)** 해야 본 위임이 확정된다(spec 우선 — spec/01 §2 · CLAUDE.md §9). spec 미개정 상태에서 pullim-api 가 본 문서를 확정 작업지시로 착수하지 말 것 — 계약 합의 후 진행.
+> ⚠️ **이 핸드오프는 미승인 제안이다 (확정 계약으로 받지 말 것)**: pullim-games 의 현행 권위 spec `proc/spec/05 §5.2` 는 games 계정·학습데이터가 **완전 독립**(games 전용 Postgres)이라고 아직 못 박고 있다. 아래 "위임" 방향은 그 전제를 뒤집으므로, **pullim-games 가 먼저 선행 spec 을 개정(G1/G3/G4 합의)** 해야 본 위임이 확정된다(spec 우선 — spec/01 §2 · CLAUDE.md §9). ⚠️ **개정 범위는 §5.2 단독이 아니다** — 같은 위임으로 영향받는 절을 묶어 개정해야 부분 정합을 피한다: 최소 `spec/05 §5.2`(독립 계정·games DB)·`spec/05 §5.6`(가입 계약 권위 중앙 이동)·`spec/09 §9.1`(`DATABASE_URL`·게임 DB 런타임 폐기) + §5 잔여 계정/데이터 조항(상세는 integration plan §1·banner). spec 미개정 상태에서 pullim-api 가 본 문서를 확정 작업지시로 착수하지 말 것 — 계약 합의 후 진행.
 
 > 🎯 **문서 범위 — 고수준 방향·요구만**: 본 핸드오프는 *무엇을 위임하고 무엇이 필요한지*(방향+요구사항)를 전한다. **세부 구현 계약은 단독 명세하지 않는다** — 아래 [P0 설계 TODO] 항목(CORS, 동기화 동시성, 세션 격리, 게스트 게이트 등)은 **통합 실제 착수(P0 설계) 시 pullim-api 와 공동 확정**한다. 미착수 통합의 세부를 지금 단정하면 양 repo 가 stale·불일치 위험. 아래 스펙은 **합의 출발점**이지 최종 계약이 아니다.
 
