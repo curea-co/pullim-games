@@ -11,9 +11,10 @@
 > 🎯 **문서 범위 — 고수준 방향·요구만**: 본 핸드오프는 *무엇을 위임하고 무엇이 필요한지*(방향+요구사항)를 전한다. **세부 구현 계약은 단독 명세하지 않는다** — 아래 [P0 설계 TODO] 항목(CORS, 동기화 동시성, 세션 격리, 게스트 게이트 등)은 **통합 실제 착수(P0 설계) 시 pullim-api 와 공동 확정**한다. 미착수 통합의 세부를 지금 단정하면 양 repo 가 stale·불일치 위험. 아래 스펙은 **합의 출발점**이지 최종 계약이 아니다.
 
 ### [P0 설계 TODO] — 착수 시 pullim-api 공동 확정 (지금 단독 명세 X)
-- **CORS 계약**: 브라우저가 `api.pullim.ai` 를 `credentials:include` 로 직접 호출하므로 pullim-api CORS allowlist(games 오리진)·허용 헤더/메서드·preflight 계약 필요(same-site 쿠키만으로 cross-origin fetch 안 열림). 미정의 시 dev/prod 에서 로그인·sync 차단.
+- **CORS 계약**: 브라우저가 `api.pullim.ai` 를 `credentials:include` 로 직접 호출하므로 pullim-api CORS allowlist(`games.pullim.ai`·`dev-games.pullim.ai` 오리진 명시 허용)·허용 헤더/메서드·preflight 계약 필요(same-site 쿠키만으로 cross-origin fetch 안 열림). 미정의 시 dev/prod 에서 정본 직접호출 경로가 브라우저에서 바로 차단.
 - **동기화 동시성**: 오프라인 다기기 LWW 가 서버 `updated_at` 만으로는 늦게 도착한 옛 payload 가 최신을 덮어쓰는 경쟁이 남음 → push payload 에 `client_updated_at`(또는 base revision) 포함 규약 필요. 증분 pull 커서도 `since=<updated_at>` 단일값은 동일 ms 배치에서 경계 누락 → `(updated_at, stable_id)` tie-breaker 또는 opaque `next_cursor` 필요.
-- **계정 product-격리**: `.pullim.ai` 쿠키 공유 ≠ cross-product 계정 통합. games 전용 세션 namespace/audience 격리 규칙(§A 참조).
+- **기존 회원 계정 마이그레이션**: games 자체 인증(email/pw, `users` 테이블)을 폐기하고 중앙 identity 로 옮길 때, **기존 games 회원 계정을 어떻게 이관/통합할지** 계약 필요 — 이메일 충돌·중복 식별자 매핑·재인증/재가입 정책·기존 학습데이터 귀속 유지. (계정 데이터 실재 여부는 §B3 확인 TODO 와 연동 — 데이터 있으면 마이그레이션, 없으면 신규.)
+- **계정 product-격리 + 환경 격리**: `.pullim.ai` 쿠키 공유 ≠ cross-product 계정 통합. ⒜ **product**: games 전용 세션 namespace/audience 격리(§A — `games`·`games-arcade` 완전 독립 계정 유지). ⒝ **환경**: dev/prod 쿠키·세션 스코프 분리(`dev-games↔dev-api` / `games↔api`)로 환경 간 세션 누수 차단.
 - **게스트 게이트**: games 기존 local-only 동작 유지(본 통합 범위 밖, §A). 게스트 모델 변경은 별도 spec/05 개정 사안.
 
 pullim-games 가 자체 인증·학습데이터 BE 를 폐기하고 **pullim-api 로 위임하는 방향을 제안**한다 (games = FE + 얇은 라우트-게이팅 proxy, 인증/데이터 프록시 아님). 확정 시 pullim-api `games` 모듈이 아래를 제공하면 games **FE 가 pullim-api 를 직접 호출**한다.
