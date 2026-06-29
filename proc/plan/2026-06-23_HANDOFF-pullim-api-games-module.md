@@ -53,10 +53,10 @@ games 의 현행 스키마/동기화 모델을 이식. **증분 동기화**: 각
 | cleanup(cron) | (내부 스케줄) activity_log `date < cutoff(14일)` 삭제 | games 의 `/api/sync/cleanup` cron 대체 — pullim-api 스케줄러로 |
 
 - 단일 `POST/GET /games/sync` 통합 vs 영역별 분리는 pullim-api 컨벤션 따름. 핵심은 **LWW + updated_at 커서 + device_id** 보존.
-- 현행 games 동작 참조: `pullim-games` `apps/games/lib/server/learning/*` + `app/api/sync/route.ts`.
+- 현행 games 동작 참조: `pullim-games` `apps/games/lib/server/learning/*` + `apps/games/app/api/sync/route.ts`.
 
 ### B3. 데이터 마이그레이션
-- **이행 데이터 0 (클린 컷오버)** — games 자체 DB 는 운영 env(`DATABASE_URL`) 미설정 상태로 prod 데이터 없음. 신규 스키마로 시작.
+- **⚠️ [확인 TODO — 단정 금지] 이행 데이터 존재 여부 선검증**: games 자체 DB 운영 데이터가 0 인지 **확정 전 반드시 확인**. 현행 권위 spec(`proc/spec/05 §5.2`)은 계정 학습데이터를 games 전용 Postgres 영속으로 유지하고, 통합 auth plan 도 prod `DATABASE_URL` 등록을 운영 항목으로 둔다 → 운영 DB 부재를 확인 안 한 채 "클린 컷오버(이행 0)"로 단정하면 존재할 수 있는 계정 데이터를 누락시킨다. **운영 DB 상태 확인 → 데이터 있으면 마이그레이션 / 없으면 클린 컷오버** 분기.
 
 ---
 

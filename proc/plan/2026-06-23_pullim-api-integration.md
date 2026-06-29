@@ -38,23 +38,23 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 ## 3. pullim-games 변경
 
 ### 제거 (pullim-api 로 이관)
-- `lib/server/auth/{password,users,session}` (인증 비즈니스 로직) — pullim-api login/session 으로 대체
-- `lib/server/learning/*` (srs·streak·activity·custom·sync-csrf) — pullim-api games 모듈로 이전
-- `lib/server/db/client.ts`, `migrations/0001_init.sql`·`0002_learning_data.sql` — games DB 폐기
+- `apps/games/lib/server/auth/{password,users,session}` (인증 비즈니스 로직) — pullim-api login/session 으로 대체
+- `apps/games/lib/server/learning/*` (srs·streak·activity·custom·sync-csrf) — pullim-api games 모듈로 이전
+- `apps/games/lib/server/db/client.ts`, `apps/games/migrations/0001_init.sql`·`0002_learning_data.sql` — games DB 폐기
 - `DATABASE_URL` env (Vercel·`.env.example`)
-- `app/api/auth/{login,signup,logout,me,csrf}` · `app/api/sync*` (games 자체 인증/학습 BFF 라우트) — **제거.** 아래 정본 경로(직접 호출)로 대체.
+- `apps/games/app/api/auth/{login,signup,logout,me,csrf}` · `apps/games/app/api/sync*` (games 자체 인증/학습 BFF 라우트) — **제거.** 아래 정본 경로(직접 호출)로 대체.
 - DB 의존 단위/라우트 테스트
 
 ### 정본 경로 — **브라우저 직접 호출 (단일 경로 고정)**
 > 인증·학습데이터 요청은 **하나의 경로만** 둔다(이원화 금지 — CSRF·쿠키 스코프·오류 처리 기준 단일화). FE 가 pullim-api 를 **직접 호출**하는 것이 정본이고, games BFF 는 **인증/데이터 프록시가 아니다.**
-- **직접 호출(정본)**: 브라우저가 `api.pullim.ai/auth/*`(인증)·`api.pullim.ai/games/*`(학습데이터)를 `credentials:include` 로 직접 호출. CSRF·세션 쿠키 발급/검증은 **pullim-api 가 단독 소유**. games 에 `app/api/auth/*`·`app/api/sync*` 미보유.
+- **직접 호출(정본)**: 브라우저가 `api.pullim.ai/auth/*`(인증)·`api.pullim.ai/games/*`(학습데이터)를 `credentials:include` 로 직접 호출. CSRF·세션 쿠키 발급/검증은 **pullim-api 가 단독 소유**. games 에 `apps/games/app/api/auth/*`·`apps/games/app/api/sync*` 미보유.
 - **games proxy 의 역할 = 보호 라우트 진입 게이팅뿐**: 미들웨어가 쿠키 1차 필터 후 pullim-api introspection 으로 신원 확인해 라우트 통과/차단만 한다(요청 프록시 아님).
-- `lib/server/http/{csrf,same-origin}` — 게이팅 미들웨어의 보조 가드로만 필요 최소 유지.
+- `apps/games/lib/server/http/{csrf,same-origin}` — 게이팅 미들웨어의 보조 가드로만 필요 최소 유지.
 - FE 전부 유지.
 
 ### 보류 (G1, 2026-06-23 — 이번 범위 밖)
-- `app/api/billing/notify*` + `lib/server/billing/*` (Resend) — **보류.** pullim-api 에 `billing` 도메인 + toss_payments 가 *언급*(dev API docs `dev-api.pullim.ai/api-docs`)되나 구현·운영 불명. 결제 통합은 별 트랙.
-- `app/api/event` — **보류** (billing 과 함께 추후 판단).
+- `apps/games/app/api/billing/notify*` + `apps/games/lib/server/billing/*` (Resend) — **보류.** pullim-api 에 `billing` 도메인 + toss_payments 가 *언급*(dev API docs `dev-api.pullim.ai/api-docs`)되나 구현·운영 불명. 결제 통합은 별 트랙.
+- `apps/games/app/api/event` — **보류** (billing 과 함께 추후 판단).
 
 ## 4. pullim-api 변경 (별 repo — **핸드오프 문서로 전달**)
 
@@ -70,7 +70,7 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 
 1. **세션·쿠키**: same-site `.pullim.ai` 쿠키 SSO + CSRF — **발급·검증은 pullim-api 가 단독 소유**. games 는 `NEXT_PUBLIC_API_BASE_URL`(dev/api.pullim.ai)로 pullim-api `/auth/*` 직접 호출(`credentials:include`). **games 로컬 세션 저장·검증 없음** (중앙 위임). (이 계약의 정당성은 games spec/contract + pullim-api 계약으로만 선다 — 타 풀림 프로젝트를 근거로 들지 않는다.)
 2. **얇은 proxy**: 보호 라우트 진입 게이팅만 — 쿠키 1차 필터 후 pullim-api introspection 으로 신원 확인. 풀 요청 프록시 아님. CSRF/same-origin 보조 가드는 필요 최소만.
-3. **데이터 마이그레이션**: games DB env 미설정 = **prod 데이터 없음 → 클린 컷오버**(이행 0). 배포 전 재확인.
+3. **데이터 마이그레이션 [확인 TODO]**: 운영 `DATABASE_URL` 미설정처럼 보이나 **prod 데이터 0 은 단정 금지** — 실제 운영 DB 상태를 먼저 확인한다. spec/05 §5.2 가 계정 학습데이터 games Postgres 영속을 권위 정책으로 유지하므로, 데이터 부재 확인 후에만 클린 컷오버; 데이터가 있으면 마이그레이션 계획.
 4. **확인 필요(축소)**: ① games authz scope(authz-matrix), ② `/games/me` introspection vs `/auth/me` 재사용, ③ 게스트 흐름 vs dev KCB 강제 — **핸드오프 §A** 참조.
 
 ## 6. Phase 분할 (안전·점진)
@@ -88,5 +88,5 @@ pullim-api (api.pullim.ai) ── 중앙 인증(/auth/*) + games 모듈(/games/*
 
 - 본 plan 으로 자동 코드 변경 없음 — Phase 별 PR + codex + (양 repo) 거버넌스 준수.
 - pullim-api 는 **pnpm·NestJS**, games 는 **bun·Next.js** (스택 차이 유지 — canonical-stack 정합).
-- AI 카드 생성(`ANTHROPIC_API_KEY`)은 **보류**(G1) — 본 통합 범위 밖. games `lib/server/ai/anthropic.ts` 는 보류 상태로 둠.
+- AI 카드 생성(`ANTHROPIC_API_KEY`)은 **보류**(G1) — 본 통합 범위 밖. games `apps/games/lib/server/ai/anthropic.ts` 는 보류 상태로 둠.
 - games 의 게스트(비로그인) 사용은 보존 — 중앙 인증 위임 후에도 게스트 우선(`spec/05 §5.2`).
