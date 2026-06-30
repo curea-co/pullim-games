@@ -34,7 +34,9 @@
 
 ## 3. 마이그레이션
 
-- 기존 게스트/회원 중 고2·고3 grade: `isGrade` 가 거부 → `getPlayer` null → 온보딩 재선택(자연 마이그레이션). DB 회원 grade 는 read 시 enum 재검증 안 해 크래시 없음(기존 값 보존, 재선택만 막힘). **프리런치라 실사용자 영향 0**.
+- **게스트**: 고2·고3 grade → `isGrade` 거부 → `getPlayer` null → 온보딩 재선택(자연 마이그레이션).
+- **회원**: 레거시 DB row 의 고2·고3 grade 는 `toPublicUser` 가 read 시 `isGrade` 로 정규화 → 범위 밖이면 null 노출(재선택 유도). DB 값 자체는 비파괴 보존, **앱 노출값은 항상 중1~고1 또는 null** — 주석·계약 ↔ 런타임 일치(Codex #129 R3). 별도 DB 마이그레이션 불필요.
+- **프리런치라 실사용자 영향 0**.
 
 ## 4. 비스코프 (deferred) — KNOWN-TRADE-OFF
 
