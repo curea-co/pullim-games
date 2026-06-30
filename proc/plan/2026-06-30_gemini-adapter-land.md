@@ -49,6 +49,15 @@ PR #128 codex 가 머지 전 차단 2건 지적 → 둘 다 코드 fix 로 응�
 1. **secret 이름 불일치** — 코드는 `GOOGLE_AI_STUDIO_API_KEY`(gemini.ts `getClient()`)인데 본 plan 초안이 `GEMINI_API_KEY` 로 오기. 계약 정식 이름은 `GOOGLE_AI_STUDIO_API_KEY`(2026-05-28 plan·전 daily 일치) → plan·index.ts 주석을 코드에 맞춰 정정. 코드 env 이름 무변.
 2. **Zod 런타임 검증 누락 (spec/01 §21)** — gemini.ts `cardsJsonToDrafts` 가 외부 AI JSON 을 `as TypingJson` 타입 단언으로 받던 것을 → 4 kind 별 Zod 스키마(`safeParse`) 검증으로 교체. API `responseJsonSchema` 1차 강제 + 파싱 결과 2차 Zod 재검증(신뢰 경계 밖 입력). 검증 실패 → `[]` 반환 → 호출자 친절 에러. (참고: anthropic.ts `toolInputToDrafts` 도 동일 `as` 패턴이나 본 PR delta 밖 — 후속 정합 대상)
 
+## 5.2 Codex Review round 2 — 코드 fix 응답
+
+round1 fix 반영 후 codex 가 새 차단 2건 지적 → 코드 fix:
+
+1. **`LLM_PROVIDER` 오타 silent fallback** — `=== "gemini" ? gemini : anthropic` 는 `gemni` 같은 오타를 조용히 anthropic 으로 흘려 운영 오설정을 은폐(silent fallback 금지 위반). → `getLlmProvider()` 가 미설정=anthropic 유지하되, **인식 못 하는 값은 throw**. 설정 실수를 즉시 드러냄.
+2. **객관식 `correctIndex` 정수성 미보장** — Zod `z.number()` 는 비정수(2.5)·범위밖을 통과시켜 `choices[idx]=undefined` → 풀 수 없는 카드 생성 가능. → `z.number().int().min(0).max(3)` 로 강제(responseJsonSchema 의 `type:integer, 0~3` 와 런타임 정합).
+
+검증: typecheck·lint green, test 492/492.
+
 ## 5. 거버넌스
 
 - KNOWN-TRADE-OFF(`2026-05-29 ... C 항목`) 정당 해소 — "spec/09 합의 후 별도 PR" 게이트를 사용자 G1 가 직접 waive(본 plan 권한 줄). 회피 아님(코드로 게이트 해소).

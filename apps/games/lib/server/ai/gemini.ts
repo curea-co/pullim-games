@@ -247,7 +247,10 @@ const MultipleChoiceJsonSchema = z.object({
     z.object({
       question: z.string(),
       choices: z.array(z.string()),
-      correctIndex: z.number(),
+      // correctIndex 는 정수 0~3 만 유효 — 비정수/범위밖이면 choices[idx] 가
+      // undefined 가 되어 UI 에서 풀 수 없는 카드가 된다. responseJsonSchema 와
+      // 동일 제약(type:integer, 0~3)을 런타임에서도 강제.
+      correctIndex: z.number().int().min(0).max(3),
       rationale: z.string().optional(),
       difficulty: z.number().optional(),
     }),

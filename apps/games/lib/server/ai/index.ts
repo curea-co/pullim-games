@@ -14,7 +14,18 @@ import * as gemini from "./gemini";
 export type LlmProvider = "gemini" | "anthropic";
 
 export function getLlmProvider(): LlmProvider {
-  return process.env.LLM_PROVIDER === "gemini" ? "gemini" : "anthropic";
+  const raw = process.env.LLM_PROVIDER;
+  // 미설정(undefined/빈 문자열) = 기본 anthropic (behavior-neutral).
+  if (raw === undefined || raw === "") return "anthropic";
+  // 인식 못 하는 값은 silent fallback 금지 — 운영 오설정(오타 등)을 조용히
+  // anthropic 으로 숨기지 않고 즉시 throw 해 설정 실수를 드러낸다.
+  if (raw !== "gemini" && raw !== "anthropic") {
+    throw new Error(
+      `LLM_PROVIDER 환경변수 값이 올바르지 않아요: "${raw}". ` +
+        `"gemini" 또는 "anthropic" 만 허용됩니다.`,
+    );
+  }
+  return raw;
 }
 
 const impl = getLlmProvider() === "gemini" ? gemini : anthropic;
