@@ -130,7 +130,7 @@ D2·D3·D4가 "thin monorepo"(=apps/games 단독, src/ 유지, backend·packages
 - [x] `turbo typecheck`(WIP gemini 제외 green) · `turbo lint` · `turbo build`(전 라우트) · `turbo test`(471/471) green
 - [ ] `bun run test:e2e` — **로컬 미실행**(build+start+브라우저 비용). CI e2e job 으로 검증 예정
 - [x] `apps/games/public/` 존재(갭 해소, .gitkeep)
-- [ ] 4-viewport `ui:audit` critical overflow 0 — **머지 전 실행 + 결과 PR 첨부 의무** (루트 AGENTS.md viewport 룰 — 순수 이동이라도 해당 경로 변경이면 게이트 적용)
+- [x] 4-viewport `ui:audit` critical overflow 0 — `/manage/content` 4 viewport(320·390·768·1280) 전부 실측 PASS, critical/informational overflow 0 (2026-06-30 검증). 캡처: `/tmp/ui-audit/{mobile-sm-320,iphone13-390,tablet-768,desktop-1280}.png`
 - [x] ci.yml·e2e-nightly.yml `apps/games` working-directory + paths-filter·awk·artifact 경로 갱신. codex-review.yml 무수정(루트 diff·문서 참조 — 거버넌스 §9)
 - [x] (D5) `.pullim-meta/CONVENTION.md` T-UI 경로 + README/CLAUDE/AGENTS 구조 섹션 갱신 (사용자 G1 게이트 무시 승인)
 - [x] (D3/D4 확인) backend·packages 미생성 — thin monorepo. BE 는 별 repo `pullim-api`

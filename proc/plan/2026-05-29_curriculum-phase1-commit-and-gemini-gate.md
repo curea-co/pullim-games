@@ -4,6 +4,16 @@
 > 근거: `daily_outcome/2026-05-29.md` A·B·C 단계
 > 연결: `proc/plan/2026-05-27_curriculum-ai-content-creation.md` · `proc/plan/2026-05-28_gemini-adapter.md`
 
+---
+
+> **[처리 방향 확정 — 2026-06-30, 사용자 G1 권한 위임]**
+>
+> **그룹 A (curriculum Phase 1) — SHIPPED.** main `#115`(`feat(curriculum): Phase 1 + 대시보드 CompactActivity 통합 — main 동기화(드리프트 해소)`) 로 이미 머지됨. `apps/games/lib/core/curriculum/catalog/`(4-depth catalog·loader·JSON) 가 origin/main 에 존재 확인(2026-06-30). 이후 #122 모노레포 재구조화로 `src/` 래퍼 제거되며 경로는 `apps/games/lib/...` 로 정착.
+>
+> **`feat/curriculum-phase1` 브랜치 — STALE.** origin/main 대비 2 커밋 앞서나(5abc71a, ef6492b) 그 내용은 #115 로 이미 main 반영 + pre-restructure `src/` 경로 기반 → 가치 없는 잔재. 정리 대상: `feat/curriculum-phase1`·`feat/curriculum-rebased`·`backup/curriculum-phase1-orig`(로컬+origin). → daily_outcome D "양자택일" 은 무의미(작업이 이미 ship 됨) — **브랜치 정리로 종결.**
+>
+> **그룹 C (Gemini prep GATED) — 후속 plan 으로 이관.** `apps/games/src/lib/server/ai/{gemini,index}.ts` WIP 처리는 `proc/plan/2026-06-30_gemini-adapter-land.md` 참조(E 항목).
+
 ## 목적
 
 WIP 56개(38개 파일, git diff --stat 기준) 가 단일 working tree 에 혼재한다.

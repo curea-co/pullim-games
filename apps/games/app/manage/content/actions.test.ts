@@ -3,11 +3,13 @@
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-vi.mock("@/lib/server/ai/anthropic", () => ({
+// actions.ts 는 provider switch (@/lib/server/ai = index) 를 import — 그 경계를 mock.
+vi.mock("@/lib/server/ai", () => ({
   generateFromSourceLLM: vi.fn(),
+  generateFromCurriculumLLM: vi.fn(),
 }));
 
-import { generateFromSourceLLM } from "@/lib/server/ai/anthropic";
+import { generateFromSourceLLM } from "@/lib/server/ai";
 import { generateFromSourceAction } from "./actions";
 
 const GENERIC_ERROR = "자동 생성에 실패했어요. 잠시 후 다시 시도해주세요.";
