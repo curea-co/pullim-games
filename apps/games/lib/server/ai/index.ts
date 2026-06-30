@@ -3,7 +3,7 @@
 //
 // 기본 provider: Anthropic Claude (현 동작 유지 — behavior-neutral 랜딩).
 //   - 기존 actions.ts 는 anthropic 직접 import 였음 (KNOWN-TRADE-OFF 해소).
-//   - Gemini 기본 전환은 prod GEMINI_API_KEY provisioning 후 별도 PR (default 플립).
+//   - Gemini 기본 전환은 prod GOOGLE_AI_STUDIO_API_KEY provisioning 후 별도 PR (default 플립).
 // opt-in provider: Gemini (LLM_PROVIDER=gemini 명시 시 — native responseSchema·무료 티어).
 
 import "server-only";

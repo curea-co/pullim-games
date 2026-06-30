@@ -10,6 +10,7 @@
 
 import "server-only";
 import { GoogleGenAI } from "@google/genai";
+import { z } from "zod";
 import type {
   BlankDraft,
   CatalogUnit,
@@ -221,39 +222,51 @@ function getClient(): GoogleGenAI {
 
 type Difficulty = 1 | 2 | 3 | 4 | 5;
 
-interface TypingJson {
-  cards: {
-    answer: string;
-    meaning: string;
-    pronunciation?: string;
-    difficulty?: number;
-  }[];
-}
+// spec/01 §21 — 외부 AI JSON 은 Zod 로 런타임 검증한다 (타입 단언 금지).
+// API responseJsonSchema 가 1차 강제하지만, 신뢰 경계 밖 입력이므로 파싱 결과를 재검증.
+const TypingJsonSchema = z.object({
+  cards: z.array(
+    z.object({
+      answer: z.string(),
+      meaning: z.string(),
+      pronunciation: z.string().optional(),
+      difficulty: z.number().optional(),
+    }),
+  ),
+});
+type TypingJson = z.infer<typeof TypingJsonSchema>;
 
-interface WordMatchJson {
-  pairs: { left: string; right: string }[];
-  cardDifficulty?: number;
-}
+const WordMatchJsonSchema = z.object({
+  pairs: z.array(z.object({ left: z.string(), right: z.string() })),
+  cardDifficulty: z.number().optional(),
+});
+type WordMatchJson = z.infer<typeof WordMatchJsonSchema>;
 
-interface MultipleChoiceJson {
-  cards: {
-    question: string;
-    choices: string[];
-    correctIndex: number;
-    rationale?: string;
-    difficulty?: number;
-  }[];
-}
+const MultipleChoiceJsonSchema = z.object({
+  cards: z.array(
+    z.object({
+      question: z.string(),
+      choices: z.array(z.string()),
+      correctIndex: z.number(),
+      rationale: z.string().optional(),
+      difficulty: z.number().optional(),
+    }),
+  ),
+});
+type MultipleChoiceJson = z.infer<typeof MultipleChoiceJsonSchema>;
 
-interface BlankJson {
-  cards: {
-    passage: string;
-    answer: string;
-    distractors: string[];
-    rationale?: string;
-    difficulty?: number;
-  }[];
-}
+const BlankJsonSchema = z.object({
+  cards: z.array(
+    z.object({
+      passage: z.string(),
+      answer: z.string(),
+      distractors: z.array(z.string()),
+      rationale: z.string().optional(),
+      difficulty: z.number().optional(),
+    }),
+  ),
+});
+type BlankJson = z.infer<typeof BlankJsonSchema>;
 
 function clampDifficulty(d: number | undefined): Difficulty {
   if (typeof d !== "number" || Number.isNaN(d)) return 3;
@@ -272,8 +285,9 @@ function cardsJsonToDrafts(
   input: unknown,
 ): CustomCardDraft[] {
   if (kind === "typing") {
-    const i = input as TypingJson;
-    if (!Array.isArray(i?.cards)) return [];
+    const parsed = TypingJsonSchema.safeParse(input);
+    if (!parsed.success) return [];
+    const i: TypingJson = parsed.data;
     return i.cards.map(
       (c): TypingDraft => ({
         kind: "typing",
@@ -287,8 +301,9 @@ function cardsJsonToDrafts(
     );
   }
   if (kind === "word-match") {
-    const i = input as WordMatchJson;
-    if (!Array.isArray(i?.pairs)) return [];
+    const parsed = WordMatchJsonSchema.safeParse(input);
+    if (!parsed.success) return [];
+    const i: WordMatchJson = parsed.data;
     const cardDiff = clampDifficulty(i.cardDifficulty);
     const pairs = i.pairs
       .map((p) => ({
@@ -313,8 +328,9 @@ function cardsJsonToDrafts(
     return cards;
   }
   if (kind === "multiple-choice") {
-    const i = input as MultipleChoiceJson;
-    if (!Array.isArray(i?.cards)) return [];
+    const parsed = MultipleChoiceJsonSchema.safeParse(input);
+    if (!parsed.success) return [];
+    const i: MultipleChoiceJson = parsed.data;
     return i.cards
       .filter(
         (c) =>
@@ -336,8 +352,9 @@ function cardsJsonToDrafts(
       );
   }
   // blank
-  const i = input as BlankJson;
-  if (!Array.isArray(i?.cards)) return [];
+  const parsed = BlankJsonSchema.safeParse(input);
+  if (!parsed.success) return [];
+  const i: BlankJson = parsed.data;
   return i.cards
     .filter(
       (c) =>

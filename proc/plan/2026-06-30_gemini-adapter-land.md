@@ -13,7 +13,7 @@
 
 WIP 의 `index.ts` 는 **기본 provider 를 Gemini 로** 두고 있었음("recurring 무료 티어"). 그대로 랜딩하면:
 - 동작이 Gemini 로 바뀜 (behavior-neutral 아님)
-- prod `GEMINI_API_KEY` 미provisioning 시 콘텐츠 생성 전면 장애
+- prod `GOOGLE_AI_STUDIO_API_KEY` 미provisioning 시 콘텐츠 생성 전면 장애
 
 → **기본값을 anthropic 으로 뒤집어 랜딩**. 현 동작 100% 유지, Gemini 는 `LLM_PROVIDER=gemini` 명시 opt-in. 기본 provider 플립(무료 티어 채택)은 prod 키 provisioning 후 별도 1줄 PR.
 
@@ -34,13 +34,20 @@ WIP 의 `index.ts` 는 **기본 provider 를 Gemini 로** 두고 있었음("recu
 - [x] `bun run test` — **492/492 pass** (이전 487 + actions.test.ts 5 복구)
 - [x] `bun run build` green (전 라우트, 15.4s)
 - [ ] e2e — 별도(`2026-06-30_e2e-infra-fix.md`). 본 변경은 server action import 경계만, 기본 동작 무변
-- [ ] (후속) prod `GEMINI_API_KEY` provisioning + 기본 provider 플립 PR
+- [ ] (후속) prod `GOOGLE_AI_STUDIO_API_KEY` provisioning + 기본 provider 플립 PR
 
 ## 4. 환경 변수
 
 - `LLM_PROVIDER` (선택): `gemini` 면 Gemini, 그 외/미설정 = **anthropic**(기본).
-- `GEMINI_API_KEY`: `LLM_PROVIDER=gemini` 시에만 필요. 기본 경로에선 불필요 → 본 PR 은 새 secret 의존 0.
+- `GOOGLE_AI_STUDIO_API_KEY`: `LLM_PROVIDER=gemini` 시에만 필요(gemini.ts `getClient()` 가 읽음 — 계약 정합: `2026-05-28_gemini-adapter.md` §43·§67). 기본 경로에선 불필요 → 본 PR 은 새 secret 의존 0.
 - 기존 `ANTHROPIC_API_KEY` 경로 무변.
+
+## 5.1 Codex Review round 1 — 코드 fix 응답 (회피 아님, 거버넌스 §9)
+
+PR #128 codex 가 머지 전 차단 2건 지적 → 둘 다 코드 fix 로 응답:
+
+1. **secret 이름 불일치** — 코드는 `GOOGLE_AI_STUDIO_API_KEY`(gemini.ts `getClient()`)인데 본 plan 초안이 `GEMINI_API_KEY` 로 오기. 계약 정식 이름은 `GOOGLE_AI_STUDIO_API_KEY`(2026-05-28 plan·전 daily 일치) → plan·index.ts 주석을 코드에 맞춰 정정. 코드 env 이름 무변.
+2. **Zod 런타임 검증 누락 (spec/01 §21)** — gemini.ts `cardsJsonToDrafts` 가 외부 AI JSON 을 `as TypingJson` 타입 단언으로 받던 것을 → 4 kind 별 Zod 스키마(`safeParse`) 검증으로 교체. API `responseJsonSchema` 1차 강제 + 파싱 결과 2차 Zod 재검증(신뢰 경계 밖 입력). 검증 실패 → `[]` 반환 → 호출자 친절 에러. (참고: anthropic.ts `toolInputToDrafts` 도 동일 `as` 패턴이나 본 PR delta 밖 — 후속 정합 대상)
 
 ## 5. 거버넌스
 
