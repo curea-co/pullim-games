@@ -41,7 +41,7 @@
 **KNOWN-TRADE-OFF: `proc/plan/2026-06-30_target-middle-to-high1.md` §4** (= 본 절). Codex #129 R1 finding 1("허브/추천 표면이 여전히 고등 상위 학년 콘텐츠 노출") 정당 deferral 근거.
 
 - **게임 콘텐츠 노출면 학년 필터** — 허브·추천(`GameMeta.stage` 계약 표면)의 학년 밴드 정합은 본 PR 비스코프. 이유:
-  1. 현 `stage?: "middle" | "high"` 는 **binary** — 고1 과 고2·고3 콘텐츠를 분리 못 함. 학년 단위 노출 제어는 미구현 기능("학년별 게임 제공 필터", `lib/games/registry.ts:22`·`types.ts:53` 에 "향후 재설계 예정" 으로 코드 자체 명시).
+  1. 현 `stage?: "middle" | "high"` 는 **binary** — 고1 과 고2·고3 콘텐츠를 분리 못 함. 학년 단위 노출 제어는 미구현 기능("학년별 게임 제공 필터", `apps/games/lib/games/registry.ts:22`·`apps/games/lib/games/types.ts:53` 에 "향후 재설계 예정" 으로 코드 자체 명시).
   2. 21 게임 콘텐츠 grade-band 감사·재보정(`english-blank` 고3 단원 등)은 [[project_middle_school_repositioning]] §보류(콘텐츠 재보정 후속 PR §1.1) 의 별도 대규모 스코프.
 - **본 PR 경계**: GRADES enum(가입 학년 수집) = 즉시 반영(고2·고3 차단). 콘텐츠 노출 = 후속. spec/02 §2.4 에 phasing 명시로 문서·동작 괴리 해소(과약속 제거).
 - **후속 트리거**: "학년별 게임 제공 필터" 설계 시 — 전 게임 stage(또는 grade-band) 태깅 + 사용자 grade 매칭 노출 필터 + 21 게임 콘텐츠 재보정 동반.
