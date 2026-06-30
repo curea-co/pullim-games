@@ -15,12 +15,12 @@ import {
   type CustomCardDraft,
   type CustomCardKind,
 } from "@/lib/core";
-// Phase 1: anthropic 직접 import. Gemini provider switch (index.ts) 는 spec/09 합의 후 별도 PR.
-// KNOWN-TRADE-OFF: proc/plan/2026-05-29_curriculum-phase1-commit-and-gemini-gate.md C 항목
+// LLM provider switch (index.ts) — 기본 anthropic, LLM_PROVIDER=gemini 로 opt-in.
+// 근거: proc/plan/2026-06-30_gemini-adapter-land.md (KNOWN-TRADE-OFF C 항목 해소).
 import {
   generateFromCurriculumLLM,
   generateFromSourceLLM,
-} from "@/lib/server/ai/anthropic";
+} from "@/lib/server/ai";
 
 export interface GenerateResult {
   ok: boolean;
