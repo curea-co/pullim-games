@@ -2,11 +2,11 @@
 import { z } from "zod";
 import { isGrade } from "@/lib/core/player";
 
-// 중·고등 타겟 — 가입 시 학년 수집·검증. 게스트(/start)와 동일 GRADES(중1~고3, 초등 제외).
-// isGrade 단일 출처 재사용(드리프트 차단). 근거: proc/plan/2026-06-26_middle-high-target.md.
+// 중1~고1 타겟 — 가입 시 학년 수집·검증. 게스트(/start)와 동일 GRADES(중1~고1, 초등·고2·고3 제외).
+// isGrade 단일 출처 재사용(드리프트 차단). 근거: proc/plan/2026-06-30_target-middle-to-high1.md.
 const gradeSchema = z
   .string({ required_error: "학년을 선택해주세요" })
-  .refine(isGrade, "중·고등(중1~고3) 학년만 선택할 수 있어요");
+  .refine(isGrade, "중1~고1 학년만 선택할 수 있어요");
 
 // bcrypt 72바이트 한계 — 초과 시 뒤가 조용히 잘려 입력≠해시대상. 가입·로그인 공통 적용.
 const within72Bytes = (v: string) => new TextEncoder().encode(v).length <= 72;

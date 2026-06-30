@@ -38,9 +38,9 @@ function makeDocument(initial = "") {
   };
 }
 
-describe("player — GRADES 중등 한정", () => {
-  it("GRADES 는 중·고(중1~고3) 포함, 초등 제외", () => {
-    expect([...GRADES]).toEqual(["중1", "중2", "중3", "고1", "고2", "고3"]);
+describe("player — GRADES 중1~고1 한정", () => {
+  it("GRADES 는 중1~고1 포함, 초등·고2·고3 제외", () => {
+    expect([...GRADES]).toEqual(["중1", "중2", "중3", "고1"]);
   });
 });
 
