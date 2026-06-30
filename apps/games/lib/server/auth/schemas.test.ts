@@ -25,12 +25,16 @@ describe("SignupSchema", () => {
     expect(SignupSchema.safeParse({ email: base.email, password: base.password }).success).toBe(false);
     expect(SignupSchema.safeParse({ ...base, consent: false }).success).toBe(false);
   });
-  it("grade 누락·초등(범위 밖) 거부 + 중·고 학년 허용", () => {
+  it("grade — 타겟(중1~고1) 만 허용, 누락·초등·고2·고3 거부", () => {
     const { grade: _omit, ...noGrade } = base;
     expect(SignupSchema.safeParse(noGrade).success).toBe(false);
     expect(SignupSchema.safeParse({ ...base, grade: "초5" }).success).toBe(false); // 초등=주니어 영역
+    expect(SignupSchema.safeParse({ ...base, grade: "중1" }).success).toBe(true);
     expect(SignupSchema.safeParse({ ...base, grade: "중3" }).success).toBe(true);
-    expect(SignupSchema.safeParse({ ...base, grade: "고1" }).success).toBe(true); // 고등도 타겟
+    expect(SignupSchema.safeParse({ ...base, grade: "고1" }).success).toBe(true); // 타겟 상단
+    // 타겟 정밀화(중1~고1) 핵심 계약 — 서버 가입 검증이 고2·고3 을 직접 차단.
+    expect(SignupSchema.safeParse({ ...base, grade: "고2" }).success).toBe(false);
+    expect(SignupSchema.safeParse({ ...base, grade: "고3" }).success).toBe(false);
   });
   it("잘못된 이메일 거부", () => {
     expect(SignupSchema.safeParse({ ...base, email: "not-an-email" }).success).toBe(false);

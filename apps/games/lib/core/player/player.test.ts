@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { GRADES, GUEST_COOKIE, createPlayer, getPlayer } from "./index";
+import { GRADES, GUEST_COOKIE, createPlayer, getPlayer, isGrade } from "./index";
 
 // 중등 재포지셔닝(2026-06-23) — GRADES 축소에 따른 신원 마이그레이션.
 // 근거: proc/plan/2026-06-23_middle-school-repositioning.md + Codex #125.
@@ -38,9 +38,25 @@ function makeDocument(initial = "") {
   };
 }
 
-describe("player — GRADES 중등 한정", () => {
-  it("GRADES 는 중·고(중1~고3) 포함, 초등 제외", () => {
-    expect([...GRADES]).toEqual(["중1", "중2", "중3", "고1", "고2", "고3"]);
+describe("player — GRADES 중1~고1 한정", () => {
+  it("GRADES 는 중1~고1 포함, 초등·고2·고3 제외", () => {
+    expect([...GRADES]).toEqual(["중1", "중2", "중3", "고1"]);
+  });
+
+  // 타겟 정밀화(2026-06-30, 중1~고1)의 핵심 회귀를 명시 잠금:
+  // isGrade 가 고2·고3 을 거부해야 게스트·회원 양쪽 학년 수집이 타겟을 따른다.
+  it("isGrade — 유효 학년(중1~고1) 만 통과", () => {
+    for (const g of ["중1", "중2", "중3", "고1"]) {
+      expect(isGrade(g)).toBe(true);
+    }
+  });
+
+  it("isGrade — 타겟 밖(고2·고3·초등) 거부", () => {
+    for (const g of ["고2", "고3", "초5", "초6", "중4", ""]) {
+      expect(isGrade(g)).toBe(false);
+    }
+    expect(isGrade(undefined)).toBe(false);
+    expect(isGrade(1)).toBe(false);
   });
 });
 
