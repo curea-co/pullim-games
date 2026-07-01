@@ -48,17 +48,19 @@ const config: Config = {
   			},
   			'pullim-lemon': '#E6FF4C',
   			highlight: '#E6FF4C',
+  			// 풀림 통합 룩 — 중립 스케일을 ink/paper-tinted 로 remap(cool-gray → blue-ink).
+  			// slate 직접 사용 컴포넌트(셸·인증·허브)도 통합 룩 반영. spec/08 §8.1.
   			'pullim-slate': {
-  				'50': '#F8FAFC',
-  				'100': '#F1F5F9',
-  				'200': '#E2E8F0',
-  				'300': '#CBD5E1',
-  				'400': '#94A3B8',
-  				'500': '#64748B',
-  				'600': '#475569',
-  				'700': '#334155',
-  				'800': '#1E293B',
-  				'900': '#0F172A'
+  				'50': '#F4FAFF',
+  				'100': '#E8EFF6',
+  				'200': '#D6E2EE',
+  				'300': '#B0BCC3',
+  				'400': '#8A97A0',
+  				'500': '#5E6B72',
+  				'600': '#45555C',
+  				'700': '#33444B',
+  				'800': '#1F2C32',
+  				'900': '#0D1A1F'
   			},
   			'pullim-blue': {
   				'50': '#E5F0FB',
@@ -81,13 +83,7 @@ const config: Config = {
   				'Spoqa Han Sans Neo',
   				'sans-serif'
   			],
-  			// 풀림 통합 룩 — 브랜드 헤딩 + mono (next/font CSS var). spec/08 §8.2.
-  			brand: [
-  				'var(--font-bai-jamjuree)',
-  				'Pretendard Variable',
-  				'system-ui',
-  				'sans-serif'
-  			],
+  			// 풀림 통합 룩 — mono (next/font CSS var). spec/08 §8.2.
   			mono: [
   				'var(--font-jetbrains-mono)',
   				'ui-monospace',

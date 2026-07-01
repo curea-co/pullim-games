@@ -1,17 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Bai_Jamjuree, JetBrains_Mono } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import { AppShell } from "@/components/shell/app-shell";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
-// 풀림 통합 룩(spec/08 §8.2) — 브랜드 헤딩(Bai Jamjuree) + mono 라벨/코드(JetBrains Mono).
-// 본문 한글은 Pretendard(globals.css CDN) 유지. spec/08 §8.2.
-const baiJamjuree = Bai_Jamjuree({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-bai-jamjuree",
-  display: "swap",
-});
+// 풀림 통합 룩(spec/08 §8.2) — mono 라벨/코드(JetBrains Mono, latin).
+// 본문·헤딩 한글은 Pretendard(globals.css CDN) 유지. brand latin 폰트는 games 한글 UI 에
+// 렌더 표면이 없어 미도입(spec/08 §8.2 note).
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -81,10 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang="ko"
-      className={`${baiJamjuree.variable} ${jetbrainsMono.variable}`}
-    >
+    <html lang="ko" className={jetbrainsMono.variable}>
       <body>
         <AppShell role="student">{children}</AppShell>
       </body>

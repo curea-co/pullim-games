@@ -62,9 +62,10 @@ Tailwind v4 마이그레이션은 **비스코프**(games=Next15+Tailwind v3 유�
 ## 5. 검증 (자가 체크리스트)
 - [x] Phase 1: typecheck·lint·build green, 폰트 3종(Pretendard·Bai Jamjuree·JetBrains Mono) 로드 확인, test 497/497
 - [x] Phase 2: 헤더 72px 적용 확인 (container-x 는 Phase 3 로 이관)
-- [x] **4-viewport ui:audit (merge gate, AGENTS.md)** — 2026-07-01 실측:
-  - `/` (탑네비 서피스): 320·390·768·1280 **critical/informational overflow 0 PASS**
-  - `/manage/content` (사이드바 서피스): 4 viewport **overflow 0 PASS**
-  - 캡처: `/tmp/ui-audit/{mobile-sm-320,iphone13-390,tablet-768,desktop-1280}.png`
+- [x] **4-viewport ui:audit (merge gate, AGENTS.md)** — 2026-07-01 실측, **3 서피스 전부 critical overflow 0 PASS**:
+  - `/` (탑네비): 320·390·768·1280 overflow 0
+  - `/manage/content` (사이드바): 4 viewport overflow 0
+  - `/games/factorization` (게임, guest 시드): 4 viewport overflow 0 — 헤더가 게임 페이지에도 렌더되므로 포함
+  - slate remap 후 재감사에서도 3 서피스 overflow 0 유지
 - [ ] Phase 3(후속): container-x·section·footer 세부 정합 + 게임 라우트(로그인) 감사
 - [ ] spec/08 ↔ tailwind.config 토큰 정합(diff 0 표류)
