@@ -62,7 +62,7 @@ function NavRow({ item, isActive, onNavigate, compact }: NavRowProps) {
         aria-current={isActive ? "page" : undefined}
         title={compact ? item.label : item.description}
         className={cn(
-          "group flex items-center gap-2 rounded-lg text-sm font-medium transition-colors",
+          "group flex items-center gap-2 rounded-button text-sm font-medium transition-colors",
           compact ? "h-11 w-full justify-center" : "min-h-11 px-2 py-2",
           isActive
             ? "bg-accent-positive/10 font-semibold text-pullim-slate-900"
