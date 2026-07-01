@@ -5,6 +5,89 @@
 /* Pretendard Variable — CDN 임포트. SPEC §08.2 강제. */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 
+/* ==========================================================================
+   Pullim Design Tokens — pullim-web 정합 (2026-07-01)
+   SoT: proc/spec/08-디자인-시스템.md §8.1·§8.2 + proc/plan/2026-07-01_pullim-web-layout-alignment.md
+   ========================================================================== */
+:root {
+  /* Core 4 */
+  --pullim-blue: #0362da;
+  --pullim-ink: #0d1a1f;
+  --pullim-paper: #f0f6fb;
+  --pullim-lemon: #e6ff4c;
+
+  /* Extended */
+  --pullim-white: #ffffff;
+  --pullim-paper2: #f0f6fb;
+  --pullim-paper3: #f4faff;
+  --pullim-ink2: #1f2c32;
+  --pullim-ink3: #45555c;
+  --pullim-ink4: #5e6b72;
+  --pullim-ink5: #b0bcc3;
+  --pullim-line: #d6e2ee;
+  --pullim-line2: #e8eff6;
+
+  /* Semantic */
+  --bg: var(--pullim-paper);
+  --bg-raised: var(--pullim-white);
+  --bg-rgb: 240, 246, 251;
+  --bg-raised-rgb: 255, 255, 255;
+  --fg: var(--pullim-ink);
+  --fg-muted: var(--pullim-ink3);
+  --fg-subtle: #5e6b72;
+  --accent: var(--pullim-blue);
+  --highlight: var(--pullim-lemon);
+  --hairline: var(--pullim-line);
+  --hairline-soft: var(--pullim-line2);
+
+  /* Spacing (24px base, 48px section) */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+
+  /* Radii */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 18px;
+
+  /* Typography */
+  --fs-xxs: 11px;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-base: 16px;
+  --fs-md: 18px;
+  --fs-lg: 22px;
+  --fs-xl: 28px;
+  --fs-2xl: 36px;
+  --fs-3xl: 48px;
+  --fs-display: 68px;
+  --lh-tight: 1.05;
+  --lh-snug: 1.2;
+  --lh-body: 1.65;
+  --ls-tight: -0.02em;
+  --ls-display: -0.03em;
+  --ls-label: 0.16em;
+  --ls-wide: 0.22em;
+
+  /* Layout */
+  --container: 1280px;
+  --nav-h: 72px;
+  --section-pad: clamp(72px, 10vw, 160px);
+
+  /* Font stacks (next/font CSS vars filled at runtime; Pretendard via CDN) */
+  --f-kr: "Pretendard Variable", "Pretendard", "Spoqa Han Sans Neo", sans-serif;
+  --f-brand: var(--font-bai-jamjuree), "Pretendard Variable", system-ui, sans-serif;
+  --f-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --f-body: var(--f-kr);
+}
+
 @layer base {
   :root {
     color-scheme: light;
@@ -40,6 +123,19 @@
   /* SPEC §08.2 — tabular-nums 강제 */
   .tabular {
     font-variant-numeric: tabular-nums;
+  }
+
+  /* pullim-web 정합 — 중앙 컨테이너 + 반응형 gutter (web .container-x) */
+  .container-x {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: clamp(20px, 4vw, 48px);
+  }
+
+  /* 섹션 세로 리듬 (web .section) */
+  .section {
+    padding-block: var(--section-pad);
   }
 
   /* prefers-reduced-motion: reduce 시 ambient float 정지 (Framer Motion에서 별도 처리) */

@@ -13,21 +13,41 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+  			// pullim-web 정합 팔레트 (spec/08 §8.1). 기존 시맨틱 이름 유지 + 값 remap.
   			bg: {
-  				primary: '#FBFAF8',
+  				primary: '#F0F6FB',
   				block: '#FFFFFF'
   			},
   			border: {
-  				hairline: '#E5E5E5'
+  				hairline: '#D6E2EE'
   			},
   			type: {
-  				primary: '#0F172A',
-  				secondary: '#64748B'
+  				primary: '#0D1A1F',
+  				secondary: '#45555C'
   			},
   			accent: {
   				positive: '#0362DA',
   				negative: '#F87171'
   			},
+  			// Core 4 + Extended (web)
+  			'pullim-ink': {
+  				DEFAULT: '#0D1A1F',
+  				'2': '#1F2C32',
+  				'3': '#45555C',
+  				'4': '#5E6B72',
+  				'5': '#B0BCC3'
+  			},
+  			'pullim-paper': {
+  				DEFAULT: '#F0F6FB',
+  				'2': '#F0F6FB',
+  				'3': '#F4FAFF'
+  			},
+  			'pullim-line': {
+  				DEFAULT: '#D6E2EE',
+  				'2': '#E8EFF6'
+  			},
+  			'pullim-lemon': '#E6FF4C',
+  			highlight: '#E6FF4C',
   			'pullim-slate': {
   				'50': '#F8FAFC',
   				'100': '#F1F5F9',
@@ -51,8 +71,8 @@ const config: Config = {
   			},
   			'pullim-danger': '#EF4444',
   			card: '#FFFFFF',
-  			foreground: '#0F172A',
-  			background: '#FBFAF8'
+  			foreground: '#0D1A1F',
+  			background: '#F0F6FB'
   		},
   		fontFamily: {
   			sans: [
@@ -60,6 +80,20 @@ const config: Config = {
   				'Pretendard',
   				'Spoqa Han Sans Neo',
   				'sans-serif'
+  			],
+  			// pullim-web 정합 — 브랜드 헤딩 + mono (next/font CSS var). spec/08 §8.2.
+  			brand: [
+  				'var(--font-bai-jamjuree)',
+  				'Pretendard Variable',
+  				'system-ui',
+  				'sans-serif'
+  			],
+  			mono: [
+  				'var(--font-jetbrains-mono)',
+  				'ui-monospace',
+  				'SF Mono',
+  				'Menlo',
+  				'monospace'
   			]
   		},
   		fontSize: {
@@ -97,7 +131,9 @@ const config: Config = {
   			block: '4px',
   			button: '6px',
   			dropzone: '8px',
-  			modal: '16px'
+  			modal: '16px',
+  			// web --r-lg (service symbol 컨테이너 등). Tailwind 기본 rounded-lg 미충돌 이름.
+  			symbol: '18px'
   		},
   		boxShadow: {
   			block: '0 1px 0 rgba(0,0,0,0.04)',
