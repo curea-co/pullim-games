@@ -131,9 +131,7 @@ const config: Config = {
   			block: '4px',
   			button: '6px',
   			dropzone: '8px',
-  			modal: '16px',
-  			// web --r-lg (service symbol 컨테이너 등). Tailwind 기본 rounded-lg 미충돌 이름.
-  			symbol: '18px'
+  			modal: '16px'
   		},
   		boxShadow: {
   			block: '0 1px 0 rgba(0,0,0,0.04)',
