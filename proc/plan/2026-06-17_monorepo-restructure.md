@@ -127,7 +127,7 @@ D2·D3·D4가 "thin monorepo"(=apps/games 단독, src/ 유지, backend·packages
 - [x] 앱 전체 `apps/games/` 이동(388 renames), `src/` 유지, `@/* → ./src/*` 동작 (typecheck alias 에러 0)
 - [x] `apps/games/tsconfig.json` extends `../../tsconfig.base.json`, paths 유지
 - [x] `gen:registry` 정상(21게임 등록) + registry.generated.ts in-sync(diff 0)
-- [x] `turbo typecheck`(WIP gemini 제외 green) · `turbo lint` · `turbo build`(전 라우트) · `turbo test`(471/471) green
+- [x] `turbo typecheck` · `turbo lint` · `turbo build`(전 라우트) · `turbo test`(471/471) green
 - [ ] `bun run test:e2e` — **로컬 미실행**(build+start+브라우저 비용). CI e2e job 으로 검증 예정
 - [x] `apps/games/public/` 존재(갭 해소, .gitkeep)
 - [x] 4-viewport `ui:audit` critical overflow 0 — `/manage/content` 4 viewport(320·390·768·1280) 전부 실측 PASS, critical/informational overflow 0 (2026-06-30 검증). 캡처: `/tmp/ui-audit/{mobile-sm-320,iphone13-390,tablet-768,desktop-1280}.png`
@@ -138,6 +138,6 @@ D2·D3·D4가 "thin monorepo"(=apps/games 단독, src/ 유지, backend·packages
 ## 7. 잔여 (별도 처리)
 
 - **D6 Vercel root directory → `apps/games`**: 대시보드 설정. "개인→공용 계정 이전"과 함께. 머지 전 preview 배포 확인 필요.
-- **commit/PR**: 사용자 지시 시. 미추적 WIP(`apps/games/src/lib/server/ai/{gemini,index}.ts` — gemini-adapter 작업물)는 본 restructure 와 분리 권장.
+- **commit/PR**: 사용자 지시 시.
 - **branch**: `chore/monorepo-restructure` (현재 작업 브랜치).
 ```
