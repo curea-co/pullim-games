@@ -9,7 +9,7 @@ import "./globals.css";
 // 렌더 표면이 없어 미도입(spec/08 §8.2 note).
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-jetbrains-mono",
   display: "swap",
 });

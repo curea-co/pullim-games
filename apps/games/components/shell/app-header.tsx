@@ -33,7 +33,7 @@ export function AppHeader({ role, variant = "default" }: Props) {
           <Link
             href="/games"
             aria-label="게임 허브로 돌아가기"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-600 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-pullim-slate-600 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
@@ -88,7 +88,7 @@ export function AppHeader({ role, variant = "default" }: Props) {
                   type="button"
                   aria-label="검색 (준비 중)"
                   disabled
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
                   title="검색 — 준비 중"
                 >
                   <Search className="h-5 w-5" />
@@ -97,7 +97,7 @@ export function AppHeader({ role, variant = "default" }: Props) {
                   type="button"
                   aria-label="알림 (준비 중)"
                   disabled
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
                   title="알림 — 준비 중"
                 >
                   <Bell className="h-5 w-5" />
