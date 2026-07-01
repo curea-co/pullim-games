@@ -1,9 +1,9 @@
 # 디자인 시스템 정합 — 풀림 통합 룩 (풀 정합)
 
 > 작성: Claude Opus 4.8 (에이전트) · 2026-07-01
-> 근거: G1 지시 2026-07-01 — 풀림 제품군 통합 룩(ink/paper/blue/lemon 팔레트 + 3-role 폰트)으로 정합. 스코프 "풀 디자인 정합" 확인.
+> 근거: G1 지시 2026-07-01 — 풀림 제품군 통합 룩(ink/paper/blue/lemon 팔레트 + 2-role 폰트)으로 정합. 스코프 "풀 디자인 정합" 확인.
 > **SoT: 본 리포 `proc/spec/08-디자인-시스템.md`.** 정합 대상 룩의 값은 spec/08 §8.1·§8.2 에 encode 되어 있으며, 이후 모든 작업의 권위는 spec/08(+§8.3·§8.4)이다. 외부 리포 코드/파일 참조·import 없음 — **독립 프로젝트 원칙(CLAUDE.md §7) 준수**. (디자인 방향의 origin 은 G1 의 풀림 통합 룩 지시이며, 본 리포 spec 이 이를 자립적으로 정의한다.)
-> 동반 spec 개정(G1 승인 2026-07-01): `spec/08 §8.1`(팔레트)·`§8.2`(3-role 폰트) + `spec/09` 폰트 라인 정합.
+> 동반 spec 개정(G1 승인 2026-07-01): `spec/08 §8.1`(팔레트)·`§8.2`(2-role 폰트) + `spec/09` 폰트 라인 정합.
 
 ## 0. 목표
 
@@ -14,10 +14,10 @@
 | 항목 | 통합 룩 (목표, spec/08) | games (현재) |
 |---|---|---|
 | 팔레트 | ink `#0D1A1F`·paper `#F0F6FB`·blue `#0362DA`·**lemon `#E6FF4C`** + ink2~5·line/line2·paper2/3 | slate 50~900·blue·bg-primary `#FBFAF8`·type-primary `#0F172A` |
-| 폰트 | Pretendard(본문) + **Bai Jamjuree**(brand) + **JetBrains Mono**(mono) | Pretendard 단독 |
+| 폰트 | Pretendard(본문·헤딩) + **JetBrains Mono**(mono). brand latin 폰트 미도입(한글 UI 렌더 표면 부재) | Pretendard 단독 |
 | 헤더 | 72px sticky, backdrop blur, hairline | 56px(h-14) |
 | 컨테이너 | 1280px, gutter `clamp(20,4vw,48)` (`.container-x`) | 1280px, px-4/6/8 |
-| radii | 4/8/**18** | 4/6/8/16 |
+| radii | 4/6/8/16 (spec §8.4 준수 — 18px 미도입) | 4/6/8/16 |
 | spacing | `--s-1~10` (4~128) | Tailwind 기본 |
 | type scale | `--fs-xxs~display` (11~68) + `--lh`·`--ls` | display/body/label/helper |
 | section | `--section-pad clamp(72,10vw,160)` | py-6/8 |
@@ -28,17 +28,17 @@ games 컴포넌트·21게임이 쓰는 기존 토큰 **이름 유지**하고 **�
 
 - `bg-primary #FBFAF8 → paper #F0F6FB` / `border-hairline #E5E5E5 → line #D6E2EE` / `type-primary #0F172A → ink #0D1A1F` / `type-secondary → ink3 #45555C` / `accent-positive` 불변(#0362DA)
 - `pullim-slate-*` 스케일 → web ink/paper 계열로 색온도 이동(cool→ink-tinted). 근사 매핑, audit 로 회귀 검출.
-- **신규**: `lemon/highlight`, `pullim-ink-{2,3,4,5}`, `paper-{2,3}`, `line2`, font `brand`/`mono`, radii `lg=18`, spacing `--s-*`, `--nav-h`, `--section-pad`, `.container-x`·`.section` 유틸.
+- **신규(실제 반영)**: `pullim-lemon`, `pullim-ink-{2,3,4,5}`, `pullim-paper-{2,3}`, `pullim-line-{,2}`, font `mono`(JetBrains Mono). radii 18px·`highlight` alias·CSS-var 스케일(spacing/type)·container-x 는 spec §8.2~§8.4 정합상 미도입(후속 Phase 에서 spec 동반 시).
 
-Tailwind v4 마이그레이션은 **비스코프**(games=Next15+Tailwind v3 유지) — web 토큰 값을 v3 config + globals CSS var 로 이식.
+Tailwind v4 마이그레이션은 **비스코프**(games=Next15+Tailwind v3 유지) — 통합 룩 토큰 값을 v3 `tailwind.config`(hex) 로 이식. games 토큰 SoT 는 config 이며, globals CSS-var 병행 시스템은 미도입(codex R1 — 미소비·spec 드리프트 회피).
 
 ## 3. 단계 (Phase)
 
 ### Phase 1 — 디자인 파운데이션 (토큰·폰트·spec) ← 본 PR 시작
-- [ ] `layout.tsx`: Bai Jamjuree + JetBrains Mono `next/font/google` 추가 → CSS var(`--font-bai-jamjuree`·`--font-jetbrains-mono`) 노출. Pretendard 현 CDN 유지.
-- [ ] `globals.css`: web CSS-var 토큰 이식(:root 팔레트·semantic·spacing·radii·type·layout·font stacks) + dark theme + `.container-x`·`.section` 유틸.
-- [ ] `tailwind.config.ts`: 시맨틱 remap + 신규 토큰(브랜드·mono 폰트, lemon, ink 스케일, radii-lg, spacing) 추가.
-- [ ] `spec/08 §8.1·§8.2` 개정 — 팔레트(lemon·ink/paper) + 타이포(3 폰트 role) 반영. 기존 "Pretendard 단독·타 폰트 금지" → "본문 Pretendard, 브랜드 Bai Jamjuree, mono JetBrains Mono" 로 개정(G1 승인).
+- [x] `layout.tsx`: JetBrains Mono `next/font/google` 추가 → CSS var(`--font-jetbrains-mono`). Pretendard CDN 유지. (brand latin 미도입)
+- [x] `globals.css`: 원상 유지 — games 토큰 SoT 는 `tailwind.config`(hex). CSS-var 병행 시스템·dark·container-x 는 미소비·spec 드리프트로 미도입(codex R1).
+- [x] `tailwind.config.ts`: 시맨틱 remap + slate 스케일 remap(ink/paper-tinted) + 신규 토큰(mono 폰트, lemon, ink/paper/line 스케일).
+- [x] `spec/08 §8.1·§8.2` + `spec/09` 개정(G1 승인) — 팔레트(lemon·ink/paper) + 타이포 2-role(Pretendard 본문·헤딩 + JetBrains Mono mono). brand latin 미도입 명시.
 - [ ] `typecheck·lint·build` green.
 
 ### Phase 2 — 셸 크롬 정합
@@ -60,7 +60,7 @@ Tailwind v4 마이그레이션은 **비스코프**(games=Next15+Tailwind v3 유�
 - **4-viewport audit HARD gate**: 공통 셸·config 변경이라 머지 전 필수(AGENTS.md viewport 룰).
 
 ## 5. 검증 (자가 체크리스트)
-- [x] Phase 1: typecheck·lint·build green, 폰트 3종(Pretendard·Bai Jamjuree·JetBrains Mono) 로드 확인, test 497/497
+- [x] Phase 1: typecheck·lint·build green, 폰트 2종(Pretendard·JetBrains Mono) 로드 확인, test 497/497
 - [x] Phase 2: 헤더 72px 적용 확인 (container-x 는 Phase 3 로 이관)
 - [x] **4-viewport ui:audit (merge gate, AGENTS.md)** — 2026-07-01 실측, **3 서피스 전부 critical overflow 0 PASS**:
   - `/` (탑네비): 320·390·768·1280 overflow 0

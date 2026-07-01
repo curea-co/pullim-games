@@ -47,7 +47,6 @@ const config: Config = {
   				'2': '#E8EFF6'
   			},
   			'pullim-lemon': '#E6FF4C',
-  			highlight: '#E6FF4C',
   			// 풀림 통합 룩 — 중립 스케일을 ink/paper-tinted 로 remap(cool-gray → blue-ink).
   			// slate 직접 사용 컴포넌트(셸·인증·허브)도 통합 룩 반영. spec/08 §8.1.
   			'pullim-slate': {
