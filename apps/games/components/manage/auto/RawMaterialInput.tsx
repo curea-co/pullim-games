@@ -27,7 +27,7 @@ export function RawMaterialInput({ value, onChange }: Props) {
         rows={10}
         autoComplete="off"
         spellCheck={false}
-        className="rounded-block border-border-hairline bg-bg-block font-mono text-helper leading-relaxed text-type-primary placeholder:text-type-secondary/60 focus-visible:border-type-primary focus-visible:ring-0"
+        className="rounded-block border-border-hairline bg-bg-block font-sans text-helper leading-relaxed text-type-primary placeholder:text-type-secondary/60 focus-visible:border-type-primary focus-visible:ring-0"
       />
       <p className="flex items-center justify-between text-helper text-type-secondary">
         <span>
