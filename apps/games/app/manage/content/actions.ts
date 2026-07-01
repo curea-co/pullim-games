@@ -15,12 +15,10 @@ import {
   type CustomCardDraft,
   type CustomCardKind,
 } from "@/lib/core";
-// LLM provider switch (index.ts) — 기본 anthropic, LLM_PROVIDER=gemini 로 opt-in.
-// 근거: proc/plan/2026-06-30_gemini-adapter-land.md (KNOWN-TRADE-OFF C 항목 해소).
 import {
   generateFromCurriculumLLM,
   generateFromSourceLLM,
-} from "@/lib/server/ai";
+} from "@/lib/server/ai/anthropic";
 
 export interface GenerateResult {
   ok: boolean;

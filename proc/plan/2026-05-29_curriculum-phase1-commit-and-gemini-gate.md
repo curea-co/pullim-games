@@ -12,7 +12,7 @@
 >
 > **`feat/curriculum-phase1` 브랜치 — STALE.** origin/main 대비 2 커밋 앞서나(5abc71a, ef6492b) 그 내용은 #115 로 이미 main 반영 + pre-restructure `src/` 경로 기반 → 가치 없는 잔재. 정리 대상: `feat/curriculum-phase1`·`feat/curriculum-rebased`·`backup/curriculum-phase1-orig`(로컬+origin). → daily_outcome D "양자택일" 은 무의미(작업이 이미 ship 됨) — **브랜치 정리로 종결.**
 >
-> **그룹 C (Gemini prep GATED) — 후속 plan 으로 이관.** `apps/games/src/lib/server/ai/{gemini,index}.ts` WIP 처리는 `proc/plan/2026-06-30_gemini-adapter-land.md` 참조(E 항목).
+> **그룹 C (provider prep) — 폐기.** 해당 WIP 는 2026-06-30 G1 결정으로 미진행·제거. 현 LLM provider 는 anthropic 단일 유지.
 
 ## 목적
 
