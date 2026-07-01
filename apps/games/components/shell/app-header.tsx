@@ -44,7 +44,7 @@ export function AppHeader({ role, variant = "default" }: Props) {
         {/* 로고 — 랜딩에서는 `/` 유지(신규 방문자 대시보드 우회 방지), 그 외 /home */}
         <Link
           href={isLanding ? "/" : "/home"}
-          className="flex shrink-0 items-center gap-1.5"
+          className="flex min-h-11 shrink-0 items-center gap-1.5"
           aria-label="풀림 게임즈 홈"
         >
           <svg
