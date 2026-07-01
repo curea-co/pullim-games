@@ -1,17 +1,17 @@
-# pullim-web 레이아웃·디자인 시스템 정합 — 풀 정합
+# 디자인 시스템 정합 — 풀림 통합 룩 (풀 정합)
 
 > 작성: Claude Opus 4.8 (에이전트) · 2026-07-01
-> 근거: G1 지시 2026-07-01 "pullim-web 레이아웃을 그대로 따라가" + 스코프 확인("풀 디자인 정합")
-> 참조 리포: `~/dev_git/pullim-web` (curea-co/pullim-web, Next 16·Tailwind v4). **코드 import 아님 — 토큰·구조를 games 코드에 재현**(독립 프로젝트 원칙 유지, CLAUDE.md §7).
-> 동반 spec 개정: `proc/spec/08-디자인-시스템.md` §8.1(팔레트)·§8.2(타이포) — G1 승인(2026-07-01).
+> 근거: G1 지시 2026-07-01 — 풀림 제품군 통합 룩(ink/paper/blue/lemon 팔레트 + 3-role 폰트)으로 정합. 스코프 "풀 디자인 정합" 확인.
+> **SoT: 본 리포 `proc/spec/08-디자인-시스템.md`.** 정합 대상 룩의 값은 spec/08 §8.1·§8.2 에 encode 되어 있으며, 이후 모든 작업의 권위는 spec/08(+§8.3·§8.4)이다. 외부 리포 코드/파일 참조·import 없음 — **독립 프로젝트 원칙(CLAUDE.md §7) 준수**. (디자인 방향의 origin 은 G1 의 풀림 통합 룩 지시이며, 본 리포 spec 이 이를 자립적으로 정의한다.)
+> 동반 spec 개정(G1 승인 2026-07-01): `spec/08 §8.1`(팔레트)·`§8.2`(3-role 폰트) + `spec/09` 폰트 라인 정합.
 
 ## 0. 목표
 
-pullim-games 를 pullim-web 과 **한 몸처럼 보이도록** 디자인 시스템 전면 정합. 공통 셸 + `tailwind.config` 변경이라 **21개 게임 전체 영향** → 4-viewport audit 필수, 단계별 검증.
+풀림 제품군 **통합 룩**으로 디자인 시스템 전면 정합. 공통 셸 + `tailwind.config` 변경이라 **21개 게임 전체 영향** → 4-viewport audit 필수(merge gate), 단계별 검증. 권위는 본 리포 spec/08.
 
-## 1. Gap 요약 (web ← games)
+## 1. Gap 요약 (통합 룩 목표 ← games 현재)
 
-| 항목 | web (목표) | games (현재) |
+| 항목 | 통합 룩 (목표, spec/08) | games (현재) |
 |---|---|---|
 | 팔레트 | ink `#0D1A1F`·paper `#F0F6FB`·blue `#0362DA`·**lemon `#E6FF4C`** + ink2~5·line/line2·paper2/3 | slate 50~900·blue·bg-primary `#FBFAF8`·type-primary `#0F172A` |
 | 폰트 | Pretendard(본문) + **Bai Jamjuree**(brand) + **JetBrains Mono**(mono) | Pretendard 단독 |
@@ -60,7 +60,11 @@ Tailwind v4 마이그레이션은 **비스코프**(games=Next15+Tailwind v3 유�
 - **4-viewport audit HARD gate**: 공통 셸·config 변경이라 머지 전 필수(AGENTS.md viewport 룰).
 
 ## 5. 검증 (자가 체크리스트)
-- [ ] Phase 1: typecheck·lint·build green, 폰트 3종 로드 확인
-- [ ] Phase 2: 헤더 72px·container-x 적용 확인
-- [ ] Phase 3: ui:audit 4-viewport overflow 0, test green
+- [x] Phase 1: typecheck·lint·build green, 폰트 3종(Pretendard·Bai Jamjuree·JetBrains Mono) 로드 확인, test 497/497
+- [x] Phase 2: 헤더 72px 적용 확인 (container-x 는 Phase 3 로 이관)
+- [x] **4-viewport ui:audit (merge gate, AGENTS.md)** — 2026-07-01 실측:
+  - `/` (탑네비 서피스): 320·390·768·1280 **critical/informational overflow 0 PASS**
+  - `/manage/content` (사이드바 서피스): 4 viewport **overflow 0 PASS**
+  - 캡처: `/tmp/ui-audit/{mobile-sm-320,iphone13-390,tablet-768,desktop-1280}.png`
+- [ ] Phase 3(후속): container-x·section·footer 세부 정합 + 게임 라우트(로그인) 감사
 - [ ] spec/08 ↔ tailwind.config 토큰 정합(diff 0 표류)

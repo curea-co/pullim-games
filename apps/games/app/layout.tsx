@@ -4,7 +4,7 @@ import { AppShell } from "@/components/shell/app-shell";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
-// pullim-web 정합 — 브랜드 헤딩(Bai Jamjuree) + mono 라벨/코드(JetBrains Mono).
+// 풀림 통합 룩(spec/08 §8.2) — 브랜드 헤딩(Bai Jamjuree) + mono 라벨/코드(JetBrains Mono).
 // 본문 한글은 Pretendard(globals.css CDN) 유지. spec/08 §8.2.
 const baiJamjuree = Bai_Jamjuree({
   subsets: ["latin"],

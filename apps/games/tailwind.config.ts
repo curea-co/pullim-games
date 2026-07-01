@@ -13,7 +13,7 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
-  			// pullim-web 정합 팔레트 (spec/08 §8.1). 기존 시맨틱 이름 유지 + 값 remap.
+  			// 풀림 통합 룩 팔레트 (spec/08 §8.1). 기존 시맨틱 이름 유지 + 값 remap.
   			bg: {
   				primary: '#F0F6FB',
   				block: '#FFFFFF'
@@ -81,7 +81,7 @@ const config: Config = {
   				'Spoqa Han Sans Neo',
   				'sans-serif'
   			],
-  			// pullim-web 정합 — 브랜드 헤딩 + mono (next/font CSS var). spec/08 §8.2.
+  			// 풀림 통합 룩 — 브랜드 헤딩 + mono (next/font CSS var). spec/08 §8.2.
   			brand: [
   				'var(--font-bai-jamjuree)',
   				'Pretendard Variable',
