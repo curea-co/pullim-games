@@ -25,8 +25,9 @@ export function AppHeader({ role, variant = "default" }: Props) {
   const isLanding = variant === "landing";
 
   return (
-    <header className="sticky top-0 z-30 border-b border-pullim-slate-200 bg-card/85 backdrop-blur-md">
-      <div className="flex h-14 items-center gap-2 px-3 md:px-4">
+    <header className="sticky top-0 z-30 border-b border-border-hairline bg-card/85 backdrop-blur-md">
+      {/* pullim-web nav 정합 — 높이 72px(--nav-h). */}
+      <div className="flex h-[72px] items-center gap-2 px-3 md:px-4">
         {/* 게임: ✕(허브 복귀). default: 모바일 햄버거. landing: 좌측 네비 없음(온보딩 분리) */}
         {isGame ? (
           <Link
