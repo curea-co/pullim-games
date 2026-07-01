@@ -25,14 +25,15 @@ export function AppHeader({ role, variant = "default" }: Props) {
   const isLanding = variant === "landing";
 
   return (
-    <header className="sticky top-0 z-30 border-b border-pullim-slate-200 bg-card/85 backdrop-blur-md">
-      <div className="flex h-14 items-center gap-2 px-3 md:px-4">
+    <header className="sticky top-0 z-30 border-b border-border-hairline bg-card/85 backdrop-blur-md">
+      {/* 풀림 통합 룩(spec/08) — nav 높이 72px. */}
+      <div className="flex h-[72px] items-center gap-2 px-3 md:px-4">
         {/* 게임: ✕(허브 복귀). default: 모바일 햄버거. landing: 좌측 네비 없음(온보딩 분리) */}
         {isGame ? (
           <Link
             href="/games"
             aria-label="게임 허브로 돌아가기"
-            className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-600 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-button text-pullim-slate-600 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
           >
             <ArrowLeft className="h-5 w-5" />
           </Link>
@@ -43,7 +44,7 @@ export function AppHeader({ role, variant = "default" }: Props) {
         {/* 로고 — 랜딩에서는 `/` 유지(신규 방문자 대시보드 우회 방지), 그 외 /home */}
         <Link
           href={isLanding ? "/" : "/home"}
-          className="flex shrink-0 items-center gap-1.5"
+          className="flex min-h-11 shrink-0 items-center gap-1.5"
           aria-label="풀림 게임즈 홈"
         >
           <svg
@@ -87,7 +88,7 @@ export function AppHeader({ role, variant = "default" }: Props) {
                   type="button"
                   aria-label="검색 (준비 중)"
                   disabled
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-button text-pullim-slate-400 opacity-60"
                   title="검색 — 준비 중"
                 >
                   <Search className="h-5 w-5" />
@@ -96,7 +97,7 @@ export function AppHeader({ role, variant = "default" }: Props) {
                   type="button"
                   aria-label="알림 (준비 중)"
                   disabled
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-pullim-slate-400 opacity-60"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-button text-pullim-slate-400 opacity-60"
                   title="알림 — 준비 중"
                 >
                   <Bell className="h-5 w-5" />

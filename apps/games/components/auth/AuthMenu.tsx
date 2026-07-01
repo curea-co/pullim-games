@@ -70,12 +70,12 @@ export function AuthMenu() {
 
   // 첫 렌더(로드 전)는 레이아웃 시프트 방지용 자리만 차지.
   if (!loaded) {
-    return <span aria-hidden className="inline-block h-9 w-16" />;
+    return <span aria-hidden className="inline-block h-11 w-16" />;
   }
 
   // auth 미확정(게스트도 없음) — 로그아웃/로그인 어느 쪽도 단정 불가. 중립 placeholder.
   if (!user && !player && unavailable) {
-    return <span aria-hidden className="inline-block h-9 w-16" />;
+    return <span aria-hidden className="inline-block h-11 w-16" />;
   }
 
   // 회원도 게스트도 아니고 확정됨 → 로그인 진입(주로 랜딩).
@@ -83,7 +83,7 @@ export function AuthMenu() {
     return (
       <Link
         href="/login"
-        className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
+        className="inline-flex h-11 items-center rounded-button px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
       >
         로그인
       </Link>
@@ -101,7 +101,7 @@ export function AuthMenu() {
           type="button"
           onClick={onGuestExit}
           title="이 기기의 게스트 학습 기록을 모두 지우고 나갑니다"
-          className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-accent-negative hover:bg-pullim-slate-100"
+          className="inline-flex h-11 items-center rounded-button px-3 text-sm font-medium text-accent-negative hover:bg-pullim-slate-100"
         >
           기록 지우고 나가기
         </button>
@@ -123,7 +123,7 @@ export function AuthMenu() {
         type="button"
         onClick={onLogout}
         disabled={busy}
-        className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900 disabled:opacity-50"
+        className="inline-flex h-11 items-center rounded-button px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900 disabled:opacity-50"
       >
         {busy ? "…" : "로그아웃"}
       </button>

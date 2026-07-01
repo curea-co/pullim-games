@@ -1,7 +1,19 @@
 import type { Metadata, Viewport } from "next";
+import { JetBrains_Mono } from "next/font/google";
 import { AppShell } from "@/components/shell/app-shell";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
+
+// 풀림 통합 룩(spec/08 §8.2) — mono 라벨/코드(JetBrains Mono, latin).
+// 본문·헤딩 한글은 Pretendard(globals.css CDN) 유지. brand latin 폰트는 games 한글 UI 에
+// 렌더 표면이 없어 미도입(spec/08 §8.2 note).
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  // 실사용 weight 만 로드(폰트 페이로드 최소화): font-mono(400)·font-medium(500)·font-bold(700).
+  weight: ["400", "500", "700"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
 
 const BRAND = "풀림 게임즈";
 const TAGLINE = "푸는 게 곧 배우는 거예요";
@@ -65,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ko">
+    <html lang="ko" className={jetbrainsMono.variable}>
       <body>
         <AppShell role="student">{children}</AppShell>
       </body>
