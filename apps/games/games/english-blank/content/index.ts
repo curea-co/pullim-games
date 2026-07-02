@@ -1,5 +1,8 @@
 // english-blank 카드 풀 — 5장, 자체 작성 본문 (저작권 회피).
 // 본문 내 ___ 자리 = 빈칸. 4지선다.
+// KNOWN-TRADE-OFF: proc/plan/2026-06-30_target-middle-to-high1.md §6.6 — 어휘 난도는 고1 상단(수능 연계)이나,
+//   영어는 과학과 달리 교과 고정 어휘 리스트가 없어 학술어가 고1 reading 에서 도달 가능(spec/02 §2.4·spec/05 §5.1).
+//   콘텐츠 교체 대신 라벨=고1 유지, 사용자 합의 2026-07-02 (Codex #133 R4).
 
 import { BlankCardSchema } from "../schema";
 import type { BlankCard } from "../schema";

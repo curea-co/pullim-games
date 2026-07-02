@@ -126,3 +126,15 @@ Codex #133 R2: 일부 카드(§6.3 ③④)는 실제 난도가 고2/고3 인데 
 | `chemistry-balance` cb-005 | C₂H₆ 유기연소 (화학I) | 광합성 `6CO₂+6H₂O→C₆H₁₂O₆+6O₂` | 유기연소(화학I) → 통합과학 "생명 시스템" 광합성 (난도 5 유지: 큰 계수) |
 
 검증: 균형/합력 파서 재현 검산 (cb-002·cb-005 BALANCED, pv-004·pv-005 합력 일치) + schema safeParse + typecheck/lint/vitest 497/497. §6.3 ③④ 해소.
+
+### 6.6 영어 3게임 어휘 난도 — KNOWN-TRADE-OFF (Codex #133 R4, 사용자 합의 2026-07-02)
+
+Codex #133 R4: 영어 게임 3종(`english-blank`·`english-word-match`·`english-vocab-typing`)은 `unit` 라벨만 고1 로 내리고 어휘 난도(encounter·sufficient·resilience·pursue·integrity·prejudice·ambiguous 등)는 그대로라, spec/02 §2.4(타깃 중1~고1)·spec/05 §5.1(학습효과 우선) 기준 trade-off 를 숨긴다는 지적.
+
+**사용자 결정 = KNOWN-TRADE-OFF 명시 (콘텐츠 유지).** 근거:
+
+- 과학(화학I·물리I)은 **교과 과목이 고2 로 고정**되어 콘텐츠 자체가 밴드 밖 → 교체 필요(§6.5). 반면 **영어는 교과 고정 어휘 리스트가 없다** — 고1 영어는 필수 공통과목이고 학술 어휘(academic vocabulary)에 상한 grade 가 없어, 위 단어들은 고1 영어 reading·어휘 확장에서 실제 도달 가능.
+- 즉 영어 어휘는 "고2/고3 전용 커리큘럼"이 아니라 "고1~고3 공통 학술어의 고1 상단"이다. 라벨 고1 은 부정확한 낮춤이 아니라 정당한 카탈로그 슬롯.
+- 프리런치 단계 · 학습효과 우선(spec/05 §5.1): 도전적 어휘 노출은 학습효과에 부합(중독성 아님).
+
+처리: 콘텐츠 교체 대신 3개 content 파일 헤더에 `KNOWN-TRADE-OFF: <본 plan §6.6>` 주석 명시(CLAUDE.md §9 정당한 trade-off 기록 룰, 사용자 합의 충족). 추후 고1 기초 어휘로 낮추길 원하면 별 콘텐츠 PR 로 전환 가능.
