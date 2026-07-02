@@ -270,7 +270,8 @@
   & .switcher-trigger .chev { color: var(--ink-4); }
 
   & .switcher-menu {
-    position: absolute; top: calc(100% + 10px); left: 0; width: 330px;
+    /* 320px 뷰포트 정합(codex #138 R2): 고정 330px 대신 뷰포트 여백 확보. 소형은 아래 미디어에서 뷰포트 고정. */
+    position: absolute; top: calc(100% + 10px); left: 0; width: min(330px, calc(100vw - 24px));
     background: #fff; border: 1px solid var(--line);
     border-radius: var(--r-lg); box-shadow: var(--sh-pop);
     padding: 10px; z-index: 80;
@@ -346,9 +347,11 @@
   & .input:disabled { background: var(--paper-2); color: var(--ink-4); cursor: not-allowed; }
 
   /* ── Chips / badges / pills ───────────────────────────────────────── */
+  /* games spec/08 §8.12 정합(codex #138 R2): 칩·뱃지 라디우스는 rounded-button(6px), pill(16px+) 금지.
+     pullim-web 은 --r-pill(999px) 이었으나 games 스펙 준수를 위해 --r-xs(6px)로 조정. */
   & .chip {
     display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 11px; border-radius: var(--r-pill);
+    padding: 4px 11px; border-radius: var(--r-xs);
     font-size: 12px; font-weight: 600;
     background: var(--paper-2); color: var(--ink-3);
   }
@@ -370,7 +373,7 @@
   & .badge {
     display: inline-grid; place-items: center;
     min-width: 20px; height: 20px; padding: 0 6px;
-    border-radius: var(--r-pill);
+    border-radius: var(--r-xs); /* spec/08 §8.12 — 준비중/베타 뱃지 pill 금지, rounded-button(6px) */
     font-family: var(--mono); font-size: 11px; font-weight: 600;
     background: var(--accent, var(--pullim-blue)); color: #fff;
   }
@@ -491,6 +494,12 @@
     & .tabbar a svg    { width: 21px; height: 21px; }
     & .topbar { padding: 0 14px; gap: 10px; }
     & .switcher-trigger .sn { display: none; }
+    /* ServiceSwitcher 메뉴를 뷰포트에 고정(codex #138 R2) — 트리거가 topbar 중앙부라 absolute+left:0 이면
+       320px 에서 화면을 넘친다. 소형은 뷰포트 12px 여백에 고정해 항상 안착. */
+    & .switcher-menu {
+      position: fixed; left: 12px; right: 12px; width: auto;
+      top: calc(var(--topbar-h) + 6px);
+    }
   }
 
   @media (max-width: 560px) {

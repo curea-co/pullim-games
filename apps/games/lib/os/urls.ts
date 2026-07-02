@@ -13,16 +13,17 @@
 
 const strip = (u: string): string => u.replace(/\/$/, "");
 
-// 현재 배포 환경의 서브도메인 접두("" = prod, "dev-" = dev).
+// 현재 배포 환경의 서브도메인 접두("" = prod, "dev-" = 비-prod).
+// 원칙(codex #138 R2): **prod 만 prod 형제**, 그 외(dev·PR preview·localhost)는 dev 형제로 보낸다.
+// preview 가 production 서비스로 새지 않게(데이터·환경 오염 차단) — preview 전용 형제는 없으므로
+// 가장 가까운 비-prod = dev 로 격리. 명시 override(NEXT_PUBLIC_*_URL)로 개별 환경 지정 가능.
 function envPrefix(): "" | "dev-" {
   if (typeof window !== "undefined") {
-    // 클라이언트: 접속 호스트가 곧 환경. dev-games.pullim.ai → dev- 형제.
-    return window.location.hostname.startsWith("dev-") ? "dev-" : "";
+    // 클라이언트: prod 커스텀 도메인만 prod 형제. dev-games·*.vercel.app(preview)·localhost → dev 형제.
+    return window.location.hostname === "games.pullim.ai" ? "" : "dev-";
   }
-  // 서버(SSR/빌드): Vercel 컨텍스트. (커스텀 도메인은 VERCEL_URL 이 *.vercel.app 이라 branch 로 판정)
-  if (process.env.VERCEL_ENV === "production") return "";
-  if (process.env.VERCEL_GIT_COMMIT_REF === "dev") return "dev-";
-  return "";
+  // 서버(SSR/빌드): production 배포만 prod. dev·preview 는 dev 형제(site-url.ts 정합).
+  return process.env.VERCEL_ENV === "production" ? "" : "dev-";
 }
 
 // 서브도메인 → origin. 명시 env override 최우선, 없으면 환경 접두로 형제 도메인 구성.
