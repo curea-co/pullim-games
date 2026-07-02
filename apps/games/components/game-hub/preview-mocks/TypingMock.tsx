@@ -46,7 +46,7 @@ export function TypingMock({ variant, locked }: MockProps) {
           <motion.span
             animate={
               animate
-                ? { opacity: [1, 1, 1, 0, 0], color: ["#0F172A", "#0F172A", "#0F172A", "#0362DA", "#0F172A"] }
+                ? { opacity: [1, 1, 1, 0, 0], color: ["#0D1A1F", "#0D1A1F", "#0D1A1F", "#0362DA", "#0D1A1F"] }
                 : undefined
             }
             transition={{

@@ -75,7 +75,7 @@ function FactorChip({ text, isHovering, isWrongFlash, onMount }: ChipProps) {
           ? "#F87171"
           : isHovering
             ? "#0362DA"
-            : "#E5E5E5",
+            : "#D6E2EE",
         backgroundColor: isHovering
           ? "rgba(3,98,218,0.06)"
           : "rgba(0,0,0,0)",

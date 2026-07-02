@@ -23,8 +23,8 @@ export default async function OGImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: 80,
-          background: "#FBFAF8",
-          color: "#0F172A",
+          background: "#F0F6FB",
+          color: "#0D1A1F",
           fontFamily:
             'system-ui, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
           position: "relative",
@@ -38,7 +38,7 @@ export default async function OGImage() {
             right: 0,
             bottom: 0,
             backgroundImage:
-              "linear-gradient(#E5E5E5 1px, transparent 1px), linear-gradient(90deg, #E5E5E5 1px, transparent 1px)",
+              "linear-gradient(#D6E2EE 1px, transparent 1px), linear-gradient(90deg, #D6E2EE 1px, transparent 1px)",
             backgroundSize: "48px 48px",
             opacity: 0.35,
           }}
@@ -65,7 +65,7 @@ export default async function OGImage() {
               fontSize: 22,
               fontWeight: 600,
               letterSpacing: 1,
-              color: "#0F172A",
+              color: "#0D1A1F",
             }}
           >
             풀림 게임즈
@@ -75,7 +75,7 @@ export default async function OGImage() {
               marginLeft: 8,
               fontSize: 18,
               fontWeight: 500,
-              color: "#64748B",
+              color: "#45555C",
             }}
           >
             Pullim Games
@@ -95,7 +95,7 @@ export default async function OGImage() {
               fontWeight: 700,
               letterSpacing: -3,
               lineHeight: 1.05,
-              color: "#0F172A",
+              color: "#0D1A1F",
             }}
           >
             5분, 인수분해를
@@ -106,7 +106,7 @@ export default async function OGImage() {
               fontWeight: 700,
               letterSpacing: -3,
               lineHeight: 1.05,
-              color: "#0F172A",
+              color: "#0D1A1F",
               display: "flex",
               alignItems: "baseline",
               gap: 12,
@@ -120,7 +120,7 @@ export default async function OGImage() {
               marginTop: 28,
               fontSize: 32,
               fontWeight: 500,
-              color: "#64748B",
+              color: "#45555C",
               lineHeight: 1.4,
               maxWidth: 880,
             }}
@@ -147,7 +147,7 @@ export default async function OGImage() {
                   height: 14,
                   borderRadius: 4,
                   background: i === 0 ? "#0362DA" : "transparent",
-                  border: i === 0 ? "none" : "1.5px solid #E5E5E5",
+                  border: i === 0 ? "none" : "1.5px solid #D6E2EE",
                 }}
               />
             ))}
@@ -156,7 +156,7 @@ export default async function OGImage() {
                 marginLeft: 12,
                 fontSize: 20,
                 fontWeight: 500,
-                color: "#64748B",
+                color: "#45555C",
                 fontVariantNumeric: "tabular-nums",
               }}
             >
@@ -168,7 +168,7 @@ export default async function OGImage() {
               fontSize: 18,
               fontWeight: 600,
               letterSpacing: 1.5,
-              color: "#64748B",
+              color: "#45555C",
               maxWidth: 1040,
               overflow: "hidden",
               whiteSpace: "nowrap",

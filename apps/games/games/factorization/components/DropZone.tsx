@@ -26,7 +26,7 @@ export const DropZone = forwardRef<HTMLDivElement, DropZoneProps>(function DropZ
       ref={ref}
       className="rounded-dropzone px-5 py-3 text-center"
       animate={{
-        borderColor: active ? "#0362DA" : "#E5E5E5",
+        borderColor: active ? "#0362DA" : "#D6E2EE",
         backgroundColor: active ? "rgba(3,98,218,0.06)" : "rgba(0,0,0,0)",
       }}
       style={{
