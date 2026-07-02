@@ -9,10 +9,14 @@ import { test, expect } from "@playwright/test";
 import { seedCustomGames } from "./helpers/seed";
 import { MANAGE_ENABLED } from "../lib/features";
 
-// 관리 영역 비활성화(MANAGE_ENABLED=false) 시 스킵 — /manage/content CTA 자체가
-// 사라지므로. true 로 되돌리면 자동 복원. 근거: proc/plan/2026-07-02_disable-manage.md
+// 관리 **활성** 상태 스위트 — /manage/content CTA 진입 검증. 비활성이면 skip.
+// 비활성(MANAGE_ENABLED=false) 정책 검증은 대칭 스위트 manage-disabled.spec.ts 가
+// 담당(섹션 숨김·0장 타일 미노출·/manage 리다이렉트). 근거: proc/plan/2026-07-02_disable-manage.md
 test.beforeEach(() => {
-  test.skip(!MANAGE_ENABLED, "MANAGE_ENABLED=false — 관리 영역 비활성화");
+  test.skip(
+    !MANAGE_ENABLED,
+    "MANAGE_ENABLED=false — 비활성 검증은 manage-disabled.spec.ts",
+  );
 });
 
 test("빈 상태 — 나만의 게임 영역 전체가 CTA, 클릭 시 /manage/content 진입", async ({

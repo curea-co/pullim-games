@@ -35,6 +35,19 @@ export function CustomGamesSection() {
   const customGames = games.filter((g) => g.meta.kind === "custom");
   const totalCustomCards = counts ? counts.cards : 0;
 
+  const cardCountOf = (gameId: string) => {
+    const kind = KIND_BY_GAME_ID[gameId];
+    return kind && counts ? counts.cardsByKind[kind] : 0;
+  };
+
+  // 관리 비활성 시엔 0장(플레이 불가) 메커닉 타일을 숨긴다 — 빈 상태 CTA 가
+  // 제거돼 있어 클릭 시 "카드 없어요" 빈 화면 dead-end 가 되기 때문.
+  // 활성 시엔 전부 노출(빈 타일은 "더 만들기" 유도).
+  // 근거: proc/plan/2026-07-02_disable-manage.md (Codex #139 R1)
+  const gridGames = MANAGE_ENABLED
+    ? customGames
+    : customGames.filter((g) => cardCountOf(g.meta.id) > 0);
+
   // 관리 비활성 + 카드 없음 — 콘텐츠 저작 경로가 막혀 있으므로 섹션 자체를 숨긴다.
   // (카드가 이미 있으면 아래 채워진 상태로 기존 카드 플레이는 유지)
   // 근거: proc/plan/2026-07-02_disable-manage.md
@@ -97,10 +110,9 @@ export function CustomGamesSection() {
       </header>
 
       <ul className="grid grid-cols-2 gap-2">
-        {customGames.map((g) => {
+        {gridGames.map((g) => {
           const Icon = g.meta.icon;
-          const kind = KIND_BY_GAME_ID[g.meta.id];
-          const cardCount = kind && counts ? counts.cardsByKind[kind] : 0;
+          const cardCount = cardCountOf(g.meta.id);
           const isPlayable = cardCount > 0;
           return (
             <li key={g.meta.id}>

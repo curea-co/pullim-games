@@ -43,6 +43,11 @@ export const MANAGE_ENABLED: boolean = false;
   - 보호 라우트(/home·custom 게임 빈 상태)는 guest 쿠키 시드 필요 — 변경이 순수 subtractive 라 세로 overflow 단조 비증가로 판정, 별도 캡처 생략.
 - e2e 는 PR delta 만 평가(인프라 선행 red 알려짐) — manage 3 spec 은 `MANAGE_ENABLED` 기반 skip 로 green.
 
+## Codex Review 대응 (PR #139)
+
+- **R1 (CustomGamesSection dead-end)**: 채워진 상태에서 0장 메커닉 타일이 여전히 `/games/custom-*` 로 링크 → manage off + 빈 상태 CTA 제거 상태에서 클릭 시 빈 화면 dead-end. **fix**: `MANAGE_ENABLED=false` 시 grid 를 `cardCountOf(id) > 0` 로 필터해 0장 타일 미노출. 활성 시엔 기존대로 전부 노출.
+- **R2 (e2e 검증 공백)**: skip 만 하고 비활성 정책 검증이 없음. **fix**: `e2e/manage-disabled.spec.ts` 신규 — (a) 카드 0장 시 섹션·CTA 미노출, (b) 일부만 채움 시 0장 메커닉 타일 미노출(dead-end 회귀 가드), (c) `/manage/*` → `/home` 리다이렉트. 기존 `custom-games-cta.spec.ts` 는 활성 상태 스위트로 역할 명시(대칭).
+
 ## 되돌리는 법
 
 `MANAGE_ENABLED = true` 한 줄. 그 외 코드는 모두 플래그 분기라 원복이 자동.
