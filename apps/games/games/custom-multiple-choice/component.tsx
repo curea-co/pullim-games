@@ -10,6 +10,7 @@ import {
   type CustomCurriculum,
   type CustomMultipleChoiceCard,
 } from "@/lib/core";
+import { MANAGE_ENABLED } from "@/lib/features";
 
 const GAME_ID = "custom-multiple-choice";
 
@@ -58,7 +59,9 @@ export default function CustomMultipleChoiceGame() {
       completionMessage={(n) => `${n}문제, 내 카드를 풀었어요.`}
       emptyMessage={{
         title: "아직 만든 객관식 카드가 없어요.",
-        cta: { label: "관리에서 만들기", href: "/manage/content" },
+        cta: MANAGE_ENABLED
+          ? { label: "관리에서 만들기", href: "/manage/content" }
+          : undefined,
       }}
     />
   );

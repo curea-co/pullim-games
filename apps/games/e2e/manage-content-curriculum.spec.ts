@@ -10,6 +10,13 @@
 // 실 LLM 호출 경로는 ANTHROPIC_API_KEY 가 있는 로컬 환경에서 별도 수동 검증.
 
 import { test, expect, type Page } from "@playwright/test";
+import { MANAGE_ENABLED } from "../lib/features";
+
+// 관리 영역 비활성화(MANAGE_ENABLED=false) 시 스킵 — /manage/content 는 /home 으로
+// 리다이렉트된다. true 로 되돌리면 자동 복원. 근거: proc/plan/2026-07-02_disable-manage.md
+test.beforeEach(() => {
+  test.skip(!MANAGE_ENABLED, "MANAGE_ENABLED=false — 관리 영역 비활성화");
+});
 
 async function seedUserData(page: Page) {
   await page.evaluate(() => {
