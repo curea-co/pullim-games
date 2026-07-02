@@ -108,6 +108,12 @@ Codex #133 R1 지적: content `unit` 만 재보정하고 발견 표면(허브·�
 | `english-vocab-typing/manifest+content` | `수능 어휘`·`수능-영어-어휘`(5) → `빈출 어휘`·`고1-영어-어휘` (#133 원 스코프 누락분 편입) |
 | `vocab-typing/content` | 주석 "수능 빈출" → "고1 빈출" |
 
-sweep 결과 전 게임 `unit`·manifest·hint·주석에 초/수능/고2/고3 잔여 **0**. grade 슬롯 분포 고1 90 (기존 85 + vocab-typing 5). 검증: typecheck ✓ / lint ✓ / vitest 497/497.
+**code/plan 기준 sweep** 결과 게임 콘텐츠(`games/*/{manifest.ts,content/index.ts}`)의 `unit`·hint·주석에 초/수능/고2/고3 잔여 **0**. grade 슬롯 분포 고1 90 (기존 85 + vocab-typing 5). 검증: typecheck ✓ / lint ✓ / vitest 497/497.
+
+> **spec 드리프트 잔존 (Codex #133 R2)**: 위 "잔여 0" 은 **게임 콘텐츠 코드 한정**이며 권위 spec 과의 정합을 단정하지 않는다. `proc/spec/06-콘텐츠-데이터.md §6.9` 에는 여전히 옛 표기(`english-word-match=수능 어휘 빈출`·`chemistry-balance=화학I 반응식 균형`·`english-blank=수능 빈칸 추론`·`physics-vector=물리 — 힘 합성`)가 남아 있다. 문서 라우팅상 spec 이 plan 보다 우선이므로 spec/06 §6.9 정합화는 **G1 합의 후 별 spec PR** 로 처리한다(CLAUDE.md §4 권위 문서 수정 룰). 본 PR 은 코드 재보정 한정.
 
 > tone 주의: 사용자 노출 hint 의 "수능 빈출" 문구를 학습 지향 문구로 낮춤(고3 연상 제거). "수능 대비" 를 aspirational 문구로 유지하고 싶으면 사용자 지시 시 revert 가능 — §6.3 ①② 경계 항목과 연계.
+
+### 6.5 밴드 경계 콘텐츠 난도 (Codex #133 R2 ①) — 사용자 판단 대기
+
+Codex #133 R2: 일부 카드(§6.3 ③④)는 실제 난도가 고2/고3 인데 `unit` 라벨만 고1 로 내려 학년 밴드 메타가 부정확. 대상 — `physics-vector` pv-004(임의각 일반합성)·pv-005(음수성분 `[-2,1]+[3,2]`), `chemistry-balance` cb-002(KClO₃ 분해)·cb-005(C₂H₆ 유기연소). 처리 방향(콘텐츠 교체 / KNOWN-TRADE-OFF 수용 / 라벨 환원)은 사용자 결정 대기.
