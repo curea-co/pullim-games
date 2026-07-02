@@ -1,4 +1,7 @@
-// english-vocab-typing 카드 풀 — 5장, 수능 빈출 영어 어휘.
+// english-vocab-typing 카드 풀 — 5장, 고1 빈출 영어 어휘.
+// KNOWN-TRADE-OFF: proc/plan/2026-06-30_target-middle-to-high1.md §6.6 — 어휘 난도는 고1 상단(수능 연계)이나,
+//   영어는 과학과 달리 교과 고정 어휘 리스트가 없어 학술어가 고1 reading 에서 도달 가능(spec/02 §2.4·spec/05 §5.1).
+//   콘텐츠 교체 대신 라벨=고1 유지, 사용자 합의 2026-07-02 (Codex #133 R4).
 
 import { EnglishVocabTypingCardSchema } from "../schema";
 import type { EnglishVocabTypingCard } from "../schema";
@@ -7,7 +10,7 @@ const RAW_CARDS: EnglishVocabTypingCard[] = [
   {
     id: "evt-001",
     type: "english-vocab-typing",
-    unit: "수능-영어-어휘",
+    unit: "고1-영어-어휘",
     difficultySeed: 1,
     hint: "7글자 동사, a- 로 시작",
     problem: {
@@ -19,7 +22,7 @@ const RAW_CARDS: EnglishVocabTypingCard[] = [
   {
     id: "evt-002",
     type: "english-vocab-typing",
-    unit: "수능-영어-어휘",
+    unit: "고1-영어-어휘",
     difficultySeed: 2,
     hint: "11글자 명사, en- 로 시작",
     problem: {
@@ -31,7 +34,7 @@ const RAW_CARDS: EnglishVocabTypingCard[] = [
   {
     id: "evt-003",
     type: "english-vocab-typing",
-    unit: "수능-영어-어휘",
+    unit: "고1-영어-어휘",
     difficultySeed: 2,
     hint: "7글자 동사, an- 로 시작",
     problem: {
@@ -43,7 +46,7 @@ const RAW_CARDS: EnglishVocabTypingCard[] = [
   {
     id: "evt-004",
     type: "english-vocab-typing",
-    unit: "수능-영어-어휘",
+    unit: "고1-영어-어휘",
     difficultySeed: 3,
     hint: "11글자 명사, con- 로 시작",
     problem: {
@@ -55,7 +58,7 @@ const RAW_CARDS: EnglishVocabTypingCard[] = [
   {
     id: "evt-005",
     type: "english-vocab-typing",
-    unit: "수능-영어-어휘",
+    unit: "고1-영어-어휘",
     difficultySeed: 3,
     hint: "13글자 형용사, in- 부정 접두사",
     problem: {

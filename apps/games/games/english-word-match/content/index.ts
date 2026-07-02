@@ -1,4 +1,7 @@
-// english-word-match 카드 풀 — 5장, 수능 어휘 매칭 (영어↔한국어).
+// english-word-match 카드 풀 — 5장, 고1 빈출 어휘 매칭 (영어↔한국어).
+// KNOWN-TRADE-OFF: proc/plan/2026-06-30_target-middle-to-high1.md §6.6 — 어휘 난도는 고1 상단(수능 연계)이나,
+//   영어는 과학과 달리 교과 고정 어휘 리스트가 없어 학술어가 고1 reading 에서 도달 가능(spec/02 §2.4·spec/05 §5.1).
+//   콘텐츠 교체 대신 라벨=고1 유지, 사용자 합의 2026-07-02 (Codex #133 R4).
 
 import { WordMatchCardSchema } from "../schema";
 import type { WordMatchCard } from "../schema";
@@ -7,9 +10,9 @@ const RAW_CARDS: WordMatchCard[] = [
   {
     id: "wm-001",
     type: "word-match",
-    unit: "고2-영어-수능동사",
+    unit: "고1-영어-빈출동사",
     difficultySeed: 2,
-    hint: "수능 빈출 동사 5종",
+    hint: "빈출 동사 5종",
     problem: {
       pairs: [
         { english: "pursue", korean: "추구하다" },
@@ -27,7 +30,7 @@ const RAW_CARDS: WordMatchCard[] = [
   {
     id: "wm-002",
     type: "word-match",
-    unit: "고2-영어-추상명사",
+    unit: "고1-영어-추상명사",
     difficultySeed: 3,
     hint: "추상 명사 5종",
     problem: {
@@ -47,9 +50,9 @@ const RAW_CARDS: WordMatchCard[] = [
   {
     id: "wm-003",
     type: "word-match",
-    unit: "고2-영어-형용사",
+    unit: "고1-영어-형용사",
     difficultySeed: 3,
-    hint: "수능 형용사 5종",
+    hint: "빈출 형용사 5종",
     problem: {
       pairs: [
         { english: "profound", korean: "심오한" },
@@ -67,7 +70,7 @@ const RAW_CARDS: WordMatchCard[] = [
   {
     id: "wm-004",
     type: "word-match",
-    unit: "고2-영어-혼동어휘",
+    unit: "고1-영어-혼동어휘",
     difficultySeed: 4,
     hint: "헷갈리기 쉬운 어휘",
     problem: {
@@ -87,9 +90,9 @@ const RAW_CARDS: WordMatchCard[] = [
   {
     id: "wm-005",
     type: "word-match",
-    unit: "고2-영어-어법빈출",
+    unit: "고1-영어-어법빈출",
     difficultySeed: 4,
-    hint: "수능 어법 빈출 동사",
+    hint: "어법 빈출 동사",
     problem: {
       pairs: [
         { english: "confide", korean: "신뢰하다" },

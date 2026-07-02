@@ -7,7 +7,7 @@ const RAW_CARDS: TimelineCard[] = [
   {
     id: "ht-001",
     type: "timeline",
-    unit: "고2-한국사-개항기",
+    unit: "고1-한국사-개항기",
     difficultySeed: 2,
     hint: "대원군 하야 후 개항부터",
     problem: {
@@ -24,7 +24,7 @@ const RAW_CARDS: TimelineCard[] = [
   {
     id: "ht-002",
     type: "timeline",
-    unit: "고2-한국사-대한제국",
+    unit: "고1-한국사-대한제국",
     difficultySeed: 3,
     hint: "고종의 황제 즉위부터 한일병합까지",
     problem: {
@@ -41,7 +41,7 @@ const RAW_CARDS: TimelineCard[] = [
   {
     id: "ht-003",
     type: "timeline",
-    unit: "고2-한국사-1910년대",
+    unit: "고1-한국사-1910년대",
     difficultySeed: 3,
     hint: "무단통치 → 3·1 운동 → 임정",
     problem: {
@@ -58,7 +58,7 @@ const RAW_CARDS: TimelineCard[] = [
   {
     id: "ht-004",
     type: "timeline",
-    unit: "고2-한국사-1920년대",
+    unit: "고1-한국사-1920년대",
     difficultySeed: 4,
     hint: "산미증식 → 학생운동 → 의거",
     problem: {
@@ -75,7 +75,7 @@ const RAW_CARDS: TimelineCard[] = [
   {
     id: "ht-005",
     type: "timeline",
-    unit: "고2-한국사-광복정부수립",
+    unit: "고1-한국사-광복정부수립",
     difficultySeed: 4,
     hint: "광복 → 신탁통치 논쟁 → 단독선거",
     problem: {

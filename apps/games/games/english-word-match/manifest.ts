@@ -10,7 +10,7 @@ const manifest: GameManifest = {
     id: "english-word-match",
     title: "영단어 매칭",
     subject: "영어",
-    unit: "수능 어휘",
+    unit: "빈출 어휘",
     tagline: "의미가 맞는 짝을 찾으면 카드가 결합돼요",
     estimatedMinutes: 1,
     status: "available",
