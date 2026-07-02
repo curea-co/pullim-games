@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Pullim Library">
+  <title>풀림 라이브러리</title>
+  <rect x="4" y="4" width="92" height="92" rx="18" fill="#0362DA"/>
+  <!-- book 1 (left, shorter) -->
+  <rect x="30" y="38" width="8" height="32" fill="#FFFFFF"/>
+  <!-- book 2 (middle, tallest, dead center) -->
+  <rect x="46" y="30" width="8" height="40" fill="#FFFFFF"/>
+  <!-- book 3 (right, shorter) -->
+  <rect x="62" y="38" width="8" height="32" fill="#FFFFFF"/>
+  <!-- shelf base -->
+  <rect x="22" y="70" width="56" height="8" fill="#FFFFFF"/>
+  <!-- bookmark accent on middle book (overlays book 2 center) -->
+  <rect x="46" y="46" width="8" height="8" fill="#E6FF4C"/>
+</svg>

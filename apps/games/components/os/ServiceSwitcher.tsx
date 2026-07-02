@@ -1,0 +1,117 @@
+"use client";
+
+// 앱 스위처 — pullim-web src/components/os/ServiceSwitcher.tsx 구조 이식 + games 어댑트.
+// 상단 바에서 다른 풀림 앱(플래너·문제큐·게임즈 등)으로 하드 내비게이션하는 드롭다운.
+// games 어댑트: entitlement 잠금(serviceGate)·useSession 제거 — 잠금 없이 live 서비스 전부 노출.
+// current='games' 고정(자기 앱). href 는 os-services 가 절대 URL 로 제공(@/lib/os/urls).
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import { OS_SERVICES_NAV } from "@/lib/os-services";
+
+interface ServiceSwitcherProps {
+  current: string; // slug or 'home'
+}
+
+export function ServiceSwitcher({ current }: ServiceSwitcherProps) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Close on outside click
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    if (open) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [open]);
+
+  const currentService = OS_SERVICES_NAV.find((s) => s.slug === current);
+  const triggerName = current === "home" ? "OS 홈" : (currentService?.name ?? "OS");
+  const triggerIcon = current === "home" ? null : currentService?.icon;
+
+  return (
+    <div className={`switcher${open ? " open" : ""}`} ref={ref} style={{ marginLeft: "8px" }}>
+      <button
+        className="switcher-trigger"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-haspopup="listbox"
+      >
+        <span className="sg">
+          {triggerIcon ? (
+            <Image src={triggerIcon} alt={triggerName} width={24} height={24} style={{ width: "100%", height: "100%" }} />
+          ) : (
+            <span
+              style={{
+                width: "100%",
+                height: "100%",
+                background: "var(--pullim-blue)",
+                color: "#fff",
+                display: "grid",
+                placeItems: "center",
+                fontSize: "15px",
+                borderRadius: "var(--r-sm)",
+              }}
+            >
+              ⌂
+            </span>
+          )}
+        </span>
+        <span className="sn">{triggerName}</span>
+        <svg
+          className="chev"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          aria-hidden="true"
+        >
+          <path d="M6 9l6 6 6-6" />
+        </svg>
+      </button>
+
+      <div className="switcher-menu" role="listbox" aria-label="서비스 전환">
+        <div className="sm-head">서비스 전환</div>
+
+        {OS_SERVICES_NAV.map((svc) => (
+          <a
+            key={svc.slug}
+            className={`sm-item${svc.status === "soon" ? " is-soon" : ""}`}
+            href={svc.href}
+            role="option"
+            aria-selected={current === svc.slug}
+            aria-disabled={svc.status === "soon" || undefined}
+          >
+            <span className="sg">
+              <Image src={svc.icon} alt={svc.name} width={34} height={34} style={{ width: "100%", height: "100%" }} />
+            </span>
+            <div>
+              <div className="sm-name">
+                {svc.name}
+                {svc.status === "soon" && (
+                  <span className="badge soft" style={{ marginLeft: "6px" }}>
+                    준비중
+                  </span>
+                )}
+                {svc.status === "beta" && (
+                  <span className="badge soft" style={{ marginLeft: "6px" }}>
+                    베타
+                  </span>
+                )}
+              </div>
+              <div className="sm-desc">{svc.desc}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  );
+}
