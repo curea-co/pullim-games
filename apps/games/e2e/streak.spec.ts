@@ -1,12 +1,19 @@
 // 일일 학습 스트릭 — 게임 카드 정답 후 localStorage 영속화 검증.
 // plan 2026-05-15_fsrs-streak-backbone §3 Phase 5.
+//
+// 2026-07-02: seedGuestSession 추가 — localStorage.clear() 후 player profile 재주입.
+// plan: proc/plan/2026-06-30_e2e-infra-fix.md §2 H2 fix.
 
 import { test, expect } from "@playwright/test";
+import { seedGuestSession } from "./helpers/auth";
 
-test("게임 카드 정답 → streak 첫 활동 기록 (current=1)", async ({ page }) => {
+test("게임 카드 정답 → streak 첫 활동 기록 (current=1)", async ({ page, context }) => {
   // 깨끗한 상태 — localStorage 초기화 (홈 진입 후 clear)
   await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
+
+  // clear 이후 player profile 재주입 — RequireIdentity 게이트 통과 유지.
+  await seedGuestSession(page, context);
 
   // vocab-typing 진입 + 첫 카드 ("모순") 정답
   await page.goto("/games/vocab-typing");
@@ -30,7 +37,8 @@ test("게임 카드 정답 → streak 첫 활동 기록 (current=1)", async ({ p
 test("홈 dashboard — streak.current >= 2 일 시 'N일 연속' 노출", async ({
   page,
 }) => {
-  // localStorage 시드 — streak + 1 SRS state (gamesPlayed > 0 보장)
+  // localStorage 시드 — streak + 1 SRS state (gamesPlayed > 0 보장).
+  // storageState 로 player profile 이 이미 있으므로 별도 seedGuestSession 불필요.
   await page.addInitScript(() => {
     const today = (() => {
       const d = new Date();
