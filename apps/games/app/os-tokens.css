@@ -44,7 +44,7 @@
   --ink:    var(--pullim-ink);    /* #0D1A1F */
   --ink-2:  var(--pullim-ink2);   /* #1F2C32 */
   --ink-3:  var(--pullim-ink3);   /* #45555C */
-  --ink-4:  #7A8990;              /* OS canonical (globals has #5E6B72 for a11y on marketing) */
+  --ink-4:  var(--pullim-ink4);   /* games spec/08 정합 = #5E6B72 (WCAG AA — pullim-web #7A8990 미채택) */
   --ink-5:  var(--pullim-ink5);   /* #B0BCC3 */
   --paper:  #FFFFFF;
   --paper-2: #F0F6FB;
@@ -85,12 +85,13 @@
      리터럴 'JetBrains Mono' 는 시스템 설치본 폴백. (Bai Jamjuree 는 games 미로드 → Pretendard 폴백) */
   --mono:  var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Shape */
+  /* Shape — games spec/08 §8.4 정합: 16px+ 일반 사용 금지. pullim-web 의 r-lg 20px·r-xl 28px 을
+     games 상한(modal 16px)으로 조정한다(레이아웃 골격 동일, 라운드만 spec 준수 — AI slop 회피). */
   --r-xs:   6px;
   --r-sm:   10px;
   --r-md:   14px;
-  --r-lg:   20px;
-  --r-xl:   28px;
+  --r-lg:   16px;
+  --r-xl:   16px;
   --r-pill: 999px;
 
   /* Shadows */

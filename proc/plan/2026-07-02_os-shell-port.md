@@ -47,11 +47,15 @@ pullim-web OS 셸 크롬을 **verbatim 이식**(스타일 그대로), **내용�
 
 - `typecheck` ✓ · `lint` ✓ · `build` ✓ (os-tokens 네스팅 flatten 확인: `.os-root .topbar{…}`) · `vitest` 497/497 ✓
 - 시각(seeded guest, 4 viewport): `/home`·`/games` 데스크톱=풀 OS 셸(mast 풀림 게임즈 + ServiceSwitcher 게임즈 + rail 4섹션 + breadcrumb), 모바일=rail 숨김+하단 tabbar, `/games/<id>`=몰입(백링크+mast, rail 없음), `/`=온보딩
-- **4-viewport overflow audit** (critical=0 gate):
-  - `/home` (OS 셸) = **0** ✓ / `/games/<id>` (몰입) = **0** ✓ / `/` (랜딩) = **0** ✓
-  - `/games` (허브) = 72 — **baseline(구 셸, origin/dev) = 70**. 델타 **+2**, 전부 fold 아래 게임 카드 링크(세로, `right`≤1220<1280 가로 overflow 없음). **셸 이식 회귀 아님 — 밀집 그리드에 대한 기존 audit 한계** (셸 자체 `/home`=0 이 증거). [[project_e2e_infra_broken]] 와 동일한 비-델타 성격.
+- **4-viewport overflow audit** — 본 PR 이 도입한 **셸 크롬 표면은 gate 충족(critical=0)**:
+  - `/home` (OS default 셸: topbar·rail·switcher·tabbar·breadcrumb) = **critical 0** ✓ (320/390/768/1280 전부)
+  - `/games/<id>` (game 몰입) = **critical 0** ✓ / `/` (landing) = **critical 0** ✓
+- **`/games` 허브(catalog 페이지)는 셸이 아니라 기존 페이지 이슈** — A/B 로 확정(codex #138 R3):
+  - my shell = 72, **baseline(origin/dev 구 셸) = 70**. 델타 +2(breadcrumb 오프셋으로 카드 행 하나가 fold 아래로).
+  - overflow 성격: 390/768/1280 = 전부 fold 아래 카드(세로 스크롤 자연). **320 은 가로 overflow 20건 실재**(RecommendationCard·GameCard 가 292px 컨텐츠폭 초과) — 그러나 **baseline 구 셸도 동일 20건·동일 요소(`r=333/336`)**. 즉 GameHubPage 자체의 반응형 결함으로, 본 셸 이식이 유발/악화하지 않음(구 셸이 오히려 컨텐츠폭 288px 로 더 좁았음).
+  - 근거: 셸 크롬 표면(`/home`)이 4뷰포트 0 인 것이 "셸은 무결" 증거. `/games` 는 catalog 페이지 별 이슈로 [[project_e2e_infra_broken]] 와 동일한 **비-델타 pre-existing red**.
 
 ## 5. 후속
 
-- `/games` 허브의 below-fold 카드 audit 이슈는 별도(본 PR 무관, 기존 70건). 필요 시 `data-cta-priority` 마킹 또는 audit 룰 정교화로 별 작업.
+- **`/games` 허브 320px 가로 overflow(기존 결함)** 는 별 작업으로 GameHubPage 반응형 수정 필요(본 셸 PR scope 아님 — A/B 로 pre-existing 확정). fold 아래 카드 세로 overflow 는 audit 룰이 스크롤 catalog 를 flag 하는 한계로, `data-cta-priority` 마킹 또는 룰 정교화 검토.
 - main 승격은 사용자 게이트(dev→dev-games.pullim.ai 자동배포로 pullim-web↔games 연속성 실검증 후).
