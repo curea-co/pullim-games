@@ -5,6 +5,7 @@
 
 import { useRef } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
+import { palette } from "@/lib/design-tokens";
 import { LOOP_DURATION, mockWrapperClass, type MockProps } from "./shared";
 
 export function TypingMock({ variant, locked }: MockProps) {
@@ -46,7 +47,7 @@ export function TypingMock({ variant, locked }: MockProps) {
           <motion.span
             animate={
               animate
-                ? { opacity: [1, 1, 1, 0, 0], color: ["#0F172A", "#0F172A", "#0F172A", "#0362DA", "#0F172A"] }
+                ? { opacity: [1, 1, 1, 0, 0], color: [palette.ink, palette.ink, palette.ink, palette.blue, palette.ink] }
                 : undefined
             }
             transition={{

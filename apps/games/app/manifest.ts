@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { palette } from "@/lib/design-tokens";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -9,8 +10,8 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/games",
     display: "standalone",
     orientation: "portrait",
-    background_color: "#FBFAF8",
-    theme_color: "#0362DA",
+    background_color: palette.paper,
+    theme_color: palette.blue,
     lang: "ko-KR",
     categories: ["education", "games"],
   };
