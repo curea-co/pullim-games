@@ -110,7 +110,7 @@ Codex #133 R1 지적: content `unit` 만 재보정하고 발견 표면(허브·�
 
 **code/plan 기준 sweep** 결과 게임 콘텐츠(`games/*/{manifest.ts,content/index.ts}`)의 `unit`·hint·주석에 초/수능/고2/고3 잔여 **0**. grade 슬롯 분포 고1 90 (기존 85 + vocab-typing 5). 검증: typecheck ✓ / lint ✓ / vitest 497/497.
 
-> **spec 드리프트 잔존 (Codex #133 R2)**: 위 "잔여 0" 은 **게임 콘텐츠 코드 한정**이며 권위 spec 과의 정합을 단정하지 않는다. `proc/spec/06-콘텐츠-데이터.md §6.9` 에는 여전히 옛 표기(`english-word-match=수능 어휘 빈출`·`chemistry-balance=화학I 반응식 균형`·`english-blank=수능 빈칸 추론`·`physics-vector=물리 — 힘 합성`)가 남아 있다. 문서 라우팅상 spec 이 plan 보다 우선이므로 spec/06 §6.9 정합화는 **G1 합의 후 별 spec PR** 로 처리한다(CLAUDE.md §4 권위 문서 수정 룰). 본 PR 은 코드 재보정 한정.
+> **spec 정합 — 본 PR 에 통합 (Codex #133 R2·R5, 사용자 결정 2026-07-02)**: 게임 콘텐츠 코드 재보정과 권위 spec 을 **원자적으로** 머지한다. `proc/spec/06 §6.9`(단원 매핑 4행)·`proc/spec/02 §2.4`(english-blank 고3 한시노출 KNOWN-TRADE-OFF) 를 본 PR 에서 함께 정합 → §6.7 참조. (당초 별 spec PR(#137) 로 분리했으나 Codex 가 분리 시 데드락 — spec 만/코드 만 각각 상대 미머지 절반과 모순 — 을 증명해 원자적 통합으로 전환, #137 close.)
 
 > tone 주의: 사용자 노출 hint 의 "수능 빈출" 문구를 학습 지향 문구로 낮춤(고3 연상 제거). "수능 대비" 를 aspirational 문구로 유지하고 싶으면 사용자 지시 시 revert 가능 — §6.3 ①② 경계 항목과 연계.
 
@@ -138,3 +138,20 @@ Codex #133 R4: 영어 게임 3종(`english-blank`·`english-word-match`·`englis
 - 프리런치 단계 · 학습효과 우선(spec/05 §5.1): 도전적 어휘 노출은 학습효과에 부합(중독성 아님).
 
 처리: 콘텐츠 교체 대신 3개 content 파일 헤더에 `KNOWN-TRADE-OFF: <본 plan §6.6>` 주석 명시(CLAUDE.md §9 정당한 trade-off 기록 룰, 사용자 합의 충족). 추후 고1 기초 어휘로 낮추길 원하면 별 콘텐츠 PR 로 전환 가능.
+
+### 6.7 spec 원자적 통합 (Codex #133 R5·#137 R1 데드락 해소, 사용자 결정 2026-07-02)
+
+당초 spec/06 정합을 별 PR(#137) 로 분리했으나(§6.4 초안), Codex 가 **분리 PR 데드락**을 증명:
+
+- **#133(코드만)**: dev 의 spec 이 옛 라벨이라 "코드-spec 분리 머지 시 기준 이중화" 로 승인 거부(R5).
+- **#137(spec만)**: dev 의 앱 메타·카드가 아직 옛 라벨(#133 미머지)이라 "spec 이 제품을 잘못 대표" 로 승인 거부(R1).
+- 각 PR 이 상대의 **미머지 절반**과 모순 → 어느 쪽도 단독 승인 불가.
+
+**해소 = 원자적 통합.** spec 을 #133 에 합쳐 코드+spec 을 동시 머지:
+
+| 파일 | 변경 |
+|---|---|
+| `proc/spec/06 §6.9` | 단원 매핑 4행 정합 (수능 어휘→고1 빈출, 화학I→통합과학, 수능 빈칸→고1 빈칸, 물리 평행사변형→통합과학 직각·방향 합성) |
+| `proc/spec/02 §2.4` | phasing KNOWN-TRADE-OFF 재보정 — "english-blank 고3 한시노출" → "unit 라벨 중1~고1 재보정 완료(§6.4~6.6), stage 필터만 후속" |
+
+CLAUDE.md §8 은 CONVENTION/CLAUDE/AGENTS 메타 문서 분리 룰이며 content-spec(spec/02·06) 을 content 코드 PR 에 통합하는 것은 위반 아님. 권위 문서 수정은 G1 승인(2026-07-02) 충족(§4). #137 은 close.
