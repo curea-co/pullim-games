@@ -78,9 +78,11 @@
   --danger:   #E5484D; --danger-bg: #FCEBEC;
   --info:     #1F89F5; --info-bg:   #E8F2FE;
 
-  /* Type — OS-specific names; marketing site uses --f-kr / --f-brand / --f-mono */
-  --sans:  'Pretendard Variable', Pretendard, -apple-system, system-ui, sans-serif;
-  --brand: 'Bai Jamjuree', 'Pretendard Variable', var(--sans);
+  /* Type — games spec/08 §8.2 정합: Pretendard 계열 고정. AGENTS/CLAUDE 가 금지한 system-ui·
+     -apple-system·Inter·Roboto 미사용(codex #138 R4). games tailwind fontFamily.sans 와 동일 스택. */
+  --sans:  'Pretendard Variable', Pretendard, 'Spoqa Han Sans Neo', sans-serif;
+  /* brand latin(Bai Jamjuree) 미도입 — Pretendard 로 폴백(spec/08 §8.2 note, games UI 렌더 표면 없음). */
+  --brand: var(--sans);
   /* games 적응: 모노는 next/font 로드(layout.tsx --font-jetbrains-mono)를 1순위로.
      리터럴 'JetBrains Mono' 는 시스템 설치본 폴백. (Bai Jamjuree 는 games 미로드 → Pretendard 폴백) */
   --mono:  var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, monospace;
@@ -704,21 +706,8 @@
   to { transform: rotate(360deg); }
 }
 
-/* ── Marketing chrome suppression ────────────────────────────────────────────
-   When an .os-root is present in the page body, hide the marketing Nav
-   (renders as <header>), Footer, ProgressRail and CookieBanner so the OS
-   shell stands alone. Uses CSS :has() — baseline in all modern browsers.
-   ───────────────────────────────────────────────────────────────────────── */
-body:has(.os-root) > header,
-body:has(.os-root) > footer,
-/* CookieBanner (role=dialog, identified by its labelledby) — was overlapping
-   the OS surface because it renders as a body-direct <div>, not a footer.
-   Targeted precisely so the CommandPalette / ProgressRail are untouched. */
-body:has(.os-root) > [aria-labelledby="pullim-cookie-title"] {
-  display: none !important;
-}
-/* Strip flex sizing from the root <main> wrapper so os-root fills correctly */
-body:has(.os-root) > main#main {
-  flex: unset;
-  padding: 0;
-}
+/* pullim-web 의 "marketing chrome suppression" 블록(marketing Nav/Footer/CookieBanner/main#main
+   `body:has(.os-root) > …` 숨김)은 **games 에 이식하지 않는다**(codex #138 R4):
+   games body 직속 자식은 OsAppShell 의 `.os-root` 뿐 — 마케팅 header/footer·`pullim-cookie-title`
+   배너·`main#main` 이 존재하지 않는다. 전역 `display:none` 규칙을 남기면 향후 games 가 body-direct
+   동의 배너를 추가할 때 무조건 숨겨 런타임 동의 UI 를 깨뜨릴 위험이 있어 제거. */

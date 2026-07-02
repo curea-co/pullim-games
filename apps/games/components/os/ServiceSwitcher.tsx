@@ -4,6 +4,13 @@
 // 상단 바에서 다른 풀림 앱(플래너·문제큐·게임즈 등)으로 하드 내비게이션하는 드롭다운.
 // games 어댑트: entitlement 잠금(serviceGate)·useSession 제거 — 잠금 없이 live 서비스 전부 노출.
 // current='games' 고정(자기 앱). href 는 os-services 가 절대 URL 로 제공(@/lib/os/urls).
+//
+// KNOWN-TRADE-OFF (codex #138 R4 · 근거: proc/plan/2026-07-02_os-shell-port.md §0 + [[project_pullim_web_integration]]):
+//   games 회원 세션(`pullim_games_session`)은 host-only 쿠키(Domain 미지정 — lib/server/auth/session.ts)라
+//   sibling 앱으로 하드 내비게이션해도 세션이 동반되지 않는다(회원은 대상 앱에서 재인증). games 는 자체
+//   standalone auth 이고, cross-서브도메인 세션 연속성(Domain=.pullim.ai)은 **공유 auth(pullim-api)
+//   SSO 트랙**(Q 의 NEXT_PUBLIC_DOMAIN_API_URL 모델) 이라 본 셸 PR scope 밖. 게스트(games 1차 사용자)는
+//   보존할 세션이 없어 무영향, 회원은 대상 앱 로그인으로 graceful. SSO 채택 시 연속성 확보(별 작업).
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { OS_SERVICES_NAV } from "@/lib/os-services";

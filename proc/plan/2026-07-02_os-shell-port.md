@@ -65,4 +65,6 @@ pullim-web OS 셸 크롬을 **verbatim 이식**(스타일 그대로), **내용�
 
 ## 5. 후속
 
+- **cross-앱 세션 연속성(SSO, codex #138 R4-1)**: ServiceSwitcher 는 sibling 앱 하드 nav 를 노출하나 games 회원 세션은 host-only 쿠키라 동반 안 됨. Domain=.pullim.ai 세션(공유 auth pullim-api / Q 의 `NEXT_PUBLIC_DOMAIN_API_URL` 모델) 채택은 별 트랙 — 게스트 무영향, 회원 graceful 재인증. [[project_pullim_web_integration]] SSO 스텝.
+- R4-2 마케팅 크롬 억제 블록(pullim-web 전용 `body:has(.os-root)>header/footer/cookie/main#main`) 미이식(games 무관·향후 동의 배너 훼손 위험 제거). R4-3 `--sans` spec/08 §8.2 정합(system-ui·-apple-system 제거).
 - main 승격은 사용자 게이트(dev→dev-games.pullim.ai 자동배포로 pullim-web↔games 연속성 실검증 후).
