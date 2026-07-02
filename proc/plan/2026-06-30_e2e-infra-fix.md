@@ -39,13 +39,13 @@
 
 1. **middleware.ts (Edge/서버)**: `pullim_games_session`(HttpOnly) 또는 `pullim_games_guest`(non-HttpOnly) 쿠키가 없으면 `"/"` 로 redirect. 쿠키 값 미검증 — 존재 여부만 coarse gate. **e2e spec 은 쿠키 미시드 → 미들웨어가 `"/"` 로 redirect → 게임 콘텐츠 미렌더.**
 
-2. **RequireIdentity (클라이언트)**: `getPlayer()` → localStorage `"pullim-games:player"` 파싱. `Player.grade` 가 `GRADES("중1"~"고3")` 안에 없으면 `clearPlayer()` + null → `router.replace("/")`. **e2e spec 은 player profile 미시드 → RequireIdentity 가 `"/"` 로 redirect.**
+2. **RequireIdentity (클라이언트)**: `getPlayer()` → localStorage `"pullim-games:player"` 파싱. `Player.grade` 가 `GRADES("중1"~"고1")` 안에 없으면 `clearPlayer()` + null → `router.replace("/")`. **e2e spec 은 player profile 미시드 → RequireIdentity 가 `"/"` 로 redirect.**
 
 두 게이트 모두 우회하지 않으면 게임/대시보드 콘텐츠에 도달 불가.
 
 **통과 조건:**
 - 쿠키: `pullim_games_guest=1` (non-HttpOnly, Playwright `context.addCookies` 로 주입 가능)
-- localStorage: `pullim-games:player = { nickname, grade: "중1"~"고3", consent: true, createdAt }` (Playwright `addInitScript` 또는 `storageState` 로 주입)
+- localStorage: `pullim-games:player = { nickname, grade: "중1"~"고1", consent: true, createdAt }` (Playwright `addInitScript` 또는 `storageState` 로 주입)
 
 e2e helper 현황: `e2e/helpers/{games,seed,viewports}.ts` — `seed.ts` 는 custom-* localStorage 콘텐츠 주입만, **게스트/회원·학년 상태 시드 없음** → H2 확정.
 
