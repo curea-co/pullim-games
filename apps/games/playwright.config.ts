@@ -13,20 +13,13 @@
 //   실패 → 그런 spec 은 helpers/auth.ts seedGuestSession() 으로 재주입 필요.
 
 import { defineConfig, devices } from "@playwright/test";
-import path from "path";
+// storageState 경로는 helpers/auth.ts(게스트 fixture SoT)에서 가져온다 — 중복 정의 제거(Codex #134 R2).
+// helpers/auth.ts 는 test() 호출이 없어 config 로딩 시 부작용이 없다(auth.setup.ts 를 직접 import 하면
+// 안 되는 것과 구분).
+import { STORAGE_STATE_PATH } from "./e2e/helpers/auth";
 
 const PORT = 3004;
 const baseURL = `http://localhost:${PORT}`;
-
-// Playwright storageState 파일 경로 — e2e/setup/auth.setup.ts 와 동일.
-// import 로 auth.setup 을 끌어오면 setup 내 test() 호출이 config 로딩 시 실행돼 에러 발생하므로
-// 경로 상수를 여기서 직접 정의한다.
-// playwright.config.ts 위치: apps/games/ → __dirname = apps/games/.
-export const STORAGE_STATE_PATH = path.join(
-  __dirname,
-  ".playwright",
-  "guest-auth.json",
-);
 
 export default defineConfig({
   testDir: "e2e",

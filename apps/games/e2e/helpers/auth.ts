@@ -9,7 +9,7 @@
 //
 //   2. RequireIdentity (클라이언트):
 //      getPlayer() → localStorage "pullim-games:player" 파싱.
-//      Player.grade 가 GRADES("중1"~"고3") 안에 없으면 clearPlayer() + null 반환 → "/" 리다이렉트.
+//      Player.grade 가 GRADES("중1"~"고1", #129 중1~고1 정밀화) 안에 없으면 clearPlayer() + null 반환 → "/" 리다이렉트.
 //
 //   → e2e 에서 두 조건을 모두 충족해야 게임/대시보드 콘텐츠가 렌더된다.
 //
@@ -37,6 +37,18 @@
 //   await page.goto("/home");
 
 import type { Page, BrowserContext } from "@playwright/test";
+import path from "path";
+
+// Playwright storageState 파일 경로 — 본 모듈이 게스트 fixture 의 단일 출처(SoT)다(Codex #134 R2).
+// auth.setup.ts(생성)·playwright.config.ts(chromium 상속) 가 이 상수를 import 해 중복을 없앤다.
+// helpers/auth.ts 위치: apps/games/e2e/helpers/ → ../../ = apps/games/.
+export const STORAGE_STATE_PATH = path.join(
+  __dirname,
+  "..",
+  "..",
+  ".playwright",
+  "guest-auth.json",
+);
 
 /** e2e 게스트 플레이어 프로필 — GRADES 목록(lib/core/player/index.ts) 중 하나여야 함. */
 const E2E_PLAYER = {
