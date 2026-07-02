@@ -53,31 +53,31 @@ const RAW_CARDS: VectorCard[] = [
   {
     id: "pv-004",
     type: "vector",
-    unit: "고1-통합과학-일반합성",
+    unit: "고1-통합과학-방향합성",
     difficultySeed: 4,
-    hint: "x 성분과 y 성분을 따로",
+    hint: "아래 방향(−y) 힘에 주의",
     problem: {
-      context: "임의각 두 힘의 합력은?",
+      context: "오른쪽 4 N, 아래쪽 3 N 두 힘의 합력은?",
       vectors: [
-        { origin: [0, 0], components: [3, 0], label: "F1" },
-        { origin: [0, 0], components: [2, 2], label: "F2" },
+        { origin: [0, 0], components: [4, 0], label: "F1" },
+        { origin: [0, 0], components: [0, -3], label: "F2" },
       ],
-      resultant: { origin: [0, 0], components: [5, 2], label: "R" },
+      resultant: { origin: [0, 0], components: [4, -3], label: "R" },
     },
   },
   {
     id: "pv-005",
     type: "vector",
-    unit: "고1-통합과학-음수성분",
+    unit: "고1-통합과학-방향합성",
     difficultySeed: 5,
-    hint: "성분이 음수일 수 있어요",
+    hint: "왼쪽 방향(−x) 힘에 주의",
     problem: {
-      context: "두 벡터의 합벡터는?",
+      context: "왼쪽 6 N, 위쪽 3 N 두 힘의 합력은?",
       vectors: [
-        { origin: [0, 0], components: [-2, 1], label: "F1" },
-        { origin: [0, 0], components: [3, 2], label: "F2" },
+        { origin: [0, 0], components: [-6, 0], label: "F1" },
+        { origin: [0, 0], components: [0, 3], label: "F2" },
       ],
-      resultant: { origin: [0, 0], components: [1, 3], label: "R" },
+      resultant: { origin: [0, 0], components: [-6, 3], label: "R" },
     },
   },
 ];

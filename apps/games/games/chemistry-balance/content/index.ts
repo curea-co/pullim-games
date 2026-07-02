@@ -23,12 +23,12 @@ const RAW_CARDS: ChemistryBalanceCard[] = [
     type: "chemistry-balance",
     unit: "고1-통합과학-분해반응",
     difficultySeed: 2,
-    hint: "K, Cl, O 모두 균형",
+    hint: "과산화수소(H₂O₂)의 분해",
     problem: {
-      reactants: [{ formula: "KClO3", coefficient: 2 }],
+      reactants: [{ formula: "H2O2", coefficient: 2 }],
       products: [
-        { formula: "KCl", coefficient: 2 },
-        { formula: "O2", coefficient: 3 },
+        { formula: "H2O", coefficient: 2 },
+        { formula: "O2", coefficient: 1 },
       ],
     },
   },
@@ -66,17 +66,17 @@ const RAW_CARDS: ChemistryBalanceCard[] = [
   {
     id: "cb-005",
     type: "chemistry-balance",
-    unit: "고1-통합과학-유기연소",
+    unit: "고1-통합과학-광합성",
     difficultySeed: 5,
-    hint: "에탄(C2H6)의 완전 연소",
+    hint: "광합성 (이산화탄소 + 물 → 포도당 + 산소)",
     problem: {
       reactants: [
-        { formula: "C2H6", coefficient: 2 },
-        { formula: "O2", coefficient: 7 },
+        { formula: "CO2", coefficient: 6 },
+        { formula: "H2O", coefficient: 6 },
       ],
       products: [
-        { formula: "CO2", coefficient: 4 },
-        { formula: "H2O", coefficient: 6 },
+        { formula: "C6H12O6", coefficient: 1 },
+        { formula: "O2", coefficient: 6 },
       ],
     },
   },
