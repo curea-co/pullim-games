@@ -10,7 +10,7 @@ const manifest: GameManifest = {
     id: "chemistry-balance",
     title: "화학 반응식 균형",
     subject: "과학",
-    unit: "화학I",
+    unit: "통합과학",
     tagline: "양변의 원자 수를 맞추면 반응식이 결합돼요",
     estimatedMinutes: 3,
     status: "available",

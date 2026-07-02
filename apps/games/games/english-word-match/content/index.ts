@@ -1,4 +1,4 @@
-// english-word-match 카드 풀 — 5장, 수능 어휘 매칭 (영어↔한국어).
+// english-word-match 카드 풀 — 5장, 고1 빈출 어휘 매칭 (영어↔한국어).
 
 import { WordMatchCardSchema } from "../schema";
 import type { WordMatchCard } from "../schema";
@@ -7,9 +7,9 @@ const RAW_CARDS: WordMatchCard[] = [
   {
     id: "wm-001",
     type: "word-match",
-    unit: "고1-영어-수능동사",
+    unit: "고1-영어-빈출동사",
     difficultySeed: 2,
-    hint: "수능 빈출 동사 5종",
+    hint: "빈출 동사 5종",
     problem: {
       pairs: [
         { english: "pursue", korean: "추구하다" },
@@ -49,7 +49,7 @@ const RAW_CARDS: WordMatchCard[] = [
     type: "word-match",
     unit: "고1-영어-형용사",
     difficultySeed: 3,
-    hint: "수능 형용사 5종",
+    hint: "빈출 형용사 5종",
     problem: {
       pairs: [
         { english: "profound", korean: "심오한" },
@@ -89,7 +89,7 @@ const RAW_CARDS: WordMatchCard[] = [
     type: "word-match",
     unit: "고1-영어-어법빈출",
     difficultySeed: 4,
-    hint: "수능 어법 빈출 동사",
+    hint: "어법 빈출 동사",
     problem: {
       pairs: [
         { english: "confide", korean: "신뢰하다" },

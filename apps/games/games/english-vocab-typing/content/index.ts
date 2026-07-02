@@ -1,4 +1,4 @@
-// english-vocab-typing 카드 풀 — 5장, 수능 빈출 영어 어휘.
+// english-vocab-typing 카드 풀 — 5장, 고1 빈출 영어 어휘.
 
 import { EnglishVocabTypingCardSchema } from "../schema";
 import type { EnglishVocabTypingCard } from "../schema";
@@ -7,7 +7,7 @@ const RAW_CARDS: EnglishVocabTypingCard[] = [
   {
     id: "evt-001",
     type: "english-vocab-typing",
-    unit: "수능-영어-어휘",
+    unit: "고1-영어-어휘",
     difficultySeed: 1,
     hint: "7글자 동사, a- 로 시작",
     problem: {
@@ -19,7 +19,7 @@ const RAW_CARDS: EnglishVocabTypingCard[] = [
   {
     id: "evt-002",
     type: "english-vocab-typing",
-    unit: "수능-영어-어휘",
+    unit: "고1-영어-어휘",
     difficultySeed: 2,
     hint: "11글자 명사, en- 로 시작",
     problem: {
@@ -31,7 +31,7 @@ const RAW_CARDS: EnglishVocabTypingCard[] = [
   {
     id: "evt-003",
     type: "english-vocab-typing",
-    unit: "수능-영어-어휘",
+    unit: "고1-영어-어휘",
     difficultySeed: 2,
     hint: "7글자 동사, an- 로 시작",
     problem: {
@@ -43,7 +43,7 @@ const RAW_CARDS: EnglishVocabTypingCard[] = [
   {
     id: "evt-004",
     type: "english-vocab-typing",
-    unit: "수능-영어-어휘",
+    unit: "고1-영어-어휘",
     difficultySeed: 3,
     hint: "11글자 명사, con- 로 시작",
     problem: {
@@ -55,7 +55,7 @@ const RAW_CARDS: EnglishVocabTypingCard[] = [
   {
     id: "evt-005",
     type: "english-vocab-typing",
-    unit: "수능-영어-어휘",
+    unit: "고1-영어-어휘",
     difficultySeed: 3,
     hint: "13글자 형용사, in- 부정 접두사",
     problem: {

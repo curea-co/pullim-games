@@ -91,3 +91,23 @@
 ③ **`physics-vector` 벡터 합성**: 물리I(고2 선택) 내용을 통합과학(고1)으로 재분류함. 벡터 합성 중 일반합성(임의각)·음수성분 문제는 수준이 통합과학 상한선에 가까움. 실제 수업 맥락에서 고1이 풀기 어렵다고 판단 시 해당 카드(pv-004·pv-005) 콘텐츠 교체 검토 요청.
 
 ④ **`chemistry-balance` KClO₃·C₂H₆ 연소**: 분해반응(KClO₃)·유기연소(C₂H₆)는 통합과학보다 화학I 수준에 가까움. 통합과학으로 재분류했으나, 고1 학습자에게 어렵다고 판단 시 카드(cb-002·cb-005) 콘텐츠 교체 검토 요청.
+
+### 6.4 Codex #133 R1 후속 — manifest 메타 정합 + 수능 잔재 전수 정리 (2026-07-02)
+
+Codex #133 R1 지적: content `unit` 만 재보정하고 발견 표면(허브·추천·리스트·ARIA)이 읽는 `manifest.ts meta.unit` 은 그대로라 표면 드리프트 발생 (플레이 화면=고1, 허브=물리I/수능). 정당한 지적 → 코드 fix.
+
+추가로 원래 grep(고2/고3)이 놓친 **out-of-band "수능"(=고3 밴드) 잔재** 전수 sweep 으로 발견·정리:
+
+| 파일 | 변경 |
+|---|---|
+| `english-blank/manifest.ts` | `unit: 수능 빈칸` → `빈칸 추론` |
+| `english-word-match/manifest.ts` | `unit: 수능 어휘` → `빈출 어휘` |
+| `physics-vector/manifest.ts` | `unit: 물리I` → `통합과학` (content 정합) |
+| `chemistry-balance/manifest.ts` | `unit: 화학I` → `통합과학` (content 정합) |
+| `english-word-match/content` | `고1-영어-수능동사` → `고1-영어-빈출동사`, hint 3종 "수능" 제거 |
+| `english-vocab-typing/manifest+content` | `수능 어휘`·`수능-영어-어휘`(5) → `빈출 어휘`·`고1-영어-어휘` (#133 원 스코프 누락분 편입) |
+| `vocab-typing/content` | 주석 "수능 빈출" → "고1 빈출" |
+
+sweep 결과 전 게임 `unit`·manifest·hint·주석에 초/수능/고2/고3 잔여 **0**. grade 슬롯 분포 고1 90 (기존 85 + vocab-typing 5). 검증: typecheck ✓ / lint ✓ / vitest 497/497.
+
+> tone 주의: 사용자 노출 hint 의 "수능 빈출" 문구를 학습 지향 문구로 낮춤(고3 연상 제거). "수능 대비" 를 aspirational 문구로 유지하고 싶으면 사용자 지시 시 revert 가능 — §6.3 ①② 경계 항목과 연계.

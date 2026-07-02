@@ -1,4 +1,4 @@
-// vocab-typing 카드 풀 — 5장, 수능 빈출 한자성어/한자어 (한글 음 입력).
+// vocab-typing 카드 풀 — 5장, 고1 빈출 한자성어/한자어 (한글 음 입력).
 
 import { VocabTypingCardSchema } from "../schema";
 import type { VocabTypingCard } from "../schema";
