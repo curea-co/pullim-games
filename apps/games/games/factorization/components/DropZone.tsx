@@ -9,6 +9,7 @@
 
 import { forwardRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { palette } from "@/lib/design-tokens";
 
 interface DropZoneProps {
   /** 드래그 진행 중인지. true 일 때 accent 강조 + 미리보기 표시. */
@@ -26,7 +27,7 @@ export const DropZone = forwardRef<HTMLDivElement, DropZoneProps>(function DropZ
       ref={ref}
       className="rounded-dropzone px-5 py-3 text-center"
       animate={{
-        borderColor: active ? "#0362DA" : "#D6E2EE",
+        borderColor: active ? palette.blue : palette.line,
         backgroundColor: active ? "rgba(3,98,218,0.06)" : "rgba(0,0,0,0)",
       }}
       style={{

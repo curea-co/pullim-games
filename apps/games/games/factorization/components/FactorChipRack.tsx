@@ -13,6 +13,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { palette } from "@/lib/design-tokens";
 
 export interface FactorChipRackProps {
   /** 후보 chip 텍스트 3개 (1 정답 + 2 distractors, 부모가 shuffle 해서 전달). */
@@ -72,10 +73,10 @@ function FactorChip({ text, isHovering, isWrongFlash, onMount }: ChipProps) {
       className="relative flex min-h-[56px] min-w-[80px] items-center justify-center rounded-block border bg-bg-block px-4 py-3 text-display tabular text-type-primary"
       animate={{
         borderColor: isWrongFlash
-          ? "#F87171"
+          ? palette.negative
           : isHovering
-            ? "#0362DA"
-            : "#D6E2EE",
+            ? palette.blue
+            : palette.line,
         backgroundColor: isHovering
           ? "rgba(3,98,218,0.06)"
           : "rgba(0,0,0,0)",
