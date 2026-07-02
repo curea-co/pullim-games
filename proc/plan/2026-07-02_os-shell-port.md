@@ -5,6 +5,14 @@
 - 선행: `2026-07-01_pullim-web-layout-alignment.md`(팔레트-only, PR #131·#135) — 본 작업이 **셸 골격 이식으로 승격**
 - 관련 메모리: `project_pullim_web_integration`, `project_logged_in_route_audit_seed`
 
+## 0. 거버넌스 — CLAUDE.md §7 "sibling 참조 금지"와의 관계 (codex #138 R3-1)
+
+본 이식은 CLAUDE.md §7 "다른 풀림 프로젝트(planner/Q/classbot) 코드·페이지·mock 참조 — 독립 프로젝트이므로 cross-domain 의존 금지" 룰과 **충돌하지 않는다**:
+- **G1(사용자) 명시 지시**: "pullim-web 레포를 보고 레이아웃 코드를 베껴오라 … 레이아웃만 그대로, 내용물은 games"(2026-07-02). 프로젝트 오너(G1)의 직접 지시.
+- **런타임 cross-repo 의존 아님**: pullim-web 을 import/참조하지 않는다. os-tokens.css·os 컴포넌트를 games 트리로 **일회성 vendored copy** — 이후 games 가 **독립 소유**(pullim-web 변경이 games 에 전파 안 됨). §7 룰의 취지(런타임 sibling 의존 금지)에 저촉 안 됨.
+- **대상은 planner/Q/classbot 이 아니라 OS 호스트(pullim-web)**: 룰이 명시한 3 sibling 이 아니라, games 가 핸드오프로 통합되는 OS 셸([[project_pullim_web_integration]] 연장). games 를 OS 셸 안에 시각 정합시키는 통합 작업.
+- CLAUDE.md 본문은 **수정하지 않는다**(§9 codex 회피성 룰북 수정 금지). 본 §0 이 G1 합의 기록.
+
 ## 1. 배경·문제
 
 games 를 pullim-web(풀림 OS 웹 셸)에서 핸드오프(리디렉션)하는 것은 되지만, games 에 진입하면 **pullim-web 의 글로벌 네비게이션·사이드바 크롬이 이식돼 있지 않았다.** #131·#135 는 팔레트·색 remap 만 했지 셸 **골격**을 안 가져옴.
@@ -47,15 +55,14 @@ pullim-web OS 셸 크롬을 **verbatim 이식**(스타일 그대로), **내용�
 
 - `typecheck` ✓ · `lint` ✓ · `build` ✓ (os-tokens 네스팅 flatten 확인: `.os-root .topbar{…}`) · `vitest` 497/497 ✓
 - 시각(seeded guest, 4 viewport): `/home`·`/games` 데스크톱=풀 OS 셸(mast 풀림 게임즈 + ServiceSwitcher 게임즈 + rail 4섹션 + breadcrumb), 모바일=rail 숨김+하단 tabbar, `/games/<id>`=몰입(백링크+mast, rail 없음), `/`=온보딩
-- **4-viewport overflow audit** — 본 PR 이 도입한 **셸 크롬 표면은 gate 충족(critical=0)**:
-  - `/home` (OS default 셸: topbar·rail·switcher·tabbar·breadcrumb) = **critical 0** ✓ (320/390/768/1280 전부)
-  - `/games/<id>` (game 몰입) = **critical 0** ✓ / `/` (landing) = **critical 0** ✓
-- **`/games` 허브(catalog 페이지)는 셸이 아니라 기존 페이지 이슈** — A/B 로 확정(codex #138 R3):
-  - my shell = 72, **baseline(origin/dev 구 셸) = 70**. 델타 +2(breadcrumb 오프셋으로 카드 행 하나가 fold 아래로).
-  - overflow 성격: 390/768/1280 = 전부 fold 아래 카드(세로 스크롤 자연). **320 은 가로 overflow 20건 실재**(RecommendationCard·GameCard 가 292px 컨텐츠폭 초과) — 그러나 **baseline 구 셸도 동일 20건·동일 요소(`r=333/336`)**. 즉 GameHubPage 자체의 반응형 결함으로, 본 셸 이식이 유발/악화하지 않음(구 셸이 오히려 컨텐츠폭 288px 로 더 좁았음).
-  - 근거: 셸 크롬 표면(`/home`)이 4뷰포트 0 인 것이 "셸은 무결" 증거. `/games` 는 catalog 페이지 별 이슈로 [[project_e2e_infra_broken]] 와 동일한 **비-델타 pre-existing red**.
+- **4-viewport overflow audit — 전 changed surface critical=0 (HARD gate 충족)** (codex #138 R3, 사용자 결정 "이 PR 에서 허브까지 수정"):
+  - `/home`·`/games`·`/manage` (seeded) · `/games/<id>` (몰입) · `/` (landing) = **4뷰포트 전부 critical 0** ✓
+  - 공식 `bun run ui:audit /games` = **critical 0 PASS** (informational 79 = 자연 스크롤 catalog)
+  - **가로 overflow(실제 레이아웃 break) 근본 수정**:
+    - `.shell` grid `1fr` → `minmax(0, 1fr)` — 순수 `1fr`(암묵 min-width:auto)이 넓은 자식에 맞춰 트랙을 뷰포트 밖으로 확장(grid blowout)해 320px 문서 가로 스크롤을 유발하던 근본 원인 제거.
+    - 모바일 topbar 압축(검색·알림 placeholder·mast sub 숨김) + GameHubPage 헤더 `flex-wrap`(제목+뷰토글 320px wrap).
+  - **fold 아래 스크롤 콘텐츠**(catalog 카드·manage 보조 링크)는 `data-cta-priority="informational"` 마킹 — games 기존 관례(AuthForm·ModeChipsRow·RecommendationCard 선례). 5개 허브 뷰(Grid/Preview/List/Table/Thumbnail)·CustomGamesSection·manage 보조 CTA. **가로 break 는 0(마킹으로 숨긴 것 아님, 실제 fix)**, 세로는 스크롤 catalog 의 정당한 informational.
 
 ## 5. 후속
 
-- **`/games` 허브 320px 가로 overflow(기존 결함)** 는 별 작업으로 GameHubPage 반응형 수정 필요(본 셸 PR scope 아님 — A/B 로 pre-existing 확정). fold 아래 카드 세로 overflow 는 audit 룰이 스크롤 catalog 를 flag 하는 한계로, `data-cta-priority` 마킹 또는 룰 정교화 검토.
 - main 승격은 사용자 게이트(dev→dev-games.pullim.ai 자동배포로 pullim-web↔games 연속성 실검증 후).

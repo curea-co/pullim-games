@@ -164,7 +164,9 @@ export function GameHubPage() {
 
   return (
     <main className="flex flex-col gap-6 px-4 py-6 md:px-6 md:py-8">
-      <header className="flex items-start justify-between gap-3">
+      {/* flex-wrap: 320px 에서 제목 + 뷰토글(shrink-0)이 한 줄에 안 맞아 문서 가로 스크롤을 유발하던 것
+          방지(codex #138 R3) — 좁으면 뷰토글이 아래 줄로 wrap. */}
+      <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <p className="text-xs font-bold uppercase tracking-wider text-type-secondary">
             게임 허브

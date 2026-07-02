@@ -192,7 +192,9 @@
     box-shadow: var(--sh-1);
   }
 
-  & .shell { flex: 1; display: grid; grid-template-columns: var(--rail-w) 1fr; align-items: start; }
+  /* 콘텐츠 트랙은 minmax(0,1fr) — 순수 `1fr`(암묵 min-width:auto)은 넓은 자식(카드·툴바 min-content)에
+     맞춰 트랙이 뷰포트를 넘어 확장(grid blowout)돼 320px 에서 문서 가로 스크롤을 유발한다(codex #138 R3). */
+  & .shell { flex: 1; display: grid; grid-template-columns: var(--rail-w) minmax(0, 1fr); align-items: start; }
 
   & .rail {
     position: sticky; top: var(--topbar-h);
@@ -236,7 +238,7 @@
   & .main { padding: 30px 36px 80px; max-width: 1240px; width: 100%; margin: 0 auto; }
 
   /* ── 사이드바(레일) 접기 토글 ─────────────────────────────────────── */
-  &.rail-collapsed .shell { grid-template-columns: 1fr; }
+  &.rail-collapsed .shell { grid-template-columns: minmax(0, 1fr); }
   &.rail-collapsed .rail { display: none; }
   & .rail-collapse-btn {
     display: grid; place-items: center; width: 34px; height: 34px; flex: none;
@@ -474,7 +476,7 @@
 
   /* ── Responsive ───────────────────────────────────────────────────── */
   @media (max-width: 920px) {
-    & .shell { grid-template-columns: 1fr; }
+    & .shell { grid-template-columns: minmax(0, 1fr); }
     & .rail  { display: none; }
     & .rail-collapse-btn { display: none; } /* 레일이 이미 숨겨지는 구간 — 토글 불필요 */
     & .main  { padding: 22px 18px 96px; }
