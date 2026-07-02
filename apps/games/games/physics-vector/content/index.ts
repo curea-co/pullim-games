@@ -72,12 +72,12 @@ const RAW_CARDS: VectorCard[] = [
     difficultySeed: 5,
     hint: "왼쪽 방향(−x) 힘에 주의",
     problem: {
-      context: "왼쪽 6 N, 위쪽 3 N 두 힘의 합력은?",
+      context: "왼쪽 4 N, 위쪽 3 N 두 힘의 합력은?",
       vectors: [
-        { origin: [0, 0], components: [-6, 0], label: "F1" },
+        { origin: [0, 0], components: [-4, 0], label: "F1" },
         { origin: [0, 0], components: [0, 3], label: "F2" },
       ],
-      resultant: { origin: [0, 0], components: [-6, 3], label: "R" },
+      resultant: { origin: [0, 0], components: [-4, 3], label: "R" },
     },
   },
 ];
