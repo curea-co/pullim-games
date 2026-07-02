@@ -61,9 +61,11 @@ export function OsShell({ current = "games", rail, children }: OsShellProps) {
         <OsTopbar />
       </header>
 
+      {/* 콘텐츠 래퍼는 <div> — 하위 페이지(home/games/about/game)가 자체 <main> 랜드마크를 렌더하므로
+          여기서 <main> 을 쓰면 중첩된다(codex #138 R5, a11y). /manage 는 ManageLayout 이 <main> 제공. */}
       <div className="shell">
         {rail}
-        <main className="main">
+        <div className="main">
           {trail.length > 1 && (
             <nav className="crumbs" aria-label="현재 위치">
               {trail.map((node, i) => {
@@ -78,7 +80,7 @@ export function OsShell({ current = "games", rail, children }: OsShellProps) {
             </nav>
           )}
           {children}
-        </main>
+        </div>
       </div>
 
       <OsTabbar items={tabbarItems} />

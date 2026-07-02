@@ -385,9 +385,12 @@
   & .badge.muted  { background: var(--paper-2); color: var(--ink-4); }
 
   /* ── Cards ────────────────────────────────────────────────────────── */
+  /* games spec/08 §8.5: resting card 는 hairline border 중심, 그림자는 elevated/drag 상태 한정.
+     pullim-web 의 resting box-shadow(--sh-1) 미채택 — border 만(codex #138 R5). 오버레이(아바타
+     드롭다운 등)는 인라인으로 var(--sh-3) 를 얹어 elevation 표현. */
   & .card {
     background: #fff; border: 1px solid var(--line);
-    border-radius: var(--r-lg); padding: 22px; box-shadow: var(--sh-1);
+    border-radius: var(--r-lg); padding: 22px; box-shadow: none;
   }
   & .card.flat      { box-shadow: none; }
   & .card.pad-lg    { padding: 28px; }

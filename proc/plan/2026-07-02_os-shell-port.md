@@ -13,6 +13,13 @@
 - **대상은 planner/Q/classbot 이 아니라 OS 호스트(pullim-web)**: 룰이 명시한 3 sibling 이 아니라, games 가 핸드오프로 통합되는 OS 셸([[project_pullim_web_integration]] 연장). games 를 OS 셸 안에 시각 정합시키는 통합 작업.
 - CLAUDE.md 본문은 **수정하지 않는다**(§9 codex 회피성 룰북 수정 금지). 본 §0 이 G1 합의 기록.
 
+### 0.1 os-tokens 디자인 토큰과 spec/08 SoT (codex #138 R2·R5-2)
+
+`os-tokens.css` 는 pullim-web OS 셸의 디자인 축(`--r-*`·`--sh-*`·`--pb-*` 등)을 `.os-root` **스코프**로 들여온다. 이는 games spec/08·`tailwind.config.ts` 를 **대체·분기하지 않는다** — games 페이지 콘텐츠는 계속 tailwind/spec-08 토큰만 사용하고, os-tokens 는 **OS 셸 크롬 표면(topbar·rail·switcher·tabbar)에만** 적용된다(silent fallback 무관 — `.os-root` 미포함 표면엔 영향 0).
+- **G1 결정**: OS 셸을 pullim-web 룩으로 정합(cross-앱 시각 연속성)하는 것이 목표. 스코프된 셸 디자인 시스템 채택은 그 직접 결과.
+- **구체 spec/08 규칙은 셸 표면에서도 준수**(codex 지적 반영): §8.2 폰트(Pretendard, system-ui 금지) · §8.4 radius(16px 상한) · §8.5 resting card 무그림자 · §8.12 칩/뱃지 rounded-button · ink4 WCAG. 즉 "별도 축"이지만 **렌더 결과는 games spec 규칙에 수렴**.
+- tailwind.config/spec 동시 갱신(신규 토큰 정식화)이 필요하면 별 PR(§8 컨벤션 변경 분리) — 본 PR 은 스코프 vendored 유지.
+
 ## 1. 배경·문제
 
 games 를 pullim-web(풀림 OS 웹 셸)에서 핸드오프(리디렉션)하는 것은 되지만, games 에 진입하면 **pullim-web 의 글로벌 네비게이션·사이드바 크롬이 이식돼 있지 않았다.** #131·#135 는 팔레트·색 remap 만 했지 셸 **골격**을 안 가져옴.
