@@ -22,33 +22,50 @@
 
 ## 1. Root cause 가설 (2)
 
-### H1 — 포트 불일치 (3033 vs 3004) · **이미 해소 가능성 높음**
+### H1 — 포트 불일치 (3033 vs 3004) · **단독 원인 기각 (2026-07-01 nightly 여전히 red)**
 
 06-29 nightly 로그: `[WebServer] $ next start -p 3033` 인데 `playwright.config.ts` 는 `baseURL = http://localhost:3004` 대기. webServer 가 3033 에 뜨면 3004 대기 readiness 가 어긋남.
 
 - **현재 상태**: `apps/games/package.json` `start: "next start -p 3004"`, `playwright.config.ts PORT=3004` — **일치**. 포트 SoT 정렬은 #127 (`7bdbf64`, 2026-06-29) 이 수행.
-- 즉 06-29 nightly 는 #127 머지 직전 커밋(start=3033)에서 돌아 불일치로 red 였을 수 있음.
-- **검증(무비용)**: #127 머지 후 **다음 nightly(2026-06-30 02:00 KST 이후) 결과 1건** 확인. green 이면 H1 단독 원인 확정, 본 plan 종결.
+- **검증 결과**: #127 머지 후 nightly 2026-07-01 18:53 UTC — 여전히 100% failure. **H1 단독 원인 기각.** H2 처리로 진행.
 
-### H2 — auth/학년수집 게이트 리다이렉트 · **포트 fix 후에도 잔존 가능**
+### H2 — auth/학년수집 게이트 리다이렉트 · **확정 (2026-07-02 정적 분석)**
 
 `page.goto` 통과 + `locator.waitFor` 타임아웃 = 페이지는 떴으나 게임/대시보드 콘텐츠 부재. auth 입구 모델(#114 게스트/회원 게이트)·중등 재포지셔닝(#125 학년 수집·신원 마이그레이션) 도입 후 `/home`·`/games/*` 가 **로그인/학년수집 게이트로 리다이렉트**되면, e2e spec 은 인증/온보딩 상태를 시드하지 않아 게임 화면에 도달 못 함.
 
-- e2e helper 현황: `e2e/helpers/{games,seed,viewports}.ts` — `seed.ts` 는 custom-* localStorage 콘텐츠 주입만, **게스트/회원·학년 상태 시드 없음**.
-- **검증**: 로컬 `bun run build && bun run start` → `/home` 수동 진입 시 게이트 리다이렉트 여부 1회 확인. 리다이렉트면 H2 확정.
+**정적 분석으로 H2 확정 (2026-07-02):**
+
+게이트 구조 (2계층):
+
+1. **middleware.ts (Edge/서버)**: `pullim_games_session`(HttpOnly) 또는 `pullim_games_guest`(non-HttpOnly) 쿠키가 없으면 `"/"` 로 redirect. 쿠키 값 미검증 — 존재 여부만 coarse gate. **e2e spec 은 쿠키 미시드 → 미들웨어가 `"/"` 로 redirect → 게임 콘텐츠 미렌더.**
+
+2. **RequireIdentity (클라이언트)**: `getPlayer()` → localStorage `"pullim-games:player"` 파싱. `Player.grade` 가 `GRADES("중1"~"고3")` 안에 없으면 `clearPlayer()` + null → `router.replace("/")`. **e2e spec 은 player profile 미시드 → RequireIdentity 가 `"/"` 로 redirect.**
+
+두 게이트 모두 우회하지 않으면 게임/대시보드 콘텐츠에 도달 불가.
+
+**통과 조건:**
+- 쿠키: `pullim_games_guest=1` (non-HttpOnly, Playwright `context.addCookies` 로 주입 가능)
+- localStorage: `pullim-games:player = { nickname, grade: "중1"~"고3", consent: true, createdAt }` (Playwright `addInitScript` 또는 `storageState` 로 주입)
+
+e2e helper 현황: `e2e/helpers/{games,seed,viewports}.ts` — `seed.ts` 는 custom-* localStorage 콘텐츠 주입만, **게스트/회원·학년 상태 시드 없음** → H2 확정.
 
 ## 2. fix 방향
 
-1. **H1 검증 우선 (무비용)** — 다음 nightly green 여부 확인. green → §3 체크 완료, plan archive.
-2. **H1 잔존 red 시 H2 처리** — `e2e/helpers/` 에 인증/온보딩 우회 시드 헬퍼 추가 (`seedGuestSession()` / `seedGradeOnboarded()` — localStorage·쿠키로 게이트 통과 상태 주입). 전 spec `beforeEach` 또는 playwright `storageState` 로 일괄 적용.
+1. **H1 검증 우선 (무비용)** — ~~다음 nightly green 여부 확인. green → §3 체크 완료, plan archive.~~
+   **→ 2026-07-01 nightly 여전히 red. H1 단독 원인 기각. H2 처리로 이행.**
+2. **H2 처리 (2026-07-02 완료)** — Playwright `storageState` 글로벌 셋업으로 모든 spec 에 게스트 신원 주입:
+   - `e2e/helpers/auth.ts`: `seedGuestSession(page, context)` — 쿠키 + localStorage 개별 주입 helper (localhost.clear() 이후 재주입용).
+   - `e2e/setup/auth.setup.ts`: `setup` 프로젝트 — `.playwright/guest-auth.json` storageState 생성.
+   - `playwright.config.ts`: `setup` → `chromium` 의존 관계로 모든 spec 이 storageState 상속.
+   - `localStorage.clear()` 호출 spec 5개 (activity-heatmap, home-dashboard-layout, english-vocab-typing-case, vocab-typing-case, streak) 에 `seedGuestSession` 재주입 추가.
 3. **CI e2e job(`ci.yml`)·nightly 공통** — webServer build 단계 로그를 artifact 로 항상 보관(현 `stdout: ignore` → 진단 시 `pipe` 전환 검토).
 
 ## 3. 작업 항목 (자가 검증 체크리스트)
 
-- [ ] H1: #127 머지 후 **첫 nightly run 결과** 확인 — green/red 기록 (run id)
-- [ ] H1 green 시: 본 plan COMPLETE archive, [[project_e2e_infra_broken]] 메모리 "포트 cutover 로 해소" 갱신
-- [ ] H1 잔존 red 시: 로컬 `/home` 게이트 리다이렉트 수동 확인 → H2 확정/기각
-- [ ] H2 확정 시: `e2e/helpers/` 인증·온보딩 시드 헬퍼 추가 + 대표 spec 1개(activity-heatmap) 로컬 green 재현
+- [x] H1: #127 머지 후 **첫 nightly run 결과** 확인 — nightly 2026-07-01 18:53 UTC 여전히 red → **H1 단독 원인 기각**
+- [ ] H1 green 시: 본 plan COMPLETE archive, [[project_e2e_infra_broken]] 메모리 "포트 cutover 로 해소" 갱신 (해당 없음 — H1 기각)
+- [x] H1 잔존 red 시: 로컬 `/home` 게이트 리다이렉트 정적 분석 → **H2 확정** (middleware.ts + RequireIdentity.tsx 정적 분석으로 확인)
+- [x] H2 확정 시: `e2e/helpers/auth.ts` + `e2e/setup/auth.setup.ts` 시드 헬퍼 추가 + `playwright.config.ts` storageState 글로벌 셋업 + `localStorage.clear()` 사용 spec 5개 `seedGuestSession` 재주입 (PR fix/e2e-onboarding-seed)
 - [ ] H2 fix 후: nightly 또는 수동 `workflow_dispatch` 1회 green 확인
 
 ## 4. 거버넌스 메모
