@@ -8,7 +8,7 @@ const RAW_CARDS: BlankCard[] = [
   {
     id: "eb-001",
     type: "blank",
-    unit: "고3-영어-빈칸어휘",
+    unit: "고1-영어-빈칸어휘",
     difficultySeed: 2,
     hint: "맥락이 가벼워요",
     problem: {
@@ -22,7 +22,7 @@ const RAW_CARDS: BlankCard[] = [
   {
     id: "eb-002",
     type: "blank",
-    unit: "고3-영어-빈칸대비",
+    unit: "고1-영어-빈칸대비",
     difficultySeed: 3,
     hint: "however 가 단서",
     problem: {
@@ -37,7 +37,7 @@ const RAW_CARDS: BlankCard[] = [
   {
     id: "eb-003",
     type: "blank",
-    unit: "고3-영어-빈칸함의",
+    unit: "고1-영어-빈칸함의",
     difficultySeed: 3,
     hint: "Without ___ + 부정 결과",
     problem: {
@@ -52,7 +52,7 @@ const RAW_CARDS: BlankCard[] = [
   {
     id: "eb-004",
     type: "blank",
-    unit: "고3-영어-빈칸추론",
+    unit: "고1-영어-빈칸추론",
     difficultySeed: 4,
     hint: "지식을 '자기 것으로'",
     problem: {
@@ -67,7 +67,7 @@ const RAW_CARDS: BlankCard[] = [
   {
     id: "eb-005",
     type: "blank",
-    unit: "고3-영어-빈칸어휘추론",
+    unit: "고1-영어-빈칸어휘추론",
     difficultySeed: 5,
     hint: "회복하는 힘",
     problem: {

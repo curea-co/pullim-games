@@ -7,7 +7,7 @@ const RAW_CARDS: ChemistryBalanceCard[] = [
   {
     id: "cb-001",
     type: "chemistry-balance",
-    unit: "고2-화학I-단순결합",
+    unit: "고1-통합과학-단순결합",
     difficultySeed: 1,
     hint: "양쪽 H 와 O 원자 수가 같도록",
     problem: {
@@ -21,7 +21,7 @@ const RAW_CARDS: ChemistryBalanceCard[] = [
   {
     id: "cb-002",
     type: "chemistry-balance",
-    unit: "고2-화학I-분해반응",
+    unit: "고1-통합과학-분해반응",
     difficultySeed: 2,
     hint: "K, Cl, O 모두 균형",
     problem: {
@@ -35,7 +35,7 @@ const RAW_CARDS: ChemistryBalanceCard[] = [
   {
     id: "cb-003",
     type: "chemistry-balance",
-    unit: "고2-화학I-연소",
+    unit: "고1-통합과학-연소",
     difficultySeed: 3,
     hint: "메탄의 완전 연소",
     problem: {
@@ -52,7 +52,7 @@ const RAW_CARDS: ChemistryBalanceCard[] = [
   {
     id: "cb-004",
     type: "chemistry-balance",
-    unit: "고2-화학I-금속산화",
+    unit: "고1-통합과학-금속산화",
     difficultySeed: 4,
     hint: "Fe2O3 의 Fe:O = 2:3",
     problem: {
@@ -66,7 +66,7 @@ const RAW_CARDS: ChemistryBalanceCard[] = [
   {
     id: "cb-005",
     type: "chemistry-balance",
-    unit: "고2-화학I-유기연소",
+    unit: "고1-통합과학-유기연소",
     difficultySeed: 5,
     hint: "에탄(C2H6)의 완전 연소",
     problem: {

@@ -8,7 +8,7 @@ const RAW_CARDS: VectorCard[] = [
   {
     id: "pv-001",
     type: "vector",
-    unit: "고2-물리I-직각합성",
+    unit: "고1-통합과학-직각합성",
     difficultySeed: 1,
     hint: "x 와 y 가 직각",
     problem: {
@@ -23,7 +23,7 @@ const RAW_CARDS: VectorCard[] = [
   {
     id: "pv-002",
     type: "vector",
-    unit: "고2-물리I-평행합성",
+    unit: "고1-통합과학-평행합성",
     difficultySeed: 2,
     hint: "같은 방향 = 크기 합",
     problem: {
@@ -38,7 +38,7 @@ const RAW_CARDS: VectorCard[] = [
   {
     id: "pv-003",
     type: "vector",
-    unit: "고2-물리I-반대합성",
+    unit: "고1-통합과학-반대합성",
     difficultySeed: 3,
     hint: "반대 방향 = 크기 차",
     problem: {
@@ -53,7 +53,7 @@ const RAW_CARDS: VectorCard[] = [
   {
     id: "pv-004",
     type: "vector",
-    unit: "고2-물리I-일반합성",
+    unit: "고1-통합과학-일반합성",
     difficultySeed: 4,
     hint: "x 성분과 y 성분을 따로",
     problem: {
@@ -68,7 +68,7 @@ const RAW_CARDS: VectorCard[] = [
   {
     id: "pv-005",
     type: "vector",
-    unit: "고2-물리I-음수성분",
+    unit: "고1-통합과학-음수성분",
     difficultySeed: 5,
     hint: "성분이 음수일 수 있어요",
     problem: {
