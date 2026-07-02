@@ -38,19 +38,23 @@ export default defineConfig({
   use: {
     baseURL,
     trace: "retain-on-failure",
-    storageState: STORAGE_STATE_PATH,
+    // storageState 는 전역에 두지 않는다 — "setup" 프로젝트가 이 파일을 **생성**하는 쪽이라
+    // 전역으로 걸면 setup 컨텍스트가 아직 없는 파일을 읽으려다 ENOENT 로 죽는다(Codex #134 R1:
+    // `storageState: undefined` 프로젝트 오버라이드가 전역을 못 덮는 Playwright 판정 회피).
+    // storageState 상속은 아래 "chromium" 프로젝트 use 에만 명시한다.
   },
   projects: [
-    // 1단계: 게스트 인증 storageState 생성 (모든 spec 실행 전 1회).
+    // 1단계: 게스트 인증 storageState 생성 (모든 spec 실행 전 1회). storageState 미상속(생성 전담).
     {
       name: "setup",
       testMatch: /setup\/auth\.setup\.ts/,
-      use: { storageState: undefined },
     },
-    // 2단계: 모든 spec — setup 완료 후 storageState 상속.
+    // 2단계: 모든 spec — setup 완료 후 storageState 상속. setup 파일은 testIgnore 로 명시 격리
+    // (chromium 이 setup 을 재실행해 guest-auth.json 을 병렬 덮어쓰는 레이스 차단 — Codex #134 R2).
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      testIgnore: /setup\//,
+      use: { ...devices["Desktop Chrome"], storageState: STORAGE_STATE_PATH },
       dependencies: ["setup"],
     },
   ],

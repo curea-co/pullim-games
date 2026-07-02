@@ -17,6 +17,7 @@
 //   복구하지는 않는다.
 
 import { test as setup } from "@playwright/test";
+import fs from "fs";
 import path from "path";
 
 // auth.setup.ts 위치: apps/games/e2e/setup/ → ../../ = apps/games/.
@@ -66,5 +67,7 @@ setup("게스트 인증 storageState 생성", async ({ page, context }) => {
   );
 
   // 3. storageState 저장 — 이후 모든 테스트 컨텍스트가 이 상태를 상속.
+  //    fresh checkout 엔 .playwright/ 가 없으므로 부모 디렉터리를 먼저 생성한다(Codex #134 R1).
+  fs.mkdirSync(path.dirname(STORAGE_STATE_PATH), { recursive: true });
   await page.context().storageState({ path: STORAGE_STATE_PATH });
 });
