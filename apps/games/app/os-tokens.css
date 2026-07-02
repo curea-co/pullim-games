@@ -505,6 +505,12 @@
   @media (max-width: 560px) {
     font-size: 14.5px;
     & .main { padding: 18px 14px 96px; }
+    /* 320px 정합(codex #138 R3): topbar 가 320px 를 넘어 문서 가로 스크롤을 유발 → crumbs·본문·
+       게임 카드가 그 스크롤 폭으로 늘어나 critical overflow 발생. 검색·알림은 비활성 placeholder
+       ("준비 중")이므로 소형에서 숨겨 topbar 를 뷰포트 안으로. (계정 아바타는 유지) */
+    & .topbar { gap: 8px; }
+    & .tb-actions .icon-btn { display: none; }
+    & .mast .sub { display: none; }
   }
 
   /* ── Wizard ────────────────────────────────────────────────────────── */

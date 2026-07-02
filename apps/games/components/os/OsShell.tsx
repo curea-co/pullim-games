@@ -6,6 +6,7 @@
 // game/landing 최소 크롬은 OsAppShell 이 분기 — 본 컴포넌트는 default 전용.
 import { Fragment, type ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ServiceSwitcher } from "./ServiceSwitcher";
 import { OsTabbar, type TabbarItem } from "./OsTabbar";
@@ -39,7 +40,7 @@ export function OsShell({ current = "games", rail, children }: OsShellProps) {
     <div className="os-root">
       <header className="topbar">
         <RailCollapseToggle />
-        <a className="mast" href="/home" aria-label="풀림 게임즈 홈">
+        <Link className="mast" href="/home" aria-label="풀림 게임즈 홈">
           <span className="glyph">
             <Image
               src="/os/icons/pullim.svg"
@@ -51,7 +52,7 @@ export function OsShell({ current = "games", rail, children }: OsShellProps) {
           </span>
           <span className="wordmark">풀림</span>
           <span className="sub">게임즈</span>
-        </a>
+        </Link>
 
         <ServiceSwitcher current={current} />
 
@@ -70,7 +71,7 @@ export function OsShell({ current = "games", rail, children }: OsShellProps) {
                 return (
                   <Fragment key={`${node.label}-${i}`}>
                     {i > 0 && <span className="sep">/</span>}
-                    {node.href && !isLast ? <a href={node.href}>{node.label}</a> : <span>{node.label}</span>}
+                    {node.href && !isLast ? <Link href={node.href}>{node.label}</Link> : <span>{node.label}</span>}
                   </Fragment>
                 );
               })}

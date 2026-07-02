@@ -6,6 +6,7 @@
 // (사용자 결정: "레이아웃은 pullim-web 그대로, 내용물은 games". 앱-홉은 상단 ServiceSwitcher 가 담당.)
 //
 // 기존 nav-config 재사용: studentDomains(4 섹션 + lucide 아이콘) + findActiveNav(활성 판정).
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { findActiveNav, studentDomains } from "@/components/shell/nav-config";
 
@@ -20,7 +21,8 @@ export function OsServiceRail() {
         const Icon = item.icon;
         const isActive = active?.href === item.href;
         return (
-          <a
+          // 내부 games 라우트 — next/link(App Router 클라 전환). 앱-홉만 raw <a>(ServiceSwitcher).
+          <Link
             key={item.href}
             className={`nav-item${isActive ? " active" : ""}`}
             href={item.href}
@@ -30,7 +32,7 @@ export function OsServiceRail() {
             {/* lucide 아이콘은 os-tokens `.nav-item svg{width:19px}` 로 자동 사이징 */}
             <Icon aria-hidden="true" />
             {item.label}
-          </a>
+          </Link>
         );
       })}
     </nav>

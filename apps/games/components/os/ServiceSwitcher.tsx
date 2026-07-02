@@ -81,36 +81,58 @@ export function ServiceSwitcher({ current }: ServiceSwitcherProps) {
       <div className="switcher-menu" role="listbox" aria-label="서비스 전환">
         <div className="sm-head">서비스 전환</div>
 
-        {OS_SERVICES_NAV.map((svc) => (
-          <a
-            key={svc.slug}
-            className={`sm-item${svc.status === "soon" ? " is-soon" : ""}`}
-            href={svc.href}
-            role="option"
-            aria-selected={current === svc.slug}
-            aria-disabled={svc.status === "soon" || undefined}
-          >
-            <span className="sg">
-              <Image src={svc.icon} alt={svc.name} width={34} height={34} style={{ width: "100%", height: "100%" }} />
-            </span>
-            <div>
-              <div className="sm-name">
-                {svc.name}
-                {svc.status === "soon" && (
-                  <span className="badge soft" style={{ marginLeft: "6px" }}>
-                    준비중
-                  </span>
-                )}
-                {svc.status === "beta" && (
-                  <span className="badge soft" style={{ marginLeft: "6px" }}>
-                    베타
-                  </span>
-                )}
+        {OS_SERVICES_NAV.map((svc) => {
+          const isCurrent = current === svc.slug;
+          const inner = (
+            <>
+              <span className="sg">
+                <Image src={svc.icon} alt={svc.name} width={34} height={34} style={{ width: "100%", height: "100%" }} />
+              </span>
+              <div>
+                <div className="sm-name">
+                  {svc.name}
+                  {isCurrent && (
+                    <span className="badge soft" style={{ marginLeft: "6px" }}>
+                      현재
+                    </span>
+                  )}
+                  {!isCurrent && svc.status === "soon" && (
+                    <span className="badge soft" style={{ marginLeft: "6px" }}>
+                      준비중
+                    </span>
+                  )}
+                  {!isCurrent && svc.status === "beta" && (
+                    <span className="badge soft" style={{ marginLeft: "6px" }}>
+                      베타
+                    </span>
+                  )}
+                </div>
+                <div className="sm-desc">{svc.desc}</div>
               </div>
-              <div className="sm-desc">{svc.desc}</div>
-            </div>
-          </a>
-        ))}
+            </>
+          );
+          // 현재 서비스(games)는 링크가 아닌 비활성 표시 — svc.href 는 gamesUrl() 이라 클릭 시
+          // preview/localhost 에서 다른 환경(dev-games/prod)으로 새는 것을 차단(codex #138 R3).
+          if (isCurrent) {
+            return (
+              <div key={svc.slug} className="sm-item" role="option" aria-selected aria-current="page" style={{ cursor: "default" }}>
+                {inner}
+              </div>
+            );
+          }
+          return (
+            <a
+              key={svc.slug}
+              className={`sm-item${svc.status === "soon" ? " is-soon" : ""}`}
+              href={svc.href}
+              role="option"
+              aria-selected={false}
+              aria-disabled={svc.status === "soon" || undefined}
+            >
+              {inner}
+            </a>
+          );
+        })}
       </div>
     </div>
   );

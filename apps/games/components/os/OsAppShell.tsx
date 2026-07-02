@@ -7,6 +7,7 @@
 // - landing (/): 최소 topbar(mast + 계정) + 풀폭 온보딩 스크롤.
 import type { ReactNode } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { OsShell } from "./OsShell";
 import { OsServiceRail } from "./OsServiceRail";
@@ -25,7 +26,7 @@ function detectVariant(pathname: string): Variant {
 
 function Mast({ href }: { href: string }) {
   return (
-    <a className="mast" href={href} aria-label="풀림 게임즈 홈">
+    <Link className="mast" href={href} aria-label="풀림 게임즈 홈">
       <span className="glyph">
         <Image
           src="/os/icons/pullim.svg"
@@ -37,7 +38,7 @@ function Mast({ href }: { href: string }) {
       </span>
       <span className="wordmark">풀림</span>
       <span className="sub">게임즈</span>
-    </a>
+    </Link>
   );
 }
 
@@ -50,12 +51,12 @@ export function OsAppShell({ children }: { children: ReactNode }) {
     return (
       <div className="os-root" style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
         <header className="topbar">
-          <a href="/games" className="rail-collapse-btn" aria-label="게임 허브로 돌아가기" title="게임 허브로">
+          <Link href="/games" className="rail-collapse-btn" aria-label="게임 허브로 돌아가기" title="게임 허브로">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M19 12H5" />
               <path d="M12 19l-7-7 7-7" />
             </svg>
-          </a>
+          </Link>
           <Mast href="/home" />
           <div className="spacer" />
         </header>
