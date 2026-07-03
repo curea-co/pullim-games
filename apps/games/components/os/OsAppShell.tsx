@@ -73,7 +73,7 @@ export function OsAppShell({ children }: { children: ReactNode }) {
         <header className="topbar">
           <Mast href="/" />
           <div className="spacer" />
-          <OsTopbar />
+          <OsTopbar variant="landing" />
         </header>
         <div>{children}</div>
         <DevResetButton />

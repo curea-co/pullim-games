@@ -120,10 +120,9 @@
 
   /* ── Scoped reset helpers ─────────────────────────────────────────── */
   & *, & *::before, & *::after { box-sizing: border-box; }
-  & a { color: inherit; text-decoration: none; }
-  & img, & svg { display: block; max-width: 100%; }
-  & button { font: inherit; color: inherit; cursor: pointer; background: none; border: none; }
-  & ul { list-style: none; }
+  & img, & svg { max-width: 100%; }
+  /* a/button/ul 리셋은 element-level specificity(:where, 파일 하단)로 분리 — .os-root a/button(0,1,1)이
+     Tailwind 유틸(0,1,0)을 이겨 games 콘텐츠(shadcn Button 등) 스타일을 덮어쓰던 회귀 방지(codex #138 R7). */
   & ::selection { background: var(--pullim-lemon); color: var(--ink); }
   & :focus-visible { outline: 2px solid var(--pullim-blue); outline-offset: 2px; border-radius: 4px; }
 
@@ -704,6 +703,13 @@
   }
 
 } /* end .os-root */
+
+/* 최소 element-level reset(:where 로 specificity=(0,0,1)) — 어떤 클래스든 이를 이긴다(codex #138 R7).
+   background/border/color/font/list-style 는 Tailwind preflight(@tailwind base)가 이미 버튼·a·ul 을
+   정규화하므로 재선언하지 않는다 — 특히 `border:none`(border-style:none) 이 콘텐츠 버튼의
+   `border` 유틸 테두리를 지우던 회귀 제거. OS 크롬은 자체 클래스로 스타일되어 무영향. */
+:where(.os-root) a { text-decoration: none; }
+:where(.os-root) button { cursor: pointer; }
 
 @keyframes wizard-spin {
   to { transform: rotate(360deg); }

@@ -15,7 +15,7 @@ function initialOf(s: string, fallback: string): string {
   return t ? Array.from(t)[0] : fallback;
 }
 
-export function OsTopbar() {
+export function OsTopbar({ variant = "default" }: { variant?: "default" | "landing" } = {}) {
   const router = useRouter();
   const pathname = usePathname();
   const [user, setUser] = useState<AuthUser | null>(null);
@@ -104,21 +104,32 @@ export function OsTopbar() {
 
   return (
     <div className="tb-actions">
-      {/* 검색 — 준비 중(placeholder) */}
-      <button className="icon-btn" aria-label="검색 (준비 중)" title="검색 — 준비 중" disabled style={{ opacity: 0.55 }}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <circle cx="11" cy="11" r="7" />
-          <path d="M21 21l-4-4" />
-        </svg>
-      </button>
+      {/* 검색·알림 placeholder — default 만(랜딩 온보딩에선 계정 진입만 노출, codex #138 R7). */}
+      {variant !== "landing" && (
+        <>
+          <button className="icon-btn" aria-label="검색 (준비 중)" title="검색 — 준비 중" disabled style={{ opacity: 0.55 }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" />
+              <path d="M21 21l-4-4" />
+            </svg>
+          </button>
+          <button className="icon-btn" aria-label="알림 (준비 중)" title="알림 — 준비 중" disabled style={{ opacity: 0.55 }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
+              <path d="M13.7 21a2 2 0 0 1-3.4 0" />
+            </svg>
+          </button>
+        </>
+      )}
 
-      {/* 알림 — 준비 중(placeholder) */}
-      <button className="icon-btn" aria-label="알림 (준비 중)" title="알림 — 준비 중" disabled style={{ opacity: 0.55 }}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <path d="M18 8a6 6 0 1 0-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
-          <path d="M13.7 21a2 2 0 0 1-3.4 0" />
-        </svg>
-      </button>
+      {/* 비회원 직접 로그인/회원가입 진입점(pullim-web OsTopbar showGuestEntries 복원, codex #138 R7) —
+          아바타 메뉴 안에만 숨기지 않고 topbar 에 직접 노출. 특히 랜딩 온보딩 전환 보장. */}
+      {loaded && !neutral && !isMember && (
+        <>
+          <Link href="/login" className="btn btn-soft btn-sm">로그인</Link>
+          <Link href="/signup" className="btn btn-soft btn-sm">회원가입</Link>
+        </>
+      )}
 
       {/* 로드 전 / 중립 — 레이아웃 시프트 방지 placeholder */}
       {!loaded || neutral ? (
