@@ -51,7 +51,10 @@ export function OsAppShell({ children }: { children: ReactNode }) {
     return (
       <div className="os-root" style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
         <header className="topbar">
-          <Link href="/games" className="rail-collapse-btn" aria-label="게임 허브로 돌아가기" title="게임 허브로">
+          {/* 백링크는 .icon-btn — .rail-collapse-btn 은 ≤920px 에서 display:none 이라 모바일 게임
+              페이지에서 뒤로가기가 사라지던 회귀 방지(codex #138 R9). .icon-btn 은 전 뷰포트 노출
+              (mobile hide 는 `.tb-actions .icon-btn` 스코프라 topbar 직속 백링크엔 미적용). */}
+          <Link href="/games" className="icon-btn" aria-label="게임 허브로 돌아가기" title="게임 허브로">
             <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M19 12H5" />
               <path d="M12 19l-7-7 7-7" />

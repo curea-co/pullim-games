@@ -619,7 +619,7 @@
     display: flex; flex-wrap: wrap; gap: 8px;
   }
   & .wizard-chip {
-    padding: 8px 15px; border-radius: var(--r-pill);
+    padding: 8px 15px; border-radius: var(--r-xs); /* spec/08 §8.12 칩 rounded-button(6px) — pill 금지 */
     border: 1.5px solid var(--line); background: #fff;
     font-size: 13.5px; font-weight: 600; color: var(--ink-3);
     cursor: pointer; transition: .14s var(--ease);
