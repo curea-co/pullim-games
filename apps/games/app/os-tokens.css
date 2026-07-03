@@ -517,6 +517,9 @@
     & .topbar { gap: 8px; }
     & .tb-actions .icon-btn { display: none; }
     & .mast .sub { display: none; }
+    /* 비회원 로그인/회원가입 직접 CTA 는 소형에서 숨김(codex #138 R8) — mast+switcher+CTA+avatar 가
+       320px 를 넘어 topbar overflow 재발하던 것 방지. 모바일은 아바타 메뉴로 로그인 진입(메뉴에 유지). */
+    & .tb-actions .tb-guest-cta { display: none; }
   }
 
   /* ── Wizard ────────────────────────────────────────────────────────── */

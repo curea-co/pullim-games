@@ -126,8 +126,8 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
           아바타 메뉴 안에만 숨기지 않고 topbar 에 직접 노출. 특히 랜딩 온보딩 전환 보장. */}
       {loaded && !neutral && !isMember && (
         <>
-          <Link href="/login" className="btn btn-soft btn-sm">로그인</Link>
-          <Link href="/signup" className="btn btn-soft btn-sm">회원가입</Link>
+          <Link href="/login" className="btn btn-soft btn-sm tb-guest-cta">로그인</Link>
+          <Link href="/signup" className="btn btn-soft btn-sm tb-guest-cta">회원가입</Link>
         </>
       )}
 

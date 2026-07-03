@@ -48,7 +48,8 @@ export function ServiceSwitcher({ current }: ServiceSwitcherProps) {
         className="switcher-trigger"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        aria-haspopup="listbox"
+        aria-haspopup="menu"
+        aria-label={`서비스 전환 — 현재 ${triggerName}`}
       >
         <span className="sg">
           {triggerIcon ? (
@@ -85,7 +86,8 @@ export function ServiceSwitcher({ current }: ServiceSwitcherProps) {
         </svg>
       </button>
 
-      <div className="switcher-menu" role="listbox" aria-label="서비스 전환">
+      {/* 네비게이션(다른 앱으로 이동) — listbox/option(값 선택) 의미론 아님(codex #138 R8). 링크 목록. */}
+      <nav className="switcher-menu" aria-label="다른 풀림 서비스로 전환">
         <div className="sm-head">서비스 전환</div>
 
         {OS_SERVICES_NAV.map((svc) => {
@@ -121,10 +123,11 @@ export function ServiceSwitcher({ current }: ServiceSwitcherProps) {
           // 현재 서비스(games)는 링크가 아닌 비활성 표시 — svc.href 는 gamesUrl() 이라 클릭 시
           // preview/localhost 에서 다른 환경(dev-games/prod)으로 새는 것을 차단(codex #138 R3).
           if (isCurrent) {
+            // 현재 앱 — 링크 아님(비활성 표시). aria-current 로 "현재 위치" 전달.
             return (
-              <div key={svc.slug} className="sm-item" role="option" aria-selected aria-current="page" style={{ cursor: "default" }}>
+              <span key={svc.slug} className="sm-item" aria-current="page" style={{ cursor: "default" }}>
                 {inner}
-              </div>
+              </span>
             );
           }
           return (
@@ -132,15 +135,13 @@ export function ServiceSwitcher({ current }: ServiceSwitcherProps) {
               key={svc.slug}
               className={`sm-item${svc.status === "soon" ? " is-soon" : ""}`}
               href={svc.href}
-              role="option"
-              aria-selected={false}
               aria-disabled={svc.status === "soon" || undefined}
             >
               {inner}
             </a>
           );
         })}
-      </div>
+      </nav>
     </div>
   );
 }
