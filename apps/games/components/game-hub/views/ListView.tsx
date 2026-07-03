@@ -76,7 +76,7 @@ export function ListView({ games, perGame }: Props) {
         return (
           <li key={g.meta.id}>
             {isAvailable ? (
-              <Link href={`/games/${g.meta.id}`} className="block rounded-block">
+              <Link href={`/games/${g.meta.id}`} data-cta-priority="informational" className="block rounded-block">
                 {inner}
               </Link>
             ) : (

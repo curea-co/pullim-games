@@ -78,7 +78,7 @@ export default function ManageHomePage() {
           variant="outline"
           className="group h-auto justify-between rounded-block border-border-hairline bg-bg-block px-5 py-4 text-body text-type-primary hover:border-type-primary hover:bg-bg-block hover:text-type-primary"
         >
-          <Link href="/manage/custom-games">
+          <Link href="/manage/custom-games" data-cta-priority="informational">
             <span>내 게임 보기</span>
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
@@ -119,7 +119,7 @@ export default function ManageHomePage() {
             size="sm"
             className="mt-4 gap-1.5 rounded-button border-type-primary bg-bg-block text-helper font-medium text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
           >
-            <Link href="/manage/subjects">
+            <Link href="/manage/subjects" data-cta-priority="informational">
               과목 만들기
               <ArrowRight className="h-3 w-3" />
             </Link>

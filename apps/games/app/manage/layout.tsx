@@ -4,8 +4,10 @@ import type { ReactNode } from "react";
 import { ManageNav } from "@/components/manage/ManageNav";
 
 export default function ManageLayout({ children }: { children: ReactNode }) {
+  // OsShell 콘텐츠 래퍼가 div 로 바뀌어(중첩 main 회피, codex #138 R5) /manage 는 여기서 main
+  // 랜드마크를 제공한다 — 페이지당 정확히 하나의 main 보장.
   return (
-    <div className="flex flex-col gap-4 px-4 py-6 md:px-6 md:py-8">
+    <main className="flex flex-col gap-4 px-4 py-6 md:px-6 md:py-8">
       <header>
         <p className="text-xs font-bold uppercase tracking-wider text-type-secondary">
           관리
@@ -19,6 +21,6 @@ export default function ManageLayout({ children }: { children: ReactNode }) {
       </header>
       <ManageNav />
       <div className="mt-2">{children}</div>
-    </div>
+    </main>
   );
 }
