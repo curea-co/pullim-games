@@ -109,6 +109,12 @@
   --ease:     cubic-bezier(.32,.72,0,1);
 
   /* ── Base styles (was body{} in pullim-os.css) ────────────────────── */
+  /* 루트 셸은 flex 컬럼 — `.shell { flex: 1 }` 이 실제 렌더 트리에서 뷰포트 높이를 채우도록(codex #138 R13).
+     이게 없으면 `.os-root` 가 block 이라 `.shell` 의 flex:1 이 no-op 이 되어 계약이 미적용된다.
+     game variant 는 인라인 height:100vh 로 override, landing 은 자연 스크롤(min-height 로 최소 뷰포트 보장). */
+  min-height:              100vh;
+  display:                 flex;
+  flex-direction:          column;
   background:              var(--paper-2);
   color:                   var(--ink);
   font-family:             var(--sans);
