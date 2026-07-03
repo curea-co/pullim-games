@@ -277,7 +277,7 @@
     /* 320px 뷰포트 정합(codex #138 R2): 고정 330px 대신 뷰포트 여백 확보. 소형은 아래 미디어에서 뷰포트 고정. */
     position: absolute; top: calc(100% + 10px); left: 0; width: min(330px, calc(100vw - 24px));
     background: #fff; border: 1px solid var(--line);
-    border-radius: var(--r-lg); box-shadow: var(--sh-pop);
+    border-radius: var(--r-md); /* §8.4 — 오버레이(드롭다운)는 8px(드롭존). 16px 은 modal 한정 */ box-shadow: var(--sh-pop);
     padding: 10px; z-index: 80;
     opacity: 0; visibility: hidden; transform: translateY(-6px);
     transition: .2s var(--ease);
@@ -389,7 +389,7 @@
      드롭다운 등)는 인라인으로 var(--sh-3) 를 얹어 elevation 표현. */
   & .card {
     background: #fff; border: 1px solid var(--line);
-    border-radius: var(--r-lg); padding: 22px; box-shadow: none;
+    border-radius: var(--r-md); /* §8.4 — 오버레이(드롭다운)는 8px(드롭존). 16px 은 modal 한정 */ padding: 22px; box-shadow: none;
   }
   & .card.flat      { box-shadow: none; }
   & .card.pad-lg    { padding: 28px; }

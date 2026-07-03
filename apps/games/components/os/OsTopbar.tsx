@@ -139,8 +139,8 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
           <button
             type="button"
             className="avatar"
-            aria-label={`${displayName} 메뉴`}
-            aria-haspopup="menu"
+            aria-label={`${displayName} 계정 메뉴`}
+            aria-haspopup="true"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((o) => !o)}
           >
@@ -148,9 +148,10 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
           </button>
 
           {menuOpen && (
+            // 단순 disclosure 패널(codex #138 R10) — role="menu"(키보드 메뉴 상호작용 필요) 미사용.
+            // 내부는 링크(<nav>)·버튼으로 스크린리더가 자체 서술.
             <div
-              role="menu"
-              aria-label="사용자 메뉴"
+              aria-label="계정 메뉴"
               className="card"
               style={{
                 position: "absolute",
@@ -181,7 +182,6 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
                     <Link
                       key={l.href}
                       href={l.href}
-                      role="menuitem"
                       onClick={() => setMenuOpen(false)}
                       style={{
                         display: "block",
@@ -203,7 +203,6 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
                 <div style={{ padding: 6 }}>
                   <button
                     type="button"
-                    role="menuitem"
                     onClick={onLogout}
                     disabled={busy}
                     className="btn btn-ghost btn-sm"
@@ -219,7 +218,6 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
                 <div style={{ padding: 6 }}>
                   <button
                     type="button"
-                    role="menuitem"
                     onClick={onGuestExit}
                     title="이 기기의 게스트 학습 기록을 모두 지우고 나갑니다"
                     className="btn btn-ghost btn-sm"
