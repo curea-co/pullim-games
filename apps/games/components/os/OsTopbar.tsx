@@ -140,7 +140,6 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
             type="button"
             className="avatar"
             aria-label={`${displayName} 계정 메뉴`}
-            aria-haspopup="true"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen((o) => !o)}
           >

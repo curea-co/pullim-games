@@ -23,18 +23,24 @@ export function ServiceSwitcher({ current }: ServiceSwitcherProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  // Close on outside click
+  // 외부 클릭 + Escape 로 닫기(codex #138 R12 — 기존 헤더 대비 접근성 후퇴 방지).
   useEffect(() => {
+    if (!open) return;
     function handleClickOutside(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    }
+    function handleKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
         setOpen(false);
+        // 트리거로 포커스 복귀(disclosure 접근성 패턴).
+        ref.current?.querySelector<HTMLButtonElement>(".switcher-trigger")?.focus();
       }
     }
-    if (open) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKey);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKey);
     };
   }, [open]);
 
@@ -48,7 +54,6 @@ export function ServiceSwitcher({ current }: ServiceSwitcherProps) {
         className="switcher-trigger"
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
-        aria-haspopup="menu"
         aria-label={`서비스 전환 — 현재 ${triggerName}`}
       >
         <span className="sg">
