@@ -17,8 +17,11 @@
 
 `os-tokens.css` 는 pullim-web OS 셸의 디자인 축(`--r-*`·`--sh-*`·`--pb-*` 등)을 `.os-root` **스코프**로 들여온다. 이는 games spec/08·`tailwind.config.ts` 를 **대체·분기하지 않는다** — games 페이지 콘텐츠는 계속 tailwind/spec-08 토큰만 사용하고, os-tokens 는 **OS 셸 크롬 표면(topbar·rail·switcher·tabbar)에만** 적용된다(silent fallback 무관 — `.os-root` 미포함 표면엔 영향 0).
 - **G1 결정**: OS 셸을 pullim-web 룩으로 정합(cross-앱 시각 연속성)하는 것이 목표. 스코프된 셸 디자인 시스템 채택은 그 직접 결과.
-- **구체 spec/08 규칙은 셸 표면에서도 준수**(codex 지적 반영): §8.2 폰트(Pretendard, system-ui 금지) · §8.4 radius(16px 상한) · §8.5 resting card 무그림자 · §8.12 칩/뱃지 rounded-button · ink4 WCAG. 즉 "별도 축"이지만 **렌더 결과는 games spec 규칙에 수렴**.
-- tailwind.config/spec 동시 갱신(신규 토큰 정식화)이 필요하면 별 PR(§8 컨벤션 변경 분리) — 본 PR 은 스코프 vendored 유지.
+- **디자인 토큰을 games spec/08 로 정합**(사용자 결정 R6 "spec/08 로 라디우스·그림자 정합", 레이아웃 구조는 pullim-web 유지):
+  - **radius**: pullim-web 10/11/12/14/20/28px → games 스케일 **블록4·버튼6·드롭존8·모달16**. `.btn*`=6px, `.nav-item`·`.icon-btn`·`.switcher-trigger`·`.sm-item`·`.tabbar a`·`.input`·`.mast .glyph`·`.rail-collapse-btn`=8px, `.card`·`.switcher-menu`=16px. r-pill 은 아바타·진행바 원형 전용.
+  - **shadow**: resting 무그림자(§8.5) — `.card`·`.avatar`·`.btn-primary`·`.btn-accent` resting box-shadow 제거, hover/overlay(dropdown `--sh-pop`) 만 elevation.
+  - §8.2 폰트(Pretendard, system-ui 금지) · §8.12 칩/뱃지 rounded-button(6px) · ink4 WCAG 도 반영.
+- 결과: os-tokens 는 pullim-web **레이아웃 구조** + games **spec/08 라운드·그림자·폰트·색**. SoT 분기 해소(값이 games 스펙에 수렴).
 
 ## 1. 배경·문제
 
