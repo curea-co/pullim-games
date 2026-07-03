@@ -66,7 +66,8 @@ export function StartForm() {
 
   return (
     // spec/08 §8.3·§8.7: 모바일 가장자리 24px(px-6), 컨텐츠 폭 480px.
-    <div className="mx-auto flex min-h-[60vh] w-full max-w-[480px] items-center px-6">
+    // <main> 랜드마크 — OsShell 콘텐츠 래퍼가 <div> 라 페이지가 자체 main 을 제공(codex #138 R11).
+    <main className="mx-auto flex min-h-[60vh] w-full max-w-[480px] items-center px-6">
       <Card className="w-full rounded border-pullim-slate-200 bg-card shadow-sm">
         <CardHeader>
           <CardTitle className="text-pullim-slate-900">게스트로 시작</CardTitle>
@@ -149,6 +150,6 @@ export function StartForm() {
           </p>
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 }
