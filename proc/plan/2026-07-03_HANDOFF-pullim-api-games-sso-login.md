@@ -64,7 +64,7 @@ Guards: JwtVerifyGuard  ONLY   ← EntitlementGuard('games') 붙이지 말 것
 
 ## 3. games 측이 처리 (핸드오프 아님 — 참고)
 - **게스트(비로그인) 완전 보존**: games 미들웨어가 `pullim_games_guest`(non-HttpOnly 힌트, PII 없음) 존재만으로 보호 라우트 통과. pullim-api 신규 작업 **0**. 회원 introspection 은 게스트 게이트 **옆에 추가**될 뿐.
-- **학습데이터**: games 전용 Postgres 에 그대로 저장(`/api/sync`), key 만 `sub` 로 재배선. pullim-api 학습데이터 API **요청 안 함**(umbrella 별 트랙).
+- **학습데이터**: games 전용 Postgres 에 그대로 저장(`/api/sync`). 저장/FK 조인 키는 games `users.id` 유지 — `sub` 는 외부 식별자 겸 매핑 컬럼이라 `sub → users.id` resolve 후 `user_id` 로 동작(sub 직접 저장 아님). pullim-api 학습데이터 API **요청 안 함**(umbrella 별 트랙).
 - 로그인 리다이렉트 타깃(`{SITE}/login?next=`)·게이트·CSRF 1차 가드 — games.
 - 익명→회원 데이터 병합은 **명시적 사용자 확인 후만**(공유 기기 명의오염 방지, `spec/05 §5.2`) — games FE 책임.
 
