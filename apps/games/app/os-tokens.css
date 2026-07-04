@@ -1,0 +1,731 @@
+/* ============================================================================
+   PULLIM OS · os-tokens.css
+   The full OS design system scoped under .os-root so it cannot affect the
+   marketing site. All rules use native CSS nesting (Lightning CSS / Next 16).
+
+   Load order: imported by src/app/globals.css AFTER @import "tailwindcss"
+   Usage:      wrap the OS shell element with class="os-root"
+   ============================================================================ */
+
+/* ── Keyframes (must live at top level — cannot be nested) ─────────────── */
+@keyframes os-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .os-root * { animation: none !important; transition: none !important; }
+}
+
+/* ============================================================================
+   .os-root — everything below is scoped here
+   ============================================================================ */
+.os-root {
+
+  /* ── Token block (replaces :root{} from pullim-os.css) ─────────────── */
+
+  /* Blue scale */
+  --pb-1: #F4FAFF;
+  --pb-2: #D1E8FF;
+  --pb-3: #9FC8FF;
+  --pb-4: #5AA9FF;
+  --pb-5: #1F89F5;
+  --pb-6: #0362DA;
+  --pb-7: #004BB9;
+  --pb-8: #00389E;
+  --pb-9: #002878;
+  --pb-10: #001B52;
+
+  /* Brand colour aliases — reference globals.css tokens */
+  --os-blue:  var(--pullim-blue);   /* #0362DA */
+  --os-lemon: var(--pullim-lemon);  /* #E6FF4C */
+
+  /* Ink / paper aliases — map OS names to globals.css equivalents */
+  --ink:    var(--pullim-ink);    /* #0D1A1F */
+  --ink-2:  var(--pullim-ink2);   /* #1F2C32 */
+  --ink-3:  var(--pullim-ink3);   /* #45555C */
+  --ink-4:  var(--pullim-ink4);   /* games spec/08 정합 = #5E6B72 (WCAG AA — pullim-web #7A8990 미채택) */
+  --ink-5:  var(--pullim-ink5);   /* #B0BCC3 */
+  --paper:  #FFFFFF;
+  --paper-2: #F0F6FB;
+  --paper-3: #F4FAFF;
+  --paper-4: #E9F2FB;
+  --line:   var(--pullim-line);   /* #D6E2EE */
+  --line-2: var(--pullim-line2);  /* #E8EFF6 */
+  --line-3: #EEF4FA;
+
+  /* Muted foreground aliases — OS/auth surfaces (.os-root) are ALWAYS a light card
+     (--paper #FFF), but globals.css flips --fg-muted/--fg-subtle to near-white
+     (rgba(240,246,251,…)) under dark theme. Inline `var(--fg-muted)` users on the white
+     card (e.g. /signup descriptions) then turn invisible. Pin them to OS ink tokens so
+     OS surfaces stay readable regardless of the page-level theme. */
+  --fg-muted:  var(--ink-3);
+  --fg-subtle: var(--ink-4);
+
+  /* Per-service accents — unified to brand blue (identity via icon, not hue) */
+  --svc-planner:  var(--pullim-blue); --svc-planner-ink:  var(--pb-8);
+  --svc-classbot: var(--pullim-blue); --svc-classbot-ink: var(--pb-8);
+  --svc-q:        var(--pullim-blue); --svc-q-ink:        var(--pb-8);
+  --svc-games:    var(--pullim-blue); --svc-games-ink:    var(--pb-8);
+  --svc-studio:   var(--pullim-blue); --svc-studio-ink:   var(--pb-8);
+  --svc-library:  var(--pullim-blue); --svc-library-ink:  var(--pb-8);
+  --svc-writing:  var(--pullim-blue); --svc-writing-ink:  var(--pb-8);
+  --svc-exam:     var(--pullim-blue); --svc-exam-ink:     var(--pb-8);
+
+  /* Semantic status colours */
+  --ok:       #10B987; --ok-bg:     #E7F8F1;
+  --warn:     #F0883E; --warn-bg:   #FDF1E7;
+  --danger:   #E5484D; --danger-bg: #FCEBEC;
+  --info:     #1F89F5; --info-bg:   #E8F2FE;
+
+  /* Type — games spec/08 §8.2 정합: Pretendard 계열 고정. AGENTS/CLAUDE 가 금지한 system-ui·
+     -apple-system·Inter·Roboto 미사용(codex #138 R4). games tailwind fontFamily.sans 와 동일 스택. */
+  --sans:  'Pretendard Variable', Pretendard, 'Spoqa Han Sans Neo', sans-serif;
+  /* brand latin(Bai Jamjuree) 미도입 — Pretendard 로 폴백(spec/08 §8.2 note, games UI 렌더 표면 없음). */
+  --brand: var(--sans);
+  /* games 적응: 모노는 next/font 로드(layout.tsx --font-jetbrains-mono)를 1순위로.
+     리터럴 'JetBrains Mono' 는 시스템 설치본 폴백. (Bai Jamjuree 는 games 미로드 → Pretendard 폴백) */
+  --mono:  var(--font-jetbrains-mono), 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Shape — games spec/08 §8.4 정합(codex #138, 사용자 결정 "spec/08 로 라디우스 정합"):
+     games 라운드 스케일 = 블록4·버튼6·드롭존8·모달16. pullim-web 의 10/14/20/28px 을 이 스케일로 remap.
+     레이아웃 골격은 동일, 라운드만 games 스펙(AI slop·SoT 분기 회피). r-pill 은 아바타·진행바 원형 전용. */
+  --r-xs:   6px;   /* 버튼 */
+  --r-sm:   8px;   /* 드롭존 */
+  --r-md:   8px;   /* 드롭존 */
+  --r-lg:   16px;  /* 모달 */
+  --r-xl:   16px;  /* 모달 */
+  --r-pill: 999px; /* 아바타/진행바 원형 (칩·뱃지는 --r-xs 로 이동) */
+
+  /* Shadows */
+  --sh-1:   0 1px 2px rgba(13,26,31,.04), 0 1px 3px rgba(13,26,31,.06);
+  --sh-2:   0 2px 8px rgba(13,26,31,.06), 0 8px 24px rgba(13,26,31,.05);
+  --sh-3:   0 12px 40px rgba(3,98,218,.12), 0 4px 12px rgba(13,26,31,.06);
+  --sh-pop: 0 18px 50px rgba(13,26,31,.16);
+
+  /* Shell metrics */
+  --rail-w:   248px;
+  --topbar-h: 60px;
+  --ease:     cubic-bezier(.32,.72,0,1);
+
+  /* ── Base styles (was body{} in pullim-os.css) ────────────────────── */
+  /* 루트 셸은 flex 컬럼 — `.shell { flex: 1 }` 이 실제 렌더 트리에서 뷰포트 높이를 채우도록(codex #138 R13).
+     이게 없으면 `.os-root` 가 block 이라 `.shell` 의 flex:1 이 no-op 이 되어 계약이 미적용된다.
+     game variant 는 인라인 height:100vh 로 override, landing 은 자연 스크롤(min-height 로 최소 뷰포트 보장). */
+  min-height:              100vh;
+  display:                 flex;
+  flex-direction:          column;
+  background:              var(--paper-2);
+  color:                   var(--ink);
+  font-family:             var(--sans);
+  -webkit-font-smoothing:  antialiased;
+  text-rendering:          optimizeLegibility;
+  font-size:               15px;
+  line-height:             1.55;
+  letter-spacing:          -.01em;
+
+  /* ── Scoped reset helpers ─────────────────────────────────────────── */
+  & *, & *::before, & *::after { box-sizing: border-box; }
+  & img, & svg { max-width: 100%; }
+  /* a/button/ul 리셋은 element-level specificity(:where, 파일 하단)로 분리 — .os-root a/button(0,1,1)이
+     Tailwind 유틸(0,1,0)을 이겨 games 콘텐츠(shadcn Button 등) 스타일을 덮어쓰던 회귀 방지(codex #138 R7). */
+  & ::selection { background: var(--pullim-lemon); color: var(--ink); }
+  & :focus-visible { outline: 2px solid var(--pullim-blue); outline-offset: 2px; border-radius: 4px; }
+
+  /* ── Utility classes ──────────────────────────────────────────────── */
+  & .mono      { font-family: var(--mono); }
+  & .brandfont { font-family: var(--brand); }
+  & .muted     { color: var(--ink-4); }
+  & .muted-2   { color: var(--ink-3); }
+
+  /* Texture */
+  & .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(3,98,218,.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(3,98,218,.045) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+  & .bg-dot {
+    background-image: radial-gradient(rgba(3,98,218,.10) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  /* ── Brand mark ───────────────────────────────────────────────────── */
+  & .mast { display: inline-flex; align-items: center; gap: 10px; }
+  & .mast .glyph {
+    width: 30px; height: 30px; border-radius: 8px;
+    display: grid; place-items: center; flex: none;
+    background: var(--pullim-blue); overflow: hidden;
+  }
+  & .mast .glyph img { width: 100%; height: 100%; display: block; }
+  & .mast .wordmark {
+    font-family: var(--sans); font-weight: 800; font-size: 18px;
+    letter-spacing: -.04em; color: var(--ink);
+  }
+  & .mast .sub {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .04em;
+    color: var(--ink-4); padding-left: 9px; margin-left: 2px;
+    border-left: 1px solid var(--line);
+  }
+
+  /* ── App shell ────────────────────────────────────────────────────── */
+  & .os { min-height: 100vh; display: flex; flex-direction: column; }
+
+  & .topbar {
+    height: var(--topbar-h); position: sticky; top: 0; z-index: 60;
+    display: flex; align-items: center; gap: 18px; padding: 0 22px;
+    background: rgba(255,255,255,.82); backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  & .topbar .spacer { flex: 1; }
+  & .topbar .tb-actions { display: flex; align-items: center; gap: 6px; }
+
+  & .icon-btn {
+    width: 38px; height: 38px; border-radius: 8px;
+    display: grid; place-items: center;
+    color: var(--ink-3); position: relative; transition: .18s var(--ease);
+  }
+  & .icon-btn:hover { background: var(--paper-2); color: var(--ink); }
+  & .icon-btn .dot {
+    position: absolute; top: 9px; right: 9px;
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--danger); box-shadow: 0 0 0 2px #fff;
+  }
+
+  & .avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-weight: 700; font-size: 14px; color: #fff;
+    background: linear-gradient(135deg, var(--pb-5), var(--pb-7));
+    /* resting 무그림자(spec/08 §8.5) — 그라디언트 원형 아바타는 border/그림자 없이 flat. */
+  }
+
+  /* 콘텐츠 트랙은 minmax(0,1fr) — 순수 `1fr`(암묵 min-width:auto)은 넓은 자식(카드·툴바 min-content)에
+     맞춰 트랙이 뷰포트를 넘어 확장(grid blowout)돼 320px 에서 문서 가로 스크롤을 유발한다(codex #138 R3). */
+  & .shell { flex: 1; display: grid; grid-template-columns: var(--rail-w) minmax(0, 1fr); align-items: start; }
+
+  & .rail {
+    position: sticky; top: var(--topbar-h);
+    height: calc(100vh - var(--topbar-h));
+    border-right: 1px solid var(--line); background: #fff;
+    padding: 18px 14px; display: flex; flex-direction: column; gap: 4px; overflow-y: auto;
+  }
+  & .rail .rail-head {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--ink-4); padding: 10px 12px 6px;
+  }
+  & .rail .rail-spacer { flex: 1; }
+
+  /* 레인 토글 — 나브 아이템과 동일 디자인(버튼 기본값만 리셋, .nav-item/.active/:hover 는 그대로). */
+  & .rail-lane { display: flex; flex-direction: column; gap: 2px; margin: 12px 0 2px; }
+  & .rail-lane button {
+    width: 100%; border: 0; background: transparent; font-family: inherit;
+    text-align: left; cursor: pointer; -webkit-appearance: none; appearance: none;
+  }
+
+  & .nav-item {
+    display: flex; align-items: center; gap: 11px; padding: 10px 12px;
+    border-radius: 8px; color: var(--ink-3); font-weight: 500; font-size: 14px;
+    transition: .16s var(--ease); position: relative;
+  }
+  & .nav-item svg { width: 19px; height: 19px; flex: none; }
+  & .nav-item:hover { background: var(--paper-2); color: var(--ink); }
+  & .nav-item.active {
+    background: var(--accent-soft, var(--pb-1));
+    color: var(--accent, var(--pullim-blue));
+    font-weight: 600;
+  }
+  & .nav-item.active::before {
+    content: ""; position: absolute; left: -14px; top: 9px; bottom: 9px;
+    width: 3px; border-radius: 0 3px 3px 0;
+    background: var(--accent, var(--pullim-blue));
+  }
+  & .nav-item .badge { margin-left: auto; }
+  & .nav-item.locked { opacity: .55; cursor: default; }
+
+  & .main { padding: 30px 36px 80px; max-width: 1240px; width: 100%; margin: 0 auto; }
+
+  /* ── 사이드바(레일) 접기 토글 ─────────────────────────────────────── */
+  &.rail-collapsed .shell { grid-template-columns: minmax(0, 1fr); }
+  &.rail-collapsed .rail { display: none; }
+  & .rail-collapse-btn {
+    display: grid; place-items: center; width: 34px; height: 34px; flex: none;
+    margin-right: 4px; border-radius: 8px; border: 1px solid var(--line);
+    background: #fff; color: var(--ink-3); cursor: pointer; transition: .16s var(--ease);
+  }
+  & .rail-collapse-btn:hover { background: var(--paper-2); color: var(--ink); }
+
+  & .crumbs {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-4);
+    letter-spacing: .04em; margin-bottom: 14px;
+  }
+  & .crumbs .sep { opacity: .5; }
+
+  /* ── Service switcher ─────────────────────────────────────────────── */
+  & .switcher { position: relative; }
+
+  & .switcher-trigger {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 12px 7px 9px; border-radius: 8px;
+    border: 1px solid var(--line); background: #fff; transition: .16s var(--ease);
+  }
+  & .switcher-trigger:hover { border-color: var(--pb-3); box-shadow: var(--sh-1); }
+  & .switcher-trigger .sg {
+    width: 24px; height: 24px; border-radius: 6px;
+    display: grid; place-items: center;
+    color: #fff; font-weight: 700; font-size: 13px; flex: none;
+  }
+  & .switcher-trigger .sn { font-weight: 700; font-size: 14px; letter-spacing: -.02em; }
+  & .switcher-trigger .chev { color: var(--ink-4); }
+
+  & .switcher-menu {
+    /* 320px 뷰포트 정합(codex #138 R2): 고정 330px 대신 뷰포트 여백 확보. 소형은 아래 미디어에서 뷰포트 고정. */
+    position: absolute; top: calc(100% + 10px); left: 0; width: min(330px, calc(100vw - 24px));
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--r-md); /* §8.4 — 오버레이(드롭다운)는 8px(드롭존). 16px 은 modal 한정 */ box-shadow: var(--sh-pop);
+    padding: 10px; z-index: 80;
+    opacity: 0; visibility: hidden; transform: translateY(-6px);
+    transition: .2s var(--ease);
+  }
+  & .switcher.open .switcher-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+  & .switcher-menu .sm-head {
+    font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--ink-4); padding: 8px 10px 6px;
+  }
+
+  & .sm-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px; border-radius: 8px; transition: .14s var(--ease);
+  }
+  & .sm-item:hover { background: var(--paper-2); }
+  & .sm-item .sg {
+    width: 34px; height: 34px; border-radius: 8px;
+    display: grid; place-items: center;
+    color: #fff; font-weight: 700; font-size: 15px; flex: none;
+  }
+  & .sm-item .sm-name { font-weight: 700; font-size: 14px; letter-spacing: -.02em; }
+  & .sm-item .sm-desc { font-size: 12px; color: var(--ink-4); }
+  & .sm-item .sm-meta { margin-left: auto; }
+  & .sm-item.is-soon { opacity: .55; pointer-events: none; }
+
+  /* ── Buttons ──────────────────────────────────────────────────────── */
+  & .btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 8px; padding: 11px 18px; border-radius: 6px;
+    font-weight: 600; font-size: 14px; letter-spacing: -.01em;
+    transition: .16s var(--ease); white-space: nowrap;
+  }
+  & .btn svg { width: 17px; height: 17px; }
+
+  /* resting 무그림자(spec/08 §8.5) — 컬러 글로우는 hover 상태 한정. */
+  & .btn-primary {
+    background: var(--accent, var(--pullim-blue)); color: #fff;
+  }
+  & .btn-primary:hover { filter: brightness(1.05); transform: translateY(-1px); box-shadow: 0 8px 22px rgba(3,98,218,.30); }
+
+  & .btn-dark { background: var(--ink); color: #fff; }
+  & .btn-dark:hover { background: var(--ink-2); transform: translateY(-1px); }
+
+  & .btn-ghost { background: #fff; color: var(--ink-2); border: 1px solid var(--line); }
+  & .btn-ghost:hover { border-color: var(--ink-4); background: var(--paper-3); }
+
+  & .btn-soft { background: var(--accent-soft, var(--pb-1)); color: var(--accent, var(--pullim-blue)); }
+  & .btn-soft:hover { filter: brightness(.97); }
+
+  & .btn-accent {
+    background: var(--pullim-lemon); color: var(--ink);
+  }
+  & .btn-accent:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(230,255,76,.5); }
+
+  & .btn-lg { padding: 14px 24px; font-size: 15px; border-radius: 6px; }
+  & .btn-sm { padding: 8px 13px; font-size: 13px; border-radius: 6px; }
+  & .btn-block { width: 100%; }
+
+  /* ── Form inputs ──────────────────────────────────────────────────────
+     Tailwind Preflight 가 인풋 기본 테두리/배경을 리셋하므로 .input 이 없으면
+     로그인·회원가입 칸이 안 보인다(회귀). 칸 구분·배경·포커스 링을 복원한다. */
+  & .input {
+    width: 100%; padding: 11px 13px; border-radius: 8px;
+    border: 1px solid var(--line); background: #fff; color: var(--ink);
+    font-size: 14px; line-height: 1.4; transition: .16s var(--ease);
+  }
+  & .input::placeholder { color: var(--ink-5); }
+  & .input:hover { border-color: var(--ink-5); }
+  & .input:focus { outline: none; border-color: var(--pullim-blue); box-shadow: 0 0 0 3px var(--pb-1); }
+  & .input:disabled { background: var(--paper-2); color: var(--ink-4); cursor: not-allowed; }
+
+  /* ── Chips / badges / pills ───────────────────────────────────────── */
+  /* games spec/08 §8.12 정합(codex #138 R2): 칩·뱃지 라디우스는 rounded-button(6px), pill(16px+) 금지.
+     pullim-web 은 --r-pill(999px) 이었으나 games 스펙 준수를 위해 --r-xs(6px)로 조정. */
+  & .chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 11px; border-radius: var(--r-xs);
+    font-size: 12px; font-weight: 600;
+    background: var(--paper-2); color: var(--ink-3);
+  }
+  & .chip.dot::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  & .chip.brand  { background: var(--pb-1);          color: var(--pullim-blue); }
+  & .chip.ok     { background: var(--ok-bg);          color: var(--ok); }
+  & .chip.warn   { background: var(--warn-bg);        color: var(--warn); }
+  & .chip.danger { background: var(--danger-bg);      color: var(--danger); }
+  & .chip.accent { background: var(--pullim-lemon);   color: var(--ink); }
+  & .chip.outline { background: #fff; border: 1px solid var(--line); color: var(--ink-3); }
+
+  & .eyebrow {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--ink-4);
+  }
+  & .eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--accent, var(--pullim-blue)); }
+
+  & .badge {
+    display: inline-grid; place-items: center;
+    min-width: 20px; height: 20px; padding: 0 6px;
+    border-radius: var(--r-xs); /* spec/08 §8.12 — 준비중/베타 뱃지 pill 금지, rounded-button(6px) */
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+    background: var(--accent, var(--pullim-blue)); color: #fff;
+  }
+  & .badge.soft   { background: var(--accent-soft, var(--pb-1)); color: var(--accent, var(--pullim-blue)); }
+  & .badge.muted  { background: var(--paper-2); color: var(--ink-4); }
+
+  /* ── Cards ────────────────────────────────────────────────────────── */
+  /* games spec/08 §8.5: resting card 는 hairline border 중심, 그림자는 elevated/drag 상태 한정.
+     pullim-web 의 resting box-shadow(--sh-1) 미채택 — border 만(codex #138 R5). 오버레이(아바타
+     드롭다운 등)는 인라인으로 var(--sh-3) 를 얹어 elevation 표현. */
+  & .card {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--r-md); /* §8.4 — 오버레이(드롭다운)는 8px(드롭존). 16px 은 modal 한정 */ padding: 22px; box-shadow: none;
+  }
+  & .card.flat      { box-shadow: none; }
+  & .card.pad-lg    { padding: 28px; }
+  & .card.tint      { border-top: 4px solid var(--accent, var(--pullim-blue)); }
+  & .card.dark      { background: var(--ink); color: #fff; border-color: var(--ink-2); }
+  & .card.dark .muted { color: var(--ink-5); }
+  & .card-hover     { transition: .2s var(--ease); }
+  & .card-hover:hover { transform: translateY(-3px); box-shadow: var(--sh-2); border-color: var(--pb-3); }
+
+  /* ── Section heads ────────────────────────────────────────────────── */
+  & .sec-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 16px; margin: 34px 0 16px;
+  }
+  & .sec-head h2 { font-size: 19px; font-weight: 800; letter-spacing: -.03em; }
+  & .sec-head .aside { font-family: var(--mono); font-size: 11px; color: var(--ink-4); letter-spacing: .04em; }
+
+  /* ── Stat tiles ───────────────────────────────────────────────────── */
+  & .stat {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--r-md); padding: 16px 18px;
+  }
+  & .stat .k { display: flex; align-items: center; gap: 7px; font-size: 12.5px; color: var(--ink-4); font-weight: 500; }
+  & .stat .v { font-size: 26px; font-weight: 800; letter-spacing: -.04em; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  & .stat .d { font-size: 12px; margin-top: 3px; font-family: var(--mono); }
+  & .stat .d.up   { color: var(--ok); }
+  & .stat .d.down { color: var(--danger); }
+
+  /* ── Progress bar ─────────────────────────────────────────────────── */
+  & .bar {
+    height: 8px; border-radius: var(--r-pill);
+    background: var(--paper-2); overflow: hidden;
+  }
+  & .bar > i {
+    display: block; height: 100%; border-radius: inherit;
+    background: var(--accent, var(--pullim-blue));
+    transition: width .6s var(--ease);
+  }
+
+  /* ── List rows ────────────────────────────────────────────────────── */
+  & .row {
+    display: flex; align-items: center; gap: 14px; padding: 14px 16px;
+    border-radius: var(--r-md); background: #fff; border: 1px solid var(--line-2);
+    transition: .16s var(--ease);
+  }
+  & .row + .row { margin-top: 8px; }
+  & .row:hover  { border-color: var(--pb-3); box-shadow: var(--sh-1); }
+  & .row .time  { font-family: var(--mono); font-size: 13px; color: var(--ink-4); width: 46px; flex: none; }
+  & .row .ic    { width: 34px; height: 34px; border-radius: 8px; display: grid; place-items: center; flex: none; background: var(--accent-soft, var(--pb-1)); color: var(--accent, var(--pullim-blue)); }
+  & .row .body  { flex: 1; min-width: 0; }
+  & .row .body .t { font-weight: 600; font-size: 14.5px; letter-spacing: -.01em; }
+  & .row .body .s { font-size: 12.5px; color: var(--ink-4); margin-top: 2px; }
+  & .row .right { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+
+  /* ── Avatars / service glyphs ─────────────────────────────────────── */
+  & .sg {
+    width: 30px; height: 30px; border-radius: 8px; overflow: hidden;
+    display: grid; place-items: center; flex: none; background: none; padding: 0;
+  }
+  & .sg img { width: 100%; height: 100%; display: block; }
+  & .sm-item .sg,
+  & .switcher-trigger .sg { border-radius: 8px; }
+
+  /* ── Hero title ───────────────────────────────────────────────────── */
+  & .hero-title { font-family: var(--sans); font-weight: 800; letter-spacing: -.045em; line-height: 1.02; }
+
+  /* ── Footer ───────────────────────────────────────────────────────── */
+  & .foot {
+    border-top: 1px solid var(--line); margin-top: 64px; padding: 30px 0;
+    color: var(--ink-4); font-size: 12.5px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 16px; flex-wrap: wrap;
+  }
+
+  /* ── Mobile tab bar (hidden by default) ──────────────────────────── */
+  & .tabbar { display: none; }
+
+  /* ── Motion ───────────────────────────────────────────────────────── */
+  & .rise { animation: os-rise .6s var(--ease) both; }
+  & .d1 { animation-delay: .05s; }
+  & .d2 { animation-delay: .1s;  }
+  & .d3 { animation-delay: .16s; }
+  & .d4 { animation-delay: .22s; }
+  & .d5 { animation-delay: .28s; }
+  & .d6 { animation-delay: .34s; }
+  & .d7 { animation-delay: .40s; }
+  & .d8 { animation-delay: .46s; }
+
+  /* ── Responsive ───────────────────────────────────────────────────── */
+  @media (max-width: 920px) {
+    & .shell { grid-template-columns: minmax(0, 1fr); }
+    & .rail  { display: none; }
+    & .rail-collapse-btn { display: none; } /* 레일이 이미 숨겨지는 구간 — 토글 불필요 */
+    & .main  { padding: 22px 18px 96px; }
+    & .tabbar {
+      display: flex; position: fixed; bottom: 0; left: 0; right: 0;
+      z-index: 70; height: 62px;
+      background: rgba(255,255,255,.92); backdrop-filter: blur(14px);
+      border-top: 1px solid var(--line);
+      padding: 6px 8px; justify-content: space-around;
+    }
+    & .tabbar a {
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      font-size: 10.5px; color: var(--ink-4);
+      padding: 6px 10px; border-radius: 8px; flex: 1;
+    }
+    & .tabbar a.active { color: var(--accent, var(--pullim-blue)); }
+    & .tabbar a svg    { width: 21px; height: 21px; }
+    & .topbar { padding: 0 14px; gap: 10px; }
+    & .switcher-trigger .sn { display: none; }
+    /* ServiceSwitcher 메뉴를 뷰포트에 고정(codex #138 R2) — 트리거가 topbar 중앙부라 absolute+left:0 이면
+       320px 에서 화면을 넘친다. 소형은 뷰포트 12px 여백에 고정해 항상 안착. */
+    & .switcher-menu {
+      position: fixed; left: 12px; right: 12px; width: auto;
+      top: calc(var(--topbar-h) + 6px);
+    }
+  }
+
+  @media (max-width: 560px) {
+    font-size: 14.5px;
+    & .main { padding: 18px 14px 96px; }
+    /* 320px 정합(codex #138 R3): topbar 가 320px 를 넘어 문서 가로 스크롤을 유발 → crumbs·본문·
+       게임 카드가 그 스크롤 폭으로 늘어나 critical overflow 발생. 검색·알림은 비활성 placeholder
+       ("준비 중")이므로 소형에서 숨겨 topbar 를 뷰포트 안으로. (계정 아바타는 유지) */
+    & .topbar { gap: 8px; }
+    & .tb-actions .icon-btn { display: none; }
+    & .mast .sub { display: none; }
+    /* 비회원 로그인/회원가입 직접 CTA 는 소형에서 숨김(codex #138 R8) — mast+switcher+CTA+avatar 가
+       320px 를 넘어 topbar overflow 재발하던 것 방지. 모바일은 아바타 메뉴로 로그인 진입(메뉴에 유지). */
+    & .tb-actions .tb-guest-cta { display: none; }
+  }
+
+  /* ── Wizard ────────────────────────────────────────────────────────── */
+  & .wizard-root {
+    max-width: 560px;
+    margin: 0 auto;
+    animation: os-rise .5s var(--ease) both;
+  }
+
+  & .wizard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
+  & .wizard-stepper {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  & .ws-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--line);
+    transition: .2s var(--ease);
+  }
+  & .ws-dot.done {
+    background: var(--pb-3);
+  }
+  & .ws-dot.active {
+    width: 22px; border-radius: var(--r-pill);
+    background: var(--pullim-blue);
+  }
+
+  & .wizard-step-count {
+    font-family: var(--mono); font-size: 11px;
+    color: var(--ink-4); letter-spacing: .06em;
+  }
+
+  & .wizard-card {
+    margin-bottom: 20px;
+    padding: 28px 28px 24px;
+  }
+
+  & .wizard-step-head {
+    margin-bottom: 22px;
+  }
+  & .wizard-title {
+    font-size: 21px; font-weight: 800; letter-spacing: -.035em;
+    color: var(--ink); line-height: 1.25;
+  }
+  & .wizard-sub {
+    margin-top: 6px; font-size: 13.5px; color: var(--ink-4); line-height: 1.5;
+  }
+
+  /* Option cards (radio-style) */
+  & .wizard-options {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  & .wizard-option {
+    display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px; border-radius: var(--r-md);
+    border: 1.5px solid var(--line); background: #fff;
+    text-align: left; cursor: pointer;
+    transition: .15s var(--ease);
+  }
+  & .wizard-option:hover {
+    border-color: var(--pb-3); background: var(--paper-3);
+  }
+  & .wizard-option.selected {
+    border-color: var(--pullim-blue);
+    background: var(--pb-1);
+    box-shadow: 0 0 0 3px rgba(3,98,218,.08);
+  }
+  & .wo-check {
+    width: 22px; height: 22px; border-radius: 50%; flex: none;
+    border: 2px solid var(--line); display: grid; place-items: center;
+    font-size: 12px; font-weight: 700; color: #fff;
+    background: transparent;
+    transition: .15s var(--ease);
+  }
+  & .wizard-option.selected .wo-check {
+    background: var(--pullim-blue); border-color: var(--pullim-blue);
+  }
+  & .wo-body {
+    display: flex; flex-direction: column; gap: 2px;
+  }
+  & .wo-label {
+    font-weight: 700; font-size: 14.5px; color: var(--ink);
+  }
+  & .wo-desc {
+    font-size: 12.5px; color: var(--ink-4);
+  }
+
+  /* Chips (multi-select) */
+  & .wizard-chips {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  & .wizard-chip {
+    padding: 8px 15px; border-radius: var(--r-xs); /* spec/08 §8.12 칩 rounded-button(6px) — pill 금지 */
+    border: 1.5px solid var(--line); background: #fff;
+    font-size: 13.5px; font-weight: 600; color: var(--ink-3);
+    cursor: pointer; transition: .14s var(--ease);
+  }
+  & .wizard-chip:hover {
+    border-color: var(--pb-3); color: var(--ink); background: var(--paper-3);
+  }
+  & .wizard-chip.selected {
+    border-color: var(--pullim-blue);
+    background: var(--pb-1); color: var(--pullim-blue);
+  }
+
+  /* Goal input */
+  & .wizard-inp {
+    width: 100%; padding: 12px 14px;
+    border: 1.5px solid var(--line); border-radius: var(--r-md);
+    background: #fff; font: inherit; font-size: 14px; color: var(--ink);
+    transition: .15s var(--ease); outline: none;
+  }
+  & .wizard-inp::placeholder { color: var(--ink-5); }
+  & .wizard-inp:focus { border-color: var(--pullim-blue); box-shadow: 0 0 0 3px rgba(3,98,218,.10); }
+
+  /* Validation / error messages */
+  & .wizard-validation {
+    margin-top: 14px; padding: 10px 14px;
+    border-radius: var(--r-sm); background: var(--warn-bg);
+    color: var(--warn); font-size: 13px; font-weight: 600;
+  }
+  & .wizard-error {
+    margin-top: 14px; padding: 10px 14px;
+    border-radius: var(--r-sm); background: var(--danger-bg);
+    color: var(--danger); font-size: 13px; font-weight: 600;
+  }
+
+  /* Navigation row */
+  & .wizard-nav {
+    display: flex; align-items: center; gap: 12px;
+  }
+  & .wizard-btn-disabled { opacity: .55; }
+
+  /* Inline spinner */
+  & .wizard-spinner {
+    display: inline-block; width: 15px; height: 15px;
+    border: 2.5px solid rgba(255,255,255,.35);
+    border-top-color: #fff; border-radius: 50%;
+    animation: wizard-spin .7s linear infinite;
+    flex: none;
+  }
+
+  /* Loading overlay */
+  & .wizard-loading-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(255,255,255,.72); backdrop-filter: blur(10px);
+    display: grid; place-items: center;
+  }
+  & .wizard-loading-card {
+    background: #fff; border: 1px solid var(--line);
+    border-radius: var(--r-xl); padding: 40px 44px;
+    box-shadow: var(--sh-pop); text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 16px;
+    animation: os-rise .4s var(--ease) both;
+  }
+  & .wizard-loading-spinner {
+    width: 44px; height: 44px;
+    border: 4px solid var(--line);
+    border-top-color: var(--pullim-blue);
+    border-radius: 50%;
+    animation: wizard-spin 1s linear infinite;
+  }
+  & .wizard-loading-text {
+    font-size: 16px; font-weight: 700; color: var(--ink); letter-spacing: -.02em;
+  }
+  & .wizard-loading-sub {
+    font-size: 13px; color: var(--ink-4); margin-top: -8px;
+  }
+
+  /* Goal block spacing */
+  & .wizard-goal-block { display: flex; flex-direction: column; gap: 0; }
+
+  /* Responsive */
+  @media (max-width: 560px) {
+    & .wizard-card { padding: 20px 16px; }
+    & .wizard-title { font-size: 18px; }
+  }
+
+} /* end .os-root */
+
+/* 최소 element-level reset(:where 로 specificity=(0,0,1)) — 어떤 클래스든 이를 이긴다(codex #138 R7).
+   background/border/color/font/list-style 는 Tailwind preflight(@tailwind base)가 이미 버튼·a·ul 을
+   정규화하므로 재선언하지 않는다 — 특히 `border:none`(border-style:none) 이 콘텐츠 버튼의
+   `border` 유틸 테두리를 지우던 회귀 제거. OS 크롬은 자체 클래스로 스타일되어 무영향. */
+:where(.os-root) a { text-decoration: none; }
+:where(.os-root) button { cursor: pointer; }
+
+@keyframes wizard-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* pullim-web 의 "marketing chrome suppression" 블록(marketing Nav/Footer/CookieBanner/main#main
+   `body:has(.os-root) > …` 숨김)은 **games 에 이식하지 않는다**(codex #138 R4):
+   games body 직속 자식은 OsAppShell 의 `.os-root` 뿐 — 마케팅 header/footer·`pullim-cookie-title`
+   배너·`main#main` 이 존재하지 않는다. 전역 `display:none` 규칙을 남기면 향후 games 가 body-direct
+   동의 배너를 추가할 때 무조건 숨겨 런타임 동의 UI 를 깨뜨릴 위험이 있어 제거. */

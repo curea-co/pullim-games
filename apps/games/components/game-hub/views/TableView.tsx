@@ -102,7 +102,7 @@ export function TableView({ games, perGame }: Props) {
                       aria-label={`${g.meta.title} 시작`}
                       className="h-7 gap-1 rounded-button border-type-primary bg-bg-block px-2.5 text-helper font-medium text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
                     >
-                      <Link href={`/games/${g.meta.id}`}>
+                      <Link href={`/games/${g.meta.id}`} data-cta-priority="informational">
                         시작 <ArrowRight className="h-3 w-3" />
                       </Link>
                     </Button>

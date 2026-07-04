@@ -61,6 +61,7 @@ export function CustomGamesSection() {
       <Link
         href="/manage/content"
         aria-label="첫 카드 만들기"
+        data-cta-priority="informational"
         className="block rounded-block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-type-primary focus-visible:ring-offset-2"
       >
         <Card
@@ -116,7 +117,7 @@ export function CustomGamesSection() {
           const isPlayable = cardCount > 0;
           return (
             <li key={g.meta.id}>
-              <Link href={`/games/${g.meta.id}`} className="group block">
+              <Link href={`/games/${g.meta.id}`} data-cta-priority="informational" className="group block">
                 <Card
                   className={cn(
                     "flex items-center gap-2 rounded-block bg-bg-primary px-3 py-2.5 shadow-none transition-colors",

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono } from "next/font/google";
-import { AppShell } from "@/components/shell/app-shell";
+import { OsAppShell } from "@/components/os/OsAppShell";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
@@ -79,7 +79,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={jetbrainsMono.variable}>
       <body>
-        <AppShell role="student">{children}</AppShell>
+        <OsAppShell>{children}</OsAppShell>
       </body>
     </html>
   );

@@ -105,6 +105,7 @@ export function DataPortability({ onAfterImport }: Props) {
           variant="outline"
           size="sm"
           onClick={handleExport}
+          data-cta-priority="informational"
           className="gap-1.5 rounded-button border-border-hairline bg-bg-primary text-helper font-medium text-type-primary hover:border-type-primary hover:bg-bg-primary hover:text-type-primary"
         >
           <Download className="h-3.5 w-3.5" />
@@ -115,6 +116,7 @@ export function DataPortability({ onAfterImport }: Props) {
           variant="outline"
           size="sm"
           onClick={handleImportClick}
+          data-cta-priority="informational"
           className="gap-1.5 rounded-button border-border-hairline bg-bg-primary text-helper font-medium text-type-primary hover:border-type-primary hover:bg-bg-primary hover:text-type-primary"
         >
           <Upload className="h-3.5 w-3.5" />

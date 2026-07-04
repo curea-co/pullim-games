@@ -67,7 +67,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
 
   return (
     // spec/08 §8.3·§8.7: 모바일 가장자리 패딩 24px(px-6), 컨텐츠 폭 480px.
-    <div className="mx-auto flex min-h-[60vh] w-full max-w-[480px] items-center px-6">
+    // <main> 랜드마크 — OsShell 콘텐츠 래퍼가 <div> 라 페이지가 자체 main 을 제공(codex #138 R11).
+    <main className="mx-auto flex min-h-[60vh] w-full max-w-[480px] items-center px-6">
       {/* 디자인 시스템 토큰 정합(AGENTS.md/spec/08): pullim-* 색, 블록 radius 4px. */}
       <Card className="w-full rounded border-pullim-slate-200 bg-card shadow-sm">
         <CardHeader>
@@ -199,6 +200,6 @@ export function AuthForm({ mode }: { mode: Mode }) {
           </p>
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 }
