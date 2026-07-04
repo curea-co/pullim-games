@@ -1,7 +1,7 @@
 # 풀림 games ↔ pullim-web 통합 로그인(SSO) 위임 — 회원만 pullim-api SSO, 게스트 보존
 
 **작성일**: 2026-07-03 (spec 개정 반영 2026-07-04)
-**상태**: **선행 spec 개정 완료 → games 코드 착수 대기.** 본 plan 의 §2-A spec 개정은 PR #140(`spec/games-sso-login-delegation`)으로 반영됨. §0 결정은 사용자(G1) 합의 완료(2026-07-03). games 코드(PR-1/2)는 spec PR 머지 후 착수.
+**상태**: **선행 spec 개정안 PR #140(`spec/games-sso-login-delegation`) 제출·Codex 리뷰 반영 중 — 권위 문서라 G1/G3/G4 합의·머지 대기(CLAUDE.md §4).** §0 제품 방향(D1/D2/D3)은 G1(사용자) 발의(2026-07-03)이며, 권위 spec 개정 승인은 G1/G3/G4 합의로 확정. games 코드(PR-1/2)는 spec PR **머지 후** 착수.
 **근거**: 사용자 결정 2026-07-03 — 게스트 유지+회원 SSO / 자체 auth legacy dormant / games DB 유지(회원 식별만 pullim-api sub, 저장 키 `users.id` 유지·`sub`=매핑 컬럼). 설계 정당성은 games 권위 spec `proc/spec/05 §5.2`·`§5.6`·`§9.3`·`§9.4` + games↔pullim-api 계약으로 자립한다(타 풀림 프로젝트를 근거로 들지 않음 — `CLAUDE.md §4` 독립 프로젝트 원칙).
 **umbrella**: `proc/plan/2026-06-23_pullim-api-integration.md`(+ `2026-06-23_HANDOFF-pullim-api-games-module.md`). 본 plan 은 그 umbrella 의 **인증 슬라이스만** 좁혀 선실행하는 문서다 — 학습데이터 이관·games DB 폐기(umbrella P3/P4)는 본 plan 범위 밖.
 
@@ -29,7 +29,7 @@
 
 ## 2. 🔴 선행 조건 (코드 착수 전 필수)
 
-### 2-A. spec 개정 (거버넌스 — G1/G3/G4 합의) — **✅ 반영 완료 (PR #140 `spec/games-sso-login-delegation`, 2026-07-04). Codex 리뷰 반복 반영 중, G1/G3/G4 합의 후 머지 → 그 뒤 games 코드 착수**
+### 2-A. spec 개정 (거버넌스 — G1/G3/G4 합의) — **🟡 PR #140(`spec/games-sso-login-delegation`, 2026-07-04) 제출·Codex 리뷰 반복 반영 중. G1/G3/G4 합의·머지 대기 → 머지 후 games 코드 착수** (아래 체크박스 = spec 편집 반영분, 승인 아님)
 중앙 로그인 위임은 `spec/05 §5.2`(games 계정 완전 독립)·`§5.6`(games 자체 가입 계약)과 충돌한다. `spec/01 §2 명세 우선` + `CLAUDE.md §9` 경로에 따라 **spec 먼저 개정 후 코드**.
 - [x] `spec/05 §5.2`: 회원 신원 pullim-api 중앙 위임(pullim 모드)·게스트 games 독립·"완전 독립 계정" 조항을 데이터소유/게스트로 축소·자체 auth legacy dormant. DB 조항 존치(D3).
 - [x] `spec/05 §5.6`: identity PII(이메일·비번 해시·본인인증) pullim-api 소유·가입/동의 권위 중앙 이동(games `AuthForm` pullim 모드 표면 제거). 게스트 PII 무변경.
@@ -102,7 +102,7 @@
 - [ ] `bun run typecheck && bun run lint && bun run build`.
 
 ## 6. PR 순서 (FE/BE 분리 · base=dev) — 진행 현황
-1. ✅ **(spec)** §2-A spec 개정 — **PR #140 진행 중**(Codex 리뷰 반복 반영, G1/G3/G4 합의 후 머지). **최선행.**
+1. 🟡 **(spec)** §2-A spec 개정 — **PR #140 리뷰 중**(Codex 반복 반영, G1/G3/G4 합의·머지 대기). **최선행.**
 2. ✅ **(pullim-api, 별 repo 핸드오프)** CORS games origin + `/games/me` — **dev #312 완료**. §2-C.
 3. 🟡 **(pullim-web, 별 repo)** resolveNext prod 승격(dev 는 이미 됨). §2-B.
 4. ⬜ games **PR-1**(pullim 모드 게이트) → 5. ⬜ games **PR-2**(신원·페치 재배선). **spec(#140) 머지 후 착수.**
