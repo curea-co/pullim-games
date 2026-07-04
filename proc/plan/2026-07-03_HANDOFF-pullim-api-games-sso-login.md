@@ -57,6 +57,7 @@ Guards: JwtVerifyGuard  ONLY   ← EntitlementGuard('games') 붙이지 말 것
   ```
 - PII·전체 flags 맵·토큰 원문 비노출(authz-sample DoD 가드레일 동일).
 - games 가 pullim-api 에 요구하는 신규 인증 메커니즘 **없음** — 기존 `JwtVerifyGuard`·쿠키 세션 재사용.
+- **⚠️ product 격리 — `JwtVerifyGuard` 단독이 의도(cross-product 우회 아님, Codex #140)**: SSO 는 세션·신원을 서비스 간 공유하는 설계라, 로그인한 pullim 회원(planner 등 다른 서비스 세션 포함)이 `/games/me` 200 을 받는 것은 **정상**이다 — games 플레이는 무료이므로 인증된 사람이면 누구나 플레이 가능(`spec/05 §5.2`). games 의 **gated 자격**(교사제작 `flags.games`)은 별도 **제작/쓰기 엔드포인트에서 `EntitlementGuard('games')`** 로 게이트(현행 `/games/authz/sample` 패턴)하고, **데이터**는 games 로컬 `sub` projection 으로 격리한다. 즉 `/games/me` 는 audience 체크가 필요 없다(무료 플레이 신원 확인용). 만약 pullim-api 가 토큰 audience 를 product 별로 발급한다면 games audience 미포함 토큰도 **플레이 목적 200** 이어야 한다(플레이 무료 — audience 로 막으면 R1 재현). 격리는 인증층이 아니라 entitlement·데이터층.
 
 > 대안: 신규 `/games/me` 대신 **기존 `/auth/me`(있다면) 재사용 가능 여부 회신**해 주면 games 는 그걸 쓴다. 요건은 "games flag 무관 200/401"뿐. pullim-api 판단.
 
