@@ -33,7 +33,7 @@
 중앙 로그인 위임은 `spec/05 §5.2`(games 계정 완전 독립)·`§5.6`(games 자체 가입 계약)과 충돌한다. `spec/01 §2 명세 우선` + `CLAUDE.md §9` 경로에 따라 **spec 먼저 개정 후 코드**.
 - [x] `spec/05 §5.2`: 회원 신원 pullim-api 중앙 위임(pullim 모드)·게스트 games 독립·"완전 독립 계정" 조항을 데이터소유/게스트로 축소·자체 auth legacy dormant. DB 조항 존치(D3).
 - [x] `spec/05 §5.6`: identity PII(이메일·비번 해시·본인인증) pullim-api 소유·가입/동의 권위 중앙 이동(games `AuthForm` pullim 모드 표면 제거). 게스트 PII 무변경.
-- [x] `spec/09 §9.4`(env `NEXT_PUBLIC_DOMAIN_API_URL`·`PULLIM_LOGIN_ORIGIN` 표 + prod 승격 함정) · `§9.3`(데이터 저장 games DB 존치·키만 sub).
+- [x] `spec/09 §9.4`(env `NEXT_PUBLIC_DOMAIN_API_URL`·`NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN` 표 + prod 승격 함정) · `§9.3`(데이터 저장 games DB 존치·키만 sub).
 - [x] 영향 절 전수 sweep: `04 §4.5 RBAC`(비로그인 단일→게스트+회원 SSO 정합)·`03 §C6`·`10 로드맵`(SSO 통합 V1.x 착수 주석)·`05 §5.5`(로그인 세션 TTL pullim/legacy 분기)·`05 §5.2 V2 확장`("풀림 SSO 통합" 잔여 재정의)·`01 §5`(구 "PII 0개·만14세 V1 미발생" → §5.6 권위 위임 정정). 잔여 stale: 개정 이력 내 역사 서술만("비로그인" 맥락).
 
 ### 2-B. pullim-web (별 repo — 핸드오프)
@@ -60,7 +60,7 @@
 - [ ] `lib/core/player/use-identity.ts`(**정밀 게이트 — introspection 여기서**): pullim 모드일 때 회원 판정을 `/api/auth/me`(자체) → `${DOMAIN_API_URL}/games/me`(credentials:include, 2.5s timeout)로. **tri-state**: 200=회원, 401=미인증(→랜딩/로그인 CTA), **5xx·네트워크·timeout=fail-open**(기존 신원 유지 — pullim-api 장애가 로그인 회원을 튕기지 않음, 503 계약 보존 = R9). 게스트 판정 로직 무변경.
 - [ ] `lib/api/domain-fetch.ts`(신규 or 어댑트): pullim 모드 = `credentials:'include'` 로 pullim-api 직접 호출, legacy = 기존 자체 라우트.
 - [ ] **`users` projection 스키마 마이그레이션 (선행 — Codex #140)**: 현행 `users`(`migrations/0001_init.sql`)는 `email TEXT NOT NULL UNIQUE`·`password_hash TEXT NOT NULL` 이라 **pullim 모드 회원 row(email/pw 미보유)를 upsert 할 수 없다**. 더미 이메일/해시 삽입은 `§5.6` PII 분리 계약 위반. → **결정: nullable 전환 + `sub` 컬럼 신설**(신규 마이그레이션). ⒜ `email`·`password_hash` **NULL 허용**(legacy row 만 채움), ⒝ `sub TEXT UNIQUE`(nullable — pullim projection row 는 `sub` 만, legacy row 는 NULL), ⒞ 학습데이터 FK 는 `users(id)` 유지(projection row 의 `id` 에 걸림), ⒟ CHECK 제약으로 "row 는 (email+password_hash) XOR sub" 보장(혼선 차단). auth 전용 테이블 분리·projection 전용 테이블 신설은 대안으로 검토했으나 FK 재배선 blast radius 커서 nullable+sub 최소 변경 채택.
-- [ ] `app/api/sync/route.ts` + projection upsert: 회원 식별을 pullim-api sub 로(introspection 결과). 첫 `/games/me` 성공 시 `users`(sub) lazy upsert(위 마이그레이션 전제). **games Postgres 존치**(D3, FK 유지). 게스트는 기존대로 localStorage only. (`spec/09 §9.3`)
+- [ ] `app/api/sync/route.ts` + projection upsert (**키 모델: 저장/조인 키=`users.id` 무변경, `sub`=매핑 컬럼**): 첫 `/games/me` 성공 시 `sub` 로 `users` projection lazy upsert(위 마이그레이션 전제) → 이후 sync·조회는 **`sub → users.id` resolve 후 `user_id` 로 동작**(FK 무변경). `users.id=sub` 통일 안 함(legacy id 타입 혼용 방지). **games Postgres 존치**(D3). 게스트는 기존대로 localStorage only. (`spec/09 §9.3`)
 - [ ] `auth_sessions`·`fingerprint_links`: pullim 모드에서 `auth_sessions`(games 자체 세션)는 미사용(세션은 pullim-api `.pullim.ai` 쿠키) — dormant. `fingerprint_links` 는 `sub` 에 귀속(projection row). legacy 모드에서만 `auth_sessions` 유효.
 - [ ] 자체 로그인/가입 UI 표면 제거(dormant): `app/login`·`app/signup`·관련 컴포넌트를 pullim 모드에서 렌더 안 함(코드 삭제 아님 — D2). legacy fallback 위해 파일 보존.
 - [ ] **(후속 — 별 트랙) 중앙 계정 삭제 전파 계약**: pullim-api 중앙 계정 삭제 → games projection 삭제(webhook/job) → CASCADE 파기. 법적 파기 보장 위해 필수지만 **본 slice(로그인) 범위 밖** — pullim-api 후속 핸드오프로 확정(`spec/05 §5.6` 파기 계약 TODO). 미확정 동안 "중앙 삭제 시 games 자동 파기" 보장 표기 금지.

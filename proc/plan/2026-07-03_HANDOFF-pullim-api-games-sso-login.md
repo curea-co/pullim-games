@@ -33,7 +33,7 @@ games FE(`games.pullim.ai`/`dev-games.pullim.ai`)가 pullim-api `/games/me` 를 
 
 ## 2. 요청 ②: `GET /games/me` introspection 엔드포인트 신설
 
-games FE(클라 `RequireIdentity`)와 Edge middleware 가 회원 세션 검증에 쓸 introspection. pullim-api 는 내부적으로 기존 me 표면(예: `src/q/modules/me/`) 구조를 참고해 구현할 수 있으나 **가드가 다르다**(아래 🔴, pullim-api 관할).
+games **클라 `RequireIdentity`(정밀 게이트)** 가 회원 세션 검증에 쓸 introspection. ⚠️ **games Edge middleware 는 이걸 호출하지 않는다**(미들웨어 = coarse 쿠키 presence 만; introspection 을 미들웨어에서 때리면 5xx→fail-closed 로 로그인 회원이 튕기는 회귀 = games 측 R9). 즉 `/games/me` 는 **클라이언트 정밀 게이트 전용** — pullim-api 는 엣지/서버 호출을 전제하지 말 것(장애 시 클라가 fail-open 처리). pullim-api 내부 구현은 기존 me 표면 구조 참고 가능하나 **가드가 다르다**(아래 🔴, pullim-api 관할).
 
 ### 🔴 결정적 제약 — `EntitlementGuard('games')` 를 게이트로 쓰면 안 됨 (무한루프)
 - **games 플레이는 entitlement flag 무관 무료다.** games entitlement flag(`flags.games`)는 **교사 제작(teacher_author)** 전용 — home/free 회원은 `flags.games = null`(정상).
