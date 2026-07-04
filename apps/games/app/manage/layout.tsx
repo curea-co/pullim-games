@@ -1,9 +1,15 @@
 // /manage/* 공통 layout — ManageNav 탭 + 본문.
 
 import type { ReactNode } from "react";
+import { redirect } from "next/navigation";
 import { ManageNav } from "@/components/manage/ManageNav";
+import { MANAGE_ENABLED } from "@/lib/features";
 
 export default function ManageLayout({ children }: { children: ReactNode }) {
+  // 관리 영역 비활성화 — /manage/* 전 하위 라우트를 한 곳에서 차단.
+  // 근거: proc/plan/2026-07-02_disable-manage.md
+  if (!MANAGE_ENABLED) redirect("/home");
+
   // OsShell 콘텐츠 래퍼가 div 로 바뀌어(중첩 main 회피, codex #138 R5) /manage 는 여기서 main
   // 랜드마크를 제공한다 — 페이지당 정확히 하나의 main 보장.
   return (

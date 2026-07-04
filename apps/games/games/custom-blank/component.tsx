@@ -10,6 +10,7 @@ import {
   type CustomBlankCard,
   type CustomCurriculum,
 } from "@/lib/core";
+import { MANAGE_ENABLED } from "@/lib/features";
 
 const GAME_ID = "custom-blank";
 
@@ -60,7 +61,9 @@ export default function CustomBlankGame() {
       completionMessage={(n) => `${n}개 빈칸, 내 카드로 풀었어요.`}
       emptyMessage={{
         title: "아직 만든 빈칸 카드가 없어요.",
-        cta: { label: "관리에서 만들기", href: "/manage/content" },
+        cta: MANAGE_ENABLED
+          ? { label: "관리에서 만들기", href: "/manage/content" }
+          : undefined,
       }}
     />
   );

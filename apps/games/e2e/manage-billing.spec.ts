@@ -7,6 +7,13 @@
 // - 클라이언트는 plain email 전송. 본 서버는 라우트 처리 후 변수 폐기 — 저장 0.
 
 import { test, expect } from "@playwright/test";
+import { MANAGE_ENABLED } from "../lib/features";
+
+// 관리 영역 비활성화(MANAGE_ENABLED=false) 시 스킵 — /manage/billing 은 /home 으로
+// 리다이렉트된다. true 로 되돌리면 자동 복원. 근거: proc/plan/2026-07-02_disable-manage.md
+test.beforeEach(() => {
+  test.skip(!MANAGE_ENABLED, "MANAGE_ENABLED=false — 관리 영역 비활성화");
+});
 
 test("/manage/billing 진입 — 4 섹션 렌더 + 알림 신청 → POST /api/billing/notify (외부 위임)", async ({
   page,
