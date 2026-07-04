@@ -34,7 +34,7 @@
 - [x] `spec/05 §5.2`: 회원 신원 pullim-api 중앙 위임(pullim 모드)·게스트 games 독립·"완전 독립 계정" 조항을 데이터소유/게스트로 축소·자체 auth legacy dormant. DB 조항 존치(D3).
 - [x] `spec/05 §5.6`: identity PII(이메일·비번 해시·본인인증) pullim-api 소유·가입/동의 권위 중앙 이동(games `AuthForm` pullim 모드 표면 제거). 게스트 PII 무변경.
 - [x] `spec/09 §9.4`(env `NEXT_PUBLIC_DOMAIN_API_URL`·`PULLIM_LOGIN_ORIGIN` 표 + prod 승격 함정) · `§9.3`(데이터 저장 games DB 존치·키만 sub).
-- [x] 영향 절 전수 sweep: `04 §4.5 RBAC`(비로그인 단일→게스트+회원 SSO 정합)·`03 §C6`·`10 로드맵`(SSO 통합 V1.x 착수 주석)·`05 §5.5`(로그인 세션 TTL pullim/legacy 분기). 잔여 stale 0(개정 이력만 "비로그인" 언급).
+- [x] 영향 절 전수 sweep: `04 §4.5 RBAC`(비로그인 단일→게스트+회원 SSO 정합)·`03 §C6`·`10 로드맵`(SSO 통합 V1.x 착수 주석)·`05 §5.5`(로그인 세션 TTL pullim/legacy 분기)·`05 §5.2 V2 확장`("풀림 SSO 통합" 잔여 재정의)·`01 §5`(구 "PII 0개·만14세 V1 미발생" → §5.6 권위 위임 정정). 잔여 stale: 개정 이력 내 역사 서술만("비로그인" 맥락).
 
 ### 2-B. pullim-web (별 repo — 핸드오프)
 - [ ] resolveNext **prod(pullim.ai) 승격**(dev→main). `*.pullim.ai` generic 화이트리스트라 games 전용 코드 아님. **games 는 dev 에선 이미 동작 가능.**
@@ -47,19 +47,21 @@
 
 ## 3. 작업 항목 — games 레포 (FE, base=dev)
 
+> ⚠️ **게이트 2층 계약 (R9 — 장애 허용 보존, Codex #140)**: **미들웨어 = coarse(쿠키 presence 만, 네트워크 호출 없음)**, **클라 `RequireIdentity` = 정밀(introspection + fail-open)**. 미들웨어에서 `/games/me` 를 때려 `5xx=fail-closed` 로 닫으면 pullim-api 일시 장애만으로 로그인 회원이 `/home`·`/games/*` 에서 전부 랜딩으로 튕겨 기존 503 fail-open 계약이 깨진다. 따라서 **introspection 은 미들웨어가 아니라 클라에서** 수행하고, 5xx/네트워크는 fail-open(기존 신원 유지)한다. 이는 현행 아키텍처(미들웨어 coarse + `RequireIdentity` 정밀)와 정합.
+
 ### PR-1: pullim 모드 도입 (회원 SSO 게이트)
 - [ ] `lib/auth/pullim-mode.ts`(신규): `NEXT_PUBLIC_DOMAIN_API_URL` 존재 여부로 `PULLIM_MODE` 판정. 미설정 시 legacy(자체 auth) 유지 = D2.
-- [ ] `lib/auth/pullim-session.ts`(신규): `hasValidPullimSession(cookieHeader)` — `*-pullim-at` suffix 쿠키만 화이트리스트 → `${DOMAIN_API_URL}/games/me` fetch(2.5s timeout, 200=통과, 401/5xx=fail-closed).
 - [ ] `lib/auth/login-redirect.ts`(신규): `pullimLoginUrl(nextFullUrl)` = `${NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN}/login?next=<encoded 절대 URL>`. ⚠️ origin = **SITE 호스트**(dev `dev.pullim.ai`/prod `pullim.ai`), OS 호스트 아님.
-- [ ] `middleware.ts` 수정: pullim 모드 한정 3-상태 게이트 — ⒜ 게스트 쿠키(`pullim_games_guest`) 있으면 통과(무변경), ⒝ `*-pullim-at` 있고 introspection 200 이면 통과, ⒞ 둘 다 없으면 랜딩(`/`). 게스트 경로 완전 보존(D1).
+- [ ] `middleware.ts` 수정 (**coarse only — 네트워크 호출 없음**): pullim 모드 한정 3-상태 presence 게이트 — ⒜ 게스트 쿠키(`pullim_games_guest`) 있으면 통과(무변경), ⒝ `*-pullim-at` suffix 쿠키 **존재**하면 통과(값 검증·introspection 은 클라에서), ⒞ 둘 다 없으면 랜딩(`/`). 게스트 경로 완전 보존(D1). **미들웨어에서 `/games/me` fetch 금지**(5xx fail-closed 회귀 방지).
 - [ ] `components/auth/RequireIdentity.tsx`·랜딩 CTA: "로그인" 버튼 → `window.location.assign(pullimLoginUrl(...))`(cross-origin, next router 불가). "게스트로 시작" 은 무변경.
 - [ ] env: `.env.example` 에 `NEXT_PUBLIC_DOMAIN_API_URL`·`NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN` 추가(주석: 미설정=legacy 모드).
 
 ### PR-2: 회원 신원·데이터 페치 재배선
-- [ ] `lib/core/player/use-identity.ts`: pullim 모드일 때 회원 판정을 `/api/auth/me`(자체) → `${DOMAIN_API_URL}/games/me`(credentials:include)로. 게스트 판정 로직 무변경. 503 fail-open 유지.
+- [ ] `lib/core/player/use-identity.ts`(**정밀 게이트 — introspection 여기서**): pullim 모드일 때 회원 판정을 `/api/auth/me`(자체) → `${DOMAIN_API_URL}/games/me`(credentials:include, 2.5s timeout)로. **tri-state**: 200=회원, 401=미인증(→랜딩/로그인 CTA), **5xx·네트워크·timeout=fail-open**(기존 신원 유지 — pullim-api 장애가 로그인 회원을 튕기지 않음, 503 계약 보존 = R9). 게스트 판정 로직 무변경.
 - [ ] `lib/api/domain-fetch.ts`(신규 or 어댑트): pullim 모드 = `credentials:'include'` 로 pullim-api 직접 호출, legacy = 기존 자체 라우트.
-- [ ] `app/api/sync/route.ts`: 회원 식별을 pullim-api sub 로(introspection 결과의 sub). **games Postgres 존치**(D3) — 저장은 그대로, key 만 pullim sub. 게스트는 기존대로 localStorage only.
+- [ ] `app/api/sync/route.ts` + `users` projection: 회원 식별을 pullim-api sub 로(introspection 결과의 sub). **games Postgres 존치**(D3). ⚠️ 학습 데이터 FK 가 `users(id) ON DELETE CASCADE`(`migrations/0002_learning_data.sql`)이므로 **단순 key 치환 아님** — games 로컬 `users` 를 **pullim `sub` projection 으로 존치**(첫 `/games/me` 성공 시 lazy upsert, FK 유지). 게스트는 기존대로 localStorage only. (`spec/09 §9.3`)
 - [ ] 자체 로그인/가입 UI 표면 제거(dormant): `app/login`·`app/signup`·관련 컴포넌트를 pullim 모드에서 렌더 안 함(코드 삭제 아님 — D2). legacy fallback 위해 파일 보존.
+- [ ] **(후속 — 별 트랙) 중앙 계정 삭제 전파 계약**: pullim-api 중앙 계정 삭제 → games projection 삭제(webhook/job) → CASCADE 파기. 법적 파기 보장 위해 필수지만 **본 slice(로그인) 범위 밖** — pullim-api 후속 핸드오프로 확정(`spec/05 §5.6` 파기 계약 TODO). 미확정 동안 "중앙 삭제 시 games 자동 파기" 보장 표기 금지.
 
 ### PR-3(보류): legacy auth 완전 제거 — umbrella P4
 - [ ] (명시 승인 후) 자체 `app/api/auth/*`·`pullim_games_session`·games `users`/`sessions` 테이블 은퇴. **본 slice 범위 밖.**
@@ -75,6 +77,9 @@
 - **R4. Vercel Deployment Protection**: dev.pullim.ai·dev-games 전부 Vercel SSO 뒤 → cross-domain 바운스마다 SSO 벽. 인증 브라우저 관찰이 SoT(비인증 curl 검증 불가).
 - **R5. CORS/credentials**: pullim-api dev CORS 에 `dev-games.pullim.ai` + Allow-Credentials 누락 시 `/games/me`·domain-fetch 전부 실패 → 미인증 오판(§2-C).
 - **R6. presence 힌트 쿠키 (games 고유)**: `*-pullim-at` 이 `Domain=.pullim.ai`(공유)면 middleware 가 games host 에서 서버측으로 읽을 수 있으나, sibling 누수 우려. pullim-api 가 이미 `.pullim.ai` 로 심으므로(§1 pullim-api 계약) games middleware 가 request 쿠키로 직접 읽음 — 별도 presence 쿠키 불필요. **⚠️ 배포 전 실제 쿠키 Domain 확인**(host-scoped 면 games 로그인 후 자기 host presence 힌트 필요).
+
+### 🟠 높음 — 장애 허용
+- **R9. 미들웨어 fail-closed → 503 fail-open 계약 파괴 (Codex #140)**: 미들웨어가 introspection(`/games/me`)을 때려 `5xx=fail-closed` 로 닫으면 pullim-api 일시 장애만으로 로그인 회원이 보호 라우트에서 전부 랜딩으로 튕긴다(기존 `use-identity` 503 fail-open 계약 붕괴). → **미들웨어 coarse(쿠키 presence)만·네트워크 호출 금지, introspection+fail-open 은 클라 `RequireIdentity`**(PR-1/PR-2 게이트 2층 계약). tri-state: 200=회원 / 401=미인증 / 5xx·네트워크=fail-open.
 
 ### 🟡 중간
 - **R7. 절반 이전 = 레거시**: PR-1 만 하고 멈추면 자체 auth + pullim 모드 영구 동거. PR-2 완주 전제(D2 dormant 는 의도된 상태, 미완주는 아님).
