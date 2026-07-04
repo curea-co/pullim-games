@@ -2,7 +2,7 @@
 
 **작성일**: 2026-07-03 (spec 개정 반영 2026-07-04)
 **상태**: **선행 spec 개정 완료 → games 코드 착수 대기.** 본 plan 의 §2-A spec 개정은 PR #140(`spec/games-sso-login-delegation`)으로 반영됨. §0 결정은 사용자(G1) 합의 완료(2026-07-03). games 코드(PR-1/2)는 spec PR 머지 후 착수.
-**근거**: 사용자 결정 2026-07-03 — 게스트 유지+회원 SSO / 자체 auth legacy dormant / games DB 유지(신원 키만 pullim-api sub). 설계 정당성은 games 권위 spec `proc/spec/05 §5.2`·`§5.6`·`§9.3`·`§9.4` + games↔pullim-api 계약으로 자립한다(타 풀림 프로젝트를 근거로 들지 않음 — `CLAUDE.md §4` 독립 프로젝트 원칙).
+**근거**: 사용자 결정 2026-07-03 — 게스트 유지+회원 SSO / 자체 auth legacy dormant / games DB 유지(회원 식별만 pullim-api sub, 저장 키 `users.id` 유지·`sub`=매핑 컬럼). 설계 정당성은 games 권위 spec `proc/spec/05 §5.2`·`§5.6`·`§9.3`·`§9.4` + games↔pullim-api 계약으로 자립한다(타 풀림 프로젝트를 근거로 들지 않음 — `CLAUDE.md §4` 독립 프로젝트 원칙).
 **umbrella**: `proc/plan/2026-06-23_pullim-api-integration.md`(+ `2026-06-23_HANDOFF-pullim-api-games-module.md`). 본 plan 은 그 umbrella 의 **인증 슬라이스만** 좁혀 선실행하는 문서다 — 학습데이터 이관·games DB 폐기(umbrella P3/P4)는 본 plan 범위 밖.
 
 ## 0. 목표 · 확정 결정
@@ -16,8 +16,8 @@
 | # | 결정 | 함의 |
 |---|---|---|
 | D1 | **게스트 유지 + 회원만 pullim-api SSO 추가** | 게스트 신원(localStorage `pullim-games:player` + `pullim_games_guest` 쿠키) 무변경. 회원 신원만 pullim-api sub. games 는 guest-first 하이퍼캐주얼 성격 보존(`spec/05 §5.2`) |
-| D2 | **games 자체 auth 는 legacy dormant** (env `NEXT_PUBLIC_DOMAIN_API_URL` 토글) | pullim 모드 on 이면 자체 `/api/auth/*`·`pullim_games_session`·자체 Postgres users/sessions 비활성(코드 보존·미사용). 롤백 안전. umbrella P4(완전 제거)는 별 PR·명시 승인 후 |
-| D3 | **학습 데이터는 games 전용 Postgres 존치, 신원 키만 pullim-api sub 로** | umbrella(학습데이터 pullim-api 이관·games DB 폐기)와 **의도적 분기** — 이번 슬라이스는 DB 이관 안 함. `/api/sync` 는 회원 식별을 pullim sub 로 재배선만. games DB 존치(Postgres — Supabase 는 배포 provider 일 뿐, 계약 SoT 는 Postgres) |
+| D2 | **games 자체 auth 는 legacy dormant** (env 토글 — 두 env all-or-nothing §9.4) | pullim 모드 on 이면 자체 `/api/auth/*`·`pullim_games_session`·자체 Postgres users/sessions 비활성(코드 보존·미사용). 롤백 안전. umbrella P4(완전 제거)는 별 PR·명시 승인 후 |
+| D3 | **학습 데이터는 games 전용 Postgres 존치, 회원 식별만 pullim-api sub 로(저장 키 `users.id` 유지)** | umbrella(학습데이터 pullim-api 이관·games DB 폐기)와 **의도적 분기** — 이번 슬라이스는 DB 이관 안 함. `/api/sync` 는 회원 식별 입력을 sub 로 바꾸되 `sub→users.id` resolve 후 `user_id` FK 로 동작(저장 키 무변경). games DB 존치(Postgres — Supabase 는 배포 provider 일 뿐, 계약 SoT 는 Postgres) |
 
 > ⚠️ D3 은 umbrella `2026-06-23_pullim-api-integration.md` §1(학습데이터 pullim-api 이관·games DB 폐기)을 **이번 범위에서 보류/역전**한다. umbrella 는 여전히 장기 방향으로 유효하나, 로그인 통합을 데이터 이관과 분리해 blast radius 를 줄인다. 두 문서 충돌 아님 — 슬라이스 순서 조정.
 
@@ -33,7 +33,7 @@
 중앙 로그인 위임은 `spec/05 §5.2`(games 계정 완전 독립)·`§5.6`(games 자체 가입 계약)과 충돌한다. `spec/01 §2 명세 우선` + `CLAUDE.md §9` 경로에 따라 **spec 먼저 개정 후 코드**.
 - [x] `spec/05 §5.2`: 회원 신원 pullim-api 중앙 위임(pullim 모드)·게스트 games 독립·"완전 독립 계정" 조항을 데이터소유/게스트로 축소·자체 auth legacy dormant. DB 조항 존치(D3).
 - [x] `spec/05 §5.6`: identity PII(이메일·비번 해시·본인인증) pullim-api 소유·가입/동의 권위 중앙 이동(games `AuthForm` pullim 모드 표면 제거). 게스트 PII 무변경.
-- [x] `spec/09 §9.4`(env `NEXT_PUBLIC_DOMAIN_API_URL`·`NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN` 표 + prod 승격 함정) · `§9.3`(데이터 저장 games DB 존치·키만 sub).
+- [x] `spec/09 §9.4`(env `NEXT_PUBLIC_DOMAIN_API_URL`·`NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN` 표 all-or-nothing + prod 승격 함정) · `§9.3`(데이터 저장 games DB 존치·저장 키 `users.id` 유지·`sub`=매핑 컬럼).
 - [x] 영향 절 전수 sweep: `04 §4.5 RBAC`(비로그인 단일→게스트+회원 SSO 정합)·`03 §C6`·`10 로드맵`(SSO 통합 V1.x 착수 주석)·`05 §5.5`(로그인 세션 TTL pullim/legacy 분기)·`05 §5.2 V2 확장`("풀림 SSO 통합" 잔여 재정의)·`01 §5`(구 "PII 0개·만14세 V1 미발생" → §5.6 권위 위임 정정). 잔여 stale: 개정 이력 내 역사 서술만("비로그인" 맥락).
 
 ### 2-B. pullim-web (별 repo — 핸드오프)

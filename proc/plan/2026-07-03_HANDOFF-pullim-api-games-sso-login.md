@@ -6,7 +6,7 @@
 **상태**: ✅ **DELIVERED — pullim-api 반영 완료 (dev PR #312, 2026-07-04)**. 아래 §1·§2 계약대로 구현·검증(e2e 7/7, R1 루프 회귀 고정 포함). 본 문서는 요청 기록으로 보존. games 측 코드 착수는 선행 spec 개정(§0, PR #140) 머지 후.
 **연계**: games plan `proc/plan/2026-07-03_games-unified-login-os-delegation.md`. 본 계약은 games 요구사항 + games↔pullim-api 계약만으로 자립한다(타 풀림 프로젝트를 근거로 들지 않음 — `CLAUDE.md §4`).
 
-> 🎯 **범위 — 로그인 SSO 슬라이스만.** pullim-games 회원을 pullim-api `.pullim.ai` 쿠키 SSO 로 인증하기 위해 **pullim-api 에 필요한 것은 딱 2건**: ⑴ CORS allowlist 에 games origin 추가, ⑵ **`GET /games/me` introspection 엔드포인트 신설**. 학습데이터 이관·games DB 폐기·회원 계정 마이그레이션은 **본 핸드오프 범위 밖**(별 트랙 = umbrella `2026-06-23_HANDOFF-pullim-api-games-module.md`). games 는 이번엔 학습데이터를 **자기 Postgres(games 전용 DB) 에 계속 저장**하고 신원 키만 pullim-api `sub` 로 바꾼다 — 그래서 pullim-api 학습데이터 API 는 요청하지 않는다.
+> 🎯 **범위 — 로그인 SSO 슬라이스만.** pullim-games 회원을 pullim-api `.pullim.ai` 쿠키 SSO 로 인증하기 위해 **pullim-api 에 필요한 것은 딱 2건**: ⑴ CORS allowlist 에 games origin 추가, ⑵ **`GET /games/me` introspection 엔드포인트 신설**. 학습데이터 이관·games DB 폐기·회원 계정 마이그레이션은 **본 핸드오프 범위 밖**(별 트랙 = umbrella `2026-06-23_HANDOFF-pullim-api-games-module.md`). games 는 이번엔 학습데이터를 **자기 Postgres(games 전용 DB) 에 계속 저장**하고 회원 식별만 pullim-api `sub` 로 바꾼다(저장/조인 키는 games `users.id` 유지, `sub`=로컬 `users` projection 매핑 컬럼) — 그래서 pullim-api 학습데이터 API 는 요청하지 않는다.
 
 ## 0. 선행 조건 (games 측, pullim-api 무관)
 games 회원 신원의 중앙 위임은 games 권위 spec `proc/spec/05 §5.2`(계정 완전 독립)·`§5.6`(자체 가입)과 충돌하므로 games 가 먼저 spec 개정(G1/G3/G4)한다. **pullim-api 는 이 spec 개정과 무관하게 아래 §1·§2 를 검토·수용할 수 있다**(CORS·introspection 은 games spec 에 의존하지 않는 인프라 계약). 단 games FE 착수는 spec 개정 후.
@@ -50,7 +50,7 @@ Guards: JwtVerifyGuard  ONLY   ← EntitlementGuard('games') 붙이지 말 것
 - **응답 body**(AuthzSampleResponseDto 와 유사한 보수적 최소 노출):
   ```jsonc
   {
-    "sub": "usr_...",              // pullim-api 신원 — games 는 이걸 학습데이터 key 로 씀(games 전용 Postgres)
+    "sub": "usr_...",              // pullim-api 외부 신원 — games 는 sub→로컬 users.id resolve 후 학습데이터 FK(user_id)로 동작(sub 를 저장 키로 직접 쓰지 않음)
     "globalRole": "user",          // admin|user|guest
     "gamesFlagLevel": null | 1     // flags.games ?? null (null=플레이 무료회원, 1=교사제작 권한). 게이트 아님, 표시/분기용
   }
