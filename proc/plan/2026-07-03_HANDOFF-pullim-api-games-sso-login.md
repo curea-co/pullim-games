@@ -61,6 +61,9 @@ Guards: JwtVerifyGuard  ONLY   ← EntitlementGuard('games') 붙이지 말 것
 
 > 대안: 신규 `/games/me` 대신 **기존 `/auth/me`(있다면) 재사용 가능 여부 회신**해 주면 games 는 그걸 쓴다. 요건은 "games flag 무관 200/401"뿐. pullim-api 판단.
 
+### 🟠 후속 요청 (pullim 모드 활성화 전 필요 — Codex #140 P-A)
+- **`/games/me` 에 `grade` 노출**: games 클라 auth 계약 `AuthUser = {id, email, grade}`(`lib/auth/client.ts`)는 **`grade` 로 학년별(중1~고1) 콘텐츠를 노출**한다. 현행 `/games/me` 응답(`{sub, globalRole, gamesFlagLevel}`)엔 grade 가 없어 **pullim 모드 전환 시 콘텐츠 타게팅이 깨진다**. → 중앙 가입이 `grade`(+`consent`)를 수집(umbrella §A.4)하므로, **`/games/me` 응답에 `grade`(및 표시용 최소 식별자) 추가** 요청. games 는 `AuthUser` 를 pullim 형태(`id=sub`, `grade`, `email` optional)로 매핑한다. **grade 계약 없이는 pullim 모드 활성화 불가**(본 slice 로그인만 검증하고, grade 계약 확정 후 콘텐츠 경로 연결).
+
 ---
 
 ## 3. games 측이 처리 (핸드오프 아님 — 참고)

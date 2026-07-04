@@ -45,6 +45,12 @@
 - [x] **`/games/me` 엔드포인트 신설**: `JwtVerifyGuard` **단독**(EntitlementGuard 미장착), 응답 `{ sub, globalRole, gamesFlagLevel(nullable) }`. R1 무한루프 e2e 고정(무료 회원 403 아닌 200). `src/games/modules/me/`.
 - [ ] (선택) games play 인가와 teacher-author 인가 분리 정식화(별 트랙 가능)
 
+### 2-D. 🔴 pullim 모드 **활성화(env on) hard preconditions** (Codex #140 — 승격 ≠ 활성화)
+> spec 은 pullim 모드 **설계를 V1.x 정책으로 채택**하지만, 아래 3 계약이 닫히기 전에는 **env 를 켜서 활성화하지 않는다**(설계 승격과 런타임 활성화 분리). 미충족 상태 활성화 금지.
+- [ ] **P-A. 클라 auth 메타데이터 계약 (PR-2 blocker)**: 현행 클라 `AuthUser = {id, email, grade}`(`lib/auth/client.ts`)는 **grade 로 학년별 콘텐츠를 노출**한다. pullim `/games/me` 는 `{sub, globalRole, gamesFlagLevel}` 만 줘 **grade 부재 → pullim 모드에서 콘텐츠 타게팅 깨짐**. → pullim-api 가 `/games/me`(또는 프로필 엔드포인트)에 **`grade` 노출**(중앙 가입이 grade+consent 수집 — umbrella §A.4) + 클라 `AuthUser` 를 pullim 형태(id=sub, grade, email optional)로 매핑. **grade 없이 pullim 모드 켜면 안 됨.**
+- [ ] **P-B. legacy 회원 재연결 vs first-writer-wins (기존 회원 cutover)**: `fingerprint_links` first-writer-wins(`§5.2`) 때문에 기존 legacy 회원이 SSO 로그인해도 **같은 브라우저 fingerprint·데이터가 옛 `users` row 에 남아 새 `sub` projection 에 연결 안 됨**. → 재연결 마이그레이션(P-C 데이터 존재 시)이 닫히기 전엔 **기존 games email 회원이 있는 환경에서 pullim 모드 활성화 금지**(신규 환경·게스트 위주는 안전). 자동 병합은 여전히 금지.
+- [ ] **P-C. 중앙 삭제 파기 전파 (법적 — 회원 서버데이터 저장 시)**: 회원 학습데이터가 서버에 실제 저장되는 시점(클라 sync GA)부터 **중앙 계정 삭제 → games projection 삭제 전파 계약**(webhook/job, `§5.6`)이 **법적 파기 선행 필수**. sync GA 전(현재)은 서버 회원 데이터 0 이라 유예 가능하나, **sync 활성화와 동시 필수**. 파기 경로 미확정 상태로 회원 서버 저장 활성화 금지.
+
 ## 3. 작업 항목 — games 레포 (FE, base=dev)
 
 > ⚠️ **게이트 2층 계약 (R9 — 장애 허용 보존, Codex #140)**: **미들웨어 = coarse(쿠키 presence 만, 네트워크 호출 없음)**, **클라 `RequireIdentity` = 정밀(introspection + fail-open)**. 미들웨어에서 `/games/me` 를 때려 `5xx=fail-closed` 로 닫으면 pullim-api 일시 장애만으로 로그인 회원이 `/home`·`/games/*` 에서 전부 랜딩으로 튕겨 기존 503 fail-open 계약이 깨진다. 따라서 **introspection 은 미들웨어가 아니라 클라에서** 수행하고, 5xx/네트워크는 fail-open(기존 신원 유지)한다. 이는 현행 아키텍처(미들웨어 coarse + `RequireIdentity` 정밀)와 정합.
