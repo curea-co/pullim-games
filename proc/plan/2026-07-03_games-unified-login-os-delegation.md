@@ -59,7 +59,9 @@
 ### PR-2: 회원 신원·데이터 페치 재배선
 - [ ] `lib/core/player/use-identity.ts`(**정밀 게이트 — introspection 여기서**): pullim 모드일 때 회원 판정을 `/api/auth/me`(자체) → `${DOMAIN_API_URL}/games/me`(credentials:include, 2.5s timeout)로. **tri-state**: 200=회원, 401=미인증(→랜딩/로그인 CTA), **5xx·네트워크·timeout=fail-open**(기존 신원 유지 — pullim-api 장애가 로그인 회원을 튕기지 않음, 503 계약 보존 = R9). 게스트 판정 로직 무변경.
 - [ ] `lib/api/domain-fetch.ts`(신규 or 어댑트): pullim 모드 = `credentials:'include'` 로 pullim-api 직접 호출, legacy = 기존 자체 라우트.
-- [ ] `app/api/sync/route.ts` + `users` projection: 회원 식별을 pullim-api sub 로(introspection 결과의 sub). **games Postgres 존치**(D3). ⚠️ 학습 데이터 FK 가 `users(id) ON DELETE CASCADE`(`migrations/0002_learning_data.sql`)이므로 **단순 key 치환 아님** — games 로컬 `users` 를 **pullim `sub` projection 으로 존치**(첫 `/games/me` 성공 시 lazy upsert, FK 유지). 게스트는 기존대로 localStorage only. (`spec/09 §9.3`)
+- [ ] **`users` projection 스키마 마이그레이션 (선행 — Codex #140)**: 현행 `users`(`migrations/0001_init.sql`)는 `email TEXT NOT NULL UNIQUE`·`password_hash TEXT NOT NULL` 이라 **pullim 모드 회원 row(email/pw 미보유)를 upsert 할 수 없다**. 더미 이메일/해시 삽입은 `§5.6` PII 분리 계약 위반. → **결정: nullable 전환 + `sub` 컬럼 신설**(신규 마이그레이션). ⒜ `email`·`password_hash` **NULL 허용**(legacy row 만 채움), ⒝ `sub TEXT UNIQUE`(nullable — pullim projection row 는 `sub` 만, legacy row 는 NULL), ⒞ 학습데이터 FK 는 `users(id)` 유지(projection row 의 `id` 에 걸림), ⒟ CHECK 제약으로 "row 는 (email+password_hash) XOR sub" 보장(혼선 차단). auth 전용 테이블 분리·projection 전용 테이블 신설은 대안으로 검토했으나 FK 재배선 blast radius 커서 nullable+sub 최소 변경 채택.
+- [ ] `app/api/sync/route.ts` + projection upsert: 회원 식별을 pullim-api sub 로(introspection 결과). 첫 `/games/me` 성공 시 `users`(sub) lazy upsert(위 마이그레이션 전제). **games Postgres 존치**(D3, FK 유지). 게스트는 기존대로 localStorage only. (`spec/09 §9.3`)
+- [ ] `auth_sessions`·`fingerprint_links`: pullim 모드에서 `auth_sessions`(games 자체 세션)는 미사용(세션은 pullim-api `.pullim.ai` 쿠키) — dormant. `fingerprint_links` 는 `sub` 에 귀속(projection row). legacy 모드에서만 `auth_sessions` 유효.
 - [ ] 자체 로그인/가입 UI 표면 제거(dormant): `app/login`·`app/signup`·관련 컴포넌트를 pullim 모드에서 렌더 안 함(코드 삭제 아님 — D2). legacy fallback 위해 파일 보존.
 - [ ] **(후속 — 별 트랙) 중앙 계정 삭제 전파 계약**: pullim-api 중앙 계정 삭제 → games projection 삭제(webhook/job) → CASCADE 파기. 법적 파기 보장 위해 필수지만 **본 slice(로그인) 범위 밖** — pullim-api 후속 핸드오프로 확정(`spec/05 §5.6` 파기 계약 TODO). 미확정 동안 "중앙 삭제 시 games 자동 파기" 보장 표기 금지.
 
@@ -86,7 +88,7 @@
 - **R8. bfcache 뒤로가기**: 로그인 후 games→뒤로 시 캐시된 로그아웃 상태 재바운스.
 
 ## 5. 검증
-- [ ] 로컬 SSO: `/etc/hosts` `*.pullim.local` + dev 등가 env 로 pullim-web/games 동시 기동 → games 로그인 CTA → pullim.local 로그인 → games 복귀+인증.
+- [ ] 로컬 SSO(host 통일 — `*.pullim.local`, `spec/09 §9.4`): `/etc/hosts` 에 `games.pullim.local`·`api.pullim.local`·`pullim.local` 등록 → games 를 `games.pullim.local:3004` 로 기동(bare `localhost` 혼용 금지 — Chrome eTLD 로 쿠키 SSO 불가) → games 로그인 CTA → `pullim.local` 로그인 → games 복귀+인증. (pullim-api `CORS_LOCAL_ORIGINS` 에 `games.pullim.local:3004` 추가 필요.)
 - [ ] **루프 회귀(R1)**: games flag 0(무료) 회원이 로그인 후 games 진입 시 무한 바운스 아니라 정상 플레이 진입하는지. 쿠키명/Domain 오설정 시 빠른 실패(R2).
 - [ ] **게스트 회귀(R3)**: 게스트로 시작 → `/home`·`/games/*` 진입 무변경(로그인 바운스 없음). e2e 게스트 시드(`e2e/helpers/auth.ts`) 그대로 green.
 - [ ] 4 viewport audit(로그인 CTA 변경 시 랜딩·`/home` — `RequireIdentity` 등 UI 변경 PR 이면 `bun run ui:audit`).

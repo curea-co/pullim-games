@@ -21,7 +21,7 @@ games FE(`games.pullim.ai`/`dev-games.pullim.ai`)가 pullim-api `/games/me` 를 
   - `isValidPullimOrigin`(`src/common/config/env.ts`) dev env 제약 = `dev-*.pullim.ai` 라벨만 → `dev-games` ✓ 통과.
 - **prod cutover 시(미래): prod-api `CORS_ALLOWED_ORIGINS` 에 `https://games.pullim.ai`**
   - prod env 제약 = 비 `dev-` 라벨 → `games` ✓.
-- **로컬**: `CORS_LOCAL_ORIGINS` 에 `http://localhost:3004`(games dev 포트, `spec/09 §9.1`). ⚠️ dev env allowlist 는 `dev-*` 라벨만 허용하므로 로컬 games 는 **원격 dev-api 호출 불가**, **로컬 pullim-api(env=local)** 를 쓴다.
+- **로컬**: `CORS_LOCAL_ORIGINS` 에 `http://localhost:3004`(games 기본 dev 포트, `spec/09 §9.1`). ⚠️ dev env allowlist 는 `dev-*` 라벨만 허용하므로 로컬 games 는 **원격 dev-api 호출 불가**, **로컬 pullim-api(env=local)** 를 쓴다. **⚠️ 로컬 SSO(쿠키 redirect) 검증 모드**는 bare `localhost` 로는 불가(Chrome eTLD) → games 를 `games.pullim.local:3004` 로 띄우고 `CORS_LOCAL_ORIGINS` 에 `http://games.pullim.local:3004` 도 추가 필요(`spec/09 §9.4` 로컬 host 통일).
 
 값 SoT·절차는 pullim-api config-catalog §2 / ADR-010 관할. `credentials:true`·preflight 헤더는 pullim-api 기설정. games 는 CORS 1줄이면 dev 에서 붙는다.
 
