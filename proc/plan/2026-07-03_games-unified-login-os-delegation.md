@@ -10,7 +10,7 @@
 ### 목표
 비로그인 게스트 사용은 그대로 두고, **로그인 회원만 pullim-api `.pullim.ai` 쿠키 SSO 로 신원 통일**한다. games 미인증(=게스트도 아니고 회원도 아님) 진입 시 랜딩 bounce 는 유지하되, "로그인" 선택 시 **pullim-web `/login?next=<games url>` 로 cross-서브도메인 위임**한다.
 
-**완료 기준**: dev-games.pullim.ai 에서 "로그인" → `dev.pullim.ai/login?next=<dev-games url>` 이동 → 로그인 성공 → dev-games 복귀 + `*-pullim-at` 쿠키로 회원 인증됨. 게스트 "시작하기" 흐름은 무변경. games 는 자체 로그인/가입 UI 를 **표면에서 제거(코드는 dormant)**.
+**완료 기준**: dev-games.pullim.ai 에서 ⑴ "로그인" → `dev.pullim.ai/login?next=<dev-games url>` → 로그인 성공 → dev-games 복귀 + `*-pullim-at` 쿠키로 회원 인증됨, **⑵ "회원가입" → `dev.pullim.ai/signup?next=<dev-games url>` → 가입 성공 → dev-games 복귀 + 인증됨**(신규 회원 온보딩 대칭). 게스트 "시작하기" 흐름은 무변경. games 는 자체 로그인/가입 UI 를 **표면에서 제거(코드는 dormant)**.
 
 ### 확정 결정 (2026-07-03, G1)
 | # | 결정 | 함의 |
@@ -51,9 +51,9 @@
 
 ### PR-1: pullim 모드 도입 (회원 SSO 게이트)
 - [ ] `lib/auth/pullim-mode.ts`(신규): **`NEXT_PUBLIC_DOMAIN_API_URL` + `NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN` 둘 다 있을 때만** `PULLIM_MODE` on. ⚠️ **반쯤 설정 금지(Codex #140)**: 하나만 설정되면 introspection 은 켜지나 미인증 리다이렉트 URL 을 못 만들어 런타임에서만 깨진다 → **부팅 시 "한쪽만 존재" fail-fast**(build/start 에러). 둘 다 미설정 = legacy(자체 auth) 유지 = D2. (spec `§9.4` env 계약)
-- [ ] `lib/auth/login-redirect.ts`(신규): `pullimLoginUrl(nextFullUrl)` = `${NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN}/login?next=<encoded 절대 URL>`. ⚠️ origin = **SITE 호스트**(dev `dev.pullim.ai`/prod `pullim.ai`), OS 호스트 아님.
+- [ ] `lib/auth/login-redirect.ts`(신규): **로그인·가입 대칭** — `pullimLoginUrl(nextFullUrl)` = `${NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN}/login?next=<encoded 절대 URL>`, `pullimSignupUrl(nextFullUrl)` = `.../signup?next=<encoded>`. ⚠️ origin = **SITE 호스트**(dev `dev.pullim.ai`/prod `pullim.ai`), OS 호스트 아님. (§5.2 회원 경로 = pullim-web `/login·/signup` 둘 다 중앙 위임 — 가입도 대칭 복귀.)
 - [ ] `middleware.ts` 수정 (**coarse only — 네트워크 호출 없음**): pullim 모드 한정 3-상태 presence 게이트 — ⒜ 게스트 쿠키(`pullim_games_guest`) 있으면 통과(무변경), ⒝ `*-pullim-at` suffix 쿠키 **존재**하면 통과(값 검증·introspection 은 클라에서), ⒞ 둘 다 없으면 랜딩(`/`). 게스트 경로 완전 보존(D1). **미들웨어에서 `/games/me` fetch 금지**(5xx fail-closed 회귀 방지).
-- [ ] `components/auth/RequireIdentity.tsx`·랜딩 CTA: "로그인" 버튼 → `window.location.assign(pullimLoginUrl(...))`(cross-origin, next router 불가). "게스트로 시작" 은 무변경.
+- [ ] `components/auth/RequireIdentity.tsx`·랜딩 CTA: "로그인" 버튼 → `window.location.assign(pullimLoginUrl(...))`, **"회원가입" 버튼 → `window.location.assign(pullimSignupUrl(...))`**(둘 다 cross-origin, next router 불가). "게스트로 시작" 은 무변경. 가입 완료 후에도 검증된 `next` 로 games 복귀(pullim-web resolveNext, §2-B).
 - [ ] env: `.env.example` 에 `NEXT_PUBLIC_DOMAIN_API_URL`·`NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN` 추가(주석: 미설정=legacy 모드).
 
 ### PR-2: 회원 신원·데이터 페치 재배선
@@ -89,7 +89,7 @@
 - **R8. bfcache 뒤로가기**: 로그인 후 games→뒤로 시 캐시된 로그아웃 상태 재바운스.
 
 ## 5. 검증
-- [ ] 로컬 SSO(host 통일 — `*.pullim.local`, `spec/09 §9.4`): `/etc/hosts` 에 `games.pullim.local`·`api.pullim.local`·`pullim.local` 등록 → games 를 `games.pullim.local:3004` 로 기동(bare `localhost` 혼용 금지 — Chrome eTLD 로 쿠키 SSO 불가) → games 로그인 CTA → `pullim.local` 로그인 → games 복귀+인증. (pullim-api `CORS_LOCAL_ORIGINS` 에 `games.pullim.local:3004` 추가 필요.)
+- [ ] 로컬 SSO(host 통일 — `*.pullim.local`, `spec/09 §9.4`): `/etc/hosts` 에 `games.pullim.local`·`api.pullim.local`·`pullim.local` 등록 → games 를 `games.pullim.local:3004` 로 기동(bare `localhost` 혼용 금지 — Chrome eTLD 로 쿠키 SSO 불가) → **로그인·가입 둘 다**: games "로그인"/"회원가입" CTA → `pullim.local` `/login`·`/signup` → games 복귀+인증. (pullim-api `CORS_LOCAL_ORIGINS` 에 `games.pullim.local:3004` 추가 필요.)
 - [ ] **루프 회귀(R1)**: games flag 0(무료) 회원이 로그인 후 games 진입 시 무한 바운스 아니라 정상 플레이 진입하는지. 쿠키명/Domain 오설정 시 빠른 실패(R2).
 - [ ] **게스트 회귀(R3)**: 게스트로 시작 → `/home`·`/games/*` 진입 무변경(로그인 바운스 없음). e2e 게스트 시드(`e2e/helpers/auth.ts`) 그대로 green.
 - [ ] 4 viewport audit(로그인 CTA 변경 시 랜딩·`/home` — `RequireIdentity` 등 UI 변경 PR 이면 `bun run ui:audit`).
@@ -102,8 +102,9 @@
 4. ⬜ games **PR-1**(pullim 모드 게이트) → 5. ⬜ games **PR-2**(신원·페치 재배선). **spec(#140) 머지 후 착수.**
 - games PR base=`dev`([[feedback_branch_flow_dev_main]]). FE/BE 섞지 않음. main 승격은 §2-B/2-C prod 완료 후(prod 모드 불일치 방지 — §7).
 
-## 7. 🔴 prod 승격 전 체크리스트 (모드 불일치 방지)
-- [ ] prod env `NEXT_PUBLIC_DOMAIN_API_URL=https://api.pullim.ai` + `NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN=https://pullim.ai`
-- [ ] pullim-api **prod** CORS 에 `games.pullim.ai` + Allow-Credentials
-- [ ] pullim-web resolveNext **prod** 배포
-- [ ] 위 3 없이 games dev→main 승격 금지(로그인은 되나 데이터/introspection 실패하는 모드 불일치 방지).
+## 7. 🔴 prod 승격 전 체크리스트 (교차 repo 준비 — games env 반쪽은 fail-fast 가 차단)
+> games 두 env 는 all-or-nothing fail-fast(§9.4)라 "로그인만 되고 데이터 깨짐" 반쪽 설정은 부팅에서 걸린다. 남는 함정은 **games env 완전 설정인데 다른 repo prod 미준비** — 아래 3종을 함께 확인.
+- [ ] prod env **둘 다** `NEXT_PUBLIC_DOMAIN_API_URL=https://api.pullim.ai` + `NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN=https://pullim.ai`(한쪽만이면 부팅 fail-fast — 배포 실패로 조기 발견)
+- [ ] pullim-api **prod** CORS 에 `games.pullim.ai` + Allow-Credentials (미등록 시 introspection/직접호출 실패)
+- [ ] pullim-web resolveNext **prod** 배포 (미배포 시 로그인/가입 후 games 복귀 실패)
+- [ ] 위 3 없이 games dev→main 승격 금지(games env 완전 설정 + 타 repo prod 미준비 = 런타임 introspection/복귀 실패 방지).
