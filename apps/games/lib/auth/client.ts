@@ -3,6 +3,7 @@
 "use client";
 
 import { getFingerprint } from "@/lib/core/fingerprint";
+import { PULLIM_MODE, PULLIM_DOMAIN_API_URL } from "@/lib/auth/pullim-mode";
 
 // 서버 PublicUser 와 동일 계약 — 가입 시 수집한 중·고 학년(레거시 회원은 null).
 // signup·login·/me 응답이 모두 grade 를 싣는다(프로필 뱃지·학년별 노출용).
@@ -116,6 +117,7 @@ export async function getAuthState(): Promise<{
   user: AuthUser | null;
   unavailable: boolean;
 }> {
+  if (PULLIM_MODE) return getPullimAuthState();
   try {
     const res = await fetch("/api/auth/me", { cache: "no-store" });
     // 503 = 응답 받음 + 토큰 보유 + 백엔드 장애 → 미확정(fail-open 대상).
@@ -126,6 +128,36 @@ export async function getAuthState(): Promise<{
   } catch {
     // 응답 자체가 없음 → 토큰 보유 미상 → fail-closed(무신원 통과 방지).
     return { user: null, unavailable: false };
+  }
+}
+
+// pullim 모드 정밀 게이트(2단 게이트 계약 클라 측, spec/05 §5.2 R9) — 회원 세션 검증을
+// pullim-api introspection(`GET /games/me`, credentials:include)으로 한다. 미들웨어 coarse
+// (`*-pullim-at` presence)를 통과한 트래픽의 만료/위조 정밀 판정 + fail-open.
+// ⚠️ 게이트 목적의 최소 신원만 매핑(id=sub). grade·표시명(email)은 P-A 계약(pullim-api /games/me
+//    확장) 전까지 미제공 → 콘텐츠 타게팅·회원 표시명은 PR-2/P-A 에서 연결. 게이트엔 무관.
+async function getPullimAuthState(): Promise<{
+  user: AuthUser | null;
+  unavailable: boolean;
+}> {
+  try {
+    const res = await fetch(`${PULLIM_DOMAIN_API_URL}/games/me`, {
+      credentials: "include",
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const data = (await res.json()) as { sub?: string };
+      if (!data.sub) return { user: null, unavailable: false }; // 계약 위반 방어.
+      // 최소 AuthUser — grade/email 은 P-A 전까지 null(게이트 무관, 표시/콘텐츠는 P-A).
+      return { user: { id: data.sub, email: "", grade: null }, unavailable: false };
+    }
+    if (res.status === 401) return { user: null, unavailable: false }; // 미인증 확정.
+    // 5xx/기타 = 미확정 → fail-open. 미들웨어가 이미 `*-pullim-at` presence 를 통과시켰으므로
+    // 회원 세션은 존재 → pullim-api 일시 장애로 회원을 튕기지 않는다(R9, 가용성 보존).
+    return { user: null, unavailable: true };
+  } catch {
+    // 네트워크 오류 = 미확정 → fail-open(동일 근거 — pullim 모드는 introspection 이 유일 검증선).
+    return { user: null, unavailable: true };
   }
 }
 

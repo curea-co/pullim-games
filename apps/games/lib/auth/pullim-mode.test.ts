@@ -79,3 +79,55 @@ describe("login-redirect — 로그인·가입 대칭 URL", () => {
     expect(decodeURIComponent(url.split("next=")[1])).toBe(next);
   });
 });
+
+describe("getAuthState — pullim 모드 정밀 게이트(/games/me introspection, R9)", () => {
+  beforeEach(() => {
+    vi.stubEnv("NEXT_PUBLIC_DOMAIN_API_URL", API);
+    vi.stubEnv("NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN", LOGIN);
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
+  async function callWithFetch(impl: () => Promise<Response>) {
+    vi.resetModules();
+    vi.stubGlobal("fetch", vi.fn(impl));
+    const { getAuthState } = await import("./client");
+    return getAuthState();
+  }
+
+  const res = (status: number, body?: unknown): Response =>
+    ({ ok: status >= 200 && status < 300, status, json: async () => body }) as Response;
+
+  it("200 + {sub} → 회원(id=sub, grade/email null=P-A 전), unavailable=false", async () => {
+    const r = await callWithFetch(async () => res(200, { sub: "usr_1", globalRole: "user", gamesFlagLevel: null }));
+    expect(r.user).toEqual({ id: "usr_1", email: "", grade: null });
+    expect(r.unavailable).toBe(false);
+  });
+
+  it("401 → 미인증 확정(user=null, unavailable=false)", async () => {
+    const r = await callWithFetch(async () => res(401));
+    expect(r.user).toBeNull();
+    expect(r.unavailable).toBe(false);
+  });
+
+  it("🔴 5xx → fail-open(user=null, unavailable=true — 장애 시 회원 안 튕김)", async () => {
+    const r = await callWithFetch(async () => res(503));
+    expect(r.user).toBeNull();
+    expect(r.unavailable).toBe(true);
+  });
+
+  it("🔴 네트워크 오류 → fail-open(unavailable=true)", async () => {
+    const r = await callWithFetch(async () => {
+      throw new Error("network down");
+    });
+    expect(r.user).toBeNull();
+    expect(r.unavailable).toBe(true);
+  });
+
+  it("200 인데 sub 누락(계약 위반) → 보수적 null", async () => {
+    const r = await callWithFetch(async () => res(200, { globalRole: "user" }));
+    expect(r.user).toBeNull();
+    expect(r.unavailable).toBe(false);
+  });
+});
