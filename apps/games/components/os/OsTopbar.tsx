@@ -5,10 +5,10 @@
 // 검색·알림을 disabled placeholder("준비 중", 기존 AppHeader 정합)로 두고, 아바타 메뉴만
 // games auth(@/lib/auth/client · @/lib/core/player)로 배선한다.
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { getAuthState, logout, type AuthUser } from "@/lib/auth/client";
 import { getPlayer, resetGuestSession, type Player } from "@/lib/core/player";
+import { AuthCta } from "@/components/auth/AuthCta";
 
 function initialOf(s: string, fallback: string): string {
   const t = (s || "").trim();
@@ -93,11 +93,14 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
   const initial = !loaded
     ? "풀"
     : isMember
-      ? initialOf(user!.email, "풀").toUpperCase()
+      ? initialOf(user!.email || "회원", "회").toUpperCase()
       : isGuest
         ? initialOf(player!.nickname, "게")
         : "게";
-  const displayName = isMember ? user!.email : isGuest ? `${player!.nickname} (게스트)` : "게스트";
+  // pullim 모드 회원은 email 미제공(P-A 전)이라 빈 문자열 가능 → "회원" 폴백(Codex #141).
+  // grade·표시명 정식 노출은 P-A(/games/me 확장) 후 PR-2.
+  const memberLabel = user?.email || "회원";
+  const displayName = isMember ? memberLabel : isGuest ? `${player!.nickname} (게스트)` : "게스트";
   const modeLabel = isMember ? "로그인됨" : "게스트 모드";
   // auth 미확정(게스트도 없음) — 로그인/게스트 어느 쪽도 단정 불가.
   const neutral = loaded && !user && !player && unavailable;
@@ -126,8 +129,8 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
           아바타 메뉴 안에만 숨기지 않고 topbar 에 직접 노출. 특히 랜딩 온보딩 전환 보장. */}
       {loaded && !neutral && !isMember && (
         <>
-          <Link href="/login" className="btn btn-soft btn-sm tb-guest-cta">로그인</Link>
-          <Link href="/signup" className="btn btn-soft btn-sm tb-guest-cta">회원가입</Link>
+          <AuthCta kind="login" className="btn btn-soft btn-sm tb-guest-cta">로그인</AuthCta>
+          <AuthCta kind="signup" className="btn btn-soft btn-sm tb-guest-cta">회원가입</AuthCta>
         </>
       )}
 
@@ -174,14 +177,14 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
               {/* 게스트 전용 — 로그인/회원가입 진입 */}
               {!isMember && (
                 <nav style={{ padding: 6, borderBottom: "1px solid var(--line)" }} aria-label="계정 진입">
-                  {[
-                    { href: "/login", label: "로그인" },
-                    { href: "/signup", label: "회원가입" },
-                  ].map((l) => (
-                    <Link
-                      key={l.href}
-                      href={l.href}
-                      onClick={() => setMenuOpen(false)}
+                  {([
+                    { kind: "login", label: "로그인" },
+                    { kind: "signup", label: "회원가입" },
+                  ] as const).map((l) => (
+                    <AuthCta
+                      key={l.kind}
+                      kind={l.kind}
+                      onNavigate={() => setMenuOpen(false)}
                       style={{
                         display: "block",
                         padding: "10px 12px",
@@ -192,7 +195,7 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
                       }}
                     >
                       {l.label}
-                    </Link>
+                    </AuthCta>
                   ))}
                 </nav>
               )}

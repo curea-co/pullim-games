@@ -5,7 +5,7 @@
 // 모든 뷰포트에서 노출(모바일 포함) — URL 직접 입력 없이도 계정 기능 도달 가능.
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { AuthCta } from "@/components/auth/AuthCta";
 import { usePathname, useRouter } from "next/navigation";
 import { getAuthState, logout, type AuthUser } from "@/lib/auth/client";
 import { getPlayer, resetGuestSession, type Player } from "@/lib/core/player";
@@ -81,12 +81,12 @@ export function AuthMenu() {
   // 회원도 게스트도 아니고 확정됨 → 로그인 진입(주로 랜딩).
   if (!user && !player) {
     return (
-      <Link
-        href="/login"
+      <AuthCta
+        kind="login"
         className="inline-flex h-11 items-center rounded-button px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
       >
         로그인
-      </Link>
+      </AuthCta>
     );
   }
 
@@ -109,15 +109,17 @@ export function AuthMenu() {
     );
   }
 
-  // 회원 — 이메일 + 로그아웃. (위 가드들로 여기선 user 비-null 보장.)
+  // 회원 — 표시명 + 로그아웃. (위 가드들로 여기선 user 비-null 보장.)
+  // pullim 모드 회원은 email 미제공(P-A 전) → "회원" 폴백(Codex #141). 정식 표시명은 P-A 후 PR-2.
   if (!user) return null;
+  const memberLabel = user.email || "회원";
   return (
     <div className="flex items-center gap-1">
       <span
         className="hidden max-w-[10rem] truncate text-xs font-medium text-pullim-slate-500 sm:inline"
-        title={user.email}
+        title={memberLabel}
       >
-        {user.email}
+        {memberLabel}
       </span>
       <button
         type="button"

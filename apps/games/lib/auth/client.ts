@@ -3,6 +3,7 @@
 "use client";
 
 import { getFingerprint } from "@/lib/core/fingerprint";
+import { PULLIM_MODE, PULLIM_DOMAIN_API_URL } from "@/lib/auth/pullim-mode";
 
 // 서버 PublicUser 와 동일 계약 — 가입 시 수집한 중·고 학년(레거시 회원은 null).
 // signup·login·/me 응답이 모두 grade 를 싣는다(프로필 뱃지·학년별 노출용).
@@ -89,6 +90,7 @@ export async function login(email: string, password: string): Promise<AuthResult
 
 /** 로그아웃. 서버가 세션을 실제로 파기했는지(성공 여부) 반환 — 호출부가 상태 정합에 사용. */
 export async function logout(): Promise<boolean> {
+  if (PULLIM_MODE) return pullimLogout();
   try {
     const csrf = await ensureCsrf(); // signup/login 과 동일한 double-submit 방어
     const headers: Record<string, string> = {};
@@ -98,6 +100,43 @@ export async function logout(): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+// pullim 모드 로그아웃 — 회원 세션은 pullim-api 발급 `.pullim.ai` `*-pullim-at` 쿠키라
+// local `/api/auth/logout`(host-only `pullim_games_session` 만 지움)으로는 못 지운다(로그아웃해도
+// 새로고침 시 재로그인 — Codex #141). → 중앙 로그아웃 `POST ${DOMAIN_API_URL}/auth/logout` 위임
+// (credentials:include + CSRF double-submit). pullim-api 가 `.pullim.ai` 세션·CSRF 쿠키를 클리어.
+async function pullimLogout(): Promise<boolean> {
+  try {
+    // double-submit CSRF: GET /auth/csrf 로 `*-pullim-csrf` 쿠키 발급받고 그 값을 헤더로 echo.
+    await fetch(`${PULLIM_DOMAIN_API_URL}/auth/csrf`, {
+      credentials: "include",
+      cache: "no-store",
+    });
+    const csrf = readPullimCsrfCookie();
+    const res = await fetch(`${PULLIM_DOMAIN_API_URL}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+      headers: csrf ? { "X-CSRF-Token": csrf } : {},
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/** pullim-api CSRF 쿠키(`*-pullim-csrf` suffix, non-HttpOnly) 값 읽기 — double-submit echo 용. */
+function readPullimCsrfCookie(): string | null {
+  if (typeof document === "undefined") return null;
+  for (const pair of document.cookie.split(";")) {
+    const eq = pair.indexOf("=");
+    if (eq < 0) continue;
+    const name = pair.slice(0, eq).trim();
+    if (name.endsWith("-pullim-csrf")) {
+      return decodeURIComponent(pair.slice(eq + 1)) || null;
+    }
+  }
+  return null;
 }
 
 export async function getMe(): Promise<AuthUser | null> {
@@ -116,6 +155,7 @@ export async function getAuthState(): Promise<{
   user: AuthUser | null;
   unavailable: boolean;
 }> {
+  if (PULLIM_MODE) return getPullimAuthState();
   try {
     const res = await fetch("/api/auth/me", { cache: "no-store" });
     // 503 = 응답 받음 + 토큰 보유 + 백엔드 장애 → 미확정(fail-open 대상).
@@ -126,6 +166,40 @@ export async function getAuthState(): Promise<{
   } catch {
     // 응답 자체가 없음 → 토큰 보유 미상 → fail-closed(무신원 통과 방지).
     return { user: null, unavailable: false };
+  }
+}
+
+// pullim 모드 정밀 게이트(2단 게이트 계약 클라 측, spec/05 §5.2 R9) — 회원 세션 검증을
+// pullim-api introspection(`GET /games/me`, credentials:include)으로 한다. 미들웨어 coarse
+// (`*-pullim-at` presence)를 통과한 트래픽의 만료/위조 정밀 판정 + fail-open.
+// ⚠️ 게이트 목적의 최소 신원만 매핑(id=sub). grade·표시명(email)은 P-A 계약(pullim-api /games/me
+//    확장) 전까지 미제공 → 콘텐츠 타게팅·회원 표시명은 PR-2/P-A 에서 연결. 게이트엔 무관.
+async function getPullimAuthState(): Promise<{
+  user: AuthUser | null;
+  unavailable: boolean;
+}> {
+  try {
+    const res = await fetch(`${PULLIM_DOMAIN_API_URL}/games/me`, {
+      credentials: "include",
+      cache: "no-store",
+    });
+    if (res.ok) {
+      const data = (await res.json()) as { sub?: string };
+      if (!data.sub) return { user: null, unavailable: false }; // 계약 위반 방어.
+      // 최소 AuthUser — grade/email 은 P-A 전까지 null(게이트 무관, 표시/콘텐츠는 P-A).
+      return { user: { id: data.sub, email: "", grade: null }, unavailable: false };
+    }
+    if (res.status === 401) return { user: null, unavailable: false }; // 미인증 확정.
+    // tri-state 엄격화(Codex #141): **5xx 만 fail-open**(pullim-api 일시 장애 — 회원 안 튕김, R9).
+    // 403·기타 4xx 는 계약 드리프트·권한 오류일 수 있어 fail-open 하면 misconfiguration 을 숨긴다
+    // → 닫힘(user null·unavailable false). 미들웨어가 `*-pullim-at` presence 는 이미 통과시켰으므로
+    //   장애(5xx)만 가용성 보존, 그 외 비정상은 보수적 차단.
+    if (res.status >= 500) return { user: null, unavailable: true };
+    return { user: null, unavailable: false };
+  } catch {
+    // 네트워크 오류(응답 없음) = 미확정 → fail-open(pullim 모드는 introspection 이 유일 검증선,
+    // 미들웨어 presence 통과분이라 회원 세션 존재 → 가용성 보존).
+    return { user: null, unavailable: true };
   }
 }
 
