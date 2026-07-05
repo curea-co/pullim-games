@@ -131,3 +131,40 @@ describe("getAuthState — pullim 모드 정밀 게이트(/games/me introspectio
     expect(r.unavailable).toBe(false);
   });
 });
+
+describe("logout — pullim 모드 중앙 로그아웃 위임(Codex #141)", () => {
+  beforeEach(() => {
+    vi.stubEnv("NEXT_PUBLIC_DOMAIN_API_URL", API);
+    vi.stubEnv("NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN", LOGIN);
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
+
+  it("pullim 모드 로그아웃 = pullim-api /auth/logout POST(credentials:include) — local X", async () => {
+    vi.resetModules();
+    const calls: Array<{ url: string; method?: string; credentials?: string }> = [];
+    vi.stubGlobal(
+      "document",
+      { cookie: "dev-pullim-csrf=tok123" } as unknown as Document,
+    );
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string, init?: RequestInit) => {
+        calls.push({ url, method: init?.method, credentials: init?.credentials as string });
+        return { ok: true, status: 200 } as Response;
+      }),
+    );
+    const { logout } = await import("./client");
+    const ok = await logout();
+    expect(ok).toBe(true);
+    // /auth/csrf 발급 → /auth/logout POST, 둘 다 pullim-api(DOMAIN_API_URL)·credentials:include
+    expect(calls.some((c) => c.url === `${API}/auth/csrf`)).toBe(true);
+    const logoutCall = calls.find((c) => c.url === `${API}/auth/logout`);
+    expect(logoutCall?.method).toBe("POST");
+    expect(logoutCall?.credentials).toBe("include");
+    // local /api/auth/logout 은 호출 안 함
+    expect(calls.some((c) => c.url.includes("/api/auth/logout"))).toBe(false);
+  });
+});

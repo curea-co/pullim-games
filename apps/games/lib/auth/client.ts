@@ -90,6 +90,7 @@ export async function login(email: string, password: string): Promise<AuthResult
 
 /** 로그아웃. 서버가 세션을 실제로 파기했는지(성공 여부) 반환 — 호출부가 상태 정합에 사용. */
 export async function logout(): Promise<boolean> {
+  if (PULLIM_MODE) return pullimLogout();
   try {
     const csrf = await ensureCsrf(); // signup/login 과 동일한 double-submit 방어
     const headers: Record<string, string> = {};
@@ -99,6 +100,43 @@ export async function logout(): Promise<boolean> {
   } catch {
     return false;
   }
+}
+
+// pullim 모드 로그아웃 — 회원 세션은 pullim-api 발급 `.pullim.ai` `*-pullim-at` 쿠키라
+// local `/api/auth/logout`(host-only `pullim_games_session` 만 지움)으로는 못 지운다(로그아웃해도
+// 새로고침 시 재로그인 — Codex #141). → 중앙 로그아웃 `POST ${DOMAIN_API_URL}/auth/logout` 위임
+// (credentials:include + CSRF double-submit). pullim-api 가 `.pullim.ai` 세션·CSRF 쿠키를 클리어.
+async function pullimLogout(): Promise<boolean> {
+  try {
+    // double-submit CSRF: GET /auth/csrf 로 `*-pullim-csrf` 쿠키 발급받고 그 값을 헤더로 echo.
+    await fetch(`${PULLIM_DOMAIN_API_URL}/auth/csrf`, {
+      credentials: "include",
+      cache: "no-store",
+    });
+    const csrf = readPullimCsrfCookie();
+    const res = await fetch(`${PULLIM_DOMAIN_API_URL}/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+      headers: csrf ? { "X-CSRF-Token": csrf } : {},
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
+/** pullim-api CSRF 쿠키(`*-pullim-csrf` suffix, non-HttpOnly) 값 읽기 — double-submit echo 용. */
+function readPullimCsrfCookie(): string | null {
+  if (typeof document === "undefined") return null;
+  for (const pair of document.cookie.split(";")) {
+    const eq = pair.indexOf("=");
+    if (eq < 0) continue;
+    const name = pair.slice(0, eq).trim();
+    if (name.endsWith("-pullim-csrf")) {
+      return decodeURIComponent(pair.slice(eq + 1)) || null;
+    }
+  }
+  return null;
 }
 
 export async function getMe(): Promise<AuthUser | null> {
