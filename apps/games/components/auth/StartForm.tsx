@@ -6,7 +6,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { AuthCta } from "@/components/auth/AuthCta";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -144,9 +144,9 @@ export function StartForm() {
 
           <p className="text-type-secondary mt-4 text-center text-sm">
             기록을 안전하게 저장하고 싶나요?{" "}
-            <Link href="/signup" className="text-pullim-blue-600 underline">
+            <AuthCta kind="signup" className="text-pullim-blue-600 underline">
               회원가입
-            </Link>
+            </AuthCta>
           </p>
         </CardContent>
       </Card>

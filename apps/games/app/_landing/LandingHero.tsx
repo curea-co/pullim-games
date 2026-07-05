@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { BarChart3, BookOpenCheck, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { AuthCta } from "@/components/auth/AuthCta";
 import { useIdentity } from "@/lib/core/player/use-identity";
 import { PullimMark } from "@/components/brand/PullimMark";
 
@@ -65,18 +66,18 @@ export function LandingHero() {
 
           {/* 주 CTA — 회원가입 / 로그인 (회원 경로, 각각 별도 화면) */}
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link
-              href="/signup"
+            <AuthCta
+              kind="signup"
               className="inline-flex h-12 items-center justify-center rounded-md bg-accent-positive px-8 text-base font-bold text-white shadow-sm transition-colors hover:bg-accent-positive/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-positive focus-visible:ring-offset-2"
             >
               회원가입
-            </Link>
-            <Link
-              href="/login"
+            </AuthCta>
+            <AuthCta
+              kind="login"
               className="inline-flex h-12 items-center justify-center rounded-md border border-pullim-slate-300 bg-card px-8 text-base font-bold text-type-primary shadow-sm transition-colors hover:bg-pullim-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-positive focus-visible:ring-offset-2"
             >
               로그인
-            </Link>
+            </AuthCta>
           </div>
 
           {/* 게스트 경로 — 가입 없이 닉네임·학년만 */}

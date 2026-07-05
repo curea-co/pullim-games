@@ -1,7 +1,7 @@
 # 풀림 games ↔ pullim-web 통합 로그인(SSO) 위임 — 회원만 pullim-api SSO, 게스트 보존
 
 **작성일**: 2026-07-03 (spec 개정 반영 2026-07-04)
-**상태**: **선행 spec 개정안 PR #140(`spec/games-sso-login-delegation`) 제출·Codex 리뷰 반영 중 — 권위 문서라 G1/G3/G4 합의·머지 대기(CLAUDE.md §4).** §0 제품 방향(D1/D2/D3)은 G1(사용자) 발의(2026-07-03)이며, 권위 spec 개정 승인은 G1/G3/G4 합의로 확정. games 코드(PR-1/2)는 spec PR **머지 후** 착수.
+**상태**: **선행 spec 개정 PR #140 MERGED→dev(squash 5fb0ae8, 2026-07-05).** games 코드 착수: **PR-1(pullim 모드 게이트) 구현 완료**(브랜치 `feat/pullim-mode-sso-gate`), PR-2(신원·페치 재배선) 대기. §0 제품 방향(D1/D2/D3)은 G1 발의(2026-07-03).
 **근거**: 사용자 결정 2026-07-03 — 게스트 유지+회원 SSO / 자체 auth legacy dormant / games DB 유지(회원 식별만 pullim-api sub, 저장 키 `users.id` 유지·`sub`=매핑 컬럼). 설계 정당성은 games 권위 spec `proc/spec/05 §5.2`·`§5.6`·`§9.3`·`§9.4` + games↔pullim-api 계약으로 자립한다(타 풀림 프로젝트를 근거로 들지 않음 — `CLAUDE.md §4` 독립 프로젝트 원칙).
 **umbrella**: `proc/plan/2026-06-23_pullim-api-integration.md`(+ `2026-06-23_HANDOFF-pullim-api-games-module.md`). 본 plan 은 그 umbrella 의 **인증 슬라이스만** 좁혀 선실행하는 문서다 — 학습데이터 이관·games DB 폐기(umbrella P3/P4)는 본 plan 범위 밖.
 
@@ -29,7 +29,7 @@
 
 ## 2. 🔴 선행 조건 (코드 착수 전 필수)
 
-### 2-A. spec 개정 (거버넌스 — G1/G3/G4 합의) — **🟡 PR #140(`spec/games-sso-login-delegation`, 2026-07-04) 제출·Codex 리뷰 반복 반영 중. G1/G3/G4 합의·머지 대기 → 머지 후 games 코드 착수** (아래 체크박스 = spec 편집 반영분, 승인 아님)
+### 2-A. spec 개정 (거버넌스 — G1/G3/G4 합의) — ✅ **MERGED→dev (PR #140 squash 5fb0ae8, 2026-07-05). Codex 19라운드 반영 후 사용자 승인 머지.**
 중앙 로그인 위임은 `spec/05 §5.2`(games 계정 완전 독립)·`§5.6`(games 자체 가입 계약)과 충돌한다. `spec/01 §2 명세 우선` + `CLAUDE.md §9` 경로에 따라 **spec 먼저 개정 후 코드**.
 - [x] `spec/05 §5.2`: 회원 신원 pullim-api 중앙 위임(pullim 모드)·게스트 games 독립·"완전 독립 계정" 조항을 데이터소유/게스트로 축소·자체 auth legacy dormant. DB 조항 존치(D3).
 - [x] `spec/05 §5.6`: identity PII(이메일·비번 해시·본인인증) pullim-api 소유·가입/동의 권위 중앙 이동(games `AuthForm` pullim 모드 표면 제거). 게스트 PII 무변경.
@@ -55,12 +55,13 @@
 
 > ⚠️ **게이트 2층 계약 (R9 — 장애 허용 보존, Codex #140)**: **미들웨어 = coarse(쿠키 presence 만, 네트워크 호출 없음)**, **클라 `RequireIdentity` = 정밀(introspection + fail-open)**. 미들웨어에서 `/games/me` 를 때려 `5xx=fail-closed` 로 닫으면 pullim-api 일시 장애만으로 로그인 회원이 `/home`·`/games/*` 에서 전부 랜딩으로 튕겨 기존 503 fail-open 계약이 깨진다. 따라서 **introspection 은 미들웨어가 아니라 클라에서** 수행하고, 5xx/네트워크는 fail-open(기존 신원 유지)한다. 이는 현행 아키텍처(미들웨어 coarse + `RequireIdentity` 정밀)와 정합.
 
-### PR-1: pullim 모드 도입 (회원 SSO 게이트)
-- [ ] `lib/auth/pullim-mode.ts`(신규): **`NEXT_PUBLIC_DOMAIN_API_URL` + `NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN` 둘 다 있을 때만** `PULLIM_MODE` on. ⚠️ **반쯤 설정 금지(Codex #140)**: 하나만 설정되면 introspection 은 켜지나 미인증 리다이렉트 URL 을 못 만들어 런타임에서만 깨진다 → **부팅 시 "한쪽만 존재" fail-fast**(build/start 에러). 둘 다 미설정 = legacy(자체 auth) 유지 = D2. (spec `§9.4` env 계약)
-- [ ] `lib/auth/login-redirect.ts`(신규): **로그인·가입 대칭** — `pullimLoginUrl(nextFullUrl)` = `${NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN}/login?next=<encoded 절대 URL>`, `pullimSignupUrl(nextFullUrl)` = `.../signup?next=<encoded>`. ⚠️ origin = **SITE 호스트**(dev `dev.pullim.ai`/prod `pullim.ai`), OS 호스트 아님. (§5.2 회원 경로 = pullim-web `/login·/signup` 둘 다 중앙 위임 — 가입도 대칭 복귀.)
-- [ ] `middleware.ts` 수정 (**coarse only — 네트워크 호출 없음**): pullim 모드 한정 3-상태 presence 게이트 — ⒜ 게스트 쿠키(`pullim_games_guest`) 있으면 통과(무변경), ⒝ `*-pullim-at` suffix 쿠키 **존재**하면 통과(값 검증·introspection 은 클라에서), ⒞ 둘 다 없으면 랜딩(`/`). 게스트 경로 완전 보존(D1). **미들웨어에서 `/games/me` fetch 금지**(5xx fail-closed 회귀 방지).
-- [ ] **로그인·가입 진입점 전수 전환 (Codex #140 — 누락 시 dormant 로컬 화면 빠짐)**: pullim 모드에서 **모든** 로컬 `/login`·`/signup` 링크를 `pullimLoginUrl`/`pullimSignupUrl` 로 `window.location.assign`(cross-origin, next router 불가). 대상 전수: `app/_landing/LandingHero.tsx`(69·75), `components/os/OsTopbar.tsx`(topbar guest CTA 129·130 + 아바타 메뉴 178·179), `components/auth/AuthMenu.tsx`(85), `components/auth/StartForm.tsx`(147 게스트→가입 링크), `components/auth/AuthForm.tsx`(181·192 login↔signup 상호링크 — pullim 모드선 폼 자체가 dormant 라 진입 차단). legacy 모드에선 기존 로컬 링크 유지. "게스트로 시작" 은 무변경. 가입 완료 후에도 검증된 `next` 로 games 복귀(pullim-web resolveNext, §2-B). ⚠️ 로컬 링크 신규 추가 방지 가드(테스트) 권장.
-- [ ] env: `.env.example` 에 `NEXT_PUBLIC_DOMAIN_API_URL`·`NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN` 추가(주석: 미설정=legacy 모드).
+### PR-1: pullim 모드 도입 (회원 SSO 게이트) — ✅ **구현 완료 (브랜치 `feat/pullim-mode-sso-gate`, 2026-07-05)**
+- [x] `lib/auth/pullim-mode.ts`(신규): 두 env 모두일 때만 `PULLIM_MODE` on, 한쪽만=모듈 로드 시 throw(fail-fast), 둘 다 미설정=legacy=D2. 유닛 테스트(`pullim-mode.test.ts` 6케이스 — 토글·fail-fast·URL).
+- [x] `lib/auth/login-redirect.ts`(신규): `pullimLoginUrl`/`pullimSignupUrl`(대칭, SITE 호스트 origin)·`gotoPullimAuth`(현재 URL 을 next 로 하드 내비)·`pullimAuthHref`(SSR/no-JS 폴백).
+- [x] `middleware.ts` 수정(coarse only, 네트워크 X): pullim 모드=`*-pullim-at` suffix presence, legacy=`pullim_games_session` presence, 게스트=`pullim_games_guest`. 게스트 OR 회원 통과(D1 보존). introspection 미호출(R9).
+- [x] **진입점 전수 전환**: 공유 `components/auth/AuthCta.tsx` 신설(단일 진입점) — legacy=로컬 Link, pullim=pullim-web 하드 내비. 적용: `LandingHero`·`OsTopbar`(topbar CTA+아바타 메뉴)·`AuthMenu`·`StartForm`·`AuthForm`. 잔여 로컬 `/login·/signup` 링크 0(grep 확인). className 보존→시각 무변경(legacy 기본, 랜딩 4-viewport audit critical=0).
+- [x] env: `.env.example` 에 두 env + all-or-nothing·활성화 precondition 주석.
+> ⚠️ **PR-1 은 게이트·리다이렉트 인프라까지.** 회원 신원·데이터 페치 재배선(use-identity introspection·domain-fetch·projection)은 PR-2. pullim 모드 **활성화(env on)는 §2-D P-A/B/C 선행 필수** — 본 PR 머지 후에도 env 미설정이라 legacy 기본(런타임 무변경).
 
 ### PR-2: 회원 신원·데이터 페치 재배선
 - [ ] `lib/core/player/use-identity.ts`(**정밀 게이트 — introspection 여기서**): pullim 모드일 때 회원 판정을 `/api/auth/me`(자체) → `${NEXT_PUBLIC_DOMAIN_API_URL}/games/me`(credentials:include, 2.5s timeout)로. **tri-state**: 200=회원, 401=미인증(→랜딩/로그인 CTA), **5xx·네트워크·timeout=fail-open**(기존 신원 유지 — pullim-api 장애가 로그인 회원을 튕기지 않음, 503 계약 보존 = R9). 게스트 판정 로직 무변경.
@@ -102,10 +103,10 @@
 - [ ] `bun run typecheck && bun run lint && bun run build`.
 
 ## 6. PR 순서 (FE/BE 분리 · base=dev) — 진행 현황
-1. 🟡 **(spec)** §2-A spec 개정 — **PR #140 리뷰 중**(Codex 반복 반영, G1/G3/G4 합의·머지 대기). **최선행.**
+1. ✅ **(spec)** §2-A spec 개정 — **PR #140 MERGED→dev (5fb0ae8)**. **최선행.**
 2. ✅ **(pullim-api, 별 repo 핸드오프)** CORS games origin + `/games/me` — **dev #312 완료**. §2-C.
 3. 🟡 **(pullim-web, 별 repo)** resolveNext prod 승격(dev 는 이미 됨). §2-B.
-4. ⬜ games **PR-1**(pullim 모드 게이트) → 5. ⬜ games **PR-2**(신원·페치 재배선). **spec(#140) 머지 후 착수.**
+4. ✅ games **PR-1**(pullim 모드 게이트) 구현 완료 → 5. ⬜ games **PR-2**(신원·페치 재배선).
 - games PR base=`dev`([[feedback_branch_flow_dev_main]]). FE/BE 섞지 않음. main 승격은 §2-B/2-C prod 완료 후(prod 모드 불일치 방지 — §7).
 
 ## 7. 🔴 prod 승격 전 체크리스트 (교차 repo 준비 — games env 반쪽은 fail-fast 가 차단)

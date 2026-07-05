@@ -5,10 +5,10 @@
 // 검색·알림을 disabled placeholder("준비 중", 기존 AppHeader 정합)로 두고, 아바타 메뉴만
 // games auth(@/lib/auth/client · @/lib/core/player)로 배선한다.
 import { useEffect, useRef, useState } from "react";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { getAuthState, logout, type AuthUser } from "@/lib/auth/client";
 import { getPlayer, resetGuestSession, type Player } from "@/lib/core/player";
+import { AuthCta } from "@/components/auth/AuthCta";
 
 function initialOf(s: string, fallback: string): string {
   const t = (s || "").trim();
@@ -126,8 +126,8 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
           아바타 메뉴 안에만 숨기지 않고 topbar 에 직접 노출. 특히 랜딩 온보딩 전환 보장. */}
       {loaded && !neutral && !isMember && (
         <>
-          <Link href="/login" className="btn btn-soft btn-sm tb-guest-cta">로그인</Link>
-          <Link href="/signup" className="btn btn-soft btn-sm tb-guest-cta">회원가입</Link>
+          <AuthCta kind="login" className="btn btn-soft btn-sm tb-guest-cta">로그인</AuthCta>
+          <AuthCta kind="signup" className="btn btn-soft btn-sm tb-guest-cta">회원가입</AuthCta>
         </>
       )}
 
@@ -174,14 +174,14 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
               {/* 게스트 전용 — 로그인/회원가입 진입 */}
               {!isMember && (
                 <nav style={{ padding: 6, borderBottom: "1px solid var(--line)" }} aria-label="계정 진입">
-                  {[
-                    { href: "/login", label: "로그인" },
-                    { href: "/signup", label: "회원가입" },
-                  ].map((l) => (
-                    <Link
-                      key={l.href}
-                      href={l.href}
-                      onClick={() => setMenuOpen(false)}
+                  {([
+                    { kind: "login", label: "로그인" },
+                    { kind: "signup", label: "회원가입" },
+                  ] as const).map((l) => (
+                    <AuthCta
+                      key={l.kind}
+                      kind={l.kind}
+                      onNavigate={() => setMenuOpen(false)}
                       style={{
                         display: "block",
                         padding: "10px 12px",
@@ -192,7 +192,7 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
                       }}
                     >
                       {l.label}
-                    </Link>
+                    </AuthCta>
                   ))}
                 </nav>
               )}

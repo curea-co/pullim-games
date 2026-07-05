@@ -5,7 +5,7 @@
 // 모든 뷰포트에서 노출(모바일 포함) — URL 직접 입력 없이도 계정 기능 도달 가능.
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { AuthCta } from "@/components/auth/AuthCta";
 import { usePathname, useRouter } from "next/navigation";
 import { getAuthState, logout, type AuthUser } from "@/lib/auth/client";
 import { getPlayer, resetGuestSession, type Player } from "@/lib/core/player";
@@ -81,12 +81,12 @@ export function AuthMenu() {
   // 회원도 게스트도 아니고 확정됨 → 로그인 진입(주로 랜딩).
   if (!user && !player) {
     return (
-      <Link
-        href="/login"
+      <AuthCta
+        kind="login"
         className="inline-flex h-11 items-center rounded-button px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
       >
         로그인
-      </Link>
+      </AuthCta>
     );
   }
 
