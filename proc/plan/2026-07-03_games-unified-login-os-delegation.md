@@ -47,7 +47,10 @@
 
 ### 2-D. 🔴 pullim 모드 **활성화(env on) hard preconditions** (Codex #140 — 승격 ≠ 활성화)
 > spec 은 pullim 모드 **설계를 V1.x 정책으로 채택**하지만, 아래 3 계약이 닫히기 전에는 **env 를 켜서 활성화하지 않는다**(설계 승격과 런타임 활성화 분리). 미충족 상태 활성화 금지.
-- [ ] **P-A. 클라 auth 메타데이터 계약 (PR-2 blocker)**: 현행 클라 `AuthUser = {id, email, grade}`(`lib/auth/client.ts`)는 ⒜ **grade 로 학년별 콘텐츠 노출**, ⒝ **회원 UI(`OsTopbar.tsx`·`AuthMenu.tsx`)가 `user.email` 을 표시명(아바타·계정 메뉴)으로 사용**한다. pullim `/games/me` 는 `{sub, globalRole, gamesFlagLevel}` 만 줘 **grade·표시명 부재 → 콘텐츠 타게팅 + 회원 UI 둘 다 깨짐**. → pullim-api 가 `/games/me`(또는 프로필 엔드포인트)에 **`grade` + 표시용 식별자(name/nickname 또는 마스킹 email)** 노출(중앙 가입이 grade+consent 수집 — umbrella §A.4) + 클라 `AuthUser` 를 pullim 형태(`id=sub`, `grade`, `displayName`, `email` optional)로 매핑. **grade·표시명 계약 없이 pullim 모드 켜면 안 됨.**
+- **P-A. 클라 auth 메타데이터 계약 (PR-2 blocker)** — 조사(2026-07-05) 후 **역할 분리**:
+  - [ ] **표시명(displayName) = pullim-api 핸드오프**: 회원 UI(`OsTopbar`·`AuthMenu`)가 표시명 필요. identity PII 라 `§5.6` 상 pullim-api 소유(games 미보관) → `/games/me` 에 `displayName` 추가 요청. **핸드오프 작성·전달**: `proc/plan/2026-07-05_HANDOFF-pullim-api-games-me-displayname.md` → pullim-api. pullim-api `auth.users.displayName` 기존재·`/q/me` `name` 선례. (PR-1 은 임시 "회원" 폴백 중.)
+  - [ ] **학년(grade) = games-side**: grade 는 콘텐츠 preference(identity 아님)이고 중앙 signup 미수집·auth 스키마 부재(planner/q 각자 보유)라, **games 가 게스트처럼 회원 grade 도 자체 수집(StartForm 재사용)·games projection 보관**(PR-2, pullim-api 요청 아님 — 중앙 결합 회피). 회원 로그인 후 grade 미보유 시 수집 UX.
+  - 클라 `AuthUser` 를 pullim 형태(`id=sub`, `displayName`[pullim-api], `grade`[games], `email` optional)로 완성 = PR-2.
 - [ ] **P-B. legacy 회원 재연결 vs first-writer-wins (기존 회원 cutover)**: `fingerprint_links` first-writer-wins(`§5.2`) 때문에 기존 legacy 회원이 SSO 로그인해도 **같은 브라우저 fingerprint·데이터가 옛 `users` row 에 남아 새 `sub` projection 에 연결 안 됨**. → 재연결 마이그레이션(P-C 데이터 존재 시)이 닫히기 전엔 **기존 games email 회원이 있는 환경에서 pullim 모드 활성화 금지**(신규 환경·게스트 위주는 안전). 자동 병합은 여전히 금지.
 - [ ] **P-C. 중앙 삭제 파기 전파 (법적 — 회원 서버데이터 저장 시)**: 회원 학습데이터가 서버에 실제 저장되는 시점(클라 sync GA)부터 **중앙 계정 삭제 → games projection 삭제 전파 계약**(webhook/job, `§5.6`)이 **법적 파기 선행 필수**. sync GA 전(현재)은 서버 회원 데이터 0 이라 유예 가능하나, **sync 활성화와 동시 필수**. 파기 경로 미확정 상태로 회원 서버 저장 활성화 금지.
 
