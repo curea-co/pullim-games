@@ -190,11 +190,15 @@ async function getPullimAuthState(): Promise<{
       return { user: { id: data.sub, email: "", grade: null }, unavailable: false };
     }
     if (res.status === 401) return { user: null, unavailable: false }; // 미인증 확정.
-    // 5xx/기타 = 미확정 → fail-open. 미들웨어가 이미 `*-pullim-at` presence 를 통과시켰으므로
-    // 회원 세션은 존재 → pullim-api 일시 장애로 회원을 튕기지 않는다(R9, 가용성 보존).
-    return { user: null, unavailable: true };
+    // tri-state 엄격화(Codex #141): **5xx 만 fail-open**(pullim-api 일시 장애 — 회원 안 튕김, R9).
+    // 403·기타 4xx 는 계약 드리프트·권한 오류일 수 있어 fail-open 하면 misconfiguration 을 숨긴다
+    // → 닫힘(user null·unavailable false). 미들웨어가 `*-pullim-at` presence 는 이미 통과시켰으므로
+    //   장애(5xx)만 가용성 보존, 그 외 비정상은 보수적 차단.
+    if (res.status >= 500) return { user: null, unavailable: true };
+    return { user: null, unavailable: false };
   } catch {
-    // 네트워크 오류 = 미확정 → fail-open(동일 근거 — pullim 모드는 introspection 이 유일 검증선).
+    // 네트워크 오류(응답 없음) = 미확정 → fail-open(pullim 모드는 introspection 이 유일 검증선,
+    // 미들웨어 presence 통과분이라 회원 세션 존재 → 가용성 보존).
     return { user: null, unavailable: true };
   }
 }

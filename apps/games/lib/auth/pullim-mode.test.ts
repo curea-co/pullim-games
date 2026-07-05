@@ -117,6 +117,13 @@ describe("getAuthState — pullim 모드 정밀 게이트(/games/me introspectio
     expect(r.unavailable).toBe(true);
   });
 
+  it("🔴 403·기타 4xx → fail-CLOSED(unavailable=false — 계약 드리프트 은폐 방지, Codex #141)", async () => {
+    const r403 = await callWithFetch(async () => res(403));
+    expect(r403).toEqual({ user: null, unavailable: false });
+    const r404 = await callWithFetch(async () => res(404));
+    expect(r404).toEqual({ user: null, unavailable: false });
+  });
+
   it("🔴 네트워크 오류 → fail-open(unavailable=true)", async () => {
     const r = await callWithFetch(async () => {
       throw new Error("network down");

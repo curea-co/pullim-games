@@ -11,9 +11,13 @@ import { PULLIM_LOGIN_ORIGIN } from "./pullim-mode";
 import { getSiteUrl } from "@/lib/site-url";
 
 /**
- * games 홈 절대 URL(no-JS 폴백 next 기본값). 클라=현재 origin(window), SSR=site-url SoT
- * (`getSiteUrl` — prod/dev/preview VERCEL_URL 정합). ⚠️ sibling `gamesUrl()`(env 추정) 아님 —
- * 그건 preview/로컬에서 현재 origin 을 보존 못 함(Codex #141). 초기 HTML href 는 SSR 값.
+ * games 홈 절대 URL(AuthCta no-JS 폴백 href 의 기본 next). **클라 런타임 = 현재 origin(window)**
+ * 이라 실제 호스트 정확. **SSR(초기 HTML href) = `getSiteUrl()`** (NEXT_PUBLIC_SITE_URL 우선 →
+ * prod/dev/preview VERCEL_URL). ⚠️ AuthCta 는 client 컴포넌트라 SSR 에서 `headers()`(실제 요청
+ * 호스트)를 못 쓴다 — 그래서 **로컬 SSO(`games.pullim.local:3004`)는 NEXT_PUBLIC_SITE_URL 설정 필요**
+ * (그래야 no-JS href 의 next 가 실제 호스트로; JS on 이면 window 로 자동 정확). 서버 direct-hit
+ * (`/login`·`/signup` page)는 `getRequestOrigin`(headers) 로 이미 실제 호스트 보존(Codex #141).
+ * sibling `gamesUrl()`(env 추정) 은 쓰지 않는다.
  */
 function gamesHomeUrl(): string {
   if (typeof window !== "undefined") return `${window.location.origin}/home`;
