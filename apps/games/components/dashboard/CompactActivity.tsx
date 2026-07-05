@@ -13,6 +13,23 @@ interface Props {
   limit?: number;
 }
 
+/** 마지막 플레이 상대시각 — "오늘 / 어제 / N일 전". 없으면 null. */
+function relativeDay(date: Date | undefined): string | null {
+  if (!date) return null;
+  const startOfToday = new Date();
+  startOfToday.setHours(0, 0, 0, 0);
+  const startOfThat = new Date(date);
+  startOfThat.setHours(0, 0, 0, 0);
+  const diffDays = Math.round(
+    (startOfToday.getTime() - startOfThat.getTime()) / 86_400_000,
+  );
+  if (diffDays <= 0) return "오늘";
+  if (diffDays === 1) return "어제";
+  if (diffDays < 7) return `${diffDays}일 전`;
+  if (diffDays < 28) return `${Math.floor(diffDays / 7)}주 전`;
+  return `${Math.floor(diffDays / 30)}개월 전`;
+}
+
 export function CompactActivity({
   played,
   untouchedCount,
@@ -24,10 +41,10 @@ export function CompactActivity({
 
   return (
     <section
-      aria-label="게임 활동"
+      aria-label="게임별 기록"
       className="flex flex-col rounded-block border border-border-hairline bg-bg-block"
     >
-      {top.length > 0 && (
+      {top.length > 0 ? (
         <ul className="divide-y divide-border-hairline">
           {top.map((p) => (
             <li key={p.gameId}>
@@ -35,6 +52,12 @@ export function CompactActivity({
             </li>
           ))}
         </ul>
+      ) : (
+        // 빈 상태도 대시보드 톤 — "기록이 쌓일 자리"임을 명시(온보딩 스플래시 대체 아님).
+        <p className="px-4 py-5 text-center text-helper text-type-secondary">
+          아직 풀어본 게임이 없어요.
+          <br />첫 게임을 풀면 게임별 정답률·마지막 플레이가 여기에 쌓여요.
+        </p>
       )}
 
       <Link
@@ -62,11 +85,14 @@ function CompactRow({ stat }: { stat: PerGameStat }) {
   const accuracyPct =
     stat.attempts > 0 ? Math.round(stat.accuracy * 100) : 0;
   const isHeavy = stat.attempts >= 10;
+  const lastPlayed = relativeDay(stat.lastReviewAt);
 
   return (
     <Link
       href={`/games/${stat.gameId}`}
-      aria-label={`${stat.title} — 성공 ${stat.correct}, 실패 ${stat.failed}, 정답률 ${accuracyPct}%`}
+      aria-label={`${stat.title} — 성공 ${stat.correct}, 실패 ${stat.failed}, 정답률 ${accuracyPct}%${
+        lastPlayed ? `, 마지막 플레이 ${lastPlayed}` : ""
+      }`}
       className="group flex items-center gap-3 px-4 py-2.5 hover:bg-pullim-slate-50"
     >
       <span
@@ -80,8 +106,16 @@ function CompactRow({ stat }: { stat: PerGameStat }) {
       >
         <Icon className="h-3.5 w-3.5" strokeWidth={2} />
       </span>
-      <span className="min-w-0 flex-1 truncate text-label font-medium text-type-primary">
-        {stat.title}
+      {/* 제목 + 마지막 플레이 시각("언제 어떤 게임") */}
+      <span className="flex min-w-0 flex-1 flex-col leading-tight">
+        <span className="truncate text-label font-medium text-type-primary">
+          {stat.title}
+        </span>
+        {lastPlayed && (
+          <span className="truncate text-helper tabular text-type-secondary">
+            마지막 {lastPlayed}
+          </span>
+        )}
       </span>
       <span className="shrink-0 text-helper tabular text-type-secondary">
         <span className="font-bold text-accent-positive">{stat.correct}</span>

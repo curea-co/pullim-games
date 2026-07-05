@@ -28,8 +28,8 @@ export interface PerGameStat {
 export interface DashboardStats {
   /**
    * 카드를 한 번이라도 본 적 있는 게임 수 — **전체 games 기준**(보관 게임 직접 URL 플레이 포함).
-   * 실제 학습 이력 총계. 홈 EmptyDashboard(첫 사용자) 판정 + 헤더 문구에 쓴다 — 보관 게임만
-   * 플레이한 사용자도 빈 상태로 되돌리지 않고, 그 게임이 `perGame`(재진입)에도 남는다(R9·R10).
+   * 실제 학습 이력 총계. 홈 헤더 문구·첫 사용자 배너 판정에 쓴다(2026-07-05 EmptyDashboard 분기
+   * 제거 후에도 유지) — 보관 게임만 플레이한 사용자도 그 게임이 `perGame`(재진입)에 남는다(R9·R10).
    */
   gamesPlayed: number;
   /** 풀이 시도 총합 (모든 게임 reps 합). */

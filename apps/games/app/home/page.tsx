@@ -10,7 +10,6 @@ import { CheckCircle2, XCircle } from "lucide-react";
 import { computeDashboardStats, type DashboardStats } from "@/lib/core";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { CompactActivity } from "@/components/dashboard/CompactActivity";
-import { EmptyDashboard } from "@/components/dashboard/EmptyDashboard";
 import { DashboardSkeleton } from "@/components/dashboard/DashboardSkeleton";
 import { DashboardStatusRow } from "@/components/dashboard/DashboardStatusRow";
 import { ActivityHeatmap } from "@/components/dashboard/ActivityHeatmap";
@@ -66,24 +65,19 @@ function HomeDashboard() {
         <h1 className="mt-1 text-2xl font-bold leading-tight tracking-tight text-type-primary">
           {hello || "안녕하세요"}
         </h1>
-        {stats && stats.gamesPlayed > 0 && (
+        {stats && (
           <p className="mt-1.5 text-label text-type-secondary tabular">
-            {stats.gamesPlayed}개 게임을 만났어요
+            {stats.gamesPlayed > 0
+              ? `${stats.gamesPlayed}개 게임을 만났어요`
+              : "첫 게임을 풀면 여기에 기록이 쌓여요"}
           </p>
         )}
       </header>
 
-      {!stats ? (
-        <DashboardSkeleton />
-      ) : stats.gamesPlayed === 0 ? (
-        // 빈 상태(첫 사용자) 판정 = 전체 gamesPlayed(실제 학습 이력) — 보관 게임만 직접 URL 로
-        // 플레이한 사용자도 SRS·스트릭·due 가 있으면 빈 상태로 되돌리지 않는다(단일 백본, R9).
-        // 활동 목록(perGame)은 이미 플레이한 보관 게임은 유지(재진입), 미플레이 보관 게임만
-        // 숨긴다(discovery 차단) — 헤더·게이트·목록이 모두 전체 gamesPlayed 기준으로 정합(R10).
-        <EmptyDashboard />
-      ) : (
-        <Dashboard stats={stats} />
-      )}
+      {/* 홈은 기록 유무와 무관하게 항상 대시보드 골격을 렌더한다 — 빈 상태도 온보딩 스플래시가
+          아니라 "채워지길 기다리는 대시보드"로 보인다(0 값 KPI·상태 칩 + 추천 콜드스타트가 첫
+          게임 안내를 담당). plan: 2026-07-05_home-dashboard-always-on.md. */}
+      {!stats ? <DashboardSkeleton /> : <Dashboard stats={stats} />}
     </main>
   );
 }
@@ -96,10 +90,21 @@ function Dashboard({ stats }: { stats: DashboardStats }) {
   // 미진행 게임
   const untouched = stats.perGame.filter((p) => p.cardsTouched === 0);
 
+  const isFirstTime = stats.gamesPlayed === 0;
+
   // 행렬 정렬 우선 — 모든 영역이 전체 폭 row stack. 행 사이 빈 공간 X.
   // 와이드에서 grid 분할은 row 내부에서만 (chip·KPI·게임별).
   return (
     <div className="flex flex-col gap-5">
+      {/* 첫 사용자 — 아직 기록 없음 안내. 대시보드 골격은 그대로 두고 배너로만 맥락 제공
+          (온보딩 스플래시로 대체하지 않는다 — 홈은 항상 대시보드). */}
+      {isFirstTime && (
+        <p className="rounded-block border border-border-hairline bg-bg-block px-4 py-3 text-helper text-type-secondary">
+          아직 풀어본 게임이 없어요. 아래 추천 게임을 한 판 풀면 정답률·활동·연속이 여기에
+          쌓여요.
+        </p>
+      )}
+
       {/* 오늘의 추천 — full-width hero */}
       <section aria-label="오늘의 추천">
         <Suspense fallback={null}>
