@@ -72,7 +72,8 @@ test("미플레이 사용자 — 히트맵 미노출 (playedStats 0)", async ({
   });
 
   await page.goto("/home");
-  // gamesPlayed === 0 이면 EmptyDashboard 분기 → 히트맵 자체 미렌더
+  // 미플레이여도 홈은 대시보드 골격을 렌더하지만, ActivityHeatmap 은 playedStats > 0
+  // 일 때만 렌더 → 히트맵 자체 미노출(2026-07-05: EmptyDashboard 분기 제거 후에도 동일).
   const heatmap = page.getByRole("region", { name: "최근 활동 히트맵" });
   await expect(heatmap).toHaveCount(0);
 });
