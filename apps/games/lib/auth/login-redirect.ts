@@ -8,6 +8,17 @@
 "use client";
 
 import { PULLIM_LOGIN_ORIGIN } from "./pullim-mode";
+import { getSiteUrl } from "@/lib/site-url";
+
+/**
+ * games 홈 절대 URL(no-JS 폴백 next 기본값). 클라=현재 origin(window), SSR=site-url SoT
+ * (`getSiteUrl` — prod/dev/preview VERCEL_URL 정합). ⚠️ sibling `gamesUrl()`(env 추정) 아님 —
+ * 그건 preview/로컬에서 현재 origin 을 보존 못 함(Codex #141). 초기 HTML href 는 SSR 값.
+ */
+function gamesHomeUrl(): string {
+  if (typeof window !== "undefined") return `${window.location.origin}/home`;
+  return `${getSiteUrl()}/home`;
+}
 
 function buildAuthUrl(path: "/login" | "/signup", nextFullUrl: string): string {
   return `${PULLIM_LOGIN_ORIGIN}${path}?next=${encodeURIComponent(nextFullUrl)}`;
@@ -36,10 +47,11 @@ export function gotoPullimAuth(kind: "login" | "signup"): void {
 }
 
 /**
- * SSR/no-JS 폴백 href — next 없는 pullim-web 인증 URL(`{origin}/login|/signup`).
- * 클릭 시엔 gotoPullimAuth 가 현재 URL 을 next 로 붙여 정밀 복귀. JS 비활성 시엔 이 href 로
- * pullim-web 인증 페이지까지는 도달(next 없이 → 인증 후 games 홈 복귀). 로컬 dormant 라우트로 안 샘.
+ * SSR/no-JS 폴백 href — pullim-web 인증 URL + **기본 next=games 홈**(Codex #141).
+ * 클릭(JS)은 gotoPullimAuth 가 현재 URL 을 next 로 덮어 정밀 복귀. JS 비활성·새 탭·링크 복사처럼
+ * href 자체를 소비하는 경로에선 이 기본 next(games 홈)로 인증 후 games 복귀(§5.2 `/login?next=` 계약).
  */
 export function pullimAuthHref(kind: "login" | "signup"): string {
-  return `${PULLIM_LOGIN_ORIGIN}${kind === "login" ? "/login" : "/signup"}`;
+  const path = kind === "login" ? "/login" : "/signup";
+  return `${PULLIM_LOGIN_ORIGIN}${path}?next=${encodeURIComponent(gamesHomeUrl())}`;
 }
