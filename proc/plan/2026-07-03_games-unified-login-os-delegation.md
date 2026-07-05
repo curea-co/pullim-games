@@ -34,7 +34,7 @@
 - [x] `spec/05 §5.2`: 회원 신원 pullim-api 중앙 위임(pullim 모드)·게스트 games 독립·"완전 독립 계정" 조항을 데이터소유/게스트로 축소·자체 auth legacy dormant. DB 조항 존치(D3).
 - [x] `spec/05 §5.6`: identity PII(이메일·비번 해시·본인인증) pullim-api 소유·가입/동의 권위 중앙 이동(games `AuthForm` pullim 모드 표면 제거). 게스트 PII 무변경.
 - [x] `spec/09 §9.4`(env `NEXT_PUBLIC_DOMAIN_API_URL`·`NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN` 표 all-or-nothing + prod 승격 함정) · `§9.3`(데이터 저장 games DB 존치·저장 키 `users.id` 유지·`sub`=매핑 컬럼).
-- [x] 영향 절 전수 sweep: `04 §4.5 RBAC`(비로그인 단일→게스트+회원 SSO 정합)·`03 §C6`·`10 로드맵`(SSO 통합 V1.x 착수 주석)·`05 §5.5`(로그인 세션 TTL pullim/legacy 분기)·`05 §5.2 V2 확장`("풀림 SSO 통합" 잔여 재정의)·`01 §5`(구 "PII 0개·만14세 V1 미발생" → §5.6 권위 위임 정정). 잔여 stale: 개정 이력 내 역사 서술만("비로그인" 맥락).
+- [x] 영향 절 전수 sweep: `04 §4.5 RBAC`(비로그인 단일→게스트+회원 SSO)·`03 §C6`·`10 로드맵`(SSO 통합 V1.x 주석)·`03 §M8`(익명 fingerprint 단독→입구 신원 게스트/회원 SSO)·`05 §5.5`(로그인 세션 TTL pullim/legacy 분기)·`05 §5.2 V2 확장`("풀림 SSO 통합" 재정의)·`01 §5`(구 "PII 0개·비로그인" → §5.6 위임)·`05 §5.7`(V2 결제 "V1 비로그인"→"비결제, 계정 선택적")·`09 §9.8`(모니터링 "V1 비로그인 PII 0"→이벤트 로그 PII 0). 잔여 "비로그인": 개정 이력의 역사 서술 + `09 §9.2.2` 라이브러리 trade-off 논의(현재 상태 단정 아님)뿐.
 
 ### 2-B. pullim-web (별 repo — 핸드오프)
 - [ ] resolveNext **prod(pullim.ai) 승격**(dev→main). `*.pullim.ai` generic 화이트리스트라 games 전용 코드 아님. **games 는 dev 에선 이미 동작 가능.**
