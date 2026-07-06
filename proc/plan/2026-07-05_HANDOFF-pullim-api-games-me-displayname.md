@@ -6,7 +6,7 @@
 **상태**: HANDOFF DRAFT — pullim-api 수용·구현·운영은 pullim-api 자체 거버넌스 따름.
 **연계**: games plan `proc/plan/2026-07-03_games-unified-login-os-delegation.md §2-D P-A`. 선행: `/games/me`·CORS(dev #312) 완료, games PR-1(pullim 모드 게이트) merged(#141).
 
-> 🎯 **범위 — `/games/me` 응답에 표시용 식별자 1건.** pullim 모드에서 games 회원 UI(아바타·계정 메뉴)가 표시명을 필요로 하는데, 현행 `/games/me` 응답(`{sub, globalRole, gamesFlagLevel}`)엔 표시명이 없어 **회원 UI 라벨이 비어버린다**(games PR-1 은 임시로 "회원" 폴백 중). identity(표시명)는 `§5.6` 상 pullim-api 소유이므로 games 가 자체 저장할 수 없다 → pullim-api 가 `/games/me` 에 노출 요청.
+> 🎯 **범위 — `/games/me` 응답에 표시용 식별자 1건.** pullim 모드에서 games 회원 UI(아바타·계정 메뉴)가 표시명을 필요로 하는데, 현행 `/games/me` 응답(`{sub, globalRole, gamesFlagLevel}`)엔 표시명이 없다. **현재 games PR-1 은 `displayName || "회원"` 폴백으로 generic "회원" 라벨을 표시**(빈 값 아님) — 즉 증상은 UI 깨짐이 아니라 **개인화된 표시명이 없는 기능 저하**(모든 회원이 "회원"으로 보임). identity(표시명)는 `§5.6` 상 pullim-api 소유이므로 games 가 자체 저장할 수 없다 → pullim-api 가 `/games/me` 에 노출 요청(우선순위: 기능 저하 해소, 게이트·차단 이슈 아님).
 
 ## 0. 왜 이것만 요청하나 (grade 는 games-side 로 분리)
 games plan §2-D P-A 는 원래 "`/games/me` 가 **grade + 표시명**"을 요구했으나, 조사 결과 **역할을 분리**한다:
