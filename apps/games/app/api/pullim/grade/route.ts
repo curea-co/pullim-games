@@ -75,15 +75,16 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "forbidden_csrf" }, { status: 403, headers: NO_STORE });
   }
 
+  // 리포 관례: JSON 파싱 실패 = 400 invalid_json, 파싱 성공 후 필드 위반 = 422(login·signup·sync·event 정합).
   let body: { grade?: unknown };
   try {
     body = (await request.json()) as { grade?: unknown };
   } catch {
-    body = {};
+    return NextResponse.json({ error: "invalid_json" }, { status: 400, headers: NO_STORE });
   }
   const grade = typeof body.grade === "string" ? body.grade : "";
   if (!isGrade(grade)) {
-    return NextResponse.json({ error: "invalid_grade" }, { status: 400, headers: NO_STORE });
+    return NextResponse.json({ error: "invalid_grade" }, { status: 422, headers: NO_STORE });
   }
 
   // 신원 = 클라 값 불신, 서버 introspection 으로 확인. 장애(503)와 미인증(401) 구분(fail-closed 쓰기).

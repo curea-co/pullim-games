@@ -107,10 +107,17 @@ describe("POST — CSRF·same-origin·검증·저장", () => {
   it("CSRF 토큰 누락 → 403", async () => {
     expect((await POST(postReq({ grade: "중1" }, { csrf: false }))).status).toBe(403);
   });
-  it("🔴 타겟 밖 grade(고3)·빈값 → 400", async () => {
+  it("malformed JSON → 400 invalid_json(파싱 실패, 관례)", async () => {
+    const r = await POST(postReq("not-json{"));
+    expect(r.status).toBe(400);
+    expect((await r.json()).error).toBe("invalid_json");
+  });
+  it("🔴 타겟 밖 grade(고3)·빈값 → 422 invalid_grade(파싱 성공 후 필드 위반, 관례)", async () => {
     vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false });
-    expect((await POST(postReq({ grade: "고3" }))).status).toBe(400);
-    expect((await POST(postReq({ grade: "" }))).status).toBe(400);
+    const r = await POST(postReq({ grade: "고3" }));
+    expect(r.status).toBe(422);
+    expect((await r.json()).error).toBe("invalid_grade");
+    expect((await POST(postReq({ grade: "" }))).status).toBe(422);
     expect(setPullimMemberGrade).not.toHaveBeenCalled();
   });
   it("장애 → 503, 미인증 → 401(저장 안 함)", async () => {
