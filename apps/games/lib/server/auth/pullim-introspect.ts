@@ -50,7 +50,9 @@ export async function resolvePullimSub(cookieHeader: string | null): Promise<Pul
     if (res.ok) {
       const data = (await res.json()) as { sub?: unknown };
       const sub = typeof data.sub === "string" && data.sub ? data.sub : null;
-      return { sub, unavailable: false }; // sub 없으면 계약 위반 → 미인증 취급(닫힘).
+      // 200 인데 sub 없음 = 응답 계약 드리프트(미인증 아님) → unavailable 로 surface(503),
+      //   로그인 회원을 401 로 재분류하지 않고 오설정을 숨기지 않는다(Codex #146).
+      return { sub, unavailable: sub === null };
     }
     // 401 만 미인증(닫힘). 403·기타 4xx·5xx = 오설정/장애 → surface(unavailable, 503 매핑).
     return { sub: null, unavailable: res.status !== 401 };

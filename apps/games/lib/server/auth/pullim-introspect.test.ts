@@ -67,10 +67,10 @@ describe("resolvePullimSub — 서버 /games/me introspection (미인증 vs 장�
     expect(fetchFn).not.toHaveBeenCalled();
   });
 
-  it("sub 누락(계약 위반) → {sub:null, unavailable:false}", async () => {
+  it("🔴 200 인데 sub 누락(계약 드리프트) → {sub:null, unavailable:true}(미인증 아닌 surface)", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => res(200, { globalRole: "user" })));
     const { resolvePullimSub } = await load();
-    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: false });
+    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true });
   });
 });
 

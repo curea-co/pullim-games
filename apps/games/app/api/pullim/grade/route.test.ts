@@ -20,14 +20,14 @@ vi.mock("@/lib/server/auth/pullim-member", () => ({
   get MEMBER_DATA_STORAGE_ENABLED() {
     return memberDataEnabled;
   },
-  ensurePullimMember: vi.fn(),
+  getPullimMemberGrade: vi.fn(),
   setPullimMemberGrade: vi.fn(),
 }));
 vi.mock("@/lib/server/http/same-origin", () => ({ isSameOriginRequest: vi.fn(() => true) }));
 
 import { GET, POST } from "./route";
 import { resolvePullimSub } from "@/lib/server/auth/pullim-introspect";
-import { ensurePullimMember, setPullimMemberGrade } from "@/lib/server/auth/pullim-member";
+import { getPullimMemberGrade, setPullimMemberGrade } from "@/lib/server/auth/pullim-member";
 import { isSameOriginRequest } from "@/lib/server/http/same-origin";
 import { authCsrf } from "@/lib/server/auth/csrf";
 
@@ -56,7 +56,7 @@ beforeEach(() => {
   pullimMode = true;
   memberDataEnabled = true;
   vi.mocked(resolvePullimSub).mockReset();
-  vi.mocked(ensurePullimMember).mockReset();
+  vi.mocked(getPullimMemberGrade).mockReset();
   vi.mocked(setPullimMemberGrade).mockReset();
   vi.mocked(isSameOriginRequest).mockReturnValue(true);
 });
@@ -88,13 +88,14 @@ describe("GET — 장애/미인증 구분", () => {
     vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: false });
     expect((await GET(getReq())).status).toBe(401);
   });
-  it("회원 → 200 + grade, projection 물질화(ensurePullimMember 호출)", async () => {
+  it("회원 → 200 + grade (순수 조회, write 부작용 없음)", async () => {
     vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false });
-    vi.mocked(ensurePullimMember).mockResolvedValue({ id: "u1", sub: "s1", grade: "중2" });
+    vi.mocked(getPullimMemberGrade).mockResolvedValue("중2");
     const r = await GET(getReq());
     expect(r.status).toBe(200);
     expect((await r.json()).grade).toBe("중2");
-    expect(ensurePullimMember).toHaveBeenCalledWith("s1"); // 첫-touch 물질화
+    // GET 은 write 안 함(물질화는 POST/write 경로에서만) — setPullimMemberGrade 미호출
+    expect(setPullimMemberGrade).not.toHaveBeenCalled();
   });
 });
 
