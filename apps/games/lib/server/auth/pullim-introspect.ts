@@ -28,8 +28,10 @@ export type PullimSubResult = { sub: string | null; unavailable: boolean };
 
 /**
  * pullim 회원 sub 서버 확인. `*-pullim-at` 쿠키를 pullim-api `/games/me` 로 introspection.
- * - 200+sub → `{sub, unavailable:false}`  · 401/기타 4xx → `{sub:null, unavailable:false}`(미인증 확정)
- * - 5xx·네트워크·timeout → `{sub:null, unavailable:true}`(장애 — 503 매핑)
+ * - 200+sub → `{sub, unavailable:false}`  · **401** → `{sub:null, unavailable:false}`(미인증 확정)
+ * - **5xx·네트워크·timeout·403·기타 4xx** → `{sub:null, unavailable:true}`(장애/오설정 — 503 매핑)
+ *   ⚠️ 403(EntitlementGuard 오장착 등 계약 드리프트)을 401 로 접으면 misconfiguration 을 로그인
+ *   회원의 "미인증"으로 숨긴다(§5.2·R1) → 401 만 미인증, 나머지 비정상은 surface(Codex #146).
  * - pullim 모드 아님·pullim-at 쿠키 없음 → `{sub:null, unavailable:false}`
  */
 export async function resolvePullimSub(cookieHeader: string | null): Promise<PullimSubResult> {
@@ -50,8 +52,8 @@ export async function resolvePullimSub(cookieHeader: string | null): Promise<Pul
       const sub = typeof data.sub === "string" && data.sub ? data.sub : null;
       return { sub, unavailable: false }; // sub 없으면 계약 위반 → 미인증 취급(닫힘).
     }
-    // 5xx = 장애(unavailable), 401·기타 4xx = 미인증 확정(닫힘).
-    return { sub: null, unavailable: res.status >= 500 };
+    // 401 만 미인증(닫힘). 403·기타 4xx·5xx = 오설정/장애 → surface(unavailable, 503 매핑).
+    return { sub: null, unavailable: res.status !== 401 };
   } catch {
     return { sub: null, unavailable: true }; // 네트워크·timeout·파싱오류 = 장애.
   } finally {

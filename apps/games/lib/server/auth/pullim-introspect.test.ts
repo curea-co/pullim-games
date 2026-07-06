@@ -50,10 +50,13 @@ describe("resolvePullimSub — 서버 /games/me introspection (미인증 vs 장�
     expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true });
   });
 
-  it("403·기타 4xx → {sub:null, unavailable:false}(미인증 취급, 장애 아님)", async () => {
+  it("🔴 403·기타 4xx → {sub:null, unavailable:true}(오설정 surface, 미인증 은폐 방지)", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => res(403)));
-    const { resolvePullimSub } = await load();
-    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: false });
+    let m = await load();
+    expect(await m.resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true });
+    vi.stubGlobal("fetch", vi.fn(async () => res(404)));
+    m = await load();
+    expect(await m.resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true });
   });
 
   it("pullim-at 쿠키 없으면 fetch 없이 {sub:null, unavailable:false}", async () => {

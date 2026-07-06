@@ -12,6 +12,7 @@ function row(grade: string | null): UserRow {
     id: "u1",
     email: "a@b.com",
     password_hash: "x",
+    sub: null,
     grade,
     created_at: 0,
     updated_at: 0,

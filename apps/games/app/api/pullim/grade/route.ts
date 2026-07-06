@@ -9,7 +9,7 @@ import { isSameOriginRequest } from "@/lib/server/http/same-origin";
 import { AUTH_CSRF_HEADER, authCsrf } from "@/lib/server/auth/csrf";
 import { resolvePullimSub } from "@/lib/server/auth/pullim-introspect";
 import {
-  getPullimMemberGrade,
+  ensurePullimMember,
   setPullimMemberGrade,
   MEMBER_DATA_STORAGE_ENABLED,
 } from "@/lib/server/auth/pullim-member";
@@ -45,9 +45,11 @@ export async function GET(request: Request) {
   if (!sub) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401, headers: NO_STORE });
   }
+  // 첫-touch 물질화(§9.3·plan §2-D): projection row(sub→users.id)를 lazy upsert 해 이후 sync·
+  // fingerprint·조회가 이 id 에 붙게 한다. ensurePullimMember 가 grade 도 함께 반환(SELECT 별도 불요).
   let grade: string | null;
   try {
-    grade = await getPullimMemberGrade(sub);
+    grade = (await ensurePullimMember(sub)).grade;
   } catch {
     return NextResponse.json({ error: "backend_unavailable" }, { status: 503, headers: NO_STORE });
   }

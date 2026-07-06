@@ -6,8 +6,15 @@ import { query, type QueryFn } from "@/lib/server/db/client";
 
 export type UserRow = {
   id: string;
-  email: string;
-  password_hash: string;
+  // ⚠️ email·password_hash 는 legacy row 만 채운다. pullim projection row(0004)는 NULL
+  //    (email/pw 는 pullim-api 소유, §5.6). 0004 CHECK: legacy(email+pw) XOR pullim(sub).
+  //    ⚠️ 아래 legacy 함수(findUserByEmail·createUser·verifyPassword)는 email 로 조회하거나
+  //       email/pw 를 채워 넣으므로 projection row 를 반환/생성하지 않는다(email NULL 은 email
+  //       WHERE 에 안 걸림). projection 조회·생성은 `pullim-member.ts` 전용.
+  email: string | null;
+  password_hash: string | null;
+  /** pullim 외부 신원 매핑(0004). legacy row 는 NULL. 저장/조인 키는 계속 id(§9.3). */
+  sub: string | null;
   /**
    * DB 원본 grade. 가입 시 중1~고1 수집(migration 0003). 단 레거시 회원은 null,
    * 또는 구 타겟 범위(고2·고3 등) 값이 잔존할 수 있음 — `toPublicUser` 가 read 시
@@ -27,9 +34,10 @@ export type PublicUser = {
 };
 
 export function toPublicUser(u: UserRow): PublicUser {
-  // 타겟 정밀화(중1~고1) — 레거시 grade(고2·고3 등 범위 밖)는 게스트 getPlayer 와 동일하게
-  // null 로 정규화해 런타임이 계약(GRADES)을 따르게 한다(주석·계약 ↔ 런타임 일치).
-  return { id: u.id, email: u.email, grade: isGrade(u.grade) ? u.grade : null };
+  // legacy 회원 serializer — pullim projection row 는 이 경로로 오지 않는다(login/me 는 email 계정 전용).
+  // 방어적으로 email NULL 은 "" 로(projection row 가 흘러들어도 타입/응답 계약 안 깨지게).
+  // 타겟 정밀화(중1~고1) — 레거시 grade(고2·고3 등 범위 밖)는 getPlayer 와 동일하게 null 로 정규화.
+  return { id: u.id, email: u.email ?? "", grade: isGrade(u.grade) ? u.grade : null };
 }
 
 export async function findUserByEmail(email: string): Promise<UserRow | null> {
