@@ -182,3 +182,45 @@ describe("logout — pullim 모드 중앙 로그아웃 위임(Codex #141)", () =
     expect(calls.some((c) => c.url.includes("/api/auth/logout"))).toBe(false);
   });
 });
+
+describe("getPullimGrade / setPullimGrade — 홈 학년 모달 클라 (client.ts)", () => {
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    vi.resetModules();
+  });
+
+  async function loadClient(impl: (u: string, i?: RequestInit) => Promise<Response>) {
+    vi.resetModules();
+    vi.stubGlobal("fetch", vi.fn(impl));
+    return import("./client");
+  }
+  const r = (status: number, body?: unknown): Response =>
+    ({ ok: status >= 200 && status < 300, status, json: async () => body }) as Response;
+
+  it("getPullimGrade 200+{grade} → {grade}", async () => {
+    const { getPullimGrade } = await loadClient(async () => r(200, { grade: "중2" }));
+    expect(await getPullimGrade()).toEqual({ grade: "중2" });
+  });
+  it("getPullimGrade 200+null → {grade:null}(모달 노출 대상)", async () => {
+    const { getPullimGrade } = await loadClient(async () => r(200, { grade: null }));
+    expect(await getPullimGrade()).toEqual({ grade: null });
+  });
+  it("getPullimGrade 404·503·에러 → null(모달 노출 안 함)", async () => {
+    expect(await (await loadClient(async () => r(404))).getPullimGrade()).toBeNull();
+    expect(await (await loadClient(async () => r(503))).getPullimGrade()).toBeNull();
+    expect(await (await loadClient(async () => { throw new Error("x"); })).getPullimGrade()).toBeNull();
+  });
+  it("setPullimGrade → POST /api/pullim/grade, res.ok 반환", async () => {
+    const calls: Array<{ url: string; method?: string }> = [];
+    const { setPullimGrade } = await loadClient(async (url, init) => {
+      calls.push({ url, method: init?.method });
+      return r(200, { ok: true });
+    });
+    expect(await setPullimGrade("중1")).toBe(true);
+    expect(calls.some((c) => c.url === "/api/pullim/grade" && c.method === "POST")).toBe(true);
+  });
+  it("setPullimGrade 실패(422) → false", async () => {
+    const { setPullimGrade } = await loadClient(async () => r(422));
+    expect(await setPullimGrade("고3")).toBe(false);
+  });
+});

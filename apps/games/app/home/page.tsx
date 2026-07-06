@@ -15,12 +15,15 @@ import { DashboardStatusRow } from "@/components/dashboard/DashboardStatusRow";
 import { ActivityHeatmap } from "@/components/dashboard/ActivityHeatmap";
 import { RecommendationCard } from "@/components/RecommendationCard";
 import { RequireIdentity } from "@/components/auth/RequireIdentity";
+import { GradePrompt } from "@/components/auth/GradePrompt";
 
 // 입구 게이트(arcade 모델) — 신원(게스트/회원) 없으면 랜딩으로. plan: 2026-06-01_arcade-entry-model.md.
 export default function HomePage() {
   return (
     <RequireIdentity>
       <HomeDashboard />
+      {/* pullim 모드 회원 학년 미보유 시 수집 모달(dormant — env 미설정 시 no-op). */}
+      <GradePrompt />
     </RequireIdentity>
   );
 }

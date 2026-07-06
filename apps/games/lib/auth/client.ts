@@ -150,6 +150,42 @@ export async function getMe(): Promise<AuthUser | null> {
   return (await getAuthState()).user;
 }
 
+// ── pullim 모드 회원 학년(grade) — games-side 수집(§5.2⒜⑵). 홈 학년 수집 모달이 호출. ──
+
+/**
+ * pullim 회원 grade 조회(모달 노출 판정). 반환:
+ *  - `{ grade }` — 200. grade null 이면 미보유(모달 노출 대상).
+ *  - `null` — 비대상(feature off·미인증·장애·에러). 모달 노출 안 함.
+ * legacy 모드(PULLIM_MODE off)는 라우트가 404 → null.
+ */
+export async function getPullimGrade(): Promise<{ grade: string | null } | null> {
+  try {
+    const res = await fetch("/api/pullim/grade", { cache: "no-store" });
+    if (!res.ok) return null; // 404(비활성)·401·503(장애/미확정) → 모달 노출 안 함.
+    const data = (await res.json()) as { grade?: string | null };
+    return { grade: data.grade ?? null };
+  } catch {
+    return null;
+  }
+}
+
+/** pullim 회원 grade 저장(모달 제출). double-submit CSRF. 성공 여부 반환. */
+export async function setPullimGrade(grade: string): Promise<boolean> {
+  try {
+    const csrf = await ensureCsrf();
+    const headers: Record<string, string> = { "content-type": "application/json" };
+    if (csrf) headers["x-csrf-token"] = csrf;
+    const res = await fetch("/api/pullim/grade", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ grade }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 /**
  * 회원 신원 + "판정 가능 여부"를 함께 반환(Codex #114 R2·R4).
  * `/api/auth/me`는 **응답을 실제로 받았고** 토큰(세션 쿠키) 보유 + 백엔드 장애일 때만 503
