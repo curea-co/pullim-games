@@ -69,8 +69,8 @@
 - [x] `spec/05-비즈니스-정책.md §5.6`: 계정 가입 정책 `over14`-only → **honest consent**(게스트와 동일, 만14세 미만+보호자 동의 허용). 중등 타겟 정합 + Codex #125 R3 (G1 승인 2026-06-23). 구 정책(Codex #114 R3)은 본 개정으로 대체. 실효적 법정대리인 동의 검증은 pullim-api ADR-033 중앙 위임 시 정착.
 
 ### 2.3 정합성
-- [ ] #124 pullim-api 핸드오프(별 PR): (a) "games = 플랫폼 `games` 패키지·서비스, `junior`(주니어) 아님" 1줄, (b) **회원 프로필에 `grade`(중1~중3) 필드** 추가 — games-local `users.grade`(0003)는 P4 중앙 인증 이관 시 pullim-api 회원 프로필로 이동. 학습데이터 위임 시 학령 혼선 방지.
-- [x] 학년 입력 진입점 정합: `StartForm`(게스트)·`AuthForm`(회원가입) **양쪽 모두 학년 수집** 완료. 회원 학년은 games-local `users.grade` 에 임시 저장(P4 시 pullim-api 이관).
+- [x] #124 pullim-api 핸드오프(별 PR): (a) "games = 플랫폼 `games` 패키지·서비스, `junior`(주니어) 아님" 1줄. ~~(b) 회원 프로필에 `grade` 필드 추가 — P4 중앙 이관~~ → ⚠️ **SUPERSEDED (2026-07-05, spec/05 §5.2⒜⑵·§5.6)**: grade 는 콘텐츠 preference 라 pullim-api 이관하지 않고 **games-side 존치**(중앙 signup grade 미수집). games-local `users.grade`(0003)를 pullim 모드에서도 회원 grade projection 으로 계속 사용.
+- [x] 학년 입력 진입점 정합: `StartForm`(게스트)·`AuthForm`(회원가입) **양쪽 모두 학년 수집** 완료. 회원 학년은 games-local `users.grade` 에 저장(⚠️ 구 "P4 pullim-api 이관" 폐기 — games-side 존치, 위 SUPERSEDED. pullim 모드 회원은 별도 회원용 grade 수집 UX = delegation plan PR-2).
 
 ## 3. 비목표 / 주의
 - 게임 **삭제 없음** — 고등 전용도 보관(`지우지 말 것`, G1).
