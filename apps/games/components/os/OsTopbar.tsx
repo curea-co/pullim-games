@@ -93,13 +93,13 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
   const initial = !loaded
     ? "풀"
     : isMember
-      ? initialOf(user!.email || "회원", "회").toUpperCase()
+      ? initialOf(user!.displayName || user!.email || "회원", "회").toUpperCase()
       : isGuest
         ? initialOf(player!.nickname, "게")
         : "게";
-  // pullim 모드 회원은 email 미제공(P-A 전)이라 빈 문자열 가능 → "회원" 폴백(Codex #141).
-  // grade·표시명 정식 노출은 P-A(/games/me 확장) 후 PR-2.
-  const memberLabel = user?.email || "회원";
+  // 회원 표시명 우선순위: pullim displayName(/games/me #330) → legacy email → "회원" 폴백.
+  // pullim 미설정 회원(displayName null·email "")은 "회원"으로 표시(개인화 표시명 없음).
+  const memberLabel = user?.displayName || user?.email || "회원";
   const displayName = isMember ? memberLabel : isGuest ? `${player!.nickname} (게스트)` : "게스트";
   const modeLabel = isMember ? "로그인됨" : "게스트 모드";
   // auth 미확정(게스트도 없음) — 로그인/게스트 어느 쪽도 단정 불가.

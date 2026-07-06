@@ -110,9 +110,9 @@ export function AuthMenu() {
   }
 
   // 회원 — 표시명 + 로그아웃. (위 가드들로 여기선 user 비-null 보장.)
-  // pullim 모드 회원은 email 미제공(P-A 전) → "회원" 폴백(Codex #141). 정식 표시명은 P-A 후 PR-2.
+  // 표시명 우선순위: pullim displayName(/games/me #330) → legacy email → "회원" 폴백.
   if (!user) return null;
-  const memberLabel = user.email || "회원";
+  const memberLabel = user.displayName || user.email || "회원";
   return (
     <div className="flex items-center gap-1">
       <span

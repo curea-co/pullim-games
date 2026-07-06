@@ -99,10 +99,17 @@ describe("getAuthState — pullim 모드 정밀 게이트(/games/me introspectio
   const res = (status: number, body?: unknown): Response =>
     ({ ok: status >= 200 && status < 300, status, json: async () => body }) as Response;
 
-  it("200 + {sub} → 회원(id=sub, grade/email null=P-A 전), unavailable=false", async () => {
-    const r = await callWithFetch(async () => res(200, { sub: "usr_1", globalRole: "user", gamesFlagLevel: null }));
-    expect(r.user).toEqual({ id: "usr_1", email: "", grade: null });
+  it("200 + {sub, displayName} → 회원(id=sub·displayName 매핑, email/grade 미제공), unavailable=false", async () => {
+    const r = await callWithFetch(async () =>
+      res(200, { sub: "usr_1", globalRole: "user", gamesFlagLevel: null, displayName: "홍길동" }),
+    );
+    expect(r.user).toEqual({ id: "usr_1", email: "", grade: null, displayName: "홍길동" });
     expect(r.unavailable).toBe(false);
+  });
+
+  it("200 + displayName null(미설정 회원) → displayName null(UI 가 '회원' 폴백)", async () => {
+    const r = await callWithFetch(async () => res(200, { sub: "usr_2", displayName: null }));
+    expect(r.user).toEqual({ id: "usr_2", email: "", grade: null, displayName: null });
   });
 
   it("401 → 미인증 확정(user=null, unavailable=false)", async () => {
