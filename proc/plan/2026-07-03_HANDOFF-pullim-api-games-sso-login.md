@@ -62,7 +62,7 @@ Guards: JwtVerifyGuard  ONLY   ← EntitlementGuard('games') 붙이지 말 것
 > 대안: 신규 `/games/me` 대신 **기존 `/auth/me`(있다면) 재사용 가능 여부 회신**해 주면 games 는 그걸 쓴다. 요건은 "games flag 무관 200/401"뿐. pullim-api 판단.
 
 ### 🟠 후속 요청 (pullim 모드 활성화 전 필요 — Codex #140 P-A)
-- **`/games/me` 에 `grade` + 표시용 식별자 노출**: games 클라 auth 계약 `AuthUser = {id, email, grade}`(`lib/auth/client.ts`)는 ⒜ **`grade` 로 학년별(중1~고1) 콘텐츠 노출**, ⒝ **회원 UI(`OsTopbar`·`AuthMenu`)가 `email` 을 표시명(아바타·계정 메뉴)으로 사용**한다. 현행 `/games/me` 응답(`{sub, globalRole, gamesFlagLevel}`)엔 grade·표시명이 없어 **pullim 모드 전환 시 콘텐츠 타게팅 + 회원 UI 둘 다 깨진다**. → 중앙 가입이 `grade`(+`consent`)를 수집(umbrella §A.4)하므로, **`/games/me` 응답에 `grade` + 표시용 식별자(name/nickname 또는 마스킹 email) 추가** 요청. games 는 `AuthUser` 를 pullim 형태(`id=sub`, `grade`, `displayName`, `email` optional)로 매핑한다. **grade·표시명 계약 없이는 pullim 모드 활성화 불가**(본 slice 로그인만 검증하고, 계약 확정 후 콘텐츠·회원 UI 경로 연결).
+- **`/games/me` 에 표시용 식별자(displayName) 노출** — ⚠️ **2026-07-05 갱신(역할 분리)**: 회원 UI(`OsTopbar`·`AuthMenu`) 표시명은 identity 라 pullim-api 소유 → `/games/me` 에 `displayName` 추가. **별 핸드오프로 분리·전달**: `proc/plan/2026-07-05_HANDOFF-pullim-api-games-me-displayname.md`(pullim-api PR #330 dev 반영). **grade 는 pullim-api 요청 아님** — 콘텐츠 preference 라 games 가 자체 수집·보관(중앙 signup 미수집·auth 스키마 부재, `spec/05 §5.2`⒜⑵). 즉 본 항목의 원안("grade+표시명 둘 다 pullim-api")은 **displayName 만 pullim-api, grade 는 games-side** 로 정정됨.
 
 ---
 
