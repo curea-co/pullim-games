@@ -6,7 +6,7 @@
 **상태**: HANDOFF DRAFT — pullim-api 수용·구현·운영은 pullim-api 자체 거버넌스 따름.
 **연계**: games plan `proc/plan/2026-07-03_games-unified-login-os-delegation.md §2-D P-A`. 선행: `/games/me`·CORS(dev #312) 완료, games PR-1(pullim 모드 게이트) merged(#141).
 
-> 🎯 **범위 — `/games/me` 응답에 표시용 식별자 1건.** pullim 모드에서 games 회원 UI(아바타·계정 메뉴)가 표시명을 필요로 하는데, 현행 `/games/me` 응답(`{sub, globalRole, gamesFlagLevel}`)엔 표시명이 없다. **현재 games PR-1 은 `displayName || "회원"` 폴백으로 generic "회원" 라벨을 표시**(빈 값 아님) — 즉 증상은 UI 깨짐이 아니라 **개인화된 표시명이 없는 기능 저하**(모든 회원이 "회원"으로 보임). identity(표시명)는 `§5.6` 상 pullim-api 소유이므로 games 가 자체 저장할 수 없다 → pullim-api 가 `/games/me` 에 노출 요청(우선순위: 기능 저하 해소, 게이트·차단 이슈 아님).
+> 🎯 **범위 — `/games/me` 응답에 표시용 식별자 1건(백엔드 필드 추가).** pullim 모드에서 games 회원 UI(아바타·계정 메뉴)가 표시명을 필요로 하는데, 현행 `/games/me` 응답(`{sub, globalRole, gamesFlagLevel}`)엔 표시명이 없다. ⚠️ **현재 games 클라 구현 상태(정확)**: `AuthUser={id,email,grade}`(displayName 필드 없음)이고 UI 는 `email || "회원"` 표시 — pullim 모드 minimal 매핑에서 email="" 이라 **generic "회원"** 으로 보인다. 즉 **games 는 아직 displayName 을 소비하지 않는다**. 본 요청은 **백엔드 필드 추가(전제)** 이고, games 측 소비(`AuthUser` 에 displayName 추가 + UI 배선)는 **PR-2 후속**이다 — pullim-api 는 "displayName 추가하면 games 가 즉시 소비"로 오해하지 말 것. 증상은 UI 깨짐이 아니라 **개인화 표시명 부재(기능 저하)**. identity(표시명)는 `§5.6` 상 pullim-api 소유이므로 games 가 자체 저장 불가 → pullim-api 노출 요청(우선순위: 기능 저하 해소, 게이트·차단 이슈 아님).
 
 ## 0. 왜 이것만 요청하나 (grade 는 games-side 로 분리)
 games plan §2-D P-A 는 원래 "`/games/me` 가 **grade + 표시명**"을 요구했으나, 조사 결과 **역할을 분리**한다:
