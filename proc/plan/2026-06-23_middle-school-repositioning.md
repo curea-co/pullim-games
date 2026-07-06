@@ -70,7 +70,7 @@
 
 ### 2.3 정합성
 - [x] #124 pullim-api 핸드오프(별 PR): (a) "games = 플랫폼 `games` 패키지·서비스, `junior`(주니어) 아님" 1줄. ~~(b) 회원 프로필에 `grade` 필드 추가 — P4 중앙 이관~~ → ⚠️ **SUPERSEDED (2026-07-05, spec/05 §5.2⒜⑵·§5.6)**: grade 는 콘텐츠 preference 라 pullim-api 이관하지 않고 **games-side 존치**(중앙 signup grade 미수집). games-local `users.grade`(0003)를 pullim 모드에서도 회원 grade projection 으로 계속 사용.
-- [x] 학년 입력 진입점 정합: `StartForm`(게스트)·`AuthForm`(회원가입) **양쪽 모두 학년 수집** 완료. 회원 학년은 games-local `users.grade` 에 저장(⚠️ 구 "P4 pullim-api 이관" 폐기 — games-side 존치, 위 SUPERSEDED. pullim 모드 회원은 별도 회원용 grade 수집 UX = delegation plan PR-2).
+- [x] 학년 입력 진입점 정합: `StartForm`(게스트)·`AuthForm`(회원가입) **양쪽 모두 학년 수집** 완료. **legacy 회원 학년은 현행대로 가입 시 games `users.grade` 서버 저장**(무변경). ⚠️ 구 "P4 pullim-api 이관" 폐기 — games-side 존치(위 SUPERSEDED). **단 "games-side 존치"와 "pullim projection 바로 사용"은 별개**: pullim 회원 grade 를 projection row 에 담으려면 PR-2 스키마 마이그레이션(`email/pw` nullable + `sub` 추가) 선행 필수 — `0003` 만으로 pullim grade 준비 아님(migration 주석·spec/09 §9.3). pullim 회원은 별도 회원용 grade 수집 UX(delegation plan PR-2).
 
 ## 3. 비목표 / 주의
 - 게임 **삭제 없음** — 고등 전용도 보관(`지우지 말 것`, G1).
