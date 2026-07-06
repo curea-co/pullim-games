@@ -9,6 +9,15 @@ import { randomUUID } from "node:crypto";
 import { isGrade } from "@/lib/core/player";
 import { query, type QueryFn } from "@/lib/server/db/client";
 
+/**
+ * 🔴 회원 서버 데이터(grade·projection) 저장 활성화 플래그 — **P-C 선행조건 가드**(Codex #146).
+ * `spec/05 §5.2⒜⒞·§5.6`·plan §2-D P-C: 중앙 계정 삭제 → games projection 삭제 전파 계약이
+ * 미확정이면 회원 서버 저장(projection·grade)을 활성화하면 안 된다(중앙 삭제 후 orphan = 법적
+ * 파기 위반). pullim 모드(로그인/게이트)와 **별개** — 로그인은 되되 회원 서버 저장은 이 플래그로 게이트.
+ * P-C(pullim-api 삭제 webhook/job) 확정 후 운영이 `PULLIM_MEMBER_DATA_ENABLED=1` 로 켠다. 기본 OFF.
+ */
+export const MEMBER_DATA_STORAGE_ENABLED = process.env.PULLIM_MEMBER_DATA_ENABLED === "1";
+
 /** pullim projection row 의 앱 노출 형태(legacy email/pw 컬럼 비노출). */
 export type PullimMemberRow = { id: string; sub: string; grade: string | null };
 

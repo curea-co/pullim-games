@@ -19,14 +19,23 @@ function pullimSessionCookieHeader(cookieHeader: string | null): string {
 }
 
 /**
- * pullim 회원 sub 서버 확인. `*-pullim-at` 쿠키를 pullim-api `/games/me` 로 introspection.
- * 반환: 유효 회원=sub, 그 외(미인증·계약위반·pullim 모드 아님)=null. 장애(5xx·네트워크·timeout)도 null
- * (쓰기 경로는 fail-closed — 신원 미확정이면 mutation 거부).
+ * introspection 결과 — **미인증(401)과 장애(5xx·네트워크·timeout)를 구분**한다(Codex #146).
+ * `unavailable=true` 면 pullim-api 일시 장애 → 라우트는 401 아닌 503 으로 내려 로그인 회원을
+ * 미인증으로 재분류하지 않는다(§5.2 2단 게이트: 5xx·네트워크는 fail-open/unavailable).
+ * 쓰기(mutation)는 sub 확정(`unavailable=false && sub`)일 때만 진행(fail-closed).
  */
-export async function resolvePullimSub(cookieHeader: string | null): Promise<string | null> {
-  if (!PULLIM_MODE || !PULLIM_DOMAIN_API_URL) return null;
+export type PullimSubResult = { sub: string | null; unavailable: boolean };
+
+/**
+ * pullim 회원 sub 서버 확인. `*-pullim-at` 쿠키를 pullim-api `/games/me` 로 introspection.
+ * - 200+sub → `{sub, unavailable:false}`  · 401/기타 4xx → `{sub:null, unavailable:false}`(미인증 확정)
+ * - 5xx·네트워크·timeout → `{sub:null, unavailable:true}`(장애 — 503 매핑)
+ * - pullim 모드 아님·pullim-at 쿠키 없음 → `{sub:null, unavailable:false}`
+ */
+export async function resolvePullimSub(cookieHeader: string | null): Promise<PullimSubResult> {
+  if (!PULLIM_MODE || !PULLIM_DOMAIN_API_URL) return { sub: null, unavailable: false };
   const cookie = pullimSessionCookieHeader(cookieHeader);
-  if (!cookie) return null;
+  if (!cookie) return { sub: null, unavailable: false };
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), INTROSPECT_TIMEOUT_MS);
@@ -36,11 +45,15 @@ export async function resolvePullimSub(cookieHeader: string | null): Promise<str
       signal: controller.signal,
       cache: "no-store",
     });
-    if (!res.ok) return null;
-    const data = (await res.json()) as { sub?: unknown };
-    return typeof data.sub === "string" && data.sub ? data.sub : null;
+    if (res.ok) {
+      const data = (await res.json()) as { sub?: unknown };
+      const sub = typeof data.sub === "string" && data.sub ? data.sub : null;
+      return { sub, unavailable: false }; // sub 없으면 계약 위반 → 미인증 취급(닫힘).
+    }
+    // 5xx = 장애(unavailable), 401·기타 4xx = 미인증 확정(닫힘).
+    return { sub: null, unavailable: res.status >= 500 };
   } catch {
-    return null; // 장애·timeout·파싱오류 = 신원 미확정 → 쓰기 거부.
+    return { sub: null, unavailable: true }; // 네트워크·timeout·파싱오류 = 장애.
   } finally {
     clearTimeout(timer);
   }
