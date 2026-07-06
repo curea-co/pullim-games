@@ -36,7 +36,7 @@ games plan §2-D P-A 는 원래 "`/games/me` 가 **grade + 표시명**"을 요�
 
 ## 2. games 측 후속 (핸드오프 아님 — 참고)
 - `/games/me` 가 `displayName` 노출하면 games 는 `AuthUser` 매핑을 `{ id: sub, displayName, grade(게임 자체), email optional }` 로 완성(PR-2). 현재 PR-1 은 `email:""` 최소 매핑 + "회원" 폴백.
-- 회원 grade 는 games 가 로그인 후 미보유 시 자체 수집(게스트 StartForm 재사용)해 games projection 에 저장(PR-2).
+- 회원 grade 는 games 가 로그인 후 미보유 시 자체 수집해 games projection 에 저장(PR-2, 회원용 grade 수집 UX). ⚠️ 게스트 `StartForm` 은 신원 있으면 `/home` 리다이렉트 + 게스트 프로필 생성 책임이라 그대로 재사용 불가 — 재사용 여부·컴포넌트 분리는 games PR-2 설계 결정(pullim-api 무관).
 
 ## 3. 검증 (반영 후)
 - `GET /games/me` 200 응답에 `displayName` 포함(회원 displayName 설정 시 값, 미설정 시 null).
