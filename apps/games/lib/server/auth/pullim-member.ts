@@ -10,11 +10,15 @@ import { isGrade } from "@/lib/core/player";
 import { query, type QueryFn } from "@/lib/server/db/client";
 
 /**
- * 🔴 회원 서버 데이터(grade·projection) 저장 활성화 플래그 — **P-C 선행조건 가드**(Codex #146).
- * `spec/05 §5.2⒜⒞·§5.6`·plan §2-D P-C: 중앙 계정 삭제 → games projection 삭제 전파 계약이
- * 미확정이면 회원 서버 저장(projection·grade)을 활성화하면 안 된다(중앙 삭제 후 orphan = 법적
- * 파기 위반). pullim 모드(로그인/게이트)와 **별개** — 로그인은 되되 회원 서버 저장은 이 플래그로 게이트.
- * P-C(pullim-api 삭제 webhook/job) 확정 후 운영이 `PULLIM_MEMBER_DATA_ENABLED=1` 로 켠다. 기본 OFF.
+ * 🔴 회원 서버 데이터(grade·projection) 저장 활성화 플래그 — **활성화 hard precondition 가드**(Codex #146).
+ * plan §2-D 상 회원 서버 저장 활성화는 **P-B·P-C 둘 다** 닫혀야 한다(P-A displayName 은 완료):
+ *  - **P-B(legacy 회원 재연결)**: 기존 legacy 회원이 SSO 로그인 시 fingerprint·서버 데이터가 새 `sub`
+ *    projection 에 연결돼야 한다(first-writer-wins 상충 해소). 미완료 상태로 켜면 legacy 회원 데이터가
+ *    새 projection 에서 끊기는 cutover 사고(§5.2).
+ *  - **P-C(중앙 삭제 파기 전파)**: 중앙 계정 삭제 → games projection 삭제 전파(webhook/job) 미확정이면
+ *    저장 시 중앙 삭제 후 orphan = 법적 파기 위반(§5.5·§5.6).
+ * pullim 모드(로그인/게이트)와 **별개** — 로그인은 되되 회원 서버 저장은 이 플래그로 게이트.
+ * **운영은 P-B·P-C 확정을 함께 확인한 뒤** `PULLIM_MEMBER_DATA_ENABLED=1` 로 켠다. 기본 OFF.
  */
 export const MEMBER_DATA_STORAGE_ENABLED = process.env.PULLIM_MEMBER_DATA_ENABLED === "1";
 
