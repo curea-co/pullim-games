@@ -4,7 +4,7 @@
 // 닫기(다음에) 가능 — dismiss 는 이 세션만(sessionStorage), 다음 세션/로그인 시 재노출.
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PULLIM_MODE } from "@/lib/auth/pullim-mode";
 import { useIdentity } from "@/lib/core/player/use-identity";
 import { getPullimGrade, setPullimGrade } from "@/lib/auth/client";
@@ -13,17 +13,39 @@ import { Button } from "@/components/ui/button";
 
 const DISMISS_KEY = "pullim-games:grade-prompt-dismissed";
 
+// sessionStorage 읽기/쓰기 — 차단 환경(웹뷰·프라이버시 모드)에서 SecurityError 나므로 try/catch.
+// 실패 시 dismiss 는 세션 메모리만(모듈 변수)로 처리해 홈 진입 effect 가 터지지 않게 한다(Codex #147).
+let dismissedMemory = false;
+function isDismissed(): boolean {
+  if (dismissedMemory) return true;
+  try {
+    return sessionStorage.getItem(DISMISS_KEY) === "1";
+  } catch {
+    return false; // storage 차단 = "판정 불가" → 미dismiss 로 진행(안전).
+  }
+}
+function markDismissed(): void {
+  dismissedMemory = true; // storage 실패해도 이 세션 재노출 방지(메모리 폴백).
+  try {
+    sessionStorage.setItem(DISMISS_KEY, "1");
+  } catch {
+    /* storage 차단 무시 — 메모리 폴백으로 이 세션은 유지 */
+  }
+}
+
 export function GradePrompt() {
   const { ready, authUser } = useIdentity();
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState<Grade | "">("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const firstGradeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     // pullim 모드 회원 + 이 세션 미dismiss 일 때만 grade 보유 확인. 게스트·legacy·비활성은 no-op.
     if (!PULLIM_MODE || !ready || !authUser) return;
-    if (typeof sessionStorage !== "undefined" && sessionStorage.getItem(DISMISS_KEY)) return;
+    if (isDismissed()) return;
     let cancelled = false;
     getPullimGrade().then((r) => {
       // r null(비활성·미인증·장애) → 노출 안 함. grade null(미보유) → 노출.
@@ -34,15 +56,39 @@ export function GradePrompt() {
     };
   }, [ready, authUser]);
 
+  // 모달 오픈 시 첫 학년 버튼에 initial focus(키보드 사용자가 모달부터 조작).
+  useEffect(() => {
+    if (open) firstGradeRef.current?.focus();
+  }, [open]);
+
   if (!open) return null;
 
   const dismiss = () => {
-    try {
-      sessionStorage.setItem(DISMISS_KEY, "1"); // 이 세션만 — 다음 세션/로그인 시 재노출.
-    } catch {
-      /* sessionStorage 불가 무시 */
-    }
+    markDismissed();
     setOpen(false);
+  };
+
+  // focus trap + Escape — role="dialog" 만으론 배경(HomeDashboard)으로 Tab 이 새므로 트랩(Codex #147).
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") {
+      if (!busy) dismiss();
+      return;
+    }
+    if (e.key !== "Tab" || !cardRef.current) return;
+    const focusable = cardRef.current.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])',
+    );
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+    if (e.shiftKey && active === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && active === last) {
+      e.preventDefault();
+      first.focus();
+    }
   };
 
   const save = async () => {
@@ -61,6 +107,7 @@ export function GradePrompt() {
       aria-modal="true"
       aria-labelledby="grade-prompt-title"
       className="fixed inset-0 z-[200] flex items-center justify-center bg-black/40 p-4"
+      onKeyDown={onKeyDown}
       onClick={() => {
         // 저장 중엔 backdrop dismiss 차단(Codex #147) — 저장이 5xx/네트워크로 실패해도 모달이
         // 이미 닫혀 세션 dismiss 되면 같은 세션 재노출 불가 → 학년 못 저장한 채 진행. busy 중 무시.
@@ -68,6 +115,7 @@ export function GradePrompt() {
       }}
     >
       <div
+        ref={cardRef}
         className="w-full max-w-sm rounded-md border border-pullim-slate-200 bg-card p-6 shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
@@ -79,9 +127,10 @@ export function GradePrompt() {
         </p>
 
         <div className="mt-5 grid grid-cols-4 gap-2" role="group" aria-label="학년 선택">
-          {GRADES.map((g) => (
+          {GRADES.map((g, i) => (
             <button
               key={g}
+              ref={i === 0 ? firstGradeRef : undefined}
               type="button"
               aria-pressed={selected === g}
               onClick={() => setSelected(g)}
