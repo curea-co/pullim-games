@@ -23,7 +23,11 @@ function isDismissed(userId: string): boolean {
   try {
     return sessionStorage.getItem(dismissKeyFor(userId)) === "1";
   } catch {
-    return false; // storage 차단 = "판정 불가" → 미dismiss 로 진행(안전).
+    // ⚠️ storage 차단(웹뷰·프라이버시)에서도 미dismiss 로 진행해 **모달을 노출한다**(Codex #147).
+    //   노출 게이트는 sessionStorage 가 아니라 서버 플래그(MEMBER_DATA_STORAGE_ENABLED, /api/pullim/grade
+    //   가 게이트)다. storage 차단 시 모달을 숨기면 그 환경의 회원은 학년 수집이 조용히 스킵된다 →
+    //   grade 수집(P-A⑵ 목적)을 우선. dismiss 지속은 메모리 폴백(이 세션)·저장 시 서버 grade 로 재노출 종료.
+    return false;
   }
 }
 function markDismissed(userId: string): void {
