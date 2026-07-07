@@ -4,9 +4,9 @@
 **From**: pullim-games (FE·데이터) 세션
 **To**: pullim-api 세션
 **상태**: HANDOFF DRAFT — pullim-api 수용·구현·운영은 pullim-api 자체 거버넌스 따름.
-**연계**: games plan `proc/plan/2026-07-03_games-unified-login-os-delegation.md §2-D P-B·P-C`, spec `05-비즈니스-정책.md §5.2/§5.5/§5.6`, `09-기술-환경.md §9.3`. 선행 완료: P-A(displayName #330·grade games-side #146/#147), PR-1 게이트(#141).
+**연계**: games plan `proc/plan/2026-07-03_games-unified-login-os-delegation.md §2-D P-B·P-C`, spec `05-비즈니스-정책.md §5.2/§5.5/§5.6`, `09-기술-환경.md §9.3`. 관련 진행: PR-1 게이트(#141) merged, P-A(displayName pullim-api #330 + games 소비, grade games-side #146/#147) 구현 진행 중. ⚠️ **P-A 완료 판정은 본 핸드오프가 하지 않는다** — games plan `§2-D` P-A 체크는 아직 열려 있고 `AuthUser` 최종 배선·회원 grade UX 마감은 PR-2 로 추적 중이다(본 문서 범위 밖). 즉 **활성화 blocker 가 P-B/P-C 만 남았다는 뜻이 아니다** — 본 문서는 그중 **pullim-api 의존 두 계약**만 다룬다.
 
-> 🎯 **범위 — pullim 모드 회원 서버 데이터 저장을 켜기(활성화) 위한 마지막 두 hard precondition.** games 는 회원 학년(`grade`)·학습 데이터를 **games 전용 Postgres 의 `sub` projection row** 에 저장하려 하는데(§9.3 키 모델: 저장 키는 `users.id`, `sub`=매핑 컬럼), 이 저장을 켜는 순간 두 계약이 선행 필수다 — ⑴ **기존 legacy 회원의 데이터를 새 `sub` 에 재연결**(P-B, 데이터 유실·고아 방지), ⑵ **중앙 계정 삭제 → games projection 파기 전파**(P-C, 법적 파기). 둘 다 **games 단독으로 못 닫는다** — identity·삭제 권위가 pullim-api 에 있기 때문. 본 문서는 *무엇이 필요한지*(방향+요구)를 전하고, **최종 계약 세부는 pullim-api 와 공동 확정**한다(단정 아님). games 측 소비 코드는 이미 dormant 로 대기(활성화 게이트 `PULLIM_MEMBER_DATA_ENABLED`=off).
+> 🎯 **범위 — pullim 모드 회원 서버 데이터 저장(활성화) 의 pullim-api 의존 두 precondition.** games 는 회원 학년(`grade`)·학습 데이터를 **games 전용 Postgres 의 `sub` projection row** 에 저장하려 하는데(§9.3 키 모델: 저장 키는 `users.id`, `sub`=매핑 컬럼), 이 저장을 켜려면 두 계약이 선행 필수다 — ⑴ **기존 legacy 회원의 데이터를 새 `sub` 에 재연결**(P-B, 데이터 유실·고아 방지), ⑵ **중앙 계정 삭제 → games projection 파기 전파**(P-C, 법적 파기). 이 둘은 **games 단독으로 못 닫는다** — identity·삭제 권위가 pullim-api 에 있기 때문. ⚠️ **활성화 blocker 는 P-B/P-C 가 전부가 아니다** — P-A(회원 메타데이터 계약)의 games-side 마감(PR-2)이 별도로 진행 중이며 그 완료 판정은 games plan `§2-D` 가 추적한다(본 문서 범위 밖). 본 문서는 *pullim-api 에 무엇이 필요한지*(방향+요구)를 전하고, **최종 계약 세부는 pullim-api 와 공동 확정**한다(단정 아님). games 측 소비 코드는 이미 dormant 로 대기(활성화 게이트 `PULLIM_MEMBER_DATA_ENABLED`=off).
 
 ---
 
