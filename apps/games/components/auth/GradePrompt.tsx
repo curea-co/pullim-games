@@ -61,7 +61,11 @@ export function GradePrompt() {
       aria-modal="true"
       aria-labelledby="grade-prompt-title"
       className="fixed inset-0 z-[200] flex items-center justify-center bg-black/40 p-4"
-      onClick={dismiss}
+      onClick={() => {
+        // 저장 중엔 backdrop dismiss 차단(Codex #147) — 저장이 5xx/네트워크로 실패해도 모달이
+        // 이미 닫혀 세션 dismiss 되면 같은 세션 재노출 불가 → 학년 못 저장한 채 진행. busy 중 무시.
+        if (!busy) dismiss();
+      }}
     >
       <div
         className="w-full max-w-sm rounded-md border border-pullim-slate-200 bg-card p-6 shadow-lg"
@@ -71,7 +75,7 @@ export function GradePrompt() {
           학년을 알려주세요
         </h2>
         <p className="mt-1.5 text-sm text-type-secondary">
-          학년에 맞는 문제를 보여드릴게요. 나중에 계정 메뉴에서 바꿀 수 있어요.
+          학년에 맞는 문제를 보여드릴게요.
         </p>
 
         <div className="mt-5 grid grid-cols-4 gap-2" role="group" aria-label="학년 선택">
