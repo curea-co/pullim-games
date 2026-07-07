@@ -11,23 +11,25 @@ import { getPullimGrade, setPullimGrade } from "@/lib/auth/client";
 import { GRADES, type Grade } from "@/lib/core/player";
 import { Button } from "@/components/ui/button";
 
-const DISMISS_KEY = "pullim-games:grade-prompt-dismissed";
+// dismiss 는 **사용자별**(authUser.id=sub)로 분리한다(Codex #147) — 같은 탭에서 A 가 "다음에" 후
+// 로그아웃하고 B 가 로그인하면 B 는 자기 key 가 없어 프롬프트가 다시 뜬다(A dismiss 상속 방지).
+const dismissKeyFor = (userId: string) => `pullim-games:grade-prompt-dismissed:${userId}`;
 
-// sessionStorage 읽기/쓰기 — 차단 환경(웹뷰·프라이버시 모드)에서 SecurityError 나므로 try/catch.
-// 실패 시 dismiss 는 세션 메모리만(모듈 변수)로 처리해 홈 진입 effect 가 터지지 않게 한다(Codex #147).
-let dismissedMemory = false;
-function isDismissed(): boolean {
-  if (dismissedMemory) return true;
+// sessionStorage 읽기/쓰기 — 차단 환경(웹뷰·프라이버시)에서 SecurityError 나므로 try/catch.
+// 실패 시 세션 메모리(모듈 Set, 사용자별)로 폴백해 홈 진입 effect 가 터지지 않게 한다.
+const dismissedMemory = new Set<string>();
+function isDismissed(userId: string): boolean {
+  if (dismissedMemory.has(userId)) return true;
   try {
-    return sessionStorage.getItem(DISMISS_KEY) === "1";
+    return sessionStorage.getItem(dismissKeyFor(userId)) === "1";
   } catch {
     return false; // storage 차단 = "판정 불가" → 미dismiss 로 진행(안전).
   }
 }
-function markDismissed(): void {
-  dismissedMemory = true; // storage 실패해도 이 세션 재노출 방지(메모리 폴백).
+function markDismissed(userId: string): void {
+  dismissedMemory.add(userId); // storage 실패해도 이 세션 재노출 방지(메모리 폴백).
   try {
-    sessionStorage.setItem(DISMISS_KEY, "1");
+    sessionStorage.setItem(dismissKeyFor(userId), "1");
   } catch {
     /* storage 차단 무시 — 메모리 폴백으로 이 세션은 유지 */
   }
@@ -42,10 +44,12 @@ export function GradePrompt() {
   const cardRef = useRef<HTMLDivElement>(null);
   const firstGradeRef = useRef<HTMLButtonElement>(null);
 
+  const userId = authUser?.id ?? null;
+
   useEffect(() => {
-    // pullim 모드 회원 + 이 세션 미dismiss 일 때만 grade 보유 확인. 게스트·legacy·비활성은 no-op.
-    if (!PULLIM_MODE || !ready || !authUser) return;
-    if (isDismissed()) return;
+    // pullim 모드 회원 + 이 사용자 미dismiss 일 때만 grade 보유 확인. 게스트·legacy·비활성은 no-op.
+    if (!PULLIM_MODE || !ready || !userId) return;
+    if (isDismissed(userId)) return;
     let cancelled = false;
     getPullimGrade().then((r) => {
       // r null(비활성·미인증·장애) → 노출 안 함. grade null(미보유) → 노출.
@@ -54,7 +58,7 @@ export function GradePrompt() {
     return () => {
       cancelled = true;
     };
-  }, [ready, authUser]);
+  }, [ready, userId]);
 
   // 모달 오픈 시 첫 학년 버튼에 initial focus(키보드 사용자가 모달부터 조작).
   useEffect(() => {
@@ -64,7 +68,7 @@ export function GradePrompt() {
   if (!open) return null;
 
   const dismiss = () => {
-    markDismissed();
+    if (userId) markDismissed(userId);
     setOpen(false);
   };
 
