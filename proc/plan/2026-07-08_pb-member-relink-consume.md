@@ -1,5 +1,7 @@
 # P-B 회원 재연결 소비 — `/games/me` `emailMatchHash` lazy 재연결
 
+> ⏸️ **보류(DEFERRED) — 2026-07-08.** pullim-api 가 `/games/me` 의 `emailMatchHash` 를 **revert**(pullim-api PR #373)했다. 따라서 이 소비 코드(#149: `pullim-relink.ts`·`pullim-member.ts` relink 경로·introspect·마이그레이션 0005/0006)는 **영구 dormant/inert** 상태다 — API 가 `emailMatchHash` 를 안 주므로 재연결이 발동하지 않는다(introspect 가 옵션 필드로 fail-soft 처리 → null → no-op). games 회원 데이터 자체가 아직 미라이브(`PULLIM_MEMBER_DATA_ENABLED=off`)라 pullim-Q 선례처럼 **fresh-start·보류**로 정렬했다(핸드오프 `2026-07-07_...member-relink-P-B.md` = 철회). **이 코드는 의도적으로 파킹된 것이며 dead-path 결함이 아니다** — 제거(A1) 대신 보존(A2) 결정. games 실회원 go-live 시 재판단(그때 정말 필요하면 pullim-api emailMatchHash 부활 또는 대안 설계).
+
 ## 목표
 
 pullim-api가 회신한 P-B 계약(`GET /games/me` 의 `emailMatchHash`)을 games 가 소비해,
