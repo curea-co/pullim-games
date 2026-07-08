@@ -233,10 +233,28 @@ export async function getAuthState(): Promise<{
   }
 }
 
+// 프로필 실명(auth `GET /me` 의 `name`, KCB 복호 — ADR-048 owner-only). best-effort:
+// 실패·미제공이면 null → 호출부가 /games/me displayName 으로 폴백. ⚠️ `/me` 는 email 등 본인 PII 도
+// 주지만 프로필엔 **`name` 만** 취한다(핸드오프 2026-07-08_...profile-realname: 타 표면·로그 노출 금지).
+async function fetchPullimRealName(): Promise<string | null> {
+  try {
+    const res = await fetch(`${PULLIM_DOMAIN_API_URL}/me`, {
+      credentials: "include",
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { name?: string | null };
+    return typeof data.name === "string" && data.name ? data.name : null;
+  } catch {
+    return null;
+  }
+}
+
 // pullim 모드 정밀 게이트(2단 게이트 계약 클라 측, spec/05 §5.2 R9) — 회원 세션 검증을
 // pullim-api introspection(`GET /games/me`, credentials:include)으로 한다. 미들웨어 coarse
 // (`*-pullim-at` presence)를 통과한 트래픽의 만료/위조 정밀 판정 + fail-open.
-// id=sub 로 게이트 판정 + `displayName`(pullim-api #330) 을 회원 UI 표시명으로 매핑.
+// id=sub 로 게이트 판정 + 프로필 표시명은 auth `GET /me.name`(KCB 실명, ADR-048) → 없으면
+//   `/games/me.displayName`(email 별칭) 폴백. OS(pullim-web)와 같은 실명 소스로 일치시킨다.
 // ⚠️ `grade` 는 pullim-api 아님(games-side, spec/05 §5.2⒜⑵) → 여기선 null, 회원 grade 수집·
 //    콘텐츠 타게팅은 후속(별도 회원용 grade UX). email 은 pullim 모드 미보관(§5.6) → "".
 async function getPullimAuthState(): Promise<{
@@ -251,10 +269,18 @@ async function getPullimAuthState(): Promise<{
     if (res.ok) {
       const data = (await res.json()) as { sub?: string; displayName?: string | null };
       if (!data.sub) return { user: null, unavailable: false }; // 계약 위반 방어.
+      // 프로필 표시명 = auth /me.name(실명) → 없으면 /games/me.displayName(email 별칭) 폴백.
+      //   best-effort — /me 실패해도 게이트(sub)엔 영향 없음.
+      const realName = await fetchPullimRealName();
       // AuthUser — id=sub, displayName(표시명, null 이면 UI 가 "회원" 폴백). email/grade 는
       // pullim 모드 미제공(email=§5.6 중앙 소유, grade=games-side 후속) → "" / null.
       return {
-        user: { id: data.sub, email: "", grade: null, displayName: data.displayName ?? null },
+        user: {
+          id: data.sub,
+          email: "",
+          grade: null,
+          displayName: realName ?? data.displayName ?? null,
+        },
         unavailable: false,
       };
     }

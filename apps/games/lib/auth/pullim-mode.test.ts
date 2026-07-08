@@ -112,6 +112,40 @@ describe("getAuthState — pullim 모드 정밀 게이트(/games/me introspectio
     expect(r.user).toEqual({ id: "usr_2", email: "", grade: null, displayName: null });
   });
 
+  // URL 별로 응답을 다르게 주는 fetch mock(/games/me vs auth /me).
+  async function callWithRouted(routes: (url: string) => Response) {
+    vi.resetModules();
+    vi.stubGlobal("fetch", vi.fn(async (url: string) => routes(url)));
+    const { getAuthState } = await import("./client");
+    return getAuthState();
+  }
+
+  // /games/me 는 "/games/me" 로, auth /me 는 "/me"(단 /games/me 아님)로 끝난다.
+  const isAuthMe = (url: string) => url.endsWith("/me") && !url.endsWith("/games/me");
+
+  it("프로필 표시명 = auth /me.name(실명) 우선 — /games/me.displayName 덮어씀", async () => {
+    const r = await callWithRouted((url) =>
+      isAuthMe(url) // auth /me (실명)
+        ? res(200, { sub: "usr_1", displayName: "psh95king", name: "박승훈", email: "a@b.com" })
+        : res(200, { sub: "usr_1", displayName: "psh95king" }), // /games/me (email 별칭)
+    );
+    // 실명이 표시명으로. email 등 PII 는 AuthUser 에 싣지 않음(email="").
+    expect(r.user).toEqual({ id: "usr_1", email: "", grade: null, displayName: "박승훈" });
+  });
+
+  it("auth /me.name 없음/실패 → /games/me.displayName 폴백", async () => {
+    const rNoName = await callWithRouted(() =>
+      res(200, { sub: "usr_1", displayName: "psh95king" }), // 양쪽 다 name 없음
+    );
+    expect(rNoName.user?.displayName).toBe("psh95king");
+    const rMeFail = await callWithRouted((url) =>
+      isAuthMe(url)
+        ? res(500) // /me 장애
+        : res(200, { sub: "usr_1", displayName: "psh95king" }),
+    );
+    expect(rMeFail.user?.displayName).toBe("psh95king"); // 폴백(게이트엔 영향 없음)
+  });
+
   it("401 → 미인증 확정(user=null, unavailable=false)", async () => {
     const r = await callWithFetch(async () => res(401));
     expect(r.user).toBeNull();
