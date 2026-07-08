@@ -1,0 +1,12 @@
+-- P-B 재연결 해결 상태 추적 (2026-07-08).
+-- 근거: proc/plan/2026-07-08_pb-member-relink-consume.md §E, Codex #149 리뷰(dormant 영구 스킵 회귀).
+-- ⚠️ 대상 = **games 자체 Postgres**(DATABASE_URL).
+--
+-- 문제: 재연결을 "sub row 최초 생성(created) 시 1회"로만 시도하면, 첫 진입 시점에 pepper 가
+--   미주입(dormant)이던 회원은 이후 pepper 가 들어와도 영구히 재연결되지 못한다. dormant 는
+--   fail-soft(재시도 가능)여야 하므로, "재연결이 종결됐는지"를 상태로 남겨 미종결 회원만 재시도한다.
+--
+-- relink_resolved_at: 재연결이 **종결**된 시각(epoch ms). NULL = 미종결(다음 write 진입 시 재시도).
+--   - linked(1:1 이관)·no_match(매칭 없음=신규/이미 종결) → 종결(set).
+--   - dormant(pepper·해시 없음)·ambiguous(다중 매칭 보류) → 미종결(NULL 유지) → 재시도.
+ALTER TABLE users ADD COLUMN IF NOT EXISTS relink_resolved_at BIGINT;

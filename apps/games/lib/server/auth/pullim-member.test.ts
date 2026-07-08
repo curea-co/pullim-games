@@ -12,24 +12,24 @@ function mockExec(rows: Row[]) {
 }
 
 describe("ensurePullimMember — sub projection lazy upsert", () => {
-  it("INSERT ... ON CONFLICT(sub) 로 upsert, id·sub·정규화 grade·created 반환", async () => {
-    const exec = mockExec([{ id: "u_local", sub: "sub_1", grade: "중2", created: true }]);
+  it("INSERT ... ON CONFLICT(sub) 로 upsert, id·sub·정규화 grade·relinkResolvedAt 반환", async () => {
+    const exec = mockExec([{ id: "u_local", sub: "sub_1", grade: "중2", relink_resolved_at: null }]);
     const r = await ensurePullimMember("sub_1", exec as never);
-    expect(r).toEqual({ id: "u_local", sub: "sub_1", grade: "중2", created: true });
+    expect(r).toEqual({ id: "u_local", sub: "sub_1", grade: "중2", relinkResolvedAt: null });
     const sql = (exec.mock.calls[0][0] as string);
     expect(sql).toMatch(/INSERT INTO users/);
     expect(sql).toMatch(/ON CONFLICT \(sub\) WHERE sub IS NOT NULL/);
-    expect(sql).toMatch(/xmax::text::bigint = 0\) AS created/); // 최초 생성 판정
+    expect(sql).toMatch(/RETURNING id, sub, grade, relink_resolved_at/);
   });
 
-  it("created=false(재진입 upsert) 반영", async () => {
-    const r = await ensurePullimMember("s", mockExec([{ id: "i", sub: "s", grade: "중1", created: false }]) as never);
-    expect(r.created).toBe(false);
+  it("relink_resolved_at(BIGINT 문자열) → number 변환", async () => {
+    const r = await ensurePullimMember("s", mockExec([{ id: "i", sub: "s", grade: "중1", relink_resolved_at: "1700000000000" }]) as never);
+    expect(r.relinkResolvedAt).toBe(1700000000000);
   });
 
   it("타겟 밖 grade(고3)·null 은 null 로 정규화", async () => {
-    expect((await ensurePullimMember("s", mockExec([{ id: "i", sub: "s", grade: "고3", created: true }]) as never)).grade).toBeNull();
-    expect((await ensurePullimMember("s", mockExec([{ id: "i", sub: "s", grade: null, created: true }]) as never)).grade).toBeNull();
+    expect((await ensurePullimMember("s", mockExec([{ id: "i", sub: "s", grade: "고3", relink_resolved_at: null }]) as never)).grade).toBeNull();
+    expect((await ensurePullimMember("s", mockExec([{ id: "i", sub: "s", grade: null, relink_resolved_at: null }]) as never)).grade).toBeNull();
   });
 });
 

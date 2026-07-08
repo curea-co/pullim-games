@@ -10,6 +10,7 @@
 //   - pepper 미주입/emailMatchHash null → **dormant**(no-op) — pullim-api 도 salt 없으면 지문 null.
 // ⚠️ 반드시 트랜잭션 QueryFn(withTx) 안에서 호출한다 — 이관·파기가 원자적이어야 부분 이관 사고가 없다.
 import "server-only";
+import { isGrade } from "@/lib/core/player";
 import type { QueryFn } from "@/lib/server/db/client";
 import { computeEmailMatchHash, getEmailMatchPepper } from "./email-match-hash";
 
@@ -109,8 +110,10 @@ export async function relinkLegacyMember(
   for (const sql of CHILD_MIGRATIONS) {
     await q(sql, [member.id, legacy.id]);
   }
-  // grade 승계 — member 가 grade 없을 때만 legacy grade 로(모달 수집값이 이후 덮어쓸 수 있음).
-  if (member.grade === null && legacy.grade !== null) {
+  // grade 승계 — member 가 grade 없고, legacy grade 가 **타겟(중1~고1) 범위 내**일 때만 승계한다.
+  //   범위 밖 legacy 값(고3 등)은 승계하지 않는다 — 쓰기 단계에서 정규화하지 않으면 잘못된 값이
+  //   projection 에 잔존한다(read 정규화 계약과 불일치, Codex #149). 모달 수집값이 이후 덮어쓸 수 있음.
+  if (member.grade === null && isGrade(legacy.grade)) {
     await q("UPDATE users SET grade = $2, updated_at = $3 WHERE id = $1 AND grade IS NULL", [
       member.id,
       legacy.grade,

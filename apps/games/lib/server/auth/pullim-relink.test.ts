@@ -107,6 +107,17 @@ describe("relinkLegacyMember — 안전 규칙(§5.2)", () => {
     await relinkLegacyMember({ id: "member_1", grade: "고1" }, "hash", fn as never);
     expect(calls.some((c) => /UPDATE users SET grade/.test(c.sql))).toBe(false);
   });
+
+  it("🔴 타겟 밖 legacy grade(고3) 는 승계 안 함(쓰기 정규화 — 잘못된 값 잔존 방지)", async () => {
+    const { fn, calls } = routedExec([
+      { match: /SELECT id, email FROM users/, rows: [] },
+      { match: /FOR UPDATE/, rows: [{ id: "legacy_1", grade: "고3" }] },
+    ]);
+    await relinkLegacyMember({ id: "member_1", grade: null }, "hash", fn as never);
+    expect(calls.some((c) => /UPDATE users SET grade/.test(c.sql))).toBe(false);
+    // 단, 자식 이관·파기는 정상 진행(grade 만 스킵)
+    expect(calls.some((c) => /DELETE FROM users/.test(c.sql))).toBe(true);
+  });
 });
 
 describe("backfillLegacyEmailMatchHashes — 멱등 백필", () => {
