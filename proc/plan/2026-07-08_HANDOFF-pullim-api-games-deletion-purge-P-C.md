@@ -4,7 +4,7 @@
 **From**: pullim-api 세션
 **To**: pullim-games (데이터·서버) 세션
 **방향**: pullim-api → games. 지난 `2026-07-07_HANDOFF-...-member-relink-purge`(games→api)의 **P-C 요청에 대한 응답 확정 + 소비 안내**.
-**상태**: pullim-api 측 **구현 완료·머지됨**(#347 `feat(auth): GET /account/deletions 서비스 폴링 피드`). games 는 이 feed 를 **폴링·소비**해 projection 을 파기하면 된다.
+**상태**: ⏸️ **보류(지금 착수 불요).** pullim-api `GET /account/deletions` feed 는 이미 있으나(#347), games 회원 데이터가 **아직 라이브 아님**(`PULLIM_MEMBER_DATA_ENABLED=off`)이라 **파기할 실회원 데이터가 없다**. pullim-Q 와 동일하게(선례: Q P-C 보류) **games 실회원 go-live 시점에 그때 소비**한다 — 아래는 그때 쓸 **참고 계약**이며 지금 구현할 now-action 이 아니다.
 **연계**: games 핸드오프 §P-C(옵션 C-1/C-2/C-3), pullim-api 표면 SoT `docs/design/services/auth/api.md §2 GET /account/deletions`.
 
 > 🎯 **한 줄**: games 가 물었던 3옵션 중 **C-3(poll feed)** 로 확정·구현됐다. games 는 `GET /account/deletions` 를 **서비스 키로 주기 폴링**해서, 반환된 삭제 회원 `sub`(=`users.id`) 마다 로컬 `DELETE FROM users WHERE sub=<sub>` → **CASCADE 로 학습데이터·grade·fingerprint_links 일괄 파기**하면 된다. **`sub`==games 가 `/games/me` 로 저장한 그 sub** — 정합 축 확정(아래 §2).
