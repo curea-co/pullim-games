@@ -7,7 +7,8 @@
 import "server-only";
 import { randomUUID } from "node:crypto";
 import { isGrade } from "@/lib/core/player";
-import { query, type QueryFn } from "@/lib/server/db/client";
+import { query, withTx, type QueryFn } from "@/lib/server/db/client";
+import { relinkLegacyMember } from "./pullim-relink";
 
 /**
  * 🔴 회원 서버 데이터(grade·projection) 저장 활성화 플래그 — **활성화 hard precondition 가드**(Codex #146).
@@ -25,6 +26,9 @@ export const MEMBER_DATA_STORAGE_ENABLED = process.env.PULLIM_MEMBER_DATA_ENABLE
 /** pullim projection row 의 앱 노출 형태(legacy email/pw 컬럼 비노출). */
 export type PullimMemberRow = { id: string; sub: string; grade: string | null };
 
+/** ensurePullimMember 결과 — `created` 는 이번 호출에서 **새로 INSERT** 됐는지(=최초 진입). P-B 재연결 트리거. */
+export type EnsurePullimMemberResult = PullimMemberRow & { created: boolean };
+
 function normalizeGrade(g: string | null): string | null {
   // 타겟(중1~고1) 밖 값·null 은 null 로 정규화(toPublicUser·getPlayer 와 동일 계약).
   return isGrade(g) ? g : null;
@@ -37,19 +41,56 @@ function normalizeGrade(g: string | null): string | null {
 export async function ensurePullimMember(
   sub: string,
   exec: QueryFn = query,
-): Promise<PullimMemberRow> {
+): Promise<EnsurePullimMemberResult> {
   const now = Date.now();
   const id = randomUUID();
-  const { rows } = await exec<{ id: string; sub: string; grade: string | null }>(
+  // (xmax = 0) = 이번 문장이 INSERT 로 만든 새 튜플(ON CONFLICT UPDATE 는 xmax≠0). 최초 진입 판정 →
+  //   P-B 재연결을 "새 sub row 최초 생성 시 1회"만 시도하게 한다. text::bigint 로 xid 비교를 명시 캐스팅.
+  const { rows } = await exec<{ id: string; sub: string; grade: string | null; created: boolean }>(
     `INSERT INTO users (id, sub, created_at, updated_at, last_seen_at)
      VALUES ($1, $2, $3, $3, $3)
      ON CONFLICT (sub) WHERE sub IS NOT NULL
        DO UPDATE SET last_seen_at = EXCLUDED.last_seen_at, updated_at = EXCLUDED.updated_at
-     RETURNING id, sub, grade`,
+     RETURNING id, sub, grade, (xmax::text::bigint = 0) AS created`,
     [id, sub, now],
   );
   const r = rows[0];
-  return { id: r.id, sub: r.sub, grade: normalizeGrade(r.grade) };
+  return { id: r.id, sub: r.sub, grade: normalizeGrade(r.grade), created: Boolean(r.created) };
+}
+
+/**
+ * pullim 회원 projection 물질화 + P-B 재연결. **write 경로 전용**(첫 서버 저장 시 호출).
+ * ensure(upsert) 와 재연결을 **단일 트랜잭션**으로 묶어, 새 sub row 최초 생성 시 legacy 데이터를
+ * 원자적으로 이관한다. 재진입(created=false)이면 재연결 스킵(멱등). 결과는 감사 로그로 surface(§5.2).
+ * @param emailMatchHash `/games/me` 지문(null=dormant) — 신원 검증은 호출부(introspection) 소관.
+ */
+export async function materializePullimMember(
+  sub: string,
+  emailMatchHash: string | null,
+): Promise<PullimMemberRow> {
+  return withTx(async (q) => {
+    const m = await ensurePullimMember(sub, q);
+    if (m.created) {
+      const outcome = await relinkLegacyMember(m, emailMatchHash, q);
+      // 감사 로그(silent 금지) — 성사·보류·dormant 를 구조화 기록. PII 없음(sub·legacyId·해시 미포함).
+      if (outcome.status === "linked") {
+        console.info(`[pb-relink] linked sub-member to legacy row (status=linked)`);
+      } else if (outcome.status === "ambiguous") {
+        console.warn(
+          `[pb-relink] HELD ambiguous match (count=${outcome.count}) — 자동 흡수 안 함, 수동 확인 필요`,
+        );
+      }
+      // 승계된 grade 재조회(재연결이 legacy grade 를 넣었을 수 있음).
+      if (outcome.status === "linked") {
+        const { rows } = await q<{ grade: string | null }>(
+          "SELECT grade FROM users WHERE id = $1",
+          [m.id],
+        );
+        return { id: m.id, sub: m.sub, grade: normalizeGrade(rows[0]?.grade ?? null) };
+      }
+    }
+    return { id: m.id, sub: m.sub, grade: m.grade };
+  });
 }
 
 /** pullim 회원 grade 조회(정규화). row 부재 시 null(미upsert). 모달의 "학년 미보유" 판정용. */

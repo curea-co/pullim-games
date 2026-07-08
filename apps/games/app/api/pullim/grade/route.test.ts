@@ -22,12 +22,17 @@ vi.mock("@/lib/server/auth/pullim-member", () => ({
   },
   getPullimMemberGrade: vi.fn(),
   setPullimMemberGrade: vi.fn(),
+  materializePullimMember: vi.fn(),
 }));
 vi.mock("@/lib/server/http/same-origin", () => ({ isSameOriginRequest: vi.fn(() => true) }));
 
 import { GET, POST } from "./route";
 import { resolvePullimSub } from "@/lib/server/auth/pullim-introspect";
-import { getPullimMemberGrade, setPullimMemberGrade } from "@/lib/server/auth/pullim-member";
+import {
+  getPullimMemberGrade,
+  setPullimMemberGrade,
+  materializePullimMember,
+} from "@/lib/server/auth/pullim-member";
 import { isSameOriginRequest } from "@/lib/server/http/same-origin";
 import { authCsrf } from "@/lib/server/auth/csrf";
 
@@ -58,6 +63,8 @@ beforeEach(() => {
   vi.mocked(resolvePullimSub).mockReset();
   vi.mocked(getPullimMemberGrade).mockReset();
   vi.mocked(setPullimMemberGrade).mockReset();
+  vi.mocked(materializePullimMember).mockReset();
+  vi.mocked(materializePullimMember).mockResolvedValue({ id: "u", sub: "s1", grade: null });
   vi.mocked(isSameOriginRequest).mockReturnValue(true);
 });
 
@@ -81,15 +88,15 @@ describe("featureGate", () => {
 
 describe("GET — 장애/미인증 구분", () => {
   it("장애(unavailable) → 503(미인증 401 아님, 로그인 회원 재분류 방지)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: true });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: true, emailMatchHash: null });
     expect((await GET(getReq())).status).toBe(503);
   });
   it("미인증(sub null) → 401", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: false });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: false, emailMatchHash: null });
     expect((await GET(getReq())).status).toBe(401);
   });
   it("회원 → 200 + grade (순수 조회, write 부작용 없음)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false, emailMatchHash: null });
     vi.mocked(getPullimMemberGrade).mockResolvedValue("중2");
     const r = await GET(getReq());
     expect(r.status).toBe(200);
@@ -113,7 +120,7 @@ describe("POST — CSRF·same-origin·검증·저장", () => {
     expect((await r.json()).error).toBe("invalid_json");
   });
   it("🔴 타겟 밖 grade(고3)·빈값 → 422 invalid_grade(파싱 성공 후 필드 위반, 관례)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false, emailMatchHash: null });
     const r = await POST(postReq({ grade: "고3" }));
     expect(r.status).toBe(422);
     expect((await r.json()).error).toBe("invalid_grade");
@@ -121,18 +128,24 @@ describe("POST — CSRF·same-origin·검증·저장", () => {
     expect(setPullimMemberGrade).not.toHaveBeenCalled();
   });
   it("장애 → 503, 미인증 → 401(저장 안 함)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: true });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: true, emailMatchHash: null });
     expect((await POST(postReq({ grade: "중1" }))).status).toBe(503);
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: false });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: false, emailMatchHash: null });
     expect((await POST(postReq({ grade: "중1" }))).status).toBe(401);
     expect(setPullimMemberGrade).not.toHaveBeenCalled();
   });
-  it("유효 회원 + 유효 grade → 200 + setPullimMemberGrade(sub, grade)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false });
+  it("유효 회원 + 유효 grade → 200 + 물질화(재연결) 후 setPullimMemberGrade(sub, grade)", async () => {
+    vi.mocked(resolvePullimSub).mockResolvedValue({
+      sub: "s1",
+      unavailable: false,
+      emailMatchHash: "d1bbcc",
+    });
     vi.mocked(setPullimMemberGrade).mockResolvedValue();
     const r = await POST(postReq({ grade: "중1" }));
     expect(r.status).toBe(200);
     expect((await r.json()).ok).toBe(true);
+    // P-B: 물질화+재연결이 introspection 지문으로 먼저, 그 뒤 grade 저장.
+    expect(materializePullimMember).toHaveBeenCalledWith("s1", "d1bbcc");
     expect(setPullimMemberGrade).toHaveBeenCalledWith("s1", "중1");
   });
 });

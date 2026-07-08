@@ -24,7 +24,16 @@ function pullimSessionCookieHeader(cookieHeader: string | null): string {
  * 미인증으로 재분류하지 않는다(§5.2 2단 게이트: 5xx·네트워크는 fail-open/unavailable).
  * 쓰기(mutation)는 sub 확정(`unavailable=false && sub`)일 때만 진행(fail-closed).
  */
-export type PullimSubResult = { sub: string | null; unavailable: boolean };
+export type PullimSubResult = {
+  sub: string | null;
+  unavailable: boolean;
+  /**
+   * P-B 재연결 대조용 email 지문(핸드오프 §1). pullim-api 가 검증된 email 을 공유 salt 로 HMAC 한 값.
+   * salt 미프로비저닝·게스트·행 없음이면 `null`(재연결 dormant). **평문 email 아님** — 해시만 경계 통과(§5.6).
+   * 미인증(401)·장애(unavailable) 응답에선 항상 `null`.
+   */
+  emailMatchHash: string | null;
+};
 
 /**
  * pullim 회원 sub 서버 확인. `*-pullim-at` 쿠키를 pullim-api `/games/me` 로 introspection.
@@ -35,9 +44,10 @@ export type PullimSubResult = { sub: string | null; unavailable: boolean };
  * - pullim 모드 아님·pullim-at 쿠키 없음 → `{sub:null, unavailable:false}`
  */
 export async function resolvePullimSub(cookieHeader: string | null): Promise<PullimSubResult> {
-  if (!PULLIM_MODE || !PULLIM_DOMAIN_API_URL) return { sub: null, unavailable: false };
+  if (!PULLIM_MODE || !PULLIM_DOMAIN_API_URL)
+    return { sub: null, unavailable: false, emailMatchHash: null };
   const cookie = pullimSessionCookieHeader(cookieHeader);
-  if (!cookie) return { sub: null, unavailable: false };
+  if (!cookie) return { sub: null, unavailable: false, emailMatchHash: null };
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), INTROSPECT_TIMEOUT_MS);
@@ -48,16 +58,21 @@ export async function resolvePullimSub(cookieHeader: string | null): Promise<Pul
       cache: "no-store",
     });
     if (res.ok) {
-      const data = (await res.json()) as { sub?: unknown };
+      const data = (await res.json()) as { sub?: unknown; emailMatchHash?: unknown };
       const sub = typeof data.sub === "string" && data.sub ? data.sub : null;
+      // emailMatchHash 는 P-B 재연결 대조용(옵션 필드). string 아니면 null(계약 fail-soft·구버전 api).
+      const emailMatchHash =
+        typeof data.emailMatchHash === "string" && data.emailMatchHash
+          ? data.emailMatchHash
+          : null;
       // 200 인데 sub 없음 = 응답 계약 드리프트(미인증 아님) → unavailable 로 surface(503),
       //   로그인 회원을 401 로 재분류하지 않고 오설정을 숨기지 않는다(Codex #146).
-      return { sub, unavailable: sub === null };
+      return { sub, unavailable: sub === null, emailMatchHash: sub ? emailMatchHash : null };
     }
     // 401 만 미인증(닫힘). 403·기타 4xx·5xx = 오설정/장애 → surface(unavailable, 503 매핑).
-    return { sub: null, unavailable: res.status !== 401 };
+    return { sub: null, unavailable: res.status !== 401, emailMatchHash: null };
   } catch {
-    return { sub: null, unavailable: true }; // 네트워크·timeout·파싱오류 = 장애.
+    return { sub: null, unavailable: true, emailMatchHash: null }; // 네트워크·timeout·파싱오류 = 장애.
   } finally {
     clearTimeout(timer);
   }
