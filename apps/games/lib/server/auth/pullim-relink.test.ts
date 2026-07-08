@@ -121,7 +121,7 @@ describe("relinkLegacyMember — 안전 규칙(§5.2)", () => {
 });
 
 describe("backfillLegacyEmailMatchHashes — 멱등 백필", () => {
-  it("hash 없는 legacy row 만 §해시로 채운다(pullim-api 바이트 일치)", async () => {
+  it("hash 없는 legacy row(sub NULL) 만 §해시로 채운다(pullim-api 바이트 일치)", async () => {
     const { fn, calls } = routedExec([
       {
         match: /SELECT id, email FROM users/,
@@ -130,6 +130,9 @@ describe("backfillLegacyEmailMatchHashes — 멱등 백필", () => {
     ]);
     const n = await backfillLegacyEmailMatchHashes(PEPPER, fn as never);
     expect(n).toBe(2);
+    // legacy 만 정밀 타겟(pullim projection row 제외) — sub IS NULL 조건 포함(Codex #149).
+    const sel = calls.find((c) => /SELECT id, email FROM users/.test(c.sql));
+    expect(sel!.sql).toMatch(/sub IS NULL/);
     const u1 = calls.find((c) => /UPDATE users SET email_match_hash/.test(c.sql) && c.params?.[0] === "l1");
     expect(u1!.params?.[1]).toBe(computeEmailMatchHash("  A@B.com ", PEPPER));
   });

@@ -22,17 +22,12 @@ vi.mock("@/lib/server/auth/pullim-member", () => ({
   },
   getPullimMemberGrade: vi.fn(),
   setPullimMemberGrade: vi.fn(),
-  materializePullimMember: vi.fn(),
 }));
 vi.mock("@/lib/server/http/same-origin", () => ({ isSameOriginRequest: vi.fn(() => true) }));
 
 import { GET, POST } from "./route";
 import { resolvePullimSub } from "@/lib/server/auth/pullim-introspect";
-import {
-  getPullimMemberGrade,
-  setPullimMemberGrade,
-  materializePullimMember,
-} from "@/lib/server/auth/pullim-member";
+import { getPullimMemberGrade, setPullimMemberGrade } from "@/lib/server/auth/pullim-member";
 import { isSameOriginRequest } from "@/lib/server/http/same-origin";
 import { authCsrf } from "@/lib/server/auth/csrf";
 
@@ -63,8 +58,6 @@ beforeEach(() => {
   vi.mocked(resolvePullimSub).mockReset();
   vi.mocked(getPullimMemberGrade).mockReset();
   vi.mocked(setPullimMemberGrade).mockReset();
-  vi.mocked(materializePullimMember).mockReset();
-  vi.mocked(materializePullimMember).mockResolvedValue({ id: "u", sub: "s1", grade: null });
   vi.mocked(isSameOriginRequest).mockReturnValue(true);
 });
 
@@ -134,18 +127,13 @@ describe("POST — CSRF·same-origin·검증·저장", () => {
     expect((await POST(postReq({ grade: "중1" }))).status).toBe(401);
     expect(setPullimMemberGrade).not.toHaveBeenCalled();
   });
-  it("유효 회원 + 유효 grade → 200 + 물질화(재연결) 후 setPullimMemberGrade(sub, grade)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({
-      sub: "s1",
-      unavailable: false,
-      emailMatchHash: "d1bbcc",
-    });
+  it("유효 회원 + 유효 grade → 200 + setPullimMemberGrade(sub, grade)", async () => {
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false, emailMatchHash: null });
     vi.mocked(setPullimMemberGrade).mockResolvedValue();
     const r = await POST(postReq({ grade: "중1" }));
     expect(r.status).toBe(200);
     expect((await r.json()).ok).toBe(true);
-    // P-B: 물질화+재연결이 introspection 지문으로 먼저, 그 뒤 grade 저장.
-    expect(materializePullimMember).toHaveBeenCalledWith("s1", "d1bbcc");
+    // 재연결/물질화는 session-init 이 전담 — grade 라우트는 저장만.
     expect(setPullimMemberGrade).toHaveBeenCalledWith("s1", "중1");
   });
 });

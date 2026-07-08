@@ -223,4 +223,23 @@ describe("getPullimGrade / setPullimGrade — 홈 학년 모달 클라 (client.t
     const { setPullimGrade } = await loadClient(async () => r(422));
     expect(await setPullimGrade("고3")).toBe(false);
   });
+
+  it("initPullimSession → POST /api/pullim/session-init, 재연결 반영 grade 반환", async () => {
+    const calls: Array<{ url: string; method?: string }> = [];
+    const { initPullimSession } = await loadClient(async (url, init) => {
+      calls.push({ url, method: init?.method });
+      return r(200, { ok: true, grade: "중2" });
+    });
+    expect(await initPullimSession()).toEqual({ grade: "중2" });
+    expect(calls.some((c) => c.url === "/api/pullim/session-init" && c.method === "POST")).toBe(true);
+  });
+  it("initPullimSession 200+null → {grade:null}(모달 노출 대상)", async () => {
+    const { initPullimSession } = await loadClient(async () => r(200, { ok: true, grade: null }));
+    expect(await initPullimSession()).toEqual({ grade: null });
+  });
+  it("initPullimSession 404·503·에러 → null(모달 노출 안 함)", async () => {
+    expect(await (await loadClient(async () => r(404))).initPullimSession()).toBeNull();
+    expect(await (await loadClient(async () => r(503))).initPullimSession()).toBeNull();
+    expect(await (await loadClient(async () => { throw new Error("x"); })).initPullimSession()).toBeNull();
+  });
 });

@@ -11,7 +11,7 @@
 // ⚠️ 반드시 트랜잭션 QueryFn(withTx) 안에서 호출한다 — 이관·파기가 원자적이어야 부분 이관 사고가 없다.
 import "server-only";
 import { isGrade } from "@/lib/core/player";
-import type { QueryFn } from "@/lib/server/db/client";
+import { withTx, type QueryFn } from "@/lib/server/db/client";
 import { computeEmailMatchHash, getEmailMatchPepper } from "./email-match-hash";
 
 /** 재연결 시도 결과(감사 로그·테스트용). */
@@ -22,13 +22,16 @@ export type RelinkOutcome =
   | { status: "linked"; legacyId: string }; // 1:1 매칭 → 이관·파기 완료
 
 /**
- * legacy email 지문 백필(멱등). pepper 존재 시, 아직 해시가 없는 legacy row(email 有·hash NULL)만
- * 대상으로 HMAC 를 계산해 채운다. 최초 1회 전체 처리 후엔 대상 0건(부분 인덱스 조회) → 저비용 no-op.
- * pullim 모드에선 신규 legacy row 가 생기지 않으므로 legacy 집합은 유계·정적(재연결이 진행되면 감소).
+ * legacy email 지문 백필(멱등). pepper 존재 시, 아직 해시가 없는 legacy row(`sub IS NULL` +
+ * email 有 + hash NULL)만 대상으로 HMAC 를 계산해 채운다. `email_match_hash IS NULL` 가드로
+ * 최초 1회 전체 처리 후엔 대상 0건 → 저비용 no-op. pullim 모드에선 신규 legacy row 가 생기지
+ * 않으므로 legacy 집합은 유계·정적(재연결이 진행되면 감소).
+ * ⚠️ **요청(grade/session 저장) 트랜잭션 밖**에서 호출한다 — `ensureLegacyBackfillOnce` 로 감싸
+ *    프로세스당 1회 자체 트랜잭션으로 커밋(사용자 요청이 O(N) 쓰기를 떠안지 않게, Codex #149).
  */
 export async function backfillLegacyEmailMatchHashes(pepper: string, q: QueryFn): Promise<number> {
   const { rows } = await q<{ id: string; email: string }>(
-    "SELECT id, email FROM users WHERE email IS NOT NULL AND email_match_hash IS NULL",
+    "SELECT id, email FROM users WHERE sub IS NULL AND email IS NOT NULL AND email_match_hash IS NULL",
   );
   for (const r of rows) {
     await q("UPDATE users SET email_match_hash = $2 WHERE id = $1", [
@@ -37,6 +40,27 @@ export async function backfillLegacyEmailMatchHashes(pepper: string, q: QueryFn)
     ]);
   }
   return rows.length;
+}
+
+// 프로세스당 1회 백필 가드. 성공 커밋된 promise 만 캐시(실패 시 리셋 → 다음 진입 재시도).
+// email_match_hash IS NULL 가드 때문에 전 시스템에서 O(N) 쓰기는 사실상 1회(첫 커밋)만 발생하고,
+// 이후 프로세스는 0건 SELECT 로 저비용 통과한다.
+let backfillPromise: Promise<void> | null = null;
+
+/**
+ * legacy 지문 백필을 **자체 트랜잭션**으로 프로세스당 1회 보장. 재연결 lookup 전에 호출해
+ * 해시가 커밋돼 있게 한다(요청 트랜잭션과 분리 → grade/session 저장 요청이 O(N) 을 안 떠안음).
+ */
+export function ensureLegacyBackfillOnce(pepper: string): Promise<void> {
+  if (!backfillPromise) {
+    backfillPromise = withTx((q) => backfillLegacyEmailMatchHashes(pepper, q))
+      .then(() => undefined)
+      .catch((e) => {
+        backfillPromise = null; // 실패 시 리셋해 다음 진입에서 재시도(부분 백필로 인한 오탐 방지).
+        throw e;
+      });
+  }
+  return backfillPromise;
 }
 
 /** 이관 대상 자식 테이블 — legacy id → member id. 전부 users(id) CASCADE. */
@@ -88,9 +112,8 @@ export async function relinkLegacyMember(
   const pepper = getEmailMatchPepper();
   if (!pepper || !emailMatchHash) return { status: "dormant" };
 
-  // legacy 지문 백필(멱등) 후 대조. 백필을 같은 트랜잭션에서 하므로 lookup 이 방금 채운 해시를 본다.
-  await backfillLegacyEmailMatchHashes(pepper, q);
-
+  // ⚠️ legacy 지문 백필은 이 함수 밖에서 `ensureLegacyBackfillOnce` 로 선행 커밋된다(요청 트랜잭션과
+  //    분리). 여기선 이미 채워진 해시로 바로 대조만 한다.
   // 매칭 legacy row 조회 — legacy 만(sub NULL) 대상. 동시 재연결 방지 위해 행 잠금.
   const { rows: matches } = await q<{ id: string; grade: string | null }>(
     `SELECT id, grade FROM users

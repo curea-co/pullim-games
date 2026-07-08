@@ -169,6 +169,27 @@ export async function getPullimGrade(): Promise<{ grade: string | null } | null>
   }
 }
 
+/**
+ * pullim 회원 로그인 직후 **확정 재연결 트리거**(P-B) + 현재 grade 조회. same-origin+CSRF POST.
+ * GradePrompt 가 모달 판정 전에 호출 — legacy 회원은 여기서 옛 데이터·grade 가 복원되고,
+ * 반환된 grade 로 모달 오탐(옛 grade 있는데 재노출)을 막는다. 반환:
+ *  - `{ grade }` — 200(재연결 반영된 grade. null 이면 미보유 → 모달 노출 대상).
+ *  - `null` — 비대상(feature off·미인증·장애·에러). 모달 노출 안 함.
+ */
+export async function initPullimSession(): Promise<{ grade: string | null } | null> {
+  try {
+    const csrf = await ensureCsrf();
+    const headers: Record<string, string> = { "content-type": "application/json" };
+    if (csrf) headers["x-csrf-token"] = csrf;
+    const res = await fetch("/api/pullim/session-init", { method: "POST", headers });
+    if (!res.ok) return null; // 404(비활성)·401·403·503 → 모달 노출 안 함.
+    const data = (await res.json()) as { grade?: string | null };
+    return { grade: data.grade ?? null };
+  } catch {
+    return null;
+  }
+}
+
 /** pullim 회원 grade 저장(모달 제출). double-submit CSRF. 성공 여부 반환. */
 export async function setPullimGrade(grade: string): Promise<boolean> {
   try {

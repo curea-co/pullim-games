@@ -8,7 +8,8 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { isGrade } from "@/lib/core/player";
 import { query, withTx, type QueryFn } from "@/lib/server/db/client";
-import { relinkLegacyMember } from "./pullim-relink";
+import { relinkLegacyMember, ensureLegacyBackfillOnce } from "./pullim-relink";
+import { getEmailMatchPepper } from "./email-match-hash";
 
 /**
  * 🔴 회원 서버 데이터(grade·projection) 저장 활성화 플래그 — **활성화 hard precondition 가드**(Codex #146).
@@ -77,6 +78,11 @@ export async function materializePullimMember(
   sub: string,
   emailMatchHash: string | null,
 ): Promise<PullimMemberRow> {
+  // legacy 지문 백필을 **요청 트랜잭션 밖**에서 프로세스당 1회 선행 커밋(O(N) 쓰기 분리, Codex #149).
+  // pepper 없으면 백필 불요(재연결은 아래에서 dormant 처리).
+  const pepper = getEmailMatchPepper();
+  if (pepper) await ensureLegacyBackfillOnce(pepper);
+
   return withTx(async (q) => {
     const m = await ensurePullimMember(sub, q);
     // 재연결 미종결(relinkResolvedAt === null) 회원만 (재)시도한다. created 가 아니라 종결 상태로

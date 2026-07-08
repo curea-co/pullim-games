@@ -71,6 +71,14 @@ emailMatchHash = hex_lower( HMAC_SHA256( key = GAMES_EMAIL_MATCH_PEPPER, msg = e
 - [x] fail-soft: pepper 미주입 → `emailMatchHash:null` → dormant(에러·회귀 없음)
 - [x] `bun run typecheck && bun run lint && bun test`
 
+## G. Codex #149 리뷰 반영 (2차)
+
+- [x] **dormant 영구 스킵 회귀 fix**: `created` 게이트 → `relink_resolved_at`(종결 상태) 게이트(마이그레이션 0006). pepper 미주입(dormant)·다중매칭(ambiguous)은 미종결 유지 → 다음 진입 재시도. linked·no_match 만 종결.
+- [x] **전 outcome 감사 로그**: linked·no_match·ambiguous·dormant 모두 구조화 로그(운영 추적성).
+- [x] **grade 승계 정규화**: `isGrade` 통과값만 승계(범위 밖 legacy grade 잔존 방지).
+- [x] **전용 로그인 트리거**(설계 결정 — 사용자 승인): `POST /api/pullim/session-init`(same-origin+CSRF)를 GradePrompt 가 모달 판정 전 호출 → 로그인 직후 확정 재연결. legacy 회원이 옛 grade 복원받아 모달 오탐·dismiss 지연 제거. #146 GET=읽기전용 계약 유지(물질화는 POST 만).
+- [x] **백필 요청경로 분리**: `ensureLegacyBackfillOnce`(프로세스당 1회 자체 트랜잭션 커밋) + `sub IS NULL` 정밀 타겟 → grade/session 저장 요청이 O(N) 쓰기 안 떠안음.
+
 ## 범위 밖 (다음 단계)
 
 - **P-C(중앙 삭제 파기 전파)**: `GET /account/deletions` poll feed 소비 + `GAMES_SYNC_SERVICE_KEY` — 별 계획.

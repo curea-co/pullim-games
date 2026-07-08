@@ -11,7 +11,6 @@ import { resolvePullimSub } from "@/lib/server/auth/pullim-introspect";
 import {
   getPullimMemberGrade,
   setPullimMemberGrade,
-  materializePullimMember,
   MEMBER_DATA_STORAGE_ENABLED,
 } from "@/lib/server/auth/pullim-member";
 import { isGrade } from "@/lib/core/player";
@@ -89,8 +88,7 @@ export async function POST(request: Request) {
   }
 
   // 신원 = 클라 값 불신, 서버 introspection 으로 확인. 장애(503)와 미인증(401) 구분(fail-closed 쓰기).
-  // emailMatchHash 도 함께 받아 P-B 재연결(최초 물질화 시)에 쓴다(§5.2).
-  const { sub, unavailable, emailMatchHash } = await resolvePullimSub(request.headers.get("cookie"));
+  const { sub, unavailable } = await resolvePullimSub(request.headers.get("cookie"));
   if (unavailable) {
     return NextResponse.json({ error: "backend_unavailable" }, { status: 503, headers: NO_STORE });
   }
@@ -98,9 +96,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401, headers: NO_STORE });
   }
   try {
-    // 첫 서버 저장 진입점 — projection 물질화 + P-B 재연결(legacy 데이터 이관)을 원자적으로 먼저 수행.
-    // 그 뒤 모달이 수집한 grade 를 저장(재연결이 승계한 legacy grade 를 사용자 선택값이 덮어씀 — 의도).
-    await materializePullimMember(sub, emailMatchHash);
+    // P-B 재연결/물질화는 로그인 직후 POST /api/pullim/session-init 이 전담한다(GradePrompt 가 모달 전에
+    //   호출). 여기선 모달이 수집한 grade 저장만 — setPullimMemberGrade 가 row 보장(ensure) 후 UPDATE.
     await setPullimMemberGrade(sub, grade);
   } catch {
     return NextResponse.json({ error: "backend_unavailable" }, { status: 503, headers: NO_STORE });
