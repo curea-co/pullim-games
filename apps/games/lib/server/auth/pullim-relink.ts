@@ -1,3 +1,8 @@
+// ⏸️ DEFERRED/DORMANT (2026-07-08) — pullim-api 가 `/games/me` 의 emailMatchHash 를 revert(pullim-api
+// PR #373)해, 이 경로는 **영구 inert** 다(API 가 emailMatchHash 를 안 줌 → introspect null → 아래 재연결
+// no-op). games 회원 데이터 미라이브(PULLIM_MEMBER_DATA_ENABLED=off)라 pullim-Q 처럼 fresh-start·보류로
+// 정렬. **의도적 파킹 — dead code 결함 아님**(제거 대신 보존, go-live 시 재판단). 상세: consume plan 헤더.
+//
 // P-B 회원 재연결 — legacy(email+pw) 회원이 SSO 로그인해 새 pullim `sub` projection 이 최초
 // 생성될 때, emailMatchHash 로 옛 legacy row 를 찾아 학습데이터·grade·fingerprint 를 1:1 이관하고
 // legacy row 를 파기한다.

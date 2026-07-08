@@ -61,6 +61,8 @@ export async function resolvePullimSub(cookieHeader: string | null): Promise<Pul
       const data = (await res.json()) as { sub?: unknown; emailMatchHash?: unknown };
       const sub = typeof data.sub === "string" && data.sub ? data.sub : null;
       // emailMatchHash 는 P-B 재연결 대조용(옵션 필드). string 아니면 null(계약 fail-soft·구버전 api).
+      // ⏸️ DEFERRED: pullim-api 가 이 필드를 revert(PR #373)해 현재 항상 부재 → 재연결 dormant(의도됨,
+      // dead-path 아님 — pullim-relink.ts 헤더·consume plan 참조).
       const emailMatchHash =
         typeof data.emailMatchHash === "string" && data.emailMatchHash
           ? data.emailMatchHash
