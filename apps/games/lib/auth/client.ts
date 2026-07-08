@@ -233,10 +233,31 @@ export async function getAuthState(): Promise<{
   }
 }
 
+// 프로필 실명(auth `GET /me` 의 `name`, KCB 복호 — ADR-048 owner-only). best-effort:
+// 실패·미제공이면 null → 호출부가 /games/me displayName 으로 폴백. ⚠️ `/me` 는 email 등 본인 PII 도
+// 주지만 프로필엔 **`name` 만** 취한다(핸드오프 2026-07-08_...profile-realname: 타 표면·로그 노출 금지).
+// ⚠️ 게이트(getAuthState/R9 정밀 판정)와 **분리** — 프로필 라벨에서만 비차단 조회한다(usePullimRealName,
+//    Codex #153). 회원 판정·헤더 렌더가 이 표시용 조회 지연에 묶이지 않게 한다.
+export async function fetchPullimRealName(): Promise<string | null> {
+  try {
+    const res = await fetch(`${PULLIM_DOMAIN_API_URL}/me`, {
+      credentials: "include",
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const data = (await res.json()) as { name?: string | null };
+    return typeof data.name === "string" && data.name ? data.name : null;
+  } catch {
+    return null;
+  }
+}
+
 // pullim 모드 정밀 게이트(2단 게이트 계약 클라 측, spec/05 §5.2 R9) — 회원 세션 검증을
 // pullim-api introspection(`GET /games/me`, credentials:include)으로 한다. 미들웨어 coarse
 // (`*-pullim-at` presence)를 통과한 트래픽의 만료/위조 정밀 판정 + fail-open.
-// id=sub 로 게이트 판정 + `displayName`(pullim-api #330) 을 회원 UI 표시명으로 매핑.
+// id=sub 로 게이트 판정 + `displayName`(pullim-api #330, /games/me email 별칭) 매핑. 프로필 실명
+//   (/me.name)은 여기서 조회하지 않는다 — 게이트를 표시용 조회로 지연시키지 않기 위해 usePullimRealName
+//   (프로필 라벨 전용, 비차단)로 분리(Codex #153).
 // ⚠️ `grade` 는 pullim-api 아님(games-side, spec/05 §5.2⒜⑵) → 여기선 null, 회원 grade 수집·
 //    콘텐츠 타게팅은 후속(별도 회원용 grade UX). email 은 pullim 모드 미보관(§5.6) → "".
 async function getPullimAuthState(): Promise<{
@@ -251,8 +272,9 @@ async function getPullimAuthState(): Promise<{
     if (res.ok) {
       const data = (await res.json()) as { sub?: string; displayName?: string | null };
       if (!data.sub) return { user: null, unavailable: false }; // 계약 위반 방어.
-      // AuthUser — id=sub, displayName(표시명, null 이면 UI 가 "회원" 폴백). email/grade 는
+      // AuthUser — id=sub, displayName(/games/me 표시명, null 이면 UI 가 "회원" 폴백). email/grade 는
       // pullim 모드 미제공(email=§5.6 중앙 소유, grade=games-side 후속) → "" / null.
+      // 프로필 실명(/me.name)은 게이트 밖(usePullimRealName)에서 비차단 조회한다(Codex #153).
       return {
         user: { id: data.sub, email: "", grade: null, displayName: data.displayName ?? null },
         unavailable: false,

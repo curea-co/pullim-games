@@ -112,6 +112,24 @@ describe("getAuthState — pullim 모드 정밀 게이트(/games/me introspectio
     expect(r.user).toEqual({ id: "usr_2", email: "", grade: null, displayName: null });
   });
 
+  it("게이트는 /games/me 만 — 프로필 실명(/me)은 조회 안 함(Codex #153, 게이트 비지연)", async () => {
+    const calls: string[] = [];
+    vi.resetModules();
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (url: string) => {
+        calls.push(url);
+        return res(200, { sub: "usr_1", displayName: "psh95king", name: "박승훈" });
+      }),
+    );
+    const { getAuthState } = await import("./client");
+    const r = await getAuthState();
+    // 게이트는 /games/me displayName(email 별칭) 그대로 — 실명은 게이트가 안 건드림.
+    expect(r.user).toEqual({ id: "usr_1", email: "", grade: null, displayName: "psh95king" });
+    expect(calls).toHaveLength(1); // /me 미호출 → 게이트가 표시용 조회에 안 묶임
+    expect(calls[0].endsWith("/games/me")).toBe(true);
+  });
+
   it("401 → 미인증 확정(user=null, unavailable=false)", async () => {
     const r = await callWithFetch(async () => res(401));
     expect(r.user).toBeNull();
@@ -143,6 +161,48 @@ describe("getAuthState — pullim 모드 정밀 게이트(/games/me introspectio
     const r = await callWithFetch(async () => res(200, { globalRole: "user" }));
     expect(r.user).toBeNull();
     expect(r.unavailable).toBe(false);
+  });
+});
+
+describe("fetchPullimRealName — 프로필 실명(auth /me.name) 비차단 조회", () => {
+  beforeEach(() => {
+    vi.stubEnv("NEXT_PUBLIC_DOMAIN_API_URL", API);
+    vi.stubEnv("NEXT_PUBLIC_PULLIM_LOGIN_ORIGIN", LOGIN);
+  });
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
+  const res = (status: number, body?: unknown): Response =>
+    ({ ok: status >= 200 && status < 300, status, json: async () => body }) as Response;
+
+  async function call(impl: (url: string) => Promise<Response>) {
+    vi.resetModules();
+    vi.stubGlobal("fetch", vi.fn(impl));
+    const { fetchPullimRealName } = await import("./client");
+    return fetchPullimRealName();
+  }
+
+  it("200 + name → 실명 반환, auth /me 호출(credentials include)", async () => {
+    let calledUrl = "";
+    const r = await call(async (url) => {
+      calledUrl = url;
+      return res(200, { sub: "u", name: "박승훈", displayName: "psh", email: "a@b.com" });
+    });
+    expect(r).toBe("박승훈");
+    expect(calledUrl.endsWith("/me")).toBe(true);
+    expect(calledUrl.endsWith("/games/me")).toBe(false);
+  });
+
+  it("name 없음·빈값 → null(호출부가 displayName 폴백)", async () => {
+    expect(await call(async () => res(200, { sub: "u", displayName: "psh" }))).toBeNull();
+    expect(await call(async () => res(200, { sub: "u", name: "" }))).toBeNull();
+  });
+
+  it("비200·네트워크 오류 → null(best-effort, 게이트 영향 없음)", async () => {
+    expect(await call(async () => res(401))).toBeNull();
+    expect(await call(async () => res(500))).toBeNull();
+    expect(await call(async () => { throw new Error("down"); })).toBeNull();
   });
 });
 

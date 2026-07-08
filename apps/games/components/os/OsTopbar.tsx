@@ -7,6 +7,7 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { getAuthState, logout, type AuthUser } from "@/lib/auth/client";
+import { usePullimRealName } from "@/lib/auth/use-pullim-real-name";
 import { getPlayer, resetGuestSession, type Player } from "@/lib/core/player";
 import { AuthCta } from "@/components/auth/AuthCta";
 
@@ -25,6 +26,8 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
   const [busy, setBusy] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  // 프로필 라벨/아바타 실명(auth /me.name) — 비차단(게이트와 분리, Codex #153). 오기 전엔 displayName 폴백.
+  const realName = usePullimRealName(!!user);
 
   // 경로 변화마다 재조회 → 로그인/로그아웃 상태 헤더 갱신(hard refresh 없이).
   useEffect(() => {
@@ -90,16 +93,16 @@ export function OsTopbar({ variant = "default" }: { variant?: "default" | "landi
     router.refresh();
   }
 
+  // 회원 표시명 우선순위: 실명(/me.name) → pullim displayName(/games/me #330) → legacy email → "회원".
+  // pullim 미설정 회원(displayName null·email "")은 "회원"으로 표시(개인화 표시명 없음).
+  const memberLabel = realName || user?.displayName || user?.email || "회원";
   const initial = !loaded
     ? "풀"
     : isMember
-      ? initialOf(user!.displayName || user!.email || "회원", "회").toUpperCase()
+      ? initialOf(memberLabel, "회").toUpperCase()
       : isGuest
         ? initialOf(player!.nickname, "게")
         : "게";
-  // 회원 표시명 우선순위: pullim displayName(/games/me #330) → legacy email → "회원" 폴백.
-  // pullim 미설정 회원(displayName null·email "")은 "회원"으로 표시(개인화 표시명 없음).
-  const memberLabel = user?.displayName || user?.email || "회원";
   const displayName = isMember ? memberLabel : isGuest ? `${player!.nickname} (게스트)` : "게스트";
   const modeLabel = isMember ? "로그인됨" : "게스트 모드";
   // auth 미확정(게스트도 없음) — 로그인/게스트 어느 쪽도 단정 불가.

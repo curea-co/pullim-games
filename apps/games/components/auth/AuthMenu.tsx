@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { AuthCta } from "@/components/auth/AuthCta";
 import { usePathname, useRouter } from "next/navigation";
 import { getAuthState, logout, type AuthUser } from "@/lib/auth/client";
+import { usePullimRealName } from "@/lib/auth/use-pullim-real-name";
 import { getPlayer, resetGuestSession, type Player } from "@/lib/core/player";
 
 export function AuthMenu() {
@@ -23,6 +24,8 @@ export function AuthMenu() {
   const [unavailable, setUnavailable] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [busy, setBusy] = useState(false);
+  // 프로필 라벨 실명(auth /me.name) — 비차단(게이트와 분리, Codex #153). 오기 전엔 displayName 폴백.
+  const realName = usePullimRealName(!!user);
 
   useEffect(() => {
     let alive = true;
@@ -110,9 +113,9 @@ export function AuthMenu() {
   }
 
   // 회원 — 표시명 + 로그아웃. (위 가드들로 여기선 user 비-null 보장.)
-  // 표시명 우선순위: pullim displayName(/games/me #330) → legacy email → "회원" 폴백.
+  // 표시명 우선순위: 실명(/me.name) → pullim displayName(/games/me #330) → legacy email → "회원".
   if (!user) return null;
-  const memberLabel = user.displayName || user.email || "회원";
+  const memberLabel = realName || user.displayName || user.email || "회원";
   return (
     <div className="flex items-center gap-1">
       <span
