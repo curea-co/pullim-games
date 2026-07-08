@@ -58,7 +58,7 @@ function emailMatchHash(email, salt) {
 
 ### `null` 조건 (games 가 처리해야 할 폴백)
 - **email 없음**(게스트·행 없음) → `null`.
-- **salt 미프로비저닝(fail-soft)** → `null`. 이 경우 pullim-api 는 부팅·200 유지하되 해시를 못 준다 → **games 재연결은 dormant**(어차피 `PULLIM_MEMBER_DATA_ENABLED=off` 와 정합). salt 주입되면 자동으로 실 해시가 나오기 시작.
+- **salt 미프로비저닝(fail-soft)** → `null`. 이 경우 pullim-api 는 부팅·200 유지하되 해시를 못 준다 → **games 재연결은 dormant**(어차피 `PULLIM_MEMBER_DATA_ENABLED=off` 와 정합). **salt 주입 후 pullim-api 앱 재시작 시** 실 해시가 나오기 시작한다(salt=onModuleInit 1회 로드·캐시 — 무재시작 자동 반영 아님).
 
 ---
 
@@ -72,7 +72,7 @@ function emailMatchHash(email, salt) {
 - **회전**: salt 회전 시 **신규 재연결만 영향**(회전 후 로그인은 새 해시로 매칭). 기존에 이미 재연결된 row 는 무영향. 대량 회전이 필요하면 사전 조율.
 - **누가**: BE 담당/오너가 값 생성·주입 주체. games·pullim-api 어느 세션도 실값을 코드/문서에 커밋하지 않는다.
 
-> **시퀀싱 이점**: pullim-api 코드는 **fail-soft** 라 salt 없이도 머지·부팅된다(그동안 `emailMatchHash:null`). 즉 "코드 배포"와 "salt 주입"을 분리할 수 있다 — games 소비 코드도 salt 주입 전까진 dormant 로 두면 안전.
+> **시퀀싱 이점**: pullim-api 코드는 **fail-soft** 라 salt 없이도 머지·부팅된다(그동안 `emailMatchHash:null`). 즉 "코드 배포"를 "salt 주입"보다 먼저 할 수 있다 — 단 **활성화는 salt 주입 후 pullim-api 앱 재시작 시**(salt 1회 캐시 — 무재시작 자동 아님). games 소비 코드도 salt 주입·재시작 전까진 dormant 로 두면 안전.
 
 ---
 
