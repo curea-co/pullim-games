@@ -28,49 +28,68 @@ describe("resolvePullimSub — 서버 /games/me introspection (미인증 vs 장�
     }));
     const { resolvePullimSub } = await load();
     const r = await resolvePullimSub("__Secure-dev-pullim-at=abc; pullim_games_guest=1; other=x");
-    expect(r).toEqual({ sub: "sub_1", unavailable: false });
+    expect(r).toEqual({ sub: "sub_1", unavailable: false, emailMatchHash: null });
     expect(sentCookie).toBe("__Secure-dev-pullim-at=abc"); // games 쿠키 누출 없음
+  });
+
+  it("200 + {sub, emailMatchHash} → 지문 전달(P-B 재연결 대조용)", async () => {
+    vi.stubGlobal("fetch", vi.fn(async () => res(200, { sub: "sub_1", emailMatchHash: "d1bbcc" })));
+    const { resolvePullimSub } = await load();
+    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({
+      sub: "sub_1",
+      unavailable: false,
+      emailMatchHash: "d1bbcc",
+    });
+  });
+
+  it("emailMatchHash 비문자열·빈값(salt 미주입 fail-soft) → null(재연결 dormant)", async () => {
+    vi.stubGlobal("fetch", vi.fn(async () => res(200, { sub: "sub_1", emailMatchHash: null })));
+    let m = await load();
+    expect((await m.resolvePullimSub("local-pullim-at=x")).emailMatchHash).toBeNull();
+    vi.stubGlobal("fetch", vi.fn(async () => res(200, { sub: "sub_1" }))); // 필드 부재(구 api)
+    m = await load();
+    expect((await m.resolvePullimSub("local-pullim-at=x")).emailMatchHash).toBeNull();
   });
 
   it("401 → {sub:null, unavailable:false}(미인증 확정)", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => res(401)));
     const { resolvePullimSub } = await load();
-    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: false });
+    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: false, emailMatchHash: null });
   });
 
   it("🔴 5xx → {sub:null, unavailable:true}(장애 — 라우트가 503)", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => res(503)));
     const { resolvePullimSub } = await load();
-    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true });
+    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true, emailMatchHash: null });
   });
 
   it("🔴 네트워크·timeout → {sub:null, unavailable:true}(장애)", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => { throw new Error("down"); }));
     const { resolvePullimSub } = await load();
-    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true });
+    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true, emailMatchHash: null });
   });
 
   it("🔴 403·기타 4xx → {sub:null, unavailable:true}(오설정 surface, 미인증 은폐 방지)", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => res(403)));
     let m = await load();
-    expect(await m.resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true });
+    expect(await m.resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true, emailMatchHash: null });
     vi.stubGlobal("fetch", vi.fn(async () => res(404)));
     m = await load();
-    expect(await m.resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true });
+    expect(await m.resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true, emailMatchHash: null });
   });
 
   it("pullim-at 쿠키 없으면 fetch 없이 {sub:null, unavailable:false}", async () => {
     const fetchFn = vi.fn(async () => res(200, { sub: "x" }));
     vi.stubGlobal("fetch", fetchFn);
     const { resolvePullimSub } = await load();
-    expect(await resolvePullimSub("pullim_games_guest=1")).toEqual({ sub: null, unavailable: false });
+    expect(await resolvePullimSub("pullim_games_guest=1")).toEqual({ sub: null, unavailable: false, emailMatchHash: null });
     expect(fetchFn).not.toHaveBeenCalled();
   });
 
   it("🔴 200 인데 sub 누락(계약 드리프트) → {sub:null, unavailable:true}(미인증 아닌 surface)", async () => {
     vi.stubGlobal("fetch", vi.fn(async () => res(200, { globalRole: "user" })));
     const { resolvePullimSub } = await load();
-    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true });
+    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: true, emailMatchHash: null });
   });
 });
 
@@ -82,7 +101,7 @@ describe("resolvePullimSub — legacy 모드(env 미설정)", () => {
     const fetchFn = vi.fn();
     vi.stubGlobal("fetch", fetchFn);
     const { resolvePullimSub } = await import("./pullim-introspect");
-    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: false });
+    expect(await resolvePullimSub("local-pullim-at=x")).toEqual({ sub: null, unavailable: false, emailMatchHash: null });
     expect(fetchFn).not.toHaveBeenCalled();
   });
 });

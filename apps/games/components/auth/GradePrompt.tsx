@@ -7,7 +7,7 @@
 import { useEffect, useRef, useState } from "react";
 import { PULLIM_MODE } from "@/lib/auth/pullim-mode";
 import { useIdentity } from "@/lib/core/player/use-identity";
-import { getPullimGrade, setPullimGrade } from "@/lib/auth/client";
+import { initPullimSession, setPullimGrade } from "@/lib/auth/client";
 import { GRADES, type Grade } from "@/lib/core/player";
 import { Button } from "@/components/ui/button";
 
@@ -51,12 +51,13 @@ export function GradePrompt() {
   const userId = authUser?.id ?? null;
 
   useEffect(() => {
-    // pullim 모드 회원 + 이 사용자 미dismiss 일 때만 grade 보유 확인. 게스트·legacy·비활성은 no-op.
+    // pullim 모드 회원 + 이 사용자 미dismiss 일 때만. 게스트·legacy·비활성은 no-op.
     if (!PULLIM_MODE || !ready || !userId) return;
     if (isDismissed(userId)) return;
     let cancelled = false;
-    getPullimGrade().then((r) => {
-      // r null(비활성·미인증·장애) → 노출 안 함. grade null(미보유) → 노출.
+    // 로그인 직후 확정 재연결(P-B) 트리거 + grade 조회를 겸한다 — legacy 회원은 여기서 옛 grade 를
+    //   복원받아 모달이 오탐하지 않는다. r null(비활성·미인증·장애) → 노출 안 함. grade null(미보유) → 노출.
+    initPullimSession().then((r) => {
       if (!cancelled && r && r.grade === null) setOpen(true);
     });
     return () => {

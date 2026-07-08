@@ -81,15 +81,15 @@ describe("featureGate", () => {
 
 describe("GET — 장애/미인증 구분", () => {
   it("장애(unavailable) → 503(미인증 401 아님, 로그인 회원 재분류 방지)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: true });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: true, emailMatchHash: null });
     expect((await GET(getReq())).status).toBe(503);
   });
   it("미인증(sub null) → 401", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: false });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: false, emailMatchHash: null });
     expect((await GET(getReq())).status).toBe(401);
   });
   it("회원 → 200 + grade (순수 조회, write 부작용 없음)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false, emailMatchHash: null });
     vi.mocked(getPullimMemberGrade).mockResolvedValue("중2");
     const r = await GET(getReq());
     expect(r.status).toBe(200);
@@ -113,7 +113,7 @@ describe("POST — CSRF·same-origin·검증·저장", () => {
     expect((await r.json()).error).toBe("invalid_json");
   });
   it("🔴 타겟 밖 grade(고3)·빈값 → 422 invalid_grade(파싱 성공 후 필드 위반, 관례)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false, emailMatchHash: null });
     const r = await POST(postReq({ grade: "고3" }));
     expect(r.status).toBe(422);
     expect((await r.json()).error).toBe("invalid_grade");
@@ -121,18 +121,19 @@ describe("POST — CSRF·same-origin·검증·저장", () => {
     expect(setPullimMemberGrade).not.toHaveBeenCalled();
   });
   it("장애 → 503, 미인증 → 401(저장 안 함)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: true });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: true, emailMatchHash: null });
     expect((await POST(postReq({ grade: "중1" }))).status).toBe(503);
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: false });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: null, unavailable: false, emailMatchHash: null });
     expect((await POST(postReq({ grade: "중1" }))).status).toBe(401);
     expect(setPullimMemberGrade).not.toHaveBeenCalled();
   });
   it("유효 회원 + 유효 grade → 200 + setPullimMemberGrade(sub, grade)", async () => {
-    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false });
+    vi.mocked(resolvePullimSub).mockResolvedValue({ sub: "s1", unavailable: false, emailMatchHash: null });
     vi.mocked(setPullimMemberGrade).mockResolvedValue();
     const r = await POST(postReq({ grade: "중1" }));
     expect(r.status).toBe(200);
     expect((await r.json()).ok).toBe(true);
+    // 재연결/물질화는 session-init 이 전담 — grade 라우트는 저장만.
     expect(setPullimMemberGrade).toHaveBeenCalledWith("s1", "중1");
   });
 });

@@ -96,6 +96,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401, headers: NO_STORE });
   }
   try {
+    // P-B 재연결/물질화는 로그인 직후 POST /api/pullim/session-init 이 전담한다(GradePrompt 가 모달 전에
+    //   호출). 여기선 모달이 수집한 grade 저장만 — setPullimMemberGrade 가 row 보장(ensure) 후 UPDATE.
     await setPullimMemberGrade(sub, grade);
   } catch {
     return NextResponse.json({ error: "backend_unavailable" }, { status: 503, headers: NO_STORE });
