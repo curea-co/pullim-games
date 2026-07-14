@@ -47,9 +47,8 @@ jobs:
   #     vocab-typing 은 english-vocab-typing 과 충돌 X (앞 `-` 가 lookbehind 차단).
   e2e-per-game:
     name: e2e (${{ matrix.game }})
-    # pullim-games 전용 group — 라우팅 근거는 codex-review.yml review job 주석 참조.
-    runs-on:
-      group: curea-runner-groups-2
+    # 공용 풀 전환(2026-07-14): 세 러너(curea-runner~3) 동일 환경 확인 — 그룹 격리 해제.
+    runs-on: self-hosted
     # 사전 sweep: 게임별 30분 상한. 21 게임 × 30 = 1 job 격리 hang 방지.
     timeout-minutes: 30
     # 모노레포: install/gen:registry 는 루트 진입점, playwright 실행 step 만 app cwd (codex #122).
@@ -210,9 +209,8 @@ jobs:
   #                                나머지 sample 게임 8 케이스는 per-game 에서 커버됨.
   e2e-shared:
     name: e2e (shared specs)
-    # pullim-games 전용 group — 라우팅 근거는 codex-review.yml review job 주석 참조.
-    runs-on:
-      group: curea-runner-groups-2
+    # 공용 풀 전환(2026-07-14): 세 러너(curea-runner~3) 동일 환경 확인 — 그룹 격리 해제.
+    runs-on: self-hosted
     timeout-minutes: 30
     # 모노레포: install/gen:registry 는 루트 진입점, playwright 실행 step 만 app cwd (codex #122).
     steps:
