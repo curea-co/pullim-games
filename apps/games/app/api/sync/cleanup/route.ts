@@ -3,6 +3,7 @@
 // 인증: CRON_SECRET 설정 시 Vercel 이 `Authorization: Bearer <CRON_SECRET>` 자동 동봉.
 import { NextResponse } from "next/server";
 import { purgeStaleActivity } from "@/lib/server/learning/activity";
+import { purgeStaleLibraryLearningEvents } from "@/lib/server/library/events";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -20,9 +21,13 @@ export async function GET(request: Request) {
   }
 
   try {
-    const removed = await purgeStaleActivity(Date.now());
+    const now = Date.now();
+    const [removed, learningEventsRemoved] = await Promise.all([
+      purgeStaleActivity(now),
+      purgeStaleLibraryLearningEvents(now),
+    ]);
     return NextResponse.json(
-      { ok: true, removed },
+      { ok: true, removed, learningEventsRemoved },
       { status: 200, headers: { "cache-control": "no-store" } },
     );
   } catch (err) {

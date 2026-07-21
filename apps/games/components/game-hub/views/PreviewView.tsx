@@ -23,7 +23,7 @@ export function PreviewView({ games, progress }: Props) {
         const isAvailable = g.meta.status === "available";
         const bucket = progress?.byGameId.get(g.meta.id) ?? "untouched";
         const inner = (
-          <Card className="group h-full overflow-hidden rounded-block border-border-hairline bg-bg-block p-0 shadow-none transition-colors hover:border-type-primary/30">
+          <Card className="puds-hub-surface group h-full overflow-hidden p-0 transition-colors">
             <PreviewMedia meta={g.meta} isAvailable={isAvailable} />
             <div className="flex flex-col gap-1.5 p-4">
               <header className="flex items-start justify-between gap-2">

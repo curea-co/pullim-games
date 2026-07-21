@@ -20,7 +20,7 @@ export function ThumbnailView({ games, progress }: Props) {
         const isAvailable = g.meta.status === "available";
         const bucket = progress?.byGameId.get(g.meta.id) ?? "untouched";
         const inner = (
-          <Card className="relative flex aspect-square flex-col items-center justify-center gap-2 rounded-block border-border-hairline bg-bg-block p-3 text-center shadow-none transition-colors hover:border-type-primary/30">
+          <Card className="puds-hub-surface relative flex aspect-square flex-col items-center justify-center gap-2 p-3 text-center transition-colors">
             {bucket !== "untouched" && (
               <span
                 aria-hidden="true"

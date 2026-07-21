@@ -33,7 +33,7 @@ export function TableView({ games, perGame }: Props) {
   const statByGame = new Map(perGame?.map((p) => [p.gameId, p]) ?? []);
 
   return (
-    <div className="overflow-x-auto rounded-block border border-border-hairline bg-bg-block">
+    <div className="puds-hub-surface overflow-x-auto">
       <table className="w-full min-w-[720px] border-collapse text-helper text-type-primary">
         <thead className="border-b border-border-hairline bg-pullim-slate-50">
           <tr>
@@ -100,7 +100,7 @@ export function TableView({ games, perGame }: Props) {
                       variant="outline"
                       size="sm"
                       aria-label={`${g.meta.title} 시작`}
-                      className="h-7 gap-1 rounded-button border-type-primary bg-bg-block px-2.5 text-helper font-medium text-type-primary hover:bg-accent-positive/10 hover:text-type-primary"
+                      className="puds-chip h-9 gap-1 px-3 text-helper font-medium"
                     >
                       <Link href={`/games/${g.meta.id}`} data-cta-priority="informational">
                         시작 <ArrowRight className="h-3 w-3" />

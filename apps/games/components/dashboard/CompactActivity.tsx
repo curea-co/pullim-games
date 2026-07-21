@@ -62,6 +62,7 @@ export function CompactActivity({
 
       <Link
         href="/games"
+        data-cta-priority="informational"
         className="flex items-center justify-between gap-3 border-t border-border-hairline px-4 py-3 text-helper text-type-secondary first:border-t-0 hover:bg-pullim-slate-50"
       >
         <span className="tabular">
@@ -90,6 +91,7 @@ function CompactRow({ stat }: { stat: PerGameStat }) {
   return (
     <Link
       href={`/games/${stat.gameId}`}
+      data-cta-priority="informational"
       aria-label={`${stat.title} — 성공 ${stat.correct}, 실패 ${stat.failed}, 정답률 ${accuracyPct}%${
         lastPlayed ? `, 마지막 플레이 ${lastPlayed}` : ""
       }`}

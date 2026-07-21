@@ -54,7 +54,7 @@ export function ModeChipsRow({ defaultGameId = "math-quick-quiz" }: Props) {
     <nav
       aria-label="다른 모드로 풀기"
       data-testid="hub-mode-chips"
-      className="flex flex-wrap items-center gap-2 rounded-block border border-border-hairline bg-bg-block px-3 py-2"
+      className="puds-hub-surface flex flex-wrap items-center gap-2 px-3 py-2"
     >
       <span className="text-helper text-type-secondary">다른 모드로</span>
       {supportedAlts.map((alt) => (
@@ -64,7 +64,7 @@ export function ModeChipsRow({ defaultGameId = "math-quick-quiz" }: Props) {
           data-cta-priority="informational"
           data-mode={alt.mode}
           aria-label={`${alt.label} 모드로 진입 (${alt.hint})`}
-          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-primary px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-positive"
+          className="puds-chip inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-4 py-2 text-helper"
         >
           {alt.label}
           <span className="ml-1 text-type-secondary/60">· {alt.hint}</span>

@@ -360,8 +360,8 @@ test("홈 (`/`) — RecommendationCard alt-modes 의 모든 chip 이 (gameId, mo
 // PR #92 Codex round 6 fix — SPEC 08.10 focus ring 회귀 차단.
 //
 // `:focus-visible` 상태에서 outline-width 가 2px 이상이고 outline-color 가
-// accent-positive (#0362DA) 인지 확인. 전역 globals.css 의 :focus-visible 룰 + chip
-// 클래스의 명시적 focus-visible:outline-* 토큰이 둘 다 적용되도록 박혔는지 검증.
+// 현재 PUDS action-primary 인지 확인. 색 공간(rgb/oklch)에 의존하지 않고 실제
+// pullim-jr semantic token과 비교한다.
 //
 // `keyboard.press("Tab")` 으로 첫 chip 에 포커스가 갈 때까지 진행한 뒤
 // computed outlineWidth/outlineColor 를 확인.
@@ -370,20 +370,27 @@ async function assertFocusRing(page: Page, locator: ReturnType<Page["locator"]>)
   // SPEC 08.10: outline 2px solid #0362DA; outline-offset 2px.
   const style = await locator.first().evaluate((el) => {
     const cs = window.getComputedStyle(el);
+    const scope = el.closest('.puds-jr-shell[data-theme="pullim-jr"]');
+    const probe = document.createElement("span");
+    probe.style.color = "var(--puds-action-primary)";
+    scope?.appendChild(probe);
+    const expectedOutlineColor = window.getComputedStyle(probe).color;
+    probe.remove();
     return {
       outlineWidth: cs.outlineWidth,
       outlineStyle: cs.outlineStyle,
       outlineColor: cs.outlineColor,
       outlineOffset: cs.outlineOffset,
+      expectedOutlineColor,
     };
   });
   // 2px 이상 (브라우저별 px 정밀 표기 차 허용).
   const widthPx = Number.parseFloat(style.outlineWidth);
   expect(Number.isFinite(widthPx)).toBe(true);
   expect(widthPx).toBeGreaterThanOrEqual(2);
-  // accent-positive #0362DA = rgb(3, 98, 218).
-  expect(style.outlineColor).toMatch(/rgba?\(\s*3\s*,\s*98\s*,\s*218/);
+  expect(style.outlineColor).toBe(style.expectedOutlineColor);
   expect(style.outlineStyle).not.toBe("none");
+  expect(Number.parseFloat(style.outlineOffset)).toBeGreaterThanOrEqual(2);
 }
 
 test("게임 허브 — ModeChipsRow chip 키보드 포커스 시 SPEC 08.10 focus ring 적용", async ({

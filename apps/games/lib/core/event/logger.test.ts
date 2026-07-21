@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { logEvent } from "./logger";
+import { logEvent, observeLogEvents } from "./logger";
 
 describe("logEvent", () => {
   let store: Map<string, string>;
@@ -93,5 +93,58 @@ describe("logEvent", () => {
         (globalThis as { window?: unknown }).window = original;
       }
     }
+  });
+
+  it("observer에 실제 전송과 같은 timestamp를 알리고 cleanup 후 중단", async () => {
+    vi.stubGlobal("navigator", {});
+    const fetchMock = vi.fn().mockResolvedValue(new Response("{}"));
+    vi.stubGlobal("fetch", fetchMock);
+    vi.spyOn(Date, "now").mockReturnValue(1_784_560_050_000);
+    const observer = vi.fn();
+    const stop = observeLogEvents(observer);
+
+    const input = {
+      gameId: "factorization",
+      cardId: "card-001",
+      action: "submit" as const,
+    };
+    await logEvent(input);
+
+    expect(observer).toHaveBeenCalledWith({
+      input,
+      timestampMs: 1_784_560_050_000,
+    });
+    const request = JSON.parse(
+      fetchMock.mock.calls[0]![1]!.body as string,
+    ) as { timestampMs: number };
+    expect(request.timestampMs).toBe(1_784_560_050_000);
+
+    stop();
+    await logEvent(input);
+    expect(observer).toHaveBeenCalledTimes(1);
+  });
+
+  it("observer throw/reject가 기존 logger 전송을 막지 않음", async () => {
+    vi.stubGlobal("navigator", {});
+    const fetchMock = vi.fn().mockResolvedValue(new Response("{}"));
+    vi.stubGlobal("fetch", fetchMock);
+    const stopThrowing = observeLogEvents(() => {
+      throw new Error("observer failed");
+    });
+    const stopRejecting = observeLogEvents(async () => {
+      throw new Error("observer rejected");
+    });
+
+    await expect(
+      logEvent({
+        gameId: "factorization",
+        cardId: null,
+        action: "session-start",
+      }),
+    ).resolves.toBeUndefined();
+    expect(fetchMock).toHaveBeenCalledOnce();
+
+    stopThrowing();
+    stopRejecting();
   });
 });

@@ -5,6 +5,7 @@
 //
 // 사용:
 //   bun run ui:audit /games/math-quick-quiz
+//   bun run ui:audit /games/math-quick-quiz --guest
 //   bun run ui:audit /manage/billing
 //   bun run ui:audit /                  (홈)
 //   bun run ui:audit /games/factorization --base https://games.pullim.ai
@@ -19,7 +20,9 @@ const args = process.argv.slice(2);
 const path = args[0];
 
 if (!path || path.startsWith("--")) {
-  console.error("usage: bun run ui:audit <path> [--base <url>] [--out <dir>]");
+  console.error(
+    "usage: bun run ui:audit <path> [--base <url>] [--out <dir>] [--guest]",
+  );
   console.error("       bun run ui:audit /games/math-quick-quiz");
   process.exit(2);
 }
@@ -29,6 +32,7 @@ const base = baseIdx >= 0 ? args[baseIdx + 1] : "http://localhost:3004";
 
 const outIdx = args.indexOf("--out");
 const outDir = outIdx >= 0 ? args[outIdx + 1] : "/tmp/ui-audit";
+const useGuestIdentity = args.includes("--guest");
 
 const VIEWPORTS = [
   { name: "mobile-sm-320", width: 320, height: 568, label: "iPhone SE 1세대 · 안드로이드 소형" },
@@ -50,6 +54,29 @@ for (const vp of VIEWPORTS) {
   const ctx = vp.device
     ? await browser.newContext(vp.device)
     : await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
+
+  if (useGuestIdentity) {
+    await ctx.addCookies([
+      {
+        name: "pullim_games_guest",
+        value: "1",
+        url: base,
+        sameSite: "Lax",
+      },
+    ]);
+    await ctx.addInitScript(() => {
+      window.localStorage.setItem(
+        "pullim-games:player",
+        JSON.stringify({
+          nickname: "시각 점검",
+          grade: "중1",
+          consent: true,
+          createdAt: 0,
+        }),
+      );
+    });
+  }
+
   const page = await ctx.newPage();
 
   try {
@@ -164,6 +191,7 @@ writeFileSync(
     {
       base,
       path,
+      useGuestIdentity,
       timestamp: new Date().toISOString(),
       totalOverflow,
       pass: totalOverflow === 0,

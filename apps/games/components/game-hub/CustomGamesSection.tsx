@@ -66,7 +66,7 @@ export function CustomGamesSection() {
       >
         <Card
           className={cn(
-            "flex flex-col items-center justify-center gap-2 rounded-block border-dashed border-border-hairline bg-bg-block px-4 py-8 shadow-none transition-colors",
+            "puds-hub-surface flex flex-col items-center justify-center gap-2 border-dashed px-4 py-8 transition-colors",
             "hover:border-type-primary/50 hover:bg-bg-shell/40 active:scale-[0.99] active:bg-bg-shell",
           )}
         >
@@ -91,7 +91,7 @@ export function CustomGamesSection() {
   return (
     <Card
       aria-label="나만의 게임"
-      className="flex flex-col gap-3 rounded-block border-dashed border-border-hairline bg-bg-block p-4 shadow-none"
+      className="puds-hub-surface flex flex-col gap-3 border-dashed p-4"
     >
       <header className="flex items-center gap-2">
         <span
@@ -120,7 +120,7 @@ export function CustomGamesSection() {
               <Link href={`/games/${g.meta.id}`} data-cta-priority="informational" className="group block">
                 <Card
                   className={cn(
-                    "flex items-center gap-2 rounded-block bg-bg-primary px-3 py-2.5 shadow-none transition-colors",
+                    "puds-hub-surface flex items-center gap-2 px-3 py-2.5 transition-colors",
                     isPlayable
                       ? "border-border-hairline group-hover:border-type-primary/30"
                       : "border-border-hairline opacity-65",

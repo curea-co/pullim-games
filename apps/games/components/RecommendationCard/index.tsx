@@ -82,10 +82,11 @@ export function RecommendationCard() {
     <div className="flex flex-col gap-2">
       <Link
         href={`/games/${game.meta.id}`}
+        data-cta-priority="informational"
         className="block rounded-block focus-visible:outline-2 focus-visible:outline-accent-positive"
         aria-label={`오늘의 추천 — ${game.meta.title}, ${recommendation.reasonText}`}
       >
-        <Card className="group relative flex flex-col gap-4 rounded-block border-accent-positive/30 bg-bg-block p-5 shadow-none transition-all hover:border-accent-positive hover:shadow-block sm:p-6">
+        <Card className="puds-hub-surface group relative flex flex-col gap-4 p-5 transition-all sm:p-6">
           {/* 헤더 — 라벨 + 컨텍스트 chip */}
           <header className="flex items-center justify-between gap-3">
             <span className="text-xs font-bold uppercase tracking-wider text-accent-positive">
@@ -155,7 +156,7 @@ export function RecommendationCard() {
                 data-cta-priority="informational"
                 data-mode={alt.mode}
                 aria-label={`${game.meta.title} — ${alt.label} 모드 (${alt.hint})`}
-                className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-button border border-border-hairline bg-bg-block px-4 py-2 text-helper text-type-secondary hover:border-type-primary hover:text-type-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-positive"
+                className="puds-chip inline-flex min-h-[44px] min-w-[44px] items-center justify-center px-4 py-2 text-helper"
               >
                 {alt.label}
               </Link>

@@ -15,7 +15,36 @@ export interface LogEventInput {
   payload?: Record<string, unknown>;
 }
 
+export interface LogEventObservation {
+  readonly input: LogEventInput;
+  readonly timestampMs: number;
+}
+
+export type LogEventObserver = (
+  observation: LogEventObservation,
+) => void | Promise<void>;
+
 const EVENT_ENDPOINT = "/api/event";
+const observers = new Set<LogEventObserver>();
+
+/**
+ * 기존 이벤트 전송 계약을 바꾸지 않고 추가 소비자가 이벤트를 관찰하게 한다.
+ * observer 실패는 기존 게임 진행과 `/api/event` 전송을 막지 않는다.
+ */
+export function observeLogEvents(observer: LogEventObserver): () => void {
+  observers.add(observer);
+  return () => observers.delete(observer);
+}
+
+function notifyObservers(observation: LogEventObservation): void {
+  for (const observer of observers) {
+    try {
+      void Promise.resolve(observer(observation)).catch(() => undefined);
+    } catch {
+      // observer 격리 — 분석 연동 실패가 게임 진행을 막지 않는다.
+    }
+  }
+}
 
 /**
  * 이벤트 로깅. fire-and-forget.
@@ -24,6 +53,9 @@ const EVENT_ENDPOINT = "/api/event";
  *          호출자는 await 할 필요 없음.
  */
 export async function logEvent(input: LogEventInput): Promise<void> {
+  const timestampMs = Date.now();
+  notifyObservers({ input, timestampMs });
+
   const fingerprint = getFingerprint();
   if (!fingerprint) return; // SSR or storage rejected — no logging
 
@@ -32,7 +64,7 @@ export async function logEvent(input: LogEventInput): Promise<void> {
     gameId: input.gameId,
     cardId: input.cardId,
     action: input.action,
-    timestampMs: Date.now(),
+    timestampMs,
     payload: input.payload,
   });
 
