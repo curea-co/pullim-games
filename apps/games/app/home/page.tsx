@@ -60,16 +60,17 @@ function HomeDashboard() {
   }, []);
 
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-6 md:px-6 md:py-8 lg:px-8">
+    <main
+      data-puds-page="student-home"
+      className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-6 md:px-6 md:py-8 lg:px-8"
+    >
       <header>
-        <p className="text-xs font-bold uppercase tracking-wider text-type-secondary">
-          홈
-        </p>
-        <h1 className="mt-1 text-2xl font-bold leading-tight tracking-tight text-type-primary">
+        <p className="puds-page-eyebrow uppercase">홈</p>
+        <h1 className="puds-page-title mt-1">
           {hello || "안녕하세요"}
         </h1>
         {stats && (
-          <p className="mt-1.5 text-label text-type-secondary tabular">
+          <p className="puds-page-meta mt-1.5 tabular">
             {stats.gamesPlayed > 0
               ? `${stats.gamesPlayed}개 게임을 만났어요`
               : "첫 게임을 풀면 여기에 기록이 쌓여요"}

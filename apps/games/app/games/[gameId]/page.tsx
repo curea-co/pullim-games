@@ -3,7 +3,8 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { getAllGameIds, getGameById } from "@/lib/games/registry";
-import { RequireIdentity } from "@/components/auth/RequireIdentity";
+import { PlayerLoadingState } from "@/components/game-shell";
+import { LibraryLaunchGate } from "@/components/library/LibraryLaunchGate";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -45,18 +46,14 @@ export default async function GamePage({ params }: PageProps) {
   // 동적 import — Next.js 가 게임별 청크 분할.
   const { default: Game } = await game.loadComponent();
   // Suspense — useSearchParams 사용 게임 컴포넌트의 prerender CSR bailout 처리 (Plan E Phase 2).
-  // RequireIdentity — 입구 게이트(arcade 모델): 신원 없으면 랜딩으로. plan: 2026-06-01_arcade-entry-model.md.
+  // LibraryLaunchGate — 직접 실행은 기존 RequireIdentity, 서명 handoff는 익명 Library session으로 분기.
   return (
     <Suspense
-      fallback={
-        <div className="flex min-h-screen items-center justify-center text-helper text-type-secondary">
-          불러오는 중…
-        </div>
-      }
+      fallback={<PlayerLoadingState />}
     >
-      <RequireIdentity>
+      <LibraryLaunchGate gameId={gameId}>
         <Game />
-      </RequireIdentity>
+      </LibraryLaunchGate>
     </Suspense>
   );
 }

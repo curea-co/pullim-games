@@ -19,6 +19,7 @@ export function DeepRecallEmpty({ homeHref = "/", defaultModeHref }: Props) {
   return (
     <main
       data-testid="deep-recall-empty"
+      data-puds-state="empty"
       className="mx-auto flex min-h-full max-w-[480px] flex-col items-center justify-center gap-4 px-6 py-10 text-center"
     >
       <motion.div

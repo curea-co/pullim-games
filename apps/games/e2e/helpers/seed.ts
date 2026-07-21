@@ -83,6 +83,20 @@ const SEED = {
   cards: CARDS,
 };
 
+/** 게스트 신원은 유지하고 학습/커스텀 상태만 초기화한다. */
+export async function clearLearningState(page: Page): Promise<void> {
+  await page.evaluate(() => {
+    const keys: string[] = [];
+    for (let index = 0; index < window.localStorage.length; index += 1) {
+      const key = window.localStorage.key(index);
+      if (key?.startsWith("pullim-games:") && key !== "pullim-games:player") {
+        keys.push(key);
+      }
+    }
+    keys.forEach((key) => window.localStorage.removeItem(key));
+  });
+}
+
 /** 페이지 로드 전 localStorage 에 custom 콘텐츠 주입. */
 export async function seedCustomGames(page: Page): Promise<void> {
   await page.addInitScript((data) => {

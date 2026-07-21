@@ -17,7 +17,7 @@ export function GameCard({ meta }: GameCardProps) {
   const inner = (
     <Card
       className={cn(
-        "group relative flex h-full flex-col rounded-block p-5 shadow-none transition-all",
+        "puds-hub-surface group relative flex h-full flex-col p-5 transition-all",
         isAvailable
           ? "border-border-hairline bg-bg-block hover:border-type-primary/30 hover:shadow-block"
           : "border-border-hairline bg-bg-primary opacity-65",

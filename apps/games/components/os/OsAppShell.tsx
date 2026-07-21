@@ -49,7 +49,12 @@ export function OsAppShell({ children }: { children: ReactNode }) {
   if (mode === "game") {
     // 게임 몰입 — GameShell 이 자체 스크롤(h-full) + CTA viewport-in. 부모는 h-screen flex column.
     return (
-      <div className="os-root" style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+      <div
+        data-theme="pullim-jr"
+        data-puds-scope="student-shell"
+        className="os-root puds-jr-shell"
+        style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+      >
         <header className="topbar">
           {/* 백링크는 .icon-btn — .rail-collapse-btn 은 ≤920px 에서 display:none 이라 모바일 게임
               페이지에서 뒤로가기가 사라지던 회귀 방지(codex #138 R9). .icon-btn 은 전 뷰포트 노출
@@ -72,7 +77,11 @@ export function OsAppShell({ children }: { children: ReactNode }) {
   if (mode === "landing") {
     // 랜딩(`/`) 온보딩 — mast(→`/`, 랜딩 우회 방지) + 계정 진입만. 풀폭 자연 스크롤.
     return (
-      <div className="os-root">
+      <div
+        data-theme="pullim-jr"
+        data-puds-scope="student-shell"
+        className="os-root puds-jr-shell"
+      >
         <header className="topbar">
           <Mast href="/" />
           <div className="spacer" />

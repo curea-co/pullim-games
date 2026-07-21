@@ -20,6 +20,7 @@ import { PULLIM_MODE } from "@/lib/auth/pullim-mode";
 
 const SESSION_COOKIE = "pullim_games_session"; // legacy 모드 회원 세션(host-only)
 const GUEST_COOKIE = "pullim_games_guest"; // 게스트 힌트(양 모드 공통, 무변경)
+const LIBRARY_LAUNCH_COOKIE = "pullim_games_library_launch";
 // pullim 모드 회원 세션 = pullim-api 발급 `*-pullim-at` 쿠키(Domain=.pullim.ai, HttpOnly).
 // HttpOnly 라도 서버(엣지)는 request 쿠키로 읽을 수 있다. suffix 매칭으로 env 접두
 // (`local-`/`__Secure-dev-`/`__Secure-prod-`) 전부 커버.
@@ -37,8 +38,11 @@ function hasMemberCookie(req: NextRequest): boolean {
 export function middleware(req: NextRequest) {
   const hasMember = hasMemberCookie(req);
   const hasGuest = Boolean(req.cookies.get(GUEST_COOKIE)?.value);
-  // 게스트 OR 회원 둘 중 하나라도 있으면 통과(OR — 게스트 우선 보존, spec/05 §5.2).
-  if (!hasMember && !hasGuest) {
+  const hasLibraryLaunch = Boolean(
+    req.cookies.get(LIBRARY_LAUNCH_COOKIE)?.value,
+  );
+  // 게스트 OR 회원 OR 검증 완료 Library launch 세션 중 하나라도 있으면 통과.
+  if (!hasMember && !hasGuest && !hasLibraryLaunch) {
     const url = req.nextUrl.clone();
     url.pathname = "/";
     url.search = "";

@@ -473,7 +473,7 @@ interface CompletionScreenProps {
 
 function CompletionScreen({ totalCards, onRetry }: CompletionScreenProps) {
   return (
-    <main className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-10">
+    <main data-puds-player-state="result" className="mx-auto flex min-h-full max-w-[480px] flex-col px-6 py-10">
       <section className="flex flex-1 flex-col items-center justify-center gap-6 text-center">
         <motion.h1
           className="text-display text-type-primary"

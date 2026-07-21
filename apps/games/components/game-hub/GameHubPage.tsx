@@ -163,18 +163,19 @@ export function GameHubPage() {
   const appliedCount = countApplied(filter);
 
   return (
-    <main className="flex flex-col gap-6 px-4 py-6 md:px-6 md:py-8">
+    <main
+      data-puds-page="game-hub"
+      className="flex flex-col gap-6 px-4 py-6 md:px-6 md:py-8"
+    >
       {/* flex-wrap: 320px 에서 제목 + 뷰토글(shrink-0)이 한 줄에 안 맞아 문서 가로 스크롤을 유발하던 것
           방지(codex #138 R3) — 좁으면 뷰토글이 아래 줄로 wrap. */}
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-bold uppercase tracking-wider text-type-secondary">
-            게임 허브
-          </p>
-          <h1 className="mt-1 text-2xl font-bold leading-tight tracking-tight text-type-primary">
+          <p className="puds-page-eyebrow uppercase">게임 허브</p>
+          <h1 className="puds-page-title mt-1">
             오늘은 어떤 게임으로 시작할까요?
           </h1>
-          <p className="mt-1.5 text-label text-type-secondary tabular">
+          <p className="puds-page-meta mt-1.5 tabular">
             {officialGames.length}개 중 {filtered.length}개 노출
             {appliedCount > 0 && ` · 필터 ${appliedCount}개 적용`}
           </p>
@@ -220,7 +221,7 @@ export function GameHubPage() {
 
           {/* 결과 */}
           {filtered.length === 0 ? (
-            <div className="rounded-block border border-border-hairline bg-bg-block p-6 text-center">
+            <div data-puds-state="empty" className="p-6 text-center">
               <p className="text-label text-type-secondary">
                 이 조합으로는 게임이 없어요.
               </p>

@@ -42,7 +42,7 @@ export function FilterSheet({
           variant="outline"
           size="sm"
           aria-label="필터 열기"
-          className="h-8 gap-1.5 rounded-button border-border-hairline bg-bg-block px-2.5 text-helper text-type-primary"
+          className="puds-chip h-9 gap-1.5 px-3 text-helper"
         >
           <Filter className="h-3.5 w-3.5" />
           필터
@@ -55,7 +55,7 @@ export function FilterSheet({
       </SheetTrigger>
       <SheetContent
         side="right"
-        className="flex w-80 max-w-[88vw] flex-col gap-0 p-0 bg-bg-primary"
+        className="flex w-80 max-w-[88vw] flex-col gap-0 bg-bg-primary p-0"
       >
         <SheetHeader className="border-b border-border-hairline px-4 py-3">
           <SheetTitle className="text-label font-bold text-type-primary">
@@ -75,7 +75,7 @@ export function FilterSheet({
             type="button"
             variant="outline"
             onClick={() => setOpen(false)}
-            className="w-full rounded-button border-type-primary bg-bg-block text-body text-type-primary"
+            className="puds-primary-control w-full text-body"
           >
             결과 보기
           </Button>

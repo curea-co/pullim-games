@@ -9,18 +9,18 @@ export function DashboardSkeleton() {
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="h-24 animate-pulse rounded-block border border-border-hairline bg-bg-block"
+            className="puds-hub-surface h-24 animate-pulse"
           />
         ))}
       </div>
       {/* 추천 카드 */}
-      <div className="h-32 animate-pulse rounded-block border border-border-hairline bg-bg-block" />
+      <div className="puds-hub-surface h-32 animate-pulse" />
       {/* 게임별 행 */}
       <div className="flex flex-col gap-2">
         {[0, 1, 2, 3].map((i) => (
           <div
             key={i}
-            className="h-20 animate-pulse rounded-block border border-border-hairline bg-bg-block"
+            className="puds-hub-surface h-20 animate-pulse"
           />
         ))}
       </div>

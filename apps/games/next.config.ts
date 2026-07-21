@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
   // 근거: proc/plan/2026-05-29_auth-login-signup.md · 2026-06-05_learning-data-server-sync.md.
   outputFileTracingIncludes: {
     "/api/auth/**": ["./migrations/**"],
+    "/api/library/**": ["./migrations/**"],
     "/api/sync/**": ["./migrations/**"],
   },
 };

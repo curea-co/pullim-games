@@ -38,7 +38,7 @@ export function ViewToggle({ value, onChange }: Props) {
       value={value}
       onValueChange={(v) => v && onChange(v as GameHubView)}
       aria-label="뷰 전환"
-      className="inline-flex items-center gap-0.5 rounded-button border border-border-hairline bg-bg-block p-0.5"
+      className="puds-segmented-control inline-flex items-center gap-0.5 p-1"
     >
       {OPTIONS.map((opt) => {
         const Icon = opt.icon;
@@ -48,7 +48,7 @@ export function ViewToggle({ value, onChange }: Props) {
             value={opt.value}
             aria-label={opt.label}
             title={opt.label}
-            className="h-8 w-8 min-w-0 rounded-button text-type-secondary hover:bg-pullim-slate-100 hover:text-type-primary data-[state=on]:bg-accent-positive/10 data-[state=on]:text-accent-positive"
+            className="puds-segmented-control__item h-9 w-9 min-w-0"
           >
             <Icon className="h-4 w-4" strokeWidth={2} />
           </ToggleGroupItem>

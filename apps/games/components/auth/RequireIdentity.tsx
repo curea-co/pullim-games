@@ -6,7 +6,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useIdentity } from "@/lib/core/player/use-identity";
-import { PullimMark } from "@/components/brand/PullimMark";
+import { PlayerLoadingState } from "@/components/game-shell";
 
 export function RequireIdentity({ children }: { children: React.ReactNode }) {
   const router = useRouter();
@@ -18,11 +18,7 @@ export function RequireIdentity({ children }: { children: React.ReactNode }) {
 
   // 판정 전 / 무신원(리다이렉트 중) — 컨텐츠 노출 안 함.
   if (!ready || !hasIdentity) {
-    return (
-      <div className="grid min-h-[60vh] place-items-center" aria-hidden="true">
-        <PullimMark className="h-10 w-10 animate-pulse" />
-      </div>
-    );
+    return <PlayerLoadingState label="학습 기록을 확인하고 있어요" />;
   }
   return <>{children}</>;
 }

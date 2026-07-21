@@ -26,7 +26,7 @@ export function ListView({ games, perGame }: Props) {
         const inner = (
           <Card
             className={cn(
-              "flex items-center gap-3 rounded-block px-3 py-2.5 shadow-none transition-colors",
+              "puds-hub-surface flex items-center gap-3 px-3 py-2.5 transition-colors",
               isAvailable
                 ? "border-border-hairline bg-bg-block hover:border-type-primary/30"
                 : "border-border-hairline bg-bg-primary opacity-65",

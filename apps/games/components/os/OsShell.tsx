@@ -37,7 +37,11 @@ export function OsShell({ current = "games", rail, children }: OsShellProps) {
   });
 
   return (
-    <div className="os-root">
+    <div
+      data-theme="pullim-jr"
+      data-puds-scope="student-shell"
+      className="os-root puds-jr-shell"
+    >
       <header className="topbar">
         <RailCollapseToggle />
         <Link className="mast" href="/home" aria-label="풀림 게임즈 홈">
