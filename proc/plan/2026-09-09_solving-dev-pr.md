@@ -15,5 +15,5 @@
 - 독립 dev 작업 폴더에서 lint, typecheck, build 통과. 단위 테스트 634개 통과.
 - 재시도 테스트의 정답 3x 고정과 동일 글자 교환 오답 가정을 발견하여 현재 카드 기준으로 수정했다(Red 3개 → Green).
 - playwright.audit.config.ts: 인증 주입 없이 감사 대조군과 실제 랜딩을 검사, 10개 통과.
-- 도해 실제 게스트 진입 및 4 viewport 감사 통과. 나머지 화면은 PR 본문에 최종 결과 기록.
+- 공식 17게임 × 4 viewport(320×568, 390×844, 768×1024, 1280×800) 실제 게스트 진입 감사 68개 통과, critical 0. 도해 320px 캡처 직접 확인. 결과는 /tmp/solving-pr-hotspot/audit.json 및 /tmp/solving-pr-ui/<game>/audit.json.
 - 전체 게임 완주, SSO·실제 회원 DB, SVG 내부 글자 잘림은 미검증.
