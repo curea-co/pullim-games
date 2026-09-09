@@ -2,7 +2,7 @@
 // 5종: flower, leaf, root, stem, seed. region overlay 와 좌표 동일 기준(0~100 %).
 //
 // 정교도 V0.1 (2026-05-14): 추상 도형 → 식물 부위 식별 가능한 paths.
-// region bbox 좌표는 content/index.ts 와 1:1 보존 — 학습 의도/난이도 유지.
+// 기존 region/정답 ID는 보존하며 stem/root 표시 좌표는 presentation.ts에서 교정한다.
 
 import type { DiagramId } from "../schema";
 
@@ -273,17 +273,14 @@ function RootSvg() {
         strokeLinecap="round"
       />
 
-      {/* 뿌리털 — 원뿌리 끝 + 곁뿌리 끝에 짧은 가닥 */}
+      {/* 뿌리털은 끝의 분열/신장 영역보다 위의 성숙 영역에 있다. */}
       {[
-        { x: 100, y: 162, dx: -3, dy: 10 },
-        { x: 100, y: 162, dx: 3, dy: 10 },
-        { x: 100, y: 162, dx: 0, dy: 12 },
-        { x: 95, y: 168, dx: -4, dy: 8 },
-        { x: 105, y: 168, dx: 4, dy: 8 },
-        { x: 46, y: 116, dx: -3, dy: 6 },
-        { x: 154, y: 116, dx: 3, dy: 6 },
-        { x: 52, y: 150, dx: -3, dy: 6 },
-        { x: 148, y: 150, dx: 3, dy: 6 },
+        { x: 94, y: 126, dx: -10, dy: 0 },
+        { x: 94, y: 132, dx: -12, dy: 1 },
+        { x: 95, y: 138, dx: -10, dy: 1 },
+        { x: 106, y: 126, dx: 10, dy: 0 },
+        { x: 106, y: 132, dx: 12, dy: 1 },
+        { x: 105, y: 138, dx: 10, dy: 1 },
       ].map((h, i) => (
         <line
           key={i}
@@ -301,16 +298,13 @@ function RootSvg() {
 }
 
 // ───────────────────── 줄기 단면 ─────────────────────
-// region: outer(5-17, 42-58), cambium(22-32, 42-58), xylem(34-42, 42-58), phloem(43-57, 43-57)
-// - 동심원 4개 유지 (region bbox 좌측 가로 배치 기준)
-// - 외피: 거친 dash 텍스처
-// - 물관/체관: 작은 점/방사선 (관다발)
+// 체관은 형성층 바깥, 물관은 안쪽. 중심은 속이며 체관으로 표시하지 않는다.
 function StemSvg() {
   return (
     <svg
       viewBox="0 0 200 200"
       role="img"
-      aria-label="줄기 단면 도식"
+      aria-label="이차 생장한 쌍떡잎식물 줄기 단면 모식도"
       className="h-full w-full"
     >
       {/* 외피 (가장 바깥 ring) */}
@@ -326,24 +320,12 @@ function StemSvg() {
         strokeDasharray="4 6"
       />
 
-      {/* 형성층 ring */}
-      <circle cx="100" cy="100" r="55" fill="#fde68a" stroke="#92400e" strokeWidth="2" />
+      {/* 쌍떡잎식물의 이차 생장 줄기: 바깥 체관 → 형성층 → 안쪽 물관. */}
+      <circle cx="100" cy="100" r="64" fill="#bbf7d0" stroke="#15803d" strokeWidth="2" />
+      <circle cx="100" cy="100" r="50" fill="#fde68a" stroke="#92400e" strokeWidth="1" />
+      <circle cx="100" cy="100" r="48" fill="#bae6fd" stroke="#0369a1" strokeWidth="1" />
+      <circle cx="100" cy="100" r="14" fill="#fff" stroke="#0369a1" strokeWidth="1" />
 
-      {/* 물관 ring */}
-      <circle cx="100" cy="100" r="32" fill="#bae6fd" stroke="#0369a1" strokeWidth="2" />
-
-      {/* 물관 관다발 점 — 방사선 배치 */}
-      {[0, 45, 90, 135, 180, 225, 270, 315].map((deg) => {
-        const rad = (deg * Math.PI) / 180;
-        const cx = r2(100 + 22 * Math.cos(rad));
-        const cy = r2(100 + 22 * Math.sin(rad));
-        return <circle key={deg} cx={cx} cy={cy} r="2" fill="#0369a1" />;
-      })}
-
-      {/* 체관 (중앙 가장 안쪽) */}
-      <circle cx="100" cy="100" r="14" fill="#bbf7d0" stroke="#15803d" strokeWidth="2" />
-      {/* 체관 중심 점 */}
-      <circle cx="100" cy="100" r="3" fill="#15803d" />
     </svg>
   );
 }

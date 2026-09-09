@@ -18,16 +18,20 @@ import { palette } from "@/lib/design-tokens";
 export interface FactorChipRackProps {
   /** 후보 chip 텍스트 3개 (1 정답 + 2 distractors, 부모가 shuffle 해서 전달). */
   candidates: string[];
+  onChoose: (text: string) => void;
+  disabled: boolean;
   /** 현재 드래그 hover 중인 chip 텍스트 — 정답 여부 구별 없이 시각 강조용. */
   hoveringText: string | null;
   /** 직전 wrong chip 텍스트 — 짧은 negative flash 표시 (border red 200ms). */
   wrongFlashText: string | null;
   /** 각 chip 의 boundingClientRect 측정용 ref 등록. 부모가 hit-test 에 사용. */
-  onChipMount: (text: string, el: HTMLDivElement | null) => void;
+  onChipMount: (text: string, el: HTMLButtonElement | null) => void;
 }
 
 export function FactorChipRack({
   candidates,
+  onChoose,
+  disabled,
   hoveringText,
   wrongFlashText,
   onChipMount,
@@ -45,6 +49,8 @@ export function FactorChipRack({
           isHovering={hoveringText === text}
           isWrongFlash={wrongFlashText === text}
           onMount={(el) => onChipMount(text, el)}
+          onChoose={() => onChoose(text)}
+          disabled={disabled}
         />
       ))}
     </div>
@@ -52,14 +58,16 @@ export function FactorChipRack({
 }
 
 interface ChipProps {
+  onChoose: () => void;
+  disabled: boolean;
   text: string;
   isHovering: boolean;
   isWrongFlash: boolean;
-  onMount: (el: HTMLDivElement | null) => void;
+  onMount: (el: HTMLButtonElement | null) => void;
 }
 
-function FactorChip({ text, isHovering, isWrongFlash, onMount }: ChipProps) {
-  const ref = useRef<HTMLDivElement>(null);
+function FactorChip({ text, isHovering, isWrongFlash, onMount, onChoose, disabled }: ChipProps) {
+  const ref = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     onMount(ref.current);
@@ -67,10 +75,14 @@ function FactorChip({ text, isHovering, isWrongFlash, onMount }: ChipProps) {
   }, [onMount]);
 
   return (
-    <motion.div
+    <motion.button
+      type="button"
+      onClick={onChoose}
+      disabled={disabled}
+      aria-label={`공통인수 ${text} 선택`}
       ref={ref}
       data-chip-text={text}
-      className="relative flex min-h-[56px] min-w-[80px] items-center justify-center rounded-block border bg-bg-block px-4 py-3 text-display tabular text-type-primary"
+      className="relative flex min-h-[56px] min-w-[80px] items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-type-primary rounded-block border bg-bg-block px-4 py-3 text-display tabular text-type-primary"
       animate={{
         borderColor: isWrongFlash
           ? palette.negative
@@ -97,6 +109,6 @@ function FactorChip({ text, isHovering, isWrongFlash, onMount }: ChipProps) {
         )}
       </AnimatePresence>
       <span>{text}</span>
-    </motion.div>
+    </motion.button>
   );
 }

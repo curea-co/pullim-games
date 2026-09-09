@@ -7,6 +7,8 @@ import { CATEGORY_COLORS } from "./ItemCard";
 
 interface CategoryBoxProps {
   category: Category;
+  onAssign: () => void;
+  canAssign: boolean;
   colorIndex: number;
   /** 드래그 중 pointer 가 이 박스 위에 있을 때 true. */
   dragOver: boolean;
@@ -15,7 +17,7 @@ interface CategoryBoxProps {
 }
 
 export const CategoryBox = forwardRef<HTMLDivElement, CategoryBoxProps>(
-  function CategoryBox({ category, colorIndex, dragOver, children }, ref) {
+  function CategoryBox({ category, colorIndex, dragOver, children, onAssign, canAssign }, ref) {
     const tintClass = CATEGORY_COLORS[colorIndex] ?? CATEGORY_COLORS[0];
     const borderClass = tintClass!.split(" ")[2] ?? "border-border-hairline";
     return (
@@ -27,11 +29,15 @@ export const CategoryBox = forwardRef<HTMLDivElement, CategoryBoxProps>(
           dragOver ? "ring-2 ring-offset-1 ring-type-primary scale-[1.01]" : ""
         }`}
       >
-        <span
-          className={`rounded-button px-2 py-1 text-label tabular text-type-primary text-center ${tintClass}`}
+        <button
+          type="button"
+          disabled={!canAssign}
+          onClick={onAssign}
+          aria-label={`${category.label}에 배치`}
+          className={`focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-type-primary rounded-button px-2 py-1 text-label tabular text-type-primary text-center ${tintClass}`}
         >
           {category.label}
-        </span>
+        </button>
         <div className="flex flex-wrap items-start gap-1.5">{children}</div>
       </div>
     );

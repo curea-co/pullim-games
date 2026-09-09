@@ -17,7 +17,7 @@
 
 자투리 시간(통학·쉬는 시간) 침투용. 30초 안에 5문제. retrieval 깊이는 얕지만 spacing 효과를 시간 분포로 채움.
 
-상세: [proc/plan/2026-05-08_game-lineup-and-filtering.md §5](../../../proc/plan/2026-05-08_game-lineup-and-filtering.md)
+상세: [proc/archive/plan/2026-05-08_game-lineup-and-filtering.md §5](../../../../proc/archive/plan/2026-05-08_game-lineup-and-filtering.md)
 
 ## 구현 현황
 

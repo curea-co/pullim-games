@@ -70,12 +70,14 @@ export function TypingComponent({
   );
   const [cardsLoaded, setCardsLoaded] = useState(mode === "default");
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [input, setInput] = useState("");
   const [wrongCount, setWrongCount] = useState(0);
   const [hintUsed, setHintUsed] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const cardStartRef = useRef<number>(0);
+  const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const all = loadAllSrsStates(gameId);
@@ -110,7 +112,13 @@ export function TypingComponent({
     inputRef.current?.focus();
     // time-attack 카드별 기준 시각 갱신
     cardStartRef.current = performance.now();
-  }, [cardIndex, card]);
+    return () => { if (feedbackTimerRef.current !== null) clearTimeout(feedbackTimerRef.current); };
+  }, [cardIndex, card, sessionRound]);
+
+  // 완료 화면에서 재시도하면 입력은 playing 렌더에서 다시 마운트된다.
+  useEffect(() => {
+    if (phase === "playing") inputRef.current?.focus();
+  }, [phase]);
 
   // Enter 단축키 — input 이 disabled(isResolved) 인 동안 다음 카드로 진행.
   // playing 중에는 input 의 onKeyDown 이 우선 처리.
@@ -164,6 +172,7 @@ export function TypingComponent({
         subtext={completionSubtext ?? "내일 또 봐요."}
         homeHref={homeHref}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           void logEvent({
             gameId,
@@ -198,7 +207,7 @@ export function TypingComponent({
       payload: { correct, input: trimmed, hintUsed, wrongCount, elapsedMs },
     });
 
-    setTimeout(() => {
+    feedbackTimerRef.current = setTimeout(() => {
       if (correct) {
         // Plan A Phase 3 — modes wrapper 마이그레이션. rating 결정은 resolveRating(default).
         applyAndPersist(mode, gameId, card!.id, {
@@ -229,7 +238,7 @@ export function TypingComponent({
           return;
         }
         setPhase("wrong");
-        setTimeout(() => {
+        feedbackTimerRef.current = setTimeout(() => {
           setInput("");
           setPhase("playing");
           inputRef.current?.focus();
@@ -300,7 +309,7 @@ export function TypingComponent({
           </div>
           <TimeAttackTimer
             active={mode === "time-attack" && phase === "playing"}
-            resetKey={cardIndex}
+            resetKey={`${sessionRound}:${cardIndex}:${card.id}`}
             onExpire={handleTimeout}
           />
         </div>

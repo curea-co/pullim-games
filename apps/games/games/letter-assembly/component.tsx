@@ -39,6 +39,7 @@ export default function LetterAssemblyGame() {
   const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [placementMap, setPlacementMap] = useState<Record<string, string | null>>(
     {},
@@ -55,7 +56,7 @@ export default function LetterAssemblyGame() {
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
-    if (all.size > 0) {
+    if (all.size > 0 || mode === "review-queue") {
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -81,7 +82,7 @@ export default function LetterAssemblyGame() {
     setWrongCount(0);
     setAccuracy(null);
     setPhase("playing");
-  }, [cardIndex, card]);
+  }, [cardIndex, card, sessionRound]);
 
   const placedCardIds = useMemo(() => {
     const set = new Set<string>();
@@ -122,6 +123,7 @@ export default function LetterAssemblyGame() {
       <CompletionScreen
         totalCards={cards.length}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           void logEvent({
             gameId: GAME_ID,
@@ -286,6 +288,7 @@ export default function LetterAssemblyGame() {
             transition={{ duration: 0.36 }}
           >
             <SlotRow
+              target={card.problem.target.hanja}
               slots={card.problem.slots}
               placements={placementsBySlotForUi}
               disabled={phase !== "playing"}
@@ -293,6 +296,7 @@ export default function LetterAssemblyGame() {
             />
           </motion.div>
 
+          {card.problem.target.hanja === "休" && <p className="mt-2 text-center text-helper text-type-secondary">人은 글자의 왼쪽에서 亻 모양으로 바뀌어요.</p>}
           {isResolved && (
             <p
               className="mt-4 text-center text-display text-type-primary"

@@ -19,7 +19,7 @@
 
 > **wow 모먼트**: "어 단어가 자석처럼 붙네 — 어 이게 영어 어순이구나"
 
-상세: [proc/plan/2026-05-08_game-lineup-and-filtering.md §5](../../../proc/plan/2026-05-08_game-lineup-and-filtering.md)
+상세: [proc/archive/plan/2026-05-08_game-lineup-and-filtering.md §5](../../../../proc/archive/plan/2026-05-08_game-lineup-and-filtering.md)
 
 ## 구현 현황
 

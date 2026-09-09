@@ -1,9 +1,9 @@
 # 이미지 핫스팟 (image-hotspot)
 
 - **gameId**: `image-hotspot`
-- **과목 · 단원**: 과학 / 고1 과학 — 식물 구조 (꽃·잎·뿌리·줄기·씨앗 5장)
+- **과목 · 단원**: 과학 / 고1 과학 — 식물 구조 (기존 5장)
 - **상태**: `available`
-- **출처 plan**: [proc/plan/2026-05-13_20-game-mechanics-roadmap.md](../../../proc/plan/2026-05-13_20-game-mechanics-roadmap.md) M6
+- **출처 plan**: [proc/archive/plan/2026-05-13_20-game-mechanics-roadmap.md](../../../../proc/archive/plan/2026-05-13_20-game-mechanics-roadmap.md) M6
 
 ## 시작하기
 
@@ -33,17 +33,21 @@ image-hotspot/
   component.tsx                    # 5-phase 상태머신
   components/
     PlantDiagram.tsx               # 5종 SVG 인라인 도식 (flower/leaf/root/stem/seed)
-    HotspotCanvas.tsx              # 도식 + region overlay (절대좌표 bbox)
+    HotspotCanvas.tsx              # 도식 + region overlay (절대좌표 bbox, 검수한 도해는 지시선 보정)
     LabelPalette.tsx               # 라벨 카드 풀 + active 강조
   logic/
     checkHotspot.ts                # region-by-region cardId 비교
     checkHotspot.test.ts
   content/
-    index.ts                       # 5장 카드 — diagramId + regions[]
+    index.ts                       # 기존 5장 — diagramId + regions[]
   README.md
 ```
 
-## 카드 풀 (5장, 난이도 1→5)
+## 현재 카드 풀 (총 5장)
+
+아래 기존 5장을 제공합니다. 문제 데이터 확장은 이 PR에 포함하지 않습니다.
+
+### V0 기존 카드 (5장, 난이도 1→5)
 
 | # | diagramId | region 수 | 라벨 (distractor) |
 |---|---|---|---|
@@ -57,7 +61,8 @@ image-hotspot/
 
 - viewBox 200×200 SVG, `bbox.x/y/width/height` 는 **0~100 %** 정규화
 - HotspotCanvas 가 `style: left/top/width/height = ${val}%` 로 절대 배치
-- SVG `aspect-square` → 가로/세로 동일, % 좌표가 SVG 좌표와 1:1 매칭
+- SVG `aspect-square` → 가로/세로 동일. 영역 버튼은 % 좌표로 배치하고 최소 44×44px 터치 영역을 보장한다.
+- 검수한 꽃·뿌리·줄기·씨앗 카드에는 라벨 버튼과 해부학적 지점을 잇는 지시선을 별도로 둔다. 작은 버튼을 원래 영역 bbox에 겹쳐 놓지 않기 위한 표시 보정이며, 정답 `regionId`와 카드 데이터는 바꾸지 않는다.
 
 ## 변별력 설계
 

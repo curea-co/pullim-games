@@ -5,12 +5,14 @@ import { forwardRef, type ReactNode } from "react";
 
 interface PoolProps {
   dragOver: boolean;
+  canReturn: boolean;
+  onReturn: () => void;
   hasItems: boolean;
   children: ReactNode;
 }
 
 export const Pool = forwardRef<HTMLDivElement, PoolProps>(function Pool(
-  { dragOver, hasItems, children },
+  { dragOver, hasItems, children, canReturn, onReturn },
   ref,
 ) {
   return (
@@ -26,9 +28,13 @@ export const Pool = forwardRef<HTMLDivElement, PoolProps>(function Pool(
     >
       <p className="text-helper text-type-secondary">
         {hasItems
-          ? "카드를 끌어 위 카테고리에 넣어주세요 (되돌릴 땐 여기로 끌어요)"
+          ? "카드를 선택해 분류하거나 끌어 놓으세요."
           : "모든 카드를 배치했어요"}
       </p>
+      <button type="button" disabled={!canReturn} onClick={onReturn}
+        className="mt-2 min-h-[44px] rounded-button border border-border-hairline px-3 py-2 text-helper focus-visible:outline focus-visible:outline-2 focus-visible:outline-type-primary disabled:opacity-50">
+        카드 풀로 되돌리기
+      </button>
       <div className="mt-2 flex min-h-[2.5rem] flex-wrap gap-1.5">
         {children}
       </div>

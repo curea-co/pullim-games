@@ -56,21 +56,23 @@ export function TimeAttackTimer({
     onExpireRef.current = onExpire;
   }, [onExpire]);
 
+  // 피드백으로 숨겨져도 카드의 deadline은 유지한다.
+  useEffect(() => {
+    startedAtRef.current = null;
+    expiredRef.current = false;
+    setRemainingMs(durationMs);
+  }, [resetKey, durationMs]);
+
   useEffect(() => {
     if (!active) {
       if (rafRef.current !== null) {
         cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
       }
-      setRemainingMs(durationMs);
-      startedAtRef.current = null;
-      expiredRef.current = false;
       return;
     }
 
-    startedAtRef.current = performance.now();
-    expiredRef.current = false;
-    setRemainingMs(durationMs);
+    if (startedAtRef.current === null) startedAtRef.current = performance.now();
 
     function tick() {
       if (startedAtRef.current === null) return;

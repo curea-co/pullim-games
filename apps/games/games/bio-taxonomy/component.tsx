@@ -56,10 +56,15 @@ export default function BioTaxonomyGame() {
   const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [assignments, setAssignments] = useState<Record<string, ZoneId>>(
     () => initialAssignments(getCardSequence(), 0),
   );
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+  const [announcement, setAnnouncement] = useState("");
+  const itemRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const pendingFocusRef = useRef<string | null>(null);
   const [dragOverZoneId, setDragOverZoneId] = useState<ZoneId | null>(null);
   const [wrongCount, setWrongCount] = useState(0);
   const [accuracy, setAccuracy] = useState<{
@@ -75,7 +80,7 @@ export default function BioTaxonomyGame() {
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
-    if (all.size > 0) {
+    if (all.size > 0 || mode === "review-queue") {
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -101,12 +106,44 @@ export default function BioTaxonomyGame() {
       initial[item.id] = POOL_ID;
     }
     setAssignments(initial);
+    setSelectedItemId(null);
+    setAnnouncement("");
+    pendingFocusRef.current = null;
     setDragOverZoneId(null);
     setWrongCount(0);
     setAccuracy(null);
     setPhase("playing");
     categoryRefs.current = {};
-  }, [cardIndex, card]);
+  }, [cardIndex, card, sessionRound]);
+
+  useEffect(() => {
+    const itemId = pendingFocusRef.current;
+    if (itemId) {
+      itemRefs.current[itemId]?.focus();
+      pendingFocusRef.current = null;
+    }
+  }, [assignments]);
+
+  useEffect(() => {
+    if (!selectedItemId || phase !== "playing") return;
+    const cancel = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      setSelectedItemId(null);
+      setAnnouncement("선택을 취소했어요.");
+      itemRefs.current[selectedItemId]?.focus();
+    };
+    window.addEventListener("keydown", cancel);
+    return () => window.removeEventListener("keydown", cancel);
+  }, [selectedItemId, phase]);
+
+  function selectItem(itemId: string) {
+    if (phase !== "playing") return;
+    const canceled = selectedItemId === itemId;
+    setSelectedItemId(canceled ? null : itemId);
+    const label = card?.problem.items.find((item) => item.id === itemId)?.label;
+    setAnnouncement(canceled ? "선택을 취소했어요." : `${label} 선택. 분류 또는 카드 풀을 선택하세요. Esc로 취소할 수 있어요.`);
+  }
 
   const poolItems = useMemo(() => {
     if (!card) return [];
@@ -169,6 +206,7 @@ export default function BioTaxonomyGame() {
       <CompletionScreen
         totalCards={cards.length}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           void logEvent({
             gameId: GAME_ID,
@@ -185,6 +223,7 @@ export default function BioTaxonomyGame() {
 
   function handleDragStart(_itemId: string) {
     if (phase !== "playing") return;
+    setSelectedItemId(null);
     setDragOverZoneId(null);
   }
 
@@ -204,8 +243,17 @@ export default function BioTaxonomyGame() {
       return;
     }
 
+    assignItem(itemId, zoneId);
+  }
+
+  function assignItem(itemId: string, zoneId: ZoneId, restoreFocus = false) {
+    if (phase !== "playing") return;
+    setSelectedItemId(null);
+    const label = card!.problem.items.find((item) => item.id === itemId)?.label;
+    const destination = zoneId === POOL_ID ? "카드 풀" : card!.problem.categories.find((cat) => cat.id === zoneId)?.label;
+    setAnnouncement(`${label} 카드를 ${destination}로 옮겼어요.`);
+    if (restoreFocus) pendingFocusRef.current = itemId;
     setAssignments((prev) => {
-      if (prev[itemId] === zoneId) return prev;
       return { ...prev, [itemId]: zoneId };
     });
     void logEvent({
@@ -330,6 +378,10 @@ export default function BioTaxonomyGame() {
             </div>
           )}
 
+          <p id="bio-input-help" className="mt-2 text-helper text-type-secondary">
+            카드를 누르거나 Enter·Space로 선택한 뒤 분류를 선택하세요. 같은 카드를 다시 선택하거나 Esc로 취소할 수 있어요.
+          </p>
+          <p className="mt-1 text-helper text-type-secondary" role="status" aria-atomic="true">{announcement}</p>
           {/* 카테고리 박스들 */}
           <motion.div
             className={`mt-6 grid gap-2 ${categoryGridClass}`}
@@ -340,6 +392,8 @@ export default function BioTaxonomyGame() {
               <CategoryBox
                 key={cat.id}
                 category={cat}
+                canAssign={selectedItemId !== null && !disabled}
+                onAssign={() => { if (selectedItemId) assignItem(selectedItemId, cat.id, true); }}
                 colorIndex={idx}
                 dragOver={dragOverZoneId === cat.id}
                 ref={(el) => {
@@ -350,6 +404,9 @@ export default function BioTaxonomyGame() {
                   <ItemCard
                     key={item.id}
                     item={item}
+                    selected={selectedItemId === item.id}
+                    onSelect={() => selectItem(item.id)}
+                    itemRef={(el) => { itemRefs.current[item.id] = el; }}
                     placed
                     categoryColorIndex={idx}
                     disabled={disabled}
@@ -365,6 +422,8 @@ export default function BioTaxonomyGame() {
           <div className="mt-6">
             <Pool
               ref={poolRef}
+              canReturn={!disabled && selectedItemId !== null && assignments[selectedItemId] !== POOL_ID}
+              onReturn={() => { if (selectedItemId) assignItem(selectedItemId, POOL_ID, true); }}
               dragOver={dragOverZoneId === POOL_ID}
               hasItems={poolItems.length > 0}
             >
@@ -372,6 +431,9 @@ export default function BioTaxonomyGame() {
                 <ItemCard
                   key={item.id}
                   item={item}
+                  selected={selectedItemId === item.id}
+                  onSelect={() => selectItem(item.id)}
+                    itemRef={(el) => { itemRefs.current[item.id] = el; }}
                   placed={false}
                   categoryColorIndex={null}
                   disabled={disabled}
