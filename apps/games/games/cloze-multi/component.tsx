@@ -38,6 +38,7 @@ export default function ClozeMultiGame() {
   const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   /** slotId → cardId. 미배치 슬롯은 키 자체가 없거나 null. */
   const [placementMap, setPlacementMap] = useState<Record<string, string | null>>(
@@ -55,7 +56,7 @@ export default function ClozeMultiGame() {
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
-    if (all.size > 0) {
+    if (all.size > 0 || mode === "review-queue") {
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -81,7 +82,7 @@ export default function ClozeMultiGame() {
     setWrongCount(0);
     setAccuracy(null);
     setPhase("playing");
-  }, [cardIndex, card]);
+  }, [cardIndex, card, sessionRound]);
 
   const placedCardIds = useMemo(() => {
     const set = new Set<string>();
@@ -122,6 +123,7 @@ export default function ClozeMultiGame() {
       <CompletionScreen
         totalCards={cards.length}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           void logEvent({
             gameId: GAME_ID,

@@ -3,7 +3,7 @@
 - **gameId**: `bio-taxonomy`
 - **과목 · 단원**: 과학 / 고1 생명과학 — 생물 분류 (진핵·원핵, 3계, 척추·무척추, 식물 4분류, 척추동물 4강)
 - **상태**: `available`
-- **출처 plan**: [proc/plan/2026-05-13_new-mechanics-expansion.md](../../../proc/plan/2026-05-13_new-mechanics-expansion.md) M3
+- **출처 plan**: [proc/archive/plan/2026-05-13_new-mechanics-expansion.md](../../../../proc/archive/plan/2026-05-13_new-mechanics-expansion.md) M3
 
 ## 시작하기
 
@@ -13,8 +13,8 @@
 
 ## 핵심 명제
 
-> **카드 드래그 = retrieval. 정답 확인 전엔 정/오 표시 없음.**
-> 카드를 손가락/마우스로 끌어 카테고리 박스 또는 풀 영역에 놓는다. drag-end pointer 좌표를 모든 zone bounding rect 와 비교(영역 안 hit-test) — 일치 zone 이 있으면 그 카테고리로 assign, 없으면 framer-motion 이 원위치로 자동 spring. 모든 카드가 풀에서 빠져나가야 "정답 확인" 활성. wrong 시 카드별 정/오 강조 없이 `n/m 맞췄어요` 정확도만.
+> **카드 분류 = retrieval. 정답 확인 전엔 정/오 표시 없음.**
+> 카드를 손가락/마우스로 끌어 카테고리 박스 또는 풀 영역에 놓거나, 카드를 선택한 뒤 목적지를 누른다. 모든 카드가 풀에서 빠져나가야 "정답 확인"이 활성화된다. wrong 시 카드별 정/오 강조 없이 `n/m 맞췄어요` 정확도만 표시한다.
 
 ## 디렉토리
 
@@ -22,11 +22,11 @@
 bio-taxonomy/
   manifest.ts                    # ✅ 자동 발견 대상
   schema.ts                      # categories[2~4] + items[6~10] + categoryId refine
-  component.tsx                  # 5-phase 상태머신 + drag-end hit-test
+  component.tsx                    # 5-phase 상태머신 + 드래그/키보드 분류
   components/
-    CategoryBox.tsx              # drop zone (ref forwarding, dragOver outline)
-    ItemCard.tsx                 # motion.div drag, layout spring 이동
-    Pool.tsx                     # 풀 영역 drop zone (카드 복귀)
+    CategoryBox.tsx              # drop zone + 선택 카드 배치 버튼
+    ItemCard.tsx                 # 드래그 또는 Enter·Space 선택 카드
+    Pool.tsx                     # 풀 영역 drop zone + 선택 카드 복귀 버튼
   logic/
     checkAssignments.ts          # item-by-item categoryId 비교
     checkAssignments.test.ts
@@ -43,13 +43,14 @@ bio-taxonomy/
 4. **식물 4분류** — 카테고리 4, 카드 8 (선태·양치·겉씨·속씨)
 5. **척추동물 4강** — 카테고리 4, 카드 8 (어류·파충류·조류·포유류, 양서류 V1+)
 
-## 인터랙션 (Drag-and-drop — D4 뒤집기 / E1·E2·E3=A 채택)
+## 인터랙션
 
 - 카드를 끌어 카테고리 박스 또는 풀 영역에 놓기
 - drag-end 시 pointer 좌표가 어느 zone bounding rect 안에 있는지 hit-test
 - 일치 zone 있으면 그 카테고리로 assign + 카드가 새 위치로 spring 이동 (framer-motion `layout`)
 - 일치 zone 없으면 (빈 영역) 자동 원위치
-- 풀 복귀 = 카테고리 안 카드를 풀 영역으로 드래그 (단일 메커닉)
+- 풀 복귀 = 카테고리 안 카드를 풀 영역으로 드래그하거나 선택 후 풀 복귀 버튼 사용
+- 키보드/터치 대안 = 카드를 누르거나 Tab으로 이동해 Enter·Space로 선택 → 카테고리 버튼 또는 `카드 풀로 되돌리기` 선택. 같은 카드 재선택이나 Esc는 선택 취소.
 - 모바일 4 카테고리는 2×2 그리드, 데스크톱 은 1×4 가로
 - 외부 D&D 라이브러리 사용 X — `framer-motion drag` + `getBoundingClientRect` 만 사용 (factorization 패턴 재사용, 단일 백본 룰)
 

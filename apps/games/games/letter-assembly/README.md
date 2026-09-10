@@ -3,7 +3,7 @@
 - **gameId**: `letter-assembly`
 - **과목 · 단원**: 국어 / 고1 국어 — 한자 부수 합자 (合字)
 - **상태**: `available`
-- **출처 plan**: [proc/plan/2026-05-13_20-game-mechanics-roadmap.md](../../../proc/plan/2026-05-13_20-game-mechanics-roadmap.md) M5
+- **출처 plan**: [proc/archive/plan/2026-05-13_20-game-mechanics-roadmap.md](../../../../proc/archive/plan/2026-05-13_20-game-mechanics-roadmap.md) M5
 
 ## 시작하기
 
@@ -26,7 +26,7 @@ letter-assembly/
   schema.ts                        # LetterAssemblyCardSchema + target/slot/card
   component.tsx                    # 5-phase 상태머신
   components/
-    SlotRow.tsx                    # 좌→우 슬롯 박스 (사이 "+" 표시)
+    SlotRow.tsx                    # 슬롯 박스 (森은 위 1개/아래 2개, 休의 왼쪽 人은 亻로 표시)
     ComponentPalette.tsx           # 부수 카드 풀 (한자 + 한글 음 라벨)
   logic/
     checkAssembly.ts               # slot-by-slot cardId 비교
@@ -45,6 +45,8 @@ letter-assembly/
 | 3 | 休 | 휴/쉴 | 人 + 木 | 人, 木, 日, 水 |
 | 4 | 好 | 호/좋을 | 女 + 子 | 女, 子, 人, 日 |
 | 5 | 森 | 삼/빽빽할 | 木 + 木 + 木 | 木, 木, 木, 日, 月 |
+
+`森`은 실제 상하 구조대로 위에 木 하나, 아래에 木 둘을 배치한다. `休`의 첫 슬롯은 카드의 人을 받아 좌측 부수 형태인 亻로 표시한다. 정답 데이터는 바꾸지 않고 표시만 글자 구조에 맞춘다.
 
 ## 변별력 설계
 

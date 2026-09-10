@@ -80,7 +80,7 @@ export default function FactorizationGame() {
   const [wrongCount, setWrongCount] = useState(0);
   const dragStartLoggedRef = useRef(false);
   // chip text → DOM element. 부모가 직접 boundingClientRect hit-test.
-  const chipRefsRef = useRef<Map<string, HTMLDivElement>>(new Map());
+  const chipRefsRef = useRef<Map<string, HTMLButtonElement>>(new Map());
   const ctaRef = useRef<HTMLButtonElement | null>(null);
   useEnterClicksRef(ctaRef);
 
@@ -88,7 +88,7 @@ export default function FactorizationGame() {
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
-    if (all.size > 0) {
+    if (all.size > 0 || mode === "review-queue") {
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -121,7 +121,7 @@ export default function FactorizationGame() {
     [card],
   );
 
-  const onChipMount = useCallback((text: string, el: HTMLDivElement | null) => {
+  const onChipMount = useCallback((text: string, el: HTMLButtonElement | null) => {
     if (el) chipRefsRef.current.set(text, el);
     else chipRefsRef.current.delete(text);
   }, []);
@@ -193,7 +193,11 @@ export default function FactorizationGame() {
       x: blockRect.left + blockRect.width / 2,
       y: blockRect.top + blockRect.height / 2,
     };
-    const hitChip = chipAt(blockCenter);
+    chooseFactor(chipAt(blockCenter));
+  };
+
+  function chooseFactor(hitChip: string | null) {
+    if (phase !== "idle" && phase !== "dragging") return;
     const correctText = card.problem.commonFactor;
 
     setHoveringChip(null);
@@ -319,13 +323,14 @@ export default function FactorizationGame() {
       content={
         <>
           <p className="mt-6 text-body text-type-secondary">{card.hint}</p>
+          <p className="mt-2 text-helper text-type-secondary">공통인수 후보를 누르거나, Tab으로 이동해 Enter·Space로 선택하세요.</p>
           {phase === "reveal" && (
             <div className="mt-3">
               <RevealBanner attemptCount={wrongCount} />
             </div>
           )}
           <div className="mt-10 flex flex-1 flex-col items-center justify-center gap-8">
-            <AnimatePresence mode="wait">
+            <AnimatePresence key={card.id} mode="wait">
               {!isResolved ? (
                 <BeforeView
                   key={`${cardIndex}-before`}
@@ -351,6 +356,8 @@ export default function FactorizationGame() {
                 hoveringText={hoveringChip}
                 wrongFlashText={wrongFlashChip}
                 onChipMount={onChipMount}
+                onChoose={chooseFactor}
+                disabled={phase !== "idle" && phase !== "dragging"}
               />
             )}
 
@@ -388,7 +395,7 @@ export default function FactorizationGame() {
       }
       liveRegion={
         <span className="sr-only" aria-live="polite">
-          {phase === "idle" && `${cardIndex + 1}번 문제. 블록을 공통인수 후보 chip 위로 끌어내세요`}
+          {phase === "idle" && `${cardIndex + 1}번 문제. 공통인수 후보를 누르거나 Tab으로 이동해 Enter·Space로 선택하세요. 블록을 후보 위로 끌어 놓을 수도 있어요`}
           {phase === "dragging" && (hoveringChip ? `${hoveringChip} chip 위. 놓으면 검증돼요.` : "chip 위로 가져가세요.")}
           {phase === "extracting" && "정답이에요. 변형 중"}
           {phase === "done" &&
@@ -433,7 +440,7 @@ function BeforeView({
 }: BeforeViewProps) {
   return (
     <motion.div
-      className="flex items-center gap-3"
+      className="flex w-full flex-wrap items-center justify-center gap-3"
       initial={{ opacity: 0, y: 6 }}
       animate={
         transforming
@@ -444,7 +451,7 @@ function BeforeView({
       transition={{ type: "spring", stiffness: 280, damping: 24 }}
     >
       {terms.map((term, idx) => (
-        <Fragment key={term.id}>
+        <div key={term.id} className="flex items-center gap-3">
           {idx > 0 && (
             <span
               aria-hidden="true"
@@ -460,7 +467,7 @@ function BeforeView({
             onDragMove={onDragMove}
             onDragEnd={onDragEnd}
           />
-        </Fragment>
+        </div>
       ))}
     </motion.div>
   );
@@ -474,7 +481,7 @@ interface AfterViewProps {
 function AfterView({ factor, remainders }: AfterViewProps) {
   return (
     <motion.div
-      className="flex items-center gap-2 rounded-block border border-border-hairline bg-bg-block px-5 py-3.5"
+      className="flex max-w-full flex-wrap items-center justify-center gap-2 rounded-block border border-border-hairline bg-bg-block px-5 py-3.5"
       initial={{
         opacity: 0,
         scale: 0.92,

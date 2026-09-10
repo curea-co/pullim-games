@@ -38,6 +38,7 @@ export default function KoreanPosTaggingGame() {
   const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [tagging, setTagging] = useState<(KoreanPos | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(0);
@@ -52,7 +53,7 @@ export default function KoreanPosTaggingGame() {
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
-    if (all.size > 0) {
+    if (all.size > 0 || mode === "review-queue") {
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -78,7 +79,7 @@ export default function KoreanPosTaggingGame() {
     setWrongCount(0);
     setAccuracy(null);
     setPhase("playing");
-  }, [cardIndex, card]);
+  }, [cardIndex, card, sessionRound]);
 
   const allTagged = useMemo(
     () => tagging.length > 0 && tagging.every((t) => t !== null),
@@ -90,6 +91,7 @@ export default function KoreanPosTaggingGame() {
       <CompletionScreen
         totalCards={cards.length}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           void logEvent({
             gameId: GAME_ID,
@@ -224,7 +226,7 @@ export default function KoreanPosTaggingGame() {
             {card.unit}
           </p>
           <h1 className="mt-2 text-display text-type-primary">
-            각 어절의 품사를 칠해주세요
+            각 단어의 품사를 골라주세요
           </h1>
           {card.hint && (
             <p className="mt-1 text-helper text-type-secondary">
@@ -268,10 +270,10 @@ export default function KoreanPosTaggingGame() {
             {phase === "wrong" && accuracy
               ? `${accuracy.correct}/${accuracy.total} 맞췄어요. 다시 살펴보세요.`
               : phase === "correct"
-                ? "모든 어절이 정답이에요"
+                ? "모든 단어의 품사가 맞았어요"
                 : activeIndex !== null
                   ? `${activeIndex + 1}번 토큰을 선택했어요 — 품사를 골라주세요`
-                  : "어절을 탭한 뒤 품사를 골라주세요"}
+                  : "단어를 탭한 뒤 품사를 골라주세요"}
           </p>
           {wrongCount > 0 && phase !== "correct" && (
             <p className="mt-1 text-center text-helper tabular text-type-secondary">
@@ -304,11 +306,11 @@ export default function KoreanPosTaggingGame() {
       }
       liveRegion={
         <span className="sr-only" aria-live="polite">
-          {phase === "playing" && "어절을 탭한 뒤 품사를 골라주세요"}
+          {phase === "playing" && "단어를 탭한 뒤 품사를 골라주세요"}
           {phase === "wrong" && accuracy
             ? `${accuracy.correct}/${accuracy.total} 맞췄어요. 다시 살펴보세요.`
             : ""}
-          {phase === "correct" && "모든 어절이 정답이에요"}
+          {phase === "correct" && "모든 단어의 품사가 맞았어요"}
           {phase === "reveal" && "여러 번 시도했어요. 정답 품사를 보여줄게요."}
         </span>
       }

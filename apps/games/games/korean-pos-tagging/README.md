@@ -3,7 +3,7 @@
 - **gameId**: `korean-pos-tagging`
 - **과목 · 단원**: 국어 / 고1 국어 — 9품사 (V0: 7품사 — 명사·대명사·동사·형용사·관형사·부사·조사)
 - **상태**: `available`
-- **출처 plan**: [proc/plan/2026-05-13_new-mechanics-expansion.md](../../../proc/plan/2026-05-13_new-mechanics-expansion.md) M2
+- **출처 plan**: [proc/archive/plan/2026-05-13_new-mechanics-expansion.md](../../../../proc/archive/plan/2026-05-13_new-mechanics-expansion.md) M2
 
 ## 시작하기
 

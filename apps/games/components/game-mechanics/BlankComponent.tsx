@@ -61,6 +61,7 @@ export function BlankComponent({
   );
   const [cardsLoaded, setCardsLoaded] = useState(mode === "default");
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [picked, setPicked] = useState<number | null>(null);
   const cardStartRef = useRef<number>(0);
@@ -88,7 +89,7 @@ export function BlankComponent({
 
   useEffect(() => {
     cardStartRef.current = performance.now();
-  }, [cardIndex, cards]);
+  }, [cardIndex, cards, sessionRound]);
 
   // Enter 단축키 — feedback 상태에서 다음 카드로 진행.
   useEnterToAdvance(phase === "feedback", () => {
@@ -145,6 +146,7 @@ export function BlankComponent({
         subtext={completionSubtext ?? "내일 또 봐요."}
         homeHref={homeHref}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           setPhase("playing");
           setPicked(null);
@@ -259,7 +261,7 @@ export function BlankComponent({
           </div>
           <TimeAttackTimer
             active={mode === "time-attack" && phase === "playing"}
-            resetKey={cardIndex}
+            resetKey={`${sessionRound}:${cardIndex}:${card.id}`}
             onExpire={handleTimeout}
           />
         </div>
@@ -373,7 +375,6 @@ function ChoiceButton({
       type="button"
       onClick={onClick}
       disabled={phase !== "playing"}
-      whileHover={phase === "playing" ? { scale: 1.01 } : undefined}
       whileTap={phase === "playing" ? { scale: 0.99 } : undefined}
       className={`block w-full rounded-block border px-3 py-2 text-left text-helper text-type-primary transition-colors sm:px-4 sm:py-3 sm:text-body ${stateClass}`}
     >

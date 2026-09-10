@@ -3,7 +3,7 @@
 - **gameId**: `cloze-multi`
 - **과목 · 단원**: 영어 / 고1 영어 — 5형식 어순 (1~5형식 5장)
 - **상태**: `available`
-- **출처 plan**: [proc/plan/2026-05-13_20-game-mechanics-roadmap.md](../../../proc/plan/2026-05-13_20-game-mechanics-roadmap.md) M4
+- **출처 plan**: [proc/archive/plan/2026-05-13_20-game-mechanics-roadmap.md](../../../../proc/archive/plan/2026-05-13_20-game-mechanics-roadmap.md) M4
 
 ## 시작하기
 

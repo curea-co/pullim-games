@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { GameShell } from "@/components/game-shell";
 import { CorrectBurst } from "@/components/ui/CorrectBurst";
 import { RevealBanner } from "@/components/ui/RevealBanner";
+import { correctedDiagramHint } from "./components/presentation";
 import { HotspotCanvas } from "./components/HotspotCanvas";
 import { LabelPalette } from "./components/LabelPalette";
 import { checkHotspot } from "./logic/checkHotspot";
@@ -38,6 +39,7 @@ export default function ImageHotspotGame() {
   const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [placementMap, setPlacementMap] = useState<Record<string, string | null>>(
     {},
@@ -54,7 +56,7 @@ export default function ImageHotspotGame() {
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
-    if (all.size > 0) {
+    if (all.size > 0 || mode === "review-queue") {
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -80,7 +82,7 @@ export default function ImageHotspotGame() {
     setWrongCount(0);
     setAccuracy(null);
     setPhase("playing");
-  }, [cardIndex, card]);
+  }, [cardIndex, card, sessionRound]);
 
   const placedCardIds = useMemo(() => {
     const set = new Set<string>();
@@ -121,6 +123,7 @@ export default function ImageHotspotGame() {
       <CompletionScreen
         totalCards={cards.length}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           void logEvent({
             gameId: GAME_ID,
@@ -262,7 +265,7 @@ export default function ImageHotspotGame() {
           </h1>
           {card.hint && (
             <p className="mt-1 text-helper text-type-secondary">
-              힌트 · {card.hint}
+              힌트 · {correctedDiagramHint(card.id, card.problem.diagramId, card.hint)}
             </p>
           )}
           {phase === "reveal" && (
@@ -277,6 +280,7 @@ export default function ImageHotspotGame() {
             transition={{ duration: 0.36 }}
           >
             <HotspotCanvas
+              cardId={card.id}
               diagramId={card.problem.diagramId}
               regions={card.problem.regions}
               placements={placementsByRegionForUi}

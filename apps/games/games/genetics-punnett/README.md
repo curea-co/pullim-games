@@ -3,7 +3,7 @@
 - **gameId**: `genetics-punnett`
 - **과목 · 단원**: 과학 / 고1 생명과학 — 멘델 유전 (단성·양성잡종, 검정교배)
 - **상태**: `available`
-- **출처 plan**: [proc/plan/2026-05-13_new-mechanics-expansion.md](../../../proc/plan/2026-05-13_new-mechanics-expansion.md) M1
+- **출처 plan**: [proc/archive/plan/2026-05-13_new-mechanics-expansion.md](../../../../proc/archive/plan/2026-05-13_new-mechanics-expansion.md) M1
 
 ## 시작하기
 

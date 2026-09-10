@@ -58,6 +58,7 @@ export default function EnglishOrderGame() {
   const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [wrongCount, setWrongCount] = useState(0);
   const dragStartedRef = useRef(false);
@@ -67,7 +68,7 @@ export default function EnglishOrderGame() {
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
-    if (all.size > 0) {
+    if (all.size > 0 || mode === "review-queue") {
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -116,13 +117,14 @@ export default function EnglishOrderGame() {
     setWrongCount(0);
     setPhase("playing");
     dragStartedRef.current = false;
-  }, [cardIndex, card]);
+  }, [cardIndex, card, sessionRound]);
 
   if (phase === "completed") {
     return (
       <CompletionScreen
         totalCards={cards.length}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           setPhase("playing");
           void logEvent({

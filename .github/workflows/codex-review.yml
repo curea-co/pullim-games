@@ -55,7 +55,7 @@ jobs:
       - name: Codex Review
         id: codex
         run: |
-          cat <<'PROMPT' | codex exec --model gpt-5.6-terra --sandbox workspace-write -c safety_strategy=unsafe -
+          cat <<'PROMPT' | codex exec --model gpt-5.6-terra -c model_reasoning_effort=medium --sandbox workspace-write -c safety_strategy=unsafe -
           /tmp/pr-diff-pullim-games.txt 파일에 이 PR의 변경 diff가 있다.
           이 diff를 대상으로 루트 AGENTS.md 와 CLAUDE.md 를 우선 적용해 리뷰해라.
           명시되지 않은 공통 규칙은 proc/spec/01~10 권위 문서를 참조해라.
