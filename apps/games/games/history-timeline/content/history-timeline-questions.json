@@ -2,11 +2,11 @@
   {
     "id": "ht-draft-001",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-1",
+    "unit": "삼국 시대~고려 건국-1",
     "difficultySeed": 1,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -114,11 +114,11 @@
   {
     "id": "ht-draft-005",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-2",
+    "unit": "삼국 시대~고려 건국-2",
     "difficultySeed": 1,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -226,11 +226,11 @@
   {
     "id": "ht-draft-009",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-3",
+    "unit": "삼국 시대~고려 건국-3",
     "difficultySeed": 1,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -338,11 +338,11 @@
   {
     "id": "ht-draft-013",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-4",
+    "unit": "삼국 시대~고려 건국-4",
     "difficultySeed": 1,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -450,11 +450,11 @@
   {
     "id": "ht-draft-017",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-5",
+    "unit": "삼국 시대~고려 건국-5",
     "difficultySeed": 1,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -562,11 +562,11 @@
   {
     "id": "ht-draft-021",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-6",
+    "unit": "삼국 시대~고려 건국-6",
     "difficultySeed": 1,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -674,11 +674,11 @@
   {
     "id": "ht-draft-025",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-7",
+    "unit": "삼국 시대~고려 건국-7",
     "difficultySeed": 1,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -786,11 +786,11 @@
   {
     "id": "ht-draft-029",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-8",
+    "unit": "삼국 시대~고려 건국-8",
     "difficultySeed": 1,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -898,11 +898,11 @@
   {
     "id": "ht-draft-033",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-9",
+    "unit": "삼국 시대~고려 건국-9",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -1010,11 +1010,11 @@
   {
     "id": "ht-draft-037",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-10",
+    "unit": "삼국 시대~고려 건국-10",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -1122,11 +1122,11 @@
   {
     "id": "ht-draft-041",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-11",
+    "unit": "삼국 시대~고려 건국-11",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -1234,11 +1234,11 @@
   {
     "id": "ht-draft-045",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-12",
+    "unit": "삼국 시대~고려 건국-12",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -1346,11 +1346,11 @@
   {
     "id": "ht-draft-049",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-13",
+    "unit": "삼국 시대~고려 건국-13",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -1458,11 +1458,11 @@
   {
     "id": "ht-draft-053",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-14",
+    "unit": "삼국 시대~고려 건국-14",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -1570,11 +1570,11 @@
   {
     "id": "ht-draft-057",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-15",
+    "unit": "삼국 시대~고려 건국-15",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -1682,11 +1682,11 @@
   {
     "id": "ht-draft-061",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-16",
+    "unit": "삼국 시대~고려 건국-16",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -1794,11 +1794,11 @@
   {
     "id": "ht-draft-065",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-17",
+    "unit": "삼국 시대~고려 건국-17",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -1906,11 +1906,11 @@
   {
     "id": "ht-draft-069",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-18",
+    "unit": "삼국 시대~고려 건국-18",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -2018,11 +2018,11 @@
   {
     "id": "ht-draft-073",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-19",
+    "unit": "삼국 시대~고려 건국-19",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -2130,11 +2130,11 @@
   {
     "id": "ht-draft-077",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-20",
+    "unit": "삼국 시대~고려 건국-20",
     "difficultySeed": 3,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -2242,11 +2242,11 @@
   {
     "id": "ht-draft-081",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-21",
+    "unit": "삼국 시대~고려 건국-21",
     "difficultySeed": 5,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -2354,11 +2354,11 @@
   {
     "id": "ht-draft-085",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-22",
+    "unit": "삼국 시대~고려 건국-22",
     "difficultySeed": 5,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -2466,11 +2466,11 @@
   {
     "id": "ht-draft-089",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-23",
+    "unit": "삼국 시대~고려 건국-23",
     "difficultySeed": 5,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -2578,11 +2578,11 @@
   {
     "id": "ht-draft-093",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-24",
+    "unit": "삼국 시대~고려 건국-24",
     "difficultySeed": 5,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",
@@ -2690,11 +2690,11 @@
   {
     "id": "ht-draft-097",
     "type": "timeline",
-    "unit": "삼국 시대~통일 신라-25",
+    "unit": "삼국 시대~고려 건국-25",
     "difficultySeed": 5,
     "hint": "연도와 사건의 선후를 함께 확인",
     "problem": {
-      "era": "삼국 시대~통일 신라",
+      "era": "삼국 시대~고려 건국",
       "events": [
         {
           "title": "고구려 건국",

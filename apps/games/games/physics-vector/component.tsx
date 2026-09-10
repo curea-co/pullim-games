@@ -200,6 +200,9 @@ export default function PhysicsVectorGame() {
           {card.hint && (
             <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
           )}
+          <p className="mt-2 text-helper text-type-primary">
+            주어진 벡터 (x, y): {card.problem.vectors.map((v) => `${v.label} = (${v.components.join(", ")})`).join(" · ")}
+          </p>
           {phase === "reveal" && (
             <div className="mt-3">
               <RevealBanner attemptCount={wrongCount} />

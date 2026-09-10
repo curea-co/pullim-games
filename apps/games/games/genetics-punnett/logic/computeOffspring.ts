@@ -122,7 +122,7 @@ export function phenotypeShorthand(traits: Trait[]): string[] {
   return out;
 }
 
-/** 부모 유전자형 한 쌍 → 자손 격자 (gametes1 × gametes2). */
+/** 부모 유전자형 한 쌍 → 자손 격자 (행: 부모2, 열: 부모1). */
 export function computeOffspring(
   p1: string,
   p2: string,
@@ -130,8 +130,8 @@ export function computeOffspring(
 ): OffspringGenotype[][] {
   const g1 = gametesOf(p1, traits);
   const g2 = gametesOf(p2, traits);
-  return g1.map((row) =>
-    g2.map((col) => {
+  return g2.map((row) =>
+    g1.map((col) => {
       const raw = row + col;
       const genotype = normalizeGenotype(raw, traits);
       return {
