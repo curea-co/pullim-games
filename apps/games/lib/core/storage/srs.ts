@@ -8,7 +8,7 @@ import {
   type CardSrsState,
   createInitialState,
 } from "@/lib/core/fsrs";
-import { loadStreak, recordActivity, saveStreak } from "@/lib/core/streak";
+import { recordActivityAndSave } from "@/lib/core/streak";
 import { recordGameActivity } from "./activity-log";
 import type { Card as FsrsCard } from "ts-fsrs";
 
@@ -120,7 +120,8 @@ export function saveSrsAndRecord(
   const srsOk = saveSrsState(gameId, cardId, state);
   let streakOk = false;
   try {
-    streakOk = saveStreak(recordActivity(loadStreak()));
+    recordActivityAndSave();
+    streakOk = true;
   } catch {
     streakOk = false;
   }

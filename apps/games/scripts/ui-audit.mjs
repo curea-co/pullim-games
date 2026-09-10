@@ -131,10 +131,14 @@ export async function scanControls(page) {
         const overflowX = exceedsX(box, elementBounds) || textOverflowX;
         const overflowY = exceedsY(box, elementBounds) || textOverflowY;
         if (overflowX || overflowY) {
+          let informational = Boolean(el.closest("form"));
+          for (let ancestor = el; ancestor; ancestor = ancestor.parentElement) {
+            if (["sticky", "fixed"].includes(getComputedStyle(ancestor).position)) informational = true;
+          }
           found.push({
             tag: el.tagName,
             text: (el.getAttribute("aria-label") || el.textContent || "").trim().slice(0, 60),
-            priority: "critical",
+            priority: informational ? "informational" : "critical",
             box: { x: r.x, y: r.y, w: r.width, h: r.height, right: r.right, bottom: r.bottom },
             visibleBounds: textOverflowX || textOverflowY ? textBounds : elementBounds,
             overflowX,

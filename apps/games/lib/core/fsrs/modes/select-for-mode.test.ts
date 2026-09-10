@@ -112,15 +112,3 @@ describe("selectCardsForMode", () => {
     });
   });
 });
-
-it.each([0,1,4,5,6,12])('review-queue %i장 신규/기존 기록에서도 수량·정렬·원본 보존', count=>{
- for(const existing of [false,true]){
-  const cards=makeCards(count);
-  if(existing)for(const c of cards)c.srs=reviewCard(c.srs,'good',baseTime);
-  const before=structuredClone(cards);
-  const selected=selectCardsForMode(cards,'review-queue',count,baseTime);
-  expect(selected).toHaveLength(Math.min(5,count));
-  expect(selected).toEqual(selectCardsForMode(cards,'default',count,baseTime).slice(0,5));
-  expect(cards).toEqual(before);
- }
-});

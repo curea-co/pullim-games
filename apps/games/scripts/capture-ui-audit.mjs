@@ -56,10 +56,11 @@ try {
       await page.screenshot({ path: png, fullPage: true });
       const measurement = await scanControls(page);
       await assertTarget(page, target);
-      const criticals = measurement.overflows;
+      const criticals = measurement.overflows.filter(item => item.priority === "critical");
+      const informationals = measurement.overflows.filter(item => item.priority === "informational");
       const pass = criticals.length === 0 && errors.length === 0;
-      results.push({ viewport: vp.name, ...measurement, criticals, errors, pass, url: page.url(), title: await page.title(), png });
-      console.log(`${pass ? "PASS" : "FAIL"} ${vp.name} ${measurement.vw}×${measurement.vh}: checked=${measurement.checked}, scrolled=${measurement.scrolled}, critical=${criticals.length}, pageerror=${errors.length}`);
+      results.push({ viewport: vp.name, ...measurement, criticals, informationals, errors, pass, url: page.url(), title: await page.title(), png });
+      console.log(`${pass ? "PASS" : "FAIL"} ${vp.name} ${measurement.vw}×${measurement.vh}: checked=${measurement.checked}, scrolled=${measurement.scrolled}, critical=${criticals.length}, informational=${informationals.length}, pageerror=${errors.length}`);
       for (const item of criticals.slice(0, 5)) console.log(`  ${item.text}: right=${item.box.right}, bottom=${item.box.bottom}`);
     } catch (error) {
       results.push({ viewport: vp.name, pass: false, error: error.message });

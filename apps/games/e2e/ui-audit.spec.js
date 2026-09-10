@@ -4,7 +4,7 @@ import { execFileSync } from "node:child_process";
 import { mkdtempSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { scanControls, viewportOptions } from "../scripts/ui-audit.mjs";
+import { scanControls, viewportOptions, assertTarget } from "../scripts/ui-audit.mjs";
 
 test("버튼·링크 안 중첩 텍스트의 잘림도 탐지한다", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 568 });
@@ -105,8 +105,22 @@ test("문서 가로 넘침과 overflow:hidden의 접근 불가 버튼을 통과�
 });
 
 test("랜딩에 머문 상태를 게임 허브 검사 성공으로 인정하지 않는다", async ({ page }) => {
-  const { assertTarget } = await import("../scripts/ui-audit.mjs");
   await page.goto("/");
   await expect(page.getByRole("link", { name: "가입 없이 게스트로 시작 →" })).toBeVisible();
   await expect(assertTarget(page, new URL("/games", page.url()))).rejects.toThrow();
+});
+
+
+test("form·sticky·fixed 넘침은 경고이고 일반 넘침은 critical이다", async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 568 });
+  await page.setContent(`<main>
+    <form><button style="width:600px">form overflow</button></form>
+    <div style="position:fixed;top:100px"><button style="width:600px">fixed overflow</button></div>
+    <div style="position:sticky;top:0"><button style="width:600px">sticky overflow</button></div>
+    <button style="width:600px">ordinary overflow</button>
+  </main>`);
+  const result = await scanControls(page);
+  for (const name of ["form overflow", "fixed overflow", "sticky overflow"])
+    expect(result.overflows.find(item => item.text === name)?.priority).toBe("informational");
+  expect(result.overflows.find(item => item.text === "ordinary overflow")?.priority).toBe("critical");
 });
