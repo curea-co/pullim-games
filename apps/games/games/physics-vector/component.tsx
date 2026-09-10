@@ -32,8 +32,8 @@ type Phase =
 
 const X_MIN = -5;
 const X_MAX = 6;
-const Y_MIN = -3;
-const Y_MAX = 5;
+const Y_MIN = -5;
+const Y_MAX = 6;
 const VIEWBOX = { width: 264, height: 192 };
 
 function projectX(x: number): number {

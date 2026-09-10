@@ -1,3 +1,4 @@
+import questions from "./english-word-match-questions.json";
 // english-word-match 카드 풀 — 5장, 고1 빈출 어휘 매칭 (영어↔한국어).
 // KNOWN-TRADE-OFF: proc/plan/2026-06-30_target-middle-to-high1.md §6.6 — 어휘 난도는 고1 상단(수능 연계)이나,
 //   영어는 과학과 달리 교과 고정 어휘 리스트가 없어 학술어가 고1 reading 에서 도달 가능(spec/02 §2.4·spec/05 §5.1).
@@ -109,7 +110,7 @@ const RAW_CARDS: WordMatchCard[] = [
   },
 ];
 
-export const cards: WordMatchCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: WordMatchCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const r = WordMatchCardSchema.safeParse(raw);
   if (!r.success) {
     throw new Error(

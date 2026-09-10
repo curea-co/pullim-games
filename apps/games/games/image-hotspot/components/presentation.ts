@@ -34,6 +34,14 @@ export function diagramCallout(
   diagramId: DiagramId,
   regionId: string,
 ): Callout | undefined {
+  if (cardId?.startsWith("ih-draft-")) {
+    const index = Number(regionId.split("-").at(-1));
+    const reviewed = diagramId === "flower" ? [flower["r-petal"], flower["r-pistil"], flower["r-stamen"], flower["r-sepal"]]
+      : diagramId === "root" ? [root["r-stem-top"], root["r-main"], root["r-lateral"], root["r-hair"]]
+      : diagramId === "seed" ? [seed["r-coat"], seed["r-cotyledon"], seed["r-embryo"]]
+      : undefined;
+    return reviewed?.[index];
+  }
   if (cardId === "card-001" && diagramId === "flower") return flower[regionId];
   if (cardId === "card-005" && diagramId === "seed") return seed[regionId];
   if (cardId === "card-004" && diagramId === "stem") return stem[regionId];
@@ -56,7 +64,7 @@ export function correctedDiagramHint(
     return "뿌리털은 뿌리 끝보다 위의 성숙한 부분에서 나와요.";
   if (
     diagramId === "seed" &&
-    (cardId === "card-005" || cardId === "image-hotspot-luna-batch-005")
+    (cardId === "card-005" || cardId === "image-hotspot-luna-batch-005" || cardId.startsWith("ih-draft-"))
   )
     return "떡잎도 배의 일부예요. 초록색은 배에서 어린 싹과 뿌리가 될 부분을 나타내요.";
   return hint;

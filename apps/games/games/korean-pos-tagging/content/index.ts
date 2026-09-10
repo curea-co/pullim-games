@@ -1,3 +1,4 @@
+import questions from "./korean-pos-tagging-questions.json";
 // 한국어 품사 태깅 카드 풀 — V0: 5장. 난이도 1→5.
 // 토큰 = 형태소 단위. 어절을 띄어쓰기 단위가 아닌 형태소(체언+조사 분리) 로 쪼갬.
 
@@ -96,7 +97,7 @@ const RAW_CARDS: KoreanPosTaggingCard[] = [
 ];
 
 // 런타임 검증
-export const cards: KoreanPosTaggingCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: KoreanPosTaggingCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const result = KoreanPosTaggingCardSchema.safeParse(raw);
   if (!result.success) {
     throw new Error(

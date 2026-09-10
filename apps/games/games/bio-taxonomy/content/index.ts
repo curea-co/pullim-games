@@ -1,3 +1,4 @@
+import questions from "./bio-taxonomy-questions.json";
 // 생물 분류 카드 풀 — V0: 5장. 난이도 1→5.
 // 모두 생명과학 (D3 채택). 카테고리 max 4 (D5 채택). 윤리·사회는 V1+ 별 게임.
 
@@ -127,7 +128,7 @@ const RAW_CARDS: BioTaxonomyCard[] = [
 ];
 
 // 런타임 검증
-export const cards: BioTaxonomyCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: BioTaxonomyCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const result = BioTaxonomyCardSchema.safeParse(raw);
   if (!result.success) {
     throw new Error(

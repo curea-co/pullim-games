@@ -1,3 +1,4 @@
+import questions from "./physics-vector-questions.json";
 // physics-vector 카드 풀 — 5장, 두 벡터 합성 (난이도 1~5).
 // 모든 합벡터는 원점에서 시작.
 
@@ -82,7 +83,7 @@ const RAW_CARDS: VectorCard[] = [
   },
 ];
 
-export const cards: VectorCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: VectorCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const r = VectorCardSchema.safeParse(raw);
   if (!r.success) {
     throw new Error(

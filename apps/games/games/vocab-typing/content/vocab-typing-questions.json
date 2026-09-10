@@ -1,0 +1,1202 @@
+[
+  {
+    "id": "vt-draft-001",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 1,
+    "hint": "한자어 觀察에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "사물이나 현상을 주의 깊게 살펴보는 일",
+      "answer": "관찰",
+      "pronunciation": "觀察"
+    }
+  },
+  {
+    "id": "vt-draft-002",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 計劃에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "앞으로 할 일의 방법과 순서를 미리 정하는 일",
+      "answer": "계획",
+      "pronunciation": "計劃"
+    }
+  },
+  {
+    "id": "vt-draft-003",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 區別에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "서로 다른 점을 가려 나누는 일",
+      "answer": "구별",
+      "pronunciation": "區別"
+    }
+  },
+  {
+    "id": "vt-draft-004",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 1,
+    "hint": "한자어 解決에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "문제나 어려움을 풀어 처리하는 일",
+      "answer": "해결",
+      "pronunciation": "解決"
+    }
+  },
+  {
+    "id": "vt-draft-005",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 分類에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일정한 기준에 따라 같은 종류끼리 나누는 일",
+      "answer": "분류",
+      "pronunciation": "分類"
+    }
+  },
+  {
+    "id": "vt-draft-006",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 進行에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일이 앞으로 나아가는 것",
+      "answer": "진행",
+      "pronunciation": "進行"
+    }
+  },
+  {
+    "id": "vt-draft-007",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 1,
+    "hint": "한자어 探究에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "진리나 지식을 깊이 조사하여 밝히는 일",
+      "answer": "탐구",
+      "pronunciation": "探究"
+    }
+  },
+  {
+    "id": "vt-draft-008",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 討論에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 문제에 대해 여러 사람이 의견을 내며 논의하는 일",
+      "answer": "토론",
+      "pronunciation": "討論"
+    }
+  },
+  {
+    "id": "vt-draft-009",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 原因에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 현상이나 결과가 생기게 한 까닭",
+      "answer": "원인",
+      "pronunciation": "原因"
+    }
+  },
+  {
+    "id": "vt-draft-010",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 1,
+    "hint": "한자어 關係에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "둘 이상의 대상이 서로 맺고 있는 관련",
+      "answer": "관계",
+      "pronunciation": "關係"
+    }
+  },
+  {
+    "id": "vt-draft-011",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 觀察에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "사물이나 현상을 주의 깊게 살펴보는 일",
+      "answer": "관찰",
+      "pronunciation": "觀察"
+    }
+  },
+  {
+    "id": "vt-draft-012",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 計劃에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "앞으로 할 일의 방법과 순서를 미리 정하는 일",
+      "answer": "계획",
+      "pronunciation": "計劃"
+    }
+  },
+  {
+    "id": "vt-draft-013",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 1,
+    "hint": "한자어 區別에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "서로 다른 점을 가려 나누는 일",
+      "answer": "구별",
+      "pronunciation": "區別"
+    }
+  },
+  {
+    "id": "vt-draft-014",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 解決에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "문제나 어려움을 풀어 처리하는 일",
+      "answer": "해결",
+      "pronunciation": "解決"
+    }
+  },
+  {
+    "id": "vt-draft-015",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 分類에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일정한 기준에 따라 같은 종류끼리 나누는 일",
+      "answer": "분류",
+      "pronunciation": "分類"
+    }
+  },
+  {
+    "id": "vt-draft-016",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 1,
+    "hint": "한자어 進行에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일이 앞으로 나아가는 것",
+      "answer": "진행",
+      "pronunciation": "進行"
+    }
+  },
+  {
+    "id": "vt-draft-017",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 探究에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "진리나 지식을 깊이 조사하여 밝히는 일",
+      "answer": "탐구",
+      "pronunciation": "探究"
+    }
+  },
+  {
+    "id": "vt-draft-018",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 討論에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 문제에 대해 여러 사람이 의견을 내며 논의하는 일",
+      "answer": "토론",
+      "pronunciation": "討論"
+    }
+  },
+  {
+    "id": "vt-draft-019",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 1,
+    "hint": "한자어 原因에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 현상이나 결과가 생기게 한 까닭",
+      "answer": "원인",
+      "pronunciation": "原因"
+    }
+  },
+  {
+    "id": "vt-draft-020",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 關係에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "둘 이상의 대상이 서로 맺고 있는 관련",
+      "answer": "관계",
+      "pronunciation": "關係"
+    }
+  },
+  {
+    "id": "vt-draft-021",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 觀察에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "사물이나 현상을 주의 깊게 살펴보는 일",
+      "answer": "관찰",
+      "pronunciation": "觀察"
+    }
+  },
+  {
+    "id": "vt-draft-022",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 1,
+    "hint": "한자어 計劃에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "앞으로 할 일의 방법과 순서를 미리 정하는 일",
+      "answer": "계획",
+      "pronunciation": "計劃"
+    }
+  },
+  {
+    "id": "vt-draft-023",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 區別에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "서로 다른 점을 가려 나누는 일",
+      "answer": "구별",
+      "pronunciation": "區別"
+    }
+  },
+  {
+    "id": "vt-draft-024",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 解決에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "문제나 어려움을 풀어 처리하는 일",
+      "answer": "해결",
+      "pronunciation": "解決"
+    }
+  },
+  {
+    "id": "vt-draft-025",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 1,
+    "hint": "한자어 分類에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일정한 기준에 따라 같은 종류끼리 나누는 일",
+      "answer": "분류",
+      "pronunciation": "分類"
+    }
+  },
+  {
+    "id": "vt-draft-026",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 進行에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일이 앞으로 나아가는 것",
+      "answer": "진행",
+      "pronunciation": "進行"
+    }
+  },
+  {
+    "id": "vt-draft-027",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 探究에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "진리나 지식을 깊이 조사하여 밝히는 일",
+      "answer": "탐구",
+      "pronunciation": "探究"
+    }
+  },
+  {
+    "id": "vt-draft-028",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 1,
+    "hint": "한자어 討論에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 문제에 대해 여러 사람이 의견을 내며 논의하는 일",
+      "answer": "토론",
+      "pronunciation": "討論"
+    }
+  },
+  {
+    "id": "vt-draft-029",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 原因에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 현상이나 결과가 생기게 한 까닭",
+      "answer": "원인",
+      "pronunciation": "原因"
+    }
+  },
+  {
+    "id": "vt-draft-030",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 1,
+    "hint": "한자어 關係에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "둘 이상의 대상이 서로 맺고 있는 관련",
+      "answer": "관계",
+      "pronunciation": "關係"
+    }
+  },
+  {
+    "id": "vt-draft-031",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 3,
+    "hint": "한자어 觀察에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "사물이나 현상을 주의 깊게 살펴보는 일",
+      "answer": "관찰",
+      "pronunciation": "觀察"
+    }
+  },
+  {
+    "id": "vt-draft-032",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 計劃에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "앞으로 할 일의 방법과 순서를 미리 정하는 일",
+      "answer": "계획",
+      "pronunciation": "計劃"
+    }
+  },
+  {
+    "id": "vt-draft-033",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 區別에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "서로 다른 점을 가려 나누는 일",
+      "answer": "구별",
+      "pronunciation": "區別"
+    }
+  },
+  {
+    "id": "vt-draft-034",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 2,
+    "hint": "한자어 解決에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "문제나 어려움을 풀어 처리하는 일",
+      "answer": "해결",
+      "pronunciation": "解決"
+    }
+  },
+  {
+    "id": "vt-draft-035",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 分類에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일정한 기준에 따라 같은 종류끼리 나누는 일",
+      "answer": "분류",
+      "pronunciation": "分類"
+    }
+  },
+  {
+    "id": "vt-draft-036",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 進行에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일이 앞으로 나아가는 것",
+      "answer": "진행",
+      "pronunciation": "進行"
+    }
+  },
+  {
+    "id": "vt-draft-037",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 3,
+    "hint": "한자어 探究에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "진리나 지식을 깊이 조사하여 밝히는 일",
+      "answer": "탐구",
+      "pronunciation": "探究"
+    }
+  },
+  {
+    "id": "vt-draft-038",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 討論에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 문제에 대해 여러 사람이 의견을 내며 논의하는 일",
+      "answer": "토론",
+      "pronunciation": "討論"
+    }
+  },
+  {
+    "id": "vt-draft-039",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 原因에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 현상이나 결과가 생기게 한 까닭",
+      "answer": "원인",
+      "pronunciation": "原因"
+    }
+  },
+  {
+    "id": "vt-draft-040",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 2,
+    "hint": "한자어 關係에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "둘 이상의 대상이 서로 맺고 있는 관련",
+      "answer": "관계",
+      "pronunciation": "關係"
+    }
+  },
+  {
+    "id": "vt-draft-041",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 觀察에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "사물이나 현상을 주의 깊게 살펴보는 일",
+      "answer": "관찰",
+      "pronunciation": "觀察"
+    }
+  },
+  {
+    "id": "vt-draft-042",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 計劃에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "앞으로 할 일의 방법과 순서를 미리 정하는 일",
+      "answer": "계획",
+      "pronunciation": "計劃"
+    }
+  },
+  {
+    "id": "vt-draft-043",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 3,
+    "hint": "한자어 區別에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "서로 다른 점을 가려 나누는 일",
+      "answer": "구별",
+      "pronunciation": "區別"
+    }
+  },
+  {
+    "id": "vt-draft-044",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 解決에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "문제나 어려움을 풀어 처리하는 일",
+      "answer": "해결",
+      "pronunciation": "解決"
+    }
+  },
+  {
+    "id": "vt-draft-045",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 分類에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일정한 기준에 따라 같은 종류끼리 나누는 일",
+      "answer": "분류",
+      "pronunciation": "分類"
+    }
+  },
+  {
+    "id": "vt-draft-046",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 2,
+    "hint": "한자어 進行에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일이 앞으로 나아가는 것",
+      "answer": "진행",
+      "pronunciation": "進行"
+    }
+  },
+  {
+    "id": "vt-draft-047",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 探究에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "진리나 지식을 깊이 조사하여 밝히는 일",
+      "answer": "탐구",
+      "pronunciation": "探究"
+    }
+  },
+  {
+    "id": "vt-draft-048",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 討論에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 문제에 대해 여러 사람이 의견을 내며 논의하는 일",
+      "answer": "토론",
+      "pronunciation": "討論"
+    }
+  },
+  {
+    "id": "vt-draft-049",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 3,
+    "hint": "한자어 原因에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 현상이나 결과가 생기게 한 까닭",
+      "answer": "원인",
+      "pronunciation": "原因"
+    }
+  },
+  {
+    "id": "vt-draft-050",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 關係에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "둘 이상의 대상이 서로 맺고 있는 관련",
+      "answer": "관계",
+      "pronunciation": "關係"
+    }
+  },
+  {
+    "id": "vt-draft-051",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 觀察에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "사물이나 현상을 주의 깊게 살펴보는 일",
+      "answer": "관찰",
+      "pronunciation": "觀察"
+    }
+  },
+  {
+    "id": "vt-draft-052",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 2,
+    "hint": "한자어 計劃에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "앞으로 할 일의 방법과 순서를 미리 정하는 일",
+      "answer": "계획",
+      "pronunciation": "計劃"
+    }
+  },
+  {
+    "id": "vt-draft-053",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 區別에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "서로 다른 점을 가려 나누는 일",
+      "answer": "구별",
+      "pronunciation": "區別"
+    }
+  },
+  {
+    "id": "vt-draft-054",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 解決에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "문제나 어려움을 풀어 처리하는 일",
+      "answer": "해결",
+      "pronunciation": "解決"
+    }
+  },
+  {
+    "id": "vt-draft-055",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 3,
+    "hint": "한자어 分類에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일정한 기준에 따라 같은 종류끼리 나누는 일",
+      "answer": "분류",
+      "pronunciation": "分類"
+    }
+  },
+  {
+    "id": "vt-draft-056",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 進行에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일이 앞으로 나아가는 것",
+      "answer": "진행",
+      "pronunciation": "進行"
+    }
+  },
+  {
+    "id": "vt-draft-057",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 探究에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "진리나 지식을 깊이 조사하여 밝히는 일",
+      "answer": "탐구",
+      "pronunciation": "探究"
+    }
+  },
+  {
+    "id": "vt-draft-058",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 2,
+    "hint": "한자어 討論에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 문제에 대해 여러 사람이 의견을 내며 논의하는 일",
+      "answer": "토론",
+      "pronunciation": "討論"
+    }
+  },
+  {
+    "id": "vt-draft-059",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 原因에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 현상이나 결과가 생기게 한 까닭",
+      "answer": "원인",
+      "pronunciation": "原因"
+    }
+  },
+  {
+    "id": "vt-draft-060",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 關係에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "둘 이상의 대상이 서로 맺고 있는 관련",
+      "answer": "관계",
+      "pronunciation": "關係"
+    }
+  },
+  {
+    "id": "vt-draft-061",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 3,
+    "hint": "한자어 觀察에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "사물이나 현상을 주의 깊게 살펴보는 일",
+      "answer": "관찰",
+      "pronunciation": "觀察"
+    }
+  },
+  {
+    "id": "vt-draft-062",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 計劃에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "앞으로 할 일의 방법과 순서를 미리 정하는 일",
+      "answer": "계획",
+      "pronunciation": "計劃"
+    }
+  },
+  {
+    "id": "vt-draft-063",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 區別에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "서로 다른 점을 가려 나누는 일",
+      "answer": "구별",
+      "pronunciation": "區別"
+    }
+  },
+  {
+    "id": "vt-draft-064",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 2,
+    "hint": "한자어 解決에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "문제나 어려움을 풀어 처리하는 일",
+      "answer": "해결",
+      "pronunciation": "解決"
+    }
+  },
+  {
+    "id": "vt-draft-065",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 分類에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일정한 기준에 따라 같은 종류끼리 나누는 일",
+      "answer": "분류",
+      "pronunciation": "分類"
+    }
+  },
+  {
+    "id": "vt-draft-066",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 進行에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일이 앞으로 나아가는 것",
+      "answer": "진행",
+      "pronunciation": "進行"
+    }
+  },
+  {
+    "id": "vt-draft-067",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 3,
+    "hint": "한자어 探究에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "진리나 지식을 깊이 조사하여 밝히는 일",
+      "answer": "탐구",
+      "pronunciation": "探究"
+    }
+  },
+  {
+    "id": "vt-draft-068",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 討論에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 문제에 대해 여러 사람이 의견을 내며 논의하는 일",
+      "answer": "토론",
+      "pronunciation": "討論"
+    }
+  },
+  {
+    "id": "vt-draft-069",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 原因에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 현상이나 결과가 생기게 한 까닭",
+      "answer": "원인",
+      "pronunciation": "原因"
+    }
+  },
+  {
+    "id": "vt-draft-070",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 2,
+    "hint": "한자어 關係에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "둘 이상의 대상이 서로 맺고 있는 관련",
+      "answer": "관계",
+      "pronunciation": "關係"
+    }
+  },
+  {
+    "id": "vt-draft-071",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 觀察에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "사물이나 현상을 주의 깊게 살펴보는 일",
+      "answer": "관찰",
+      "pronunciation": "觀察"
+    }
+  },
+  {
+    "id": "vt-draft-072",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 計劃에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "앞으로 할 일의 방법과 순서를 미리 정하는 일",
+      "answer": "계획",
+      "pronunciation": "計劃"
+    }
+  },
+  {
+    "id": "vt-draft-073",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 3,
+    "hint": "한자어 區別에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "서로 다른 점을 가려 나누는 일",
+      "answer": "구별",
+      "pronunciation": "區別"
+    }
+  },
+  {
+    "id": "vt-draft-074",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 解決에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "문제나 어려움을 풀어 처리하는 일",
+      "answer": "해결",
+      "pronunciation": "解決"
+    }
+  },
+  {
+    "id": "vt-draft-075",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 分類에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일정한 기준에 따라 같은 종류끼리 나누는 일",
+      "answer": "분류",
+      "pronunciation": "分類"
+    }
+  },
+  {
+    "id": "vt-draft-076",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 2,
+    "hint": "한자어 進行에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일이 앞으로 나아가는 것",
+      "answer": "진행",
+      "pronunciation": "進行"
+    }
+  },
+  {
+    "id": "vt-draft-077",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 3,
+    "hint": "한자어 探究에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "진리나 지식을 깊이 조사하여 밝히는 일",
+      "answer": "탐구",
+      "pronunciation": "探究"
+    }
+  },
+  {
+    "id": "vt-draft-078",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 討論에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 문제에 대해 여러 사람이 의견을 내며 논의하는 일",
+      "answer": "토론",
+      "pronunciation": "討論"
+    }
+  },
+  {
+    "id": "vt-draft-079",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 3,
+    "hint": "한자어 原因에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 현상이나 결과가 생기게 한 까닭",
+      "answer": "원인",
+      "pronunciation": "原因"
+    }
+  },
+  {
+    "id": "vt-draft-080",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 2,
+    "hint": "한자어 關係에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "둘 이상의 대상이 서로 맺고 있는 관련",
+      "answer": "관계",
+      "pronunciation": "關係"
+    }
+  },
+  {
+    "id": "vt-draft-081",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 5,
+    "hint": "한자어 觀察에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "사물이나 현상을 주의 깊게 살펴보는 일",
+      "answer": "관찰",
+      "pronunciation": "觀察"
+    }
+  },
+  {
+    "id": "vt-draft-082",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 4,
+    "hint": "한자어 計劃에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "앞으로 할 일의 방법과 순서를 미리 정하는 일",
+      "answer": "계획",
+      "pronunciation": "計劃"
+    }
+  },
+  {
+    "id": "vt-draft-083",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 5,
+    "hint": "한자어 區別에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "서로 다른 점을 가려 나누는 일",
+      "answer": "구별",
+      "pronunciation": "區別"
+    }
+  },
+  {
+    "id": "vt-draft-084",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 4,
+    "hint": "한자어 解決에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "문제나 어려움을 풀어 처리하는 일",
+      "answer": "해결",
+      "pronunciation": "解決"
+    }
+  },
+  {
+    "id": "vt-draft-085",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 5,
+    "hint": "한자어 分類에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일정한 기준에 따라 같은 종류끼리 나누는 일",
+      "answer": "분류",
+      "pronunciation": "分類"
+    }
+  },
+  {
+    "id": "vt-draft-086",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 4,
+    "hint": "한자어 進行에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일이 앞으로 나아가는 것",
+      "answer": "진행",
+      "pronunciation": "進行"
+    }
+  },
+  {
+    "id": "vt-draft-087",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 5,
+    "hint": "한자어 探究에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "진리나 지식을 깊이 조사하여 밝히는 일",
+      "answer": "탐구",
+      "pronunciation": "探究"
+    }
+  },
+  {
+    "id": "vt-draft-088",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 4,
+    "hint": "한자어 討論에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 문제에 대해 여러 사람이 의견을 내며 논의하는 일",
+      "answer": "토론",
+      "pronunciation": "討論"
+    }
+  },
+  {
+    "id": "vt-draft-089",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 5,
+    "hint": "한자어 原因에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 현상이나 결과가 생기게 한 까닭",
+      "answer": "원인",
+      "pronunciation": "原因"
+    }
+  },
+  {
+    "id": "vt-draft-090",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 4,
+    "hint": "한자어 關係에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "둘 이상의 대상이 서로 맺고 있는 관련",
+      "answer": "관계",
+      "pronunciation": "關係"
+    }
+  },
+  {
+    "id": "vt-draft-091",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 5,
+    "hint": "한자어 觀察에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "사물이나 현상을 주의 깊게 살펴보는 일",
+      "answer": "관찰",
+      "pronunciation": "觀察"
+    }
+  },
+  {
+    "id": "vt-draft-092",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 4,
+    "hint": "한자어 計劃에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "앞으로 할 일의 방법과 순서를 미리 정하는 일",
+      "answer": "계획",
+      "pronunciation": "計劃"
+    }
+  },
+  {
+    "id": "vt-draft-093",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 5,
+    "hint": "한자어 區別에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "서로 다른 점을 가려 나누는 일",
+      "answer": "구별",
+      "pronunciation": "區別"
+    }
+  },
+  {
+    "id": "vt-draft-094",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 4,
+    "hint": "한자어 解決에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "문제나 어려움을 풀어 처리하는 일",
+      "answer": "해결",
+      "pronunciation": "解決"
+    }
+  },
+  {
+    "id": "vt-draft-095",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 5,
+    "hint": "한자어 分類에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일정한 기준에 따라 같은 종류끼리 나누는 일",
+      "answer": "분류",
+      "pronunciation": "分類"
+    }
+  },
+  {
+    "id": "vt-draft-096",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 4,
+    "hint": "한자어 進行에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "일이 앞으로 나아가는 것",
+      "answer": "진행",
+      "pronunciation": "進行"
+    }
+  },
+  {
+    "id": "vt-draft-097",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 5,
+    "hint": "한자어 探究에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "진리나 지식을 깊이 조사하여 밝히는 일",
+      "answer": "탐구",
+      "pronunciation": "探究"
+    }
+  },
+  {
+    "id": "vt-draft-098",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 4,
+    "hint": "한자어 討論에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 문제에 대해 여러 사람이 의견을 내며 논의하는 일",
+      "answer": "토론",
+      "pronunciation": "討論"
+    }
+  },
+  {
+    "id": "vt-draft-099",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-개념어",
+    "difficultySeed": 5,
+    "hint": "한자어 原因에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "어떤 현상이나 결과가 생기게 한 까닭",
+      "answer": "원인",
+      "pronunciation": "原因"
+    }
+  },
+  {
+    "id": "vt-draft-100",
+    "type": "vocab-typing",
+    "unit": "고1-국어-어휘-한자어",
+    "difficultySeed": 4,
+    "hint": "한자어 關係에 해당하는 두 글자 낱말",
+    "problem": {
+      "meaning": "둘 이상의 대상이 서로 맺고 있는 관련",
+      "answer": "관계",
+      "pronunciation": "關係"
+    }
+  }
+]

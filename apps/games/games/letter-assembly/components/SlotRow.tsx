@@ -1,5 +1,5 @@
 // 슬롯 행 — 좌→우 배치. 슬롯 탭 = active 카드 배치 또는 풀로 복귀.
-// 森은 위 한 개/아래 두 개, 休의 왼쪽 人은 실제 변형 자형을 표시한다.
+// 상하·포위 구조를 구분하고, 休의 왼쪽 人은 실제 변형 자형을 표시한다.
 
 import type { ComponentCard, Slot } from "../schema";
 
@@ -20,12 +20,16 @@ export function SlotRow({
   onSlotTap,
 }: SlotRowProps) {
   const stacked = target === "森" && slots.length === 3;
+  const vertical = ["看", "男"].includes(target) && slots.length === 2;
+  const enclosure = target === "問" && slots.length === 2;
   return (
     <div
       className={
         stacked
           ? "grid justify-center gap-2"
-          : "flex items-center justify-center gap-2"
+          : vertical
+            ? "flex flex-col items-center justify-center gap-2"
+            : "flex items-center justify-center gap-2"
       }
       style={
         stacked ? { gridTemplateAreas: '"top top" "left right"' } : undefined
@@ -48,8 +52,9 @@ export function SlotRow({
                   }
                 : undefined
             }
-            className="flex items-center gap-2"
+            className="flex flex-col items-center gap-2"
           >
+            {enclosure && <span className="text-caption text-type-secondary">{i === 0 ? "바깥" : "안쪽"}</span>}
             <button
               type="button"
               onClick={() => onSlotTap(slot.id)}

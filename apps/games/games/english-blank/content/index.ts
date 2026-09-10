@@ -1,3 +1,4 @@
+import questions from "./english-blank-questions.json";
 // english-blank 카드 풀 — 5장, 자체 작성 본문 (저작권 회피).
 // 본문 내 ___ 자리 = 빈칸. 4지선다.
 // KNOWN-TRADE-OFF: proc/plan/2026-06-30_target-middle-to-high1.md §6.6 — 어휘 난도는 고1 상단(수능 연계)이나,
@@ -84,7 +85,7 @@ const RAW_CARDS: BlankCard[] = [
   },
 ];
 
-export const cards: BlankCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: BlankCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const r = BlankCardSchema.safeParse(raw);
   if (!r.success) {
     throw new Error(

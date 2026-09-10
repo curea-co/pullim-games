@@ -1,0 +1,1102 @@
+[
+  {
+    "id": "evt-draft-001",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "b로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "다른 사람의 물건을 일정 기간 쓰고 나중에 돌려주다",
+      "answer": "borrow"
+    }
+  },
+  {
+    "id": "evt-draft-002",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "l로 시작하는 4글자 동사",
+    "problem": {
+      "meaning": "자신의 물건을 다른 사람이 쓰도록 빌려주다",
+      "answer": "lend"
+    }
+  },
+  {
+    "id": "evt-draft-003",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "c로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "여러 선택지 중 하나를 골라 결정하다",
+      "answer": "choose"
+    }
+  },
+  {
+    "id": "evt-draft-004",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "n으로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "눈치채거나 주의해서 알아차리다",
+      "answer": "notice"
+    }
+  },
+  {
+    "id": "evt-draft-005",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "s로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "아이디어나 방법을 제안하다",
+      "answer": "suggest"
+    }
+  },
+  {
+    "id": "evt-draft-006",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "r로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "규칙이나 상황이 어떤 것을 반드시 필요로 하다",
+      "answer": "require"
+    }
+  },
+  {
+    "id": "evt-draft-007",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "a로 시작하는 5글자 동사",
+    "problem": {
+      "meaning": "문제나 위험을 피하여 일부러 가까이하지 않다",
+      "answer": "avoid"
+    }
+  },
+  {
+    "id": "evt-draft-008",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "s로 시작하는 5글자 동사",
+    "problem": {
+      "meaning": "문제나 수수께끼의 답을 찾아 해결하다",
+      "answer": "solve"
+    }
+  },
+  {
+    "id": "evt-draft-009",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "d로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "성공 여부가 특정 조건에 달려 있다",
+      "answer": "depend"
+    }
+  },
+  {
+    "id": "evt-draft-010",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "i로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "실력이나 상태를 더 좋아지게 하다",
+      "answer": "improve"
+    }
+  },
+  {
+    "id": "evt-draft-011",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "a로 시작하는 5글자 동사",
+    "problem": {
+      "meaning": "규칙이나 사람이 어떤 행동을 허락하다",
+      "answer": "allow"
+    }
+  },
+  {
+    "id": "evt-draft-012",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "p로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "사람이나 환경을 위험과 손상으로부터 지키다",
+      "answer": "protect"
+    }
+  },
+  {
+    "id": "evt-draft-013",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "g로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "흩어진 자료나 사람을 한곳에 모으다",
+      "answer": "gather"
+    }
+  },
+  {
+    "id": "evt-draft-014",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "i로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "전체 안에 어떤 항목을 포함하다",
+      "answer": "include"
+    }
+  },
+  {
+    "id": "evt-draft-015",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "a로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "수업이나 행사에 참석하다",
+      "answer": "attend"
+    }
+  },
+  {
+    "id": "evt-draft-016",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-형용사",
+    "difficultySeed": 1,
+    "hint": "c로 시작하는 6글자 형용사",
+    "problem": {
+      "meaning": "많은 사람에게 널리 나타나 특별하지 않은",
+      "answer": "common"
+    }
+  },
+  {
+    "id": "evt-draft-017",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-형용사",
+    "difficultySeed": 1,
+    "hint": "l로 시작하는 5글자 형용사",
+    "problem": {
+      "meaning": "특정 지역이나 그곳 주민과 관련된",
+      "answer": "local"
+    }
+  },
+  {
+    "id": "evt-draft-018",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-형용사",
+    "difficultySeed": 1,
+    "hint": "q로 시작하는 5글자 형용사",
+    "problem": {
+      "meaning": "소리나 활동이 거의 없어 조용한",
+      "answer": "quiet"
+    }
+  },
+  {
+    "id": "evt-draft-019",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-형용사",
+    "difficultySeed": 1,
+    "hint": "a로 시작하는 7글자 형용사",
+    "problem": {
+      "meaning": "아주 오래전 시대에 존재했던",
+      "answer": "ancient"
+    }
+  },
+  {
+    "id": "evt-draft-020",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-형용사",
+    "difficultySeed": 1,
+    "hint": "p로 시작하는 7글자 형용사",
+    "problem": {
+      "meaning": "다른 사람에게 공개되지 않고 개인에게 속한",
+      "answer": "private"
+    }
+  },
+  {
+    "id": "evt-draft-021",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "a로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "목적지에 도착하다",
+      "answer": "arrive"
+    }
+  },
+  {
+    "id": "evt-draft-022",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-기초-동사",
+    "difficultySeed": 1,
+    "hint": "d로 시작하는 8글자 동사",
+    "problem": {
+      "meaning": "어떤 것을 글이나 말로 자세히 나타내다",
+      "answer": "describe"
+    }
+  },
+  {
+    "id": "evt-draft-023",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "c로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "이전에 없던 것을 새로 만들다",
+      "answer": "create"
+    },
+    "unit": "고1-영어-기초-동사"
+  },
+  {
+    "id": "evt-draft-024",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "r로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "고장 나거나 손상된 물건을 고쳐 원래 기능을 되찾게 하다",
+      "answer": "repair"
+    },
+    "unit": "고1-영어-기초-동사"
+  },
+  {
+    "id": "evt-draft-025",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "d로 시작하는 8글자 동사",
+    "problem": {
+      "meaning": "전에 알려지지 않았던 사실이나 장소를 처음 찾아내다",
+      "answer": "discover"
+    },
+    "unit": "고1-영어-기초-동사"
+  },
+  {
+    "id": "evt-draft-026",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "p로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "수업이나 행사를 앞두고 필요한 것을 미리 마련하다",
+      "answer": "prepare"
+    },
+    "unit": "고1-영어-기초-동사"
+  },
+  {
+    "id": "evt-draft-027",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "r로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "장소나 물건에서 어떤 것을 치워 없애다",
+      "answer": "remove"
+    },
+    "unit": "고1-영어-기초-동사"
+  },
+  {
+    "id": "evt-draft-028",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "r로 시작하는 8글자 동사",
+    "problem": {
+      "meaning": "과거에 알았던 사실이나 경험을 마음속에 다시 떠올리다",
+      "answer": "remember"
+    },
+    "unit": "고1-영어-기초-동사"
+  },
+  {
+    "id": "evt-draft-029",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "r로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "누군가가 보내거나 준 것을 받아 가지다",
+      "answer": "receive"
+    },
+    "unit": "고1-영어-기초-동사"
+  },
+  {
+    "id": "evt-draft-030",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "t로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "한 장소에서 다른 장소로 이동하며 지내다",
+      "answer": "travel"
+    },
+    "unit": "고1-영어-기초-동사"
+  },
+  {
+    "id": "evt-draft-031",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "d로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "사람이나 사물에 해를 입힐 가능성이 있는 위험",
+      "answer": "danger"
+    },
+    "unit": "고1-영어-기초-명사"
+  },
+  {
+    "id": "evt-draft-032",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "p로 시작하는 7글자 명사",
+    "problem": {
+      "meaning": "행동이나 계획이 존재하는 이유 또는 의도",
+      "answer": "purpose"
+    },
+    "unit": "고1-영어-기초-명사"
+  },
+  {
+    "id": "evt-draft-033",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "e로 시작하는 8글자 명사",
+    "problem": {
+      "meaning": "주장이나 판단이 사실임을 뒷받침하는 정보",
+      "answer": "evidence"
+    },
+    "unit": "고1-영어-기초-명사"
+  },
+  {
+    "id": "evt-draft-034",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "c로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "한 사회나 집단에서 오랫동안 이어진 생활 방식",
+      "answer": "custom"
+    },
+    "unit": "고1-영어-기초-명사"
+  },
+  {
+    "id": "evt-draft-035",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "e로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "어떤 일을 이루기 위해 들이는 힘이나 수고",
+      "answer": "effort"
+    },
+    "unit": "고1-영어-기초-명사"
+  },
+  {
+    "id": "evt-draft-036",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "p로 시작하는 7글자 형용사",
+    "problem": {
+      "meaning": "기다리거나 어려운 일을 겪을 때 쉽게 화내지 않는",
+      "answer": "patient"
+    },
+    "unit": "고1-영어-기초-형용사"
+  },
+  {
+    "id": "evt-draft-037",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "h로 시작하는 6글자 형용사",
+    "problem": {
+      "meaning": "거짓말을 하지 않고 사실대로 말하는",
+      "answer": "honest"
+    },
+    "unit": "고1-영어-기초-형용사"
+  },
+  {
+    "id": "evt-draft-038",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "n으로 시작하는 6글자 형용사",
+    "problem": {
+      "meaning": "너비가 작아 양쪽 사이의 거리가 짧은",
+      "answer": "narrow"
+    },
+    "unit": "고1-영어-기초-형용사"
+  },
+  {
+    "id": "evt-draft-039",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "u로 시작하는 6글자 형용사",
+    "problem": {
+      "meaning": "특정 목적에 실제로 도움이 되는",
+      "answer": "useful"
+    },
+    "unit": "고1-영어-기초-형용사"
+  },
+  {
+    "id": "evt-draft-040",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "f로 시작하는 6글자 형용사",
+    "problem": {
+      "meaning": "공식적이거나 격식을 차려야 하는 상황에 알맞은",
+      "answer": "formal"
+    },
+    "unit": "고1-영어-기초-형용사"
+  },
+  {
+    "id": "evt-draft-041",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-학습-동사",
+    "difficultySeed": 1,
+    "hint": "o로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "실험이나 현상을 주의 깊게 지켜보며 사실을 알아내다",
+      "answer": "observe"
+    }
+  },
+  {
+    "id": "evt-draft-042",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-과학-동사",
+    "difficultySeed": 1,
+    "hint": "m으로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "도구를 사용해 길이·양·정도를 알아내다",
+      "answer": "measure"
+    }
+  },
+  {
+    "id": "evt-draft-043",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-학습-동사",
+    "difficultySeed": 1,
+    "hint": "c로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "두 대상의 공통점과 차이점을 살펴보다",
+      "answer": "compare"
+    }
+  },
+  {
+    "id": "evt-draft-044",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-과학-동사",
+    "difficultySeed": 1,
+    "hint": "e로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "대상을 자세히 살펴 세부 정보를 이해하다",
+      "answer": "examine"
+    }
+  },
+  {
+    "id": "evt-draft-045",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-학습-동사",
+    "difficultySeed": 2,
+    "hint": "c로 시작하는 8글자 동사",
+    "problem": {
+      "meaning": "공통된 특징에 따라 대상을 여러 집단으로 나누다",
+      "answer": "classify"
+    }
+  },
+  {
+    "id": "evt-draft-046",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-과학-동사",
+    "difficultySeed": 2,
+    "hint": "p로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "증거를 바탕으로 앞으로 일어날 일을 말하다",
+      "answer": "predict"
+    }
+  },
+  {
+    "id": "evt-draft-047",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-과학-동사",
+    "difficultySeed": 1,
+    "hint": "o로 시작하는 5글자 동사",
+    "problem": {
+      "meaning": "사건이나 현상이 실제로 일어나다",
+      "answer": "occur"
+    }
+  },
+  {
+    "id": "evt-draft-048",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-사회-동사",
+    "difficultySeed": 1,
+    "hint": "a로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "사건이나 조건이 다른 대상에 변화를 일으키다",
+      "answer": "affect"
+    }
+  },
+  {
+    "id": "evt-draft-049",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-과학-명사",
+    "difficultySeed": 2,
+    "hint": "t로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "증거를 바탕으로 현상을 설명하는 체계적인 생각",
+      "answer": "theory"
+    }
+  },
+  {
+    "id": "evt-draft-050",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-학습-명사",
+    "difficultySeed": 1,
+    "hint": "m으로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "연구나 일을 수행하기 위해 계획한 방식",
+      "answer": "method"
+    }
+  },
+  {
+    "id": "evt-draft-051",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-과학-명사",
+    "difficultySeed": 1,
+    "hint": "r로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "실험이나 행동 뒤에 실제로 일어난 것",
+      "answer": "result"
+    }
+  },
+  {
+    "id": "evt-draft-052",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-학습-명사",
+    "difficultySeed": 1,
+    "hint": "s로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "정보나 물건이 비롯된 사람·책·장소",
+      "answer": "source"
+    }
+  },
+  {
+    "id": "evt-draft-053",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-사회-명사",
+    "difficultySeed": 2,
+    "hint": "r로 시작하는 8글자 명사",
+    "problem": {
+      "meaning": "목적을 위해 사용할 수 있는 물자·시간·돈 같은 공급 자원",
+      "answer": "resource"
+    }
+  },
+  {
+    "id": "evt-draft-054",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-사회-명사",
+    "difficultySeed": 2,
+    "hint": "p로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "기관이나 집단이 공식적으로 정한 행동 방침",
+      "answer": "policy"
+    }
+  },
+  {
+    "id": "evt-draft-055",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-사회-명사",
+    "difficultySeed": 2,
+    "hint": "s로 시작하는 7글자 명사",
+    "problem": {
+      "meaning": "공통된 제도와 관계 속에서 함께 살아가는 사람들의 집단",
+      "answer": "society"
+    }
+  },
+  {
+    "id": "evt-draft-056",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-학습-형용사",
+    "difficultySeed": 1,
+    "hint": "a로 시작하는 8글자 형용사",
+    "problem": {
+      "meaning": "사실과 일치하고 오류가 없는",
+      "answer": "accurate"
+    }
+  },
+  {
+    "id": "evt-draft-057",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-수학-형용사",
+    "difficultySeed": 1,
+    "hint": "e로 시작하는 5글자 형용사",
+    "problem": {
+      "meaning": "양·크기·가치가 서로 같은",
+      "answer": "equal"
+    }
+  },
+  {
+    "id": "evt-draft-058",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-사회-형용사",
+    "difficultySeed": 1,
+    "hint": "s로 시작하는 6글자 형용사",
+    "problem": {
+      "meaning": "사회나 사람 사이의 관계와 관련된",
+      "answer": "social"
+    }
+  },
+  {
+    "id": "evt-draft-059",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-과학-형용사",
+    "difficultySeed": 2,
+    "hint": "s로 시작하는 10글자 형용사",
+    "problem": {
+      "meaning": "과학의 방법과 증거에 근거한",
+      "answer": "scientific"
+    }
+  },
+  {
+    "id": "evt-draft-060",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-학습-형용사",
+    "difficultySeed": 2,
+    "hint": "r로 시작하는 8글자 형용사",
+    "problem": {
+      "meaning": "주제나 질문과 직접 관련된",
+      "answer": "relevant"
+    }
+  },
+  {
+    "id": "evt-draft-061",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-소통-동사",
+    "difficultySeed": 2,
+    "hint": "c로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "정보가 부족하거나 뒤섞여 다른 사람이 이해하지 못하게 만들다",
+      "answer": "confuse"
+    }
+  },
+  {
+    "id": "evt-draft-062",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-소통-동사",
+    "difficultySeed": 2,
+    "hint": "c로 시작하는 8글자 동사",
+    "problem": {
+      "meaning": "상대가 어떤 주장이나 행동을 받아들이도록 설득하다",
+      "answer": "convince"
+    }
+  },
+  {
+    "id": "evt-draft-063",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-소통-동사",
+    "difficultySeed": 1,
+    "hint": "e로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "생각이나 감정을 말·글·표정으로 나타내다",
+      "answer": "express"
+    }
+  },
+  {
+    "id": "evt-draft-064",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-소통-동사",
+    "difficultySeed": 1,
+    "hint": "r로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "질문이나 요청에 대답하거나 반응하다",
+      "answer": "respond"
+    }
+  },
+  {
+    "id": "evt-draft-065",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-소통-동사",
+    "difficultySeed": 2,
+    "hint": "c로 시작하는 11글자 동사",
+    "problem": {
+      "meaning": "사람들 사이에 생각이나 정보를 주고받다",
+      "answer": "communicate"
+    }
+  },
+  {
+    "id": "evt-draft-066",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-소통-동사",
+    "difficultySeed": 1,
+    "hint": "i로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "일부러 관심을 기울이지 않고 무시하다",
+      "answer": "ignore"
+    }
+  },
+  {
+    "id": "evt-draft-067",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-감정-동사",
+    "difficultySeed": 2,
+    "hint": "a로 시작하는 10글자 동사",
+    "problem": {
+      "meaning": "다른 사람의 노력이나 가치를 알아보고 고마워하다",
+      "answer": "appreciate"
+    }
+  },
+  {
+    "id": "evt-draft-068",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-감정-동사",
+    "difficultySeed": 1,
+    "hint": "r로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "과거의 말이나 행동을 떠올리며 후회하다",
+      "answer": "regret"
+    }
+  },
+  {
+    "id": "evt-draft-069",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-논리-명사",
+    "difficultySeed": 1,
+    "hint": "o로 시작하는 7글자 명사",
+    "problem": {
+      "meaning": "어떤 주제에 대한 개인의 생각이나 판단",
+      "answer": "opinion"
+    }
+  },
+  {
+    "id": "evt-draft-070",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-소통-명사",
+    "difficultySeed": 1,
+    "hint": "a로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "상대가 무엇을 해야 할지 판단하도록 돕는 조언",
+      "answer": "advice"
+    }
+  },
+  {
+    "id": "evt-draft-071",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-논리-명사",
+    "difficultySeed": 1,
+    "hint": "r로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "어떤 일이 일어난 원인이나 설명",
+      "answer": "reason"
+    }
+  },
+  {
+    "id": "evt-draft-072",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-감정-명사",
+    "difficultySeed": 1,
+    "hint": "e로 시작하는 7글자 명사",
+    "problem": {
+      "meaning": "기쁨·두려움처럼 마음에서 느끼는 강한 감정",
+      "answer": "emotion"
+    }
+  },
+  {
+    "id": "evt-draft-073",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-공동체-명사",
+    "difficultySeed": 1,
+    "hint": "t로 시작하는 5글자 명사",
+    "problem": {
+      "meaning": "다른 사람이 믿을 만하다고 여기는 마음",
+      "answer": "trust"
+    }
+  },
+  {
+    "id": "evt-draft-074",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-공동체-명사",
+    "difficultySeed": 2,
+    "hint": "c로 시작하는 8글자 명사",
+    "problem": {
+      "meaning": "사람이나 집단 사이의 심각한 의견 충돌",
+      "answer": "conflict"
+    }
+  },
+  {
+    "id": "evt-draft-075",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-공동체-명사",
+    "difficultySeed": 2,
+    "hint": "c로 시작하는 9글자 명사",
+    "problem": {
+      "meaning": "공통된 장소·관심·목적을 나누는 사람들의 집단",
+      "answer": "community"
+    }
+  },
+  {
+    "id": "evt-draft-076",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-논리-형용사",
+    "difficultySeed": 1,
+    "hint": "l로 시작하는 7글자 형용사",
+    "problem": {
+      "meaning": "분명한 근거와 이치에 맞는 사고에 바탕을 둔",
+      "answer": "logical"
+    }
+  },
+  {
+    "id": "evt-draft-077",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-감정-형용사",
+    "difficultySeed": 2,
+    "hint": "e로 시작하는 9글자 형용사",
+    "problem": {
+      "meaning": "이성보다 강한 감정의 영향을 크게 받는",
+      "answer": "emotional"
+    }
+  },
+  {
+    "id": "evt-draft-078",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-감정-형용사",
+    "difficultySeed": 1,
+    "hint": "a로 시작하는 7글자 형용사",
+    "problem": {
+      "meaning": "앞으로 일어날 일을 걱정하고 불안해하는",
+      "answer": "anxious"
+    }
+  },
+  {
+    "id": "evt-draft-079",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-학습-형용사",
+    "difficultySeed": 1,
+    "hint": "c로 시작하는 7글자 형용사",
+    "problem": {
+      "meaning": "새로운 사실을 알고 싶어 하는",
+      "answer": "curious"
+    }
+  },
+  {
+    "id": "evt-draft-080",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-공동체-형용사",
+    "difficultySeed": 2,
+    "hint": "r로 시작하는 11글자 형용사",
+    "problem": {
+      "meaning": "맡은 의무를 다하고 그 결과에 책임을 지는",
+      "answer": "responsible"
+    }
+  },
+  {
+    "id": "evt-draft-081",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-계획-동사",
+    "difficultySeed": 1,
+    "hint": "e로 시작하는 6글자 동사",
+    "problem": {
+      "meaning": "규모나 범위를 더 크게 만들다",
+      "answer": "expand"
+    }
+  },
+  {
+    "id": "evt-draft-082",
+    "type": "english-vocab-typing",
+    "unit": "고1-영어-학업-동사",
+    "difficultySeed": 1,
+    "hint": "d로 시작하는 8글자 동사",
+    "problem": {
+      "meaning": "수나 양을 이전보다 더 적게 만들다",
+      "answer": "decrease"
+    }
+  },
+  {
+    "id": "evt-draft-083",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "o로 시작하는 8글자 동사",
+    "problem": {
+      "meaning": "자료나 활동을 목적에 맞게 체계적으로 정리하다",
+      "answer": "organize"
+    },
+    "unit": "고1-영어-계획-동사"
+  },
+  {
+    "id": "evt-draft-084",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "i로 시작하는 8글자 동사",
+    "problem": {
+      "meaning": "문제의 원인이나 대상이 무엇인지 정확히 알아내다",
+      "answer": "identify"
+    },
+    "unit": "고1-영어-문제해결-동사"
+  },
+  {
+    "id": "evt-draft-085",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "r로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "사용한 물질을 새 제품을 만드는 데 다시 이용하다",
+      "answer": "recycle"
+    },
+    "unit": "고1-영어-환경-동사"
+  },
+  {
+    "id": "evt-draft-086",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "p로 시작하는 7글자 동사",
+    "problem": {
+      "meaning": "공기·물·땅을 해로운 물질로 더럽히다",
+      "answer": "pollute"
+    },
+    "unit": "고1-영어-환경-동사"
+  },
+  {
+    "id": "evt-draft-087",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "c로 시작하는 8글자 동사",
+    "problem": {
+      "meaning": "자원이나 에너지를 아껴 낭비를 줄이며 사용하다",
+      "answer": "conserve"
+    },
+    "unit": "고1-영어-환경-동사"
+  },
+  {
+    "id": "evt-draft-088",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "c로 시작하는 11글자 동사",
+    "problem": {
+      "meaning": "주의를 한 대상에 모아 공부나 일에 몰두하다",
+      "answer": "concentrate"
+    },
+    "unit": "고1-영어-학업-동사"
+  },
+  {
+    "id": "evt-draft-089",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "e로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "행동이나 사건이 만들어 낸 결과 또는 영향",
+      "answer": "effect"
+    },
+    "unit": "고1-영어-문제해결-명사"
+  },
+  {
+    "id": "evt-draft-090",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "c로 시작하는 5글자 명사",
+    "problem": {
+      "meaning": "어떤 결과를 직접 만들어 내는 원인",
+      "answer": "cause"
+    },
+    "unit": "고1-영어-문제해결-명사"
+  },
+  {
+    "id": "evt-draft-091",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "c로 시작하는 11글자 명사",
+    "problem": {
+      "meaning": "사건이나 행동 뒤에 따라오는 결과",
+      "answer": "consequence"
+    },
+    "unit": "고1-영어-문제해결-명사"
+  },
+  {
+    "id": "evt-draft-092",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "c로 시작하는 7글자 명사",
+    "problem": {
+      "meaning": "한 지역의 오랜 기간에 걸친 날씨의 일반적 특성",
+      "answer": "climate"
+    },
+    "unit": "고1-영어-환경-명사"
+  },
+  {
+    "id": "evt-draft-093",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "e로 시작하는 6글자 명사",
+    "problem": {
+      "meaning": "일을 움직이거나 기계를 작동하게 하는 힘",
+      "answer": "energy"
+    },
+    "unit": "고1-영어-환경-명사"
+  },
+  {
+    "id": "evt-draft-094",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "s로 시작하는 8글자 명사",
+    "problem": {
+      "meaning": "목표를 이루기 위해 세운 장기적인 방법과 계획",
+      "answer": "strategy"
+    },
+    "unit": "고1-영어-계획-명사"
+  },
+  {
+    "id": "evt-draft-095",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "c로 시작하는 9글자 명사",
+    "problem": {
+      "meaning": "해결하거나 이겨 내야 하는 어려운 과제",
+      "answer": "challenge"
+    },
+    "unit": "고1-영어-문제해결-명사"
+  },
+  {
+    "id": "evt-draft-096",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "p로 시작하는 8글자 동사",
+    "problem": {
+      "meaning": "자연이나 물건을 손상되지 않게 지켜 원래 상태를 유지하다",
+      "answer": "preserve"
+    },
+    "unit": "고1-영어-환경-동사"
+  },
+  {
+    "id": "evt-draft-097",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "e로 시작하는 9글자 형용사",
+    "problem": {
+      "meaning": "시간·에너지·자원을 낭비하지 않고 성과를 내는",
+      "answer": "efficient"
+    },
+    "unit": "고1-영어-학업-형용사"
+  },
+  {
+    "id": "evt-draft-098",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "p로 시작하는 8글자 형용사",
+    "problem": {
+      "meaning": "실제로 일어나거나 이루어질 수 있는",
+      "answer": "possible"
+    },
+    "unit": "고1-영어-문제해결-형용사"
+  },
+  {
+    "id": "evt-draft-099",
+    "type": "english-vocab-typing",
+    "difficultySeed": 1,
+    "hint": "n으로 시작하는 7글자 형용사",
+    "problem": {
+      "meaning": "자연에서 비롯되거나 자연의 특징을 가진",
+      "answer": "natural"
+    },
+    "unit": "고1-영어-환경-형용사"
+  },
+  {
+    "id": "evt-draft-100",
+    "type": "english-vocab-typing",
+    "difficultySeed": 2,
+    "hint": "a로 시작하는 9글자 형용사",
+    "problem": {
+      "meaning": "필요할 때 사용할 수 있도록 준비되어 있는",
+      "answer": "available"
+    },
+    "unit": "고1-영어-계획-형용사"
+  }
+]

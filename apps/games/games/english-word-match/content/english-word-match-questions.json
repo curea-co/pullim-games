@@ -1,0 +1,3302 @@
+[
+  {
+    "id": "wm-draft-001",
+    "type": "word-match",
+    "unit": "고1-영어-생활어휘-1",
+    "difficultySeed": 1,
+    "hint": "집에서 물건을 다루는 행동의 차이를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "wash",
+          "korean": "물로 씻다"
+        },
+        {
+          "english": "fold",
+          "korean": "천을 접다"
+        },
+        {
+          "english": "spill",
+          "korean": "액체를 쏟다"
+        },
+        {
+          "english": "lock",
+          "korean": "자물쇠로 잠그다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-002",
+    "type": "word-match",
+    "unit": "고1-영어-학교생활-1",
+    "difficultySeed": 1,
+    "hint": "수업과 과제에서 쓰이는 학교 행동을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "submit",
+          "korean": "과제를 제출하다"
+        },
+        {
+          "english": "revise",
+          "korean": "글을 고쳐 쓰다"
+        },
+        {
+          "english": "attend",
+          "korean": "수업에 참석하다"
+        },
+        {
+          "english": "memorize",
+          "korean": "내용을 외우다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-003",
+    "type": "word-match",
+    "unit": "고1-영어-과학기초-1",
+    "difficultySeed": 2,
+    "hint": "관찰과 실험에서 맡는 역할을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "melt",
+          "korean": "고체가 녹다"
+        },
+        {
+          "english": "expand",
+          "korean": "부피가 커지다"
+        },
+        {
+          "english": "absorb",
+          "korean": "액체를 흡수하다"
+        },
+        {
+          "english": "rotate",
+          "korean": "축을 중심으로 돌다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-004",
+    "type": "word-match",
+    "unit": "고1-영어-사회기초-1",
+    "difficultySeed": 2,
+    "hint": "공동체에서 사람과 규칙의 관계를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "vote",
+          "korean": "투표하다"
+        },
+        {
+          "english": "elect",
+          "korean": "대표로 선출하다"
+        },
+        {
+          "english": "protest",
+          "korean": "항의 시위를 하다"
+        },
+        {
+          "english": "permit",
+          "korean": "공식적으로 허가하다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-005",
+    "type": "word-match",
+    "unit": "고1-영어-생활명사-1",
+    "difficultySeed": 1,
+    "hint": "일상에서 사용하는 장소와 물건의 종류를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "receipt",
+          "korean": "구매 영수증"
+        },
+        {
+          "english": "shelf",
+          "korean": "물건을 올려 두는 선반"
+        },
+        {
+          "english": "laundry",
+          "korean": "세탁할 빨래"
+        },
+        {
+          "english": "neighborhood",
+          "korean": "집 주변의 동네"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-006",
+    "type": "word-match",
+    "unit": "고1-영어-학업명사-1",
+    "difficultySeed": 2,
+    "hint": "학습 결과와 자료를 나타내는 명사를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "assignment",
+          "korean": "교사가 내준 과제"
+        },
+        {
+          "english": "lecture",
+          "korean": "교수의 강의"
+        },
+        {
+          "english": "semester",
+          "korean": "학교의 한 학기"
+        },
+        {
+          "english": "scholarship",
+          "korean": "학업 장학금"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-007",
+    "type": "word-match",
+    "unit": "고1-영어-과학명사-1",
+    "difficultySeed": 2,
+    "hint": "과학 탐구에서 관찰 대상과 결과를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "specimen",
+          "korean": "검사할 표본"
+        },
+        {
+          "english": "molecule",
+          "korean": "물질을 이루는 분자"
+        },
+        {
+          "english": "density",
+          "korean": "부피당 질량인 밀도"
+        },
+        {
+          "english": "orbit",
+          "korean": "천체의 공전 궤도"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-008",
+    "type": "word-match",
+    "unit": "고1-영어-사회명사-1",
+    "difficultySeed": 3,
+    "hint": "사회 제도와 시민 관계를 나타내는 말을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "citizen",
+          "korean": "국가의 시민"
+        },
+        {
+          "english": "welfare",
+          "korean": "사회 복지 제도"
+        },
+        {
+          "english": "lawyer",
+          "korean": "법률 변호사"
+        },
+        {
+          "english": "election",
+          "korean": "공직자 선거"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-009",
+    "type": "word-match",
+    "unit": "고1-영어-생활형용사-1",
+    "difficultySeed": 1,
+    "hint": "사람이나 물건의 상태를 구별하는 형용사입니다.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "fresh",
+          "korean": "갓 만들어 신선한"
+        },
+        {
+          "english": "empty",
+          "korean": "안에 아무것도 없는"
+        },
+        {
+          "english": "noisy",
+          "korean": "소리가 시끄러운"
+        },
+        {
+          "english": "polite",
+          "korean": "예의 바른"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-010",
+    "type": "word-match",
+    "unit": "고1-영어-학업형용사-1",
+    "difficultySeed": 2,
+    "hint": "학습 자료와 수행의 성격을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "complex",
+          "korean": "구조가 복잡한"
+        },
+        {
+          "english": "logical",
+          "korean": "논리적으로 타당한"
+        },
+        {
+          "english": "optional",
+          "korean": "선택해도 되는"
+        },
+        {
+          "english": "oral",
+          "korean": "말로 하는"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-011",
+    "type": "word-match",
+    "unit": "고1-영어-과학형용사-1",
+    "difficultySeed": 3,
+    "hint": "물질과 관찰 결과의 성질을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "solid",
+          "korean": "고체 상태의"
+        },
+        {
+          "english": "microscopic",
+          "korean": "현미경으로 보이는"
+        },
+        {
+          "english": "chemical",
+          "korean": "화학 물질과 관련된"
+        },
+        {
+          "english": "stable",
+          "korean": "쉽게 변하지 않는"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-012",
+    "type": "word-match",
+    "unit": "고1-영어-사회형용사-1",
+    "difficultySeed": 3,
+    "hint": "사회 현상과 태도의 성격을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "urban",
+          "korean": "도시와 관련된"
+        },
+        {
+          "english": "legal",
+          "korean": "법에 맞는"
+        },
+        {
+          "english": "equal",
+          "korean": "차별 없이 같은"
+        },
+        {
+          "english": "public",
+          "korean": "대중을 위한"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-013",
+    "type": "word-match",
+    "unit": "고1-영어-생활동사-2",
+    "difficultySeed": 2,
+    "hint": "이동과 약속에서 일어나는 행동을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "pack",
+          "korean": "짐을 싸다"
+        },
+        {
+          "english": "delay",
+          "korean": "일정을 늦추다"
+        },
+        {
+          "english": "cancel",
+          "korean": "예약을 취소하다"
+        },
+        {
+          "english": "arrive",
+          "korean": "장소에 도착하다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-014",
+    "type": "word-match",
+    "unit": "고1-영어-학업동사-2",
+    "difficultySeed": 3,
+    "hint": "발표와 연구 과정의 행동을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "summarize",
+          "korean": "핵심만 요약하다"
+        },
+        {
+          "english": "analyze",
+          "korean": "요소를 분석하다"
+        },
+        {
+          "english": "quote",
+          "korean": "출처의 말을 인용하다"
+        },
+        {
+          "english": "calculate",
+          "korean": "수치를 계산하다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-015",
+    "type": "word-match",
+    "unit": "고1-영어-과학동사-2",
+    "difficultySeed": 3,
+    "hint": "변화와 측정을 나타내는 과학 동사를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "freeze",
+          "korean": "액체가 얼다"
+        },
+        {
+          "english": "react",
+          "korean": "물질이 반응하다"
+        },
+        {
+          "english": "measure",
+          "korean": "수치로 측정하다"
+        },
+        {
+          "english": "emit",
+          "korean": "빛이나 열을 방출하다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-016",
+    "type": "word-match",
+    "unit": "고1-영어-사회동사-2",
+    "difficultySeed": 4,
+    "hint": "사회적 의사결정과 관계의 행동을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "negotiate",
+          "korean": "조건을 협상하다"
+        },
+        {
+          "english": "enforce",
+          "korean": "규칙을 강제로 시행하다"
+        },
+        {
+          "english": "advocate",
+          "korean": "정책을 공개적으로 지지하다"
+        },
+        {
+          "english": "represent",
+          "korean": "사람을 대표하다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-017",
+    "type": "word-match",
+    "unit": "고1-영어-생활혼동어휘-1",
+    "difficultySeed": 2,
+    "hint": "비슷해 보이지만 위치와 이동 방식이 다른 말을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "남의 물건을 빌려 쓰다"
+        },
+        {
+          "english": "lend",
+          "korean": "남에게 물건을 빌려주다"
+        },
+        {
+          "english": "bring",
+          "korean": "이곳으로 가져오다"
+        },
+        {
+          "english": "carry",
+          "korean": "들고 운반하다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-018",
+    "type": "word-match",
+    "unit": "고1-영어-학업혼동어휘-1",
+    "difficultySeed": 3,
+    "hint": "학습 자료의 출처와 내용을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "fact",
+          "korean": "확인 가능한 사실"
+        },
+        {
+          "english": "opinion",
+          "korean": "개인의 의견"
+        },
+        {
+          "english": "source",
+          "korean": "정보의 출처"
+        },
+        {
+          "english": "topic",
+          "korean": "글의 주제"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-019",
+    "type": "word-match",
+    "unit": "고1-영어-과학혼동어휘-1",
+    "difficultySeed": 4,
+    "hint": "생명과 물질을 설명하는 과학 개념을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "organism",
+          "korean": "살아 있는 생물"
+        },
+        {
+          "english": "organ",
+          "korean": "생물의 기관"
+        },
+        {
+          "english": "energy",
+          "korean": "일을 할 수 있는 에너지"
+        },
+        {
+          "english": "force",
+          "korean": "물체를 미는 힘"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-020",
+    "type": "word-match",
+    "unit": "고1-영어-사회혼동어휘-1",
+    "difficultySeed": 4,
+    "hint": "사회 문제를 설명할 때 원인과 대응을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "cause",
+          "korean": "사건을 일으킨 원인"
+        },
+        {
+          "english": "effect",
+          "korean": "원인으로 생긴 결과"
+        },
+        {
+          "english": "issue",
+          "korean": "사회적 쟁점"
+        },
+        {
+          "english": "solution",
+          "korean": "문제의 해결책"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-021",
+    "type": "word-match",
+    "unit": "고1-영어-일상행동-2",
+    "difficultySeed": 1,
+    "hint": "아침 준비와 집안일에서 하는 행동을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "wake",
+          "korean": "잠에서 깨다"
+        },
+        {
+          "english": "brush",
+          "korean": "이를 닦다"
+        },
+        {
+          "english": "sweep",
+          "korean": "바닥을 쓸다"
+        },
+        {
+          "english": "hang",
+          "korean": "걸어서 매달다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-022",
+    "type": "word-match",
+    "unit": "고1-영어-학교행동-2",
+    "difficultySeed": 1,
+    "hint": "교실에서 학생이 수행하는 행동을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "participate",
+          "korean": "활동에 참여하다"
+        },
+        {
+          "english": "discuss",
+          "korean": "주제를 토론하다"
+        },
+        {
+          "english": "underline",
+          "korean": "글에 밑줄을 긋다"
+        },
+        {
+          "english": "concentrate",
+          "korean": "한곳에 집중하다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-023",
+    "type": "word-match",
+    "unit": "고1-영어-환경과학-2",
+    "difficultySeed": 2,
+    "hint": "환경 변화와 생태 작용의 차이를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "erode",
+          "korean": "흙이나 바위가 침식되다"
+        },
+        {
+          "english": "germinate",
+          "korean": "씨앗이 발아하다"
+        },
+        {
+          "english": "evaporate",
+          "korean": "액체가 증발하다"
+        },
+        {
+          "english": "pollute",
+          "korean": "환경을 오염시키다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-024",
+    "type": "word-match",
+    "unit": "고1-영어-사회행동-2",
+    "difficultySeed": 2,
+    "hint": "공공생활에서 권리와 의무를 나타내는 행동을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "obey",
+          "korean": "규칙을 따르다"
+        },
+        {
+          "english": "tax",
+          "korean": "세금을 부과하다"
+        },
+        {
+          "english": "donate",
+          "korean": "돈이나 물품을 기부하다"
+        },
+        {
+          "english": "volunteer",
+          "korean": "자원봉사로 돕다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-025",
+    "type": "word-match",
+    "unit": "고1-영어-여행명사-2",
+    "difficultySeed": 1,
+    "hint": "여행을 준비할 때 만나는 장소와 문서를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "luggage",
+          "korean": "여행용 짐"
+        },
+        {
+          "english": "passport",
+          "korean": "국제 여행 신분증"
+        },
+        {
+          "english": "platform",
+          "korean": "기차를 타는 승강장"
+        },
+        {
+          "english": "destination",
+          "korean": "여행의 목적지"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-026",
+    "type": "word-match",
+    "unit": "고1-영어-학업명사-2",
+    "difficultySeed": 2,
+    "hint": "학교 평가와 학습 활동을 나타내는 명사를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "quiz",
+          "korean": "짧은 학습 시험"
+        },
+        {
+          "english": "formula",
+          "korean": "계산에 쓰는 공식"
+        },
+        {
+          "english": "paragraph",
+          "korean": "글의 한 문단"
+        },
+        {
+          "english": "certificate",
+          "korean": "자격을 증명하는 증서"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-027",
+    "type": "word-match",
+    "unit": "고1-영어-생명과학-2",
+    "difficultySeed": 2,
+    "hint": "생명체의 구조와 기능을 나타내는 명사를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "cell",
+          "korean": "생물의 기본 세포"
+        },
+        {
+          "english": "tissue",
+          "korean": "같은 세포들의 조직"
+        },
+        {
+          "english": "habitat",
+          "korean": "생물의 서식지"
+        },
+        {
+          "english": "predator",
+          "korean": "다른 동물을 사냥하는 포식자"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-028",
+    "type": "word-match",
+    "unit": "고1-영어-사회명사-2",
+    "difficultySeed": 3,
+    "hint": "경제와 공동체에서 쓰이는 제도·관계를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "budget",
+          "korean": "수입과 지출 계획"
+        },
+        {
+          "english": "industry",
+          "korean": "상품을 생산하는 산업"
+        },
+        {
+          "english": "resident",
+          "korean": "특정 지역의 거주자"
+        },
+        {
+          "english": "authority",
+          "korean": "명령할 공식 권한"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-029",
+    "type": "word-match",
+    "unit": "고1-영어-일상상태-2",
+    "difficultySeed": 1,
+    "hint": "일상 물건의 모양과 상태를 구별하는 형용사입니다.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "broken",
+          "korean": "망가져 작동하지 않는"
+        },
+        {
+          "english": "smooth",
+          "korean": "표면이 매끄러운"
+        },
+        {
+          "english": "narrow",
+          "korean": "폭이 좁은"
+        },
+        {
+          "english": "crowded",
+          "korean": "사람이나 물건이 가득한"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-030",
+    "type": "word-match",
+    "unit": "고1-영어-학업성격-2",
+    "difficultySeed": 2,
+    "hint": "글과 학습 과제의 성격을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "brief",
+          "korean": "시간이나 내용이 짧은"
+        },
+        {
+          "english": "relevant",
+          "korean": "주제와 관련 있는"
+        },
+        {
+          "english": "accurate",
+          "korean": "사실과 정확히 일치하는"
+        },
+        {
+          "english": "creative",
+          "korean": "새롭고 독창적인"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-031",
+    "type": "word-match",
+    "unit": "고1-영어-물리성질-2",
+    "difficultySeed": 3,
+    "hint": "물체의 운동과 측정 가능한 성질을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "elastic",
+          "korean": "늘어나도 되돌아오는"
+        },
+        {
+          "english": "magnetic",
+          "korean": "자석에 끌리는"
+        },
+        {
+          "english": "vertical",
+          "korean": "수직 방향의"
+        },
+        {
+          "english": "transparent",
+          "korean": "빛이 통과하는"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-032",
+    "type": "word-match",
+    "unit": "고1-영어-사회성격-2",
+    "difficultySeed": 3,
+    "hint": "사회 관계와 정책의 성격을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "global",
+          "korean": "전 세계와 관련된"
+        },
+        {
+          "english": "local",
+          "korean": "특정 지역에 한정된"
+        },
+        {
+          "english": "racial",
+          "korean": "인종과 관련된"
+        },
+        {
+          "english": "economic",
+          "korean": "경제와 관련된"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-033",
+    "type": "word-match",
+    "unit": "고1-영어-일상변화-2",
+    "difficultySeed": 2,
+    "hint": "물건을 준비하고 상태를 바꾸는 행동을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "unwrap",
+          "korean": "포장을 풀다"
+        },
+        {
+          "english": "replace",
+          "korean": "고장 난 것을 교체하다"
+        },
+        {
+          "english": "freeze",
+          "korean": "음식을 얼리다"
+        },
+        {
+          "english": "charge",
+          "korean": "배터리에 전기를 채우다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-034",
+    "type": "word-match",
+    "unit": "고1-영어-학업과정-2",
+    "difficultySeed": 3,
+    "hint": "정보를 읽고 정리하는 학습 행동을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "interpret",
+          "korean": "의미를 해석하다"
+        },
+        {
+          "english": "classify",
+          "korean": "종류별로 분류하다"
+        },
+        {
+          "english": "infer",
+          "korean": "근거로 추론하다"
+        },
+        {
+          "english": "illustrate",
+          "korean": "예를 들어 설명하다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-035",
+    "type": "word-match",
+    "unit": "고1-영어-화학변화-2",
+    "difficultySeed": 3,
+    "hint": "실험에서 물질의 양과 변화를 나타내는 동사를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "dissolve",
+          "korean": "액체에 녹아 섞이다"
+        },
+        {
+          "english": "combine",
+          "korean": "둘 이상을 결합하다"
+        },
+        {
+          "english": "separate",
+          "korean": "서로 나누다"
+        },
+        {
+          "english": "detect",
+          "korean": "존재를 감지하다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-036",
+    "type": "word-match",
+    "unit": "고1-영어-사회변화-2",
+    "difficultySeed": 4,
+    "hint": "사회 제도와 여론이 변하는 과정을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "reform",
+          "korean": "제도를 개혁하다"
+        },
+        {
+          "english": "ban",
+          "korean": "공식적으로 금지하다"
+        },
+        {
+          "english": "approve",
+          "korean": "제안을 승인하다"
+        },
+        {
+          "english": "influence",
+          "korean": "행동이나 생각에 영향을 주다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-037",
+    "type": "word-match",
+    "unit": "고1-영어-일상혼동어휘-2",
+    "difficultySeed": 2,
+    "hint": "시간과 장소의 방향을 나타내는 말을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "before",
+          "korean": "어떤 때보다 앞서"
+        },
+        {
+          "english": "after",
+          "korean": "어떤 때보다 뒤에"
+        },
+        {
+          "english": "inside",
+          "korean": "공간의 안쪽에"
+        },
+        {
+          "english": "outside",
+          "korean": "공간의 바깥쪽에"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-038",
+    "type": "word-match",
+    "unit": "고1-영어-학업혼동어휘-2",
+    "difficultySeed": 3,
+    "hint": "시험과 글쓰기에서 목적이 다른 동사를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "mention",
+          "korean": "짧게 언급하다"
+        },
+        {
+          "english": "explain",
+          "korean": "이유나 뜻을 설명하다"
+        },
+        {
+          "english": "suggest",
+          "korean": "아이디어를 제안하다"
+        },
+        {
+          "english": "conclude",
+          "korean": "논의를 결론내리다"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-039",
+    "type": "word-match",
+    "unit": "고1-영어-과학혼동어휘-2",
+    "difficultySeed": 4,
+    "hint": "과학적 주장과 검증 과정을 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "theory",
+          "korean": "검증된 과학 이론"
+        },
+        {
+          "english": "hypothesis",
+          "korean": "검증 전의 가설"
+        },
+        {
+          "english": "variable",
+          "korean": "실험에서 변하는 변수"
+        },
+        {
+          "english": "constant",
+          "korean": "실험에서 일정한 상수"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-040",
+    "type": "word-match",
+    "unit": "고1-영어-사회혼동어휘-2",
+    "difficultySeed": 4,
+    "hint": "사회적 주장과 합의의 정도를 구별하세요.",
+    "problem": {
+      "pairs": [
+        {
+          "english": "debate",
+          "korean": "찬반을 주고받는 토론"
+        },
+        {
+          "english": "argument",
+          "korean": "주장을 뒷받침하는 논거"
+        },
+        {
+          "english": "agreement",
+          "korean": "의견이 일치한 합의"
+        },
+        {
+          "english": "dispute",
+          "korean": "해결되지 않은 분쟁"
+        }
+      ]
+    }
+  },
+  {
+    "id": "wm-draft-041",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-11",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "feature",
+          "issue"
+        ],
+        "korean": [
+          "특징",
+          "쟁점"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-042",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-11",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "approach",
+          "occur"
+        ],
+        "korean": [
+          "접근법",
+          "발생하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-043",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-11",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "select",
+          "enable"
+        ],
+        "korean": [
+          "선택하다",
+          "가능하게 하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-044",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-11",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "prevent",
+          "define"
+        ],
+        "korean": [
+          "막다",
+          "정의하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-045",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-12",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "require",
+          "respond"
+        ],
+        "korean": [
+          "요구하다",
+          "응답하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-046",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-12",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "design",
+          "measure"
+        ],
+        "korean": [
+          "설계하다",
+          "측정하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-047",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-12",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "reflect",
+          "adaptation"
+        ],
+        "korean": [
+          "반영하다",
+          "적응"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-048",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-12",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "pattern",
+          "aim"
+        ],
+        "korean": [
+          "양식",
+          "목표"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-049",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-13",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "challenge",
+          "benefit"
+        ],
+        "korean": [
+          "도전",
+          "혜택"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-050",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-13",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "source",
+          "role"
+        ],
+        "korean": [
+          "출처",
+          "역할"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-051",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-13",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "surface",
+          "method"
+        ],
+        "korean": [
+          "표면",
+          "방법"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-052",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-13",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "impact",
+          "resource"
+        ],
+        "korean": [
+          "영향",
+          "자원"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-053",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-14",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "evidence",
+          "feature"
+        ],
+        "korean": [
+          "근거",
+          "특징"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-054",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-14",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "issue",
+          "approach"
+        ],
+        "korean": [
+          "쟁점",
+          "접근법"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-055",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-14",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "occur",
+          "select"
+        ],
+        "korean": [
+          "발생하다",
+          "선택하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-056",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-14",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "enable",
+          "prevent"
+        ],
+        "korean": [
+          "가능하게 하다",
+          "막다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-057",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-15",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "define",
+          "require"
+        ],
+        "korean": [
+          "정의하다",
+          "요구하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-058",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-15",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "respond",
+          "design"
+        ],
+        "korean": [
+          "응답하다",
+          "설계하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-059",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-15",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "measure",
+          "reflect"
+        ],
+        "korean": [
+          "측정하다",
+          "반영하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-060",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-15",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "adaptation",
+          "pattern"
+        ],
+        "korean": [
+          "적응",
+          "양식"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-061",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-16",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "aim",
+          "challenge"
+        ],
+        "korean": [
+          "목표",
+          "도전"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-062",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-16",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "benefit",
+          "source"
+        ],
+        "korean": [
+          "혜택",
+          "출처"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-063",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-16",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "role",
+          "surface"
+        ],
+        "korean": [
+          "역할",
+          "표면"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-064",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-16",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "method",
+          "impact"
+        ],
+        "korean": [
+          "방법",
+          "영향"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-065",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-17",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "resource",
+          "evidence"
+        ],
+        "korean": [
+          "자원",
+          "근거"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-066",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-17",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "feature",
+          "issue"
+        ],
+        "korean": [
+          "특징",
+          "쟁점"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-067",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-17",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "approach",
+          "occur"
+        ],
+        "korean": [
+          "접근법",
+          "발생하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-068",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-17",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "select",
+          "enable"
+        ],
+        "korean": [
+          "선택하다",
+          "가능하게 하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-069",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-18",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "prevent",
+          "define"
+        ],
+        "korean": [
+          "막다",
+          "정의하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-070",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-18",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "require",
+          "respond"
+        ],
+        "korean": [
+          "요구하다",
+          "응답하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-071",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-18",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "design",
+          "measure"
+        ],
+        "korean": [
+          "설계하다",
+          "측정하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-072",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-18",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "reflect",
+          "adaptation"
+        ],
+        "korean": [
+          "반영하다",
+          "적응"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-073",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-19",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "pattern",
+          "aim"
+        ],
+        "korean": [
+          "양식",
+          "목표"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-074",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-19",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "challenge",
+          "benefit"
+        ],
+        "korean": [
+          "도전",
+          "혜택"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-075",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-19",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "source",
+          "role"
+        ],
+        "korean": [
+          "출처",
+          "역할"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-076",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-19",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "surface",
+          "method"
+        ],
+        "korean": [
+          "표면",
+          "방법"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-077",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-20",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "impact",
+          "resource"
+        ],
+        "korean": [
+          "영향",
+          "자원"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-078",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-20",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "evidence",
+          "feature"
+        ],
+        "korean": [
+          "근거",
+          "특징"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-079",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-20",
+    "difficultySeed": 3,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "issue",
+          "approach"
+        ],
+        "korean": [
+          "쟁점",
+          "접근법"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-080",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-20",
+    "difficultySeed": 2,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "occur",
+          "select"
+        ],
+        "korean": [
+          "발생하다",
+          "선택하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-081",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-21",
+    "difficultySeed": 5,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "enable",
+          "prevent"
+        ],
+        "korean": [
+          "가능하게 하다",
+          "막다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-082",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-21",
+    "difficultySeed": 4,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "define",
+          "require"
+        ],
+        "korean": [
+          "정의하다",
+          "요구하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-083",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-21",
+    "difficultySeed": 5,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "respond",
+          "design"
+        ],
+        "korean": [
+          "응답하다",
+          "설계하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-084",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-21",
+    "difficultySeed": 4,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "measure",
+          "reflect"
+        ],
+        "korean": [
+          "측정하다",
+          "반영하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-085",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-22",
+    "difficultySeed": 5,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "adaptation",
+          "pattern"
+        ],
+        "korean": [
+          "적응",
+          "양식"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-086",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-22",
+    "difficultySeed": 4,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "aim",
+          "challenge"
+        ],
+        "korean": [
+          "목표",
+          "도전"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-087",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-22",
+    "difficultySeed": 5,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "benefit",
+          "source"
+        ],
+        "korean": [
+          "혜택",
+          "출처"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-088",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-22",
+    "difficultySeed": 4,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "role",
+          "surface"
+        ],
+        "korean": [
+          "역할",
+          "표면"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-089",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-23",
+    "difficultySeed": 5,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "method",
+          "impact"
+        ],
+        "korean": [
+          "방법",
+          "영향"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-090",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-23",
+    "difficultySeed": 4,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "resource",
+          "evidence"
+        ],
+        "korean": [
+          "자원",
+          "근거"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-091",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-23",
+    "difficultySeed": 5,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "feature",
+          "issue"
+        ],
+        "korean": [
+          "특징",
+          "쟁점"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-092",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-23",
+    "difficultySeed": 4,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "approach",
+          "occur"
+        ],
+        "korean": [
+          "접근법",
+          "발생하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-093",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-24",
+    "difficultySeed": 5,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "select",
+          "enable"
+        ],
+        "korean": [
+          "선택하다",
+          "가능하게 하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-094",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-24",
+    "difficultySeed": 4,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "prevent",
+          "define"
+        ],
+        "korean": [
+          "막다",
+          "정의하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-095",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-24",
+    "difficultySeed": 5,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "require",
+          "respond"
+        ],
+        "korean": [
+          "요구하다",
+          "응답하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-096",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-24",
+    "difficultySeed": 4,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "design",
+          "measure"
+        ],
+        "korean": [
+          "설계하다",
+          "측정하다"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-097",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-25",
+    "difficultySeed": 5,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "observe",
+          "korean": "관찰하다"
+        },
+        {
+          "english": "predict",
+          "korean": "예측하다"
+        },
+        {
+          "english": "compare",
+          "korean": "비교하다"
+        },
+        {
+          "english": "reduce",
+          "korean": "줄이다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "reflect",
+          "adaptation"
+        ],
+        "korean": [
+          "반영하다",
+          "적응"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-098",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-25",
+    "difficultySeed": 4,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "benefit",
+          "korean": "이익"
+        },
+        {
+          "english": "factor",
+          "korean": "요인"
+        },
+        {
+          "english": "process",
+          "korean": "과정"
+        },
+        {
+          "english": "result",
+          "korean": "결과"
+        }
+      ],
+      "extras": {
+        "english": [
+          "pattern",
+          "aim"
+        ],
+        "korean": [
+          "양식",
+          "목표"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-099",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-25",
+    "difficultySeed": 5,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "annual",
+          "korean": "매년의"
+        },
+        {
+          "english": "similar",
+          "korean": "비슷한"
+        },
+        {
+          "english": "urgent",
+          "korean": "긴급한"
+        },
+        {
+          "english": "visible",
+          "korean": "보이는"
+        }
+      ],
+      "extras": {
+        "english": [
+          "challenge",
+          "benefit"
+        ],
+        "korean": [
+          "도전",
+          "혜택"
+        ]
+      }
+    }
+  },
+  {
+    "id": "wm-draft-100",
+    "type": "word-match",
+    "unit": "고1-영어-어휘-의미관계-25",
+    "difficultySeed": 4,
+    "hint": "각 단어의 품사와 기본 뜻을 대응",
+    "problem": {
+      "pairs": [
+        {
+          "english": "borrow",
+          "korean": "빌리다"
+        },
+        {
+          "english": "lend",
+          "korean": "빌려주다"
+        },
+        {
+          "english": "raise",
+          "korean": "올리다"
+        },
+        {
+          "english": "rise",
+          "korean": "오르다"
+        }
+      ],
+      "extras": {
+        "english": [
+          "source",
+          "role"
+        ],
+        "korean": [
+          "출처",
+          "역할"
+        ]
+      }
+    }
+  }
+]

@@ -1,3 +1,4 @@
+import questions from "./image-hotspot-questions.json";
 // 이미지 핫스팟 카드 풀 — V0: 식물 구조 5장.
 // 도식 SVG (PlantDiagram.tsx) 기준 좌표 — bbox 는 0~100 % (viewBox 200x200 기준).
 // 카드 풀에 distractor 1개 포함 → 끼워맞추기 회피.
@@ -196,7 +197,7 @@ const RAW_CARDS: ImageHotspotCard[] = [
   },
 ];
 
-export const cards: ImageHotspotCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: ImageHotspotCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const result = ImageHotspotCardSchema.safeParse(raw);
   if (!result.success) {
     throw new Error(

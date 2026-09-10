@@ -1,3 +1,4 @@
+import questions from "./letter-assembly-questions.json";
 // 한자 부수 조합 카드 풀 — V0: 5장. 난이도 1→5.
 // 1: 林 (木+木), 2: 明 (日+月), 3: 休 (人+木), 4: 好 (女+子), 5: 森 (木+木+木)
 // 카드 풀에는 distractor 부수 1~2개 섞임 → 끼워맞추기 회피.
@@ -108,7 +109,7 @@ const RAW_CARDS: LetterAssemblyCard[] = [
   },
 ];
 
-export const cards: LetterAssemblyCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: LetterAssemblyCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const result = LetterAssemblyCardSchema.safeParse(raw);
   if (!result.success) {
     throw new Error(

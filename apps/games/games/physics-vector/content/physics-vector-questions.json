@@ -1,0 +1,4502 @@
+[
+  {
+    "id": "pv-draft-001",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -5,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -4,
+          -5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-002",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -4,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -2,
+          -5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-003",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -3,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          0,
+          -5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-004",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -2,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          -5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-005",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -1,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          -5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-006",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-007",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          -4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-008",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          -4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-009",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-010",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-011",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-012",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            -3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-013",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -5,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -4,
+          -2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-014",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -4,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -2,
+          -2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-015",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -3,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          0,
+          -2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-016",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -2,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          -2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-017",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -1,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          -2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-018",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-019",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-020",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-021",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-022",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-023",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-024",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            -2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-025",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -5,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -4,
+          1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-026",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -4,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -2,
+          1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-027",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -3,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          0,
+          1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-028",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -2,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-029",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -1,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-030",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 1,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-031",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-032",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-033",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-034",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-035",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-036",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            -1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-037",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -5,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            4
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -4,
+          4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-038",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -4,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            4
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -2,
+          4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-039",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -3,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            4
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          0,
+          4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-040",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -2,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            4
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-041",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -1,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            4
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-042",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            4
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          4
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-043",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            5
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-044",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            5
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-045",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            5
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-046",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            5
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-047",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            5
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-048",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            0
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            5
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-049",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -5,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -4,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-050",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -4,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -2,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-051",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -3,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          0,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-052",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -2,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-053",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -1,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-054",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          -1
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-055",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          0
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-056",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          0
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-057",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          0
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-058",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          0
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-059",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          0
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-060",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            1
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            -1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          0
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-061",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -5,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -4,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-062",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -4,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -2,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-063",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -3,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          0,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-064",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -2,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-065",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -1,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-066",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            0
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          2
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-067",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          3
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-068",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          3
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-069",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          3
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-070",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          3
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-071",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          3
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-072",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            2
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            1
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          3
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-073",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -5,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -4,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-074",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -4,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -2,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-075",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -3,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          0,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-076",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -2,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-077",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -1,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-078",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          5
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-079",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 3,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-080",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 2,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-081",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 5,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-082",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 4,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-083",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 5,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-084",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 4,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            3
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            3
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-085",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 5,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -5,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -4,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-086",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 4,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -4,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -2,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-087",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 5,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -3,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          0,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-088",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 4,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -2,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-089",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 5,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -1,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-090",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 4,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-091",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 5,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-092",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 4,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          4,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-093",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-5",
+    "difficultySeed": 5,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-094",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-6",
+    "difficultySeed": 4,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-095",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-7",
+    "difficultySeed": 5,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            5,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-096",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-8",
+    "difficultySeed": 4,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            6,
+            4
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            0,
+            2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          6,
+          6
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-097",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-1",
+    "difficultySeed": 5,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -5,
+            5
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            1,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -4,
+          3
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-098",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-2",
+    "difficultySeed": 4,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -4,
+            5
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            2,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          -2,
+          3
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-099",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-3",
+    "difficultySeed": 5,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -3,
+            5
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            3,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          0,
+          3
+        ],
+        "label": "R"
+      }
+    }
+  },
+  {
+    "id": "pv-draft-100",
+    "type": "vector",
+    "unit": "고1-물리-벡터-성분합-4",
+    "difficultySeed": 4,
+    "hint": "x성분끼리, y성분끼리 따로 더한다",
+    "problem": {
+      "context": "두 힘의 x·y 성분을 더해 합력을 구한다",
+      "vectors": [
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            -2,
+            5
+          ],
+          "label": "F1"
+        },
+        {
+          "origin": [
+            0,
+            0
+          ],
+          "components": [
+            4,
+            -2
+          ],
+          "label": "F2"
+        }
+      ],
+      "resultant": {
+        "origin": [
+          0,
+          0
+        ],
+        "components": [
+          2,
+          3
+        ],
+        "label": "R"
+      }
+    }
+  }
+]

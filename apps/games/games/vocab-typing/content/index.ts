@@ -1,3 +1,4 @@
+import questions from "./vocab-typing-questions.json";
 // vocab-typing 카드 풀 — 5장, 고1 빈출 한자성어/한자어 (한글 음 입력).
 
 import { VocabTypingCardSchema } from "../schema";
@@ -66,7 +67,7 @@ const RAW_CARDS: VocabTypingCard[] = [
   },
 ];
 
-export const cards: VocabTypingCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: VocabTypingCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const r = VocabTypingCardSchema.safeParse(raw);
   if (!r.success) {
     throw new Error(

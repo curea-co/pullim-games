@@ -1,0 +1,7102 @@
+[
+  {
+    "id": "cm-draft-001",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c0-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c0-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c0-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c0-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c0-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c0-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c0-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c0-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d0",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-002",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c1-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c1-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c1-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c1-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c1-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c1-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c1-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c1-3",
+          "text": "speed"
+        },
+        {
+          "id": "d1",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-003",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c2-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c2-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c2-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c2-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c2-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c2-1",
+          "text": "made"
+        },
+        {
+          "id": "c2-2",
+          "text": "the players"
+        },
+        {
+          "id": "c2-3",
+          "text": "practice"
+        },
+        {
+          "id": "d2",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-004",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c3-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c3-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c3-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c3-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c3-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c3-1",
+          "text": "the students"
+        },
+        {
+          "id": "c3-2",
+          "text": "opened"
+        },
+        {
+          "id": "c3-3",
+          "text": "their books"
+        },
+        {
+          "id": "d3",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-005",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c4-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c4-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c4-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c4-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c4-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c4-1",
+          "text": "gave"
+        },
+        {
+          "id": "c4-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c4-3",
+          "text": "a map"
+        },
+        {
+          "id": "d4",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-006",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c5-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c5-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c5-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c5-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c5-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c5-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c5-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c5-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d5",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-007",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c6-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c6-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c6-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c6-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c6-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c6-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c6-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c6-3",
+          "text": "speed"
+        },
+        {
+          "id": "d6",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-008",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c7-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c7-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c7-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c7-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c7-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c7-1",
+          "text": "made"
+        },
+        {
+          "id": "c7-2",
+          "text": "the players"
+        },
+        {
+          "id": "c7-3",
+          "text": "practice"
+        },
+        {
+          "id": "d7",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-009",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c8-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c8-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c8-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c8-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c8-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c8-1",
+          "text": "the students"
+        },
+        {
+          "id": "c8-2",
+          "text": "opened"
+        },
+        {
+          "id": "c8-3",
+          "text": "their books"
+        },
+        {
+          "id": "d8",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-010",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c9-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c9-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c9-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c9-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c9-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c9-1",
+          "text": "gave"
+        },
+        {
+          "id": "c9-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c9-3",
+          "text": "a map"
+        },
+        {
+          "id": "d9",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-011",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c10-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c10-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c10-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c10-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c10-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c10-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c10-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c10-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d10",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-012",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c11-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c11-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c11-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c11-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c11-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c11-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c11-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c11-3",
+          "text": "speed"
+        },
+        {
+          "id": "d11",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-013",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c12-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c12-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c12-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c12-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c12-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c12-1",
+          "text": "made"
+        },
+        {
+          "id": "c12-2",
+          "text": "the players"
+        },
+        {
+          "id": "c12-3",
+          "text": "practice"
+        },
+        {
+          "id": "d12",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-014",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c13-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c13-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c13-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c13-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c13-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c13-1",
+          "text": "the students"
+        },
+        {
+          "id": "c13-2",
+          "text": "opened"
+        },
+        {
+          "id": "c13-3",
+          "text": "their books"
+        },
+        {
+          "id": "d13",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-015",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c14-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c14-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c14-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c14-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c14-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c14-1",
+          "text": "gave"
+        },
+        {
+          "id": "c14-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c14-3",
+          "text": "a map"
+        },
+        {
+          "id": "d14",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-016",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c15-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c15-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c15-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c15-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c15-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c15-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c15-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c15-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d15",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-017",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c16-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c16-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c16-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c16-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c16-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c16-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c16-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c16-3",
+          "text": "speed"
+        },
+        {
+          "id": "d16",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-018",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c17-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c17-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c17-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c17-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c17-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c17-1",
+          "text": "made"
+        },
+        {
+          "id": "c17-2",
+          "text": "the players"
+        },
+        {
+          "id": "c17-3",
+          "text": "practice"
+        },
+        {
+          "id": "d17",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-019",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c18-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c18-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c18-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c18-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c18-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c18-1",
+          "text": "the students"
+        },
+        {
+          "id": "c18-2",
+          "text": "opened"
+        },
+        {
+          "id": "c18-3",
+          "text": "their books"
+        },
+        {
+          "id": "d18",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-020",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c19-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c19-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c19-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c19-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c19-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c19-1",
+          "text": "gave"
+        },
+        {
+          "id": "c19-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c19-3",
+          "text": "a map"
+        },
+        {
+          "id": "d19",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-021",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c20-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c20-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c20-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c20-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c20-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c20-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c20-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c20-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d20",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-022",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c21-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c21-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c21-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c21-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c21-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c21-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c21-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c21-3",
+          "text": "speed"
+        },
+        {
+          "id": "d21",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-023",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c22-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c22-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c22-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c22-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c22-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c22-1",
+          "text": "made"
+        },
+        {
+          "id": "c22-2",
+          "text": "the players"
+        },
+        {
+          "id": "c22-3",
+          "text": "practice"
+        },
+        {
+          "id": "d22",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-024",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c23-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c23-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c23-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c23-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c23-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c23-1",
+          "text": "the students"
+        },
+        {
+          "id": "c23-2",
+          "text": "opened"
+        },
+        {
+          "id": "c23-3",
+          "text": "their books"
+        },
+        {
+          "id": "d23",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-025",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c24-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c24-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c24-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c24-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c24-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c24-1",
+          "text": "gave"
+        },
+        {
+          "id": "c24-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c24-3",
+          "text": "a map"
+        },
+        {
+          "id": "d24",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-026",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c25-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c25-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c25-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c25-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c25-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c25-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c25-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c25-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d25",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-027",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c26-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c26-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c26-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c26-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c26-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c26-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c26-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c26-3",
+          "text": "speed"
+        },
+        {
+          "id": "d26",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-028",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c27-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c27-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c27-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c27-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c27-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c27-1",
+          "text": "made"
+        },
+        {
+          "id": "c27-2",
+          "text": "the players"
+        },
+        {
+          "id": "c27-3",
+          "text": "practice"
+        },
+        {
+          "id": "d27",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-029",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c28-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c28-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c28-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c28-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c28-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c28-1",
+          "text": "the students"
+        },
+        {
+          "id": "c28-2",
+          "text": "opened"
+        },
+        {
+          "id": "c28-3",
+          "text": "their books"
+        },
+        {
+          "id": "d28",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-030",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 1,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c29-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c29-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c29-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c29-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c29-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c29-1",
+          "text": "gave"
+        },
+        {
+          "id": "c29-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c29-3",
+          "text": "a map"
+        },
+        {
+          "id": "d29",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-031",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c30-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c30-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c30-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c30-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c30-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c30-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c30-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c30-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d30",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-032",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c31-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c31-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c31-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c31-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c31-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c31-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c31-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c31-3",
+          "text": "speed"
+        },
+        {
+          "id": "d31",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-033",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c32-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c32-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c32-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c32-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c32-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c32-1",
+          "text": "made"
+        },
+        {
+          "id": "c32-2",
+          "text": "the players"
+        },
+        {
+          "id": "c32-3",
+          "text": "practice"
+        },
+        {
+          "id": "d32",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-034",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c33-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c33-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c33-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c33-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c33-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c33-1",
+          "text": "the students"
+        },
+        {
+          "id": "c33-2",
+          "text": "opened"
+        },
+        {
+          "id": "c33-3",
+          "text": "their books"
+        },
+        {
+          "id": "d33",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-035",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c34-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c34-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c34-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c34-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c34-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c34-1",
+          "text": "gave"
+        },
+        {
+          "id": "c34-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c34-3",
+          "text": "a map"
+        },
+        {
+          "id": "d34",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-036",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c35-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c35-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c35-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c35-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c35-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c35-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c35-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c35-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d35",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-037",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c36-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c36-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c36-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c36-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c36-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c36-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c36-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c36-3",
+          "text": "speed"
+        },
+        {
+          "id": "d36",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-038",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c37-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c37-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c37-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c37-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c37-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c37-1",
+          "text": "made"
+        },
+        {
+          "id": "c37-2",
+          "text": "the players"
+        },
+        {
+          "id": "c37-3",
+          "text": "practice"
+        },
+        {
+          "id": "d37",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-039",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c38-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c38-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c38-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c38-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c38-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c38-1",
+          "text": "the students"
+        },
+        {
+          "id": "c38-2",
+          "text": "opened"
+        },
+        {
+          "id": "c38-3",
+          "text": "their books"
+        },
+        {
+          "id": "d38",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-040",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c39-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c39-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c39-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c39-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c39-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c39-1",
+          "text": "gave"
+        },
+        {
+          "id": "c39-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c39-3",
+          "text": "a map"
+        },
+        {
+          "id": "d39",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-041",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c40-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c40-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c40-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c40-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c40-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c40-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c40-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c40-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d40",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-042",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c41-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c41-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c41-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c41-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c41-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c41-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c41-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c41-3",
+          "text": "speed"
+        },
+        {
+          "id": "d41",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-043",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c42-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c42-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c42-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c42-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c42-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c42-1",
+          "text": "made"
+        },
+        {
+          "id": "c42-2",
+          "text": "the players"
+        },
+        {
+          "id": "c42-3",
+          "text": "practice"
+        },
+        {
+          "id": "d42",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-044",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c43-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c43-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c43-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c43-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c43-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c43-1",
+          "text": "the students"
+        },
+        {
+          "id": "c43-2",
+          "text": "opened"
+        },
+        {
+          "id": "c43-3",
+          "text": "their books"
+        },
+        {
+          "id": "d43",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-045",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c44-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c44-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c44-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c44-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c44-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c44-1",
+          "text": "gave"
+        },
+        {
+          "id": "c44-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c44-3",
+          "text": "a map"
+        },
+        {
+          "id": "d44",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-046",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c45-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c45-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c45-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c45-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c45-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c45-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c45-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c45-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d45",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-047",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c46-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c46-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c46-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c46-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c46-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c46-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c46-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c46-3",
+          "text": "speed"
+        },
+        {
+          "id": "d46",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-048",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c47-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c47-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c47-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c47-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c47-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c47-1",
+          "text": "made"
+        },
+        {
+          "id": "c47-2",
+          "text": "the players"
+        },
+        {
+          "id": "c47-3",
+          "text": "practice"
+        },
+        {
+          "id": "d47",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-049",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c48-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c48-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c48-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c48-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c48-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c48-1",
+          "text": "the students"
+        },
+        {
+          "id": "c48-2",
+          "text": "opened"
+        },
+        {
+          "id": "c48-3",
+          "text": "their books"
+        },
+        {
+          "id": "d48",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-050",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c49-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c49-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c49-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c49-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c49-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c49-1",
+          "text": "gave"
+        },
+        {
+          "id": "c49-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c49-3",
+          "text": "a map"
+        },
+        {
+          "id": "d49",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-051",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c50-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c50-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c50-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c50-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c50-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c50-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c50-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c50-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d50",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-052",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c51-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c51-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c51-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c51-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c51-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c51-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c51-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c51-3",
+          "text": "speed"
+        },
+        {
+          "id": "d51",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-053",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c52-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c52-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c52-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c52-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c52-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c52-1",
+          "text": "made"
+        },
+        {
+          "id": "c52-2",
+          "text": "the players"
+        },
+        {
+          "id": "c52-3",
+          "text": "practice"
+        },
+        {
+          "id": "d52",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-054",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c53-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c53-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c53-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c53-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c53-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c53-1",
+          "text": "the students"
+        },
+        {
+          "id": "c53-2",
+          "text": "opened"
+        },
+        {
+          "id": "c53-3",
+          "text": "their books"
+        },
+        {
+          "id": "d53",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-055",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c54-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c54-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c54-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c54-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c54-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c54-1",
+          "text": "gave"
+        },
+        {
+          "id": "c54-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c54-3",
+          "text": "a map"
+        },
+        {
+          "id": "d54",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-056",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c55-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c55-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c55-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c55-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c55-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c55-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c55-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c55-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d55",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-057",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c56-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c56-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c56-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c56-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c56-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c56-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c56-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c56-3",
+          "text": "speed"
+        },
+        {
+          "id": "d56",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-058",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c57-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c57-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c57-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c57-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c57-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c57-1",
+          "text": "made"
+        },
+        {
+          "id": "c57-2",
+          "text": "the players"
+        },
+        {
+          "id": "c57-3",
+          "text": "practice"
+        },
+        {
+          "id": "d57",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-059",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c58-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c58-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c58-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c58-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c58-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c58-1",
+          "text": "the students"
+        },
+        {
+          "id": "c58-2",
+          "text": "opened"
+        },
+        {
+          "id": "c58-3",
+          "text": "their books"
+        },
+        {
+          "id": "d58",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-060",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c59-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c59-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c59-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c59-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c59-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c59-1",
+          "text": "gave"
+        },
+        {
+          "id": "c59-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c59-3",
+          "text": "a map"
+        },
+        {
+          "id": "d59",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-061",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c60-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c60-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c60-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c60-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c60-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c60-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c60-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c60-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d60",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-062",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c61-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c61-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c61-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c61-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c61-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c61-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c61-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c61-3",
+          "text": "speed"
+        },
+        {
+          "id": "d61",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-063",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c62-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c62-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c62-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c62-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c62-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c62-1",
+          "text": "made"
+        },
+        {
+          "id": "c62-2",
+          "text": "the players"
+        },
+        {
+          "id": "c62-3",
+          "text": "practice"
+        },
+        {
+          "id": "d62",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-064",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c63-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c63-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c63-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c63-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c63-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c63-1",
+          "text": "the students"
+        },
+        {
+          "id": "c63-2",
+          "text": "opened"
+        },
+        {
+          "id": "c63-3",
+          "text": "their books"
+        },
+        {
+          "id": "d63",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-065",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c64-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c64-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c64-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c64-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c64-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c64-1",
+          "text": "gave"
+        },
+        {
+          "id": "c64-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c64-3",
+          "text": "a map"
+        },
+        {
+          "id": "d64",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-066",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c65-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c65-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c65-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c65-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c65-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c65-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c65-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c65-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d65",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-067",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c66-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c66-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c66-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c66-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c66-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c66-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c66-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c66-3",
+          "text": "speed"
+        },
+        {
+          "id": "d66",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-068",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c67-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c67-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c67-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c67-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c67-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c67-1",
+          "text": "made"
+        },
+        {
+          "id": "c67-2",
+          "text": "the players"
+        },
+        {
+          "id": "c67-3",
+          "text": "practice"
+        },
+        {
+          "id": "d67",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-069",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c68-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c68-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c68-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c68-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c68-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c68-1",
+          "text": "the students"
+        },
+        {
+          "id": "c68-2",
+          "text": "opened"
+        },
+        {
+          "id": "c68-3",
+          "text": "their books"
+        },
+        {
+          "id": "d68",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-070",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c69-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c69-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c69-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c69-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c69-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c69-1",
+          "text": "gave"
+        },
+        {
+          "id": "c69-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c69-3",
+          "text": "a map"
+        },
+        {
+          "id": "d69",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-071",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c70-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c70-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c70-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c70-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c70-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c70-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c70-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c70-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d70",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-072",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c71-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c71-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c71-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c71-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c71-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c71-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c71-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c71-3",
+          "text": "speed"
+        },
+        {
+          "id": "d71",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-073",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c72-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c72-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c72-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c72-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c72-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c72-1",
+          "text": "made"
+        },
+        {
+          "id": "c72-2",
+          "text": "the players"
+        },
+        {
+          "id": "c72-3",
+          "text": "practice"
+        },
+        {
+          "id": "d72",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-074",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c73-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c73-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c73-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c73-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c73-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c73-1",
+          "text": "the students"
+        },
+        {
+          "id": "c73-2",
+          "text": "opened"
+        },
+        {
+          "id": "c73-3",
+          "text": "their books"
+        },
+        {
+          "id": "d73",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-075",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c74-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c74-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c74-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c74-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c74-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c74-1",
+          "text": "gave"
+        },
+        {
+          "id": "c74-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c74-3",
+          "text": "a map"
+        },
+        {
+          "id": "d74",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-076",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c75-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c75-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c75-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c75-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c75-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c75-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c75-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c75-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d75",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-077",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c76-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c76-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c76-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c76-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c76-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c76-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c76-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c76-3",
+          "text": "speed"
+        },
+        {
+          "id": "d76",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-078",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c77-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c77-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c77-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c77-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c77-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c77-1",
+          "text": "made"
+        },
+        {
+          "id": "c77-2",
+          "text": "the players"
+        },
+        {
+          "id": "c77-3",
+          "text": "practice"
+        },
+        {
+          "id": "d77",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-079",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 3,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c78-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c78-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c78-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c78-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c78-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c78-1",
+          "text": "the students"
+        },
+        {
+          "id": "c78-2",
+          "text": "opened"
+        },
+        {
+          "id": "c78-3",
+          "text": "their books"
+        },
+        {
+          "id": "d78",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-080",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 2,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c79-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c79-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c79-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c79-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c79-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c79-1",
+          "text": "gave"
+        },
+        {
+          "id": "c79-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c79-3",
+          "text": "a map"
+        },
+        {
+          "id": "d79",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-081",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 5,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c80-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c80-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c80-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c80-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c80-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c80-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c80-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c80-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d80",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-082",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 4,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c81-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c81-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c81-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c81-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c81-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c81-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c81-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c81-3",
+          "text": "speed"
+        },
+        {
+          "id": "d81",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-083",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 5,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c82-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c82-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c82-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c82-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c82-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c82-1",
+          "text": "made"
+        },
+        {
+          "id": "c82-2",
+          "text": "the players"
+        },
+        {
+          "id": "c82-3",
+          "text": "practice"
+        },
+        {
+          "id": "d82",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-084",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 4,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c83-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c83-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c83-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c83-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c83-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c83-1",
+          "text": "the students"
+        },
+        {
+          "id": "c83-2",
+          "text": "opened"
+        },
+        {
+          "id": "c83-3",
+          "text": "their books"
+        },
+        {
+          "id": "d83",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-085",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 5,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c84-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c84-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c84-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c84-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c84-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c84-1",
+          "text": "gave"
+        },
+        {
+          "id": "c84-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c84-3",
+          "text": "a map"
+        },
+        {
+          "id": "d84",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-086",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 4,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c85-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c85-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c85-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c85-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c85-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c85-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c85-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c85-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d85",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-087",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 5,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c86-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c86-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c86-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c86-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c86-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c86-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c86-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c86-3",
+          "text": "speed"
+        },
+        {
+          "id": "d86",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-088",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 4,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c87-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c87-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c87-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c87-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c87-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c87-1",
+          "text": "made"
+        },
+        {
+          "id": "c87-2",
+          "text": "the players"
+        },
+        {
+          "id": "c87-3",
+          "text": "practice"
+        },
+        {
+          "id": "d87",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-089",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 5,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c88-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c88-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c88-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c88-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c88-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c88-1",
+          "text": "the students"
+        },
+        {
+          "id": "c88-2",
+          "text": "opened"
+        },
+        {
+          "id": "c88-3",
+          "text": "their books"
+        },
+        {
+          "id": "d88",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-090",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 4,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c89-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c89-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c89-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c89-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c89-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c89-1",
+          "text": "gave"
+        },
+        {
+          "id": "c89-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c89-3",
+          "text": "a map"
+        },
+        {
+          "id": "d89",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-091",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 5,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c90-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c90-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c90-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c90-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c90-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c90-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c90-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c90-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d90",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-092",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 4,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c91-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c91-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c91-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c91-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c91-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c91-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c91-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c91-3",
+          "text": "speed"
+        },
+        {
+          "id": "d91",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-093",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 5,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c92-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c92-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c92-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c92-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c92-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c92-1",
+          "text": "made"
+        },
+        {
+          "id": "c92-2",
+          "text": "the players"
+        },
+        {
+          "id": "c92-3",
+          "text": "practice"
+        },
+        {
+          "id": "d92",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-094",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 4,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c93-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c93-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c93-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c93-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c93-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c93-1",
+          "text": "the students"
+        },
+        {
+          "id": "c93-2",
+          "text": "opened"
+        },
+        {
+          "id": "c93-3",
+          "text": "their books"
+        },
+        {
+          "id": "d93",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-095",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 5,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c94-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c94-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c94-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c94-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c94-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c94-1",
+          "text": "gave"
+        },
+        {
+          "id": "c94-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c94-3",
+          "text": "a map"
+        },
+        {
+          "id": "d94",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-096",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-1",
+    "difficultySeed": 4,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: carefully",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c95-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c95-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c95-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c95-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c95-0",
+          "text": "The scientist"
+        },
+        {
+          "id": "c95-1",
+          "text": "recorded"
+        },
+        {
+          "id": "c95-2",
+          "text": "the temperature"
+        },
+        {
+          "id": "c95-3",
+          "text": "carefully"
+        },
+        {
+          "id": "d95",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-097",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-2",
+    "difficultySeed": 5,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: speed",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c96-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c96-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c96-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c96-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c96-0",
+          "text": "Because the road was wet"
+        },
+        {
+          "id": "c96-1",
+          "text": "the driver"
+        },
+        {
+          "id": "c96-2",
+          "text": "reduced"
+        },
+        {
+          "id": "c96-3",
+          "text": "speed"
+        },
+        {
+          "id": "d96",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-098",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-3",
+    "difficultySeed": 4,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: practice",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c97-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c97-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c97-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c97-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c97-0",
+          "text": "The coach"
+        },
+        {
+          "id": "c97-1",
+          "text": "made"
+        },
+        {
+          "id": "c97-2",
+          "text": "the players"
+        },
+        {
+          "id": "c97-3",
+          "text": "practice"
+        },
+        {
+          "id": "d97",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-099",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-4",
+    "difficultySeed": 5,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: books",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c98-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c98-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c98-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c98-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c98-0",
+          "text": "After the bell rang"
+        },
+        {
+          "id": "c98-1",
+          "text": "the students"
+        },
+        {
+          "id": "c98-2",
+          "text": "opened"
+        },
+        {
+          "id": "c98-3",
+          "text": "their books"
+        },
+        {
+          "id": "d98",
+          "text": "quickly"
+        }
+      ]
+    }
+  },
+  {
+    "id": "cm-draft-100",
+    "type": "cloze-multi",
+    "unit": "고1-영어-문장구조-5",
+    "difficultySeed": 4,
+    "hint": "주어→동사→목적어→수식어 순으로 배치하세요. 마지막 표현: map",
+    "problem": {
+      "passage": [
+        {
+          "kind": "blank",
+          "slotId": "s0"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s1"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s2"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s3"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        }
+      ],
+      "blanks": [
+        {
+          "id": "s0",
+          "correctCardId": "c99-0"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c99-1"
+        },
+        {
+          "id": "s2",
+          "correctCardId": "c99-2"
+        },
+        {
+          "id": "s3",
+          "correctCardId": "c99-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c99-0",
+          "text": "Our team"
+        },
+        {
+          "id": "c99-1",
+          "text": "gave"
+        },
+        {
+          "id": "c99-2",
+          "text": "the visitors"
+        },
+        {
+          "id": "c99-3",
+          "text": "a map"
+        },
+        {
+          "id": "d99",
+          "text": "quickly"
+        }
+      ]
+    }
+  }
+]

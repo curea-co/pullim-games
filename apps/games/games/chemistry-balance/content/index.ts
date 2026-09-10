@@ -1,3 +1,4 @@
+import questions from "./chemistry-balance-questions.json";
 // chemistry-balance 카드 풀 — 5장, 화학 반응식 균형 (난이도 1~5).
 
 import { ChemistryBalanceCardSchema } from "../schema";
@@ -82,7 +83,7 @@ const RAW_CARDS: ChemistryBalanceCard[] = [
   },
 ];
 
-export const cards: ChemistryBalanceCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: ChemistryBalanceCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const r = ChemistryBalanceCardSchema.safeParse(raw);
   if (!r.success) {
     throw new Error(

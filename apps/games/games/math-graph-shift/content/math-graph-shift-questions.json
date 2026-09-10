@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "gs-draft-001",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x + 3)² - 3",
+      "targetA": -2,
+      "targetH": -3,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-002",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x + 3)² - 3",
+      "targetA": -1,
+      "targetH": -3,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-003",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x + 3)² - 3",
+      "targetA": 1,
+      "targetH": -3,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-004",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x + 3)² - 3",
+      "targetA": 2,
+      "targetH": -3,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-005",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x + 2)² - 3",
+      "targetA": -2,
+      "targetH": -2,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-006",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x + 2)² - 3",
+      "targetA": -1,
+      "targetH": -2,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-007",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x + 2)² - 3",
+      "targetA": 1,
+      "targetH": -2,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-008",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x + 2)² - 3",
+      "targetA": 2,
+      "targetH": -2,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-009",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x + 1)² - 3",
+      "targetA": -2,
+      "targetH": -1,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-010",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x + 1)² - 3",
+      "targetA": -1,
+      "targetH": -1,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-011",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x + 1)² - 3",
+      "targetA": 1,
+      "targetH": -1,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-012",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x + 1)² - 3",
+      "targetA": 2,
+      "targetH": -1,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-013",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 0)² - 3",
+      "targetA": -2,
+      "targetH": 0,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-014",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 0)² - 3",
+      "targetA": -1,
+      "targetH": 0,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-015",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 0)² - 3",
+      "targetA": 1,
+      "targetH": 0,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-016",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 0)² - 3",
+      "targetA": 2,
+      "targetH": 0,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-017",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 1)² - 3",
+      "targetA": -2,
+      "targetH": 1,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-018",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 1)² - 3",
+      "targetA": -1,
+      "targetH": 1,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-019",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 1)² - 3",
+      "targetA": 1,
+      "targetH": 1,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-020",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 1)² - 3",
+      "targetA": 2,
+      "targetH": 1,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-021",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 2)² - 3",
+      "targetA": -2,
+      "targetH": 2,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-022",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 2)² - 3",
+      "targetA": -1,
+      "targetH": 2,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-023",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 2)² - 3",
+      "targetA": 1,
+      "targetH": 2,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-024",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 2)² - 3",
+      "targetA": 2,
+      "targetH": 2,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-025",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 3)² - 3",
+      "targetA": -2,
+      "targetH": 3,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-026",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 3)² - 3",
+      "targetA": -1,
+      "targetH": 3,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-027",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 3)² - 3",
+      "targetA": 1,
+      "targetH": 3,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-028",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 3)² - 3",
+      "targetA": 2,
+      "targetH": 3,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-029",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 4)² - 3",
+      "targetA": -2,
+      "targetH": 4,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-030",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 1,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 4)² - 3",
+      "targetA": -1,
+      "targetH": 4,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-031",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 4)² - 3",
+      "targetA": 1,
+      "targetH": 4,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-032",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 4)² - 3",
+      "targetA": 2,
+      "targetH": 4,
+      "targetK": -3
+    }
+  },
+  {
+    "id": "gs-draft-033",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x + 3)² - 2",
+      "targetA": -2,
+      "targetH": -3,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-034",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x + 3)² - 2",
+      "targetA": -1,
+      "targetH": -3,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-035",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x + 3)² - 2",
+      "targetA": 1,
+      "targetH": -3,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-036",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x + 3)² - 2",
+      "targetA": 2,
+      "targetH": -3,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-037",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x + 2)² - 2",
+      "targetA": -2,
+      "targetH": -2,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-038",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x + 2)² - 2",
+      "targetA": -1,
+      "targetH": -2,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-039",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x + 2)² - 2",
+      "targetA": 1,
+      "targetH": -2,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-040",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x + 2)² - 2",
+      "targetA": 2,
+      "targetH": -2,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-041",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x + 1)² - 2",
+      "targetA": -2,
+      "targetH": -1,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-042",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x + 1)² - 2",
+      "targetA": -1,
+      "targetH": -1,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-043",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x + 1)² - 2",
+      "targetA": 1,
+      "targetH": -1,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-044",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x + 1)² - 2",
+      "targetA": 2,
+      "targetH": -1,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-045",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 0)² - 2",
+      "targetA": -2,
+      "targetH": 0,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-046",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 0)² - 2",
+      "targetA": -1,
+      "targetH": 0,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-047",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 0)² - 2",
+      "targetA": 1,
+      "targetH": 0,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-048",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 0)² - 2",
+      "targetA": 2,
+      "targetH": 0,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-049",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 1)² - 2",
+      "targetA": -2,
+      "targetH": 1,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-050",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 1)² - 2",
+      "targetA": -1,
+      "targetH": 1,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-051",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 1)² - 2",
+      "targetA": 1,
+      "targetH": 1,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-052",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 1)² - 2",
+      "targetA": 2,
+      "targetH": 1,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-053",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 2)² - 2",
+      "targetA": -2,
+      "targetH": 2,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-054",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 2)² - 2",
+      "targetA": -1,
+      "targetH": 2,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-055",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 2)² - 2",
+      "targetA": 1,
+      "targetH": 2,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-056",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 2)² - 2",
+      "targetA": 2,
+      "targetH": 2,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-057",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 3)² - 2",
+      "targetA": -2,
+      "targetH": 3,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-058",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 3)² - 2",
+      "targetA": -1,
+      "targetH": 3,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-059",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 3)² - 2",
+      "targetA": 1,
+      "targetH": 3,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-060",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 3)² - 2",
+      "targetA": 2,
+      "targetH": 3,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-061",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 4)² - 2",
+      "targetA": -2,
+      "targetH": 4,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-062",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 4)² - 2",
+      "targetA": -1,
+      "targetH": 4,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-063",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 4)² - 2",
+      "targetA": 1,
+      "targetH": 4,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-064",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 4)² - 2",
+      "targetA": 2,
+      "targetH": 4,
+      "targetK": -2
+    }
+  },
+  {
+    "id": "gs-draft-065",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x + 3)² - 1",
+      "targetA": -2,
+      "targetH": -3,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-066",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x + 3)² - 1",
+      "targetA": -1,
+      "targetH": -3,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-067",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x + 3)² - 1",
+      "targetA": 1,
+      "targetH": -3,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-068",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x + 3)² - 1",
+      "targetA": 2,
+      "targetH": -3,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-069",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x + 2)² - 1",
+      "targetA": -2,
+      "targetH": -2,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-070",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x + 2)² - 1",
+      "targetA": -1,
+      "targetH": -2,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-071",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x + 2)² - 1",
+      "targetA": 1,
+      "targetH": -2,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-072",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x + 2)² - 1",
+      "targetA": 2,
+      "targetH": -2,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-073",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x + 1)² - 1",
+      "targetA": -2,
+      "targetH": -1,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-074",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x + 1)² - 1",
+      "targetA": -1,
+      "targetH": -1,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-075",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x + 1)² - 1",
+      "targetA": 1,
+      "targetH": -1,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-076",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x + 1)² - 1",
+      "targetA": 2,
+      "targetH": -1,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-077",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 0)² - 1",
+      "targetA": -2,
+      "targetH": 0,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-078",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 0)² - 1",
+      "targetA": -1,
+      "targetH": 0,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-079",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 3,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 0)² - 1",
+      "targetA": 1,
+      "targetH": 0,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-080",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 2,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 0)² - 1",
+      "targetA": 2,
+      "targetH": 0,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-081",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 5,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 1)² - 1",
+      "targetA": -2,
+      "targetH": 1,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-082",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 4,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 1)² - 1",
+      "targetA": -1,
+      "targetH": 1,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-083",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 5,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 1)² - 1",
+      "targetA": 1,
+      "targetH": 1,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-084",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 4,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 1)² - 1",
+      "targetA": 2,
+      "targetH": 1,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-085",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 5,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 2)² - 1",
+      "targetA": -2,
+      "targetH": 2,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-086",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 4,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 2)² - 1",
+      "targetA": -1,
+      "targetH": 2,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-087",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 5,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 2)² - 1",
+      "targetA": 1,
+      "targetH": 2,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-088",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 4,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 2)² - 1",
+      "targetA": 2,
+      "targetH": 2,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-089",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 5,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 3)² - 1",
+      "targetA": -2,
+      "targetH": 3,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-090",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 4,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 3)² - 1",
+      "targetA": -1,
+      "targetH": 3,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-091",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 5,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 3)² - 1",
+      "targetA": 1,
+      "targetH": 3,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-092",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 4,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 3)² - 1",
+      "targetA": 2,
+      "targetH": 3,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-093",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-5",
+    "difficultySeed": 5,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x - 4)² - 1",
+      "targetA": -2,
+      "targetH": 4,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-094",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-6",
+    "difficultySeed": 4,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x - 4)² - 1",
+      "targetA": -1,
+      "targetH": 4,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-095",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-7",
+    "difficultySeed": 5,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x - 4)² - 1",
+      "targetA": 1,
+      "targetH": 4,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-096",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-8",
+    "difficultySeed": 4,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x - 4)² - 1",
+      "targetA": 2,
+      "targetH": 4,
+      "targetK": -1
+    }
+  },
+  {
+    "id": "gs-draft-097",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-1",
+    "difficultySeed": 5,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -2(x + 3)² + 0",
+      "targetA": -2,
+      "targetH": -3,
+      "targetK": 0
+    }
+  },
+  {
+    "id": "gs-draft-098",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-2",
+    "difficultySeed": 4,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = -(x + 3)² + 0",
+      "targetA": -1,
+      "targetH": -3,
+      "targetK": 0
+    }
+  },
+  {
+    "id": "gs-draft-099",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-3",
+    "difficultySeed": 5,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = (x + 3)² + 0",
+      "targetA": 1,
+      "targetH": -3,
+      "targetK": 0
+    }
+  },
+  {
+    "id": "gs-draft-100",
+    "type": "graph-shift",
+    "unit": "고1-수학-이차함수-변환-4",
+    "difficultySeed": 4,
+    "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
+    "problem": {
+      "startEquation": "y = x²",
+      "targetEquation": "y = 2(x + 3)² + 0",
+      "targetA": 2,
+      "targetH": -3,
+      "targetK": 0
+    }
+  }
+]

@@ -1,0 +1,2950 @@
+[
+  {
+    "id": "cb-draft-001",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Mg",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "MgCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-002",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ca",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CaCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-003",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Zn",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "ZnCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-004",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Fe",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "FeCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-005",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ni",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "NiCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-006",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Co",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CoCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-007",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Sn",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "SnCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-008",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ba",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "BaCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-009",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Pb",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "PbCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-010",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Mn",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "MnCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-011",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Sr",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "SrCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-012",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Cd",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CdCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-013",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Be",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "BeCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-014",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Hg",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "HgCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-015",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Mg",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "MgSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-016",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ca",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "CaSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-017",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Zn",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "ZnSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-018",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Fe",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "FeSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-019",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ni",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "NiSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-020",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Co",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "CoSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-021",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Sn",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "SnSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-022",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ba",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "BaSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-023",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Pb",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "PbSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-024",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Mn",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "MnSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-025",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Sr",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "SrSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-026",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Cd",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "CdSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-027",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Be",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "BeSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-028",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Hg",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "HgSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-029",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "MgO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "MgCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-030",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 1,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "CaO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CaCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-031",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "ZnO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "ZnCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-032",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "FeO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "FeCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-033",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "NiO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "NiCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-034",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "CoO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CoCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-035",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "SnO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "SnCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-036",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "BaO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "BaCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-037",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "PbO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "PbCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-038",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "MnO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "MnCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-039",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "SrO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "SrCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-040",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "CdO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CdCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-041",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "BeO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "BeCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-042",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "HgO",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "HgCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-043",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "MgCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "MgCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-044",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "CaCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CaCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-045",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "ZnCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "ZnCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-046",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "FeCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "FeCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-047",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "NiCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "NiCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-048",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "CoCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CoCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-049",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "SnCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "SnCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-050",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "BaCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "BaCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-051",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "PbCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "PbCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-052",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "MnCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "MnCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-053",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "SrCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "SrCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-054",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "CdCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CdCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-055",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "BeCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "BeCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-056",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "HgCO3",
+          "coefficient": 1
+        },
+        {
+          "formula": "HCl",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "HgCl2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        },
+        {
+          "formula": "CO2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-057",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Mg",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "MgBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-058",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ca",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CaBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-059",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Zn",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "ZnBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-060",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Fe",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "FeBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-061",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ni",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "NiBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-062",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Co",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CoBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-063",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Sn",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "SnBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-064",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ba",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "BaBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-065",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Pb",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "PbBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-066",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Mn",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "MnBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-067",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Sr",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "SrBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-068",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Cd",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CdBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-069",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Be",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "BeBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-070",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Hg",
+          "coefficient": 1
+        },
+        {
+          "formula": "HBr",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "HgBr2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-071",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Mg",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "MgI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-072",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ca",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CaI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-073",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Zn",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "ZnI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-074",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Fe",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "FeI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-075",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ni",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "NiI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-076",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Co",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CoI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-077",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Sn",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "SnI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-078",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Ba",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "BaI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-079",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 3,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Pb",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "PbI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-080",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 2,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Mn",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "MnI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-081",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 5,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Sr",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "SrI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-082",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 4,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Cd",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "CdI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-083",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 5,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Be",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "BeI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-084",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 4,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "Hg",
+          "coefficient": 1
+        },
+        {
+          "formula": "HI",
+          "coefficient": 2
+        }
+      ],
+      "products": [
+        {
+          "formula": "HgI2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-085",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 5,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "MgO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "MgSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-086",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 4,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "CaO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "CaSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-087",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 5,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "ZnO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "ZnSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-088",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 4,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "FeO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "FeSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-089",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 5,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "NiO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "NiSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-090",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 4,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "CoO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "CoSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-091",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 5,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "SnO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "SnSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-092",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 4,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "BaO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "BaSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-093",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 5,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "PbO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "PbSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-094",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 4,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "MnO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "MnSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-095",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 5,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "SrO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "SrSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-096",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 4,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "CdO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "CdSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-097",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 5,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "BeO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "BeSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-098",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 4,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "HgO",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2SO4",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "HgSO4",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2O",
+          "coefficient": 1
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-099",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 5,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "H2",
+          "coefficient": 1
+        },
+        {
+          "formula": "F2",
+          "coefficient": 1
+        }
+      ],
+      "products": [
+        {
+          "formula": "HF",
+          "coefficient": 2
+        }
+      ]
+    }
+  },
+  {
+    "id": "cb-draft-100",
+    "type": "chemistry-balance",
+    "unit": "고1-화학-화학반응식-1",
+    "difficultySeed": 4,
+    "hint": "원소별 원자 수를 양쪽에서 비교",
+    "problem": {
+      "reactants": [
+        {
+          "formula": "N2",
+          "coefficient": 1
+        },
+        {
+          "formula": "H2",
+          "coefficient": 3
+        }
+      ],
+      "products": [
+        {
+          "formula": "NH3",
+          "coefficient": 2
+        }
+      ]
+    }
+  }
+]

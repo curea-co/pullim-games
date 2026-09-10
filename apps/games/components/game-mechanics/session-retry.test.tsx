@@ -338,7 +338,7 @@ async function reveal(id: string, card: any) {
     ).id;
   else if (id === "letter-assembly") {
     const expected = p.cards.find((c: { id: string }) => c.id === p.slots[0].correctCardId);
-    p.slots[0].correctCardId = p.cards.find((c: { text: string }) => c.text !== expected.text).id;
+    p.slots[0].correctCardId = p.cards.find((c: { id: string; text: string }) => c.text !== expected.text && !p.slots.some((slot: { correctCardId: string }) => slot.correctCardId === c.id)).id;
   }
   else if (["cloze-multi", "image-hotspot"].includes(id)) {
     const slots = p.blanks ?? p.slots ?? p.regions;

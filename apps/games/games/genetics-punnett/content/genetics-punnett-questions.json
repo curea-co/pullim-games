@@ -1,0 +1,2302 @@
+[
+  {
+    "id": "gp-draft-001",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-002",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-003",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-004",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-005",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-006",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-007",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-008",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-009",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-010",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-011",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-012",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-013",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-014",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-015",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-016",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-017",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-018",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-019",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-020",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-021",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-022",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-023",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-024",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-025",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-026",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-027",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-028",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-029",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-030",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 1,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-031",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-032",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-033",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-034",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-035",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-036",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-037",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-038",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-039",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-040",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-041",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-042",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-043",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-044",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-045",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-046",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-047",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-048",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-049",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-050",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-051",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-052",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-053",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-054",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-055",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-056",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-057",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-058",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-059",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-060",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-061",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-062",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-063",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-064",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-065",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-066",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-067",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-068",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-069",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-070",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-071",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-072",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-073",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-074",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-075",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-076",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-077",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-078",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-079",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 3,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-080",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 2,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-081",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 5,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-082",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 4,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-083",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 5,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-084",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 4,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-085",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 5,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-086",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 4,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-087",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 5,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-088",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 4,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-089",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 5,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-090",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 4,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-091",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 5,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-092",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 4,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-093",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 5,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-094",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 4,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-095",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 5,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-096",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 4,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-097",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-1",
+    "difficultySeed": 5,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        3,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-098",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-2",
+    "difficultySeed": 4,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "Aa",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-099",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-3",
+    "difficultySeed": 5,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "Aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-100",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성-4",
+    "difficultySeed": 4,
+    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "problem": {
+      "p1": "AA",
+      "p2": "aa",
+      "traits": [
+        {
+          "name": "씨앗 색",
+          "symbol": "A",
+          "dominant": "노란색",
+          "recessive": "초록색"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  }
+]

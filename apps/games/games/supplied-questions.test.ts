@@ -1,0 +1,45 @@
+import { describe, it, expect } from "vitest";
+import { isBalanced } from "./chemistry-balance/logic/parse";
+import raw0 from "./bio-taxonomy/content/bio-taxonomy-questions.json";
+import { cards as pool0 } from "./bio-taxonomy/content";
+import raw1 from "./chemistry-balance/content/chemistry-balance-questions.json";
+import { cards as pool1 } from "./chemistry-balance/content";
+import raw2 from "./cloze-multi/content/cloze-multi-questions.json";
+import { cards as pool2 } from "./cloze-multi/content";
+import raw3 from "./english-blank/content/english-blank-questions.json";
+import { cards as pool3 } from "./english-blank/content";
+import raw4 from "./english-order/content/english-order-questions.json";
+import { cards as pool4 } from "./english-order/content";
+import raw5 from "./english-vocab-typing/content/english-vocab-typing-questions.json";
+import { cards as pool5 } from "./english-vocab-typing/content";
+import raw6 from "./english-word-match/content/english-word-match-questions.json";
+import { cards as pool6 } from "./english-word-match/content";
+import raw7 from "./factorization/content/factorization-questions.json";
+import { cards as pool7 } from "./factorization/content";
+import raw8 from "./genetics-punnett/content/genetics-punnett-questions.json";
+import { cards as pool8 } from "./genetics-punnett/content";
+import raw9 from "./history-timeline/content/history-timeline-questions.json";
+import { cards as pool9 } from "./history-timeline/content";
+import raw10 from "./image-hotspot/content/image-hotspot-questions.json";
+import { cards as pool10 } from "./image-hotspot/content";
+import raw11 from "./korean-pos-tagging/content/korean-pos-tagging-questions.json";
+import { cards as pool11 } from "./korean-pos-tagging/content";
+import raw12 from "./letter-assembly/content/letter-assembly-questions.json";
+import { cards as pool12 } from "./letter-assembly/content";
+import raw13 from "./math-graph-shift/content/math-graph-shift-questions.json";
+import { cards as pool13 } from "./math-graph-shift/content";
+import raw14 from "./math-quick-quiz/content/math-quick-quiz-questions.json";
+import { cards as pool14 } from "./math-quick-quiz/content";
+import raw15 from "./physics-vector/content/physics-vector-questions.json";
+import { cards as pool15 } from "./physics-vector/content";
+import raw16 from "./vocab-typing/content/vocab-typing-questions.json";
+import { cards as pool16 } from "./vocab-typing/content";
+const bundles = [{name:"bio-taxonomy", raw:raw0, pool:pool0},{name:"chemistry-balance", raw:raw1, pool:pool1},{name:"cloze-multi", raw:raw2, pool:pool2},{name:"english-blank", raw:raw3, pool:pool3},{name:"english-order", raw:raw4, pool:pool4},{name:"english-vocab-typing", raw:raw5, pool:pool5},{name:"english-word-match", raw:raw6, pool:pool6},{name:"factorization", raw:raw7, pool:pool7},{name:"genetics-punnett", raw:raw8, pool:pool8},{name:"history-timeline", raw:raw9, pool:pool9},{name:"image-hotspot", raw:raw10, pool:pool10},{name:"korean-pos-tagging", raw:raw11, pool:pool11},{name:"letter-assembly", raw:raw12, pool:pool12},{name:"math-graph-shift", raw:raw13, pool:pool13},{name:"math-quick-quiz", raw:raw14, pool:pool14},{name:"physics-vector", raw:raw15, pool:pool15},{name:"vocab-typing", raw:raw16, pool:pool16}];
+describe("1700 supplied question cards",()=>{
+ it("has exactly 100 per format and preserves runtime IDs",()=>{
+  expect(bundles.reduce((n,b)=>n+b.raw.length,0)).toBe(1700);
+  for(const b of bundles){expect(b.raw,b.name).toHaveLength(100);expect(new Set(b.raw.map(c=>c.id)).size,b.name).toBe(100);for(const c of b.raw)expect(b.pool.some(p=>p.id===c.id),c.id).toBe(true);expect(new Set(b.pool.map(c=>c.id)).size,b.name).toBe(b.pool.length);}
+ });
+ it("balances every supplied chemical equation",()=>{for(const c of raw1)expect(isBalanced(c.problem.reactants,c.problem.products),c.id).toBe(true);});
+ it("has reachable vector sums",()=>{for(const c of raw15){const p=c.problem; for(const i of [0,1]){expect(p.resultant.components[i],c.id).toBe(p.vectors.reduce((n,v)=>n+v.components[i],0));expect(p.resultant.components[i],c.id).toBeGreaterThanOrEqual(-5);expect(p.resultant.components[i],c.id).toBeLessThanOrEqual(6);}}});
+});

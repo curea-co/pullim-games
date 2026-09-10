@@ -1,3 +1,4 @@
+import questions from "./history-timeline-questions.json";
 // history-timeline 카드 풀 — 5장, 한국 근현대사 시기별 사건 정렬.
 
 import { TimelineCardSchema } from "../schema";
@@ -91,7 +92,7 @@ const RAW_CARDS: TimelineCard[] = [
   },
 ];
 
-export const cards: TimelineCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: TimelineCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const r = TimelineCardSchema.safeParse(raw);
   if (!r.success) {
     throw new Error(

@@ -1,3 +1,4 @@
+import questions from "./english-order-questions.json";
 // english-order 카드 풀 — 5장, 어순 난이도 점진 상승.
 
 import { WordOrderCardSchema } from "../schema";
@@ -61,7 +62,7 @@ const RAW_CARDS: WordOrderCard[] = [
   },
 ];
 
-export const cards: WordOrderCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: WordOrderCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const r = WordOrderCardSchema.safeParse(raw);
   if (!r.success) {
     throw new Error(
