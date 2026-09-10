@@ -17,3 +17,7 @@
 - playwright.audit.config.ts: 인증 주입 없이 감사 대조군과 실제 랜딩을 검사, 10개 통과.
 - 공식 17게임 × 4 viewport(320×568, 390×844, 768×1024, 1280×800) 실제 게스트 진입 감사 68개 통과, critical 0. 도해 320px 캡처 직접 확인. 결과는 /tmp/solving-pr-hotspot/audit.json 및 /tmp/solving-pr-ui/<game>/audit.json.
 - 전체 게임 완주, SSO·실제 회원 DB, SVG 내부 글자 잘림은 미검증.
+
+## 로컬 포트와 과거 기록
+
+2026-09-09 원래 작업 폴더의 실행 설정은 3033이었다. 이 PR의 기반 dev(dc5b37e)는 이미 3004였으며 이 PR에서 포트를 변경하지 않았다. 현재 재현은 `bun run dev` → `http://localhost:3004`를 사용한다. 과거 보고서의 3033은 당시 실행 증거로 남기고 현재 실행 안내와 구분한다.
