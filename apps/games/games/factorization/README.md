@@ -3,12 +3,12 @@
 - **gameId**: `factorization`
 - **과목 · 단원**: 수학 / 고1 다항식 (공통인수, ax² + bx + c, 삼차차, 치환)
 - **상태**: `available`
-- **출처 명세**: [proc/spec/03 §3.1 M4](../../../proc/spec/03-핵심-기능.md), [proc/spec/06 §6.1](../../../proc/spec/06-콘텐츠-데이터.md)
+- **출처 명세**: [proc/spec/03 §3.1 M4](../../../../proc/spec/03-핵심-기능.md), [proc/spec/06 §6.1](../../../../proc/spec/06-콘텐츠-데이터.md)
 
 ## 시작하기
 
 1. **이 디렉토리만 작업하세요.** `apps/games/lib/core/` 변경이 필요하면 별도 PR.
-2. `bun run dev` → `http://localhost:3033/games/factorization` 에서 확인.
+2. `bun run dev` → `http://localhost:3004/games/factorization` 에서 확인.
 3. 테스트: `bun run test -- games/factorization/`
 
 ## 의존성
@@ -44,7 +44,7 @@ factorization/
 
 ## 카드 풀 (5장, 난이도 1~5)
 
-상세: [proc/spec/06 §6.1](../../../proc/spec/06-콘텐츠-데이터.md)
+상세: [proc/spec/06 §6.1](../../../../proc/spec/06-콘텐츠-데이터.md)
 
 1. `2x + 4` → `2(x + 2)`
 2. `x² + 5x + 6` → `(x + 2)(x + 3)`

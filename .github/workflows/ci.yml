@@ -116,7 +116,7 @@ jobs:
   # 게임별 vitest 샤딩 — 특정 앱 경로(games/<id>)만 실행하는 app-scoped job.
   # codex 지적상 "앱 하위 경로가 꼭 필요한" 경우라 step 에서 app cwd 사용.
   test-core:
-    name: test (lib/core)
+    name: test (core and shared games)
     needs: detect-changes
     if: needs.detect-changes.outputs.core_changed == 'true'
     runs-on: ubuntu-latest
@@ -127,7 +127,7 @@ jobs:
           bun-version: latest
       - run: bun install --frozen-lockfile
       - run: bun run gen:registry
-      - run: bunx vitest run lib/core
+      - run: bunx vitest run lib/core components/game-mechanics components/game-hub
         working-directory: apps/games
 
   test-game:
@@ -162,7 +162,7 @@ jobs:
       - run: bun run gen:registry
       # 인증 스택(password/session/csrf/same-origin/schemas/라우트) 단위·라우트 테스트.
       # DB 불필요(라우트 테스트는 DB 계층 mock). plan 완료조건의 회귀 가드.
-      - run: bunx vitest run lib/server/http lib/server/auth app/api/auth
+      - run: bunx vitest run lib/server/http lib/server/auth lib/auth lib/request-origin.test.ts app/api/auth app/api/pullim
         working-directory: apps/games
 
   build:

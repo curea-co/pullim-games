@@ -3,12 +3,12 @@
 - **gameId**: `cloze-multi`
 - **과목 · 단원**: 영어 / 고1 영어 — 5형식 어순 (1~5형식 5장)
 - **상태**: `available`
-- **출처 plan**: [proc/plan/2026-05-13_20-game-mechanics-roadmap.md](../../../proc/plan/2026-05-13_20-game-mechanics-roadmap.md) M4
+- **출처 plan**: [proc/archive/plan/2026-05-13_20-game-mechanics-roadmap.md](../../../../proc/archive/plan/2026-05-13_20-game-mechanics-roadmap.md) M4
 
 ## 시작하기
 
 1. **이 디렉토리만 작업하세요.** `apps/games/lib/core/` 변경이 필요하면 별도 PR.
-2. `bun run dev` → `http://localhost:3033/games/cloze-multi`
+2. `bun run dev` → `http://localhost:3004/games/cloze-multi`
 3. 테스트: `bun run test -- games/cloze-multi/`
 
 ## 핵심 명제

@@ -13,32 +13,53 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+  			// 풀림 통합 룩 팔레트 (spec/08 §8.1). 기존 시맨틱 이름 유지 + 값 remap.
   			bg: {
-  				primary: '#FBFAF8',
+  				primary: '#F0F6FB',
   				block: '#FFFFFF'
   			},
   			border: {
-  				hairline: '#E5E5E5'
+  				hairline: '#D6E2EE'
   			},
   			type: {
-  				primary: '#0F172A',
-  				secondary: '#64748B'
+  				primary: '#0D1A1F',
+  				secondary: '#45555C'
   			},
   			accent: {
   				positive: '#0362DA',
   				negative: '#F87171'
   			},
+  			// Core 4 + Extended (web)
+  			'pullim-ink': {
+  				DEFAULT: '#0D1A1F',
+  				'2': '#1F2C32',
+  				'3': '#45555C',
+  				'4': '#5E6B72',
+  				'5': '#B0BCC3'
+  			},
+  			'pullim-paper': {
+  				DEFAULT: '#F0F6FB',
+  				'2': '#F0F6FB',
+  				'3': '#F4FAFF'
+  			},
+  			'pullim-line': {
+  				DEFAULT: '#D6E2EE',
+  				'2': '#E8EFF6'
+  			},
+  			'pullim-lemon': '#E6FF4C',
+  			// 풀림 통합 룩 — 중립 스케일을 ink/paper-tinted 로 remap(cool-gray → blue-ink).
+  			// slate 직접 사용 컴포넌트(셸·인증·허브)도 통합 룩 반영. spec/08 §8.1.
   			'pullim-slate': {
-  				'50': '#F8FAFC',
-  				'100': '#F1F5F9',
-  				'200': '#E2E8F0',
-  				'300': '#CBD5E1',
-  				'400': '#94A3B8',
-  				'500': '#64748B',
-  				'600': '#475569',
-  				'700': '#334155',
-  				'800': '#1E293B',
-  				'900': '#0F172A'
+  				'50': '#F4FAFF',
+  				'100': '#E8EFF6',
+  				'200': '#D6E2EE',
+  				'300': '#B0BCC3',
+  				'400': '#8A97A0',
+  				'500': '#5E6B72',
+  				'600': '#45555C',
+  				'700': '#33444B',
+  				'800': '#1F2C32',
+  				'900': '#0D1A1F'
   			},
   			'pullim-blue': {
   				'50': '#E5F0FB',
@@ -51,8 +72,8 @@ const config: Config = {
   			},
   			'pullim-danger': '#EF4444',
   			card: '#FFFFFF',
-  			foreground: '#0F172A',
-  			background: '#FBFAF8'
+  			foreground: '#0D1A1F',
+  			background: '#F0F6FB'
   		},
   		fontFamily: {
   			sans: [
@@ -60,6 +81,14 @@ const config: Config = {
   				'Pretendard',
   				'Spoqa Han Sans Neo',
   				'sans-serif'
+  			],
+  			// 풀림 통합 룩 — mono (next/font CSS var). spec/08 §8.2.
+  			mono: [
+  				'var(--font-jetbrains-mono)',
+  				'ui-monospace',
+  				'SF Mono',
+  				'Menlo',
+  				'monospace'
   			]
   		},
   		fontSize: {

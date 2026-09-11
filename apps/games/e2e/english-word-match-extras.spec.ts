@@ -4,6 +4,20 @@
 
 import { test, expect } from "@playwright/test";
 
+// 보너스 쌍이 있는 기존 wm-001을 복습 우선 카드로 준비한다.
+// 신규 첫 카드(4쌍)로 바꾸면 extras 회귀 검증 자체가 사라지므로 원래 카드를 유지한다.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => {
+    const reviewed = new Date(Date.now() - 30 * 86400000).toISOString();
+    localStorage.setItem("pullim-games:srs:english-word-match:wm-001", JSON.stringify({
+      fsrsCard: { due: reviewed, last_review: reviewed, stability: 1, difficulty: 5,
+        elapsed_days: 30, scheduled_days: 1, reps: 1, lapses: 0, state: 2, learning_steps: 0 },
+      reviewCount: 1, lastReviewAt: reviewed,
+    }));
+  });
+});
+
+
 test("5개 매칭 후 남은 2개도 정답 매칭 가능", async ({ page }) => {
   await page.goto("/games/english-word-match");
 

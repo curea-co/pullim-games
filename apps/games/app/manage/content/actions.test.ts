@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 vi.mock("@/lib/server/ai/anthropic", () => ({
   generateFromSourceLLM: vi.fn(),
+  generateFromCurriculumLLM: vi.fn(),
 }));
 
 import { generateFromSourceLLM } from "@/lib/server/ai/anthropic";

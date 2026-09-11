@@ -1,0 +1,1702 @@
+[
+  {
+    "id": "mqq-draft-001",
+    "type": "multiple-choice",
+    "unit": "고1-수학-다항식 연산",
+    "difficultySeed": 1,
+    "hint": "동류항끼리 계수를 더해요",
+    "problem": {
+      "question": "(2x²-3x+1)+(x²+5x-4)의 결과는?",
+      "choices": [
+        "3x²+2x-3",
+        "3x²-8x+5",
+        "x²+2x-3",
+        "3x²+2x+5"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-002",
+    "type": "multiple-choice",
+    "unit": "고1-수학-다항식 연산",
+    "difficultySeed": 1,
+    "hint": "둘째 괄호를 빼면 모든 부호가 바뀌어요",
+    "problem": {
+      "question": "(4a²-7a)-(a²+2a-3)의 결과는?",
+      "choices": [
+        "5a²-5a-3",
+        "3a²-5a-3",
+        "5a²-9a+3",
+        "3a²-9a+3"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-003",
+    "type": "multiple-choice",
+    "unit": "고1-수학-다항식 연산",
+    "difficultySeed": 1,
+    "hint": "각 항을 빠짐없이 곱한 뒤 동류항을 모아요",
+    "problem": {
+      "question": "(x+3)(x-2)의 전개 결과는?",
+      "choices": [
+        "x²+5x-6",
+        "x²-5x+6",
+        "x²+x-6",
+        "x²-x+6"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-004",
+    "type": "multiple-choice",
+    "unit": "고1-수학-다항식 연산",
+    "difficultySeed": 1,
+    "hint": "서로 다른 차수의 곱에서 y항만 골라요",
+    "problem": {
+      "question": "(2y-1)(y+4)의 y항 계수는?",
+      "choices": [
+        "1",
+        "7",
+        "8",
+        "-4"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-005",
+    "type": "multiple-choice",
+    "unit": "고1-수학-다항식 연산",
+    "difficultySeed": 1,
+    "hint": "완전제곱식 또는 다항식 나눗셈으로 확인해요",
+    "problem": {
+      "question": "(x²+2x+1)÷(x+1)의 몫?",
+      "choices": [
+        "x+1",
+        "x-1",
+        "x²+1",
+        "1"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-006",
+    "type": "multiple-choice",
+    "unit": "고1-수학-다항식 연산",
+    "difficultySeed": 1,
+    "hint": "같은 x값을 모든 항에 대입해요",
+    "problem": {
+      "question": "x=2일 때 x³-3x²+4x-5의 값은?",
+      "choices": [
+        "1",
+        "3",
+        "5",
+        "-1"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-007",
+    "type": "multiple-choice",
+    "unit": "고1-수학-다항식 연산",
+    "difficultySeed": 1,
+    "hint": "제곱 전개에서 가운데 항을 확인해요",
+    "problem": {
+      "question": "(3x-2)²에서 x의 계수는?",
+      "choices": [
+        "6",
+        "12",
+        "-12",
+        "-6"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-008",
+    "type": "multiple-choice",
+    "unit": "고1-수학-다항식 연산",
+    "difficultySeed": 1,
+    "hint": "두 항등식의 차를 계산해요",
+    "problem": {
+      "question": "(a+b)²-(a-b)²의 정리 결과는?",
+      "choices": [
+        "2ab",
+        "4ab",
+        "2a²+2b²",
+        "4a²b²"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-009",
+    "type": "multiple-choice",
+    "unit": "고1-수학-다항식 연산",
+    "difficultySeed": 1,
+    "hint": "대입 후 괄호와 제곱을 먼저 계산해요",
+    "problem": {
+      "question": "x²-4x+4에 x=3을 대입한 값은?",
+      "choices": [
+        "1",
+        "3",
+        "5",
+        "9"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-010",
+    "type": "multiple-choice",
+    "unit": "고1-수학-다항식 연산",
+    "difficultySeed": 1,
+    "hint": "세 항을 곱하면 중간항이 소거돼요",
+    "problem": {
+      "question": "(x-1)(x²+x+1)의 전개 결과는?",
+      "choices": [
+        "x³+1",
+        "x³-x",
+        "x²-1",
+        "x³-1"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-011",
+    "type": "multiple-choice",
+    "unit": "고1-수학-항등식",
+    "difficultySeed": 1,
+    "hint": "양변을 전개해 x항의 계수를 비교해요",
+    "problem": {
+      "question": "(x+2)²=x²+ax+4에서 a의 값은?",
+      "choices": [
+        "-4",
+        "8",
+        "4",
+        "2"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-012",
+    "type": "multiple-choice",
+    "unit": "고1-수학-항등식",
+    "difficultySeed": 1,
+    "hint": "우변을 전개한 뒤 같은 차수의 계수를 비교해요",
+    "problem": {
+      "question": "3x²+bx-2=(x+1)(3x-2)일 때 b?",
+      "choices": [
+        "-2",
+        "1",
+        "-1",
+        "3"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-013",
+    "type": "multiple-choice",
+    "unit": "고1-수학-항등식",
+    "difficultySeed": 1,
+    "hint": "x의 계수가 같아야 해요",
+    "problem": {
+      "question": "(k-1)x+5=3x+5가 모든 x에서 성립할 때 k?",
+      "choices": [
+        "4",
+        "3",
+        "2",
+        "1"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-014",
+    "type": "multiple-choice",
+    "unit": "고1-수학-항등식",
+    "difficultySeed": 1,
+    "hint": "상수항을 비교해요",
+    "problem": {
+      "question": "x²+6x+c=(x+3)²일 때 c?",
+      "choices": [
+        "6",
+        "3",
+        "0",
+        "9"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-015",
+    "type": "multiple-choice",
+    "unit": "고1-수학-항등식",
+    "difficultySeed": 1,
+    "hint": "상수항의 곱과 x항을 함께 확인해요",
+    "problem": {
+      "question": "(x+a)(x+2)=x²+7x+10일 때 a?",
+      "choices": [
+        "2",
+        "10",
+        "5",
+        "7"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-016",
+    "type": "multiple-choice",
+    "unit": "고1-수학-항등식",
+    "difficultySeed": 1,
+    "hint": "우변의 상수항에서 b를 정해요",
+    "problem": {
+      "question": "2x²-5x+3=(x-1)(2x+b)일 때 b?",
+      "choices": [
+        "2",
+        "-3",
+        "3",
+        "-2"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-017",
+    "type": "multiple-choice",
+    "unit": "고1-수학-항등식",
+    "difficultySeed": 1,
+    "hint": "전개 후 mn 항만 남겨요",
+    "problem": {
+      "question": "(m+n)²-(m-n)²=cmn일 때 c?",
+      "choices": [
+        "4",
+        "2",
+        "1",
+        "8"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-018",
+    "type": "multiple-choice",
+    "unit": "고1-수학-항등식",
+    "difficultySeed": 1,
+    "hint": "곱셈 전개에서 x²항이 0이 되게 해요",
+    "problem": {
+      "question": "x³+8=(x+2)(x²+ax+4)일 때 a?",
+      "choices": [
+        "2",
+        "4",
+        "-4",
+        "-2"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-019",
+    "type": "multiple-choice",
+    "unit": "고1-수학-항등식",
+    "difficultySeed": 1,
+    "hint": "좌변은 차의 제곱이에요",
+    "problem": {
+      "question": "(x+1)(x-1)=x²-k일 때 k?",
+      "choices": [
+        "2",
+        "0",
+        "1",
+        "-1"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-020",
+    "type": "multiple-choice",
+    "unit": "고1-수학-항등식",
+    "difficultySeed": 1,
+    "hint": "p(1)-p(-1)로 홀수차 항을 분리해요",
+    "problem": {
+      "question": "p(x)=ax²+bx+c와 p(0)=3, p(1)=6, p(-1)=2일 때 b?",
+      "choices": [
+        "4",
+        "2",
+        "1",
+        "3"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-021",
+    "type": "multiple-choice",
+    "unit": "고1-수학-나머지정리",
+    "difficultySeed": 1,
+    "hint": "나누는 식의 근 x=2를 대입해요",
+    "problem": {
+      "question": "2x³-x²+3을 x-2로 나눈 나머지는?",
+      "choices": [
+        "15",
+        "17",
+        "13",
+        "9"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-022",
+    "type": "multiple-choice",
+    "unit": "고1-수학-나머지정리",
+    "difficultySeed": 1,
+    "hint": "x=-1을 대입해요",
+    "problem": {
+      "question": "x³-4x+1을 x+1로 나눈 나머지는?",
+      "choices": [
+        "-2",
+        "2",
+        "6",
+        "4"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-023",
+    "type": "multiple-choice",
+    "unit": "고1-수학-나머지정리",
+    "difficultySeed": 1,
+    "hint": "P(1)=4라는 식을 세워요",
+    "problem": {
+      "question": "P(x)=x²+ax+1을 x-1로 나눈 나머지가 4일 때 a?",
+      "choices": [
+        "4",
+        "1",
+        "2",
+        "3"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-024",
+    "type": "multiple-choice",
+    "unit": "고1-수학-인수정리",
+    "difficultySeed": 1,
+    "hint": "x=2를 대입한 값이 0인지 확인해요",
+    "problem": {
+      "question": "x³-5x²+2x+8이 x-2로 나누어떨어지는지?",
+      "choices": [
+        "판단할 수 없다",
+        "그렇다",
+        "아니다",
+        "x=1에서만 그렇다"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-025",
+    "type": "multiple-choice",
+    "unit": "고1-수학-인수정리",
+    "difficultySeed": 1,
+    "hint": "정수근 후보를 대입해 0이 되는 값을 찾아요",
+    "problem": {
+      "question": "x³-3x²-4x+12의 인수로 반드시 포함되는 것?",
+      "choices": [
+        "x-3",
+        "x+3",
+        "x-2",
+        "x+4"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-026",
+    "type": "multiple-choice",
+    "unit": "고1-수학-인수정리",
+    "difficultySeed": 1,
+    "hint": "근 r에 대응하는 인수는 x-r이에요",
+    "problem": {
+      "question": "P(1)=0일 때 P(x)의 인수?",
+      "choices": [
+        "x+1",
+        "x",
+        "1-x²",
+        "x-1"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-027",
+    "type": "multiple-choice",
+    "unit": "고1-수학-인수정리",
+    "difficultySeed": 1,
+    "hint": "항을 묶은 뒤 차의 제곱을 사용해요",
+    "problem": {
+      "question": "x³+2x²-x-2를 인수분해한 결과는?",
+      "choices": [
+        "(x+1)(x²+2)",
+        "(x-1)(x²+2)",
+        "(x+2)(x²-1)",
+        "(x-2)(x²+1)"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-028",
+    "type": "multiple-choice",
+    "unit": "고1-수학-나머지정리",
+    "difficultySeed": 1,
+    "hint": "나머지정리의 대입값을 그대로 읽어요",
+    "problem": {
+      "question": "P(x)를 x-3으로 나눈 나머지가 -2일 때 P(3)?",
+      "choices": [
+        "3",
+        "-2",
+        "0",
+        "2"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-029",
+    "type": "multiple-choice",
+    "unit": "고1-수학-인수정리",
+    "difficultySeed": 1,
+    "hint": "인수분해 후 괄호 안의 일차식 두 개를 더해요",
+    "problem": {
+      "question": "x²-7x+10을 표준 일차인수 (x-5), (x-2)로 인수분해했을 때 두 인수의 합은?",
+      "choices": [
+        "2x-7",
+        "-7",
+        "7",
+        "10"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-030",
+    "type": "multiple-choice",
+    "unit": "고1-수학-나머지정리",
+    "difficultySeed": 1,
+    "hint": "P(-1)=5를 이용해요",
+    "problem": {
+      "question": "2x²+kx+3을 x+1로 나눈 나머지가 5일 때 k?",
+      "choices": [
+        "2",
+        "-2",
+        "5",
+        "0"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-031",
+    "type": "multiple-choice",
+    "unit": "고1-수학-복소수",
+    "difficultySeed": 3,
+    "hint": "허수단위의 정의를 사용해요",
+    "problem": {
+      "question": "i²의 값은?",
+      "choices": [
+        "i",
+        "-i",
+        "-1",
+        "1"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-032",
+    "type": "multiple-choice",
+    "unit": "고1-수학-복소수",
+    "difficultySeed": 2,
+    "hint": "실수부와 허수부를 각각 더해요",
+    "problem": {
+      "question": "(3+2i)+(1-5i)의 결과는?",
+      "choices": [
+        "2-3i",
+        "4-3i",
+        "2+7i",
+        "4+7i"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-033",
+    "type": "multiple-choice",
+    "unit": "고1-수학-복소수",
+    "difficultySeed": 3,
+    "hint": "켤레복소수의 곱은 제곱의 차예요",
+    "problem": {
+      "question": "(2+i)(2-i)의 값은?",
+      "choices": [
+        "5",
+        "3",
+        "4-i²",
+        "4"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-034",
+    "type": "multiple-choice",
+    "unit": "고1-수학-복소수",
+    "difficultySeed": 2,
+    "hint": "i²=-1을 잊지 말고 전개해요",
+    "problem": {
+      "question": "(1+i)²의 결과는?",
+      "choices": [
+        "1+2i",
+        "-2i",
+        "2",
+        "2i"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-035",
+    "type": "multiple-choice",
+    "unit": "고1-수학-복소수",
+    "difficultySeed": 3,
+    "hint": "허수부의 부호만 바꿔요",
+    "problem": {
+      "question": "z=4-3i의 켤레복소수?",
+      "choices": [
+        "-4-3i",
+        "3+4i",
+        "4+3i",
+        "-4+3i"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-036",
+    "type": "multiple-choice",
+    "unit": "고1-수학-복소수",
+    "difficultySeed": 2,
+    "hint": "분모와 분자에 i를 곱해요",
+    "problem": {
+      "question": "1/i를 a+bi 꼴로 나타낸 값은?",
+      "choices": [
+        "-1",
+        "-i",
+        "i",
+        "1-i"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-037",
+    "type": "multiple-choice",
+    "unit": "고1-수학-복소수",
+    "difficultySeed": 3,
+    "hint": "양변에서 2i를 빼요",
+    "problem": {
+      "question": "z+2i=5-i일 때 z?",
+      "choices": [
+        "5-3i",
+        "5+i",
+        "3-i",
+        "-5+3i"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-038",
+    "type": "multiple-choice",
+    "unit": "고1-수학-복소수",
+    "difficultySeed": 2,
+    "hint": "x²=-4를 만족하는 수를 찾아요",
+    "problem": {
+      "question": "x²+4=0의 복소수 해?",
+      "choices": [
+        "x=±4i",
+        "x=2",
+        "x=-2",
+        "x=±2i"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-039",
+    "type": "multiple-choice",
+    "unit": "고1-수학-복소수",
+    "difficultySeed": 3,
+    "hint": "켤레를 곱해 분모를 실수로 만들어요",
+    "problem": {
+      "question": "(1-i)/(1+i)의 값은?",
+      "choices": [
+        "1",
+        "-1",
+        "-i",
+        "i"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-040",
+    "type": "multiple-choice",
+    "unit": "고1-수학-복소수",
+    "difficultySeed": 2,
+    "hint": "2³과 i³을 따로 계산해요",
+    "problem": {
+      "question": "(2i)³의 값은?",
+      "choices": [
+        "8",
+        "-8i",
+        "8i",
+        "-8"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-041",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차방정식",
+    "difficultySeed": 3,
+    "hint": "곱이 6이고 합이 5인 두 수를 찾아요",
+    "problem": {
+      "question": "x²-5x+6=0의 해?",
+      "choices": [
+        "2,3",
+        "-2,-3",
+        "1,6",
+        "-1,-6"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-042",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차방정식",
+    "difficultySeed": 2,
+    "hint": "공통인수 2x를 먼저 묶어요",
+    "problem": {
+      "question": "2x²-8x=0의 해?",
+      "choices": [
+        "-4,0",
+        "2,4",
+        "-2,4",
+        "0,4"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-043",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차방정식",
+    "difficultySeed": 3,
+    "hint": "제곱근을 취할 때 두 부호를 포함해요",
+    "problem": {
+      "question": "(x-1)²=5의 해?",
+      "choices": [
+        "-1±√5",
+        "1±5",
+        "1±√5",
+        "±√5"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-044",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차방정식",
+    "difficultySeed": 2,
+    "hint": "D=b²-4ac를 계산해요",
+    "problem": {
+      "question": "x²+2x+5=0의 판별식?",
+      "choices": [
+        "4",
+        "-16",
+        "16",
+        "-4"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-045",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차방정식",
+    "difficultySeed": 3,
+    "hint": "인수분해 후 두 근 중 큰 값을 고릅니다",
+    "problem": {
+      "question": "3x²-2x-1=0의 큰 해는?",
+      "choices": [
+        "1",
+        "-1/3",
+        "1/3",
+        "-1"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-046",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차방정식",
+    "difficultySeed": 2,
+    "hint": "판별식이 0이 되게 해요",
+    "problem": {
+      "question": "x²-6x+k=0이 중근을 가질 때 k?",
+      "choices": [
+        "6",
+        "3",
+        "36",
+        "9"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-047",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차방정식",
+    "difficultySeed": 3,
+    "hint": "근의 합과 곱으로 식을 구성해요",
+    "problem": {
+      "question": "두 근이 4와 -1인 이차방정식?",
+      "choices": [
+        "x²-5x+4=0",
+        "x²+5x+4=0",
+        "x²-3x-4=0",
+        "x²+3x-4=0"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-048",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차방정식",
+    "difficultySeed": 2,
+    "hint": "x=-3을 대입해 0이 되게 해요",
+    "problem": {
+      "question": "x²+px+12=0의 한 근이 -3일 때 p?",
+      "choices": [
+        "-4",
+        "7",
+        "-7",
+        "4"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-049",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차방정식",
+    "difficultySeed": 3,
+    "hint": "근과 계수 관계를 사용해요",
+    "problem": {
+      "question": "x²-4x-5=0의 근의 곱?",
+      "choices": [
+        "-5",
+        "5",
+        "4",
+        "-4"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-050",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차방정식",
+    "difficultySeed": 2,
+    "hint": "근의 공식으로 두 근을 구해 차를 계산해요",
+    "problem": {
+      "question": "x²+4x+1=0의 두 근의 차의 절댓값은?",
+      "choices": [
+        "√3",
+        "4",
+        "2",
+        "2√3"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-051",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차함수",
+    "difficultySeed": 3,
+    "hint": "꼭짓점형의 이동을 읽어요",
+    "problem": {
+      "question": "y=(x-2)²+3의 꼭짓점은?",
+      "choices": [
+        "(2,-3)",
+        "(-2,-3)",
+        "(2,3)",
+        "(-2,3)"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-052",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차함수",
+    "difficultySeed": 2,
+    "hint": "-b/(2a)를 계산해요",
+    "problem": {
+      "question": "y=x²-6x+5의 대칭축은?",
+      "choices": [
+        "x=6",
+        "x=3",
+        "x=-3",
+        "x=5"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-053",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차함수",
+    "difficultySeed": 3,
+    "hint": "꼭짓점의 y좌표를 구해요",
+    "problem": {
+      "question": "y=-x²+4x+1의 최댓값은?",
+      "choices": [
+        "5",
+        "4",
+        "1",
+        "-5"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-054",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차함수",
+    "difficultySeed": 2,
+    "hint": "위로 열린 포물선의 꼭짓점 값을 봐요",
+    "problem": {
+      "question": "y=2(x+1)²-4의 최솟값은?",
+      "choices": [
+        "-1",
+        "2",
+        "4",
+        "-4"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-055",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차함수",
+    "difficultySeed": 3,
+    "hint": "y=0으로 놓고 해를 구해요",
+    "problem": {
+      "question": "y=x²-5x+6의 x절편의 x좌표는?",
+      "choices": [
+        "1,6",
+        "-1,-6",
+        "2,3",
+        "-2,-3"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-056",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차함수",
+    "difficultySeed": 2,
+    "hint": "x=0을 대입해요",
+    "problem": {
+      "question": "y=x²+2x-3의 y절편?",
+      "choices": [
+        "-2",
+        "-3",
+        "2",
+        "3"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-057",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차함수",
+    "difficultySeed": 3,
+    "hint": "주어진 점의 좌표를 식에 대입해요",
+    "problem": {
+      "question": "y=a(x-1)²+2가 점 (3,10)을 지날 때 a?",
+      "choices": [
+        "2",
+        "4",
+        "1",
+        "8"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-058",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차함수",
+    "difficultySeed": 2,
+    "hint": "꼭짓점과 양 끝점의 값을 비교해요",
+    "problem": {
+      "question": "0≤x≤4에서 y=(x-2)²의 최댓값은?",
+      "choices": [
+        "2",
+        "0",
+        "8",
+        "4"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-059",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차함수",
+    "difficultySeed": 3,
+    "hint": "판별식 또는 최솟값을 확인해요",
+    "problem": {
+      "question": "y=x²-4x+7의 그래프가 x축과 만나는 횟수?",
+      "choices": [
+        "2",
+        "3",
+        "0",
+        "1"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-060",
+    "type": "multiple-choice",
+    "unit": "고1-수학-이차함수",
+    "difficultySeed": 2,
+    "hint": "계수 a,b로 축을 계산해요",
+    "problem": {
+      "question": "y=-2x²+8x-5의 대칭축은?",
+      "choices": [
+        "x=8",
+        "x=2",
+        "x=-2",
+        "x=4"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-061",
+    "type": "multiple-choice",
+    "unit": "고1-수학-방정식·부등식",
+    "difficultySeed": 3,
+    "hint": "절댓값 방정식은 두 경우로 나눠요",
+    "problem": {
+      "question": "|x-2|=5의 해?",
+      "choices": [
+        "x=7,-3",
+        "x=3,-7",
+        "x=5,-5",
+        "x=2,5"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-062",
+    "type": "multiple-choice",
+    "unit": "고1-수학-방정식·부등식",
+    "difficultySeed": 2,
+    "hint": "-3<2x+1<3으로 바꿔요",
+    "problem": {
+      "question": "|2x+1|<3의 해?",
+      "choices": [
+        "-1<x<2",
+        "x<-2 또는 x>1",
+        "-3<x<3",
+        "-2<x<1"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-063",
+    "type": "multiple-choice",
+    "unit": "고1-수학-방정식·부등식",
+    "difficultySeed": 3,
+    "hint": "곱이 양수가 되는 구간을 부호표로 확인해요",
+    "problem": {
+      "question": "x²-9>0의 해?",
+      "choices": [
+        "x>3",
+        "x<-3",
+        "x<-3 또는 x>3",
+        "-3<x<3"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-064",
+    "type": "multiple-choice",
+    "unit": "고1-수학-방정식·부등식",
+    "difficultySeed": 2,
+    "hint": "두 근 사이에서 곱의 부호를 확인해요",
+    "problem": {
+      "question": "(x-1)(x+2)≤0의 해?",
+      "choices": [
+        "x< -2 또는 x>1",
+        "-2≤x≤1",
+        "x≤-2 또는 x≥1",
+        "-1≤x≤2"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-065",
+    "type": "multiple-choice",
+    "unit": "고1-수학-방정식·부등식",
+    "difficultySeed": 3,
+    "hint": "양변에 5를 더하고 2로 나눠요",
+    "problem": {
+      "question": "2x-5≤7을 만족하는 x?",
+      "choices": [
+        "x≤6",
+        "x≥6",
+        "x≤1",
+        "x≥1"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-066",
+    "type": "multiple-choice",
+    "unit": "고1-수학-방정식·부등식",
+    "difficultySeed": 2,
+    "hint": "분자는 0, 분모는 0이 아니어야 해요",
+    "problem": {
+      "question": "x/(x-1)=0을 만족하는 x?",
+      "choices": [
+        "x=1",
+        "x=-1",
+        "해가 없다",
+        "x=0"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-067",
+    "type": "multiple-choice",
+    "unit": "고1-수학-방정식·부등식",
+    "difficultySeed": 3,
+    "hint": "근호 안은 0 이상이어야 해요",
+    "problem": {
+      "question": "√(x-1)의 정의역은?",
+      "choices": [
+        "x≤1",
+        "모든 실수",
+        "x≥1",
+        "x>1"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-068",
+    "type": "multiple-choice",
+    "unit": "고1-수학-방정식·부등식",
+    "difficultySeed": 2,
+    "hint": "분자의 부호와 분모의 부호를 비교해요",
+    "problem": {
+      "question": "1/(x+2)>0의 해?",
+      "choices": [
+        "모든 실수",
+        "x>-2",
+        "x<-2",
+        "x≥-2"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-069",
+    "type": "multiple-choice",
+    "unit": "고1-수학-방정식·부등식",
+    "difficultySeed": 3,
+    "hint": "인수분해 후 근 사이 구간을 선택해요",
+    "problem": {
+      "question": "x²+2x-8≤0의 해?",
+      "choices": [
+        "-4≤x≤2",
+        "x≤-4 또는 x≥2",
+        "-2≤x≤4",
+        "x< -4 또는 x>2"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-070",
+    "type": "multiple-choice",
+    "unit": "고1-수학-방정식·부등식",
+    "difficultySeed": 2,
+    "hint": "합과 곱을 근으로 하는 이차방정식을 만들어요",
+    "problem": {
+      "question": "연립 x+y=5, xy=6에서 x,y?",
+      "choices": [
+        "1과 4",
+        "-2와 -3",
+        "5와 0",
+        "2와 3"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-071",
+    "type": "multiple-choice",
+    "unit": "고1-수학-경우의 수·확률",
+    "difficultySeed": 3,
+    "hint": "직책이 다르므로 순서를 고려해요",
+    "problem": {
+      "question": "서로 다른 5명 중 회장과 부회장 1명씩 뽑는 방법 수?",
+      "choices": [
+        "25",
+        "5",
+        "20",
+        "10"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-072",
+    "type": "multiple-choice",
+    "unit": "고1-수학-경우의 수·확률",
+    "difficultySeed": 2,
+    "hint": "순서가 없는 조합을 사용해요",
+    "problem": {
+      "question": "6명 중 2명을 대표로 뽑는 방법 수?",
+      "choices": [
+        "6",
+        "15",
+        "30",
+        "12"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-073",
+    "type": "multiple-choice",
+    "unit": "고1-수학-경우의 수·확률",
+    "difficultySeed": 3,
+    "hint": "십의 자리와 일의 자리 선택 수를 곱해요",
+    "problem": {
+      "question": "1,2,3,4로 만들 수 있는 두 자리 자연수 개수(중복 없음)?",
+      "choices": [
+        "12",
+        "16",
+        "8",
+        "24"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-074",
+    "type": "multiple-choice",
+    "unit": "고1-수학-경우의 수·확률",
+    "difficultySeed": 2,
+    "hint": "합이 8인 순서쌍을 세고 약분해요",
+    "problem": {
+      "question": "주사위 2개 눈의 합이 8일 확률은?",
+      "choices": [
+        "1/6",
+        "4/36",
+        "1/9",
+        "5/36"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-075",
+    "type": "multiple-choice",
+    "unit": "고1-수학-경우의 수·확률",
+    "difficultySeed": 3,
+    "hint": "정확히 두 앞면인 경우를 세요",
+    "problem": {
+      "question": "동전 3개 중 앞면이 2개일 확률은?",
+      "choices": [
+        "2/3",
+        "1/4",
+        "3/8",
+        "1/2"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-076",
+    "type": "multiple-choice",
+    "unit": "고1-수학-경우의 수·확률",
+    "difficultySeed": 2,
+    "hint": "겹치는 15를 한 번만 세요",
+    "problem": {
+      "question": "1부터 20까지 중 3의 배수 또는 5의 배수 개수는?",
+      "choices": [
+        "11",
+        "9",
+        "10",
+        "7"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-077",
+    "type": "multiple-choice",
+    "unit": "고1-수학-경우의 수·확률",
+    "difficultySeed": 3,
+    "hint": "남자 선택과 여자 선택을 곱해요",
+    "problem": {
+      "question": "남자 3명·여자 2명에서 남녀 1명씩 짝짓는 방법 수?",
+      "choices": [
+        "6",
+        "5",
+        "10",
+        "3"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-078",
+    "type": "multiple-choice",
+    "unit": "고1-수학-경우의 수·확률",
+    "difficultySeed": 2,
+    "hint": "파랑이 아닌 공 수를 전체와 비교해 기약분수로 써요",
+    "problem": {
+      "question": "빨강 2, 파랑 3, 초록 1 공 중 파랑이 아닐 확률은?",
+      "choices": [
+        "1/3",
+        "2/5",
+        "3/5",
+        "1/2"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-079",
+    "type": "multiple-choice",
+    "unit": "고1-수학-경우의 수·확률",
+    "difficultySeed": 3,
+    "hint": "AB를 한 묶음으로 보고 배열해요",
+    "problem": {
+      "question": "A,B,C,D를 한 줄로 배열할 때 A와 B가 붙어 있는 경우 수?",
+      "choices": [
+        "16",
+        "6",
+        "12",
+        "8"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-080",
+    "type": "multiple-choice",
+    "unit": "고1-수학-경우의 수·확률",
+    "difficultySeed": 2,
+    "hint": "전체에서 둘 다 6이 아닌 경우를 빼요",
+    "problem": {
+      "question": "두 주사위 눈 중 적어도 하나가 6일 확률은?",
+      "choices": [
+        "1/3",
+        "11/36",
+        "1/6",
+        "5/18"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-081",
+    "type": "multiple-choice",
+    "unit": "고1-수학-함수",
+    "difficultySeed": 5,
+    "hint": "y를 x에 대해 풀고 x,y를 바꿔요",
+    "problem": {
+      "question": "f(x)=2x+3의 역함수?",
+      "choices": [
+        "f⁻¹(x)=(x-3)/2",
+        "f⁻¹(x)=2x-3",
+        "f⁻¹(x)=(x+3)/2",
+        "f⁻¹(x)=3x+2"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-082",
+    "type": "multiple-choice",
+    "unit": "고1-수학-함수",
+    "difficultySeed": 4,
+    "hint": "제곱의 역연산에서 정의역 조건을 반영해요",
+    "problem": {
+      "question": "정의역을 x≥0으로 제한한 f(x)=x²의 역함수와 그 정의역은?",
+      "choices": [
+        "f⁻¹(x)=|x|, x≥0",
+        "f⁻¹(x)=-√x, x≥0",
+        "f⁻¹(x)=x², x≥0",
+        "f⁻¹(x)=√x, x≥0"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-083",
+    "type": "multiple-choice",
+    "unit": "고1-수학-함수",
+    "difficultySeed": 5,
+    "hint": "f를 먼저 적용해요",
+    "problem": {
+      "question": "f(x)=x+2, g(x)=3x일 때 (g∘f)(4)?",
+      "choices": [
+        "12",
+        "10",
+        "18",
+        "14"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-084",
+    "type": "multiple-choice",
+    "unit": "고1-수학-함수",
+    "difficultySeed": 4,
+    "hint": "서로 다른 x가 같은 함숫값을 만드는지 봐요",
+    "problem": {
+      "question": "f(x)=2x-1이 일대일 함수인지?",
+      "choices": [
+        "판단 불가",
+        "그렇다",
+        "아니다",
+        "x>0에서만 아니다"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-085",
+    "type": "multiple-choice",
+    "unit": "고1-수학-함수",
+    "difficultySeed": 5,
+    "hint": "a²=9에서 조건에 맞는 근을 골라요",
+    "problem": {
+      "question": "f(x)=x²-1에서 f(a)=8이고 a>0일 때 a?",
+      "choices": [
+        "3",
+        "-3",
+        "9",
+        "7"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-086",
+    "type": "multiple-choice",
+    "unit": "고1-수학-함수",
+    "difficultySeed": 4,
+    "hint": "괄호 안과 바깥의 이동을 구분해요",
+    "problem": {
+      "question": "y=|x|의 그래프를 y=|x-2|+1로 옮긴 방향?",
+      "choices": [
+        "왼쪽 2, 위 1",
+        "오른쪽 1, 위 2",
+        "왼쪽 1, 아래 2",
+        "오른쪽 2, 위 1"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-087",
+    "type": "multiple-choice",
+    "unit": "고1-수학-함수",
+    "difficultySeed": 5,
+    "hint": "분모가 0이 되는 입력을 제외해요",
+    "problem": {
+      "question": "f(x)=1/(x-3)의 정의역에서 제외되는 값은?",
+      "choices": [
+        "0",
+        "1/3",
+        "3",
+        "-3"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-088",
+    "type": "multiple-choice",
+    "unit": "고1-수학-함수",
+    "difficultySeed": 4,
+    "hint": "제곱의 최솟값을 이용해요",
+    "problem": {
+      "question": "정의역이 실수 전체인 f(x)=x²+1의 치역은?",
+      "choices": [
+        "모든 실수",
+        "y≥1",
+        "y>1",
+        "y≤1"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-089",
+    "type": "multiple-choice",
+    "unit": "고1-수학-함수",
+    "difficultySeed": 5,
+    "hint": "두 함숫값을 각각 구해 빼요",
+    "problem": {
+      "question": "f(x)=3x+2에서 f(a)-f(1)의 값은?",
+      "choices": [
+        "3a-3",
+        "3a+3",
+        "3a-1",
+        "a+1"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-090",
+    "type": "multiple-choice",
+    "unit": "고1-수학-함수",
+    "difficultySeed": 4,
+    "hint": "분모 조건을 확인하며 방정식을 풀어요",
+    "problem": {
+      "question": "f(x)=x/(x+1)에서 f(x)=1이 되는 x?",
+      "choices": [
+        "0",
+        "1",
+        "-1",
+        "해가 없다"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-091",
+    "type": "multiple-choice",
+    "unit": "고1-수학-근호",
+    "difficultySeed": 5,
+    "hint": "제곱근 기호의 값은 음이 아닌 한 값이에요",
+    "problem": {
+      "question": "√121을 간단히 한 값은?",
+      "choices": [
+        "121",
+        "±11",
+        "11",
+        "-11"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-092",
+    "type": "multiple-choice",
+    "unit": "고1-수학-근호",
+    "difficultySeed": 4,
+    "hint": "각 근호를 √3의 배수로 정리해요",
+    "problem": {
+      "question": "√48-√27의 간단한 꼴?",
+      "choices": [
+        "7√3",
+        "√3",
+        "3√3",
+        "√21"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-093",
+    "type": "multiple-choice",
+    "unit": "고1-수학-근호",
+    "difficultySeed": 5,
+    "hint": "분배법칙을 적용해요",
+    "problem": {
+      "question": "√5(√5+2)의 전개 결과는?",
+      "choices": [
+        "5+2√5",
+        "5+2",
+        "√5+10",
+        "25+2√5"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-094",
+    "type": "multiple-choice",
+    "unit": "고1-수학-근호",
+    "difficultySeed": 4,
+    "hint": "합차 공식으로 계산해요",
+    "problem": {
+      "question": "(√2+1)(√2-1)의 값은?",
+      "choices": [
+        "2",
+        "-1",
+        "√2",
+        "1"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-095",
+    "type": "multiple-choice",
+    "unit": "고1-수학-근호",
+    "difficultySeed": 5,
+    "hint": "분모와 분자에 √6을 곱한 뒤 약분해요",
+    "problem": {
+      "question": "3/√6의 분모를 유리화한 결과는?",
+      "choices": [
+        "3√6",
+        "1/2",
+        "√6/2",
+        "√6/3"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-096",
+    "type": "multiple-choice",
+    "unit": "고1-수학-근호",
+    "difficultySeed": 4,
+    "hint": "양변을 제곱하고 정의역을 확인해요",
+    "problem": {
+      "question": "√(x-2)=4일 때 x?",
+      "choices": [
+        "16",
+        "18",
+        "6",
+        "2"
+      ],
+      "correctIndex": 1
+    }
+  },
+  {
+    "id": "mqq-draft-097",
+    "type": "multiple-choice",
+    "unit": "고1-수학-근호",
+    "difficultySeed": 5,
+    "hint": "세 근호를 √2의 계수로 바꿔요",
+    "problem": {
+      "question": "√8+√18-√2의 값은?",
+      "choices": [
+        "4√2",
+        "3√2",
+        "5√2",
+        "√2"
+      ],
+      "correctIndex": 0
+    }
+  },
+  {
+    "id": "mqq-draft-098",
+    "type": "multiple-choice",
+    "unit": "고1-수학-근호",
+    "difficultySeed": 4,
+    "hint": "같은 근호끼리 나누어 계산해요",
+    "problem": {
+      "question": "√12/√3의 값은?",
+      "choices": [
+        "√4",
+        "4",
+        "3",
+        "2"
+      ],
+      "correctIndex": 3
+    }
+  },
+  {
+    "id": "mqq-draft-099",
+    "type": "multiple-choice",
+    "unit": "고1-수학-근호",
+    "difficultySeed": 5,
+    "hint": "제곱 전개와 √3²을 함께 사용해요",
+    "problem": {
+      "question": "(2-√3)²의 전개 결과는?",
+      "choices": [
+        "7+4√3",
+        "4-√3",
+        "7-4√3",
+        "1-4√3"
+      ],
+      "correctIndex": 2
+    }
+  },
+  {
+    "id": "mqq-draft-100",
+    "type": "multiple-choice",
+    "unit": "고1-수학-근호",
+    "difficultySeed": 4,
+    "hint": "√(x²)=|x| 조건을 적용해요",
+    "problem": {
+      "question": "√(9x²)의 값(x<0)은?",
+      "choices": [
+        "3|x|",
+        "-3x",
+        "3x",
+        "9x²"
+      ],
+      "correctIndex": 1
+    }
+  }
+]

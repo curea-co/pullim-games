@@ -3,12 +3,12 @@
 - **gameId**: `genetics-punnett`
 - **과목 · 단원**: 과학 / 고1 생명과학 — 멘델 유전 (단성·양성잡종, 검정교배)
 - **상태**: `available`
-- **출처 plan**: [proc/plan/2026-05-13_new-mechanics-expansion.md](../../../proc/plan/2026-05-13_new-mechanics-expansion.md) M1
+- **출처 plan**: [proc/archive/plan/2026-05-13_new-mechanics-expansion.md](../../../../proc/archive/plan/2026-05-13_new-mechanics-expansion.md) M1
 
 ## 시작하기
 
 1. **이 디렉토리만 작업하세요.** `apps/games/lib/core/` 변경이 필요하면 별도 PR.
-2. `bun run dev` → `http://localhost:3033/games/genetics-punnett` 에서 확인.
+2. `bun run dev` → `http://localhost:3004/games/genetics-punnett` 에서 확인.
 3. 테스트: `bun run test -- games/genetics-punnett/`
 
 ## 핵심 명제

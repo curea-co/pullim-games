@@ -59,6 +59,7 @@ export function ThumbnailView({ games, progress }: Props) {
             {isAvailable ? (
               <Link
                 href={`/games/${g.meta.id}`}
+                data-cta-priority="informational"
                 className="block rounded-block focus-visible:outline-2 focus-visible:outline-accent-positive"
               >
                 {inner}

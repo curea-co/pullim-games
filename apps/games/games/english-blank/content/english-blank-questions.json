@@ -1,0 +1,1802 @@
+[
+  {
+    "id": "eb-draft-001",
+    "type": "blank",
+    "unit": "고1-영어-수일치",
+    "difficultySeed": 1,
+    "hint": "주어의 핵심 명사와 동사의 수를 확인하세요.",
+    "problem": {
+      "passage": "The basket of fresh apples ___ on the kitchen table near the window.",
+      "choices": [
+        "is",
+        "are",
+        "be",
+        "were"
+      ],
+      "correctIndex": 0,
+      "rationale": "주어의 핵심인 단수 basket에 맞춰 is를 쓴다. apples를 주어로 착각하면 are를 고르기 쉽다."
+    }
+  },
+  {
+    "id": "eb-draft-002",
+    "type": "blank",
+    "unit": "고1-영어-과거시제",
+    "difficultySeed": 2,
+    "hint": "문장에 나타난 과거 시점을 확인하세요.",
+    "problem": {
+      "passage": "Jisoo ___ her umbrella on the bus last night and had to walk home in the rain.",
+      "choices": [
+        "left",
+        "leaves",
+        "leaving",
+        "has left"
+      ],
+      "correctIndex": 0,
+      "rationale": "끝난 과거 시점 last night에는 left가 맞다. 현재형이나 현재완료는 이 시점과 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-003",
+    "type": "blank",
+    "unit": "고1-영어-목적격 관계대명사",
+    "difficultySeed": 3,
+    "hint": "선행사와 뒤 절에서 빠진 성분을 살펴보세요.",
+    "problem": {
+      "passage": "The painting ___ we saw at the museum was created by a young artist.",
+      "choices": [
+        "that",
+        "who",
+        "where",
+        "when"
+      ],
+      "correctIndex": 0,
+      "rationale": "사물 painting을 받고 saw의 목적어가 비었으므로 that이 맞다. who는 사람, where와 when은 장소·시간이다."
+    }
+  },
+  {
+    "id": "eb-draft-004",
+    "type": "blank",
+    "unit": "고1-영어-동명사",
+    "difficultySeed": 1,
+    "hint": "전치사 뒤에 필요한 동사 형태를 확인하세요.",
+    "problem": {
+      "passage": "Hana is interested in ___ traditional bread with her grandmother.",
+      "choices": [
+        "making",
+        "make",
+        "made",
+        "to make"
+      ],
+      "correctIndex": 0,
+      "rationale": "전치사 in 뒤 명사 역할을 하는 동명사 making을 쓴다. 나머지는 이 목적어 자리에 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-005",
+    "type": "blank",
+    "unit": "고1-영어-접속사",
+    "difficultySeed": 2,
+    "hint": "앞뒤 절의 의미 관계를 판단하세요.",
+    "problem": {
+      "passage": "We stayed inside ___ the air quality outside became dangerous after the fire.",
+      "choices": [
+        "because",
+        "unless",
+        "although",
+        "while"
+      ],
+      "correctIndex": 0,
+      "rationale": "공기 질 악화가 머문 원인이므로 because가 맞다. 나머지는 조건·양보·동시 관계를 만든다."
+    }
+  },
+  {
+    "id": "eb-draft-006",
+    "type": "blank",
+    "unit": "고1-영어-수동태",
+    "difficultySeed": 3,
+    "hint": "주어가 행동을 하는지 받는지 확인하세요.",
+    "problem": {
+      "passage": "The old bridge ___ by local engineers after a careful safety inspection.",
+      "choices": [
+        "repaired",
+        "was repaired",
+        "has repairing",
+        "repairs"
+      ],
+      "correctIndex": 1,
+      "rationale": "다리는 수리를 받으므로 was repaired라는 수동태가 필요하다. 능동형 repairs는 의미가 반대다."
+    }
+  },
+  {
+    "id": "eb-draft-007",
+    "type": "blank",
+    "unit": "고1-영어-비교급",
+    "difficultySeed": 1,
+    "hint": "than이 만드는 비교 구조를 찾아보세요.",
+    "problem": {
+      "passage": "This backpack is ___ than the one I used during middle school.",
+      "choices": [
+        "light",
+        "lighter",
+        "lightest",
+        "more light"
+      ],
+      "correctIndex": 1,
+      "rationale": "than이 있으므로 비교급 lighter가 맞다. light는 원급이고 lightest는 최상급이다."
+    }
+  },
+  {
+    "id": "eb-draft-008",
+    "type": "blank",
+    "unit": "고1-영어-대명사 지시",
+    "difficultySeed": 2,
+    "hint": "앞에서 가리키는 명사의 수와 역할을 확인하세요.",
+    "problem": {
+      "passage": "The science club collected used batteries and sent ___ to a recycling center.",
+      "choices": [
+        "it",
+        "them",
+        "their",
+        "they"
+      ],
+      "correctIndex": 1,
+      "rationale": "복수 명사 batteries를 목적어로 대신하므로 them이 맞다. they는 주격이고 their는 소유격이다."
+    }
+  },
+  {
+    "id": "eb-draft-009",
+    "type": "blank",
+    "unit": "고1-영어-to부정사",
+    "difficultySeed": 3,
+    "hint": "앞 절의 행동 목적을 찾아보세요.",
+    "problem": {
+      "passage": "Mina woke up early ___ the first train to the mountain village.",
+      "choices": [
+        "catch",
+        "to catch",
+        "catching",
+        "caught"
+      ],
+      "correctIndex": 1,
+      "rationale": "목적을 나타내는 to catch가 맞다. catching과 caught는 이 목적 표현을 만들지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-010",
+    "type": "blank",
+    "unit": "고1-영어-전치사",
+    "difficultySeed": 1,
+    "hint": "시간 표현 앞에 쓰는 전치사를 떠올리세요.",
+    "problem": {
+      "passage": "Our class will visit the public library ___ Friday afternoon.",
+      "choices": [
+        "at",
+        "on",
+        "in",
+        "by"
+      ],
+      "correctIndex": 1,
+      "rationale": "특정 요일 Friday 앞에는 on을 쓴다. at은 시각, in은 긴 기간에 주로 쓴다."
+    }
+  },
+  {
+    "id": "eb-draft-011",
+    "type": "blank",
+    "unit": "고1-영어-현재완료",
+    "difficultySeed": 2,
+    "hint": "since와 현재까지 이어지는 의미를 연결하세요.",
+    "problem": {
+      "passage": "Leo ___ in this neighborhood since he started elementary school.",
+      "choices": [
+        "lives",
+        "lived",
+        "has lived",
+        "is living"
+      ],
+      "correctIndex": 2,
+      "rationale": "since가 시작점을 보여 주고 현재까지 이어지므로 has lived가 맞다. lived는 완료된 과거로 읽히기 쉽다."
+    }
+  },
+  {
+    "id": "eb-draft-012",
+    "type": "blank",
+    "unit": "고1-영어-분사 수식",
+    "difficultySeed": 3,
+    "hint": "조명이 어떤 상태인지, 누가 그 상태를 만들었는지 생각해 보세요.",
+    "problem": {
+      "passage": "The maintenance team removed the ___ lights and installed new ones before the theater opened.",
+      "choices": [
+        "confusing",
+        "confused",
+        "broken",
+        "breaking"
+      ],
+      "correctIndex": 2,
+      "rationale": "조명은 누군가 망가뜨린 상태이므로 수동 의미의 broken이 맞다. confusing은 혼란을 일으키는 것을 뜻하고, breaking은 조명이 스스로 부서지는 진행 동작처럼 읽힌다."
+    }
+  },
+  {
+    "id": "eb-draft-013",
+    "type": "blank",
+    "unit": "고1-영어-가정법 과거",
+    "difficultySeed": 1,
+    "hint": "would와 함께 쓰인 가정의 시제를 확인하세요.",
+    "problem": {
+      "passage": "If Sara ___ closer to school, she would walk there every morning.",
+      "choices": [
+        "lives",
+        "will live",
+        "lived",
+        "has lived"
+      ],
+      "correctIndex": 2,
+      "rationale": "현재와 반대되는 가정의 if절에는 과거형 lived를 쓴다. lives는 현실 진술이다."
+    }
+  },
+  {
+    "id": "eb-draft-014",
+    "type": "blank",
+    "unit": "고1-영어-부사절",
+    "difficultySeed": 2,
+    "hint": "접속사 뒤에 완전한 절이 오는지 확인하세요.",
+    "problem": {
+      "passage": "Please close the windows before ___, because the forecast predicts a storm.",
+      "choices": [
+        "rain",
+        "raining",
+        "it rains",
+        "it rained"
+      ],
+      "correctIndex": 2,
+      "rationale": "before 뒤에서 비가 오는 시점을 나타내는 완전한 절 it rains가 필요하다. rain과 raining은 주어가 없고, it rained는 앞으로 올 폭풍 예보와 시제가 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-015",
+    "type": "blank",
+    "unit": "고1-영어-사역동사",
+    "difficultySeed": 3,
+    "hint": "make 뒤 목적격 보어의 형태를 살펴보세요.",
+    "problem": {
+      "passage": "The coach made the players ___ the drill again after a careless mistake.",
+      "choices": [
+        "repeated",
+        "repeating",
+        "repeat",
+        "to repeat"
+      ],
+      "correctIndex": 2,
+      "rationale": "make는 목적어 뒤에 동사원형을 취하므로 repeat이 맞다. to repeat은 이 사역 구문에 쓰지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-016",
+    "type": "blank",
+    "unit": "고1-영어-조건절",
+    "difficultySeed": 1,
+    "hint": "조건절이 긍정인지 부정인지 판단하세요.",
+    "problem": {
+      "passage": "You will miss the beginning ___ you arrive at the theater before seven.",
+      "choices": [
+        "if",
+        "because",
+        "so",
+        "unless"
+      ],
+      "correctIndex": 3,
+      "rationale": "unless는 if not의 뜻이므로 7시 전에 도착하지 않으면이라는 의미를 만든다. if는 반대 조건이다."
+    }
+  },
+  {
+    "id": "eb-draft-017",
+    "type": "blank",
+    "unit": "고1-영어-간접의문문",
+    "difficultySeed": 2,
+    "hint": "간접의문문 어순과 시제를 함께 확인하세요.",
+    "problem": {
+      "passage": "I do not know where the missing notebook ___ after lunch.",
+      "choices": [
+        "did go",
+        "goes",
+        "going",
+        "went"
+      ],
+      "correctIndex": 3,
+      "rationale": "간접의문문은 평서문 어순이고 after lunch가 과거이므로 went가 맞다. did go는 직접의문문식 어순이다."
+    }
+  },
+  {
+    "id": "eb-draft-018",
+    "type": "blank",
+    "unit": "고1-영어-분사구문",
+    "difficultySeed": 3,
+    "hint": "두 동작의 순서와 주어를 확인하세요.",
+    "problem": {
+      "passage": "___ the final page, Daniel closed the book and turned off the lamp.",
+      "choices": [
+        "Reading",
+        "Read",
+        "To reading",
+        "Having read"
+      ],
+      "correctIndex": 3,
+      "rationale": "다 읽은 뒤 닫았으므로 완료 분사구문 Having read가 정확하다. Reading은 동시 진행의 느낌이 강하다."
+    }
+  },
+  {
+    "id": "eb-draft-019",
+    "type": "blank",
+    "unit": "고1-영어-목적격 보어",
+    "difficultySeed": 1,
+    "hint": "목적어의 상태를 나타내는 품사를 고르세요.",
+    "problem": {
+      "passage": "The librarian asked visitors to keep their voices ___ inside the reading room.",
+      "choices": [
+        "quietly",
+        "quietness",
+        "quieten",
+        "quiet"
+      ],
+      "correctIndex": 3,
+      "rationale": "voices를 어떤 상태로 유지하는지 나타내는 형용사 quiet이 맞다. quietly는 부사, quietness는 명사다."
+    }
+  },
+  {
+    "id": "eb-draft-020",
+    "type": "blank",
+    "unit": "고1-영어-관계부사",
+    "difficultySeed": 2,
+    "hint": "장소 선행사 뒤 절이 완전한지 확인하세요.",
+    "problem": {
+      "passage": "This is the café ___ my sister studies every Saturday morning.",
+      "choices": [
+        "which",
+        "who",
+        "whose",
+        "where"
+      ],
+      "correctIndex": 3,
+      "rationale": "장소 café와 완전한 절을 연결하므로 where가 맞다. which는 뒤 절에서 성분이 빠질 때 쓰는 관계대명사다."
+    }
+  },
+  {
+    "id": "eb-draft-021",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-연결",
+    "difficultySeed": 1,
+    "hint": "앞뒤 생각이 이어지는 방식을 살펴보세요.",
+    "problem": {
+      "passage": "The final paragraph ___ the main idea to the example from the opening scene.",
+      "choices": [
+        "connects",
+        "separates",
+        "borrows",
+        "predicts"
+      ],
+      "correctIndex": 0,
+      "rationale": "마지막 문단이 처음 장면의 예와 핵심 생각을 이어 주므로 connects가 맞다. separates는 나누다, borrows는 빌리다, predicts는 예측하다라는 뜻이라 문맥에 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-022",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-피하다",
+    "difficultySeed": 2,
+    "hint": "재사용 물병이 일회용 병 구매에 어떤 영향을 주는지 생각하세요.",
+    "problem": {
+      "passage": "By carrying a reusable bottle, students can ___ buying disposable bottles and reduce plastic waste.",
+      "choices": [
+        "avoid",
+        "waste",
+        "measure",
+        "decorate"
+      ],
+      "correctIndex": 0,
+      "rationale": "재사용 물병을 가지고 다니면 일회용 병을 사는 일을 피할 수 있으므로 avoid가 맞다. waste는 사는 일을 피한다는 의미가 아니고 measure와 decorate도 문맥에 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-023",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-우연히 발견하다",
+    "difficultySeed": 3,
+    "hint": "찾으려 하지 않았던 것을 발견한 상황에 맞는 동사를 고르세요.",
+    "problem": {
+      "passage": "While cleaning the attic, Yuna ___ an old diary hidden beneath a blanket.",
+      "choices": [
+        "discovered",
+        "prevented",
+        "translated",
+        "repaired"
+      ],
+      "correctIndex": 0,
+      "rationale": "다락방 청소 중 숨겨진 일기를 찾아낸 것이므로 discovered가 알맞다. prevented는 막다, translated는 번역하다, repaired는 수리하다라는 뜻이다."
+    }
+  },
+  {
+    "id": "eb-draft-024",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-수정하다",
+    "difficultySeed": 1,
+    "hint": "초안의 오류를 고치는 행동을 찾으세요.",
+    "problem": {
+      "passage": "Before submitting his essay, Daniel ___ several sentences that sounded unclear.",
+      "choices": [
+        "revised",
+        "invented",
+        "repeated",
+        "borrowed"
+      ],
+      "correctIndex": 0,
+      "rationale": "제출 전에 불분명한 문장을 고쳤으므로 revised가 맞다. invented는 새로 만들다이고 repeated와 borrowed는 오류를 고친다는 뜻이 아니다."
+    }
+  },
+  {
+    "id": "eb-draft-025",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-늘어나다",
+    "difficultySeed": 2,
+    "hint": "교통량이 많아져 시간이 길어진 결과를 파악하세요.",
+    "problem": {
+      "passage": "Because of road construction, the travel time ___ by almost twenty minutes.",
+      "choices": [
+        "increased",
+        "decreased",
+        "disappeared",
+        "returned"
+      ],
+      "correctIndex": 0,
+      "rationale": "도로 공사로 이동 시간이 늘었으므로 increased가 맞다. decreased는 줄었다는 반대 의미이고 disappeared와 returned도 문맥에 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-026",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-선택하다",
+    "difficultySeed": 3,
+    "hint": "여러 대안 중 하나를 고르는 상황을 확인하세요.",
+    "problem": {
+      "passage": "The committee will ___ one design for the school festival poster tomorrow.",
+      "choices": [
+        "hide",
+        "select",
+        "fold",
+        "melt"
+      ],
+      "correctIndex": 1,
+      "rationale": "여러 디자인 중 하나를 고르는 것이므로 select가 맞다. 나머지는 숨기다, 접다, 녹이다라는 뜻으로 선택과 관련이 없다."
+    }
+  },
+  {
+    "id": "eb-draft-027",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-분명한",
+    "difficultySeed": 1,
+    "hint": "안내 표지가 이해하기 쉬운지를 판단하세요.",
+    "problem": {
+      "passage": "The map uses simple colors and large letters, so its directions are easy to ___.",
+      "choices": [
+        "confuse",
+        "follow",
+        "cancel",
+        "scatter"
+      ],
+      "correctIndex": 1,
+      "rationale": "색과 글자가 단순해 안내를 따라가기 쉬우므로 follow가 알맞다. confuse는 혼란스럽게 하다이고 cancel과 scatter도 방향을 따른다는 의미가 아니다."
+    }
+  },
+  {
+    "id": "eb-draft-028",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-영향",
+    "difficultySeed": 2,
+    "hint": "한 사건이 다른 결과를 만들어 내는 관계를 찾으세요.",
+    "problem": {
+      "passage": "A short power outage can ___ the schedule of trains throughout the evening.",
+      "choices": [
+        "polish",
+        "affect",
+        "plant",
+        "whisper"
+      ],
+      "correctIndex": 1,
+      "rationale": "정전은 저녁 내내 열차 일정에 영향을 줄 수 있으므로 affect가 맞다. 나머지는 문맥상 일정과 연결되지 않는 동사다."
+    }
+  },
+  {
+    "id": "eb-draft-029",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-공평한",
+    "difficultySeed": 3,
+    "hint": "모든 참가자에게 같은 기회를 주는 규칙을 묘사하세요.",
+    "problem": {
+      "passage": "The teacher changed the teams so that every player would have a ___ chance to participate.",
+      "choices": [
+        "narrow",
+        "fair",
+        "noisy",
+        "broken"
+      ],
+      "correctIndex": 1,
+      "rationale": "모든 선수가 참여할 같은 기회를 뜻하므로 fair가 맞다. narrow, noisy, broken은 기회의 공평함을 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-030",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-보존하다",
+    "difficultySeed": 1,
+    "hint": "오래 유지하려는 문화유산의 대상을 확인하세요.",
+    "problem": {
+      "passage": "The village works hard to ___ its historic stone walls for future generations.",
+      "choices": [
+        "scatter",
+        "preserve",
+        "predict",
+        "replace"
+      ],
+      "correctIndex": 1,
+      "rationale": "미래 세대를 위해 역사적 돌담을 보존하려는 것이므로 preserve가 맞다. replace는 교체하다라는 반대 방향의 행동이다."
+    }
+  },
+  {
+    "id": "eb-draft-031",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-망설이다",
+    "difficultySeed": 2,
+    "hint": "결정하지 못하고 잠시 멈추는 태도를 고르세요.",
+    "problem": {
+      "passage": "Nora began to ___ before opening the letter because she feared bad news.",
+      "choices": [
+        "celebrate",
+        "harvest",
+        "hesitate",
+        "polish"
+      ],
+      "correctIndex": 2,
+      "rationale": "나쁜 소식을 걱정해 편지를 열지 못하고 망설였으므로 hesitate가 맞다. celebrate와 harvest, polish는 그런 심리 상태를 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-032",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-대체하다",
+    "difficultySeed": 3,
+    "hint": "고장 난 부품 대신 새 부품을 넣는 행동을 찾으세요.",
+    "problem": {
+      "passage": "The mechanic had to ___ the worn brake pad before returning the bicycle.",
+      "choices": [
+        "reduce",
+        "observe",
+        "replace",
+        "whistle"
+      ],
+      "correctIndex": 2,
+      "rationale": "마모된 브레이크 패드 대신 새것을 넣으므로 replace가 맞다. reduce는 줄이다, observe는 관찰하다라는 뜻이다."
+    }
+  },
+  {
+    "id": "eb-draft-033",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-주장하다",
+    "difficultySeed": 1,
+    "hint": "근거를 들어 자신의 의견을 말하는 동사를 고르세요.",
+    "problem": {
+      "passage": "In her speech, the captain ___ that teamwork mattered more than individual speed.",
+      "choices": [
+        "folded",
+        "borrowed",
+        "argued",
+        "shook"
+      ],
+      "correctIndex": 2,
+      "rationale": "연설에서 팀워크가 더 중요하다고 주장했으므로 argued가 알맞다. 나머지는 의견을 제시하는 행위를 뜻하지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-034",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-감소시키다",
+    "difficultySeed": 2,
+    "hint": "소음의 크기를 낮추는 목표를 확인하세요.",
+    "problem": {
+      "passage": "Planting trees along the road may ___ the noise heard inside nearby houses.",
+      "choices": [
+        "increase",
+        "collect",
+        "reduce",
+        "announce"
+      ],
+      "correctIndex": 2,
+      "rationale": "나무가 집 안에 들리는 소음을 줄일 수 있으므로 reduce가 맞다. increase는 반대 의미이며 collect와 announce는 소음의 크기와 관련 없다."
+    }
+  },
+  {
+    "id": "eb-draft-035",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-관찰하다",
+    "difficultySeed": 3,
+    "hint": "변화를 자세히 살피는 과학 활동을 찾으세요.",
+    "problem": {
+      "passage": "The students used a timer to ___ how quickly the ice melted in sunlight.",
+      "choices": [
+        "lend",
+        "remove",
+        "observe",
+        "escape"
+      ],
+      "correctIndex": 2,
+      "rationale": "얼음이 녹는 속도를 자세히 살피는 것이므로 observe가 맞다. lend는 빌려주다, remove는 제거하다, escape는 탈출하다이다."
+    }
+  },
+  {
+    "id": "eb-draft-036",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-필수적인",
+    "difficultySeed": 1,
+    "hint": "응급 배낭에 반드시 필요한 물건임을 나타내세요.",
+    "problem": {
+      "passage": "A flashlight is ___ during a blackout because it helps people move safely.",
+      "choices": [
+        "ordinary",
+        "distant",
+        "wooden",
+        "essential"
+      ],
+      "correctIndex": 3,
+      "rationale": "정전 때 안전하게 이동하려면 손전등이 꼭 필요하므로 essential이 맞다. ordinary는 평범한, distant는 먼, wooden은 나무로 된이라는 뜻이다."
+    }
+  },
+  {
+    "id": "eb-draft-037",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-예방하다",
+    "difficultySeed": 2,
+    "hint": "사고가 일어나기 전에 막는 행동을 고르세요.",
+    "problem": {
+      "passage": "Wearing a helmet can ___ serious head injuries during a bicycle accident.",
+      "choices": [
+        "invite",
+        "exchange",
+        "float",
+        "prevent"
+      ],
+      "correctIndex": 3,
+      "rationale": "헬멧은 심각한 머리 부상을 미리 막을 수 있으므로 prevent가 맞다. 나머지는 사고 예방의 의미를 만들지 못한다."
+    }
+  },
+  {
+    "id": "eb-draft-038",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-유사한",
+    "difficultySeed": 3,
+    "hint": "두 계획의 공통된 특징을 설명하는 형용사를 찾으세요.",
+    "problem": {
+      "passage": "Although the schedules use different colors, their basic instructions are ___.",
+      "choices": [
+        "empty",
+        "frozen",
+        "ancient",
+        "similar"
+      ],
+      "correctIndex": 3,
+      "rationale": "색은 달라도 기본 안내가 비슷하므로 similar가 맞다. empty, frozen, ancient는 두 안내의 공통성을 설명하지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-039",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-허락하다",
+    "difficultySeed": 1,
+    "hint": "박물관에서 사진 촬영을 가능하게 하는 동사를 찾으세요.",
+    "problem": {
+      "passage": "The museum does not ___ visitors to touch the sculptures, even during guided tours.",
+      "choices": [
+        "collect",
+        "repair",
+        "awaken",
+        "allow"
+      ],
+      "correctIndex": 3,
+      "rationale": "박물관이 방문객에게 조각품을 만지는 것을 허락하지 않으므로 allow가 맞다. collect와 repair, awaken은 허가의 의미가 아니다."
+    }
+  },
+  {
+    "id": "eb-draft-040",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-적응하다",
+    "difficultySeed": 2,
+    "hint": "새로운 환경에 맞게 행동을 바꾸는 능력을 확인하세요.",
+    "problem": {
+      "passage": "Animals that move to colder regions must ___ to shorter days and lower temperatures.",
+      "choices": [
+        "damage",
+        "divide",
+        "repeat",
+        "adapt"
+      ],
+      "correctIndex": 3,
+      "rationale": "추운 지역으로 이동한 동물이 환경에 적응해야 하므로 adapt가 맞다. damage는 손상시키다, divide는 나누다, repeat는 반복하다이다."
+    }
+  },
+  {
+    "id": "eb-draft-041",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-감당하다",
+    "difficultySeed": 1,
+    "hint": "수입으로 비용을 지불할 수 있는지를 확인하세요.",
+    "problem": {
+      "passage": "After saving for several months, Amir could finally ___ the train pass to visit his grandparents.",
+      "choices": [
+        "afford",
+        "borrow",
+        "invent",
+        "measure"
+      ],
+      "correctIndex": 0,
+      "rationale": "몇 달 동안 저축한 뒤 기차표 값을 낼 수 있었으므로 afford가 맞다. borrow는 빌리다, invent는 발명하다, measure는 측정하다라는 뜻이다."
+    }
+  },
+  {
+    "id": "eb-draft-042",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-소비하다",
+    "difficultySeed": 2,
+    "hint": "음식이나 에너지를 사용하는 행동을 찾으세요.",
+    "problem": {
+      "passage": "The new heater is designed to ___ less electricity while keeping the room warm.",
+      "choices": [
+        "consume",
+        "produce",
+        "describe",
+        "repair"
+      ],
+      "correctIndex": 0,
+      "rationale": "난방기가 전기를 덜 사용하도록 설계되었으므로 consume가 알맞다. produce는 생산하다이고 describe와 repair는 전력 사용과 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-043",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-설득하다",
+    "difficultySeed": 3,
+    "hint": "상대가 의견을 바꾸도록 이유를 제시하는 동사를 고르세요.",
+    "problem": {
+      "passage": "Maya tried to ___ her brother to join the neighborhood cleanup.",
+      "choices": [
+        "persuade",
+        "divide",
+        "freeze",
+        "memorize"
+      ],
+      "correctIndex": 0,
+      "rationale": "동생이 청소에 참여하도록 설득하려 했으므로 persuade가 맞다. 나머지는 설득의 행동을 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-044",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-드러내다",
+    "difficultySeed": 1,
+    "hint": "사진이 숨은 정보를 보여 주는 상황을 확인하세요.",
+    "problem": {
+      "passage": "The X-ray can ___ a small crack inside the athlete's injured wrist.",
+      "choices": [
+        "reveal",
+        "cover",
+        "transport",
+        "borrow"
+      ],
+      "correctIndex": 0,
+      "rationale": "엑스레이가 손목 안의 금을 드러내므로 reveal이 맞다. cover는 가리다이고 transport와 borrow는 정보가 보이는 과정과 관련 없다."
+    }
+  },
+  {
+    "id": "eb-draft-045",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-유지하다",
+    "difficultySeed": 2,
+    "hint": "일정한 속도나 상태를 계속 지키는 동사를 찾으세요.",
+    "problem": {
+      "passage": "To finish the race safely, runners should ___ a steady pace from the beginning.",
+      "choices": [
+        "maintain",
+        "remove",
+        "wander",
+        "translate"
+      ],
+      "correctIndex": 0,
+      "rationale": "처음부터 일정한 속도를 유지해야 하므로 maintain이 맞다. remove와 wander, translate는 속도를 계속 지킨다는 뜻이 아니다."
+    }
+  },
+  {
+    "id": "eb-draft-046",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-희귀한",
+    "difficultySeed": 3,
+    "hint": "지난 10년간 관찰 기록이 세 건뿐이라는 단서에 주목하세요.",
+    "problem": {
+      "passage": "The guide was excited to photograph a ___ bird that had been recorded by only three visitors in the past ten years.",
+      "choices": [
+        "common",
+        "rare",
+        "wooden",
+        "noisy"
+      ],
+      "correctIndex": 1,
+      "rationale": "지난 10년간 관찰한 사람이 세 명뿐이므로 매우 드문 새라는 뜻의 rare가 유일하게 알맞다. common은 흔한이라는 반대 의미이고 wooden과 noisy는 관찰 빈도나 개체 수를 설명하지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-047",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-지연시키다",
+    "difficultySeed": 1,
+    "hint": "기차가 예정 시각보다 늦어지는 원인을 설명하세요.",
+    "problem": {
+      "passage": "A fallen tree on the track may ___ the morning train for more than an hour.",
+      "choices": [
+        "celebrate",
+        "delay",
+        "gather",
+        "polish"
+      ],
+      "correctIndex": 1,
+      "rationale": "선로의 나무가 기차를 늦출 수 있으므로 delay가 맞다. 나머지는 운행 지연을 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-048",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-부족한",
+    "difficultySeed": 2,
+    "hint": "필요한 양보다 모자란 재료를 설명하세요.",
+    "problem": {
+      "passage": "The recipe was changed because the kitchen had ___ sugar for the large cake.",
+      "choices": [
+        "fresh",
+        "insufficient",
+        "enough",
+        "silent"
+      ],
+      "correctIndex": 1,
+      "rationale": "큰 케이크를 만들기에 설탕이 부족했으므로 insufficient가 맞다. enough는 충분한이라는 반대 의미다."
+    }
+  },
+  {
+    "id": "eb-draft-049",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-기부하다",
+    "difficultySeed": 3,
+    "hint": "도움이 필요한 사람에게 물건을 주는 행동을 찾으세요.",
+    "problem": {
+      "passage": "Residents decided to ___ warm coats to families affected by the winter flood.",
+      "choices": [
+        "copy",
+        "donate",
+        "arrange",
+        "shake"
+      ],
+      "correctIndex": 1,
+      "rationale": "홍수 피해 가족에게 외투를 주기로 했으므로 donate가 맞다. copy와 arrange, shake는 기부의 의미가 아니다."
+    }
+  },
+  {
+    "id": "eb-draft-050",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-정확한",
+    "difficultySeed": 1,
+    "hint": "측정 결과가 실제 값에 가까운지를 판단하세요.",
+    "problem": {
+      "passage": "The nurse used a digital thermometer to get a more ___ reading.",
+      "choices": [
+        "temporary",
+        "accurate",
+        "narrow",
+        "sleepy"
+      ],
+      "correctIndex": 1,
+      "rationale": "온도를 정확히 측정하려는 목적이므로 accurate가 맞다. temporary는 일시적인, narrow는 좁은이라는 뜻이다."
+    }
+  },
+  {
+    "id": "eb-draft-051",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-조사하다",
+    "difficultySeed": 2,
+    "hint": "경찰이 사건의 원인을 찾는 행동을 고르세요.",
+    "problem": {
+      "passage": "The detectives continued to ___ the cause of the fire at the empty warehouse.",
+      "choices": [
+        "decorate",
+        "divide",
+        "investigate",
+        "whistle"
+      ],
+      "correctIndex": 2,
+      "rationale": "화재 원인을 조사했으므로 investigate가 알맞다. 나머지는 수사와 관련된 행동이 아니다."
+    }
+  },
+  {
+    "id": "eb-draft-052",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-잠재적인",
+    "difficultySeed": 3,
+    "hint": "아직 드러나지 않았지만 가능성이 있는 문제를 묘사하세요.",
+    "problem": {
+      "passage": "The engineer found a ___ weakness in the roof before any damage appeared.",
+      "choices": [
+        "personal",
+        "circular",
+        "potential",
+        "frozen"
+      ],
+      "correctIndex": 2,
+      "rationale": "아직 피해는 없지만 생길 수 있는 약점이므로 potential이 맞다. personal은 개인적인, circular는 원형의 뜻이다."
+    }
+  },
+  {
+    "id": "eb-draft-053",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-무시하다",
+    "difficultySeed": 1,
+    "hint": "경고를 알아도 주의를 기울이지 않는 행동을 찾으세요.",
+    "problem": {
+      "passage": "You should not ___ the warning sign beside the wet floor.",
+      "choices": [
+        "repair",
+        "exchange",
+        "ignore",
+        "float"
+      ],
+      "correctIndex": 2,
+      "rationale": "젖은 바닥의 경고를 무시해서는 안 되므로 ignore가 맞다. 나머지는 경고를 대하는 태도를 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-054",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-유익한",
+    "difficultySeed": 2,
+    "hint": "건강에 좋은 습관을 설명하는 형용사를 고르세요.",
+    "problem": {
+      "passage": "Drinking enough water and sleeping well are ___ habits for growing teenagers.",
+      "choices": [
+        "harmful",
+        "distant",
+        "beneficial",
+        "metal"
+      ],
+      "correctIndex": 2,
+      "rationale": "물과 수면은 성장기 청소년에게 이로운 습관이므로 beneficial이 맞다. harmful은 해로운이라는 반대 의미다."
+    }
+  },
+  {
+    "id": "eb-draft-055",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-변환하다",
+    "difficultySeed": 3,
+    "hint": "태양 에너지를 전기로 바꾸는 과정을 설명하세요.",
+    "problem": {
+      "passage": "Solar panels ___ sunlight into electricity that homes can use.",
+      "choices": [
+        "borrow",
+        "scatter",
+        "convert",
+        "announce"
+      ],
+      "correctIndex": 2,
+      "rationale": "태양빛을 전기로 바꾸므로 convert가 맞다. borrow와 scatter, announce는 에너지 형태의 변환을 뜻하지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-056",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-생생한",
+    "difficultySeed": 1,
+    "hint": "기억이 자세하고 선명하게 남은 상태를 고르세요.",
+    "problem": {
+      "passage": "Even after many years, Grandpa had a ___ memory of his first day at sea.",
+      "choices": [
+        "ordinary",
+        "hollow",
+        "careless",
+        "vivid"
+      ],
+      "correctIndex": 3,
+      "rationale": "오랜 시간이 지나도 자세하고 선명한 기억이므로 vivid가 맞다. ordinary와 hollow, careless는 기억의 선명함을 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-057",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-금지하다",
+    "difficultySeed": 2,
+    "hint": "도서관 규칙이 특정 행동을 못 하게 하는 의미를 찾으세요.",
+    "problem": {
+      "passage": "The library rules ___ visitors from eating snacks near the computers.",
+      "choices": [
+        "invite",
+        "follow",
+        "admire",
+        "prohibit"
+      ],
+      "correctIndex": 3,
+      "rationale": "규칙이 컴퓨터 근처에서 간식을 먹지 못하게 하므로 prohibit가 맞다. invite는 초대하다, follow는 따르다라는 뜻이다."
+    }
+  },
+  {
+    "id": "eb-draft-058",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-적절한",
+    "difficultySeed": 3,
+    "hint": "특정 목적에 알맞은 장소를 설명하세요.",
+    "problem": {
+      "passage": "The quiet corner is ___ for students who need to concentrate on a difficult assignment.",
+      "choices": [
+        "broken",
+        "famous",
+        "upper",
+        "suitable"
+      ],
+      "correctIndex": 3,
+      "rationale": "집중해야 하는 학생에게 알맞은 장소이므로 suitable이 맞다. broken과 famous, upper는 장소의 적합성을 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-059",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-복원하다",
+    "difficultySeed": 1,
+    "hint": "오래된 건물을 원래 모습에 가깝게 고치는 행동을 찾으세요.",
+    "problem": {
+      "passage": "The town plans to ___ the historic theater instead of replacing it with a new building.",
+      "choices": [
+        "predict",
+        "collect",
+        "whisper",
+        "restore"
+      ],
+      "correctIndex": 3,
+      "rationale": "역사적 극장을 원래 모습으로 되살리려 하므로 restore가 맞다. replace와 비슷해 보여도 restore는 기존 것을 보존하며 고치는 뜻이다."
+    }
+  },
+  {
+    "id": "eb-draft-060",
+    "type": "blank",
+    "unit": "고1-영어-문맥어휘-일관된",
+    "difficultySeed": 2,
+    "hint": "주장과 행동이 계속 같은 방향인지 확인하세요.",
+    "problem": {
+      "passage": "Her explanation was ___ with the records kept by the school office.",
+      "choices": [
+        "random",
+        "shallow",
+        "private",
+        "consistent"
+      ],
+      "correctIndex": 3,
+      "rationale": "설명이 학교 기록과 일치하므로 consistent가 맞다. random과 shallow, private는 기록과의 일치성을 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-061",
+    "type": "blank",
+    "unit": "고1-영어-대조 연결어",
+    "difficultySeed": 1,
+    "hint": "두 절이 서로 반대되는 내용을 말하는지 확인하세요.",
+    "problem": {
+      "passage": "The path was steep; ___, the hikers continued toward the summit.",
+      "choices": [
+        "however",
+        "therefore",
+        "otherwise",
+        "similarly"
+      ],
+      "correctIndex": 0,
+      "rationale": "앞의 가파른 길과 뒤의 계속 나아갔다는 내용이 대조되므로 however가 맞다. therefore는 결과, otherwise는 다른 조건, similarly는 유사성을 나타낸다."
+    }
+  },
+  {
+    "id": "eb-draft-062",
+    "type": "blank",
+    "unit": "고1-영어-결과 연결어",
+    "difficultySeed": 2,
+    "hint": "앞 절이 뒤 절의 원인인지 살펴보세요.",
+    "problem": {
+      "passage": "The store offered a large discount; ___, many customers arrived before opening time.",
+      "choices": [
+        "as a result",
+        "nevertheless",
+        "for example",
+        "in contrast"
+      ],
+      "correctIndex": 0,
+      "rationale": "할인 때문에 손님이 많이 온 결과이므로 as a result가 알맞다. 나머지는 양보·예시·대조의 관계를 만든다."
+    }
+  },
+  {
+    "id": "eb-draft-063",
+    "type": "blank",
+    "unit": "고1-영어-지시어",
+    "difficultySeed": 3,
+    "hint": "빈칸은 뒤 절의 주어 자리이므로 복수 주격 형태를 고르세요.",
+    "problem": {
+      "passage": "The instructions were printed in large letters, so ___ were easy for everyone to read.",
+      "choices": [
+        "they",
+        "this",
+        "it",
+        "their"
+      ],
+      "correctIndex": 0,
+      "rationale": "앞의 instructions를 뒤 절의 주어로 다시 받는 복수 주격 대명사는 they이다. their는 소유격이라 주어 자리에 올 수 없고, this와 it은 단수 형태다."
+    }
+  },
+  {
+    "id": "eb-draft-064",
+    "type": "blank",
+    "unit": "고1-영어-대용 표현",
+    "difficultySeed": 1,
+    "hint": "앞의 단수 명사를 대신하는 대용어를 찾으세요.",
+    "problem": {
+      "passage": "My old phone still works, but I want to buy a newer ___ with a better camera.",
+      "choices": [
+        "one",
+        "ones",
+        "it",
+        "them"
+      ],
+      "correctIndex": 0,
+      "rationale": "앞의 단수 명사 phone을 대신하는 대용어이므로 one이 맞다. ones는 복수이고 it과 them은 특정 대상을 가리키는 대명사라 이 비교 구조에 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-065",
+    "type": "blank",
+    "unit": "고1-영어-과거완료",
+    "difficultySeed": 2,
+    "hint": "두 과거 사건 중 먼저 일어난 일을 확인하세요.",
+    "problem": {
+      "passage": "By the time the bus arrived, Mina ___ the station and was walking home.",
+      "choices": [
+        "had left",
+        "leaves",
+        "has left",
+        "will leave"
+      ],
+      "correctIndex": 2,
+      "rationale": "버스가 도착한 과거 시점보다 역을 떠난 일이 먼저 일어났으므로 과거완료 had left가 맞다. has left와 will leave는 기준 시점에 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-066",
+    "type": "blank",
+    "unit": "고1-영어-간접화법 시제",
+    "difficultySeed": 3,
+    "hint": "과거에 말한 내용을 전달할 때 시제를 맞추세요.",
+    "problem": {
+      "passage": "Joon said that he ___ the package the next morning.",
+      "choices": [
+        "will send",
+        "would send",
+        "sends",
+        "has sent"
+      ],
+      "correctIndex": 1,
+      "rationale": "주절이 과거 said이고 다음 날의 일을 전달하므로 will의 과거형 would가 맞다. 현재형과 현재완료는 전달 시점의 문맥에 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-067",
+    "type": "blank",
+    "unit": "고1-영어-조동사 추측",
+    "difficultySeed": 1,
+    "hint": "현재의 강한 확신을 나타내는 조동사를 고르세요.",
+    "problem": {
+      "passage": "The lights are on and her shoes are by the door. She ___ be at home.",
+      "choices": [
+        "would",
+        "must",
+        "used to",
+        "need"
+      ],
+      "correctIndex": 1,
+      "rationale": "현재 단서로 보아 집에 있음이 틀림없다는 강한 추측이므로 must가 맞다. would와 used to는 이 추측을 나타내지 않고 need도 문맥상 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-068",
+    "type": "blank",
+    "unit": "고1-영어-조동사 가능성",
+    "difficultySeed": 2,
+    "hint": "비가 올 가능성은 있지만 확정할 수 없다는 뒤의 단서를 확인하세요.",
+    "problem": {
+      "passage": "The clouds are getting darker, so it ___ rain before the game ends, but no one can be sure.",
+      "choices": [
+        "must",
+        "may",
+        "can’t",
+        "ought"
+      ],
+      "correctIndex": 1,
+      "rationale": "아무도 확신할 수 없지만 비가 올 가능성을 말하므로 may가 알맞다. must는 강한 확신을, can’t는 불가능을 나타내므로 뒤의 불확실성 단서와 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-069",
+    "type": "blank",
+    "unit": "고1-영어-조동사 의무",
+    "difficultySeed": 3,
+    "hint": "안전 규칙상 반드시 해야 하는 행동을 찾으세요.",
+    "problem": {
+      "passage": "All visitors ___ wear a helmet before entering the construction area.",
+      "choices": [
+        "might",
+        "must",
+        "would",
+        "could"
+      ],
+      "correctIndex": 1,
+      "rationale": "건설 현장 안전 규칙상 반드시 써야 하므로 must가 맞다. might와 could는 가능성·능력, would는 의무를 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-070",
+    "type": "blank",
+    "unit": "고1-영어-조동사 과거능력",
+    "difficultySeed": 1,
+    "hint": "과거에 할 수 있었던 능력을 나타내세요.",
+    "problem": {
+      "passage": "When she was six, Hana ___ already read simple books by herself.",
+      "choices": [
+        "can",
+        "could",
+        "must",
+        "will"
+      ],
+      "correctIndex": 1,
+      "rationale": "과거의 능력이므로 can의 과거형 could가 맞다. must는 의무나 추측이고 can과 will은 시제가 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-071",
+    "type": "blank",
+    "unit": "고1-영어-능동태",
+    "difficultySeed": 2,
+    "hint": "주어가 직접 행동을 하는지 확인하세요.",
+    "problem": {
+      "passage": "The museum guide ___ the visitors through the ancient garden every morning.",
+      "choices": [
+        "is led",
+        "was leading",
+        "leads",
+        "has been led"
+      ],
+      "correctIndex": 2,
+      "rationale": "museum guide가 방문객을 안내하는 주체이므로 능동형 leads가 맞다. 수동형 is led와 has been led는 주어의 역할을 반대로 만든다."
+    }
+  },
+  {
+    "id": "eb-draft-072",
+    "type": "blank",
+    "unit": "고1-영어-수동태",
+    "difficultySeed": 3,
+    "hint": "행동을 받은 대상과 행위자를 구분하세요.",
+    "problem": {
+      "passage": "The missing painting ___ by a security guard behind a storage cabinet.",
+      "choices": [
+        "found",
+        "has finding",
+        "was found",
+        "finds"
+      ],
+      "correctIndex": 2,
+      "rationale": "그림은 경비원에 의해 발견된 대상이므로 was found라는 수동태가 필요하다. found만으로는 be동사가 없고 finds는 능동 의미다."
+    }
+  },
+  {
+    "id": "eb-draft-073",
+    "type": "blank",
+    "unit": "고1-영어-진행 수동태",
+    "difficultySeed": 1,
+    "hint": "현재 진행 중인 수리 상태를 나타내세요.",
+    "problem": {
+      "passage": "The main road ___ by workers, so drivers must use a side street.",
+      "choices": [
+        "repairs",
+        "is repairing",
+        "is being repaired",
+        "has repaired"
+      ],
+      "correctIndex": 2,
+      "rationale": "도로가 지금 수리를 받고 있으므로 현재진행 수동태 is being repaired가 맞다. is repairing은 도로가 수리하는 주체가 된다."
+    }
+  },
+  {
+    "id": "eb-draft-074",
+    "type": "blank",
+    "unit": "고1-영어-절 구조",
+    "difficultySeed": 2,
+    "hint": "빈칸 뒤에 명사절을 이끄는 표현을 확인하세요.",
+    "problem": {
+      "passage": "The coach explained ___ the team had changed its practice schedule.",
+      "choices": [
+        "what",
+        "where",
+        "that",
+        "whose"
+      ],
+      "correctIndex": 2,
+      "rationale": "explained 뒤에는 완전한 절 the team had changed가 오므로 접속사 that이 맞다. what과 where는 절 안의 성분이나 장소를 요구한다."
+    }
+  },
+  {
+    "id": "eb-draft-075",
+    "type": "blank",
+    "unit": "고1-영어-명사절 의문사",
+    "difficultySeed": 3,
+    "hint": "placed 뒤에 장소가 이미 드러나므로 장소를 묻는 명사절을 찾으세요.",
+    "problem": {
+      "passage": "Please tell me ___ you placed the spare key after cleaning the room.",
+      "choices": [
+        "where",
+        "that",
+        "what",
+        "which"
+      ],
+      "correctIndex": 0,
+      "rationale": "placed 뒤에 spare key를 둔 장소를 묻는 명사절이므로 where가 맞다. what은 목적어를 물을 때 쓰지만 이 문장에는 spare key가 이미 목적어로 제시되어 있다."
+    }
+  },
+  {
+    "id": "eb-draft-076",
+    "type": "blank",
+    "unit": "고1-영어-양보 전치사",
+    "difficultySeed": 1,
+    "hint": "명사구와 양보 관계를 연결하세요.",
+    "problem": {
+      "passage": "___ the heavy rain, the outdoor concert began on time.",
+      "choices": [
+        "Because",
+        "Unless",
+        "While",
+        "Despite"
+      ],
+      "correctIndex": 3,
+      "rationale": "뒤에 명사구 the heavy rain이 오고 비에도 불구하고라는 뜻이므로 Despite가 맞다. Because는 원인이고 Unless와 While은 이 명사구 구조에 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-077",
+    "type": "blank",
+    "unit": "고1-영어-논리 조건",
+    "difficultySeed": 2,
+    "hint": "조건이 충족될 때의 결과를 완성하세요.",
+    "problem": {
+      "passage": "You can borrow the laboratory camera ___ you return it before Friday.",
+      "choices": [
+        "even though",
+        "so that",
+        "because of",
+        "as long as"
+      ],
+      "correctIndex": 3,
+      "rationale": "금요일 전에 돌려준다는 조건 아래 빌릴 수 있으므로 as long as가 맞다. even though는 양보, so that은 목적, because of는 명사구 원인 표현이다."
+    }
+  },
+  {
+    "id": "eb-draft-078",
+    "type": "blank",
+    "unit": "고1-영어-시제 일치",
+    "difficultySeed": 3,
+    "hint": "시간 부사절의 미래 의미에 현재형을 쓰세요.",
+    "problem": {
+      "passage": "When the school bell ___, students will return to their classrooms.",
+      "choices": [
+        "rang",
+        "will ring",
+        "has rung",
+        "rings"
+      ],
+      "correctIndex": 3,
+      "rationale": "미래의 시간 부사절에서는 미래 의미라도 현재형 rings를 쓴다. will ring은 when절에서 일반적으로 쓰지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-079",
+    "type": "blank",
+    "unit": "고1-영어-동사 목적어 절",
+    "difficultySeed": 1,
+    "hint": "conclusion 뒤에 완전한 사실을 연결하는 표현을 고르세요.",
+    "problem": {
+      "passage": "The evidence supports the conclusion ___ most students prefer studying in the library.",
+      "choices": [
+        "what",
+        "where",
+        "why",
+        "that"
+      ],
+      "correctIndex": 3,
+      "rationale": "conclusion 뒤에 완전한 사실절 most students prefer를 연결하므로 that이 맞다. what과 where는 절 안에서 각각 사물이나 장소의 빈자리를 요구하고 why는 이유를 나타내므로 이 사실을 연결하지 못한다."
+    }
+  },
+  {
+    "id": "eb-draft-080",
+    "type": "blank",
+    "unit": "고1-영어-논리 부정",
+    "difficultySeed": 2,
+    "hint": "앞 절의 조건이 없으면 결과가 불가능함을 나타내세요.",
+    "problem": {
+      "passage": "The seedlings will not grow well ___ they receive enough sunlight each day.",
+      "choices": [
+        "if",
+        "although",
+        "whereas",
+        "unless"
+      ],
+      "correctIndex": 3,
+      "rationale": "충분한 햇빛을 받지 않으면 잘 자라지 못한다는 뜻이므로 unless가 맞다. if는 조건의 방향을 바꾸고 although와 whereas는 대조·양보를 만든다."
+    }
+  },
+  {
+    "id": "eb-draft-081",
+    "type": "blank",
+    "unit": "고1-영어-원인 해석",
+    "difficultySeed": 1,
+    "hint": "첫 문장이 뒤 결과의 원인인지 살펴보세요.",
+    "problem": {
+      "passage": "The sidewalk was covered with ice. ___, the school bus arrived late.",
+      "choices": [
+        "As a result",
+        "For example",
+        "In contrast",
+        "In addition"
+      ],
+      "correctIndex": 0,
+      "rationale": "얼음으로 길이 미끄러워 버스가 늦은 결과이므로 As a result가 맞다. 나머지는 예시·대조·추가 관계다."
+    }
+  },
+  {
+    "id": "eb-draft-082",
+    "type": "blank",
+    "unit": "고1-영어-대조 해석",
+    "difficultySeed": 2,
+    "hint": "두 문장이 예상과 반대되는지 확인하세요.",
+    "problem": {
+      "passage": "The jacket looked thin. ___, it kept Minho warm during the hike.",
+      "choices": [
+        "However",
+        "Therefore",
+        "Otherwise",
+        "Likewise"
+      ],
+      "correctIndex": 0,
+      "rationale": "얇아 보였지만 따뜻하게 해 주었다는 대조이므로 However가 알맞다. Therefore는 결과이고 Likewise는 유사성을 나타낸다."
+    }
+  },
+  {
+    "id": "eb-draft-083",
+    "type": "blank",
+    "unit": "고1-영어-지시어",
+    "difficultySeed": 3,
+    "hint": "앞 문장의 단수 사물을 가리키는 말을 고르세요.",
+    "problem": {
+      "passage": "Sora left her water bottle on the train. She went back to find ___.",
+      "choices": [
+        "it",
+        "them",
+        "one",
+        "those"
+      ],
+      "correctIndex": 0,
+      "rationale": "앞서 나온 단수 물건 water bottle을 목적어로 다시 가리키므로 it이 맞다. them과 those는 복수이고 one은 특정한 그 물건을 가리키는 데 적절하지 않다."
+    }
+  },
+  {
+    "id": "eb-draft-084",
+    "type": "blank",
+    "unit": "고1-영어-함의 추론",
+    "difficultySeed": 1,
+    "hint": "불이 켜진 채로 남은 뒤의 행동과 before leaving을 연결하세요.",
+    "problem": {
+      "passage": "The classroom lights were still on after the last club meeting. Someone had forgotten to ___ the lights before leaving.",
+      "choices": [
+        "turn off",
+        "pick up",
+        "look for",
+        "write down"
+      ],
+      "correctIndex": 0,
+      "rationale": "떠나기 전에 불을 꺼야 했지만 불이 켜져 있었으므로 turn off가 맞다. pick up, look for, write down은 조명을 끄는 행동을 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-085",
+    "type": "blank",
+    "unit": "고1-영어-원인 결과",
+    "difficultySeed": 2,
+    "hint": "앞 문장의 문제를 해결하는 결과를 찾으세요.",
+    "problem": {
+      "passage": "The printer had no paper. The secretary could not ___ the report.",
+      "choices": [
+        "print",
+        "fold",
+        "carry",
+        "erase"
+      ],
+      "correctIndex": 0,
+      "rationale": "종이가 없어서 보고서를 print할 수 없으므로 print가 맞다. 나머지는 종이 부족과 직접 연결되지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-086",
+    "type": "blank",
+    "unit": "고1-영어-대조 해석",
+    "difficultySeed": 3,
+    "hint": "양보 뒤에 이어지는 예상 밖의 결과를 찾으세요.",
+    "problem": {
+      "passage": "The restaurant was small. ___, every table was full by noon.",
+      "choices": [
+        "For instance",
+        "However",
+        "As a result",
+        "Meanwhile"
+      ],
+      "correctIndex": 1,
+      "rationale": "식당이 작다는 예상과 달리 모든 자리가 찼으므로 However가 맞다. As a result는 원인과 결과를 나타내 문맥이 달라진다."
+    }
+  },
+  {
+    "id": "eb-draft-087",
+    "type": "blank",
+    "unit": "고1-영어-지시어",
+    "difficultySeed": 1,
+    "hint": "앞에서 말한 복수 대상을 목적어로 받으세요.",
+    "problem": {
+      "passage": "The volunteers sorted the books by subject. Then they placed ___ on different shelves.",
+      "choices": [
+        "it",
+        "them",
+        "one",
+        "this"
+      ],
+      "correctIndex": 1,
+      "rationale": "복수 명사 books를 목적어로 다시 받으므로 them이 맞다. it과 this는 단수이고 one은 단수 대용어다."
+    }
+  },
+  {
+    "id": "eb-draft-088",
+    "type": "blank",
+    "unit": "고1-영어-함의 추론",
+    "difficultySeed": 2,
+    "hint": "문을 긁는 개가 밖으로 나가도록 하는 동사구를 완성하세요.",
+    "problem": {
+      "passage": "The dog kept scratching at the door. Its owner decided to ___ it out.",
+      "choices": [
+        "hide",
+        "let",
+        "break",
+        "lose"
+      ],
+      "correctIndex": 1,
+      "rationale": "문을 긁는 개를 밖으로 내보내기로 했으므로 let it out이 자연스럽다. hide, break, lose는 개를 밖으로 내보낸다는 뜻을 만들지 못한다."
+    }
+  },
+  {
+    "id": "eb-draft-089",
+    "type": "blank",
+    "unit": "고1-영어-원인 해석",
+    "difficultySeed": 3,
+    "hint": "두 문장의 이유와 결과를 연결하세요.",
+    "problem": {
+      "passage": "The museum closed one room for repairs. Visitors had to ___ a different entrance.",
+      "choices": [
+        "damage",
+        "use",
+        "forget",
+        "empty"
+      ],
+      "correctIndex": 1,
+      "rationale": "한 입구를 닫았으므로 방문객은 다른 입구를 use해야 한다. 다른 보기들은 결과 행동을 나타내지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-090",
+    "type": "blank",
+    "unit": "고1-영어-대조 해석",
+    "difficultySeed": 1,
+    "hint": "앞 문장과 반대되는 사실을 이어 보세요.",
+    "problem": {
+      "passage": "The forecast predicted sunshine. ___, rain began before the picnic started.",
+      "choices": [
+        "In fact",
+        "However",
+        "For example",
+        "Therefore"
+      ],
+      "correctIndex": 1,
+      "rationale": "맑을 것이라는 예보와 비가 온 사실이 반대되므로 However가 맞다. Therefore는 논리적 결과를 만들지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-091",
+    "type": "blank",
+    "unit": "고1-영어-지시어",
+    "difficultySeed": 2,
+    "hint": "앞의 복수 대상을 주어로 다시 가리키세요.",
+    "problem": {
+      "passage": "The keys were on the desk. ___ belonged to the office manager.",
+      "choices": [
+        "It",
+        "This",
+        "They",
+        "One"
+      ],
+      "correctIndex": 2,
+      "rationale": "복수 명사 keys를 주어로 받으므로 They가 맞다. It과 This는 단수이고 One도 단수이다."
+    }
+  },
+  {
+    "id": "eb-draft-092",
+    "type": "blank",
+    "unit": "고1-영어-함의 추론",
+    "difficultySeed": 3,
+    "hint": "젖은 우산에서 추론되는 행동을 고르세요.",
+    "problem": {
+      "passage": "Jina placed her wet umbrella beside the door. She wanted it to ___ before class.",
+      "choices": [
+        "borrow",
+        "repeat",
+        "dry",
+        "freeze"
+      ],
+      "correctIndex": 2,
+      "rationale": "젖은 우산을 문 옆에 둔 목적은 말리는 것이므로 dry가 맞다. 나머지는 우산 상태와 연결되지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-093",
+    "type": "blank",
+    "unit": "고1-영어-원인 결과",
+    "difficultySeed": 1,
+    "hint": "고장 난 신호등이 만든 결과를 확인하세요.",
+    "problem": {
+      "passage": "The traffic light stopped working. Cars began to ___ slowly through the intersection.",
+      "choices": [
+        "shine",
+        "invite",
+        "move",
+        "translate"
+      ],
+      "correctIndex": 2,
+      "rationale": "신호등이 작동하지 않아 차들이 교차로를 천천히 move하므로 move가 맞다. 다른 동사는 교통 흐름과 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-094",
+    "type": "blank",
+    "unit": "고1-영어-대조 해석",
+    "difficultySeed": 2,
+    "hint": "두 번째 문장이 첫 예상과 다른지 확인하세요.",
+    "problem": {
+      "passage": "The box was heavy. ___, the child lifted it without help.",
+      "choices": [
+        "Because",
+        "For example",
+        "However",
+        "Similarly"
+      ],
+      "correctIndex": 2,
+      "rationale": "상자가 무거웠지만 아이가 혼자 들었다는 대조이므로 However가 알맞다. Because는 원인 관계를 만들고 Similarly는 유사성을 나타낸다."
+    }
+  },
+  {
+    "id": "eb-draft-095",
+    "type": "blank",
+    "unit": "고1-영어-지시어",
+    "difficultySeed": 3,
+    "hint": "앞의 단수 장소를 가리키는 표현을 고르세요.",
+    "problem": {
+      "passage": "The new science lab has better equipment than the old ___.",
+      "choices": [
+        "ones",
+        "them",
+        "one",
+        "those"
+      ],
+      "correctIndex": 2,
+      "rationale": "앞의 단수 장소 lab을 대신하는 단수 대용어 one이 맞다. ones와 those는 복수이고 them은 목적격 복수 대명사다."
+    }
+  },
+  {
+    "id": "eb-draft-096",
+    "type": "blank",
+    "unit": "고1-영어-함의 추론",
+    "difficultySeed": 1,
+    "hint": "빈 접시가 암시하는 상황을 고르세요.",
+    "problem": {
+      "passage": "The plates were empty, and the guests asked for more rice. They must have ___ the first serving.",
+      "choices": [
+        "shared",
+        "hidden",
+        "washed",
+        "enjoyed"
+      ],
+      "correctIndex": 3,
+      "rationale": "빈 접시와 밥을 더 달라는 행동으로 보아 첫 번째 음식을 맛있게 먹었다는 enjoyed가 맞다. 다른 동사는 그 단서에서 추론되지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-097",
+    "type": "blank",
+    "unit": "고1-영어-원인 결과",
+    "difficultySeed": 2,
+    "hint": "앞 문장 때문에 필요한 행동을 찾으세요.",
+    "problem": {
+      "passage": "The wind blew the papers across the yard. Daniel ran to ___ them before they got wet.",
+      "choices": [
+        "paint",
+        "lend",
+        "invite",
+        "collect"
+      ],
+      "correctIndex": 3,
+      "rationale": "바람에 흩어진 종이를 젖기 전에 모아야 하므로 collect가 맞다. 나머지는 종이를 되찾는 행동이 아니다."
+    }
+  },
+  {
+    "id": "eb-draft-098",
+    "type": "blank",
+    "unit": "고1-영어-대조 해석",
+    "difficultySeed": 3,
+    "hint": "짧은 설명이 모든 질문에 답했다는 예상 밖의 대조를 찾으세요.",
+    "problem": {
+      "passage": "The guide's explanation was brief. ___, it answered all of the students' questions.",
+      "choices": [
+        "Before",
+        "Because",
+        "For example",
+        "However"
+      ],
+      "correctIndex": 3,
+      "rationale": "설명이 짧았지만 모든 질문에 답했다는 예상 밖의 대조이므로 However가 맞다. Before와 Because는 이 두 문장의 관계를 만들지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-099",
+    "type": "blank",
+    "unit": "고1-영어-지시어",
+    "difficultySeed": 1,
+    "hint": "앞의 복수 대상을 소유 관계로 나타내세요.",
+    "problem": {
+      "passage": "The two bicycles belong to my cousins. ___ tires need more air.",
+      "choices": [
+        "Its",
+        "One",
+        "That",
+        "Their"
+      ],
+      "correctIndex": 3,
+      "rationale": "복수 주어 bicycles의 소유를 나타내므로 Their가 맞다. Its는 단수 소유격이고 One과 That은 이 복수 소유 관계에 맞지 않는다."
+    }
+  },
+  {
+    "id": "eb-draft-100",
+    "type": "blank",
+    "unit": "고1-영어-함의 추론",
+    "difficultySeed": 2,
+    "hint": "창문이 닫힌 이유를 문맥에서 추론하세요.",
+    "problem": {
+      "passage": "The baby was sleeping in the next room. Everyone spoke quietly and kept the door ___.",
+      "choices": [
+        "open",
+        "bright",
+        "heavy",
+        "closed"
+      ],
+      "correctIndex": 3,
+      "rationale": "아기를 깨우지 않으려 문을 닫아 두었으므로 closed가 맞다. 나머지는 조용히 말한 행동과 연결되는 상태가 아니다."
+    }
+  }
+]

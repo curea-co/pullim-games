@@ -10,6 +10,7 @@ import {
   type CustomCurriculum,
   type CustomWordMatchCard,
 } from "@/lib/core";
+import { MANAGE_ENABLED } from "@/lib/features";
 
 const GAME_ID = "custom-word-match";
 
@@ -52,7 +53,9 @@ export default function CustomWordMatchGame() {
       completionMessage={(n) => `${n}묶음, 내 카드로 풀었어요.`}
       emptyMessage={{
         title: "아직 만든 매칭 카드가 없어요.",
-        cta: { label: "관리에서 만들기", href: "/manage/content" },
+        cta: MANAGE_ENABLED
+          ? { label: "관리에서 만들기", href: "/manage/content" }
+          : undefined,
       }}
     />
   );

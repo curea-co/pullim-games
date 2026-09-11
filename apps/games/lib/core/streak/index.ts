@@ -115,13 +115,15 @@ export function loadStreak(): StreakState {
   }
 }
 
-export function saveStreak(state: StreakState): void {
+export function saveStreak(state: StreakState): boolean {
   const storage = getStorage();
-  if (!storage) return;
+  if (!storage) return false;
   try {
     storage.setItem(STORAGE_KEY, JSON.stringify(state));
+    return true;
   } catch {
-    // silent — 학습 진행 보호
+    // 실패를 호출자에게 알리되 학습 진행은 유지한다.
+    return false;
   }
 }
 

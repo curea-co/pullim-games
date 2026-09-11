@@ -1,0 +1,2802 @@
+[
+  {
+    "id": "ht-draft-001",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-1",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-002",
+    "type": "timeline",
+    "unit": "조선 전기-1",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-003",
+    "type": "timeline",
+    "unit": "근현대 한국사-1",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-004",
+    "type": "timeline",
+    "unit": "세계사 근대-1",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-005",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-2",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-006",
+    "type": "timeline",
+    "unit": "조선 전기-2",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-007",
+    "type": "timeline",
+    "unit": "근현대 한국사-2",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-008",
+    "type": "timeline",
+    "unit": "세계사 근대-2",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-009",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-3",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-010",
+    "type": "timeline",
+    "unit": "조선 전기-3",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-011",
+    "type": "timeline",
+    "unit": "근현대 한국사-3",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-012",
+    "type": "timeline",
+    "unit": "세계사 근대-3",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-013",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-4",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-014",
+    "type": "timeline",
+    "unit": "조선 전기-4",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-015",
+    "type": "timeline",
+    "unit": "근현대 한국사-4",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-016",
+    "type": "timeline",
+    "unit": "세계사 근대-4",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-017",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-5",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-018",
+    "type": "timeline",
+    "unit": "조선 전기-5",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-019",
+    "type": "timeline",
+    "unit": "근현대 한국사-5",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-020",
+    "type": "timeline",
+    "unit": "세계사 근대-5",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-021",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-6",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-022",
+    "type": "timeline",
+    "unit": "조선 전기-6",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-023",
+    "type": "timeline",
+    "unit": "근현대 한국사-6",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-024",
+    "type": "timeline",
+    "unit": "세계사 근대-6",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-025",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-7",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-026",
+    "type": "timeline",
+    "unit": "조선 전기-7",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-027",
+    "type": "timeline",
+    "unit": "근현대 한국사-7",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-028",
+    "type": "timeline",
+    "unit": "세계사 근대-7",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-029",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-8",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-030",
+    "type": "timeline",
+    "unit": "조선 전기-8",
+    "difficultySeed": 1,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-031",
+    "type": "timeline",
+    "unit": "근현대 한국사-8",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-032",
+    "type": "timeline",
+    "unit": "세계사 근대-8",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-033",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-9",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-034",
+    "type": "timeline",
+    "unit": "조선 전기-9",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-035",
+    "type": "timeline",
+    "unit": "근현대 한국사-9",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-036",
+    "type": "timeline",
+    "unit": "세계사 근대-9",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-037",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-10",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-038",
+    "type": "timeline",
+    "unit": "조선 전기-10",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-039",
+    "type": "timeline",
+    "unit": "근현대 한국사-10",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-040",
+    "type": "timeline",
+    "unit": "세계사 근대-10",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-041",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-11",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-042",
+    "type": "timeline",
+    "unit": "조선 전기-11",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-043",
+    "type": "timeline",
+    "unit": "근현대 한국사-11",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-044",
+    "type": "timeline",
+    "unit": "세계사 근대-11",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-045",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-12",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-046",
+    "type": "timeline",
+    "unit": "조선 전기-12",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-047",
+    "type": "timeline",
+    "unit": "근현대 한국사-12",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-048",
+    "type": "timeline",
+    "unit": "세계사 근대-12",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-049",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-13",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-050",
+    "type": "timeline",
+    "unit": "조선 전기-13",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-051",
+    "type": "timeline",
+    "unit": "근현대 한국사-13",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-052",
+    "type": "timeline",
+    "unit": "세계사 근대-13",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-053",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-14",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-054",
+    "type": "timeline",
+    "unit": "조선 전기-14",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-055",
+    "type": "timeline",
+    "unit": "근현대 한국사-14",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-056",
+    "type": "timeline",
+    "unit": "세계사 근대-14",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-057",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-15",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-058",
+    "type": "timeline",
+    "unit": "조선 전기-15",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-059",
+    "type": "timeline",
+    "unit": "근현대 한국사-15",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-060",
+    "type": "timeline",
+    "unit": "세계사 근대-15",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-061",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-16",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-062",
+    "type": "timeline",
+    "unit": "조선 전기-16",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-063",
+    "type": "timeline",
+    "unit": "근현대 한국사-16",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-064",
+    "type": "timeline",
+    "unit": "세계사 근대-16",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-065",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-17",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-066",
+    "type": "timeline",
+    "unit": "조선 전기-17",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-067",
+    "type": "timeline",
+    "unit": "근현대 한국사-17",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-068",
+    "type": "timeline",
+    "unit": "세계사 근대-17",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-069",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-18",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-070",
+    "type": "timeline",
+    "unit": "조선 전기-18",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-071",
+    "type": "timeline",
+    "unit": "근현대 한국사-18",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-072",
+    "type": "timeline",
+    "unit": "세계사 근대-18",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-073",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-19",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-074",
+    "type": "timeline",
+    "unit": "조선 전기-19",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-075",
+    "type": "timeline",
+    "unit": "근현대 한국사-19",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-076",
+    "type": "timeline",
+    "unit": "세계사 근대-19",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-077",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-20",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-078",
+    "type": "timeline",
+    "unit": "조선 전기-20",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-079",
+    "type": "timeline",
+    "unit": "근현대 한국사-20",
+    "difficultySeed": 3,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-080",
+    "type": "timeline",
+    "unit": "세계사 근대-20",
+    "difficultySeed": 2,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-081",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-21",
+    "difficultySeed": 5,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-082",
+    "type": "timeline",
+    "unit": "조선 전기-21",
+    "difficultySeed": 4,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-083",
+    "type": "timeline",
+    "unit": "근현대 한국사-21",
+    "difficultySeed": 5,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-084",
+    "type": "timeline",
+    "unit": "세계사 근대-21",
+    "difficultySeed": 4,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-085",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-22",
+    "difficultySeed": 5,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-086",
+    "type": "timeline",
+    "unit": "조선 전기-22",
+    "difficultySeed": 4,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-087",
+    "type": "timeline",
+    "unit": "근현대 한국사-22",
+    "difficultySeed": 5,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-088",
+    "type": "timeline",
+    "unit": "세계사 근대-22",
+    "difficultySeed": 4,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-089",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-23",
+    "difficultySeed": 5,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-090",
+    "type": "timeline",
+    "unit": "조선 전기-23",
+    "difficultySeed": 4,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-091",
+    "type": "timeline",
+    "unit": "근현대 한국사-23",
+    "difficultySeed": 5,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-092",
+    "type": "timeline",
+    "unit": "세계사 근대-23",
+    "difficultySeed": 4,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-093",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-24",
+    "difficultySeed": 5,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-094",
+    "type": "timeline",
+    "unit": "조선 전기-24",
+    "difficultySeed": 4,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-095",
+    "type": "timeline",
+    "unit": "근현대 한국사-24",
+    "difficultySeed": 5,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-096",
+    "type": "timeline",
+    "unit": "세계사 근대-24",
+    "difficultySeed": 4,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-097",
+    "type": "timeline",
+    "unit": "삼국 시대~고려 건국-25",
+    "difficultySeed": 5,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "삼국 시대~고려 건국",
+      "events": [
+        {
+          "title": "고구려 건국",
+          "year": -37
+        },
+        {
+          "title": "신라 화랑도 정비",
+          "year": 576
+        },
+        {
+          "title": "신라 삼국 통일",
+          "year": 676
+        },
+        {
+          "title": "고려 건국",
+          "year": 918
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-098",
+    "type": "timeline",
+    "unit": "조선 전기-25",
+    "difficultySeed": 4,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "조선 전기",
+      "events": [
+        {
+          "title": "조선 건국",
+          "year": 1392
+        },
+        {
+          "title": "훈민정음 창제",
+          "year": 1443
+        },
+        {
+          "title": "계유정난",
+          "year": 1453
+        },
+        {
+          "title": "임진왜란 발발",
+          "year": 1592
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-099",
+    "type": "timeline",
+    "unit": "근현대 한국사-25",
+    "difficultySeed": 5,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "근현대 한국사",
+      "events": [
+        {
+          "title": "강화도 조약",
+          "year": 1876
+        },
+        {
+          "title": "한일 병합",
+          "year": 1910
+        },
+        {
+          "title": "광복",
+          "year": 1945
+        },
+        {
+          "title": "대한민국 정부 수립",
+          "year": 1948
+        }
+      ]
+    }
+  },
+  {
+    "id": "ht-draft-100",
+    "type": "timeline",
+    "unit": "세계사 근대-25",
+    "difficultySeed": 4,
+    "hint": "연도와 사건의 선후를 함께 확인",
+    "problem": {
+      "era": "세계사 근대",
+      "events": [
+        {
+          "title": "미국 독립 선언",
+          "year": 1776
+        },
+        {
+          "title": "프랑스 혁명 시작",
+          "year": 1789
+        },
+        {
+          "title": "빈 회의",
+          "year": 1815
+        },
+        {
+          "title": "제1차 세계 대전 발발",
+          "year": 1914
+        }
+      ]
+    }
+  }
+]

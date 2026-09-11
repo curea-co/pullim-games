@@ -31,7 +31,7 @@ const ComponentCardSchema = z.object({
 export const LetterAssemblyProblemSchema = z
   .object({
     target: TargetSchema,
-    /** 슬롯 배열 — 좌→우 (V0) 순서로 표시. */
+    /** 슬롯 정답 순서. 기본 좌→우이며 森은 위→아래 왼쪽→아래 오른쪽으로 표시. */
     slots: z.array(SlotSchema).min(2).max(3),
     /** 카드 풀 (정답 N + distractor 0~M). 슬롯 수 이상이어야 함. */
     cards: z.array(ComponentCardSchema).min(2),

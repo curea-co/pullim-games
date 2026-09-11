@@ -5,9 +5,10 @@
 // 모든 뷰포트에서 노출(모바일 포함) — URL 직접 입력 없이도 계정 기능 도달 가능.
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
+import { AuthCta } from "@/components/auth/AuthCta";
 import { usePathname, useRouter } from "next/navigation";
 import { getAuthState, logout, type AuthUser } from "@/lib/auth/client";
+import { usePullimRealName } from "@/lib/auth/use-pullim-real-name";
 import { getPlayer, resetGuestSession, type Player } from "@/lib/core/player";
 
 export function AuthMenu() {
@@ -23,6 +24,8 @@ export function AuthMenu() {
   const [unavailable, setUnavailable] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [busy, setBusy] = useState(false);
+  // 프로필 라벨 실명(auth /me.name) — 비차단(게이트와 분리, Codex #153). 오기 전엔 displayName 폴백.
+  const realName = usePullimRealName(!!user);
 
   useEffect(() => {
     let alive = true;
@@ -70,23 +73,23 @@ export function AuthMenu() {
 
   // 첫 렌더(로드 전)는 레이아웃 시프트 방지용 자리만 차지.
   if (!loaded) {
-    return <span aria-hidden className="inline-block h-9 w-16" />;
+    return <span aria-hidden className="inline-block h-11 w-16" />;
   }
 
   // auth 미확정(게스트도 없음) — 로그아웃/로그인 어느 쪽도 단정 불가. 중립 placeholder.
   if (!user && !player && unavailable) {
-    return <span aria-hidden className="inline-block h-9 w-16" />;
+    return <span aria-hidden className="inline-block h-11 w-16" />;
   }
 
   // 회원도 게스트도 아니고 확정됨 → 로그인 진입(주로 랜딩).
   if (!user && !player) {
     return (
-      <Link
-        href="/login"
-        className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
+      <AuthCta
+        kind="login"
+        className="inline-flex h-11 items-center rounded-button px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900"
       >
         로그인
-      </Link>
+      </AuthCta>
     );
   }
 
@@ -101,7 +104,7 @@ export function AuthMenu() {
           type="button"
           onClick={onGuestExit}
           title="이 기기의 게스트 학습 기록을 모두 지우고 나갑니다"
-          className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-accent-negative hover:bg-pullim-slate-100"
+          className="inline-flex h-11 items-center rounded-button px-3 text-sm font-medium text-accent-negative hover:bg-pullim-slate-100"
         >
           기록 지우고 나가기
         </button>
@@ -109,21 +112,23 @@ export function AuthMenu() {
     );
   }
 
-  // 회원 — 이메일 + 로그아웃. (위 가드들로 여기선 user 비-null 보장.)
+  // 회원 — 표시명 + 로그아웃. (위 가드들로 여기선 user 비-null 보장.)
+  // 표시명 우선순위: 실명(/me.name) → pullim displayName(/games/me #330) → legacy email → "회원".
   if (!user) return null;
+  const memberLabel = realName || user.displayName || user.email || "회원";
   return (
     <div className="flex items-center gap-1">
       <span
         className="hidden max-w-[10rem] truncate text-xs font-medium text-pullim-slate-500 sm:inline"
-        title={user.email}
+        title={memberLabel}
       >
-        {user.email}
+        {memberLabel}
       </span>
       <button
         type="button"
         onClick={onLogout}
         disabled={busy}
-        className="inline-flex h-9 items-center rounded-md px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900 disabled:opacity-50"
+        className="inline-flex h-11 items-center rounded-button px-3 text-sm font-medium text-pullim-slate-700 hover:bg-pullim-slate-100 hover:text-pullim-slate-900 disabled:opacity-50"
       >
         {busy ? "…" : "로그아웃"}
       </button>

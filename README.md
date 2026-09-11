@@ -43,7 +43,7 @@ pullim-games/                    # 모노레포 루트
 ├── daily_outcome/     # PM 일일 보고 (CONVENTION.md 기반)
 ├── .github/workflows/ # ci · e2e-nightly · codex-review
 └── apps/
-    └── games/                   # ← 앱 본체 (@pullim-games/games, 포트 3033)
+    └── games/                   # ← 앱 본체 (@pullim-games/games, 포트 3004)
         ├── package.json next.config.ts tsconfig.json tailwind.config.ts
         ├── e2e/                 # playwright e2e
         ├── scripts/generate-registry.ts   # 레지스트리 자동 생성 (predev/prebuild)
@@ -58,13 +58,13 @@ pullim-games/                    # 모노레포 루트
 
 ```bash
 bun install
-bun dev          # http://localhost:3033 — predev에서 gen:registry 자동 실행
+bun dev          # http://localhost:3004 — predev에서 gen:registry 자동 실행
 ```
 
 ## 명령
 
 ```bash
-bun dev               # 개발 서버 (포트 3033)
+bun dev               # 개발 서버 (포트 3004)
 bun run build         # production 빌드
 bun run gen:registry  # 게임 레지스트리 수동 갱신
 bun run typecheck     # turbo → tsc --noEmit (apps/games)
@@ -94,7 +94,7 @@ bunx vercel --prod    # 수동 배포 (fallback)
 |---|---|---|
 | origin | 독립 프로젝트 | `pullim-study-demo` 추출본 |
 | Next.js | 15 | 16 |
-| 포트 | 3033 | 3030 |
+| 포트 (local) | 3004 (`proc/spec/09 §9.1`) | 각 repo 관할 |
 | 권위 문서 | `proc/spec/01~10` | `input/docs-archive/*.md` |
 | proc 5번째 폴더 | `audit/` | `knowhow/` |
 

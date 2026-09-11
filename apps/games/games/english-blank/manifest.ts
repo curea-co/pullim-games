@@ -10,7 +10,7 @@ const manifest: GameManifest = {
     id: "english-blank",
     title: "영어 빈칸 추론",
     subject: "영어",
-    unit: "수능 빈칸",
+    unit: "빈칸 추론",
     tagline: "정답을 고르면 글의 흐름이 이어져요",
     estimatedMinutes: 3,
     status: "available",

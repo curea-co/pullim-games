@@ -1,4 +1,5 @@
-// vocab-typing 카드 풀 — 5장, 수능 빈출 한자성어/한자어 (한글 음 입력).
+import questions from "./vocab-typing-questions.json";
+// vocab-typing 카드 풀 — 5장, 고1 빈출 한자성어/한자어 (한글 음 입력).
 
 import { VocabTypingCardSchema } from "../schema";
 import type { VocabTypingCard } from "../schema";
@@ -7,7 +8,7 @@ const RAW_CARDS: VocabTypingCard[] = [
   {
     id: "vt-001",
     type: "vocab-typing",
-    unit: "고2-국어-한자어",
+    unit: "고1-국어-한자어",
     difficultySeed: 1,
     hint: "두 글자",
     problem: {
@@ -19,7 +20,7 @@ const RAW_CARDS: VocabTypingCard[] = [
   {
     id: "vt-002",
     type: "vocab-typing",
-    unit: "고2-국어-한자성어",
+    unit: "고1-국어-한자성어",
     difficultySeed: 3,
     hint: "잠자코 아무 대답도 안 함",
     problem: {
@@ -31,7 +32,7 @@ const RAW_CARDS: VocabTypingCard[] = [
   {
     id: "vt-003",
     type: "vocab-typing",
-    unit: "고2-국어-한자성어",
+    unit: "고1-국어-한자성어",
     difficultySeed: 3,
     hint: "한 가지 일로 두 가지 이익",
     problem: {
@@ -43,7 +44,7 @@ const RAW_CARDS: VocabTypingCard[] = [
   {
     id: "vt-004",
     type: "vocab-typing",
-    unit: "고2-국어-한자성어",
+    unit: "고1-국어-한자성어",
     difficultySeed: 4,
     hint: "이를 갈며 마음을 썩임",
     problem: {
@@ -55,7 +56,7 @@ const RAW_CARDS: VocabTypingCard[] = [
   {
     id: "vt-005",
     type: "vocab-typing",
-    unit: "고2-국어-한자성어",
+    unit: "고1-국어-한자성어",
     difficultySeed: 4,
     hint: "여러 시문이 모두 비슷비슷",
     problem: {
@@ -66,7 +67,7 @@ const RAW_CARDS: VocabTypingCard[] = [
   },
 ];
 
-export const cards: VocabTypingCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: VocabTypingCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const r = VocabTypingCardSchema.safeParse(raw);
   if (!r.success) {
     throw new Error(

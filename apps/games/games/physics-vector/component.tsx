@@ -32,8 +32,8 @@ type Phase =
 
 const X_MIN = -5;
 const X_MAX = 6;
-const Y_MIN = -3;
-const Y_MAX = 5;
+const Y_MIN = -5;
+const Y_MAX = 6;
 const VIEWBOX = { width: 264, height: 192 };
 
 function projectX(x: number): number {
@@ -47,6 +47,7 @@ export default function PhysicsVectorGame() {
   const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [rx, setRx] = useState(1);
   const [ry, setRy] = useState(0);
@@ -57,7 +58,7 @@ export default function PhysicsVectorGame() {
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
-    if (all.size > 0) {
+    if (all.size > 0 || mode === "review-queue") {
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -81,13 +82,14 @@ export default function PhysicsVectorGame() {
     setRy(0);
     setWrongCount(0);
     setPhase("playing");
-  }, [cardIndex]);
+  }, [cardIndex, sessionRound]);
 
   if (phase === "completed") {
     return (
       <CompletionScreen
         totalCards={cards.length}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           void logEvent({
             gameId: GAME_ID,
@@ -198,6 +200,9 @@ export default function PhysicsVectorGame() {
           {card.hint && (
             <p className="mt-1 text-helper text-type-secondary">힌트 · {card.hint}</p>
           )}
+          <p className="mt-2 text-helper text-type-primary">
+            주어진 벡터 (x, y): {card.problem.vectors.map((v) => `${v.label} = (${v.components.join(", ")})`).join(" · ")}
+          </p>
           {phase === "reveal" && (
             <div className="mt-3">
               <RevealBanner attemptCount={wrongCount} />

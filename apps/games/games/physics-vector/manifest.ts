@@ -10,7 +10,7 @@ const manifest: GameManifest = {
     id: "physics-vector",
     title: "물리 벡터 합성",
     subject: "과학",
-    unit: "물리I",
+    unit: "통합과학",
     tagline: "두 화살표를 잡으면 합벡터가 그려져요",
     estimatedMinutes: 3,
     status: "available",

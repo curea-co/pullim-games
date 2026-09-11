@@ -50,6 +50,7 @@ export default function GeneticsPunnettGame() {
   const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [ratio, setRatio] = useState<number[]>([]);
   const [wrongCount, setWrongCount] = useState(0);
@@ -59,7 +60,7 @@ export default function GeneticsPunnettGame() {
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
-    if (all.size > 0) {
+    if (all.size > 0 || mode === "review-queue") {
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -85,7 +86,7 @@ export default function GeneticsPunnettGame() {
     setRatio(new Array(n).fill(0));
     setWrongCount(0);
     setPhase("playing");
-  }, [cardIndex, card]);
+  }, [cardIndex, card, sessionRound]);
 
   // 부모 gametes + 자손 격자 + 카테고리 라벨 — 카드 변경 시 재계산
   const computed = useMemo(() => {
@@ -104,6 +105,7 @@ export default function GeneticsPunnettGame() {
       <CompletionScreen
         totalCards={cards.length}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           void logEvent({
             gameId: GAME_ID,

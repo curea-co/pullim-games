@@ -2,19 +2,27 @@
 // plan: proc/plan/2026-05-19_codebase-review-followup.md Phase 1 C2.
 //
 // memory 룰: feedback_user_intent_literal — "사용자가 X했는데 틀렸대. 맞잖아" = 시스템 fix.
+//
+// 2026-07-02: seedGuestSession 추가 — localStorage.clear() 후 player profile 재주입.
+// plan: proc/plan/2026-06-30_e2e-infra-fix.md §2 H2 fix.
 
 import { test, expect } from "@playwright/test";
+import { seedGuestSession } from "./helpers/auth";
 
-test("대문자로 시작한 정답도 정답으로 인식 — Achieve (실제 answer: achieve)", async ({
+test("대문자로 시작한 정답도 정답으로 인식 — Borrow (실제 answer: borrow)", async ({
   page,
+  context,
 }) => {
+  // storageState 가 초기 플레이어 프로필을 제공하지만, /home goto + localStorage.clear() 이후
+  // player profile 이 지워지므로 game goto 전에 재주입한다.
   await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
 
+  await seedGuestSession(page, context);
   await page.goto("/games/english-vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
   await input.waitFor({ state: "visible" });
-  await input.fill("Achieve");
+  await input.fill("Borrow");
   await page.getByRole("button", { name: "확인" }).click();
 
   // 오답이면 wrongCount 증가 (wrong-flash) — 본 fix 후에는 발생 X
@@ -26,14 +34,15 @@ test("대문자로 시작한 정답도 정답으로 인식 — Achieve (실제 a
   await expect(nextBtn).toBeEnabled();
 });
 
-test("전부 대문자 입력 — ACHIEVE", async ({ page }) => {
+test("전부 대문자 입력 — BORROW", async ({ page, context }) => {
   await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
 
+  await seedGuestSession(page, context);
   await page.goto("/games/english-vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
   await input.waitFor({ state: "visible" });
-  await input.fill("ACHIEVE");
+  await input.fill("BORROW");
   await page.getByRole("button", { name: "확인" }).click();
 
   await expect(page.getByText("오답")).not.toBeVisible({ timeout: 1500 });

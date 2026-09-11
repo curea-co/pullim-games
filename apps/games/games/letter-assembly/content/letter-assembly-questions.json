@@ -1,0 +1,4102 @@
+[
+  {
+    "id": "la-draft-001",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-1",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c0a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c0b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c0a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c0b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d0",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-002",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-1",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c1a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c1b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c1a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c1b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d1",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-003",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-1",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c2a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c2b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c2a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c2b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d2",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-004",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-1",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c3a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c3b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c3a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c3b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d3",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-005",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-1",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c4a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c4b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c4a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c4b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d4",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-006",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-1",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c5a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c5b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c5a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c5b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d5",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-007",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-1",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c6a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c6b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c6a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c6b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d6",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-008",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-1",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c7a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c7b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c7a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c7b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d7",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-009",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-2",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c8a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c8b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c8a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c8b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d8",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-010",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-2",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c9a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c9b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c9a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c9b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d9",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-011",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-2",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c10a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c10b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c10a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c10b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d10",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-012",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-2",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c11a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c11b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c11a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c11b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d11",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-013",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-2",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c12a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c12b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c12a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c12b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d12",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-014",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-2",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c13a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c13b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c13a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c13b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d13",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-015",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-2",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c14a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c14b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c14a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c14b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d14",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-016",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-2",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c15a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c15b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c15a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c15b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d15",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-017",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-3",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c16a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c16b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c16a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c16b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d16",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-018",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-3",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c17a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c17b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c17a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c17b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d17",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-019",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-3",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c18a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c18b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c18a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c18b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d18",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-020",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-3",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c19a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c19b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c19a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c19b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d19",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-021",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-3",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c20a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c20b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c20a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c20b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d20",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-022",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-3",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c21a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c21b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c21a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c21b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d21",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-023",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-3",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c22a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c22b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c22a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c22b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d22",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-024",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-3",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c23a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c23b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c23a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c23b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d23",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-025",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-4",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c24a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c24b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c24a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c24b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d24",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-026",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-4",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c25a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c25b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c25a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c25b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d25",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-027",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-4",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c26a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c26b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c26a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c26b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d26",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-028",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-4",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c27a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c27b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c27a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c27b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d27",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-029",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-4",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c28a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c28b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c28a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c28b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d28",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-030",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-4",
+    "difficultySeed": 1,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c29a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c29b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c29a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c29b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d29",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-031",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-4",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c30a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c30b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c30a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c30b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d30",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-032",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-4",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c31a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c31b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c31a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c31b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d31",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-033",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-5",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c32a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c32b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c32a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c32b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d32",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-034",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-5",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c33a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c33b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c33a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c33b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d33",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-035",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-5",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c34a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c34b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c34a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c34b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d34",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-036",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-5",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c35a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c35b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c35a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c35b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d35",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-037",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-5",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c36a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c36b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c36a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c36b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d36",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-038",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-5",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c37a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c37b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c37a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c37b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d37",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-039",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-5",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c38a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c38b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c38a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c38b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d38",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-040",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-5",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c39a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c39b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c39a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c39b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d39",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-041",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-6",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c40a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c40b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c40a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c40b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d40",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-042",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-6",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c41a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c41b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c41a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c41b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d41",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-043",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-6",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c42a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c42b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c42a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c42b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d42",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-044",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-6",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c43a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c43b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c43a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c43b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d43",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-045",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-6",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c44a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c44b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c44a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c44b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d44",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-046",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-6",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c45a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c45b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c45a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c45b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d45",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-047",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-6",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c46a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c46b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c46a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c46b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d46",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-048",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-6",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c47a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c47b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c47a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c47b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d47",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-049",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-7",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c48a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c48b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c48a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c48b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d48",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-050",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-7",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c49a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c49b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c49a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c49b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d49",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-051",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-7",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c50a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c50b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c50a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c50b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d50",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-052",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-7",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c51a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c51b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c51a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c51b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d51",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-053",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-7",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c52a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c52b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c52a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c52b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d52",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-054",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-7",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c53a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c53b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c53a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c53b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d53",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-055",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-7",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c54a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c54b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c54a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c54b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d54",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-056",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-7",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c55a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c55b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c55a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c55b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d55",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-057",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-8",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c56a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c56b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c56a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c56b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d56",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-058",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-8",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c57a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c57b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c57a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c57b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d57",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-059",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-8",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c58a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c58b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c58a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c58b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d58",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-060",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-8",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c59a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c59b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c59a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c59b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d59",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-061",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-8",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c60a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c60b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c60a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c60b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d60",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-062",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-8",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c61a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c61b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c61a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c61b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d61",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-063",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-8",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c62a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c62b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c62a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c62b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d62",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-064",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-8",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c63a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c63b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c63a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c63b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d63",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-065",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-9",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c64a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c64b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c64a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c64b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d64",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-066",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-9",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c65a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c65b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c65a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c65b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d65",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-067",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-9",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c66a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c66b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c66a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c66b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d66",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-068",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-9",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c67a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c67b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c67a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c67b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d67",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-069",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-9",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c68a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c68b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c68a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c68b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d68",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-070",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-9",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c69a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c69b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c69a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c69b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d69",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-071",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-9",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c70a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c70b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c70a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c70b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d70",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-072",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-9",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c71a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c71b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c71a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c71b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d71",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-073",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-10",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c72a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c72b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c72a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c72b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d72",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-074",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-10",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c73a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c73b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c73a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c73b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d73",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-075",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-10",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c74a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c74b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c74a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c74b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d74",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-076",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-10",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c75a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c75b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c75a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c75b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d75",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-077",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-10",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c76a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c76b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c76a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c76b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d76",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-078",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-10",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c77a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c77b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c77a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c77b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d77",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-079",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-10",
+    "difficultySeed": 3,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c78a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c78b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c78a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c78b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d78",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-080",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-10",
+    "difficultySeed": 2,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c79a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c79b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c79a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c79b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d79",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-081",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-11",
+    "difficultySeed": 5,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c80a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c80b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c80a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c80b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d80",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-082",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-11",
+    "difficultySeed": 4,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c81a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c81b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c81a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c81b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d81",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-083",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-11",
+    "difficultySeed": 5,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c82a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c82b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c82a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c82b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d82",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-084",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-11",
+    "difficultySeed": 4,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c83a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c83b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c83a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c83b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d83",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-085",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-11",
+    "difficultySeed": 5,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c84a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c84b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c84a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c84b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d84",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-086",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-11",
+    "difficultySeed": 4,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c85a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c85b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c85a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c85b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d85",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-087",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-11",
+    "difficultySeed": 5,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c86a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c86b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c86a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c86b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d86",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-088",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-11",
+    "difficultySeed": 4,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c87a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c87b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c87a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c87b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d87",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-089",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-12",
+    "difficultySeed": 5,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c88a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c88b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c88a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c88b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d88",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-090",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-12",
+    "difficultySeed": 4,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c89a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c89b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c89a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c89b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d89",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-091",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-12",
+    "difficultySeed": 5,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c90a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c90b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c90a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c90b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d90",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-092",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-12",
+    "difficultySeed": 4,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c91a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c91b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c91a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c91b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d91",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-093",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-12",
+    "difficultySeed": 5,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c92a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c92b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c92a",
+          "text": "亻",
+          "label": "사람 인"
+        },
+        {
+          "id": "c92b",
+          "text": "言",
+          "label": "말씀 언"
+        },
+        {
+          "id": "d92",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-094",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-12",
+    "difficultySeed": 4,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c93a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c93b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c93a",
+          "text": "門",
+          "label": "문 문"
+        },
+        {
+          "id": "c93b",
+          "text": "口",
+          "label": "입 구"
+        },
+        {
+          "id": "d93",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-095",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-12",
+    "difficultySeed": 5,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c94a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c94b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c94a",
+          "text": "手",
+          "label": "손 수"
+        },
+        {
+          "id": "c94b",
+          "text": "目",
+          "label": "눈 목"
+        },
+        {
+          "id": "d94",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-096",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-12",
+    "difficultySeed": 4,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c95a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c95b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c95a",
+          "text": "田",
+          "label": "밭 전"
+        },
+        {
+          "id": "c95b",
+          "text": "力",
+          "label": "힘 력"
+        },
+        {
+          "id": "d95",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-097",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-13",
+    "difficultySeed": 5,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "休",
+        "meaning": "쉴 휴",
+        "reading": "휴"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c96a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c96b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c96a",
+          "text": "人",
+          "label": "사람 인"
+        },
+        {
+          "id": "c96b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d96",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-098",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-13",
+    "difficultySeed": 4,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "明",
+        "meaning": "밝을 명",
+        "reading": "명"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c97a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c97b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c97a",
+          "text": "日",
+          "label": "날 일"
+        },
+        {
+          "id": "c97b",
+          "text": "月",
+          "label": "달 월"
+        },
+        {
+          "id": "d97",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-099",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-13",
+    "difficultySeed": 5,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "林",
+        "meaning": "수풀 림",
+        "reading": "림"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c98a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c98b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c98a",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "c98b",
+          "text": "木",
+          "label": "나무 목"
+        },
+        {
+          "id": "d98",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  },
+  {
+    "id": "la-draft-100",
+    "type": "letter-assembly",
+    "unit": "고1-국어-한자구성-13",
+    "difficultySeed": 4,
+    "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
+    "problem": {
+      "target": {
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
+      },
+      "slots": [
+        {
+          "id": "s0",
+          "correctCardId": "c99a"
+        },
+        {
+          "id": "s1",
+          "correctCardId": "c99b"
+        }
+      ],
+      "cards": [
+        {
+          "id": "c99a",
+          "text": "女",
+          "label": "여자 여"
+        },
+        {
+          "id": "c99b",
+          "text": "子",
+          "label": "아들 자"
+        },
+        {
+          "id": "d99",
+          "text": "口",
+          "label": "입 구"
+        }
+      ]
+    }
+  }
+]

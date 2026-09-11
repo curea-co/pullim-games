@@ -10,7 +10,7 @@
 ## 시작하기
 
 1. **이 디렉토리만 작업하세요.** `apps/games/lib/core/` 변경이 필요하면 별도 PR.
-2. `bun run dev` → `http://localhost:3033/games/physics-vector` 에서 확인.
+2. `bun run dev` → `http://localhost:3004/games/physics-vector` 에서 확인.
 3. 테스트: `bun run test -- games/physics-vector/`
 
 ## 핵심 명제
@@ -21,7 +21,7 @@
 
 ## 구현 현황
 
-- [x] SVG 좌표평면 (x ∈ [-5, 6], y ∈ [-3, 5]) + 격자 + 축
+- [x] SVG 좌표평면 (x ∈ [-5, 6], y ∈ [-5, 6]) + 격자 + 축
 - [x] 입력 벡터 회색 화살표 + label (F1, F2 등)
 - [x] 학생 합벡터 +/- 슬라이더 (rx, ry 정수 step)
 - [x] 평행사변형 보조선 자동 (학생 합벡터 끝점 기준 점선)

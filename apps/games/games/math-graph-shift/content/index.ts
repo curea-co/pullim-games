@@ -1,3 +1,4 @@
+import questions from "./math-graph-shift-questions.json";
 // math-graph-shift 카드 풀 — 5장, 이차함수 변형 (난이도 1~5).
 // 시작은 항상 y = x², 목표는 y = a(x-h)^2 + k.
 
@@ -77,7 +78,7 @@ const RAW_CARDS: GraphShiftCard[] = [
   },
 ];
 
-export const cards: GraphShiftCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: GraphShiftCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const r = GraphShiftCardSchema.safeParse(raw);
   if (!r.success) {
     throw new Error(

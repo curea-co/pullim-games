@@ -5,7 +5,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { AuthCta } from "@/components/auth/AuthCta";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -67,7 +67,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
 
   return (
     // spec/08 §8.3·§8.7: 모바일 가장자리 패딩 24px(px-6), 컨텐츠 폭 480px.
-    <div className="mx-auto flex min-h-[60vh] w-full max-w-[480px] items-center px-6">
+    // <main> 랜드마크 — OsShell 콘텐츠 래퍼가 <div> 라 페이지가 자체 main 을 제공(codex #138 R11).
+    <main className="mx-auto flex min-h-[60vh] w-full max-w-[480px] items-center px-6">
       {/* 디자인 시스템 토큰 정합(AGENTS.md/spec/08): pullim-* 색, 블록 radius 4px. */}
       <Card className="w-full rounded border-pullim-slate-200 bg-card shadow-sm">
         <CardHeader>
@@ -176,29 +177,29 @@ export function AuthForm({ mode }: { mode: Mode }) {
                 이미 계정이 있나요?{" "}
                 {/* 보조 네비 링크 — 1차 CTA(가입/로그인 버튼) 아님. 작은 뷰포트에서 폼 아래로
                     자연 스크롤되는 게 정상이라 UI audit informational(스크롤 OK)로 표시. */}
-                <Link
-                  href="/login"
+                <AuthCta
+                  kind="login"
                   data-cta-priority="informational"
                   className="text-pullim-blue-600 underline"
                 >
                   로그인
-                </Link>
+                </AuthCta>
               </>
             ) : (
               <>
                 계정이 없나요?{" "}
-                <Link
-                  href="/signup"
+                <AuthCta
+                  kind="signup"
                   data-cta-priority="informational"
                   className="text-pullim-blue-600 underline"
                 >
                   회원가입
-                </Link>
+                </AuthCta>
               </>
             )}
           </p>
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 }

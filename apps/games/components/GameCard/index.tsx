@@ -80,6 +80,9 @@ export function GameCard({ meta }: GameCardProps) {
   return (
     <Link
       href={`/games/${meta.id}`}
+      // 카탈로그 타일 = 스크롤 발견 콘텐츠(뷰포트-핀 필수 CTA 아님) → UI audit informational
+      // (games 기존 관례: RecommendationCard·ModeChipsRow 동일). fold 아래 카드는 자연 스크롤.
+      data-cta-priority="informational"
       className="block rounded-block focus-visible:outline-2 focus-visible:outline-accent-positive"
       aria-label={`${meta.title} 시작 — ${meta.subject} ${meta.unit}, 약 ${meta.estimatedMinutes}분`}
     >

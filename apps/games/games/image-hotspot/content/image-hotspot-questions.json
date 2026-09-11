@@ -1,0 +1,6702 @@
+[
+  {
+    "id": "ih-draft-001",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-1",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r0-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l0-0"
+        },
+        {
+          "id": "r0-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l0-1"
+        },
+        {
+          "id": "r0-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l0-2"
+        },
+        {
+          "id": "r0-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l0-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l0-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l0-1",
+          "text": "암술"
+        },
+        {
+          "id": "l0-2",
+          "text": "수술"
+        },
+        {
+          "id": "l0-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d0",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-002",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-1",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r1-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l1-0"
+        },
+        {
+          "id": "r1-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l1-1"
+        },
+        {
+          "id": "r1-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l1-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l1-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l1-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l1-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d1",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-003",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-1",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r2-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l2-0"
+        },
+        {
+          "id": "r2-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l2-1"
+        },
+        {
+          "id": "r2-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l2-2"
+        },
+        {
+          "id": "r2-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l2-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l2-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l2-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l2-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l2-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d2",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-004",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-1",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r3-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l3-0"
+        },
+        {
+          "id": "r3-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l3-1"
+        },
+        {
+          "id": "r3-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l3-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l3-0",
+          "text": "종피"
+        },
+        {
+          "id": "l3-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l3-2",
+          "text": "배"
+        },
+        {
+          "id": "d3",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-005",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-2",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r4-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l4-0"
+        },
+        {
+          "id": "r4-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l4-1"
+        },
+        {
+          "id": "r4-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l4-2"
+        },
+        {
+          "id": "r4-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l4-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l4-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l4-1",
+          "text": "암술"
+        },
+        {
+          "id": "l4-2",
+          "text": "수술"
+        },
+        {
+          "id": "l4-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d4",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-006",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-2",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r5-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l5-0"
+        },
+        {
+          "id": "r5-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l5-1"
+        },
+        {
+          "id": "r5-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l5-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l5-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l5-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l5-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d5",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-007",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-2",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r6-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l6-0"
+        },
+        {
+          "id": "r6-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l6-1"
+        },
+        {
+          "id": "r6-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l6-2"
+        },
+        {
+          "id": "r6-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l6-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l6-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l6-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l6-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l6-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d6",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-008",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-2",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r7-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l7-0"
+        },
+        {
+          "id": "r7-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l7-1"
+        },
+        {
+          "id": "r7-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l7-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l7-0",
+          "text": "종피"
+        },
+        {
+          "id": "l7-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l7-2",
+          "text": "배"
+        },
+        {
+          "id": "d7",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-009",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-3",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r8-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l8-0"
+        },
+        {
+          "id": "r8-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l8-1"
+        },
+        {
+          "id": "r8-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l8-2"
+        },
+        {
+          "id": "r8-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l8-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l8-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l8-1",
+          "text": "암술"
+        },
+        {
+          "id": "l8-2",
+          "text": "수술"
+        },
+        {
+          "id": "l8-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d8",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-010",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-3",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r9-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l9-0"
+        },
+        {
+          "id": "r9-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l9-1"
+        },
+        {
+          "id": "r9-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l9-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l9-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l9-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l9-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d9",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-011",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-3",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r10-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l10-0"
+        },
+        {
+          "id": "r10-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l10-1"
+        },
+        {
+          "id": "r10-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l10-2"
+        },
+        {
+          "id": "r10-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l10-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l10-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l10-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l10-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l10-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d10",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-012",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-3",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r11-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l11-0"
+        },
+        {
+          "id": "r11-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l11-1"
+        },
+        {
+          "id": "r11-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l11-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l11-0",
+          "text": "종피"
+        },
+        {
+          "id": "l11-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l11-2",
+          "text": "배"
+        },
+        {
+          "id": "d11",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-013",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-4",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r12-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l12-0"
+        },
+        {
+          "id": "r12-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l12-1"
+        },
+        {
+          "id": "r12-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l12-2"
+        },
+        {
+          "id": "r12-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l12-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l12-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l12-1",
+          "text": "암술"
+        },
+        {
+          "id": "l12-2",
+          "text": "수술"
+        },
+        {
+          "id": "l12-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d12",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-014",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-4",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r13-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l13-0"
+        },
+        {
+          "id": "r13-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l13-1"
+        },
+        {
+          "id": "r13-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l13-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l13-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l13-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l13-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d13",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-015",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-4",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r14-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l14-0"
+        },
+        {
+          "id": "r14-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l14-1"
+        },
+        {
+          "id": "r14-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l14-2"
+        },
+        {
+          "id": "r14-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l14-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l14-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l14-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l14-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l14-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d14",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-016",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-4",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r15-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l15-0"
+        },
+        {
+          "id": "r15-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l15-1"
+        },
+        {
+          "id": "r15-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l15-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l15-0",
+          "text": "종피"
+        },
+        {
+          "id": "l15-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l15-2",
+          "text": "배"
+        },
+        {
+          "id": "d15",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-017",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-5",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r16-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l16-0"
+        },
+        {
+          "id": "r16-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l16-1"
+        },
+        {
+          "id": "r16-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l16-2"
+        },
+        {
+          "id": "r16-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l16-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l16-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l16-1",
+          "text": "암술"
+        },
+        {
+          "id": "l16-2",
+          "text": "수술"
+        },
+        {
+          "id": "l16-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d16",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-018",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-5",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r17-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l17-0"
+        },
+        {
+          "id": "r17-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l17-1"
+        },
+        {
+          "id": "r17-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l17-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l17-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l17-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l17-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d17",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-019",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-5",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r18-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l18-0"
+        },
+        {
+          "id": "r18-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l18-1"
+        },
+        {
+          "id": "r18-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l18-2"
+        },
+        {
+          "id": "r18-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l18-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l18-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l18-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l18-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l18-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d18",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-020",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-5",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r19-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l19-0"
+        },
+        {
+          "id": "r19-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l19-1"
+        },
+        {
+          "id": "r19-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l19-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l19-0",
+          "text": "종피"
+        },
+        {
+          "id": "l19-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l19-2",
+          "text": "배"
+        },
+        {
+          "id": "d19",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-021",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-6",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r20-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l20-0"
+        },
+        {
+          "id": "r20-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l20-1"
+        },
+        {
+          "id": "r20-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l20-2"
+        },
+        {
+          "id": "r20-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l20-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l20-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l20-1",
+          "text": "암술"
+        },
+        {
+          "id": "l20-2",
+          "text": "수술"
+        },
+        {
+          "id": "l20-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d20",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-022",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-6",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r21-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l21-0"
+        },
+        {
+          "id": "r21-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l21-1"
+        },
+        {
+          "id": "r21-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l21-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l21-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l21-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l21-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d21",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-023",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-6",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r22-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l22-0"
+        },
+        {
+          "id": "r22-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l22-1"
+        },
+        {
+          "id": "r22-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l22-2"
+        },
+        {
+          "id": "r22-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l22-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l22-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l22-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l22-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l22-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d22",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-024",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-6",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r23-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l23-0"
+        },
+        {
+          "id": "r23-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l23-1"
+        },
+        {
+          "id": "r23-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l23-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l23-0",
+          "text": "종피"
+        },
+        {
+          "id": "l23-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l23-2",
+          "text": "배"
+        },
+        {
+          "id": "d23",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-025",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-7",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r24-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l24-0"
+        },
+        {
+          "id": "r24-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l24-1"
+        },
+        {
+          "id": "r24-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l24-2"
+        },
+        {
+          "id": "r24-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l24-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l24-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l24-1",
+          "text": "암술"
+        },
+        {
+          "id": "l24-2",
+          "text": "수술"
+        },
+        {
+          "id": "l24-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d24",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-026",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-7",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r25-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l25-0"
+        },
+        {
+          "id": "r25-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l25-1"
+        },
+        {
+          "id": "r25-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l25-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l25-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l25-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l25-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d25",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-027",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-7",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r26-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l26-0"
+        },
+        {
+          "id": "r26-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l26-1"
+        },
+        {
+          "id": "r26-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l26-2"
+        },
+        {
+          "id": "r26-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l26-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l26-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l26-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l26-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l26-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d26",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-028",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-7",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r27-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l27-0"
+        },
+        {
+          "id": "r27-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l27-1"
+        },
+        {
+          "id": "r27-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l27-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l27-0",
+          "text": "종피"
+        },
+        {
+          "id": "l27-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l27-2",
+          "text": "배"
+        },
+        {
+          "id": "d27",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-029",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-8",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r28-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l28-0"
+        },
+        {
+          "id": "r28-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l28-1"
+        },
+        {
+          "id": "r28-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l28-2"
+        },
+        {
+          "id": "r28-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l28-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l28-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l28-1",
+          "text": "암술"
+        },
+        {
+          "id": "l28-2",
+          "text": "수술"
+        },
+        {
+          "id": "l28-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d28",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-030",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-8",
+    "difficultySeed": 1,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r29-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l29-0"
+        },
+        {
+          "id": "r29-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l29-1"
+        },
+        {
+          "id": "r29-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l29-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l29-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l29-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l29-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d29",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-031",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-8",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r30-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l30-0"
+        },
+        {
+          "id": "r30-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l30-1"
+        },
+        {
+          "id": "r30-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l30-2"
+        },
+        {
+          "id": "r30-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l30-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l30-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l30-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l30-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l30-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d30",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-032",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-8",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r31-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l31-0"
+        },
+        {
+          "id": "r31-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l31-1"
+        },
+        {
+          "id": "r31-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l31-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l31-0",
+          "text": "종피"
+        },
+        {
+          "id": "l31-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l31-2",
+          "text": "배"
+        },
+        {
+          "id": "d31",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-033",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-9",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r32-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l32-0"
+        },
+        {
+          "id": "r32-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l32-1"
+        },
+        {
+          "id": "r32-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l32-2"
+        },
+        {
+          "id": "r32-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l32-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l32-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l32-1",
+          "text": "암술"
+        },
+        {
+          "id": "l32-2",
+          "text": "수술"
+        },
+        {
+          "id": "l32-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d32",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-034",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-9",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r33-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l33-0"
+        },
+        {
+          "id": "r33-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l33-1"
+        },
+        {
+          "id": "r33-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l33-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l33-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l33-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l33-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d33",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-035",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-9",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r34-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l34-0"
+        },
+        {
+          "id": "r34-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l34-1"
+        },
+        {
+          "id": "r34-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l34-2"
+        },
+        {
+          "id": "r34-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l34-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l34-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l34-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l34-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l34-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d34",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-036",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-9",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r35-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l35-0"
+        },
+        {
+          "id": "r35-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l35-1"
+        },
+        {
+          "id": "r35-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l35-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l35-0",
+          "text": "종피"
+        },
+        {
+          "id": "l35-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l35-2",
+          "text": "배"
+        },
+        {
+          "id": "d35",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-037",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-10",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r36-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l36-0"
+        },
+        {
+          "id": "r36-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l36-1"
+        },
+        {
+          "id": "r36-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l36-2"
+        },
+        {
+          "id": "r36-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l36-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l36-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l36-1",
+          "text": "암술"
+        },
+        {
+          "id": "l36-2",
+          "text": "수술"
+        },
+        {
+          "id": "l36-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d36",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-038",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-10",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r37-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l37-0"
+        },
+        {
+          "id": "r37-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l37-1"
+        },
+        {
+          "id": "r37-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l37-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l37-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l37-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l37-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d37",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-039",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-10",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r38-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l38-0"
+        },
+        {
+          "id": "r38-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l38-1"
+        },
+        {
+          "id": "r38-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l38-2"
+        },
+        {
+          "id": "r38-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l38-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l38-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l38-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l38-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l38-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d38",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-040",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-10",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r39-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l39-0"
+        },
+        {
+          "id": "r39-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l39-1"
+        },
+        {
+          "id": "r39-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l39-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l39-0",
+          "text": "종피"
+        },
+        {
+          "id": "l39-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l39-2",
+          "text": "배"
+        },
+        {
+          "id": "d39",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-041",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-11",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r40-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l40-0"
+        },
+        {
+          "id": "r40-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l40-1"
+        },
+        {
+          "id": "r40-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l40-2"
+        },
+        {
+          "id": "r40-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l40-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l40-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l40-1",
+          "text": "암술"
+        },
+        {
+          "id": "l40-2",
+          "text": "수술"
+        },
+        {
+          "id": "l40-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d40",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-042",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-11",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r41-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l41-0"
+        },
+        {
+          "id": "r41-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l41-1"
+        },
+        {
+          "id": "r41-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l41-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l41-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l41-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l41-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d41",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-043",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-11",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r42-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l42-0"
+        },
+        {
+          "id": "r42-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l42-1"
+        },
+        {
+          "id": "r42-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l42-2"
+        },
+        {
+          "id": "r42-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l42-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l42-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l42-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l42-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l42-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d42",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-044",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-11",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r43-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l43-0"
+        },
+        {
+          "id": "r43-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l43-1"
+        },
+        {
+          "id": "r43-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l43-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l43-0",
+          "text": "종피"
+        },
+        {
+          "id": "l43-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l43-2",
+          "text": "배"
+        },
+        {
+          "id": "d43",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-045",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-12",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r44-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l44-0"
+        },
+        {
+          "id": "r44-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l44-1"
+        },
+        {
+          "id": "r44-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l44-2"
+        },
+        {
+          "id": "r44-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l44-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l44-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l44-1",
+          "text": "암술"
+        },
+        {
+          "id": "l44-2",
+          "text": "수술"
+        },
+        {
+          "id": "l44-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d44",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-046",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-12",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r45-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l45-0"
+        },
+        {
+          "id": "r45-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l45-1"
+        },
+        {
+          "id": "r45-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l45-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l45-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l45-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l45-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d45",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-047",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-12",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r46-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l46-0"
+        },
+        {
+          "id": "r46-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l46-1"
+        },
+        {
+          "id": "r46-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l46-2"
+        },
+        {
+          "id": "r46-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l46-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l46-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l46-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l46-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l46-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d46",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-048",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-12",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r47-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l47-0"
+        },
+        {
+          "id": "r47-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l47-1"
+        },
+        {
+          "id": "r47-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l47-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l47-0",
+          "text": "종피"
+        },
+        {
+          "id": "l47-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l47-2",
+          "text": "배"
+        },
+        {
+          "id": "d47",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-049",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-13",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r48-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l48-0"
+        },
+        {
+          "id": "r48-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l48-1"
+        },
+        {
+          "id": "r48-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l48-2"
+        },
+        {
+          "id": "r48-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l48-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l48-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l48-1",
+          "text": "암술"
+        },
+        {
+          "id": "l48-2",
+          "text": "수술"
+        },
+        {
+          "id": "l48-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d48",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-050",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-13",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r49-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l49-0"
+        },
+        {
+          "id": "r49-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l49-1"
+        },
+        {
+          "id": "r49-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l49-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l49-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l49-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l49-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d49",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-051",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-13",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r50-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l50-0"
+        },
+        {
+          "id": "r50-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l50-1"
+        },
+        {
+          "id": "r50-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l50-2"
+        },
+        {
+          "id": "r50-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l50-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l50-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l50-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l50-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l50-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d50",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-052",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-13",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r51-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l51-0"
+        },
+        {
+          "id": "r51-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l51-1"
+        },
+        {
+          "id": "r51-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l51-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l51-0",
+          "text": "종피"
+        },
+        {
+          "id": "l51-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l51-2",
+          "text": "배"
+        },
+        {
+          "id": "d51",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-053",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-14",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r52-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l52-0"
+        },
+        {
+          "id": "r52-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l52-1"
+        },
+        {
+          "id": "r52-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l52-2"
+        },
+        {
+          "id": "r52-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l52-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l52-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l52-1",
+          "text": "암술"
+        },
+        {
+          "id": "l52-2",
+          "text": "수술"
+        },
+        {
+          "id": "l52-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d52",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-054",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-14",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r53-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l53-0"
+        },
+        {
+          "id": "r53-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l53-1"
+        },
+        {
+          "id": "r53-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l53-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l53-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l53-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l53-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d53",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-055",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-14",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r54-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l54-0"
+        },
+        {
+          "id": "r54-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l54-1"
+        },
+        {
+          "id": "r54-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l54-2"
+        },
+        {
+          "id": "r54-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l54-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l54-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l54-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l54-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l54-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d54",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-056",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-14",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r55-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l55-0"
+        },
+        {
+          "id": "r55-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l55-1"
+        },
+        {
+          "id": "r55-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l55-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l55-0",
+          "text": "종피"
+        },
+        {
+          "id": "l55-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l55-2",
+          "text": "배"
+        },
+        {
+          "id": "d55",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-057",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-15",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r56-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l56-0"
+        },
+        {
+          "id": "r56-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l56-1"
+        },
+        {
+          "id": "r56-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l56-2"
+        },
+        {
+          "id": "r56-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l56-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l56-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l56-1",
+          "text": "암술"
+        },
+        {
+          "id": "l56-2",
+          "text": "수술"
+        },
+        {
+          "id": "l56-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d56",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-058",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-15",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r57-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l57-0"
+        },
+        {
+          "id": "r57-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l57-1"
+        },
+        {
+          "id": "r57-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l57-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l57-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l57-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l57-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d57",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-059",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-15",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r58-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l58-0"
+        },
+        {
+          "id": "r58-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l58-1"
+        },
+        {
+          "id": "r58-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l58-2"
+        },
+        {
+          "id": "r58-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l58-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l58-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l58-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l58-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l58-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d58",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-060",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-15",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r59-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l59-0"
+        },
+        {
+          "id": "r59-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l59-1"
+        },
+        {
+          "id": "r59-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l59-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l59-0",
+          "text": "종피"
+        },
+        {
+          "id": "l59-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l59-2",
+          "text": "배"
+        },
+        {
+          "id": "d59",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-061",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-16",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r60-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l60-0"
+        },
+        {
+          "id": "r60-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l60-1"
+        },
+        {
+          "id": "r60-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l60-2"
+        },
+        {
+          "id": "r60-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l60-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l60-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l60-1",
+          "text": "암술"
+        },
+        {
+          "id": "l60-2",
+          "text": "수술"
+        },
+        {
+          "id": "l60-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d60",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-062",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-16",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r61-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l61-0"
+        },
+        {
+          "id": "r61-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l61-1"
+        },
+        {
+          "id": "r61-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l61-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l61-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l61-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l61-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d61",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-063",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-16",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r62-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l62-0"
+        },
+        {
+          "id": "r62-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l62-1"
+        },
+        {
+          "id": "r62-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l62-2"
+        },
+        {
+          "id": "r62-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l62-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l62-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l62-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l62-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l62-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d62",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-064",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-16",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r63-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l63-0"
+        },
+        {
+          "id": "r63-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l63-1"
+        },
+        {
+          "id": "r63-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l63-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l63-0",
+          "text": "종피"
+        },
+        {
+          "id": "l63-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l63-2",
+          "text": "배"
+        },
+        {
+          "id": "d63",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-065",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-17",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r64-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l64-0"
+        },
+        {
+          "id": "r64-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l64-1"
+        },
+        {
+          "id": "r64-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l64-2"
+        },
+        {
+          "id": "r64-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l64-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l64-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l64-1",
+          "text": "암술"
+        },
+        {
+          "id": "l64-2",
+          "text": "수술"
+        },
+        {
+          "id": "l64-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d64",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-066",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-17",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r65-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l65-0"
+        },
+        {
+          "id": "r65-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l65-1"
+        },
+        {
+          "id": "r65-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l65-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l65-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l65-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l65-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d65",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-067",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-17",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r66-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l66-0"
+        },
+        {
+          "id": "r66-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l66-1"
+        },
+        {
+          "id": "r66-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l66-2"
+        },
+        {
+          "id": "r66-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l66-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l66-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l66-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l66-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l66-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d66",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-068",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-17",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r67-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l67-0"
+        },
+        {
+          "id": "r67-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l67-1"
+        },
+        {
+          "id": "r67-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l67-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l67-0",
+          "text": "종피"
+        },
+        {
+          "id": "l67-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l67-2",
+          "text": "배"
+        },
+        {
+          "id": "d67",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-069",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-18",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r68-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l68-0"
+        },
+        {
+          "id": "r68-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l68-1"
+        },
+        {
+          "id": "r68-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l68-2"
+        },
+        {
+          "id": "r68-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l68-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l68-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l68-1",
+          "text": "암술"
+        },
+        {
+          "id": "l68-2",
+          "text": "수술"
+        },
+        {
+          "id": "l68-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d68",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-070",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-18",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r69-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l69-0"
+        },
+        {
+          "id": "r69-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l69-1"
+        },
+        {
+          "id": "r69-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l69-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l69-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l69-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l69-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d69",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-071",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-18",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r70-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l70-0"
+        },
+        {
+          "id": "r70-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l70-1"
+        },
+        {
+          "id": "r70-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l70-2"
+        },
+        {
+          "id": "r70-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l70-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l70-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l70-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l70-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l70-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d70",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-072",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-18",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r71-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l71-0"
+        },
+        {
+          "id": "r71-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l71-1"
+        },
+        {
+          "id": "r71-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l71-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l71-0",
+          "text": "종피"
+        },
+        {
+          "id": "l71-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l71-2",
+          "text": "배"
+        },
+        {
+          "id": "d71",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-073",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-19",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r72-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l72-0"
+        },
+        {
+          "id": "r72-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l72-1"
+        },
+        {
+          "id": "r72-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l72-2"
+        },
+        {
+          "id": "r72-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l72-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l72-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l72-1",
+          "text": "암술"
+        },
+        {
+          "id": "l72-2",
+          "text": "수술"
+        },
+        {
+          "id": "l72-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d72",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-074",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-19",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r73-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l73-0"
+        },
+        {
+          "id": "r73-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l73-1"
+        },
+        {
+          "id": "r73-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l73-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l73-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l73-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l73-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d73",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-075",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-19",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r74-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l74-0"
+        },
+        {
+          "id": "r74-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l74-1"
+        },
+        {
+          "id": "r74-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l74-2"
+        },
+        {
+          "id": "r74-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l74-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l74-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l74-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l74-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l74-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d74",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-076",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-19",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r75-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l75-0"
+        },
+        {
+          "id": "r75-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l75-1"
+        },
+        {
+          "id": "r75-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l75-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l75-0",
+          "text": "종피"
+        },
+        {
+          "id": "l75-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l75-2",
+          "text": "배"
+        },
+        {
+          "id": "d75",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-077",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-20",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r76-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l76-0"
+        },
+        {
+          "id": "r76-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l76-1"
+        },
+        {
+          "id": "r76-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l76-2"
+        },
+        {
+          "id": "r76-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l76-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l76-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l76-1",
+          "text": "암술"
+        },
+        {
+          "id": "l76-2",
+          "text": "수술"
+        },
+        {
+          "id": "l76-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d76",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-078",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-20",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r77-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l77-0"
+        },
+        {
+          "id": "r77-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l77-1"
+        },
+        {
+          "id": "r77-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l77-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l77-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l77-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l77-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d77",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-079",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-20",
+    "difficultySeed": 3,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r78-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l78-0"
+        },
+        {
+          "id": "r78-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l78-1"
+        },
+        {
+          "id": "r78-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l78-2"
+        },
+        {
+          "id": "r78-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l78-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l78-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l78-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l78-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l78-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d78",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-080",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-20",
+    "difficultySeed": 2,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r79-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l79-0"
+        },
+        {
+          "id": "r79-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l79-1"
+        },
+        {
+          "id": "r79-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l79-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l79-0",
+          "text": "종피"
+        },
+        {
+          "id": "l79-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l79-2",
+          "text": "배"
+        },
+        {
+          "id": "d79",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-081",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-21",
+    "difficultySeed": 5,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r80-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l80-0"
+        },
+        {
+          "id": "r80-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l80-1"
+        },
+        {
+          "id": "r80-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l80-2"
+        },
+        {
+          "id": "r80-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l80-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l80-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l80-1",
+          "text": "암술"
+        },
+        {
+          "id": "l80-2",
+          "text": "수술"
+        },
+        {
+          "id": "l80-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d80",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-082",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-21",
+    "difficultySeed": 4,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r81-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l81-0"
+        },
+        {
+          "id": "r81-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l81-1"
+        },
+        {
+          "id": "r81-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l81-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l81-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l81-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l81-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d81",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-083",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-21",
+    "difficultySeed": 5,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r82-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l82-0"
+        },
+        {
+          "id": "r82-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l82-1"
+        },
+        {
+          "id": "r82-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l82-2"
+        },
+        {
+          "id": "r82-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l82-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l82-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l82-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l82-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l82-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d82",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-084",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-21",
+    "difficultySeed": 4,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r83-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l83-0"
+        },
+        {
+          "id": "r83-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l83-1"
+        },
+        {
+          "id": "r83-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l83-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l83-0",
+          "text": "종피"
+        },
+        {
+          "id": "l83-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l83-2",
+          "text": "배"
+        },
+        {
+          "id": "d83",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-085",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-22",
+    "difficultySeed": 5,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r84-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l84-0"
+        },
+        {
+          "id": "r84-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l84-1"
+        },
+        {
+          "id": "r84-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l84-2"
+        },
+        {
+          "id": "r84-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l84-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l84-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l84-1",
+          "text": "암술"
+        },
+        {
+          "id": "l84-2",
+          "text": "수술"
+        },
+        {
+          "id": "l84-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d84",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-086",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-22",
+    "difficultySeed": 4,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r85-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l85-0"
+        },
+        {
+          "id": "r85-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l85-1"
+        },
+        {
+          "id": "r85-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l85-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l85-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l85-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l85-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d85",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-087",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-22",
+    "difficultySeed": 5,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r86-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l86-0"
+        },
+        {
+          "id": "r86-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l86-1"
+        },
+        {
+          "id": "r86-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l86-2"
+        },
+        {
+          "id": "r86-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l86-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l86-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l86-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l86-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l86-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d86",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-088",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-22",
+    "difficultySeed": 4,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r87-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l87-0"
+        },
+        {
+          "id": "r87-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l87-1"
+        },
+        {
+          "id": "r87-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l87-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l87-0",
+          "text": "종피"
+        },
+        {
+          "id": "l87-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l87-2",
+          "text": "배"
+        },
+        {
+          "id": "d87",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-089",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-23",
+    "difficultySeed": 5,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r88-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l88-0"
+        },
+        {
+          "id": "r88-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l88-1"
+        },
+        {
+          "id": "r88-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l88-2"
+        },
+        {
+          "id": "r88-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l88-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l88-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l88-1",
+          "text": "암술"
+        },
+        {
+          "id": "l88-2",
+          "text": "수술"
+        },
+        {
+          "id": "l88-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d88",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-090",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-23",
+    "difficultySeed": 4,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r89-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l89-0"
+        },
+        {
+          "id": "r89-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l89-1"
+        },
+        {
+          "id": "r89-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l89-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l89-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l89-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l89-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d89",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-091",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-23",
+    "difficultySeed": 5,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r90-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l90-0"
+        },
+        {
+          "id": "r90-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l90-1"
+        },
+        {
+          "id": "r90-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l90-2"
+        },
+        {
+          "id": "r90-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l90-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l90-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l90-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l90-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l90-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d90",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-092",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-23",
+    "difficultySeed": 4,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r91-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l91-0"
+        },
+        {
+          "id": "r91-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l91-1"
+        },
+        {
+          "id": "r91-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l91-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l91-0",
+          "text": "종피"
+        },
+        {
+          "id": "l91-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l91-2",
+          "text": "배"
+        },
+        {
+          "id": "d91",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-093",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-24",
+    "difficultySeed": 5,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r92-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l92-0"
+        },
+        {
+          "id": "r92-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l92-1"
+        },
+        {
+          "id": "r92-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l92-2"
+        },
+        {
+          "id": "r92-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l92-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l92-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l92-1",
+          "text": "암술"
+        },
+        {
+          "id": "l92-2",
+          "text": "수술"
+        },
+        {
+          "id": "l92-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d92",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-094",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-24",
+    "difficultySeed": 4,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r93-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l93-0"
+        },
+        {
+          "id": "r93-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l93-1"
+        },
+        {
+          "id": "r93-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l93-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l93-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l93-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l93-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d93",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-095",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-24",
+    "difficultySeed": 5,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r94-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l94-0"
+        },
+        {
+          "id": "r94-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l94-1"
+        },
+        {
+          "id": "r94-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l94-2"
+        },
+        {
+          "id": "r94-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l94-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l94-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l94-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l94-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l94-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d94",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-096",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-24",
+    "difficultySeed": 4,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r95-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l95-0"
+        },
+        {
+          "id": "r95-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l95-1"
+        },
+        {
+          "id": "r95-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l95-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l95-0",
+          "text": "종피"
+        },
+        {
+          "id": "l95-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l95-2",
+          "text": "배"
+        },
+        {
+          "id": "d95",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-097",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-flower-25",
+    "difficultySeed": 5,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "flower",
+      "regions": [
+        {
+          "id": "r96-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l96-0"
+        },
+        {
+          "id": "r96-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l96-1"
+        },
+        {
+          "id": "r96-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l96-2"
+        },
+        {
+          "id": "r96-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l96-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l96-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l96-1",
+          "text": "암술"
+        },
+        {
+          "id": "l96-2",
+          "text": "수술"
+        },
+        {
+          "id": "l96-3",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d96",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-098",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-leaf-25",
+    "difficultySeed": 4,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "leaf",
+      "regions": [
+        {
+          "id": "r97-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l97-0"
+        },
+        {
+          "id": "r97-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l97-1"
+        },
+        {
+          "id": "r97-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l97-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l97-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l97-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l97-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d97",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-099",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-root-25",
+    "difficultySeed": 5,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "root",
+      "regions": [
+        {
+          "id": "r98-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l98-0"
+        },
+        {
+          "id": "r98-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l98-1"
+        },
+        {
+          "id": "r98-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l98-2"
+        },
+        {
+          "id": "r98-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l98-3"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l98-0",
+          "text": "줄기"
+        },
+        {
+          "id": "l98-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l98-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l98-3",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d98",
+          "text": "잎"
+        }
+      ]
+    }
+  },
+  {
+    "id": "ih-draft-100",
+    "type": "image-hotspot",
+    "unit": "고1-생명과학-식물도해-seed-25",
+    "difficultySeed": 4,
+    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "problem": {
+      "diagramId": "seed",
+      "regions": [
+        {
+          "id": "r99-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l99-0"
+        },
+        {
+          "id": "r99-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l99-1"
+        },
+        {
+          "id": "r99-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l99-2"
+        }
+      ],
+      "cards": [
+        {
+          "id": "l99-0",
+          "text": "종피"
+        },
+        {
+          "id": "l99-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l99-2",
+          "text": "배"
+        },
+        {
+          "id": "d99",
+          "text": "잎"
+        }
+      ]
+    }
+  }
+]

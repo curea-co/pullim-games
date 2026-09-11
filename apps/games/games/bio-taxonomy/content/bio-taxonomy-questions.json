@@ -1,0 +1,4702 @@
+[
+  {
+    "id": "bio-draft-001",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-1",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat0-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat0-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item0-0",
+          "label": "세균",
+          "categoryId": "cat0-0"
+        },
+        {
+          "id": "item0-1",
+          "label": "효모",
+          "categoryId": "cat0-1"
+        },
+        {
+          "id": "item0-2",
+          "label": "소나무",
+          "categoryId": "cat0-1"
+        },
+        {
+          "id": "item0-3",
+          "label": "대장균",
+          "categoryId": "cat0-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-002",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-1",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat1-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat1-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat1-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item1-0",
+          "label": "소나무",
+          "categoryId": "cat1-0"
+        },
+        {
+          "id": "item1-1",
+          "label": "토끼",
+          "categoryId": "cat1-1"
+        },
+        {
+          "id": "item1-2",
+          "label": "버섯",
+          "categoryId": "cat1-2"
+        },
+        {
+          "id": "item1-3",
+          "label": "젖산균",
+          "categoryId": "cat1-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-003",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-1",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat2-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat2-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat2-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat2-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item2-0",
+          "label": "잉어",
+          "categoryId": "cat2-0"
+        },
+        {
+          "id": "item2-1",
+          "label": "개구리",
+          "categoryId": "cat2-1"
+        },
+        {
+          "id": "item2-2",
+          "label": "도마뱀",
+          "categoryId": "cat2-2"
+        },
+        {
+          "id": "item2-3",
+          "label": "참새",
+          "categoryId": "cat2-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-004",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-1",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat3-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat3-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat3-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat3-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item3-0",
+          "label": "이끼",
+          "categoryId": "cat3-0"
+        },
+        {
+          "id": "item3-1",
+          "label": "고사리",
+          "categoryId": "cat3-1"
+        },
+        {
+          "id": "item3-2",
+          "label": "소나무",
+          "categoryId": "cat3-2"
+        },
+        {
+          "id": "item3-3",
+          "label": "벼",
+          "categoryId": "cat3-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-005",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-2",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat4-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat4-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item4-0",
+          "label": "세균",
+          "categoryId": "cat4-0"
+        },
+        {
+          "id": "item4-1",
+          "label": "효모",
+          "categoryId": "cat4-1"
+        },
+        {
+          "id": "item4-2",
+          "label": "소나무",
+          "categoryId": "cat4-1"
+        },
+        {
+          "id": "item4-3",
+          "label": "대장균",
+          "categoryId": "cat4-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-006",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-2",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat5-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat5-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat5-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item5-0",
+          "label": "소나무",
+          "categoryId": "cat5-0"
+        },
+        {
+          "id": "item5-1",
+          "label": "토끼",
+          "categoryId": "cat5-1"
+        },
+        {
+          "id": "item5-2",
+          "label": "버섯",
+          "categoryId": "cat5-2"
+        },
+        {
+          "id": "item5-3",
+          "label": "젖산균",
+          "categoryId": "cat5-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-007",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-2",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat6-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat6-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat6-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat6-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item6-0",
+          "label": "잉어",
+          "categoryId": "cat6-0"
+        },
+        {
+          "id": "item6-1",
+          "label": "개구리",
+          "categoryId": "cat6-1"
+        },
+        {
+          "id": "item6-2",
+          "label": "도마뱀",
+          "categoryId": "cat6-2"
+        },
+        {
+          "id": "item6-3",
+          "label": "참새",
+          "categoryId": "cat6-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-008",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-2",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat7-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat7-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat7-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat7-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item7-0",
+          "label": "이끼",
+          "categoryId": "cat7-0"
+        },
+        {
+          "id": "item7-1",
+          "label": "고사리",
+          "categoryId": "cat7-1"
+        },
+        {
+          "id": "item7-2",
+          "label": "소나무",
+          "categoryId": "cat7-2"
+        },
+        {
+          "id": "item7-3",
+          "label": "벼",
+          "categoryId": "cat7-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-009",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-3",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat8-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat8-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item8-0",
+          "label": "세균",
+          "categoryId": "cat8-0"
+        },
+        {
+          "id": "item8-1",
+          "label": "효모",
+          "categoryId": "cat8-1"
+        },
+        {
+          "id": "item8-2",
+          "label": "소나무",
+          "categoryId": "cat8-1"
+        },
+        {
+          "id": "item8-3",
+          "label": "대장균",
+          "categoryId": "cat8-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-010",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-3",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat9-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat9-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat9-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item9-0",
+          "label": "소나무",
+          "categoryId": "cat9-0"
+        },
+        {
+          "id": "item9-1",
+          "label": "토끼",
+          "categoryId": "cat9-1"
+        },
+        {
+          "id": "item9-2",
+          "label": "버섯",
+          "categoryId": "cat9-2"
+        },
+        {
+          "id": "item9-3",
+          "label": "젖산균",
+          "categoryId": "cat9-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-011",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-3",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat10-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat10-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat10-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat10-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item10-0",
+          "label": "잉어",
+          "categoryId": "cat10-0"
+        },
+        {
+          "id": "item10-1",
+          "label": "개구리",
+          "categoryId": "cat10-1"
+        },
+        {
+          "id": "item10-2",
+          "label": "도마뱀",
+          "categoryId": "cat10-2"
+        },
+        {
+          "id": "item10-3",
+          "label": "참새",
+          "categoryId": "cat10-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-012",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-3",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat11-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat11-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat11-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat11-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item11-0",
+          "label": "이끼",
+          "categoryId": "cat11-0"
+        },
+        {
+          "id": "item11-1",
+          "label": "고사리",
+          "categoryId": "cat11-1"
+        },
+        {
+          "id": "item11-2",
+          "label": "소나무",
+          "categoryId": "cat11-2"
+        },
+        {
+          "id": "item11-3",
+          "label": "벼",
+          "categoryId": "cat11-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-013",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-4",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat12-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat12-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item12-0",
+          "label": "세균",
+          "categoryId": "cat12-0"
+        },
+        {
+          "id": "item12-1",
+          "label": "효모",
+          "categoryId": "cat12-1"
+        },
+        {
+          "id": "item12-2",
+          "label": "소나무",
+          "categoryId": "cat12-1"
+        },
+        {
+          "id": "item12-3",
+          "label": "대장균",
+          "categoryId": "cat12-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-014",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-4",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat13-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat13-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat13-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item13-0",
+          "label": "소나무",
+          "categoryId": "cat13-0"
+        },
+        {
+          "id": "item13-1",
+          "label": "토끼",
+          "categoryId": "cat13-1"
+        },
+        {
+          "id": "item13-2",
+          "label": "버섯",
+          "categoryId": "cat13-2"
+        },
+        {
+          "id": "item13-3",
+          "label": "젖산균",
+          "categoryId": "cat13-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-015",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-4",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat14-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat14-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat14-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat14-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item14-0",
+          "label": "잉어",
+          "categoryId": "cat14-0"
+        },
+        {
+          "id": "item14-1",
+          "label": "개구리",
+          "categoryId": "cat14-1"
+        },
+        {
+          "id": "item14-2",
+          "label": "도마뱀",
+          "categoryId": "cat14-2"
+        },
+        {
+          "id": "item14-3",
+          "label": "참새",
+          "categoryId": "cat14-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-016",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-4",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat15-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat15-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat15-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat15-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item15-0",
+          "label": "이끼",
+          "categoryId": "cat15-0"
+        },
+        {
+          "id": "item15-1",
+          "label": "고사리",
+          "categoryId": "cat15-1"
+        },
+        {
+          "id": "item15-2",
+          "label": "소나무",
+          "categoryId": "cat15-2"
+        },
+        {
+          "id": "item15-3",
+          "label": "벼",
+          "categoryId": "cat15-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-017",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-5",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat16-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat16-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item16-0",
+          "label": "세균",
+          "categoryId": "cat16-0"
+        },
+        {
+          "id": "item16-1",
+          "label": "효모",
+          "categoryId": "cat16-1"
+        },
+        {
+          "id": "item16-2",
+          "label": "소나무",
+          "categoryId": "cat16-1"
+        },
+        {
+          "id": "item16-3",
+          "label": "대장균",
+          "categoryId": "cat16-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-018",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-5",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat17-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat17-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat17-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item17-0",
+          "label": "소나무",
+          "categoryId": "cat17-0"
+        },
+        {
+          "id": "item17-1",
+          "label": "토끼",
+          "categoryId": "cat17-1"
+        },
+        {
+          "id": "item17-2",
+          "label": "버섯",
+          "categoryId": "cat17-2"
+        },
+        {
+          "id": "item17-3",
+          "label": "젖산균",
+          "categoryId": "cat17-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-019",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-5",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat18-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat18-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat18-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat18-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item18-0",
+          "label": "잉어",
+          "categoryId": "cat18-0"
+        },
+        {
+          "id": "item18-1",
+          "label": "개구리",
+          "categoryId": "cat18-1"
+        },
+        {
+          "id": "item18-2",
+          "label": "도마뱀",
+          "categoryId": "cat18-2"
+        },
+        {
+          "id": "item18-3",
+          "label": "참새",
+          "categoryId": "cat18-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-020",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-5",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat19-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat19-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat19-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat19-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item19-0",
+          "label": "이끼",
+          "categoryId": "cat19-0"
+        },
+        {
+          "id": "item19-1",
+          "label": "고사리",
+          "categoryId": "cat19-1"
+        },
+        {
+          "id": "item19-2",
+          "label": "소나무",
+          "categoryId": "cat19-2"
+        },
+        {
+          "id": "item19-3",
+          "label": "벼",
+          "categoryId": "cat19-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-021",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-6",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat20-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat20-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item20-0",
+          "label": "세균",
+          "categoryId": "cat20-0"
+        },
+        {
+          "id": "item20-1",
+          "label": "효모",
+          "categoryId": "cat20-1"
+        },
+        {
+          "id": "item20-2",
+          "label": "소나무",
+          "categoryId": "cat20-1"
+        },
+        {
+          "id": "item20-3",
+          "label": "대장균",
+          "categoryId": "cat20-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-022",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-6",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat21-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat21-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat21-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item21-0",
+          "label": "소나무",
+          "categoryId": "cat21-0"
+        },
+        {
+          "id": "item21-1",
+          "label": "토끼",
+          "categoryId": "cat21-1"
+        },
+        {
+          "id": "item21-2",
+          "label": "버섯",
+          "categoryId": "cat21-2"
+        },
+        {
+          "id": "item21-3",
+          "label": "젖산균",
+          "categoryId": "cat21-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-023",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-6",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat22-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat22-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat22-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat22-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item22-0",
+          "label": "잉어",
+          "categoryId": "cat22-0"
+        },
+        {
+          "id": "item22-1",
+          "label": "개구리",
+          "categoryId": "cat22-1"
+        },
+        {
+          "id": "item22-2",
+          "label": "도마뱀",
+          "categoryId": "cat22-2"
+        },
+        {
+          "id": "item22-3",
+          "label": "참새",
+          "categoryId": "cat22-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-024",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-6",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat23-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat23-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat23-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat23-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item23-0",
+          "label": "이끼",
+          "categoryId": "cat23-0"
+        },
+        {
+          "id": "item23-1",
+          "label": "고사리",
+          "categoryId": "cat23-1"
+        },
+        {
+          "id": "item23-2",
+          "label": "소나무",
+          "categoryId": "cat23-2"
+        },
+        {
+          "id": "item23-3",
+          "label": "벼",
+          "categoryId": "cat23-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-025",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-7",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat24-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat24-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item24-0",
+          "label": "세균",
+          "categoryId": "cat24-0"
+        },
+        {
+          "id": "item24-1",
+          "label": "효모",
+          "categoryId": "cat24-1"
+        },
+        {
+          "id": "item24-2",
+          "label": "소나무",
+          "categoryId": "cat24-1"
+        },
+        {
+          "id": "item24-3",
+          "label": "대장균",
+          "categoryId": "cat24-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-026",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-7",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat25-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat25-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat25-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item25-0",
+          "label": "소나무",
+          "categoryId": "cat25-0"
+        },
+        {
+          "id": "item25-1",
+          "label": "토끼",
+          "categoryId": "cat25-1"
+        },
+        {
+          "id": "item25-2",
+          "label": "버섯",
+          "categoryId": "cat25-2"
+        },
+        {
+          "id": "item25-3",
+          "label": "젖산균",
+          "categoryId": "cat25-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-027",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-7",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat26-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat26-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat26-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat26-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item26-0",
+          "label": "잉어",
+          "categoryId": "cat26-0"
+        },
+        {
+          "id": "item26-1",
+          "label": "개구리",
+          "categoryId": "cat26-1"
+        },
+        {
+          "id": "item26-2",
+          "label": "도마뱀",
+          "categoryId": "cat26-2"
+        },
+        {
+          "id": "item26-3",
+          "label": "참새",
+          "categoryId": "cat26-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-028",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-7",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat27-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat27-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat27-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat27-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item27-0",
+          "label": "이끼",
+          "categoryId": "cat27-0"
+        },
+        {
+          "id": "item27-1",
+          "label": "고사리",
+          "categoryId": "cat27-1"
+        },
+        {
+          "id": "item27-2",
+          "label": "소나무",
+          "categoryId": "cat27-2"
+        },
+        {
+          "id": "item27-3",
+          "label": "벼",
+          "categoryId": "cat27-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-029",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-8",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat28-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat28-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item28-0",
+          "label": "세균",
+          "categoryId": "cat28-0"
+        },
+        {
+          "id": "item28-1",
+          "label": "효모",
+          "categoryId": "cat28-1"
+        },
+        {
+          "id": "item28-2",
+          "label": "소나무",
+          "categoryId": "cat28-1"
+        },
+        {
+          "id": "item28-3",
+          "label": "대장균",
+          "categoryId": "cat28-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-030",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-8",
+    "difficultySeed": 1,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat29-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat29-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat29-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item29-0",
+          "label": "소나무",
+          "categoryId": "cat29-0"
+        },
+        {
+          "id": "item29-1",
+          "label": "토끼",
+          "categoryId": "cat29-1"
+        },
+        {
+          "id": "item29-2",
+          "label": "버섯",
+          "categoryId": "cat29-2"
+        },
+        {
+          "id": "item29-3",
+          "label": "젖산균",
+          "categoryId": "cat29-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-031",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-8",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat30-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat30-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat30-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat30-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item30-0",
+          "label": "잉어",
+          "categoryId": "cat30-0"
+        },
+        {
+          "id": "item30-1",
+          "label": "개구리",
+          "categoryId": "cat30-1"
+        },
+        {
+          "id": "item30-2",
+          "label": "도마뱀",
+          "categoryId": "cat30-2"
+        },
+        {
+          "id": "item30-3",
+          "label": "참새",
+          "categoryId": "cat30-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-032",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-8",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat31-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat31-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat31-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat31-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item31-0",
+          "label": "이끼",
+          "categoryId": "cat31-0"
+        },
+        {
+          "id": "item31-1",
+          "label": "고사리",
+          "categoryId": "cat31-1"
+        },
+        {
+          "id": "item31-2",
+          "label": "소나무",
+          "categoryId": "cat31-2"
+        },
+        {
+          "id": "item31-3",
+          "label": "벼",
+          "categoryId": "cat31-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-033",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-9",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat32-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat32-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item32-0",
+          "label": "세균",
+          "categoryId": "cat32-0"
+        },
+        {
+          "id": "item32-1",
+          "label": "효모",
+          "categoryId": "cat32-1"
+        },
+        {
+          "id": "item32-2",
+          "label": "소나무",
+          "categoryId": "cat32-1"
+        },
+        {
+          "id": "item32-3",
+          "label": "대장균",
+          "categoryId": "cat32-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-034",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-9",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat33-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat33-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat33-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item33-0",
+          "label": "소나무",
+          "categoryId": "cat33-0"
+        },
+        {
+          "id": "item33-1",
+          "label": "토끼",
+          "categoryId": "cat33-1"
+        },
+        {
+          "id": "item33-2",
+          "label": "버섯",
+          "categoryId": "cat33-2"
+        },
+        {
+          "id": "item33-3",
+          "label": "젖산균",
+          "categoryId": "cat33-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-035",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-9",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat34-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat34-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat34-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat34-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item34-0",
+          "label": "잉어",
+          "categoryId": "cat34-0"
+        },
+        {
+          "id": "item34-1",
+          "label": "개구리",
+          "categoryId": "cat34-1"
+        },
+        {
+          "id": "item34-2",
+          "label": "도마뱀",
+          "categoryId": "cat34-2"
+        },
+        {
+          "id": "item34-3",
+          "label": "참새",
+          "categoryId": "cat34-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-036",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-9",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat35-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat35-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat35-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat35-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item35-0",
+          "label": "이끼",
+          "categoryId": "cat35-0"
+        },
+        {
+          "id": "item35-1",
+          "label": "고사리",
+          "categoryId": "cat35-1"
+        },
+        {
+          "id": "item35-2",
+          "label": "소나무",
+          "categoryId": "cat35-2"
+        },
+        {
+          "id": "item35-3",
+          "label": "벼",
+          "categoryId": "cat35-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-037",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-10",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat36-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat36-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item36-0",
+          "label": "세균",
+          "categoryId": "cat36-0"
+        },
+        {
+          "id": "item36-1",
+          "label": "효모",
+          "categoryId": "cat36-1"
+        },
+        {
+          "id": "item36-2",
+          "label": "소나무",
+          "categoryId": "cat36-1"
+        },
+        {
+          "id": "item36-3",
+          "label": "대장균",
+          "categoryId": "cat36-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-038",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-10",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat37-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat37-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat37-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item37-0",
+          "label": "소나무",
+          "categoryId": "cat37-0"
+        },
+        {
+          "id": "item37-1",
+          "label": "토끼",
+          "categoryId": "cat37-1"
+        },
+        {
+          "id": "item37-2",
+          "label": "버섯",
+          "categoryId": "cat37-2"
+        },
+        {
+          "id": "item37-3",
+          "label": "젖산균",
+          "categoryId": "cat37-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-039",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-10",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat38-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat38-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat38-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat38-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item38-0",
+          "label": "잉어",
+          "categoryId": "cat38-0"
+        },
+        {
+          "id": "item38-1",
+          "label": "개구리",
+          "categoryId": "cat38-1"
+        },
+        {
+          "id": "item38-2",
+          "label": "도마뱀",
+          "categoryId": "cat38-2"
+        },
+        {
+          "id": "item38-3",
+          "label": "참새",
+          "categoryId": "cat38-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-040",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-10",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat39-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat39-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat39-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat39-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item39-0",
+          "label": "이끼",
+          "categoryId": "cat39-0"
+        },
+        {
+          "id": "item39-1",
+          "label": "고사리",
+          "categoryId": "cat39-1"
+        },
+        {
+          "id": "item39-2",
+          "label": "소나무",
+          "categoryId": "cat39-2"
+        },
+        {
+          "id": "item39-3",
+          "label": "벼",
+          "categoryId": "cat39-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-041",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-11",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat40-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat40-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item40-0",
+          "label": "세균",
+          "categoryId": "cat40-0"
+        },
+        {
+          "id": "item40-1",
+          "label": "효모",
+          "categoryId": "cat40-1"
+        },
+        {
+          "id": "item40-2",
+          "label": "소나무",
+          "categoryId": "cat40-1"
+        },
+        {
+          "id": "item40-3",
+          "label": "대장균",
+          "categoryId": "cat40-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-042",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-11",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat41-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat41-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat41-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item41-0",
+          "label": "소나무",
+          "categoryId": "cat41-0"
+        },
+        {
+          "id": "item41-1",
+          "label": "토끼",
+          "categoryId": "cat41-1"
+        },
+        {
+          "id": "item41-2",
+          "label": "버섯",
+          "categoryId": "cat41-2"
+        },
+        {
+          "id": "item41-3",
+          "label": "젖산균",
+          "categoryId": "cat41-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-043",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-11",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat42-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat42-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat42-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat42-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item42-0",
+          "label": "잉어",
+          "categoryId": "cat42-0"
+        },
+        {
+          "id": "item42-1",
+          "label": "개구리",
+          "categoryId": "cat42-1"
+        },
+        {
+          "id": "item42-2",
+          "label": "도마뱀",
+          "categoryId": "cat42-2"
+        },
+        {
+          "id": "item42-3",
+          "label": "참새",
+          "categoryId": "cat42-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-044",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-11",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat43-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat43-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat43-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat43-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item43-0",
+          "label": "이끼",
+          "categoryId": "cat43-0"
+        },
+        {
+          "id": "item43-1",
+          "label": "고사리",
+          "categoryId": "cat43-1"
+        },
+        {
+          "id": "item43-2",
+          "label": "소나무",
+          "categoryId": "cat43-2"
+        },
+        {
+          "id": "item43-3",
+          "label": "벼",
+          "categoryId": "cat43-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-045",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-12",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat44-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat44-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item44-0",
+          "label": "세균",
+          "categoryId": "cat44-0"
+        },
+        {
+          "id": "item44-1",
+          "label": "효모",
+          "categoryId": "cat44-1"
+        },
+        {
+          "id": "item44-2",
+          "label": "소나무",
+          "categoryId": "cat44-1"
+        },
+        {
+          "id": "item44-3",
+          "label": "대장균",
+          "categoryId": "cat44-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-046",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-12",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat45-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat45-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat45-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item45-0",
+          "label": "소나무",
+          "categoryId": "cat45-0"
+        },
+        {
+          "id": "item45-1",
+          "label": "토끼",
+          "categoryId": "cat45-1"
+        },
+        {
+          "id": "item45-2",
+          "label": "버섯",
+          "categoryId": "cat45-2"
+        },
+        {
+          "id": "item45-3",
+          "label": "젖산균",
+          "categoryId": "cat45-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-047",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-12",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat46-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat46-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat46-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat46-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item46-0",
+          "label": "잉어",
+          "categoryId": "cat46-0"
+        },
+        {
+          "id": "item46-1",
+          "label": "개구리",
+          "categoryId": "cat46-1"
+        },
+        {
+          "id": "item46-2",
+          "label": "도마뱀",
+          "categoryId": "cat46-2"
+        },
+        {
+          "id": "item46-3",
+          "label": "참새",
+          "categoryId": "cat46-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-048",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-12",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat47-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat47-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat47-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat47-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item47-0",
+          "label": "이끼",
+          "categoryId": "cat47-0"
+        },
+        {
+          "id": "item47-1",
+          "label": "고사리",
+          "categoryId": "cat47-1"
+        },
+        {
+          "id": "item47-2",
+          "label": "소나무",
+          "categoryId": "cat47-2"
+        },
+        {
+          "id": "item47-3",
+          "label": "벼",
+          "categoryId": "cat47-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-049",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-13",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat48-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat48-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item48-0",
+          "label": "세균",
+          "categoryId": "cat48-0"
+        },
+        {
+          "id": "item48-1",
+          "label": "효모",
+          "categoryId": "cat48-1"
+        },
+        {
+          "id": "item48-2",
+          "label": "소나무",
+          "categoryId": "cat48-1"
+        },
+        {
+          "id": "item48-3",
+          "label": "대장균",
+          "categoryId": "cat48-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-050",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-13",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat49-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat49-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat49-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item49-0",
+          "label": "소나무",
+          "categoryId": "cat49-0"
+        },
+        {
+          "id": "item49-1",
+          "label": "토끼",
+          "categoryId": "cat49-1"
+        },
+        {
+          "id": "item49-2",
+          "label": "버섯",
+          "categoryId": "cat49-2"
+        },
+        {
+          "id": "item49-3",
+          "label": "젖산균",
+          "categoryId": "cat49-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-051",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-13",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat50-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat50-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat50-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat50-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item50-0",
+          "label": "잉어",
+          "categoryId": "cat50-0"
+        },
+        {
+          "id": "item50-1",
+          "label": "개구리",
+          "categoryId": "cat50-1"
+        },
+        {
+          "id": "item50-2",
+          "label": "도마뱀",
+          "categoryId": "cat50-2"
+        },
+        {
+          "id": "item50-3",
+          "label": "참새",
+          "categoryId": "cat50-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-052",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-13",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat51-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat51-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat51-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat51-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item51-0",
+          "label": "이끼",
+          "categoryId": "cat51-0"
+        },
+        {
+          "id": "item51-1",
+          "label": "고사리",
+          "categoryId": "cat51-1"
+        },
+        {
+          "id": "item51-2",
+          "label": "소나무",
+          "categoryId": "cat51-2"
+        },
+        {
+          "id": "item51-3",
+          "label": "벼",
+          "categoryId": "cat51-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-053",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-14",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat52-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat52-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item52-0",
+          "label": "세균",
+          "categoryId": "cat52-0"
+        },
+        {
+          "id": "item52-1",
+          "label": "효모",
+          "categoryId": "cat52-1"
+        },
+        {
+          "id": "item52-2",
+          "label": "소나무",
+          "categoryId": "cat52-1"
+        },
+        {
+          "id": "item52-3",
+          "label": "대장균",
+          "categoryId": "cat52-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-054",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-14",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat53-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat53-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat53-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item53-0",
+          "label": "소나무",
+          "categoryId": "cat53-0"
+        },
+        {
+          "id": "item53-1",
+          "label": "토끼",
+          "categoryId": "cat53-1"
+        },
+        {
+          "id": "item53-2",
+          "label": "버섯",
+          "categoryId": "cat53-2"
+        },
+        {
+          "id": "item53-3",
+          "label": "젖산균",
+          "categoryId": "cat53-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-055",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-14",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat54-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat54-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat54-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat54-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item54-0",
+          "label": "잉어",
+          "categoryId": "cat54-0"
+        },
+        {
+          "id": "item54-1",
+          "label": "개구리",
+          "categoryId": "cat54-1"
+        },
+        {
+          "id": "item54-2",
+          "label": "도마뱀",
+          "categoryId": "cat54-2"
+        },
+        {
+          "id": "item54-3",
+          "label": "참새",
+          "categoryId": "cat54-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-056",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-14",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat55-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat55-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat55-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat55-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item55-0",
+          "label": "이끼",
+          "categoryId": "cat55-0"
+        },
+        {
+          "id": "item55-1",
+          "label": "고사리",
+          "categoryId": "cat55-1"
+        },
+        {
+          "id": "item55-2",
+          "label": "소나무",
+          "categoryId": "cat55-2"
+        },
+        {
+          "id": "item55-3",
+          "label": "벼",
+          "categoryId": "cat55-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-057",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-15",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat56-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat56-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item56-0",
+          "label": "세균",
+          "categoryId": "cat56-0"
+        },
+        {
+          "id": "item56-1",
+          "label": "효모",
+          "categoryId": "cat56-1"
+        },
+        {
+          "id": "item56-2",
+          "label": "소나무",
+          "categoryId": "cat56-1"
+        },
+        {
+          "id": "item56-3",
+          "label": "대장균",
+          "categoryId": "cat56-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-058",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-15",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat57-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat57-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat57-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item57-0",
+          "label": "소나무",
+          "categoryId": "cat57-0"
+        },
+        {
+          "id": "item57-1",
+          "label": "토끼",
+          "categoryId": "cat57-1"
+        },
+        {
+          "id": "item57-2",
+          "label": "버섯",
+          "categoryId": "cat57-2"
+        },
+        {
+          "id": "item57-3",
+          "label": "젖산균",
+          "categoryId": "cat57-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-059",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-15",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat58-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat58-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat58-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat58-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item58-0",
+          "label": "잉어",
+          "categoryId": "cat58-0"
+        },
+        {
+          "id": "item58-1",
+          "label": "개구리",
+          "categoryId": "cat58-1"
+        },
+        {
+          "id": "item58-2",
+          "label": "도마뱀",
+          "categoryId": "cat58-2"
+        },
+        {
+          "id": "item58-3",
+          "label": "참새",
+          "categoryId": "cat58-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-060",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-15",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat59-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat59-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat59-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat59-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item59-0",
+          "label": "이끼",
+          "categoryId": "cat59-0"
+        },
+        {
+          "id": "item59-1",
+          "label": "고사리",
+          "categoryId": "cat59-1"
+        },
+        {
+          "id": "item59-2",
+          "label": "소나무",
+          "categoryId": "cat59-2"
+        },
+        {
+          "id": "item59-3",
+          "label": "벼",
+          "categoryId": "cat59-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-061",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-16",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat60-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat60-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item60-0",
+          "label": "세균",
+          "categoryId": "cat60-0"
+        },
+        {
+          "id": "item60-1",
+          "label": "효모",
+          "categoryId": "cat60-1"
+        },
+        {
+          "id": "item60-2",
+          "label": "소나무",
+          "categoryId": "cat60-1"
+        },
+        {
+          "id": "item60-3",
+          "label": "대장균",
+          "categoryId": "cat60-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-062",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-16",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat61-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat61-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat61-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item61-0",
+          "label": "소나무",
+          "categoryId": "cat61-0"
+        },
+        {
+          "id": "item61-1",
+          "label": "토끼",
+          "categoryId": "cat61-1"
+        },
+        {
+          "id": "item61-2",
+          "label": "버섯",
+          "categoryId": "cat61-2"
+        },
+        {
+          "id": "item61-3",
+          "label": "젖산균",
+          "categoryId": "cat61-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-063",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-16",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat62-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat62-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat62-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat62-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item62-0",
+          "label": "잉어",
+          "categoryId": "cat62-0"
+        },
+        {
+          "id": "item62-1",
+          "label": "개구리",
+          "categoryId": "cat62-1"
+        },
+        {
+          "id": "item62-2",
+          "label": "도마뱀",
+          "categoryId": "cat62-2"
+        },
+        {
+          "id": "item62-3",
+          "label": "참새",
+          "categoryId": "cat62-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-064",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-16",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat63-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat63-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat63-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat63-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item63-0",
+          "label": "이끼",
+          "categoryId": "cat63-0"
+        },
+        {
+          "id": "item63-1",
+          "label": "고사리",
+          "categoryId": "cat63-1"
+        },
+        {
+          "id": "item63-2",
+          "label": "소나무",
+          "categoryId": "cat63-2"
+        },
+        {
+          "id": "item63-3",
+          "label": "벼",
+          "categoryId": "cat63-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-065",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-17",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat64-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat64-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item64-0",
+          "label": "세균",
+          "categoryId": "cat64-0"
+        },
+        {
+          "id": "item64-1",
+          "label": "효모",
+          "categoryId": "cat64-1"
+        },
+        {
+          "id": "item64-2",
+          "label": "소나무",
+          "categoryId": "cat64-1"
+        },
+        {
+          "id": "item64-3",
+          "label": "대장균",
+          "categoryId": "cat64-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-066",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-17",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat65-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat65-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat65-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item65-0",
+          "label": "소나무",
+          "categoryId": "cat65-0"
+        },
+        {
+          "id": "item65-1",
+          "label": "토끼",
+          "categoryId": "cat65-1"
+        },
+        {
+          "id": "item65-2",
+          "label": "버섯",
+          "categoryId": "cat65-2"
+        },
+        {
+          "id": "item65-3",
+          "label": "젖산균",
+          "categoryId": "cat65-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-067",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-17",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat66-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat66-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat66-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat66-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item66-0",
+          "label": "잉어",
+          "categoryId": "cat66-0"
+        },
+        {
+          "id": "item66-1",
+          "label": "개구리",
+          "categoryId": "cat66-1"
+        },
+        {
+          "id": "item66-2",
+          "label": "도마뱀",
+          "categoryId": "cat66-2"
+        },
+        {
+          "id": "item66-3",
+          "label": "참새",
+          "categoryId": "cat66-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-068",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-17",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat67-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat67-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat67-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat67-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item67-0",
+          "label": "이끼",
+          "categoryId": "cat67-0"
+        },
+        {
+          "id": "item67-1",
+          "label": "고사리",
+          "categoryId": "cat67-1"
+        },
+        {
+          "id": "item67-2",
+          "label": "소나무",
+          "categoryId": "cat67-2"
+        },
+        {
+          "id": "item67-3",
+          "label": "벼",
+          "categoryId": "cat67-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-069",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-18",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat68-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat68-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item68-0",
+          "label": "세균",
+          "categoryId": "cat68-0"
+        },
+        {
+          "id": "item68-1",
+          "label": "효모",
+          "categoryId": "cat68-1"
+        },
+        {
+          "id": "item68-2",
+          "label": "소나무",
+          "categoryId": "cat68-1"
+        },
+        {
+          "id": "item68-3",
+          "label": "대장균",
+          "categoryId": "cat68-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-070",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-18",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat69-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat69-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat69-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item69-0",
+          "label": "소나무",
+          "categoryId": "cat69-0"
+        },
+        {
+          "id": "item69-1",
+          "label": "토끼",
+          "categoryId": "cat69-1"
+        },
+        {
+          "id": "item69-2",
+          "label": "버섯",
+          "categoryId": "cat69-2"
+        },
+        {
+          "id": "item69-3",
+          "label": "젖산균",
+          "categoryId": "cat69-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-071",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-18",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat70-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat70-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat70-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat70-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item70-0",
+          "label": "잉어",
+          "categoryId": "cat70-0"
+        },
+        {
+          "id": "item70-1",
+          "label": "개구리",
+          "categoryId": "cat70-1"
+        },
+        {
+          "id": "item70-2",
+          "label": "도마뱀",
+          "categoryId": "cat70-2"
+        },
+        {
+          "id": "item70-3",
+          "label": "참새",
+          "categoryId": "cat70-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-072",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-18",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat71-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat71-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat71-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat71-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item71-0",
+          "label": "이끼",
+          "categoryId": "cat71-0"
+        },
+        {
+          "id": "item71-1",
+          "label": "고사리",
+          "categoryId": "cat71-1"
+        },
+        {
+          "id": "item71-2",
+          "label": "소나무",
+          "categoryId": "cat71-2"
+        },
+        {
+          "id": "item71-3",
+          "label": "벼",
+          "categoryId": "cat71-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-073",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-19",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat72-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat72-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item72-0",
+          "label": "세균",
+          "categoryId": "cat72-0"
+        },
+        {
+          "id": "item72-1",
+          "label": "효모",
+          "categoryId": "cat72-1"
+        },
+        {
+          "id": "item72-2",
+          "label": "소나무",
+          "categoryId": "cat72-1"
+        },
+        {
+          "id": "item72-3",
+          "label": "대장균",
+          "categoryId": "cat72-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-074",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-19",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat73-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat73-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat73-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item73-0",
+          "label": "소나무",
+          "categoryId": "cat73-0"
+        },
+        {
+          "id": "item73-1",
+          "label": "토끼",
+          "categoryId": "cat73-1"
+        },
+        {
+          "id": "item73-2",
+          "label": "버섯",
+          "categoryId": "cat73-2"
+        },
+        {
+          "id": "item73-3",
+          "label": "젖산균",
+          "categoryId": "cat73-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-075",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-19",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat74-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat74-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat74-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat74-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item74-0",
+          "label": "잉어",
+          "categoryId": "cat74-0"
+        },
+        {
+          "id": "item74-1",
+          "label": "개구리",
+          "categoryId": "cat74-1"
+        },
+        {
+          "id": "item74-2",
+          "label": "도마뱀",
+          "categoryId": "cat74-2"
+        },
+        {
+          "id": "item74-3",
+          "label": "참새",
+          "categoryId": "cat74-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-076",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-19",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat75-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat75-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat75-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat75-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item75-0",
+          "label": "이끼",
+          "categoryId": "cat75-0"
+        },
+        {
+          "id": "item75-1",
+          "label": "고사리",
+          "categoryId": "cat75-1"
+        },
+        {
+          "id": "item75-2",
+          "label": "소나무",
+          "categoryId": "cat75-2"
+        },
+        {
+          "id": "item75-3",
+          "label": "벼",
+          "categoryId": "cat75-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-077",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-20",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat76-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat76-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item76-0",
+          "label": "세균",
+          "categoryId": "cat76-0"
+        },
+        {
+          "id": "item76-1",
+          "label": "효모",
+          "categoryId": "cat76-1"
+        },
+        {
+          "id": "item76-2",
+          "label": "소나무",
+          "categoryId": "cat76-1"
+        },
+        {
+          "id": "item76-3",
+          "label": "대장균",
+          "categoryId": "cat76-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-078",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-20",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat77-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat77-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat77-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item77-0",
+          "label": "소나무",
+          "categoryId": "cat77-0"
+        },
+        {
+          "id": "item77-1",
+          "label": "토끼",
+          "categoryId": "cat77-1"
+        },
+        {
+          "id": "item77-2",
+          "label": "버섯",
+          "categoryId": "cat77-2"
+        },
+        {
+          "id": "item77-3",
+          "label": "젖산균",
+          "categoryId": "cat77-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-079",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-20",
+    "difficultySeed": 3,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat78-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat78-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat78-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat78-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item78-0",
+          "label": "잉어",
+          "categoryId": "cat78-0"
+        },
+        {
+          "id": "item78-1",
+          "label": "개구리",
+          "categoryId": "cat78-1"
+        },
+        {
+          "id": "item78-2",
+          "label": "도마뱀",
+          "categoryId": "cat78-2"
+        },
+        {
+          "id": "item78-3",
+          "label": "참새",
+          "categoryId": "cat78-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-080",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-20",
+    "difficultySeed": 2,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat79-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat79-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat79-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat79-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item79-0",
+          "label": "이끼",
+          "categoryId": "cat79-0"
+        },
+        {
+          "id": "item79-1",
+          "label": "고사리",
+          "categoryId": "cat79-1"
+        },
+        {
+          "id": "item79-2",
+          "label": "소나무",
+          "categoryId": "cat79-2"
+        },
+        {
+          "id": "item79-3",
+          "label": "벼",
+          "categoryId": "cat79-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-081",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-21",
+    "difficultySeed": 5,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat80-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat80-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item80-0",
+          "label": "세균",
+          "categoryId": "cat80-0"
+        },
+        {
+          "id": "item80-1",
+          "label": "효모",
+          "categoryId": "cat80-1"
+        },
+        {
+          "id": "item80-2",
+          "label": "소나무",
+          "categoryId": "cat80-1"
+        },
+        {
+          "id": "item80-3",
+          "label": "대장균",
+          "categoryId": "cat80-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-082",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-21",
+    "difficultySeed": 4,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat81-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat81-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat81-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item81-0",
+          "label": "소나무",
+          "categoryId": "cat81-0"
+        },
+        {
+          "id": "item81-1",
+          "label": "토끼",
+          "categoryId": "cat81-1"
+        },
+        {
+          "id": "item81-2",
+          "label": "버섯",
+          "categoryId": "cat81-2"
+        },
+        {
+          "id": "item81-3",
+          "label": "젖산균",
+          "categoryId": "cat81-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-083",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-21",
+    "difficultySeed": 5,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat82-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat82-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat82-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat82-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item82-0",
+          "label": "잉어",
+          "categoryId": "cat82-0"
+        },
+        {
+          "id": "item82-1",
+          "label": "개구리",
+          "categoryId": "cat82-1"
+        },
+        {
+          "id": "item82-2",
+          "label": "도마뱀",
+          "categoryId": "cat82-2"
+        },
+        {
+          "id": "item82-3",
+          "label": "참새",
+          "categoryId": "cat82-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-084",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-21",
+    "difficultySeed": 4,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat83-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat83-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat83-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat83-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item83-0",
+          "label": "이끼",
+          "categoryId": "cat83-0"
+        },
+        {
+          "id": "item83-1",
+          "label": "고사리",
+          "categoryId": "cat83-1"
+        },
+        {
+          "id": "item83-2",
+          "label": "소나무",
+          "categoryId": "cat83-2"
+        },
+        {
+          "id": "item83-3",
+          "label": "벼",
+          "categoryId": "cat83-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-085",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-22",
+    "difficultySeed": 5,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat84-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat84-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item84-0",
+          "label": "세균",
+          "categoryId": "cat84-0"
+        },
+        {
+          "id": "item84-1",
+          "label": "효모",
+          "categoryId": "cat84-1"
+        },
+        {
+          "id": "item84-2",
+          "label": "소나무",
+          "categoryId": "cat84-1"
+        },
+        {
+          "id": "item84-3",
+          "label": "대장균",
+          "categoryId": "cat84-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-086",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-22",
+    "difficultySeed": 4,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat85-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat85-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat85-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item85-0",
+          "label": "소나무",
+          "categoryId": "cat85-0"
+        },
+        {
+          "id": "item85-1",
+          "label": "토끼",
+          "categoryId": "cat85-1"
+        },
+        {
+          "id": "item85-2",
+          "label": "버섯",
+          "categoryId": "cat85-2"
+        },
+        {
+          "id": "item85-3",
+          "label": "젖산균",
+          "categoryId": "cat85-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-087",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-22",
+    "difficultySeed": 5,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat86-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat86-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat86-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat86-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item86-0",
+          "label": "잉어",
+          "categoryId": "cat86-0"
+        },
+        {
+          "id": "item86-1",
+          "label": "개구리",
+          "categoryId": "cat86-1"
+        },
+        {
+          "id": "item86-2",
+          "label": "도마뱀",
+          "categoryId": "cat86-2"
+        },
+        {
+          "id": "item86-3",
+          "label": "참새",
+          "categoryId": "cat86-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-088",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-22",
+    "difficultySeed": 4,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat87-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat87-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat87-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat87-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item87-0",
+          "label": "이끼",
+          "categoryId": "cat87-0"
+        },
+        {
+          "id": "item87-1",
+          "label": "고사리",
+          "categoryId": "cat87-1"
+        },
+        {
+          "id": "item87-2",
+          "label": "소나무",
+          "categoryId": "cat87-2"
+        },
+        {
+          "id": "item87-3",
+          "label": "벼",
+          "categoryId": "cat87-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-089",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-23",
+    "difficultySeed": 5,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat88-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat88-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item88-0",
+          "label": "세균",
+          "categoryId": "cat88-0"
+        },
+        {
+          "id": "item88-1",
+          "label": "효모",
+          "categoryId": "cat88-1"
+        },
+        {
+          "id": "item88-2",
+          "label": "소나무",
+          "categoryId": "cat88-1"
+        },
+        {
+          "id": "item88-3",
+          "label": "대장균",
+          "categoryId": "cat88-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-090",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-23",
+    "difficultySeed": 4,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat89-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat89-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat89-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item89-0",
+          "label": "소나무",
+          "categoryId": "cat89-0"
+        },
+        {
+          "id": "item89-1",
+          "label": "토끼",
+          "categoryId": "cat89-1"
+        },
+        {
+          "id": "item89-2",
+          "label": "버섯",
+          "categoryId": "cat89-2"
+        },
+        {
+          "id": "item89-3",
+          "label": "젖산균",
+          "categoryId": "cat89-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-091",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-23",
+    "difficultySeed": 5,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat90-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat90-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat90-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat90-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item90-0",
+          "label": "잉어",
+          "categoryId": "cat90-0"
+        },
+        {
+          "id": "item90-1",
+          "label": "개구리",
+          "categoryId": "cat90-1"
+        },
+        {
+          "id": "item90-2",
+          "label": "도마뱀",
+          "categoryId": "cat90-2"
+        },
+        {
+          "id": "item90-3",
+          "label": "참새",
+          "categoryId": "cat90-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-092",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-23",
+    "difficultySeed": 4,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat91-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat91-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat91-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat91-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item91-0",
+          "label": "이끼",
+          "categoryId": "cat91-0"
+        },
+        {
+          "id": "item91-1",
+          "label": "고사리",
+          "categoryId": "cat91-1"
+        },
+        {
+          "id": "item91-2",
+          "label": "소나무",
+          "categoryId": "cat91-2"
+        },
+        {
+          "id": "item91-3",
+          "label": "벼",
+          "categoryId": "cat91-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-093",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-24",
+    "difficultySeed": 5,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat92-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat92-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item92-0",
+          "label": "세균",
+          "categoryId": "cat92-0"
+        },
+        {
+          "id": "item92-1",
+          "label": "효모",
+          "categoryId": "cat92-1"
+        },
+        {
+          "id": "item92-2",
+          "label": "소나무",
+          "categoryId": "cat92-1"
+        },
+        {
+          "id": "item92-3",
+          "label": "대장균",
+          "categoryId": "cat92-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-094",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-24",
+    "difficultySeed": 4,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat93-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat93-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat93-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item93-0",
+          "label": "소나무",
+          "categoryId": "cat93-0"
+        },
+        {
+          "id": "item93-1",
+          "label": "토끼",
+          "categoryId": "cat93-1"
+        },
+        {
+          "id": "item93-2",
+          "label": "버섯",
+          "categoryId": "cat93-2"
+        },
+        {
+          "id": "item93-3",
+          "label": "젖산균",
+          "categoryId": "cat93-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-095",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-24",
+    "difficultySeed": 5,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat94-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat94-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat94-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat94-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item94-0",
+          "label": "잉어",
+          "categoryId": "cat94-0"
+        },
+        {
+          "id": "item94-1",
+          "label": "개구리",
+          "categoryId": "cat94-1"
+        },
+        {
+          "id": "item94-2",
+          "label": "도마뱀",
+          "categoryId": "cat94-2"
+        },
+        {
+          "id": "item94-3",
+          "label": "참새",
+          "categoryId": "cat94-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-096",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-24",
+    "difficultySeed": 4,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat95-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat95-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat95-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat95-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item95-0",
+          "label": "이끼",
+          "categoryId": "cat95-0"
+        },
+        {
+          "id": "item95-1",
+          "label": "고사리",
+          "categoryId": "cat95-1"
+        },
+        {
+          "id": "item95-2",
+          "label": "소나무",
+          "categoryId": "cat95-2"
+        },
+        {
+          "id": "item95-3",
+          "label": "벼",
+          "categoryId": "cat95-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-097",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-25",
+    "difficultySeed": 5,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "핵막으로 둘러싸인 핵의 유무",
+      "categories": [
+        {
+          "id": "cat96-0",
+          "label": "원핵세포"
+        },
+        {
+          "id": "cat96-1",
+          "label": "진핵세포"
+        }
+      ],
+      "items": [
+        {
+          "id": "item96-0",
+          "label": "세균",
+          "categoryId": "cat96-0"
+        },
+        {
+          "id": "item96-1",
+          "label": "효모",
+          "categoryId": "cat96-1"
+        },
+        {
+          "id": "item96-2",
+          "label": "소나무",
+          "categoryId": "cat96-1"
+        },
+        {
+          "id": "item96-3",
+          "label": "대장균",
+          "categoryId": "cat96-0"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-098",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-25",
+    "difficultySeed": 4,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "영양 방식",
+      "categories": [
+        {
+          "id": "cat97-0",
+          "label": "생산자"
+        },
+        {
+          "id": "cat97-1",
+          "label": "소비자"
+        },
+        {
+          "id": "cat97-2",
+          "label": "분해자"
+        }
+      ],
+      "items": [
+        {
+          "id": "item97-0",
+          "label": "소나무",
+          "categoryId": "cat97-0"
+        },
+        {
+          "id": "item97-1",
+          "label": "토끼",
+          "categoryId": "cat97-1"
+        },
+        {
+          "id": "item97-2",
+          "label": "버섯",
+          "categoryId": "cat97-2"
+        },
+        {
+          "id": "item97-3",
+          "label": "젖산균",
+          "categoryId": "cat97-2"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-099",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-25",
+    "difficultySeed": 5,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "척추동물 분류",
+      "categories": [
+        {
+          "id": "cat98-0",
+          "label": "어류"
+        },
+        {
+          "id": "cat98-1",
+          "label": "양서류"
+        },
+        {
+          "id": "cat98-2",
+          "label": "파충류"
+        },
+        {
+          "id": "cat98-3",
+          "label": "조류"
+        }
+      ],
+      "items": [
+        {
+          "id": "item98-0",
+          "label": "잉어",
+          "categoryId": "cat98-0"
+        },
+        {
+          "id": "item98-1",
+          "label": "개구리",
+          "categoryId": "cat98-1"
+        },
+        {
+          "id": "item98-2",
+          "label": "도마뱀",
+          "categoryId": "cat98-2"
+        },
+        {
+          "id": "item98-3",
+          "label": "참새",
+          "categoryId": "cat98-3"
+        }
+      ]
+    }
+  },
+  {
+    "id": "bio-draft-100",
+    "type": "bio-taxonomy",
+    "unit": "고1-생명과학-분류-25",
+    "difficultySeed": 4,
+    "hint": "제목의 분류 기준을 먼저 고정",
+    "problem": {
+      "title": "식물 분류",
+      "categories": [
+        {
+          "id": "cat99-0",
+          "label": "선태식물"
+        },
+        {
+          "id": "cat99-1",
+          "label": "양치식물"
+        },
+        {
+          "id": "cat99-2",
+          "label": "겉씨식물"
+        },
+        {
+          "id": "cat99-3",
+          "label": "속씨식물"
+        }
+      ],
+      "items": [
+        {
+          "id": "item99-0",
+          "label": "이끼",
+          "categoryId": "cat99-0"
+        },
+        {
+          "id": "item99-1",
+          "label": "고사리",
+          "categoryId": "cat99-1"
+        },
+        {
+          "id": "item99-2",
+          "label": "소나무",
+          "categoryId": "cat99-2"
+        },
+        {
+          "id": "item99-3",
+          "label": "벼",
+          "categoryId": "cat99-3"
+        }
+      ]
+    }
+  }
+]

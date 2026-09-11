@@ -1,0 +1,702 @@
+[
+  {
+    "id": "fac-draft-001",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "2x + 4"
+  },
+  {
+    "id": "fac-draft-002",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "6x + 9"
+  },
+  {
+    "id": "fac-draft-003",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "12x + 16"
+  },
+  {
+    "id": "fac-draft-004",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "15x + 25"
+  },
+  {
+    "id": "fac-draft-005",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "24x + 30"
+  },
+  {
+    "id": "fac-draft-006",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "35x + 42"
+  },
+  {
+    "id": "fac-draft-007",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "40x + 56"
+  },
+  {
+    "id": "fac-draft-008",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "63x + 72"
+  },
+  {
+    "id": "fac-draft-009",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "70x + 90"
+  },
+  {
+    "id": "fac-draft-010",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "16x + 18"
+  },
+  {
+    "id": "fac-draft-011",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "3a² - 6"
+  },
+  {
+    "id": "fac-draft-012",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "8a² - 12"
+  },
+  {
+    "id": "fac-draft-013",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "15a² - 20"
+  },
+  {
+    "id": "fac-draft-014",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "18a² - 30"
+  },
+  {
+    "id": "fac-draft-015",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "28a² - 35"
+  },
+  {
+    "id": "fac-draft-016",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "40a² - 48"
+  },
+  {
+    "id": "fac-draft-017",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "45a² - 63"
+  },
+  {
+    "id": "fac-draft-018",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "70a² - 80"
+  },
+  {
+    "id": "fac-draft-019",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "14a² - 18"
+  },
+  {
+    "id": "fac-draft-020",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "24a² - 27"
+  },
+  {
+    "id": "fac-draft-021",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "4b³ + 8"
+  },
+  {
+    "id": "fac-draft-022",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "10b³ + 15"
+  },
+  {
+    "id": "fac-draft-023",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "18b³ + 24"
+  },
+  {
+    "id": "fac-draft-024",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "21b³ + 35"
+  },
+  {
+    "id": "fac-draft-025",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "32b³ + 40"
+  },
+  {
+    "id": "fac-draft-026",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "45b⁴ + 54b"
+  },
+  {
+    "id": "fac-draft-027",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "50b⁴ + 70b"
+  },
+  {
+    "id": "fac-draft-028",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "14b⁴ + 16b"
+  },
+  {
+    "id": "fac-draft-029",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "21b⁴ + 27b"
+  },
+  {
+    "id": "fac-draft-030",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "32b⁴ + 36b"
+  },
+  {
+    "id": "fac-draft-031",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "5p² - 10p"
+  },
+  {
+    "id": "fac-draft-032",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "12p² - 18p"
+  },
+  {
+    "id": "fac-draft-033",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "21p² - 28p"
+  },
+  {
+    "id": "fac-draft-034",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "24p² - 40p"
+  },
+  {
+    "id": "fac-draft-035",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "36p² - 45p"
+  },
+  {
+    "id": "fac-draft-036",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "50p² - 60p"
+  },
+  {
+    "id": "fac-draft-037",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "10p² - 14p"
+  },
+  {
+    "id": "fac-draft-038",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "21p² - 24p"
+  },
+  {
+    "id": "fac-draft-039",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "28p² - 36p"
+  },
+  {
+    "id": "fac-draft-040",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "40p² - 45p"
+  },
+  {
+    "id": "fac-draft-041",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "6q³ + 12q"
+  },
+  {
+    "id": "fac-draft-042",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "14q³ + 21q"
+  },
+  {
+    "id": "fac-draft-043",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "24q³ + 32q"
+  },
+  {
+    "id": "fac-draft-044",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "27q³ + 45q"
+  },
+  {
+    "id": "fac-draft-045",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "40q³ + 50q"
+  },
+  {
+    "id": "fac-draft-046",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "10q³ + 12q"
+  },
+  {
+    "id": "fac-draft-047",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "15q³ + 21q"
+  },
+  {
+    "id": "fac-draft-048",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "28q³ + 32q"
+  },
+  {
+    "id": "fac-draft-049",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "35q³ + 45q"
+  },
+  {
+    "id": "fac-draft-050",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "48q³ + 54q"
+  },
+  {
+    "id": "fac-draft-051",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "7x⁵ - 14x²"
+  },
+  {
+    "id": "fac-draft-052",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "16x⁵ - 24x²"
+  },
+  {
+    "id": "fac-draft-053",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "27x⁵ - 36x²"
+  },
+  {
+    "id": "fac-draft-054",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "30x⁵ - 50x²"
+  },
+  {
+    "id": "fac-draft-055",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "8x⁵ - 10x²"
+  },
+  {
+    "id": "fac-draft-056",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "15x⁵ - 18x²"
+  },
+  {
+    "id": "fac-draft-057",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "20x⁵ - 28x²"
+  },
+  {
+    "id": "fac-draft-058",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "35x⁵ - 40x²"
+  },
+  {
+    "id": "fac-draft-059",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "42x⁵ - 54x²"
+  },
+  {
+    "id": "fac-draft-060",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "56x⁵ - 63x²"
+  },
+  {
+    "id": "fac-draft-061",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "8a³ + 16a²"
+  },
+  {
+    "id": "fac-draft-062",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "18a³ + 27a²"
+  },
+  {
+    "id": "fac-draft-063",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "30a³ + 40a²"
+  },
+  {
+    "id": "fac-draft-064",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "6a³ + 10a²"
+  },
+  {
+    "id": "fac-draft-065",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "12a³ + 15a²"
+  },
+  {
+    "id": "fac-draft-066",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "20a³ + 24a²"
+  },
+  {
+    "id": "fac-draft-067",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "25a³ + 35a²"
+  },
+  {
+    "id": "fac-draft-068",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "42a³ + 48a²"
+  },
+  {
+    "id": "fac-draft-069",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "49a³ + 63a²"
+  },
+  {
+    "id": "fac-draft-070",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "64a³ + 72a²"
+  },
+  {
+    "id": "fac-draft-071",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "9b⁴ - 18b²"
+  },
+  {
+    "id": "fac-draft-072",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "20b⁴ - 30b²"
+  },
+  {
+    "id": "fac-draft-073",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "6b⁴ - 8b²"
+  },
+  {
+    "id": "fac-draft-074",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "9b⁴ - 15b²"
+  },
+  {
+    "id": "fac-draft-075",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "16b⁴ - 20b²"
+  },
+  {
+    "id": "fac-draft-076",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "25b² - 30"
+  },
+  {
+    "id": "fac-draft-077",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "30b² - 42"
+  },
+  {
+    "id": "fac-draft-078",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "49b² - 56"
+  },
+  {
+    "id": "fac-draft-079",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "56b² - 72"
+  },
+  {
+    "id": "fac-draft-080",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "72b² - 81"
+  },
+  {
+    "id": "fac-draft-081",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "10p³ + 20"
+  },
+  {
+    "id": "fac-draft-082",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "4p³ + 6"
+  },
+  {
+    "id": "fac-draft-083",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "9p³ + 12"
+  },
+  {
+    "id": "fac-draft-084",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "12p³ + 20"
+  },
+  {
+    "id": "fac-draft-085",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "20p³ + 25"
+  },
+  {
+    "id": "fac-draft-086",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "30p³ + 36"
+  },
+  {
+    "id": "fac-draft-087",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "35p³ + 49"
+  },
+  {
+    "id": "fac-draft-088",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "56p³ + 64"
+  },
+  {
+    "id": "fac-draft-089",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "63p³ + 81"
+  },
+  {
+    "id": "fac-draft-090",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 2,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "80p³ + 90"
+  },
+  {
+    "id": "fac-draft-091",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "2q - 4"
+  },
+  {
+    "id": "fac-draft-092",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "6q - 9"
+  },
+  {
+    "id": "fac-draft-093",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "12q - 16"
+  },
+  {
+    "id": "fac-draft-094",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "15q - 25"
+  },
+  {
+    "id": "fac-draft-095",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "24q - 30"
+  },
+  {
+    "id": "fac-draft-096",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "35q - 42"
+  },
+  {
+    "id": "fac-draft-097",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "40q - 56"
+  },
+  {
+    "id": "fac-draft-098",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "63q - 72"
+  },
+  {
+    "id": "fac-draft-099",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "70q - 90"
+  },
+  {
+    "id": "fac-draft-100",
+    "unit": "고1-수학-다항식-공통인수",
+    "difficultySeed": 1,
+    "hint": "모든 항의 계수와 문자에서 공통으로 묶을 수 있는 부분을 찾은 뒤 전개해 확인해요.",
+    "polynomial": "16q - 18"
+  }
+]

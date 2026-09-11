@@ -1,3 +1,4 @@
+import questions from "./cloze-multi-questions.json";
 // 다중 빈칸 cloze 카드 풀 — V0: 5장. 영어 5형식 어순 (S/V/SC/O/OC).
 // 카드 풀에는 distractor 가 1~2개 섞임 → 끼워맞추기 회피.
 // passage 는 blank 토큰 + 보충 text 토큰(부사·구두점 등) 으로 구성.
@@ -148,7 +149,7 @@ const RAW_CARDS: ClozeMultiCard[] = [
 ];
 
 // 런타임 검증
-export const cards: ClozeMultiCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: ClozeMultiCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const result = ClozeMultiCardSchema.safeParse(raw);
   if (!result.success) {
     throw new Error(

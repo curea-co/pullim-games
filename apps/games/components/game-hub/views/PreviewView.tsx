@@ -75,6 +75,7 @@ export function PreviewView({ games, progress }: Props) {
               <Link
                 href={`/games/${g.meta.id}`}
                 aria-label={`${g.meta.title} 시작 — ${g.meta.subject} ${g.meta.unit}, 약 ${g.meta.estimatedMinutes}분`}
+                data-cta-priority="informational"
                 className="block h-full rounded-block focus-visible:outline-2 focus-visible:outline-accent-positive"
               >
                 {inner}

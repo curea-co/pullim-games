@@ -154,3 +154,8 @@ describe("computeOffspring — 양성잡종", () => {
     expect(freq).toEqual([6, 6, 2, 2]);
   });
 });
+
+ it("Aa × aa에서 각 행은 왼쪽 a와 상단 A/a를 결합한다", () => {
+  expect(computeOffspring("Aa", "aa", traitsA).map(row => row.map(cell => cell.genotype)))
+   .toEqual([["Aa", "aa"], ["Aa", "aa"]]);
+ });

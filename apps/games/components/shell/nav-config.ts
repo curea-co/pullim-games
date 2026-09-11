@@ -13,6 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { games } from "@/lib/games/registry";
+import { MANAGE_ENABLED } from "@/lib/features";
 
 export type NavItem = {
   href: string;
@@ -46,13 +47,19 @@ export const studentDomains: NavItem[] = [
     description: "모든 게임 모음 + 나만의 게임",
     matchPrefix: ["/games"],
   },
-  {
-    href: "/manage",
-    label: "관리",
-    icon: Settings,
-    description: "과목·교육과정·콘텐츠 커스텀",
-    matchPrefix: ["/manage"],
-  },
+  // 관리(manage) 는 MANAGE_ENABLED 로 게이트 — 비활성 시 메뉴에서 제외.
+  // 근거: proc/plan/2026-07-02_disable-manage.md
+  ...(MANAGE_ENABLED
+    ? [
+        {
+          href: "/manage",
+          label: "관리",
+          icon: Settings,
+          description: "과목·교육과정·콘텐츠 커스텀",
+          matchPrefix: ["/manage"],
+        } satisfies NavItem,
+      ]
+    : []),
   {
     href: "/about",
     label: "소개하기",

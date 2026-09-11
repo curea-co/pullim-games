@@ -5,8 +5,8 @@ import { describe, expect, it } from "vitest";
 import { cards } from "./index";
 
 describe("factorization content — distractor 의미성 (Phase 3)", () => {
-  it("10 카드 모두 buildCard 성공 + schema 통과", () => {
-    expect(cards.length).toBe(10);
+  it("기존 10장과 신규 100장 모두 buildCard 성공 + schema 통과", () => {
+    expect(cards.length).toBe(110);
     for (const card of cards) {
       expect(card.type).toBe("factorization-block");
       expect(card.problem.terms.length).toBeGreaterThanOrEqual(2);

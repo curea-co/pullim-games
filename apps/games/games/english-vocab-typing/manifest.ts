@@ -9,7 +9,7 @@ const manifest: GameManifest = {
     id: "english-vocab-typing",
     title: "영어 어휘 타이핑",
     subject: "영어",
-    unit: "수능 어휘",
+    unit: "빈출 어휘",
     tagline: "한국어 뜻 보고 영단어 입력",
     estimatedMinutes: 2,
     status: "available",

@@ -1,3 +1,5 @@
+import { z } from "zod";
+import questions from "./factorization-questions.json";
 // 인수분해 카드 풀 — V0.3: 공통인수 메커닉 10장. 차수·항·계수 다양화.
 // AST 기반 buildCard helper 가 polynomial 문자열에서 UI Term[] + factoredForm 자동 도출.
 // 콘텐츠 큐레이터는 polynomial + difficulty 만 넣으면 됨.
@@ -8,6 +10,8 @@
 import { buildCard } from "../logic/buildCard";
 import { FactorizationCardSchema } from "../schema";
 import type { FactorizationCard } from "../schema";
+
+const BuildInput = z.object({ id: z.string().min(1), unit: z.string().min(1), hint: z.string().min(1), difficultySeed: z.union([z.literal(1),z.literal(2),z.literal(3),z.literal(4),z.literal(5)]), polynomial: z.string().min(1), distractors: z.tuple([z.string(),z.string()]).optional() });
 
 const RAW_CARDS = [
   buildCard({
@@ -83,7 +87,7 @@ const RAW_CARDS = [
 ];
 
 // 런타임 검증 — schema 위반 시 throw (silent miscompute 차단).
-export const cards: FactorizationCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: FactorizationCard[] = [...questions.map((q) => buildCard(BuildInput.parse(q))), ...RAW_CARDS].map((raw, i) => {
   const result = FactorizationCardSchema.safeParse(raw);
   if (!result.success) {
     throw new Error(

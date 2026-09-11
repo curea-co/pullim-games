@@ -39,6 +39,7 @@ export default function ChemistryBalanceGame() {
   const mode = useGameMode(GAME_ID);
   const [cards, setCards] = useState(() => getCardSequence());
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [reactantCoefs, setReactantCoefs] = useState<number[]>([]);
   const [productCoefs, setProductCoefs] = useState<number[]>([]);
@@ -49,7 +50,7 @@ export default function ChemistryBalanceGame() {
   useEffect(() => {
     const all = loadAllSrsStates(GAME_ID);
     const allCards = getCardSequence();
-    if (all.size > 0) {
+    if (all.size > 0 || mode === "review-queue") {
       const withSrs = allCards.map((c) => ({
         card: c,
         srs: all.get(c.id) ?? loadSrsState(GAME_ID, c.id),
@@ -74,7 +75,7 @@ export default function ChemistryBalanceGame() {
     setProductCoefs(card.problem.products.map(() => 1));
     setWrongCount(0);
     setPhase("playing");
-  }, [cardIndex, card]);
+  }, [cardIndex, card, sessionRound]);
 
   const elements = useMemo(
     () => (card ? allElements(card.problem.reactants, card.problem.products) : []),
@@ -106,6 +107,7 @@ export default function ChemistryBalanceGame() {
       <CompletionScreen
         totalCards={cards.length}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           void logEvent({
             gameId: GAME_ID,
@@ -405,7 +407,9 @@ function CoefAtom({
           +
         </button>
       </span>
-      <span className="text-display tabular text-type-primary">{formula}</span>
+      <span className="text-display tabular text-type-primary">
+        {formula.replace(/\d/g, (digit) => "₀₁₂₃₄₅₆₇₈₉"[Number(digit)]!)}
+      </span>
       {showPlus && <span className="px-1 text-body text-type-secondary">+</span>}
     </span>
   );

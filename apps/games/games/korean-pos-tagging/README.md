@@ -3,12 +3,12 @@
 - **gameId**: `korean-pos-tagging`
 - **과목 · 단원**: 국어 / 고1 국어 — 9품사 (V0: 7품사 — 명사·대명사·동사·형용사·관형사·부사·조사)
 - **상태**: `available`
-- **출처 plan**: [proc/plan/2026-05-13_new-mechanics-expansion.md](../../../proc/plan/2026-05-13_new-mechanics-expansion.md) M2
+- **출처 plan**: [proc/archive/plan/2026-05-13_new-mechanics-expansion.md](../../../../proc/archive/plan/2026-05-13_new-mechanics-expansion.md) M2
 
 ## 시작하기
 
 1. **이 디렉토리만 작업하세요.** `apps/games/lib/core/` 변경이 필요하면 별도 PR.
-2. `bun run dev` → `http://localhost:3033/games/korean-pos-tagging`
+2. `bun run dev` → `http://localhost:3004/games/korean-pos-tagging`
 3. 테스트: `bun run test -- games/korean-pos-tagging/`
 
 ## 핵심 명제

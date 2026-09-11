@@ -41,7 +41,7 @@ export function TermBlock({
     <motion.div
       ref={ref}
       layout
-      className="touch-none cursor-grab select-none rounded-block border border-border-hairline bg-bg-block px-5 py-3.5 active:cursor-grabbing"
+      className="touch-none cursor-grab select-none rounded-block border border-border-hairline bg-bg-block px-3 py-3.5 active:cursor-grabbing sm:px-5"
       drag={draggable}
       dragSnapToOrigin
       dragElastic={0.1}

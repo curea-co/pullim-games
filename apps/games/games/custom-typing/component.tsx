@@ -10,6 +10,7 @@ import {
   type CustomCurriculum,
   type CustomTypingCard,
 } from "@/lib/core";
+import { MANAGE_ENABLED } from "@/lib/features";
 
 const GAME_ID = "custom-typing";
 
@@ -54,7 +55,9 @@ export default function CustomTypingGame() {
       completionMessage={(n) => `${n}개 어휘, 내 카드를 풀었어요.`}
       emptyMessage={{
         title: "아직 만든 타이핑 카드가 없어요.",
-        cta: { label: "관리에서 만들기", href: "/manage/content" },
+        cta: MANAGE_ENABLED
+          ? { label: "관리에서 만들기", href: "/manage/content" }
+          : undefined,
       }}
     />
   );

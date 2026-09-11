@@ -9,12 +9,12 @@
 3. **`lib/core/` 변경은 별도 PR입니다.** 게임 PR과 섞지 마세요.
 4. **`lib/core/` 변경 시 모든 게임 테스트가 자동 실행됩니다** (Phase R4 CI 매트릭스).
 
-## V1 Phase 1에서 들어갈 항목
+## 현재 제공 항목
 
-- `fsrs/` — Spaced Repetition 알고리즘 엔진 (`ts-fsrs` 래퍼)
-- `fingerprint/` — 익명 브라우저 사용자 식별
-- `schema/` — Card, Event 등 공통 zod 스키마
-- `ui/` — Block, DropZone 같은 게임 공용 UI primitive
+- `fsrs/` — FSRS 엔진과 `default`·`review-queue`·`time-attack`·`deep-recall` 모드 정책
+- `storage/`, `streak/`, `event/`, `dashboard/` — 브라우저 학습 상태·활동 기록·표시용 집계
+- `fingerprint/`, `schema/`, `distractor/`, `sanitize/`, `ast/` — 공통 식별·검증·문항 보조 기능
+- `custom/`, `curriculum/`, `recommendation/` — 사용자 콘텐츠와 허브 표시를 위한 공통 API
 
 ## 이유
 

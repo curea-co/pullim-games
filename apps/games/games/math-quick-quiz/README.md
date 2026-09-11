@@ -10,14 +10,14 @@
 ## 시작하기
 
 1. **이 디렉토리만 작업하세요.** `apps/games/lib/core/` 변경이 필요하면 별도 PR.
-2. `bun run dev` → `http://localhost:3033/games/math-quick-quiz` 에서 확인.
+2. `bun run dev` → `http://localhost:3004/games/math-quick-quiz` 에서 확인.
 3. 테스트: `bun run test -- games/math-quick-quiz/`
 
 ## 핵심 명제
 
 자투리 시간(통학·쉬는 시간) 침투용. 30초 안에 5문제. retrieval 깊이는 얕지만 spacing 효과를 시간 분포로 채움.
 
-상세: [proc/plan/2026-05-08_game-lineup-and-filtering.md §5](../../../proc/plan/2026-05-08_game-lineup-and-filtering.md)
+상세: [proc/archive/plan/2026-05-08_game-lineup-and-filtering.md §5](../../../../proc/archive/plan/2026-05-08_game-lineup-and-filtering.md)
 
 ## 구현 현황
 

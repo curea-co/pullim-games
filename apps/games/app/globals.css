@@ -5,9 +5,30 @@
 /* Pretendard Variable — CDN 임포트. SPEC §08.2 강제. */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
 
+/* 풀림 OS 셸 디자인 시스템 — pullim-web src/styles/os-tokens.css 정식 이식(.os-root 스코프).
+   글로벌 네비(topbar)·사이드바(rail)·모바일 tabbar·ServiceSwitcher 크롬을 pullim-web 과 동일하게.
+   아래 :root --pullim-* 베이스 토큰에 의존한다(os-tokens 가 var(--pullim-*) 로 참조). */
+@import "./os-tokens.css";
+
 @layer base {
   :root {
     color-scheme: light;
+
+    /* ───── 풀림 브랜드 베이스 토큰 (pullim-web globals.css 정합) ─────
+       os-tokens.css(.os-root) 가 var(--pullim-*) 로 참조. games 는 light 단일. */
+    --pullim-blue: #0362da;
+    --pullim-ink: #0d1a1f;
+    --pullim-paper: #f0f6fb;
+    --pullim-lemon: #e6ff4c;
+    --pullim-white: #ffffff;
+    --pullim-paper2: #f0f6fb;
+    --pullim-paper3: #f4faff;
+    --pullim-ink2: #1f2c32;
+    --pullim-ink3: #45555c;
+    --pullim-ink4: #5e6b72;
+    --pullim-ink5: #b0bcc3;
+    --pullim-line: #d6e2ee;
+    --pullim-line2: #e8eff6;
   }
 
   html {

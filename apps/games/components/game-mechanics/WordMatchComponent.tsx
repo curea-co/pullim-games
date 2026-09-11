@@ -92,6 +92,7 @@ export function WordMatchComponent({
   );
   const [cardsLoaded, setCardsLoaded] = useState(mode === "default");
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("playing");
   const [matched, setMatched] = useState<Set<number>>(new Set());
   const [selectedLeft, setSelectedLeft] = useState<number | null>(null);
@@ -102,6 +103,7 @@ export function WordMatchComponent({
   } | null>(null);
   const [wrongCount, setWrongCount] = useState(0);
   const cardStartRef = useRef<number>(0);
+  const feedbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const all = loadAllSrsStates(gameId);
@@ -168,7 +170,16 @@ export function WordMatchComponent({
     setWrongCount(0);
     setPhase("playing");
     cardStartRef.current = performance.now();
-  }, [cardIndex, card]);
+    return () => {
+      if (feedbackTimerRef.current !== null) clearTimeout(feedbackTimerRef.current);
+    };
+  }, [cardIndex, card, sessionRound]);
+
+  useEffect(() => {
+    if (phase === "completed" && feedbackTimerRef.current !== null) {
+      clearTimeout(feedbackTimerRef.current);
+    }
+  }, [phase]);
 
   // Enter 단축키 — 카드 해결(전체 매칭 완료 또는 reveal) 시 다음 카드로 진행.
   const pairsMatchedCount = card
@@ -228,6 +239,7 @@ export function WordMatchComponent({
         subtext={completionSubtext ?? "내일 또 봐요."}
         homeHref={homeHref}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           void logEvent({
             gameId,
@@ -256,12 +268,13 @@ export function WordMatchComponent({
         payload: { pairIndex: leftPair, correct: true },
       });
       setPhase("correct-flash");
-      setTimeout(() => setPhase("playing"), 500);
       // 카드 종료 조건: 본 pairs 매칭 통과 (extras 보너스 제외) — Plan C Phase 2.
       const pairsMatched = Array.from(next).filter(
         (i) => i < card!.problem.pairs.length,
       ).length;
-      if (pairsMatched === card!.problem.pairs.length) {
+      // 보너스 짝의 조작은 유지하되 완료/카드 변경/재시도 시 콜백은 해제한다.
+      feedbackTimerRef.current = setTimeout(() => setPhase("playing"), 500);
+      if (pairsMatched === card!.problem.pairs.length && !allPairsMatched) {
         const elapsedMs = performance.now() - cardStartRef.current;
         applyAndPersist(mode, gameId, card!.id, {
           correct: true,
@@ -286,7 +299,7 @@ export function WordMatchComponent({
         action: "transform",
         payload: { leftPair, rightPair, correct: false },
       });
-      if (nextWrong >= REVEAL_THRESHOLD) {
+      if (nextWrong >= REVEAL_THRESHOLD && !allPairsMatched) {
         const elapsedMs = performance.now() - cardStartRef.current;
         applyAndPersist(mode, gameId, card!.id, {
           correct: false,
@@ -300,7 +313,7 @@ export function WordMatchComponent({
           action: "transform",
           payload: { reveal: true, wrongCount: nextWrong },
         });
-        setTimeout(() => {
+        feedbackTimerRef.current = setTimeout(() => {
           setSelectedLeft(null);
           setSelectedRight(null);
           setWrongFlash(null);
@@ -309,7 +322,7 @@ export function WordMatchComponent({
         return;
       }
       setPhase("wrong-flash");
-      setTimeout(() => {
+      feedbackTimerRef.current = setTimeout(() => {
         setSelectedLeft(null);
         setSelectedRight(null);
         setWrongFlash(null);
@@ -348,7 +361,7 @@ export function WordMatchComponent({
 
   // time-attack 시간 초과 — 강제 reveal 진입 (again 적용).
   function handleTimeout() {
-    if (phase !== "playing") return;
+    if (phase !== "playing" || isCardResolved) return;
     applyAndPersist(mode, gameId, card!.id, {
       correct: false,
       wrongCount: wrongCount + 1,
@@ -391,8 +404,8 @@ export function WordMatchComponent({
             </Link>
           </div>
           <TimeAttackTimer
-            active={mode === "time-attack" && phase === "playing"}
-            resetKey={cardIndex}
+            active={mode === "time-attack" && phase === "playing" && !isCardResolved}
+            resetKey={`${sessionRound}:${cardIndex}:${card.id}`}
             onExpire={handleTimeout}
           />
         </div>

@@ -1,3 +1,4 @@
+import questions from "./math-quick-quiz-questions.json";
 // math-quick-quiz 카드 풀 — 5장, 고1 전 단원 단답.
 
 import { QuickQuizCardSchema } from "../schema";
@@ -64,7 +65,7 @@ const RAW_CARDS: QuickQuizCard[] = [
   },
 ];
 
-export const cards: QuickQuizCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: QuickQuizCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const r = QuickQuizCardSchema.safeParse(raw);
   if (!r.success) {
     throw new Error(

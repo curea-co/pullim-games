@@ -6,7 +6,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { AuthCta } from "@/components/auth/AuthCta";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -66,7 +66,8 @@ export function StartForm() {
 
   return (
     // spec/08 §8.3·§8.7: 모바일 가장자리 24px(px-6), 컨텐츠 폭 480px.
-    <div className="mx-auto flex min-h-[60vh] w-full max-w-[480px] items-center px-6">
+    // <main> 랜드마크 — OsShell 콘텐츠 래퍼가 <div> 라 페이지가 자체 main 을 제공(codex #138 R11).
+    <main className="mx-auto flex min-h-[60vh] w-full max-w-[480px] items-center px-6">
       <Card className="w-full rounded border-pullim-slate-200 bg-card shadow-sm">
         <CardHeader>
           <CardTitle className="text-pullim-slate-900">게스트로 시작</CardTitle>
@@ -143,12 +144,12 @@ export function StartForm() {
 
           <p className="text-type-secondary mt-4 text-center text-sm">
             기록을 안전하게 저장하고 싶나요?{" "}
-            <Link href="/signup" className="text-pullim-blue-600 underline">
+            <AuthCta kind="signup" className="text-pullim-blue-600 underline">
               회원가입
-            </Link>
+            </AuthCta>
           </p>
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 }

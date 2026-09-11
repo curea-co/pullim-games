@@ -1,3 +1,4 @@
+import questions from "./genetics-punnett-questions.json";
 // 펀넷 사각형 카드 풀 — V0: 5장.
 // 멘델 우성/열성 모델만 (불완전우성·치사·복대립은 V1 이후).
 // 난이도: 단성 자손교배 → 단성 검정교배 → 양성 검정교배 → 양성 부분이형 → 양성 자손교배
@@ -88,7 +89,7 @@ const RAW_CARDS: PunnettCard[] = [
 ];
 
 // 런타임 검증 — schema 위반 시 throw.
-export const cards: PunnettCard[] = RAW_CARDS.map((raw, i) => {
+export const cards: PunnettCard[] = [...questions, ...RAW_CARDS].map((raw, i) => {
   const result = PunnettCardSchema.safeParse(raw);
   if (!result.success) {
     throw new Error(

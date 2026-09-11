@@ -15,8 +15,6 @@ import {
   type CustomCardDraft,
   type CustomCardKind,
 } from "@/lib/core";
-// Phase 1: anthropic 직접 import. Gemini provider switch (index.ts) 는 spec/09 합의 후 별도 PR.
-// KNOWN-TRADE-OFF: proc/plan/2026-05-29_curriculum-phase1-commit-and-gemini-gate.md C 항목
 import {
   generateFromCurriculumLLM,
   generateFromSourceLLM,

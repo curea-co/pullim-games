@@ -69,6 +69,7 @@ export function QuickQuizComponent({
   );
   const [cardsLoaded, setCardsLoaded] = useState(mode === "default");
   const [cardIndex, setCardIndex] = useState(0);
+  const [sessionRound, setSessionRound] = useState(0);
   const [phase, setPhase] = useState<Phase>("idle");
   const [picked, setPicked] = useState<number | null>(null);
   const dragStartedRef = useRef(false);
@@ -99,7 +100,7 @@ export function QuickQuizComponent({
   // 카드 진입 시 타이머 기준 시각 갱신 — time-attack elapsedMs 계산용.
   useEffect(() => {
     cardStartRef.current = performance.now();
-  }, [cardIndex, cards]);
+  }, [cardIndex, cards, sessionRound]);
 
   // Enter 단축키 — feedback 상태에서 다음 카드로 진행.
   useEnterToAdvance(phase === "feedback", () => {
@@ -159,6 +160,7 @@ export function QuickQuizComponent({
         subtext={completionSubtext ?? "내일 또 봐요."}
         homeHref={homeHref}
         onRetry={() => {
+          setSessionRound((round) => round + 1);
           setCardIndex(0);
           setPhase("idle");
           setPicked(null);
@@ -254,7 +256,7 @@ export function QuickQuizComponent({
           </div>
           <TimeAttackTimer
             active={mode === "time-attack" && phase === "idle"}
-            resetKey={cardIndex}
+            resetKey={`${sessionRound}:${cardIndex}:${card.id}`}
             onExpire={handleTimeout}
           />
         </div>
@@ -349,7 +351,6 @@ function ChoiceButton({
       type="button"
       onClick={onClick}
       disabled={phase !== "idle"}
-      whileHover={phase === "idle" ? { scale: 1.01 } : undefined}
       whileTap={phase === "idle" ? { scale: 0.99 } : undefined}
       animate={
         phase === "feedback" && picked && !correct
