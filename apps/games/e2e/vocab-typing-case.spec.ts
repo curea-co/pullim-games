@@ -10,7 +10,7 @@
 import { test, expect } from "@playwright/test";
 import { seedGuestSession } from "./helpers/auth";
 
-test("한글 vocab-typing 정답 인식 회귀 0 — 모순", async ({ page, context }) => {
+test("한글 vocab-typing 정답 인식 회귀 0 — 관찰", async ({ page, context }) => {
   await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
 
@@ -18,7 +18,7 @@ test("한글 vocab-typing 정답 인식 회귀 0 — 모순", async ({ page, con
   await page.goto("/games/vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
   await input.waitFor({ state: "visible" });
-  await input.fill("모순");
+  await input.fill("관찰");
   await page.getByRole("button", { name: "확인" }).click();
 
   await expect(page.getByText("오답")).not.toBeVisible({ timeout: 1500 });

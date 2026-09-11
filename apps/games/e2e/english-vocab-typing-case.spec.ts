@@ -9,7 +9,7 @@
 import { test, expect } from "@playwright/test";
 import { seedGuestSession } from "./helpers/auth";
 
-test("대문자로 시작한 정답도 정답으로 인식 — Achieve (실제 answer: achieve)", async ({
+test("대문자로 시작한 정답도 정답으로 인식 — Borrow (실제 answer: borrow)", async ({
   page,
   context,
 }) => {
@@ -22,7 +22,7 @@ test("대문자로 시작한 정답도 정답으로 인식 — Achieve (실제 a
   await page.goto("/games/english-vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
   await input.waitFor({ state: "visible" });
-  await input.fill("Achieve");
+  await input.fill("Borrow");
   await page.getByRole("button", { name: "확인" }).click();
 
   // 오답이면 wrongCount 증가 (wrong-flash) — 본 fix 후에는 발생 X
@@ -34,7 +34,7 @@ test("대문자로 시작한 정답도 정답으로 인식 — Achieve (실제 a
   await expect(nextBtn).toBeEnabled();
 });
 
-test("전부 대문자 입력 — ACHIEVE", async ({ page, context }) => {
+test("전부 대문자 입력 — BORROW", async ({ page, context }) => {
   await page.goto("/home");
   await page.evaluate(() => localStorage.clear());
 
@@ -42,7 +42,7 @@ test("전부 대문자 입력 — ACHIEVE", async ({ page, context }) => {
   await page.goto("/games/english-vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
   await input.waitFor({ state: "visible" });
-  await input.fill("ACHIEVE");
+  await input.fill("BORROW");
   await page.getByRole("button", { name: "확인" }).click();
 
   await expect(page.getByText("오답")).not.toBeVisible({ timeout: 1500 });

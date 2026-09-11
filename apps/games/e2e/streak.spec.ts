@@ -15,11 +15,11 @@ test("게임 카드 정답 → streak 첫 활동 기록 (current=1)", async ({ p
   // clear 이후 player profile 재주입 — RequireIdentity 게이트 통과 유지.
   await seedGuestSession(page, context);
 
-  // vocab-typing 진입 + 첫 카드 ("모순") 정답
+  // vocab-typing 진입 + 첫 카드 ("관찰") 정답
   await page.goto("/games/vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
   await expect(input).toBeVisible();
-  await input.fill("모순");
+  await input.fill("관찰");
   await page.getByRole("button", { name: "확인" }).click();
   await page.waitForTimeout(600);
 

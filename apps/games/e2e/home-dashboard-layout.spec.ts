@@ -32,7 +32,7 @@ async function seedActivity(page: Page, context: BrowserContext) {
   await page.goto("/games/vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
   await input.waitFor({ state: "visible" });
-  await input.fill("모순");
+  await input.fill("관찰");
   await page.getByRole("button", { name: "확인" }).click();
   await page.waitForTimeout(800);
 }
