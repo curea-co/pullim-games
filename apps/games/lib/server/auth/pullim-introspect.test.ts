@@ -105,3 +105,14 @@ describe("resolvePullimSub — legacy 모드(env 미설정)", () => {
     expect(fetchFn).not.toHaveBeenCalled();
   });
 });
+
+ it.each([{sub: "   "}, {sub: "ok", emailMatchHash: 123}, {sub: "ok", unexpected: true}])("잘못된 인증 payload를 장애로 처리: %j", async (body) => {
+   vi.stubGlobal("fetch", vi.fn(async () => res(200, body)));
+   const { resolvePullimSub } = await load();
+   expect(await resolvePullimSub("local-pullim-at=x")).toEqual({sub: null, unavailable: true, emailMatchHash: null});
+ });
+ it("현재 중앙 API의 표시 필드도 계약 검증 후 수용", async () => {
+   vi.stubGlobal("fetch", vi.fn(async () => res(200, {sub: "user_1", globalRole: "user", gamesFlagLevel: null, displayName: null})));
+   const { resolvePullimSub } = await load();
+   expect((await resolvePullimSub("local-pullim-at=x")).sub).toBe("user_1");
+ });

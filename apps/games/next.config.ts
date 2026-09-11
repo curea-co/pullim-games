@@ -24,6 +24,7 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/api/auth/**": ["./migrations/**"],
     "/api/sync/**": ["./migrations/**"],
+    "/api/pullim/**": ["./migrations/**"],
   },
 };
 

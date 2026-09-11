@@ -5,9 +5,18 @@
 // ⚠️ 클라 게이트(useIdentity getPullimAuthState)와 별개 — 이건 **서버 라우트 전용**(쓰기 검증).
 //    pullim-api 세션 쿠키는 ES256 이고 공개키 미분배라 로컬 검증 불가 → introspection 이 유일선.
 import "server-only";
+import { z } from "zod";
 import { PULLIM_MODE, PULLIM_DOMAIN_API_URL } from "@/lib/auth/pullim-mode";
 
 const INTROSPECT_TIMEOUT_MS = 2500;
+// 현재 /games/me DTO와 이전 최소 응답을 함께 검증한다. 알 수 없는 필드는 계약 드리프트다.
+const GamesMeSchema = z.object({
+  sub: z.string().trim().min(1),
+  emailMatchHash: z.string().trim().min(1).nullish(),
+  globalRole: z.enum(["admin", "user"]).optional(),
+  gamesFlagLevel: z.number().nullable().optional(),
+  displayName: z.string().nullable().optional(),
+}).strict();
 
 /** 요청 cookie 헤더에서 `*-pullim-at` suffix 쿠키만 화이트리스트(games 쿠키 누출 방지). */
 function pullimSessionCookieHeader(cookieHeader: string | null): string {
@@ -58,18 +67,9 @@ export async function resolvePullimSub(cookieHeader: string | null): Promise<Pul
       cache: "no-store",
     });
     if (res.ok) {
-      const data = (await res.json()) as { sub?: unknown; emailMatchHash?: unknown };
-      const sub = typeof data.sub === "string" && data.sub ? data.sub : null;
-      // emailMatchHash 는 P-B 재연결 대조용(옵션 필드). string 아니면 null(계약 fail-soft·구버전 api).
-      // ⏸️ DEFERRED: pullim-api 가 이 필드를 revert(PR #373)해 현재 항상 부재 → 재연결 dormant(의도됨,
-      // dead-path 아님 — pullim-relink.ts 헤더·consume plan 참조).
-      const emailMatchHash =
-        typeof data.emailMatchHash === "string" && data.emailMatchHash
-          ? data.emailMatchHash
-          : null;
-      // 200 인데 sub 없음 = 응답 계약 드리프트(미인증 아님) → unavailable 로 surface(503),
-      //   로그인 회원을 401 로 재분류하지 않고 오설정을 숨기지 않는다(Codex #146).
-      return { sub, unavailable: sub === null, emailMatchHash: sub ? emailMatchHash : null };
+      const parsed = GamesMeSchema.safeParse(await res.json());
+      if (!parsed.success) return { sub: null, unavailable: true, emailMatchHash: null };
+      return { sub: parsed.data.sub, unavailable: false, emailMatchHash: parsed.data.emailMatchHash ?? null };
     }
     // 401 만 미인증(닫힘). 403·기타 4xx·5xx = 오설정/장애 → surface(unavailable, 503 매핑).
     return { sub: null, unavailable: res.status !== 401, emailMatchHash: null };
