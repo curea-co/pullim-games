@@ -1,21 +1,13 @@
 // 일일 학습 스트릭 — 게임 카드 정답 후 localStorage 영속화 검증.
 // plan 2026-05-15_fsrs-streak-backbone §3 Phase 5.
 //
-// 2026-07-02: seedGuestSession 추가 — localStorage.clear() 후 player profile 재주입.
+// 각 테스트의 격리된 게스트 storageState를 유지한다.
 // plan: proc/plan/2026-06-30_e2e-infra-fix.md §2 H2 fix.
 
 import { test, expect } from "@playwright/test";
-import { seedGuestSession } from "./helpers/auth";
 
-test("게임 카드 정답 → streak 첫 활동 기록 (current=1)", async ({ page, context }) => {
-  // 깨끗한 상태 — localStorage 초기화 (홈 진입 후 clear)
-  await page.goto("/home");
-  await page.evaluate(() => localStorage.clear());
-
-  // clear 이후 player profile 재주입 — RequireIdentity 게이트 통과 유지.
-  await seedGuestSession(page, context);
-
-  // vocab-typing 진입 + 첫 카드 ("관찰") 정답
+test("게임 카드 정답 → streak 첫 활동 기록 (current=1)", async ({ page }) => {
+  // 각 테스트는 학습 기록이 없는 게스트 storageState로 격리된다.
   await page.goto("/games/vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
   await expect(input).toBeVisible();
