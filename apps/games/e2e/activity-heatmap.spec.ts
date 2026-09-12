@@ -3,7 +3,7 @@
 //
 // 2026-07-02: seedGuestSession 추가 — 입구 게이트(middleware 쿠키 + RequireIdentity localStorage)
 // 통과 없이는 /home·/games/* 에서 콘텐츠 미렌더 → locator.waitFor 타임아웃.
-// localStorage.clear() 이후에도 게스트 프로필을 재주입해 게이트를 유지한다.
+// 게스트 신원을 지우지 않고 격리된 초기 storageState를 사용한다.
 // plan: proc/plan/2026-06-30_e2e-infra-fix.md §2 H2 fix.
 
 import { test, expect } from "@playwright/test";
@@ -11,19 +11,8 @@ import { seedGuestSession } from "./helpers/auth";
 
 test("정답 1회 후 → 홈에 활동 히트맵 노출 + 셀 1개 채워짐", async ({
   page,
-  context,
 }) => {
-  // localStorage.clear() 전에 먼저 시드 — goto 호출 전에 addInitScript 등록 필요.
-  // clear() 이후에도 쿠키(pullim_games_guest)는 context 에 살아있어 미들웨어는 통과하지만,
-  // localStorage(pullim-games:player)가 지워지면 RequireIdentity 가 "/" 로 튕긴다.
-  // 따라서 clear() 이후 게임 goto 전에 seedGuestSession 을 재호출한다.
-  await seedGuestSession(page, context);
-  await page.goto("/home");
-  await page.evaluate(() => localStorage.clear());
-
-  // vocab-typing 첫 카드 정답 → saveSrsAndRecord 동거 wrapper 가 activity-log 갱신.
-  // clear() 로 player profile 이 지워졌으므로 재시드 후 game 진입.
-  await seedGuestSession(page, context);
+  // 각 테스트는 학습 기록이 없는 게스트 storageState로 격리된다.
   await page.goto("/games/vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
   await input.waitFor({ state: "visible" });

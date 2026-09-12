@@ -4,17 +4,13 @@
 //
 // memory 룰: feedback_user_intent_literal — "사용자가 X했는데 틀렸대. 맞잖아" = 시스템 fix.
 //
-// 2026-07-02: seedGuestSession 추가 — localStorage.clear() 후 player profile 재주입.
+// 각 테스트의 격리된 게스트 storageState를 유지한다.
 // plan: proc/plan/2026-06-30_e2e-infra-fix.md §2 H2 fix.
 
 import { test, expect } from "@playwright/test";
-import { seedGuestSession } from "./helpers/auth";
 
-test("한글 vocab-typing 정답 인식 회귀 0 — 관찰", async ({ page, context }) => {
-  await page.goto("/home");
-  await page.evaluate(() => localStorage.clear());
-
-  await seedGuestSession(page, context);
+test("한글 vocab-typing 정답 인식 회귀 0 — 관찰", async ({ page }) => {
+  // 각 테스트는 학습 기록이 없는 게스트 storageState로 격리된다.
   await page.goto("/games/vocab-typing");
   const input = page.getByPlaceholder("입력해주세요");
   await input.waitFor({ state: "visible" });
