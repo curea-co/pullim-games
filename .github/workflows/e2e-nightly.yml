@@ -7,7 +7,7 @@ name: E2E Nightly
 # 보안 사전 sweep:
 # - schedule + workflow_dispatch 트리거만 — 외부 PR 영향 0.
 # - secrets 의존 0 — pullim 원본의 DEV_API_URL/TEST_EMAIL/TEST_PASSWORD 제거.
-# - self-hosted runner 채택 (codex-review.yml 과 동일) — schedule 트리거라 외부 위협 0.
+# - ci.yml과 동일한 GitHub-hosted VM으로 job별 시스템 패키지 설치를 격리한다.
 
 on:
   # KST 02:00 = UTC 17:00 (전날). pullim 동일.
@@ -21,7 +21,7 @@ permissions:
   contents: read
 
 # Codex round 1 (PR #90 r3271490574) 지적 반영:
-# workflow_dispatch 연타 시 이전 self-hosted runner 점유 즉시 해제가 의도.
+# workflow_dispatch 연타 시 이전 runner 점유 즉시 해제가 의도.
 # cancel-in-progress: true 로 변경. schedule run 은 ref 가 main 으로 안정적이고
 # 새 schedule 이 이전 schedule 을 끊는 건 nightly 정책상 허용 (가장 최신만 유효).
 concurrency:
@@ -47,8 +47,8 @@ jobs:
   #     vocab-typing 은 english-vocab-typing 과 충돌 X (앞 `-` 가 lookbehind 차단).
   e2e-per-game:
     name: e2e (${{ matrix.game }})
-    # 공용 풀 전환(2026-07-14): 세 러너(curea-runner~3) 동일 환경 확인 — 그룹 격리 해제.
-    runs-on: self-hosted
+    # 공유 호스트의 apt 잠금 충돌을 막도록 job마다 독립 VM을 사용한다.
+    runs-on: ubuntu-latest
     # 사전 sweep: 게임별 30분 상한. 21 게임 × 30 = 1 job 격리 hang 방지.
     timeout-minutes: 30
     # 모노레포: install/gen:registry 는 루트 진입점, playwright 실행 step 만 app cwd (codex #122).
@@ -209,8 +209,8 @@ jobs:
   #                                나머지 sample 게임 8 케이스는 per-game 에서 커버됨.
   e2e-shared:
     name: e2e (shared specs)
-    # 공용 풀 전환(2026-07-14): 세 러너(curea-runner~3) 동일 환경 확인 — 그룹 격리 해제.
-    runs-on: self-hosted
+    # 공유 호스트의 apt 잠금 충돌을 막도록 job마다 독립 VM을 사용한다.
+    runs-on: ubuntu-latest
     timeout-minutes: 30
     # 모노레포: install/gen:registry 는 루트 진입점, playwright 실행 step 만 app cwd (codex #122).
     steps:
