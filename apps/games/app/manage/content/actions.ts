@@ -15,16 +15,13 @@ import {
   type CustomCardDraft,
   type CustomCardKind,
 } from "@/lib/core";
-import {
-  generateFromCurriculumLLM,
-  generateFromSourceLLM,
-} from "@/lib/server/ai/anthropic";
-
 export interface GenerateResult {
   ok: boolean;
   drafts?: CustomCardDraft[];
   error?: string;
 }
+
+const LLM_DISABLED_ERROR = "자동 생성 기능은 현재 사용할 수 없어요.";
 
 /**
  * Mode A — 두 가지 모드:
@@ -75,50 +72,19 @@ export async function generateFromCurriculumAction(input: {
     }
   }
 
-  // 2) catalog + LLM
+  // 2) catalog + LLM — 관리 기능 비활성화 중에는 비용 호출도 차단한다.
   if (catalogPath) {
-    try {
-      const { drafts } = await generateFromCurriculumLLM({
-        path: catalogPath,
-        kind,
-        count,
-      });
-      return {
-        ok: true,
-        drafts: drafts.map((d) => ({ ...d, source: "curriculum-ai" })),
-      };
-    } catch (e) {
-      console.error(
-        "[manage/content/actions] generateFromCurriculumLLM 실패:",
-        e,
-      );
-      return {
-        ok: false,
-        error: "자동 생성에 실패했어요. 잠시 후 다시 시도해주세요.",
-      };
-    }
+    return { ok: false, error: LLM_DISABLED_ERROR };
   }
 
   return { ok: false, error: "단원이 선택되지 않았어요." };
 }
 
 /** Mode B: 자료 텍스트 → LLM 으로 카드 draft 생성. */
-export async function generateFromSourceAction(input: {
+export async function generateFromSourceAction(_input: {
   kind: CustomCardKind;
   sourceText: string;
   count: number;
 }): Promise<GenerateResult> {
-  try {
-    const { drafts } = await generateFromSourceLLM(input);
-    return {
-      ok: true,
-      drafts: drafts.map((d) => ({ ...d, source: "source-text-ai" })),
-    };
-  } catch (e) {
-    console.error("[manage/content/actions] generateFromSourceLLM 실패:", e);
-    return {
-      ok: false,
-      error: "자동 생성에 실패했어요. 잠시 후 다시 시도해주세요.",
-    };
-  }
+  return { ok: false, error: LLM_DISABLED_ERROR };
 }
