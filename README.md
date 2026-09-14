@@ -110,14 +110,4 @@ cross-domain 의존 금지 — games 안에서 다른 풀림 프로젝트의 코
 - `main` push → **production** [`https://games.pullim.ai`](https://games.pullim.ai)
 - `dev` push → **dev** [`https://dev-games.pullim.ai`](https://dev-games.pullim.ai)
 
-### 개발·승격 흐름
-
-1. 최신 `dev`에서 작업 브랜치를 만든다.
-2. 작업 브랜치 → `dev` PR에서 CI를 통과한 뒤 머지한다.
-3. `dev-games.pullim.ai`에서 변경을 확인한다.
-4. `dev` → `main` 승격 PR에서 CI를 다시 통과한 뒤 머지한다.
-5. `main` 머지가 `games.pullim.ai` production 배포를 시작한다.
-
-`dev`와 `main`에는 직접 push하지 않는다.
-
 **push = 배포** (Root Directory = `apps/games`). 환경변수(`NEXT_PUBLIC_SITE_URL`·`NEXT_PUBLIC_SITE_ORIGIN`·`DATABASE_URL`·`ANTHROPIC_API_KEY`·`CRON_SECRET`)는 Vercel 에 Production/Preview 분리 설정. 수동 배포 `bunx vercel --prod` 는 fallback.
