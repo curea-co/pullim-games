@@ -10,7 +10,7 @@
 
 - 본 리포는 **bun + Next.js 15** (npm/npx 직접 호출 금지 — `proc/spec/09 §9.1`).
 - 권위 문서는 `proc/spec/01~10` — 룰 모호하면 spec 우선. 단 권위 문서 간 충돌(예: spec/01 §3 Next.js docs 지시 ↔ spec/09 §9.1 표준 Next.js 판정) 은 더 구체적·신규 spec 우선이며, 위 Next.js 블록처럼 본 리포 환경에서의 해석을 AGENTS.md/CLAUDE.md 가 명시한다.
-- **Codex Review 회피 금지.** codex 지적은 원칙적으로 코드 fix 로 응답. 룰북(workflow yml·프롬프트·AGENTS.md·CLAUDE.md·spec) 회피 목적 수정 X. 단, 명세 자체 결함 지적은 정당한 명세 진화 경로(별 plan + 사용자 합의 → spec 수정 → 코드 fix)로 정정 가능 — 절차는 `CLAUDE.md §9` 및 `proc/archive/plan/2026-05-20_plan-g-pullim-workflow-port.md` 참조 (근거: `proc/spec/01 §2` 명세 우선 원칙).
+- **리뷰 지적 회피 금지.** 리뷰 지적은 원칙적으로 코드 fix 로 응답. 룰북(AGENTS.md·CLAUDE.md·spec) 회피 목적 수정 X. (PR 자동 AI 리뷰 봇(Codex 워크플로)은 2026-09-15 폐지 — 현재 PR 게이트는 `ci.yml` + 사람 리뷰.) 단, 명세 자체 결함 지적은 정당한 명세 진화 경로(별 plan + 사용자 합의 → spec 수정 → 코드 fix)로 정정 가능 — 절차는 `CLAUDE.md §9` 및 `proc/archive/plan/2026-05-20_plan-g-pullim-workflow-port.md` 참조 (근거: `proc/spec/01 §2` 명세 우선 원칙).
 
 ## 모노레포 구조 (2026-06-17~)
 
@@ -67,7 +67,7 @@
 |---|---|---|
 | 1 | `proc/spec/01~10` | 정식 SPEC (권위) — 룰 모호하면 spec 우선 |
 | 2 | `CLAUDE.md` | 본 리포 작업 가이드 (한국어 도메인 룰·게이트키퍼·proc 폴더 구조) |
-| 3 | `AGENTS.md` (본 문서) | Codex Review·외부 AI 에이전트용 룰 요약. 본 리포 환경 한정 해석 명시 |
+| 3 | `AGENTS.md` (본 문서) | 리뷰어(사람·AI 에이전트)용 룰 요약. 본 리포 환경 한정 해석 명시 |
 | 4 | `~/dev_git/.pullim-meta/CONVENTION.md` | 4 풀림 공통 운영 룰 (게이트키퍼·daily_outcome·audit §7·viewport §8) |
 | 5 | `proc/plan/` · `proc/audit/` · `proc/research/` | 진행 중 plan·정기 audit·조사 결과 (참조) |
 
