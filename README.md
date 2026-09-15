@@ -41,7 +41,7 @@ pullim-games/                    # 모노레포 루트
 ├── output/            # 산출물
 ├── proc/              # SPARK 워크플로우 (spec/plan/archive/research/audit)
 ├── daily_outcome/     # PM 일일 보고 (CONVENTION.md 기반)
-├── .github/workflows/ # ci · e2e-nightly · codex-review
+├── .github/workflows/ # ci · e2e-nightly
 └── apps/
     └── games/                   # ← 앱 본체 (@pullim-games/games, 포트 3004)
         ├── package.json next.config.ts tsconfig.json tailwind.config.ts
