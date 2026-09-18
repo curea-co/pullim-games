@@ -7,10 +7,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x + 3)² - 3",
+      "targetEquation": "y = -2(x + 3)² + 3",
       "targetA": -2,
       "targetH": -3,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -21,10 +21,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x + 3)² - 3",
+      "targetEquation": "y = -(x + 3)² + 3",
       "targetA": -1,
       "targetH": -3,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -63,10 +63,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x + 2)² - 3",
+      "targetEquation": "y = -2(x + 2)² + 3",
       "targetA": -2,
       "targetH": -2,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -77,10 +77,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x + 2)² - 3",
+      "targetEquation": "y = -(x + 2)² + 3",
       "targetA": -1,
       "targetH": -2,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -119,10 +119,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x + 1)² - 3",
+      "targetEquation": "y = -2(x + 1)² + 3",
       "targetA": -2,
       "targetH": -1,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -133,10 +133,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x + 1)² - 3",
+      "targetEquation": "y = -(x + 1)² + 3",
       "targetA": -1,
       "targetH": -1,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -175,10 +175,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x - 0)² - 3",
+      "targetEquation": "y = -2x² + 3",
       "targetA": -2,
       "targetH": 0,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -189,10 +189,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x - 0)² - 3",
+      "targetEquation": "y = -x² + 3",
       "targetA": -1,
       "targetH": 0,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -203,7 +203,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = (x - 0)² - 3",
+      "targetEquation": "y = x² - 3",
       "targetA": 1,
       "targetH": 0,
       "targetK": -3
@@ -217,7 +217,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = 2(x - 0)² - 3",
+      "targetEquation": "y = 2x² - 3",
       "targetA": 2,
       "targetH": 0,
       "targetK": -3
@@ -231,10 +231,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x - 1)² - 3",
+      "targetEquation": "y = -2(x - 1)² + 3",
       "targetA": -2,
       "targetH": 1,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -245,10 +245,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x - 1)² - 3",
+      "targetEquation": "y = -(x - 1)² + 3",
       "targetA": -1,
       "targetH": 1,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -287,10 +287,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x - 2)² - 3",
+      "targetEquation": "y = -2(x - 2)² + 3",
       "targetA": -2,
       "targetH": 2,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -301,10 +301,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x - 2)² - 3",
+      "targetEquation": "y = -(x - 2)² + 3",
       "targetA": -1,
       "targetH": 2,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -343,10 +343,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x - 3)² - 3",
+      "targetEquation": "y = -2(x - 3)² + 3",
       "targetA": -2,
       "targetH": 3,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -357,10 +357,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x - 3)² - 3",
+      "targetEquation": "y = -(x - 3)² + 3",
       "targetA": -1,
       "targetH": 3,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -399,10 +399,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x - 4)² - 3",
+      "targetEquation": "y = -2(x - 4)² + 3",
       "targetA": -2,
       "targetH": 4,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -413,10 +413,10 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x - 4)² - 3",
+      "targetEquation": "y = -(x - 4)² + 3",
       "targetA": -1,
       "targetH": 4,
-      "targetK": -3
+      "targetK": 3
     }
   },
   {
@@ -623,7 +623,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x - 0)² - 2",
+      "targetEquation": "y = -2x² - 2",
       "targetA": -2,
       "targetH": 0,
       "targetK": -2
@@ -637,7 +637,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x - 0)² - 2",
+      "targetEquation": "y = -x² - 2",
       "targetA": -1,
       "targetH": 0,
       "targetK": -2
@@ -651,7 +651,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = (x - 0)² - 2",
+      "targetEquation": "y = x² - 2",
       "targetA": 1,
       "targetH": 0,
       "targetK": -2
@@ -665,7 +665,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = 2(x - 0)² - 2",
+      "targetEquation": "y = 2x² - 2",
       "targetA": 2,
       "targetH": 0,
       "targetK": -2
@@ -1071,7 +1071,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x - 0)² - 1",
+      "targetEquation": "y = -2x² - 1",
       "targetA": -2,
       "targetH": 0,
       "targetK": -1
@@ -1085,7 +1085,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x - 0)² - 1",
+      "targetEquation": "y = -x² - 1",
       "targetA": -1,
       "targetH": 0,
       "targetK": -1
@@ -1099,7 +1099,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = (x - 0)² - 1",
+      "targetEquation": "y = x² - 1",
       "targetA": 1,
       "targetH": 0,
       "targetK": -1
@@ -1113,7 +1113,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = 2(x - 0)² - 1",
+      "targetEquation": "y = 2x² - 1",
       "targetA": 2,
       "targetH": 0,
       "targetK": -1
@@ -1351,7 +1351,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -2(x + 3)² + 0",
+      "targetEquation": "y = -2(x + 3)²",
       "targetA": -2,
       "targetH": -3,
       "targetK": 0
@@ -1365,7 +1365,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = -(x + 3)² + 0",
+      "targetEquation": "y = -(x + 3)²",
       "targetA": -1,
       "targetH": -3,
       "targetK": 0
@@ -1379,7 +1379,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = (x + 3)² + 0",
+      "targetEquation": "y = (x + 3)²",
       "targetA": 1,
       "targetH": -3,
       "targetK": 0
@@ -1393,7 +1393,7 @@
     "hint": "괄호 안 h의 부호와 바깥 k의 방향을 구별",
     "problem": {
       "startEquation": "y = x²",
-      "targetEquation": "y = 2(x + 3)² + 0",
+      "targetEquation": "y = 2(x + 3)²",
       "targetA": 2,
       "targetH": -3,
       "targetK": 0
