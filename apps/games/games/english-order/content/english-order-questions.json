@@ -38,12 +38,12 @@
     "type": "word-order",
     "unit": "고1-영어-빈도부사",
     "difficultySeed": 2,
-    "hint": "빈도부사 usually는 일반동사 eats 앞에 둬요.",
+    "hint": "빈도부사 never는 일반동사 eats 앞에 둬요.",
     "problem": {
-      "korean": "지수는 보통 아침을 먹는다",
+      "korean": "지수는 아침을 전혀 먹지 않는다",
       "english": [
         "Jisu",
-        "usually",
+        "never",
         "eats",
         "breakfast"
       ]
@@ -107,17 +107,16 @@
     "type": "word-order",
     "unit": "고1-영어-현재진행",
     "difficultySeed": 2,
-    "hint": "is 뒤에는 동사-ing cleaning, now는 문장 끝에 둬요.",
+    "hint": "is 뒤에는 동사-ing cleaning, 그 뒤에 목적어 the window를 둬요.",
     "problem": {
-      "korean": "그 소년은 지금 창문을 닦고 있다",
+      "korean": "그 소년은 창문을 닦고 있다",
       "english": [
         "The",
         "boy",
         "is",
         "cleaning",
         "the",
-        "window",
-        "now"
+        "window"
       ]
     }
   },
@@ -349,15 +348,16 @@
     "type": "word-order",
     "unit": "고1-영어-명령문",
     "difficultySeed": 1,
-    "hint": "Please 뒤에 동사원형, 목적어 뒤에 방법 부사를 둬요.",
+    "hint": "Please 뒤에 동사원형 open, 목적어 the window 뒤에 for me를 둬요.",
     "problem": {
-      "korean": "창문을 천천히 열어 주세요",
+      "korean": "저를 위해 창문을 열어 주세요",
       "english": [
         "Please",
         "open",
         "the",
         "window",
-        "slowly"
+        "for",
+        "me"
       ]
     }
   },
@@ -417,16 +417,14 @@
     "type": "word-order",
     "unit": "고1-영어-현재완료 기간",
     "difficultySeed": 2,
-    "hint": "has 뒤에는 과거분사 studied, 시작 시점 since 2022는 문장 뒤에 둬요.",
+    "hint": "has 뒤에는 과거분사 studied, 목적어 English 뒤에 시작 시점 since 2022를 둬요.",
     "problem": {
-      "korean": "그는 2022년부터 이 학교에서 공부해 왔다",
+      "korean": "그는 2022년부터 영어를 공부해 왔다",
       "english": [
         "He",
         "has",
         "studied",
-        "at",
-        "this",
-        "school",
+        "English",
         "since",
         "2022"
       ]
@@ -779,11 +777,12 @@
     "difficultySeed": 2,
     "hint": "주절 뒤에 so that절을 두고, can 뒤에는 동사원형을 둬요.",
     "problem": {
-      "korean": "나는 모두가 이해할 수 있도록 천천히 말한다",
+      "korean": "나는 모두가 이해할 수 있도록 쉬운 단어를 사용한다",
       "english": [
         "I",
-        "speak",
-        "slowly",
+        "use",
+        "easy",
+        "words",
         "so",
         "that",
         "everyone",
@@ -911,14 +910,13 @@
     "type": "word-order",
     "unit": "고1-영어-수동태 현재완료",
     "difficultySeed": 2,
-    "hint": "현재완료 수동태는 has already been 뒤에 과거분사 checked를 둬요.",
+    "hint": "현재완료 수동태는 has been 뒤에 과거분사 checked를 둬요.",
     "problem": {
-      "korean": "그 숙제는 선생님에 의해 이미 확인되어 있다",
+      "korean": "그 숙제는 선생님에 의해 확인되었다",
       "english": [
         "The",
         "homework",
         "has",
-        "already",
         "been",
         "checked",
         "by",
@@ -932,17 +930,18 @@
     "type": "word-order",
     "unit": "고1-영어-현재분사",
     "difficultySeed": 2,
-    "hint": "명사 dog 뒤에 현재분사구 barking loudly를 두고 주절 동사 woke를 이어요.",
+    "hint": "명사 boy 뒤에 현재분사구 playing the piano를 두고 주절 동사 is를 이어요.",
     "problem": {
-      "korean": "큰 소리로 짖는 그 개가 아기를 깨웠다",
+      "korean": "피아노를 치고 있는 그 소년은 내 남동생이다",
       "english": [
         "The",
-        "dog",
-        "barking",
-        "loudly",
-        "woke",
+        "boy",
+        "playing",
         "the",
-        "baby"
+        "piano",
+        "is",
+        "my",
+        "brother"
       ]
     }
   },
@@ -1425,18 +1424,19 @@
     "type": "word-order",
     "unit": "고1-영어-동사구 위치",
     "difficultySeed": 1,
-    "hint": "turn off는 동사 뒤 목적어를 둘 수 있으며, before절은 주절 뒤에 둬요.",
+    "hint": "look after는 목적어를 after 뒤에만 둘 수 있으며, while절은 주절 뒤에 둬요.",
     "problem": {
-      "korean": "떠나기 전에 불을 꺼 주세요",
+      "korean": "내가 없는 동안 내 고양이를 돌봐 주세요",
       "english": [
         "Please",
-        "turn",
-        "off",
-        "the",
-        "light",
-        "before",
-        "you",
-        "leave"
+        "look",
+        "after",
+        "my",
+        "cat",
+        "while",
+        "I",
+        "am",
+        "away"
       ]
     }
   },
@@ -1445,16 +1445,16 @@
     "type": "word-order",
     "unit": "고1-영어-동사구 위치",
     "difficultySeed": 1,
-    "hint": "put on 동사구를 붙여 쓴 뒤 목적어 her jacket, 방법 부사 quickly를 둬요.",
+    "hint": "look for는 붙여 쓰고 목적어 her jacket은 for 뒤에 둬요.",
     "problem": {
-      "korean": "그녀는 재킷을 빨리 입었다",
+      "korean": "그녀는 재킷을 찾고 있다",
       "english": [
         "She",
-        "put",
-        "on",
+        "is",
+        "looking",
+        "for",
         "her",
-        "jacket",
-        "quickly"
+        "jacket"
       ]
     }
   },
@@ -1463,7 +1463,7 @@
     "type": "word-order",
     "unit": "고1-영어-간접 요청",
     "difficultySeed": 2,
-    "hint": "asked 뒤 사람 me, 그 뒤 to hand in 동사구를 두고 목적어를 끝에 둬요.",
+    "hint": "asked 뒤 사람 me, 그 뒤 to submit을 두고 목적어를 끝에 둬요.",
     "problem": {
       "korean": "선생님은 나에게 보고서를 제출하라고 요청했다",
       "english": [
@@ -1472,8 +1472,7 @@
         "asked",
         "me",
         "to",
-        "hand",
-        "in",
+        "submit",
         "my",
         "report"
       ]
@@ -1523,14 +1522,15 @@
     "type": "word-order",
     "unit": "고1-영어-both A and B",
     "difficultySeed": 1,
-    "hint": "Both A and B를 주어로 묶고 복수 동사 play를 둬요.",
+    "hint": "Both A and B를 주어로 묶고(I는 뒤에) 복수 동사 play를 둬요.",
     "problem": {
-      "korean": "준과 미나는 방과 후에 체스를 한다",
+      "korean": "내 형과 나는 둘 다 방과 후에 체스를 한다",
       "english": [
         "Both",
-        "Joon",
+        "my",
+        "brother",
         "and",
-        "Mina",
+        "I",
         "play",
         "chess",
         "after",
@@ -1543,19 +1543,19 @@
     "type": "word-order",
     "unit": "고1-영어-either A or B",
     "difficultySeed": 1,
-    "hint": "can 뒤 either를 두고 두 동사구를 or로 연결해요.",
+    "hint": "Either A or B를 주어로 묶고, 가까운 주어 sister에 맞춰 is를 둬요.",
     "problem": {
-      "korean": "너는 나에게 전화하거나 메시지를 보낼 수 있다",
+      "korean": "오늘은 부모님이나 언니 중 한쪽이 온다",
       "english": [
-        "You",
-        "can",
-        "either",
-        "call",
-        "me",
+        "Either",
+        "my",
+        "parents",
         "or",
-        "send",
-        "a",
-        "message"
+        "my",
+        "sister",
+        "is",
+        "coming",
+        "today"
       ]
     }
   },
@@ -1566,16 +1566,16 @@
     "difficultySeed": 2,
     "hint": "Neither A nor B를 주어로 묶고, 가까운 주어 train에 맞춰 is를 둬요.",
     "problem": {
-      "korean": "오늘은 버스도 기차도 이용할 수 없다",
+      "korean": "오늘은 버스들도 기차도 운행하지 않는다",
       "english": [
         "Neither",
         "the",
-        "bus",
+        "buses",
         "nor",
         "the",
         "train",
         "is",
-        "available",
+        "running",
         "today"
       ]
     }
@@ -1585,18 +1585,20 @@
     "type": "word-order",
     "unit": "고1-영어-not only A but also B",
     "difficultySeed": 2,
-    "hint": "be동사 뒤 not only와 형용사, but also와 두 번째 형용사를 병렬로 둬요.",
+    "hint": "Not only A but also B를 주어로 두고, 가까운 주어 the teacher에 맞춰 was를 둬요.",
     "problem": {
-      "korean": "그녀는 친절할 뿐만 아니라 용감하기도 하다",
+      "korean": "학생들뿐만 아니라 선생님도 놀랐다",
       "english": [
-        "She",
-        "is",
-        "not",
+        "Not",
         "only",
-        "kind",
+        "the",
+        "students",
         "but",
         "also",
-        "brave"
+        "the",
+        "teacher",
+        "was",
+        "surprised"
       ]
     }
   },
@@ -1830,23 +1832,23 @@
   {
     "id": "eo-draft-097",
     "type": "word-order",
-    "unit": "고1-영어-whether or not",
+    "unit": "고1-영어-if 명사절",
     "difficultySeed": 2,
-    "hint": "know 뒤 whether or not을 두고 그 뒤 절은 he will come처럼 평서문 어순으로 둬요.",
+    "hint": "know 뒤 if절은 he will come with us처럼 평서문 어순으로 두고, or not은 문장 끝에 둬요.",
     "problem": {
       "korean": "나는 그가 우리와 함께 올지 아닐지 모른다",
       "english": [
         "I",
         "don't",
         "know",
-        "whether",
-        "or",
-        "not",
+        "if",
         "he",
         "will",
         "come",
         "with",
-        "us"
+        "us",
+        "or",
+        "not"
       ]
     }
   },

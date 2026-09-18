@@ -385,8 +385,8 @@
     "problem": {
       "reactants": [
         {
-          "formula": "Hg",
-          "coefficient": 1
+          "formula": "Na",
+          "coefficient": 2
         },
         {
           "formula": "HCl",
@@ -395,8 +395,8 @@
       ],
       "products": [
         {
-          "formula": "HgCl2",
-          "coefficient": 1
+          "formula": "NaCl",
+          "coefficient": 2
         },
         {
           "formula": "H2",
@@ -791,8 +791,8 @@
     "problem": {
       "reactants": [
         {
-          "formula": "Hg",
-          "coefficient": 1
+          "formula": "Na",
+          "coefficient": 2
         },
         {
           "formula": "H2SO4",
@@ -801,7 +801,7 @@
       ],
       "products": [
         {
-          "formula": "HgSO4",
+          "formula": "Na2SO4",
           "coefficient": 1
         },
         {
@@ -1655,7 +1655,7 @@
     "problem": {
       "reactants": [
         {
-          "formula": "HgCO3",
+          "formula": "Na2CO3",
           "coefficient": 1
         },
         {
@@ -1665,8 +1665,8 @@
       ],
       "products": [
         {
-          "formula": "HgCl2",
-          "coefficient": 1
+          "formula": "NaCl",
+          "coefficient": 2
         },
         {
           "formula": "H2O",
@@ -2065,8 +2065,8 @@
     "problem": {
       "reactants": [
         {
-          "formula": "Hg",
-          "coefficient": 1
+          "formula": "K",
+          "coefficient": 2
         },
         {
           "formula": "HBr",
@@ -2075,8 +2075,8 @@
       ],
       "products": [
         {
-          "formula": "HgBr2",
-          "coefficient": 1
+          "formula": "KBr",
+          "coefficient": 2
         },
         {
           "formula": "H2",
@@ -2471,8 +2471,8 @@
     "problem": {
       "reactants": [
         {
-          "formula": "Hg",
-          "coefficient": 1
+          "formula": "Li",
+          "coefficient": 2
         },
         {
           "formula": "HI",
@@ -2481,8 +2481,8 @@
       ],
       "products": [
         {
-          "formula": "HgI2",
-          "coefficient": 1
+          "formula": "LiI",
+          "coefficient": 2
         },
         {
           "formula": "H2",

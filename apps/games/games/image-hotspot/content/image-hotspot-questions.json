@@ -4,20 +4,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-1",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃가루를 만드는 기관과 꽃가루를 받는 기관을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r0-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l0-0"
-        },
         {
           "id": "r0-1",
           "bbox": {
@@ -37,38 +27,20 @@
             "height": 14
           },
           "correctCardId": "l0-2"
-        },
-        {
-          "id": "r0-3",
-          "bbox": {
-            "x": 38,
-            "y": 78,
-            "width": 24,
-            "height": 14
-          },
-          "correctCardId": "l0-3"
         }
       ],
       "cards": [
-        {
-          "id": "l0-0",
-          "text": "꽃잎"
-        },
         {
           "id": "l0-1",
           "text": "암술"
         },
         {
+          "id": "d0-0",
+          "text": "뿌리털"
+        },
+        {
           "id": "l0-2",
           "text": "수술"
-        },
-        {
-          "id": "l0-3",
-          "text": "꽃받침"
-        },
-        {
-          "id": "d0",
-          "text": "잎"
         }
       ]
     }
@@ -78,20 +50,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-1",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "광합성이 가장 활발한 넓은 면과 물질이 이동하는 통로를 구분해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r1-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l1-0"
-        },
         {
           "id": "r1-1",
           "bbox": {
@@ -103,14 +65,14 @@
           "correctCardId": "l1-1"
         },
         {
-          "id": "r1-2",
+          "id": "r1-0",
           "bbox": {
-            "x": 42,
-            "y": 80,
-            "width": 16,
-            "height": 18
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
           },
-          "correctCardId": "l1-2"
+          "correctCardId": "l1-0"
         }
       ],
       "cards": [
@@ -119,16 +81,12 @@
           "text": "잎몸"
         },
         {
+          "id": "d1-0",
+          "text": "꽃받침"
+        },
+        {
           "id": "l1-1",
           "text": "잎맥"
-        },
-        {
-          "id": "l1-2",
-          "text": "잎자루"
-        },
-        {
-          "id": "d1",
-          "text": "잎"
         }
       ]
     }
@@ -138,7 +96,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-1",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "지표선을 기준으로 위와 아래에 있는 기관을 먼저 나눠 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
@@ -161,48 +119,20 @@
             "height": 50
           },
           "correctCardId": "l2-1"
-        },
-        {
-          "id": "r2-2",
-          "bbox": {
-            "x": 20,
-            "y": 50,
-            "width": 22,
-            "height": 26
-          },
-          "correctCardId": "l2-2"
-        },
-        {
-          "id": "r2-3",
-          "bbox": {
-            "x": 42,
-            "y": 82,
-            "width": 16,
-            "height": 16
-          },
-          "correctCardId": "l2-3"
         }
       ],
       "cards": [
         {
-          "id": "l2-0",
-          "text": "줄기"
+          "id": "d2-0",
+          "text": "수염뿌리"
         },
         {
           "id": "l2-1",
           "text": "원뿌리"
         },
         {
-          "id": "l2-2",
-          "text": "곁뿌리"
-        },
-        {
-          "id": "l2-3",
-          "text": "뿌리털"
-        },
-        {
-          "id": "d2",
-          "text": "잎"
+          "id": "l2-0",
+          "text": "줄기"
         }
       ]
     }
@@ -212,30 +142,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-1",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨를 보호하는 부분과 싹이 틀 부분을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
-        {
-          "id": "r3-0",
-          "bbox": {
-            "x": 4,
-            "y": 46,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l3-0"
-        },
-        {
-          "id": "r3-1",
-          "bbox": {
-            "x": 24,
-            "y": 45,
-            "width": 18,
-            "height": 16
-          },
-          "correctCardId": "l3-1"
-        },
         {
           "id": "r3-2",
           "bbox": {
@@ -245,6 +155,16 @@
             "height": 14
           },
           "correctCardId": "l3-2"
+        },
+        {
+          "id": "r3-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l3-0"
         }
       ],
       "cards": [
@@ -253,16 +173,12 @@
           "text": "종피"
         },
         {
-          "id": "l3-1",
-          "text": "떡잎"
-        },
-        {
           "id": "l3-2",
           "text": "배"
         },
         {
-          "id": "d3",
-          "text": "잎"
+          "id": "d3-0",
+          "text": "씨방"
         }
       ]
     }
@@ -272,20 +188,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-2",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "바깥 둘레에서 안쪽 중심으로 가며 기관의 순서를 떠올려 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r4-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l4-0"
-        },
         {
           "id": "r4-1",
           "bbox": {
@@ -297,46 +203,28 @@
           "correctCardId": "l4-1"
         },
         {
-          "id": "r4-2",
-          "bbox": {
-            "x": 62,
-            "y": 44,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l4-2"
-        },
-        {
-          "id": "r4-3",
+          "id": "r4-0",
           "bbox": {
             "x": 38,
-            "y": 78,
+            "y": 8,
             "width": 24,
-            "height": 14
+            "height": 22
           },
-          "correctCardId": "l4-3"
+          "correctCardId": "l4-0"
         }
       ],
       "cards": [
-        {
-          "id": "l4-0",
-          "text": "꽃잎"
-        },
         {
           "id": "l4-1",
           "text": "암술"
         },
         {
-          "id": "l4-2",
-          "text": "수술"
+          "id": "d4-0",
+          "text": "잎자루"
         },
         {
-          "id": "l4-3",
-          "text": "꽃받침"
-        },
-        {
-          "id": "d4",
-          "text": "잎"
+          "id": "l4-0",
+          "text": "꽃잎"
         }
       ]
     }
@@ -346,20 +234,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-2",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎이 줄기와 이어지는 쪽이 어디인지 먼저 찾아보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r5-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l5-0"
-        },
         {
           "id": "r5-1",
           "bbox": {
@@ -371,17 +249,21 @@
           "correctCardId": "l5-1"
         },
         {
-          "id": "r5-2",
+          "id": "r5-0",
           "bbox": {
-            "x": 42,
-            "y": 80,
-            "width": 16,
-            "height": 18
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
           },
-          "correctCardId": "l5-2"
+          "correctCardId": "l5-0"
         }
       ],
       "cards": [
+        {
+          "id": "d5-0",
+          "text": "뿌리털"
+        },
         {
           "id": "l5-0",
           "text": "잎몸"
@@ -389,14 +271,6 @@
         {
           "id": "l5-1",
           "text": "잎맥"
-        },
-        {
-          "id": "l5-2",
-          "text": "잎자루"
-        },
-        {
-          "id": "d5",
-          "text": "잎"
         }
       ]
     }
@@ -406,20 +280,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-2",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "굵기와 갈라지는 방식을 비교해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r6-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l6-0"
-        },
         {
           "id": "r6-1",
           "bbox": {
@@ -431,24 +295,14 @@
           "correctCardId": "l6-1"
         },
         {
-          "id": "r6-2",
-          "bbox": {
-            "x": 20,
-            "y": 50,
-            "width": 22,
-            "height": 26
-          },
-          "correctCardId": "l6-2"
-        },
-        {
-          "id": "r6-3",
+          "id": "r6-0",
           "bbox": {
             "x": 42,
-            "y": 82,
+            "y": 2,
             "width": 16,
-            "height": 16
+            "height": 24
           },
-          "correctCardId": "l6-3"
+          "correctCardId": "l6-0"
         }
       ],
       "cards": [
@@ -457,20 +311,12 @@
           "text": "줄기"
         },
         {
+          "id": "d6-0",
+          "text": "잎자루"
+        },
+        {
           "id": "l6-1",
           "text": "원뿌리"
-        },
-        {
-          "id": "l6-2",
-          "text": "곁뿌리"
-        },
-        {
-          "id": "l6-3",
-          "text": "뿌리털"
-        },
-        {
-          "id": "d6",
-          "text": "잎"
         }
       ]
     }
@@ -480,7 +326,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-2",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "쌍떡잎식물 씨의 양분이 어디에 저장되는지 떠올려 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -503,16 +349,6 @@
             "height": 16
           },
           "correctCardId": "l7-1"
-        },
-        {
-          "id": "r7-2",
-          "bbox": {
-            "x": 43,
-            "y": 43,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l7-2"
         }
       ],
       "cards": [
@@ -525,12 +361,8 @@
           "text": "떡잎"
         },
         {
-          "id": "l7-2",
-          "text": "배"
-        },
-        {
-          "id": "d7",
-          "text": "잎"
+          "id": "d7-0",
+          "text": "열매껍질"
         }
       ]
     }
@@ -540,20 +372,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-3",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃이 피기 전 봉오리를 감싸던 기관이 무엇인지 생각해 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r8-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l8-0"
-        },
         {
           "id": "r8-1",
           "bbox": {
@@ -565,46 +387,28 @@
           "correctCardId": "l8-1"
         },
         {
-          "id": "r8-2",
-          "bbox": {
-            "x": 62,
-            "y": 44,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l8-2"
-        },
-        {
-          "id": "r8-3",
+          "id": "r8-0",
           "bbox": {
             "x": 38,
-            "y": 78,
+            "y": 8,
             "width": 24,
-            "height": 14
+            "height": 22
           },
-          "correctCardId": "l8-3"
+          "correctCardId": "l8-0"
         }
       ],
       "cards": [
-        {
-          "id": "l8-0",
-          "text": "꽃잎"
-        },
         {
           "id": "l8-1",
           "text": "암술"
         },
         {
-          "id": "l8-2",
-          "text": "수술"
+          "id": "l8-0",
+          "text": "꽃잎"
         },
         {
-          "id": "l8-3",
-          "text": "꽃받침"
-        },
-        {
-          "id": "d8",
-          "text": "잎"
+          "id": "d8-0",
+          "text": "잎맥"
         }
       ]
     }
@@ -614,7 +418,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-3",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "물과 양분이 잎 안에서 어떤 길을 따라 퍼지는지 생각해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -637,34 +441,20 @@
             "height": 50
           },
           "correctCardId": "l9-1"
-        },
-        {
-          "id": "r9-2",
-          "bbox": {
-            "x": 42,
-            "y": 80,
-            "width": 16,
-            "height": 18
-          },
-          "correctCardId": "l9-2"
         }
       ],
       "cards": [
-        {
-          "id": "l9-0",
-          "text": "잎몸"
-        },
         {
           "id": "l9-1",
           "text": "잎맥"
         },
         {
-          "id": "l9-2",
-          "text": "잎자루"
+          "id": "l9-0",
+          "text": "잎몸"
         },
         {
-          "id": "d9",
-          "text": "잎"
+          "id": "d9-0",
+          "text": "원뿌리"
         }
       ]
     }
@@ -674,30 +464,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-3",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "흡수 표면적을 넓히는 구조가 뿌리 끝과 어떤 관계인지 생각해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r10-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l10-0"
-        },
-        {
-          "id": "r10-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l10-1"
-        },
         {
           "id": "r10-2",
           "bbox": {
@@ -709,36 +479,28 @@
           "correctCardId": "l10-2"
         },
         {
-          "id": "r10-3",
+          "id": "r10-0",
           "bbox": {
             "x": 42,
-            "y": 82,
+            "y": 2,
             "width": 16,
-            "height": 16
+            "height": 24
           },
-          "correctCardId": "l10-3"
+          "correctCardId": "l10-0"
         }
       ],
       "cards": [
-        {
-          "id": "l10-0",
-          "text": "줄기"
-        },
-        {
-          "id": "l10-1",
-          "text": "원뿌리"
-        },
         {
           "id": "l10-2",
           "text": "곁뿌리"
         },
         {
-          "id": "l10-3",
-          "text": "뿌리털"
+          "id": "d10-0",
+          "text": "종피"
         },
         {
-          "id": "d10",
-          "text": "잎"
+          "id": "l10-0",
+          "text": "줄기"
         }
       ]
     }
@@ -748,19 +510,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-3",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "바깥쪽에서 안쪽으로 가며 구조를 차례로 확인해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
         {
-          "id": "r11-0",
+          "id": "r11-2",
           "bbox": {
-            "x": 4,
-            "y": 46,
+            "x": 43,
+            "y": 43,
             "width": 14,
             "height": 14
           },
-          "correctCardId": "l11-0"
+          "correctCardId": "l11-2"
         },
         {
           "id": "r11-1",
@@ -771,22 +533,12 @@
             "height": 16
           },
           "correctCardId": "l11-1"
-        },
-        {
-          "id": "r11-2",
-          "bbox": {
-            "x": 43,
-            "y": 43,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l11-2"
         }
       ],
       "cards": [
         {
-          "id": "l11-0",
-          "text": "종피"
+          "id": "d11-0",
+          "text": "씨방"
         },
         {
           "id": "l11-1",
@@ -795,10 +547,6 @@
         {
           "id": "l11-2",
           "text": "배"
-        },
-        {
-          "id": "d11",
-          "text": "잎"
         }
       ]
     }
@@ -808,29 +556,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-4",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "곤충을 끌어들이는 기관과 생식에 직접 관여하는 기관을 나눠 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
         {
-          "id": "r12-0",
+          "id": "r12-3",
           "bbox": {
             "x": 38,
-            "y": 8,
+            "y": 78,
             "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l12-0"
-        },
-        {
-          "id": "r12-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
             "height": 14
           },
-          "correctCardId": "l12-1"
+          "correctCardId": "l12-3"
         },
         {
           "id": "r12-2",
@@ -841,38 +579,20 @@
             "height": 14
           },
           "correctCardId": "l12-2"
-        },
-        {
-          "id": "r12-3",
-          "bbox": {
-            "x": 38,
-            "y": 78,
-            "width": 24,
-            "height": 14
-          },
-          "correctCardId": "l12-3"
         }
       ],
       "cards": [
-        {
-          "id": "l12-0",
-          "text": "꽃잎"
-        },
-        {
-          "id": "l12-1",
-          "text": "암술"
-        },
-        {
-          "id": "l12-2",
-          "text": "수술"
-        },
         {
           "id": "l12-3",
           "text": "꽃받침"
         },
         {
-          "id": "d12",
-          "text": "잎"
+          "id": "d12-0",
+          "text": "종피"
+        },
+        {
+          "id": "l12-2",
+          "text": "수술"
         }
       ]
     }
@@ -882,20 +602,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-4",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎을 이루는 부분이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r13-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l13-0"
-        },
         {
           "id": "r13-1",
           "bbox": {
@@ -907,14 +617,14 @@
           "correctCardId": "l13-1"
         },
         {
-          "id": "r13-2",
+          "id": "r13-0",
           "bbox": {
-            "x": 42,
-            "y": 80,
-            "width": 16,
-            "height": 18
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
           },
-          "correctCardId": "l13-2"
+          "correctCardId": "l13-0"
         }
       ],
       "cards": [
@@ -923,16 +633,12 @@
           "text": "잎몸"
         },
         {
+          "id": "d13-0",
+          "text": "떡잎"
+        },
+        {
           "id": "l13-1",
           "text": "잎맥"
-        },
-        {
-          "id": "l13-2",
-          "text": "잎자루"
-        },
-        {
-          "id": "d13",
-          "text": "잎"
         }
       ]
     }
@@ -942,30 +648,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-4",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "쌍떡잎식물 뿌리계의 특징을 떠올려 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r14-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l14-0"
-        },
-        {
-          "id": "r14-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l14-1"
-        },
         {
           "id": "r14-2",
           "bbox": {
@@ -989,24 +675,16 @@
       ],
       "cards": [
         {
-          "id": "l14-0",
-          "text": "줄기"
-        },
-        {
-          "id": "l14-1",
-          "text": "원뿌리"
-        },
-        {
           "id": "l14-2",
           "text": "곁뿌리"
         },
         {
-          "id": "l14-3",
-          "text": "뿌리털"
+          "id": "d14-0",
+          "text": "덩이뿌리"
         },
         {
-          "id": "d14",
-          "text": "잎"
+          "id": "l14-3",
+          "text": "뿌리털"
         }
       ]
     }
@@ -1016,7 +694,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-4",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨의 구조가 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -1029,16 +707,6 @@
             "height": 14
           },
           "correctCardId": "l15-0"
-        },
-        {
-          "id": "r15-1",
-          "bbox": {
-            "x": 24,
-            "y": 45,
-            "width": 18,
-            "height": 16
-          },
-          "correctCardId": "l15-1"
         },
         {
           "id": "r15-2",
@@ -1057,16 +725,12 @@
           "text": "종피"
         },
         {
-          "id": "l15-1",
-          "text": "떡잎"
-        },
-        {
           "id": "l15-2",
           "text": "배"
         },
         {
-          "id": "d15",
-          "text": "잎"
+          "id": "d15-0",
+          "text": "곁뿌리"
         }
       ]
     }
@@ -1076,20 +740,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-5",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃을 이루는 네 기관의 기능을 하나씩 떠올리며 위치를 맞춰 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r16-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l16-0"
-        },
         {
           "id": "r16-1",
           "bbox": {
@@ -1101,46 +755,28 @@
           "correctCardId": "l16-1"
         },
         {
-          "id": "r16-2",
-          "bbox": {
-            "x": 62,
-            "y": 44,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l16-2"
-        },
-        {
-          "id": "r16-3",
+          "id": "r16-0",
           "bbox": {
             "x": 38,
-            "y": 78,
+            "y": 8,
             "width": 24,
-            "height": 14
+            "height": 22
           },
-          "correctCardId": "l16-3"
+          "correctCardId": "l16-0"
         }
       ],
       "cards": [
-        {
-          "id": "l16-0",
-          "text": "꽃잎"
-        },
         {
           "id": "l16-1",
           "text": "암술"
         },
         {
-          "id": "l16-2",
-          "text": "수술"
+          "id": "l16-0",
+          "text": "꽃잎"
         },
         {
-          "id": "l16-3",
-          "text": "꽃받침"
-        },
-        {
-          "id": "d16",
-          "text": "잎"
+          "id": "d16-0",
+          "text": "뿌리털"
         }
       ]
     }
@@ -1150,20 +786,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-5",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎의 각 부분이 하는 일을 떠올리며 모양과 연결해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r17-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l17-0"
-        },
         {
           "id": "r17-1",
           "bbox": {
@@ -1175,32 +801,28 @@
           "correctCardId": "l17-1"
         },
         {
-          "id": "r17-2",
+          "id": "r17-0",
           "bbox": {
-            "x": 42,
-            "y": 80,
-            "width": 16,
-            "height": 18
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
           },
-          "correctCardId": "l17-2"
+          "correctCardId": "l17-0"
         }
       ],
       "cards": [
         {
-          "id": "l17-0",
-          "text": "잎몸"
+          "id": "d17-0",
+          "text": "턱잎"
         },
         {
           "id": "l17-1",
           "text": "잎맥"
         },
         {
-          "id": "l17-2",
-          "text": "잎자루"
-        },
-        {
-          "id": "d17",
-          "text": "잎"
+          "id": "l17-0",
+          "text": "잎몸"
         }
       ]
     }
@@ -1210,20 +832,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-5",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "뿌리를 이루는 부분이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r18-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l18-0"
-        },
         {
           "id": "r18-1",
           "bbox": {
@@ -1243,38 +855,20 @@
             "height": 26
           },
           "correctCardId": "l18-2"
-        },
-        {
-          "id": "r18-3",
-          "bbox": {
-            "x": 42,
-            "y": 82,
-            "width": 16,
-            "height": 16
-          },
-          "correctCardId": "l18-3"
         }
       ],
       "cards": [
-        {
-          "id": "l18-0",
-          "text": "줄기"
-        },
-        {
-          "id": "l18-1",
-          "text": "원뿌리"
-        },
         {
           "id": "l18-2",
           "text": "곁뿌리"
         },
         {
-          "id": "l18-3",
-          "text": "뿌리털"
+          "id": "d18-0",
+          "text": "꽃받침"
         },
         {
-          "id": "d18",
-          "text": "잎"
+          "id": "l18-1",
+          "text": "원뿌리"
         }
       ]
     }
@@ -1284,20 +878,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-5",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨를 보호하는 부분과 싹이 틀 부분을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
-        {
-          "id": "r19-0",
-          "bbox": {
-            "x": 4,
-            "y": 46,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l19-0"
-        },
         {
           "id": "r19-1",
           "bbox": {
@@ -1321,20 +905,16 @@
       ],
       "cards": [
         {
-          "id": "l19-0",
-          "text": "종피"
-        },
-        {
           "id": "l19-1",
           "text": "떡잎"
         },
         {
-          "id": "l19-2",
-          "text": "배"
+          "id": "d19-0",
+          "text": "열매껍질"
         },
         {
-          "id": "d19",
-          "text": "잎"
+          "id": "l19-2",
+          "text": "배"
         }
       ]
     }
@@ -1344,30 +924,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-6",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎에서 유래한 기관이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r20-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l20-0"
-        },
-        {
-          "id": "r20-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
-            "height": 14
-          },
-          "correctCardId": "l20-1"
-        },
         {
           "id": "r20-2",
           "bbox": {
@@ -1379,36 +939,28 @@
           "correctCardId": "l20-2"
         },
         {
-          "id": "r20-3",
+          "id": "r20-1",
           "bbox": {
-            "x": 38,
-            "y": 78,
-            "width": 24,
+            "x": 44,
+            "y": 43,
+            "width": 12,
             "height": 14
           },
-          "correctCardId": "l20-3"
+          "correctCardId": "l20-1"
         }
       ],
       "cards": [
-        {
-          "id": "l20-0",
-          "text": "꽃잎"
-        },
-        {
-          "id": "l20-1",
-          "text": "암술"
-        },
         {
           "id": "l20-2",
           "text": "수술"
         },
         {
-          "id": "l20-3",
-          "text": "꽃받침"
+          "id": "d20-0",
+          "text": "잎자루"
         },
         {
-          "id": "d20",
-          "text": "잎"
+          "id": "l20-1",
+          "text": "암술"
         }
       ]
     }
@@ -1418,30 +970,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-6",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "광합성이 가장 활발한 넓은 면과 물질이 이동하는 통로를 구분해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r21-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l21-0"
-        },
-        {
-          "id": "r21-1",
-          "bbox": {
-            "x": 46,
-            "y": 20,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l21-1"
-        },
         {
           "id": "r21-2",
           "bbox": {
@@ -1451,24 +983,30 @@
             "height": 18
           },
           "correctCardId": "l21-2"
+        },
+        {
+          "id": "r21-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l21-0"
         }
       ],
       "cards": [
+        {
+          "id": "d21-0",
+          "text": "꽃받침"
+        },
         {
           "id": "l21-0",
           "text": "잎몸"
         },
         {
-          "id": "l21-1",
-          "text": "잎맥"
-        },
-        {
           "id": "l21-2",
           "text": "잎자루"
-        },
-        {
-          "id": "d21",
-          "text": "잎"
         }
       ]
     }
@@ -1478,30 +1016,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-6",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "물을 흡수하는 곳과 흡수한 물을 위로 보내는 곳을 구분해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r22-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l22-0"
-        },
-        {
-          "id": "r22-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l22-1"
-        },
         {
           "id": "r22-2",
           "bbox": {
@@ -1513,14 +1031,14 @@
           "correctCardId": "l22-2"
         },
         {
-          "id": "r22-3",
+          "id": "r22-0",
           "bbox": {
             "x": 42,
-            "y": 82,
+            "y": 2,
             "width": 16,
-            "height": 16
+            "height": 24
           },
-          "correctCardId": "l22-3"
+          "correctCardId": "l22-0"
         }
       ],
       "cards": [
@@ -1529,20 +1047,12 @@
           "text": "줄기"
         },
         {
-          "id": "l22-1",
-          "text": "원뿌리"
-        },
-        {
           "id": "l22-2",
           "text": "곁뿌리"
         },
         {
-          "id": "l22-3",
-          "text": "뿌리털"
-        },
-        {
-          "id": "d22",
-          "text": "잎"
+          "id": "d22-0",
+          "text": "수염뿌리"
         }
       ]
     }
@@ -1552,7 +1062,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-6",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "쌍떡잎식물 씨의 양분이 어디에 저장되는지 떠올려 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -1567,16 +1077,6 @@
           "correctCardId": "l23-0"
         },
         {
-          "id": "r23-1",
-          "bbox": {
-            "x": 24,
-            "y": 45,
-            "width": 18,
-            "height": 16
-          },
-          "correctCardId": "l23-1"
-        },
-        {
           "id": "r23-2",
           "bbox": {
             "x": 43,
@@ -1589,20 +1089,16 @@
       ],
       "cards": [
         {
-          "id": "l23-0",
-          "text": "종피"
-        },
-        {
-          "id": "l23-1",
-          "text": "떡잎"
-        },
-        {
           "id": "l23-2",
           "text": "배"
         },
         {
-          "id": "d23",
-          "text": "잎"
+          "id": "d23-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "l23-0",
+          "text": "종피"
         }
       ]
     }
@@ -1612,30 +1108,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-7",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃가루를 만드는 기관과 꽃가루를 받는 기관을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r24-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l24-0"
-        },
-        {
-          "id": "r24-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
-            "height": 14
-          },
-          "correctCardId": "l24-1"
-        },
         {
           "id": "r24-2",
           "bbox": {
@@ -1647,36 +1123,28 @@
           "correctCardId": "l24-2"
         },
         {
-          "id": "r24-3",
+          "id": "r24-1",
           "bbox": {
-            "x": 38,
-            "y": 78,
-            "width": 24,
+            "x": 44,
+            "y": 43,
+            "width": 12,
             "height": 14
           },
-          "correctCardId": "l24-3"
+          "correctCardId": "l24-1"
         }
       ],
       "cards": [
-        {
-          "id": "l24-0",
-          "text": "꽃잎"
-        },
         {
           "id": "l24-1",
           "text": "암술"
         },
         {
+          "id": "d24-0",
+          "text": "배젖"
+        },
+        {
           "id": "l24-2",
           "text": "수술"
-        },
-        {
-          "id": "l24-3",
-          "text": "꽃받침"
-        },
-        {
-          "id": "d24",
-          "text": "잎"
         }
       ]
     }
@@ -1686,7 +1154,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-7",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎이 줄기와 이어지는 쪽이 어디인지 먼저 찾아보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -1701,16 +1169,6 @@
           "correctCardId": "l25-0"
         },
         {
-          "id": "r25-1",
-          "bbox": {
-            "x": 46,
-            "y": 20,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l25-1"
-        },
-        {
           "id": "r25-2",
           "bbox": {
             "x": 42,
@@ -1723,20 +1181,16 @@
       ],
       "cards": [
         {
+          "id": "d25-0",
+          "text": "뿌리털"
+        },
+        {
           "id": "l25-0",
           "text": "잎몸"
         },
         {
-          "id": "l25-1",
-          "text": "잎맥"
-        },
-        {
           "id": "l25-2",
           "text": "잎자루"
-        },
-        {
-          "id": "d25",
-          "text": "잎"
         }
       ]
     }
@@ -1746,7 +1200,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-7",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "지표선을 기준으로 위와 아래에 있는 기관을 먼저 나눠 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
@@ -1761,26 +1215,6 @@
           "correctCardId": "l26-0"
         },
         {
-          "id": "r26-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l26-1"
-        },
-        {
-          "id": "r26-2",
-          "bbox": {
-            "x": 20,
-            "y": 50,
-            "width": 22,
-            "height": 26
-          },
-          "correctCardId": "l26-2"
-        },
-        {
           "id": "r26-3",
           "bbox": {
             "x": 42,
@@ -1793,24 +1227,16 @@
       ],
       "cards": [
         {
+          "id": "d26-0",
+          "text": "덩이뿌리"
+        },
+        {
           "id": "l26-0",
           "text": "줄기"
         },
         {
-          "id": "l26-1",
-          "text": "원뿌리"
-        },
-        {
-          "id": "l26-2",
-          "text": "곁뿌리"
-        },
-        {
           "id": "l26-3",
           "text": "뿌리털"
-        },
-        {
-          "id": "d26",
-          "text": "잎"
         }
       ]
     }
@@ -1820,19 +1246,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-7",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "바깥쪽에서 안쪽으로 가며 구조를 차례로 확인해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
         {
-          "id": "r27-0",
+          "id": "r27-2",
           "bbox": {
-            "x": 4,
-            "y": 46,
+            "x": 43,
+            "y": 43,
             "width": 14,
             "height": 14
           },
-          "correctCardId": "l27-0"
+          "correctCardId": "l27-2"
         },
         {
           "id": "r27-1",
@@ -1843,34 +1269,20 @@
             "height": 16
           },
           "correctCardId": "l27-1"
-        },
-        {
-          "id": "r27-2",
-          "bbox": {
-            "x": 43,
-            "y": 43,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l27-2"
         }
       ],
       "cards": [
-        {
-          "id": "l27-0",
-          "text": "종피"
-        },
         {
           "id": "l27-1",
           "text": "떡잎"
         },
         {
-          "id": "l27-2",
-          "text": "배"
+          "id": "d27-0",
+          "text": "꽃받침"
         },
         {
-          "id": "d27",
-          "text": "잎"
+          "id": "l27-2",
+          "text": "배"
         }
       ]
     }
@@ -1880,30 +1292,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-8",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "바깥 둘레에서 안쪽 중심으로 가며 기관의 순서를 떠올려 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r28-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l28-0"
-        },
-        {
-          "id": "r28-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
-            "height": 14
-          },
-          "correctCardId": "l28-1"
-        },
         {
           "id": "r28-2",
           "bbox": {
@@ -1915,36 +1307,28 @@
           "correctCardId": "l28-2"
         },
         {
-          "id": "r28-3",
+          "id": "r28-1",
           "bbox": {
-            "x": 38,
-            "y": 78,
-            "width": 24,
+            "x": 44,
+            "y": 43,
+            "width": 12,
             "height": 14
           },
-          "correctCardId": "l28-3"
+          "correctCardId": "l28-1"
         }
       ],
       "cards": [
         {
-          "id": "l28-0",
-          "text": "꽃잎"
+          "id": "l28-2",
+          "text": "수술"
         },
         {
           "id": "l28-1",
           "text": "암술"
         },
         {
-          "id": "l28-2",
-          "text": "수술"
-        },
-        {
-          "id": "l28-3",
-          "text": "꽃받침"
-        },
-        {
-          "id": "d28",
-          "text": "잎"
+          "id": "d28-0",
+          "text": "종피"
         }
       ]
     }
@@ -1954,20 +1338,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-8",
     "difficultySeed": 1,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "물과 양분이 잎 안에서 어떤 길을 따라 퍼지는지 생각해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r29-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l29-0"
-        },
         {
           "id": "r29-1",
           "bbox": {
@@ -1991,10 +1365,6 @@
       ],
       "cards": [
         {
-          "id": "l29-0",
-          "text": "잎몸"
-        },
-        {
           "id": "l29-1",
           "text": "잎맥"
         },
@@ -2003,8 +1373,8 @@
           "text": "잎자루"
         },
         {
-          "id": "d29",
-          "text": "잎"
+          "id": "d29-0",
+          "text": "종피"
         }
       ]
     }
@@ -2014,7 +1384,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-8",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "굵기와 갈라지는 방식을 비교해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
@@ -2029,16 +1399,6 @@
           "correctCardId": "l30-0"
         },
         {
-          "id": "r30-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l30-1"
-        },
-        {
           "id": "r30-2",
           "bbox": {
             "x": 20,
@@ -2049,17 +1409,29 @@
           "correctCardId": "l30-2"
         },
         {
-          "id": "r30-3",
+          "id": "r30-1",
           "bbox": {
-            "x": 42,
-            "y": 82,
-            "width": 16,
-            "height": 16
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
           },
-          "correctCardId": "l30-3"
+          "correctCardId": "l30-1"
         }
       ],
       "cards": [
+        {
+          "id": "d30-1",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l30-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "d30-0",
+          "text": "꽃받침"
+        },
         {
           "id": "l30-0",
           "text": "줄기"
@@ -2067,18 +1439,6 @@
         {
           "id": "l30-1",
           "text": "원뿌리"
-        },
-        {
-          "id": "l30-2",
-          "text": "곁뿌리"
-        },
-        {
-          "id": "l30-3",
-          "text": "뿌리털"
-        },
-        {
-          "id": "d30",
-          "text": "잎"
         }
       ]
     }
@@ -2088,7 +1448,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-8",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨의 구조가 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -2125,8 +1485,8 @@
       ],
       "cards": [
         {
-          "id": "l31-0",
-          "text": "종피"
+          "id": "d31-0",
+          "text": "잎몸"
         },
         {
           "id": "l31-1",
@@ -2137,8 +1497,12 @@
           "text": "배"
         },
         {
-          "id": "d31",
-          "text": "잎"
+          "id": "d31-1",
+          "text": "꽃받침"
+        },
+        {
+          "id": "l31-0",
+          "text": "종피"
         }
       ]
     }
@@ -2148,30 +1512,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-9",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃이 피기 전 봉오리를 감싸던 기관이 무엇인지 생각해 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r32-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l32-0"
-        },
-        {
-          "id": "r32-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
-            "height": 14
-          },
-          "correctCardId": "l32-1"
-        },
         {
           "id": "r32-2",
           "bbox": {
@@ -2191,28 +1535,38 @@
             "height": 14
           },
           "correctCardId": "l32-3"
+        },
+        {
+          "id": "r32-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l32-1"
         }
       ],
       "cards": [
         {
-          "id": "l32-0",
-          "text": "꽃잎"
-        },
-        {
           "id": "l32-1",
           "text": "암술"
-        },
-        {
-          "id": "l32-2",
-          "text": "수술"
         },
         {
           "id": "l32-3",
           "text": "꽃받침"
         },
         {
-          "id": "d32",
-          "text": "잎"
+          "id": "d32-1",
+          "text": "잎몸"
+        },
+        {
+          "id": "l32-2",
+          "text": "수술"
+        },
+        {
+          "id": "d32-0",
+          "text": "종피"
         }
       ]
     }
@@ -2222,20 +1576,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-9",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎을 이루는 부분이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r33-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l33-0"
-        },
         {
           "id": "r33-1",
           "bbox": {
@@ -2259,20 +1603,20 @@
       ],
       "cards": [
         {
-          "id": "l33-0",
-          "text": "잎몸"
-        },
-        {
-          "id": "l33-1",
-          "text": "잎맥"
+          "id": "d33-1",
+          "text": "뿌리털"
         },
         {
           "id": "l33-2",
           "text": "잎자루"
         },
         {
-          "id": "d33",
-          "text": "잎"
+          "id": "d33-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l33-1",
+          "text": "잎맥"
         }
       ]
     }
@@ -2282,20 +1626,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-9",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "흡수 표면적을 넓히는 구조가 뿌리 끝과 어떤 관계인지 생각해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r34-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l34-0"
-        },
         {
           "id": "r34-1",
           "bbox": {
@@ -2317,6 +1651,16 @@
           "correctCardId": "l34-2"
         },
         {
+          "id": "r34-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l34-0"
+        },
+        {
           "id": "r34-3",
           "bbox": {
             "x": 42,
@@ -2329,10 +1673,6 @@
       ],
       "cards": [
         {
-          "id": "l34-0",
-          "text": "줄기"
-        },
-        {
           "id": "l34-1",
           "text": "원뿌리"
         },
@@ -2341,12 +1681,20 @@
           "text": "곁뿌리"
         },
         {
+          "id": "d34-1",
+          "text": "잎맥"
+        },
+        {
           "id": "l34-3",
           "text": "뿌리털"
         },
         {
-          "id": "d34",
-          "text": "잎"
+          "id": "l34-0",
+          "text": "줄기"
+        },
+        {
+          "id": "d34-0",
+          "text": "꽃잎"
         }
       ]
     }
@@ -2356,7 +1704,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-9",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨를 보호하는 부분과 싹이 틀 부분을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -2371,16 +1719,6 @@
           "correctCardId": "l35-0"
         },
         {
-          "id": "r35-1",
-          "bbox": {
-            "x": 24,
-            "y": 45,
-            "width": 18,
-            "height": 16
-          },
-          "correctCardId": "l35-1"
-        },
-        {
           "id": "r35-2",
           "bbox": {
             "x": 43,
@@ -2393,20 +1731,16 @@
       ],
       "cards": [
         {
-          "id": "l35-0",
-          "text": "종피"
-        },
-        {
-          "id": "l35-1",
-          "text": "떡잎"
-        },
-        {
           "id": "l35-2",
           "text": "배"
         },
         {
-          "id": "d35",
-          "text": "잎"
+          "id": "d35-0",
+          "text": "암술"
+        },
+        {
+          "id": "l35-0",
+          "text": "종피"
         }
       ]
     }
@@ -2416,20 +1750,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-10",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "곤충을 끌어들이는 기관과 생식에 직접 관여하는 기관을 나눠 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r36-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l36-0"
-        },
         {
           "id": "r36-1",
           "bbox": {
@@ -2441,6 +1765,16 @@
           "correctCardId": "l36-1"
         },
         {
+          "id": "r36-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l36-0"
+        },
+        {
           "id": "r36-2",
           "bbox": {
             "x": 62,
@@ -2449,16 +1783,6 @@
             "height": 14
           },
           "correctCardId": "l36-2"
-        },
-        {
-          "id": "r36-3",
-          "bbox": {
-            "x": 38,
-            "y": 78,
-            "width": 24,
-            "height": 14
-          },
-          "correctCardId": "l36-3"
         }
       ],
       "cards": [
@@ -2467,20 +1791,20 @@
           "text": "꽃잎"
         },
         {
+          "id": "d36-1",
+          "text": "뿌리털"
+        },
+        {
           "id": "l36-1",
           "text": "암술"
         },
         {
+          "id": "d36-0",
+          "text": "잎자루"
+        },
+        {
           "id": "l36-2",
           "text": "수술"
-        },
-        {
-          "id": "l36-3",
-          "text": "꽃받침"
-        },
-        {
-          "id": "d36",
-          "text": "잎"
         }
       ]
     }
@@ -2490,7 +1814,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-10",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎의 각 부분이 하는 일을 떠올리며 모양과 연결해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -2505,16 +1829,6 @@
           "correctCardId": "l37-0"
         },
         {
-          "id": "r37-1",
-          "bbox": {
-            "x": 46,
-            "y": 20,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l37-1"
-        },
-        {
           "id": "r37-2",
           "bbox": {
             "x": 42,
@@ -2523,24 +1837,38 @@
             "height": 18
           },
           "correctCardId": "l37-2"
+        },
+        {
+          "id": "r37-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l37-1"
         }
       ],
       "cards": [
         {
-          "id": "l37-0",
-          "text": "잎몸"
-        },
-        {
           "id": "l37-1",
           "text": "잎맥"
+        },
+        {
+          "id": "d37-0",
+          "text": "원뿌리"
+        },
+        {
+          "id": "d37-1",
+          "text": "종피"
         },
         {
           "id": "l37-2",
           "text": "잎자루"
         },
         {
-          "id": "d37",
-          "text": "잎"
+          "id": "l37-0",
+          "text": "잎몸"
         }
       ]
     }
@@ -2550,7 +1878,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-10",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "쌍떡잎식물 뿌리계의 특징을 떠올려 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
@@ -2563,16 +1891,6 @@
             "height": 24
           },
           "correctCardId": "l38-0"
-        },
-        {
-          "id": "r38-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l38-1"
         },
         {
           "id": "r38-2",
@@ -2593,16 +1911,34 @@
             "height": 16
           },
           "correctCardId": "l38-3"
+        },
+        {
+          "id": "r38-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l38-1"
         }
       ],
       "cards": [
+        {
+          "id": "l38-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "d38-0",
+          "text": "잎맥"
+        },
         {
           "id": "l38-0",
           "text": "줄기"
         },
         {
-          "id": "l38-1",
-          "text": "원뿌리"
+          "id": "d38-1",
+          "text": "수염뿌리"
         },
         {
           "id": "l38-2",
@@ -2611,10 +1947,6 @@
         {
           "id": "l38-3",
           "text": "뿌리털"
-        },
-        {
-          "id": "d38",
-          "text": "잎"
         }
       ]
     }
@@ -2624,7 +1956,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-10",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "쌍떡잎식물 씨의 양분이 어디에 저장되는지 떠올려 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -2647,34 +1979,20 @@
             "height": 16
           },
           "correctCardId": "l39-1"
-        },
-        {
-          "id": "r39-2",
-          "bbox": {
-            "x": 43,
-            "y": 43,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l39-2"
         }
       ],
       "cards": [
-        {
-          "id": "l39-0",
-          "text": "종피"
-        },
         {
           "id": "l39-1",
           "text": "떡잎"
         },
         {
-          "id": "l39-2",
-          "text": "배"
+          "id": "l39-0",
+          "text": "종피"
         },
         {
-          "id": "d39",
-          "text": "잎"
+          "id": "d39-0",
+          "text": "꽃받침"
         }
       ]
     }
@@ -2684,10 +2002,20 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-11",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃을 이루는 네 기관의 기능을 하나씩 떠올리며 위치를 맞춰 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
+        {
+          "id": "r40-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l40-2"
+        },
         {
           "id": "r40-0",
           "bbox": {
@@ -2709,16 +2037,6 @@
           "correctCardId": "l40-1"
         },
         {
-          "id": "r40-2",
-          "bbox": {
-            "x": 62,
-            "y": 44,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l40-2"
-        },
-        {
           "id": "r40-3",
           "bbox": {
             "x": 38,
@@ -2731,24 +2049,28 @@
       ],
       "cards": [
         {
-          "id": "l40-0",
-          "text": "꽃잎"
-        },
-        {
           "id": "l40-1",
           "text": "암술"
-        },
-        {
-          "id": "l40-2",
-          "text": "수술"
         },
         {
           "id": "l40-3",
           "text": "꽃받침"
         },
         {
-          "id": "d40",
-          "text": "잎"
+          "id": "d40-0",
+          "text": "잎자루"
+        },
+        {
+          "id": "l40-2",
+          "text": "수술"
+        },
+        {
+          "id": "d40-1",
+          "text": "뿌리털"
+        },
+        {
+          "id": "l40-0",
+          "text": "꽃잎"
         }
       ]
     }
@@ -2758,7 +2080,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-11",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "광합성이 가장 활발한 넓은 면과 물질이 이동하는 통로를 구분해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -2773,16 +2095,6 @@
           "correctCardId": "l41-0"
         },
         {
-          "id": "r41-1",
-          "bbox": {
-            "x": 46,
-            "y": 20,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l41-1"
-        },
-        {
           "id": "r41-2",
           "bbox": {
             "x": 42,
@@ -2791,9 +2103,23 @@
             "height": 18
           },
           "correctCardId": "l41-2"
+        },
+        {
+          "id": "r41-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l41-1"
         }
       ],
       "cards": [
+        {
+          "id": "l41-2",
+          "text": "잎자루"
+        },
         {
           "id": "l41-0",
           "text": "잎몸"
@@ -2803,12 +2129,12 @@
           "text": "잎맥"
         },
         {
-          "id": "l41-2",
-          "text": "잎자루"
+          "id": "d41-0",
+          "text": "턱잎"
         },
         {
-          "id": "d41",
-          "text": "잎"
+          "id": "d41-1",
+          "text": "곁뿌리"
         }
       ]
     }
@@ -2818,7 +2144,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-11",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "뿌리를 이루는 부분이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
@@ -2833,16 +2159,6 @@
           "correctCardId": "l42-0"
         },
         {
-          "id": "r42-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l42-1"
-        },
-        {
           "id": "r42-2",
           "bbox": {
             "x": 20,
@@ -2851,6 +2167,16 @@
             "height": 26
           },
           "correctCardId": "l42-2"
+        },
+        {
+          "id": "r42-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l42-1"
         },
         {
           "id": "r42-3",
@@ -2869,6 +2195,10 @@
           "text": "줄기"
         },
         {
+          "id": "d42-1",
+          "text": "꽃잎"
+        },
+        {
           "id": "l42-1",
           "text": "원뿌리"
         },
@@ -2881,8 +2211,8 @@
           "text": "뿌리털"
         },
         {
-          "id": "d42",
-          "text": "잎"
+          "id": "d42-0",
+          "text": "떡잎"
         }
       ]
     }
@@ -2892,7 +2222,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-11",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "바깥쪽에서 안쪽으로 가며 구조를 차례로 확인해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -2933,16 +2263,20 @@
           "text": "종피"
         },
         {
-          "id": "l43-1",
-          "text": "떡잎"
+          "id": "d43-1",
+          "text": "열매껍질"
+        },
+        {
+          "id": "d43-0",
+          "text": "곁뿌리"
         },
         {
           "id": "l43-2",
           "text": "배"
         },
         {
-          "id": "d43",
-          "text": "잎"
+          "id": "l43-1",
+          "text": "떡잎"
         }
       ]
     }
@@ -2952,30 +2286,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-12",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎에서 유래한 기관이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r44-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l44-0"
-        },
-        {
-          "id": "r44-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
-            "height": 14
-          },
-          "correctCardId": "l44-1"
-        },
         {
           "id": "r44-2",
           "bbox": {
@@ -2995,28 +2309,52 @@
             "height": 14
           },
           "correctCardId": "l44-3"
+        },
+        {
+          "id": "r44-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l44-0"
+        },
+        {
+          "id": "r44-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l44-1"
         }
       ],
       "cards": [
         {
+          "id": "d44-0",
+          "text": "뿌리털"
+        },
+        {
           "id": "l44-0",
           "text": "꽃잎"
-        },
-        {
-          "id": "l44-1",
-          "text": "암술"
-        },
-        {
-          "id": "l44-2",
-          "text": "수술"
         },
         {
           "id": "l44-3",
           "text": "꽃받침"
         },
         {
-          "id": "d44",
-          "text": "잎"
+          "id": "l44-2",
+          "text": "수술"
+        },
+        {
+          "id": "l44-1",
+          "text": "암술"
+        },
+        {
+          "id": "d44-1",
+          "text": "잎맥"
         }
       ]
     }
@@ -3026,7 +2364,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-12",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎이 줄기와 이어지는 쪽이 어디인지 먼저 찾아보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -3063,20 +2401,24 @@
       ],
       "cards": [
         {
-          "id": "l45-0",
-          "text": "잎몸"
-        },
-        {
-          "id": "l45-1",
-          "text": "잎맥"
+          "id": "d45-1",
+          "text": "뿌리털"
         },
         {
           "id": "l45-2",
           "text": "잎자루"
         },
         {
-          "id": "d45",
-          "text": "잎"
+          "id": "l45-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "d45-0",
+          "text": "턱잎"
+        },
+        {
+          "id": "l45-0",
+          "text": "잎몸"
         }
       ]
     }
@@ -3086,19 +2428,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-12",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "물을 흡수하는 곳과 흡수한 물을 위로 보내는 곳을 구분해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
         {
-          "id": "r46-0",
+          "id": "r46-3",
           "bbox": {
             "x": 42,
-            "y": 2,
+            "y": 82,
             "width": 16,
-            "height": 24
+            "height": 16
           },
-          "correctCardId": "l46-0"
+          "correctCardId": "l46-3"
         },
         {
           "id": "r46-1",
@@ -3111,46 +2453,36 @@
           "correctCardId": "l46-1"
         },
         {
-          "id": "r46-2",
-          "bbox": {
-            "x": 20,
-            "y": 50,
-            "width": 22,
-            "height": 26
-          },
-          "correctCardId": "l46-2"
-        },
-        {
-          "id": "r46-3",
+          "id": "r46-0",
           "bbox": {
             "x": 42,
-            "y": 82,
+            "y": 2,
             "width": 16,
-            "height": 16
+            "height": 24
           },
-          "correctCardId": "l46-3"
+          "correctCardId": "l46-0"
         }
       ],
       "cards": [
-        {
-          "id": "l46-0",
-          "text": "줄기"
-        },
         {
           "id": "l46-1",
           "text": "원뿌리"
         },
         {
-          "id": "l46-2",
-          "text": "곁뿌리"
+          "id": "d46-1",
+          "text": "잎자루"
+        },
+        {
+          "id": "d46-0",
+          "text": "수염뿌리"
         },
         {
           "id": "l46-3",
           "text": "뿌리털"
         },
         {
-          "id": "d46",
-          "text": "잎"
+          "id": "l46-0",
+          "text": "줄기"
         }
       ]
     }
@@ -3160,20 +2492,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-12",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨의 구조가 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
-        {
-          "id": "r47-0",
-          "bbox": {
-            "x": 4,
-            "y": 46,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l47-0"
-        },
         {
           "id": "r47-1",
           "bbox": {
@@ -3193,24 +2515,38 @@
             "height": 14
           },
           "correctCardId": "l47-2"
+        },
+        {
+          "id": "r47-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l47-0"
         }
       ],
       "cards": [
+        {
+          "id": "d47-0",
+          "text": "열매껍질"
+        },
         {
           "id": "l47-0",
           "text": "종피"
         },
         {
-          "id": "l47-1",
-          "text": "떡잎"
+          "id": "d47-1",
+          "text": "잎몸"
         },
         {
           "id": "l47-2",
           "text": "배"
         },
         {
-          "id": "d47",
-          "text": "잎"
+          "id": "l47-1",
+          "text": "떡잎"
         }
       ]
     }
@@ -3220,19 +2556,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-13",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃가루를 만드는 기관과 꽃가루를 받는 기관을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
         {
-          "id": "r48-0",
+          "id": "r48-3",
           "bbox": {
             "x": 38,
-            "y": 8,
+            "y": 78,
             "width": 24,
-            "height": 22
+            "height": 14
           },
-          "correctCardId": "l48-0"
+          "correctCardId": "l48-3"
         },
         {
           "id": "r48-1",
@@ -3245,24 +2581,14 @@
           "correctCardId": "l48-1"
         },
         {
-          "id": "r48-2",
-          "bbox": {
-            "x": 62,
-            "y": 44,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l48-2"
-        },
-        {
-          "id": "r48-3",
+          "id": "r48-0",
           "bbox": {
             "x": 38,
-            "y": 78,
+            "y": 8,
             "width": 24,
-            "height": 14
+            "height": 22
           },
-          "correctCardId": "l48-3"
+          "correctCardId": "l48-0"
         }
       ],
       "cards": [
@@ -3271,20 +2597,20 @@
           "text": "꽃잎"
         },
         {
-          "id": "l48-1",
-          "text": "암술"
+          "id": "d48-0",
+          "text": "종피"
         },
         {
-          "id": "l48-2",
-          "text": "수술"
+          "id": "d48-1",
+          "text": "뿌리털"
         },
         {
           "id": "l48-3",
           "text": "꽃받침"
         },
         {
-          "id": "d48",
-          "text": "잎"
+          "id": "l48-1",
+          "text": "암술"
         }
       ]
     }
@@ -3294,20 +2620,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-13",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "물과 양분이 잎 안에서 어떤 길을 따라 퍼지는지 생각해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r49-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l49-0"
-        },
         {
           "id": "r49-1",
           "bbox": {
@@ -3317,6 +2633,16 @@
             "height": 50
           },
           "correctCardId": "l49-1"
+        },
+        {
+          "id": "r49-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l49-0"
         },
         {
           "id": "r49-2",
@@ -3331,20 +2657,24 @@
       ],
       "cards": [
         {
-          "id": "l49-0",
-          "text": "잎몸"
-        },
-        {
-          "id": "l49-1",
-          "text": "잎맥"
+          "id": "d49-0",
+          "text": "원뿌리"
         },
         {
           "id": "l49-2",
           "text": "잎자루"
         },
         {
-          "id": "d49",
-          "text": "잎"
+          "id": "d49-1",
+          "text": "턱잎"
+        },
+        {
+          "id": "l49-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l49-0",
+          "text": "잎몸"
         }
       ]
     }
@@ -3354,7 +2684,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-13",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "지표선을 기준으로 위와 아래에 있는 기관을 먼저 나눠 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
@@ -3367,16 +2697,6 @@
             "height": 24
           },
           "correctCardId": "l50-0"
-        },
-        {
-          "id": "r50-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l50-1"
         },
         {
           "id": "r50-2",
@@ -3405,20 +2725,20 @@
           "text": "줄기"
         },
         {
-          "id": "l50-1",
-          "text": "원뿌리"
-        },
-        {
-          "id": "l50-2",
-          "text": "곁뿌리"
-        },
-        {
           "id": "l50-3",
           "text": "뿌리털"
         },
         {
-          "id": "d50",
-          "text": "잎"
+          "id": "d50-1",
+          "text": "덩이뿌리"
+        },
+        {
+          "id": "d50-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l50-2",
+          "text": "곁뿌리"
         }
       ]
     }
@@ -3428,7 +2748,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-13",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨를 보호하는 부분과 싹이 틀 부분을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -3443,16 +2763,6 @@
           "correctCardId": "l51-0"
         },
         {
-          "id": "r51-1",
-          "bbox": {
-            "x": 24,
-            "y": 45,
-            "width": 18,
-            "height": 16
-          },
-          "correctCardId": "l51-1"
-        },
-        {
           "id": "r51-2",
           "bbox": {
             "x": 43,
@@ -3461,24 +2771,34 @@
             "height": 14
           },
           "correctCardId": "l51-2"
+        },
+        {
+          "id": "r51-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l51-1"
         }
       ],
       "cards": [
         {
-          "id": "l51-0",
-          "text": "종피"
-        },
-        {
           "id": "l51-1",
           "text": "떡잎"
+        },
+        {
+          "id": "l51-0",
+          "text": "종피"
         },
         {
           "id": "l51-2",
           "text": "배"
         },
         {
-          "id": "d51",
-          "text": "잎"
+          "id": "d51-0",
+          "text": "배젖"
         }
       ]
     }
@@ -3488,19 +2808,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-14",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "바깥 둘레에서 안쪽 중심으로 가며 기관의 순서를 떠올려 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
         {
-          "id": "r52-0",
+          "id": "r52-3",
           "bbox": {
             "x": 38,
-            "y": 8,
+            "y": 78,
             "width": 24,
-            "height": 22
+            "height": 14
           },
-          "correctCardId": "l52-0"
+          "correctCardId": "l52-3"
         },
         {
           "id": "r52-1",
@@ -3521,38 +2841,28 @@
             "height": 14
           },
           "correctCardId": "l52-2"
-        },
-        {
-          "id": "r52-3",
-          "bbox": {
-            "x": 38,
-            "y": 78,
-            "width": 24,
-            "height": 14
-          },
-          "correctCardId": "l52-3"
         }
       ],
       "cards": [
         {
-          "id": "l52-0",
-          "text": "꽃잎"
+          "id": "l52-3",
+          "text": "꽃받침"
         },
         {
           "id": "l52-1",
           "text": "암술"
         },
         {
+          "id": "d52-1",
+          "text": "종피"
+        },
+        {
           "id": "l52-2",
           "text": "수술"
         },
         {
-          "id": "l52-3",
-          "text": "꽃받침"
-        },
-        {
-          "id": "d52",
-          "text": "잎"
+          "id": "d52-0",
+          "text": "턱잎"
         }
       ]
     }
@@ -3562,7 +2872,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-14",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎을 이루는 부분이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -3585,34 +2895,24 @@
             "height": 50
           },
           "correctCardId": "l53-1"
-        },
-        {
-          "id": "r53-2",
-          "bbox": {
-            "x": 42,
-            "y": 80,
-            "width": 16,
-            "height": 18
-          },
-          "correctCardId": "l53-2"
         }
       ],
       "cards": [
         {
-          "id": "l53-0",
-          "text": "잎몸"
+          "id": "d53-0",
+          "text": "종피"
         },
         {
           "id": "l53-1",
           "text": "잎맥"
         },
         {
-          "id": "l53-2",
-          "text": "잎자루"
+          "id": "d53-1",
+          "text": "꽃받침"
         },
         {
-          "id": "d53",
-          "text": "잎"
+          "id": "l53-0",
+          "text": "잎몸"
         }
       ]
     }
@@ -3622,20 +2922,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-14",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "굵기와 갈라지는 방식을 비교해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r54-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l54-0"
-        },
         {
           "id": "r54-1",
           "bbox": {
@@ -3665,28 +2955,42 @@
             "height": 16
           },
           "correctCardId": "l54-3"
+        },
+        {
+          "id": "r54-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l54-0"
         }
       ],
       "cards": [
         {
-          "id": "l54-0",
-          "text": "줄기"
-        },
-        {
-          "id": "l54-1",
-          "text": "원뿌리"
-        },
-        {
           "id": "l54-2",
           "text": "곁뿌리"
+        },
+        {
+          "id": "d54-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "d54-0",
+          "text": "종피"
+        },
+        {
+          "id": "l54-0",
+          "text": "줄기"
         },
         {
           "id": "l54-3",
           "text": "뿌리털"
         },
         {
-          "id": "d54",
-          "text": "잎"
+          "id": "l54-1",
+          "text": "원뿌리"
         }
       ]
     }
@@ -3696,7 +3000,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-14",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "쌍떡잎식물 씨의 양분이 어디에 저장되는지 떠올려 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -3711,16 +3015,6 @@
           "correctCardId": "l55-0"
         },
         {
-          "id": "r55-1",
-          "bbox": {
-            "x": 24,
-            "y": 45,
-            "width": 18,
-            "height": 16
-          },
-          "correctCardId": "l55-1"
-        },
-        {
           "id": "r55-2",
           "bbox": {
             "x": 43,
@@ -3729,24 +3023,38 @@
             "height": 14
           },
           "correctCardId": "l55-2"
+        },
+        {
+          "id": "r55-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l55-1"
         }
       ],
       "cards": [
         {
-          "id": "l55-0",
-          "text": "종피"
+          "id": "d55-1",
+          "text": "씨방"
         },
         {
-          "id": "l55-1",
-          "text": "떡잎"
+          "id": "d55-0",
+          "text": "암술"
+        },
+        {
+          "id": "l55-0",
+          "text": "종피"
         },
         {
           "id": "l55-2",
           "text": "배"
         },
         {
-          "id": "d55",
-          "text": "잎"
+          "id": "l55-1",
+          "text": "떡잎"
         }
       ]
     }
@@ -3756,7 +3064,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-15",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃이 피기 전 봉오리를 감싸던 기관이 무엇인지 생각해 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
@@ -3771,14 +3079,14 @@
           "correctCardId": "l56-0"
         },
         {
-          "id": "r56-1",
+          "id": "r56-3",
           "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
+            "x": 38,
+            "y": 78,
+            "width": 24,
             "height": 14
           },
-          "correctCardId": "l56-1"
+          "correctCardId": "l56-3"
         },
         {
           "id": "r56-2",
@@ -3791,36 +3099,40 @@
           "correctCardId": "l56-2"
         },
         {
-          "id": "r56-3",
+          "id": "r56-1",
           "bbox": {
-            "x": 38,
-            "y": 78,
-            "width": 24,
+            "x": 44,
+            "y": 43,
+            "width": 12,
             "height": 14
           },
-          "correctCardId": "l56-3"
+          "correctCardId": "l56-1"
         }
       ],
       "cards": [
         {
-          "id": "l56-0",
-          "text": "꽃잎"
-        },
-        {
           "id": "l56-1",
           "text": "암술"
+        },
+        {
+          "id": "d56-1",
+          "text": "잎몸"
+        },
+        {
+          "id": "d56-0",
+          "text": "턱잎"
         },
         {
           "id": "l56-2",
           "text": "수술"
         },
         {
-          "id": "l56-3",
-          "text": "꽃받침"
+          "id": "l56-0",
+          "text": "꽃잎"
         },
         {
-          "id": "d56",
-          "text": "잎"
+          "id": "l56-3",
+          "text": "꽃받침"
         }
       ]
     }
@@ -3830,20 +3142,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-15",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎의 각 부분이 하는 일을 떠올리며 모양과 연결해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r57-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l57-0"
-        },
         {
           "id": "r57-1",
           "bbox": {
@@ -3867,10 +3169,6 @@
       ],
       "cards": [
         {
-          "id": "l57-0",
-          "text": "잎몸"
-        },
-        {
           "id": "l57-1",
           "text": "잎맥"
         },
@@ -3879,8 +3177,8 @@
           "text": "잎자루"
         },
         {
-          "id": "d57",
-          "text": "잎"
+          "id": "d57-0",
+          "text": "꽃잎"
         }
       ]
     }
@@ -3890,19 +3188,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-15",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "흡수 표면적을 넓히는 구조가 뿌리 끝과 어떤 관계인지 생각해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
         {
-          "id": "r58-0",
+          "id": "r58-3",
           "bbox": {
             "x": 42,
-            "y": 2,
+            "y": 82,
             "width": 16,
-            "height": 24
+            "height": 16
           },
-          "correctCardId": "l58-0"
+          "correctCardId": "l58-3"
         },
         {
           "id": "r58-1",
@@ -3923,27 +3221,9 @@
             "height": 26
           },
           "correctCardId": "l58-2"
-        },
-        {
-          "id": "r58-3",
-          "bbox": {
-            "x": 42,
-            "y": 82,
-            "width": 16,
-            "height": 16
-          },
-          "correctCardId": "l58-3"
         }
       ],
       "cards": [
-        {
-          "id": "l58-0",
-          "text": "줄기"
-        },
-        {
-          "id": "l58-1",
-          "text": "원뿌리"
-        },
         {
           "id": "l58-2",
           "text": "곁뿌리"
@@ -3953,8 +3233,16 @@
           "text": "뿌리털"
         },
         {
-          "id": "d58",
-          "text": "잎"
+          "id": "l58-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "d58-1",
+          "text": "꽃잎"
+        },
+        {
+          "id": "d58-0",
+          "text": "꽃받침"
         }
       ]
     }
@@ -3964,20 +3252,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-15",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "바깥쪽에서 안쪽으로 가며 구조를 차례로 확인해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
-        {
-          "id": "r59-0",
-          "bbox": {
-            "x": 4,
-            "y": 46,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l59-0"
-        },
         {
           "id": "r59-1",
           "bbox": {
@@ -3987,6 +3265,16 @@
             "height": 16
           },
           "correctCardId": "l59-1"
+        },
+        {
+          "id": "r59-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l59-0"
         },
         {
           "id": "r59-2",
@@ -4001,6 +3289,10 @@
       ],
       "cards": [
         {
+          "id": "l59-2",
+          "text": "배"
+        },
+        {
           "id": "l59-0",
           "text": "종피"
         },
@@ -4009,12 +3301,8 @@
           "text": "떡잎"
         },
         {
-          "id": "l59-2",
-          "text": "배"
-        },
-        {
-          "id": "d59",
-          "text": "잎"
+          "id": "d59-0",
+          "text": "열매껍질"
         }
       ]
     }
@@ -4024,30 +3312,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-16",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "곤충을 끌어들이는 기관과 생식에 직접 관여하는 기관을 나눠 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r60-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l60-0"
-        },
-        {
-          "id": "r60-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
-            "height": 14
-          },
-          "correctCardId": "l60-1"
-        },
         {
           "id": "r60-2",
           "bbox": {
@@ -4067,28 +3335,52 @@
             "height": 14
           },
           "correctCardId": "l60-3"
+        },
+        {
+          "id": "r60-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l60-0"
+        },
+        {
+          "id": "r60-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l60-1"
         }
       ],
       "cards": [
-        {
-          "id": "l60-0",
-          "text": "꽃잎"
-        },
         {
           "id": "l60-1",
           "text": "암술"
         },
         {
-          "id": "l60-2",
-          "text": "수술"
+          "id": "l60-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "d60-0",
+          "text": "배젖"
         },
         {
           "id": "l60-3",
           "text": "꽃받침"
         },
         {
-          "id": "d60",
-          "text": "잎"
+          "id": "d60-1",
+          "text": "뿌리털"
+        },
+        {
+          "id": "l60-2",
+          "text": "수술"
         }
       ]
     }
@@ -4098,7 +3390,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-16",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "광합성이 가장 활발한 넓은 면과 물질이 이동하는 통로를 구분해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -4113,16 +3405,6 @@
           "correctCardId": "l61-0"
         },
         {
-          "id": "r61-1",
-          "bbox": {
-            "x": 46,
-            "y": 20,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l61-1"
-        },
-        {
           "id": "r61-2",
           "bbox": {
             "x": 42,
@@ -4131,24 +3413,34 @@
             "height": 18
           },
           "correctCardId": "l61-2"
+        },
+        {
+          "id": "r61-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l61-1"
         }
       ],
       "cards": [
         {
-          "id": "l61-0",
-          "text": "잎몸"
-        },
-        {
           "id": "l61-1",
           "text": "잎맥"
+        },
+        {
+          "id": "l61-0",
+          "text": "잎몸"
         },
         {
           "id": "l61-2",
           "text": "잎자루"
         },
         {
-          "id": "d61",
-          "text": "잎"
+          "id": "d61-0",
+          "text": "곁뿌리"
         }
       ]
     }
@@ -4158,7 +3450,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-16",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "쌍떡잎식물 뿌리계의 특징을 떠올려 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
@@ -4171,16 +3463,6 @@
             "height": 24
           },
           "correctCardId": "l62-0"
-        },
-        {
-          "id": "r62-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l62-1"
         },
         {
           "id": "r62-2",
@@ -4205,24 +3487,24 @@
       ],
       "cards": [
         {
-          "id": "l62-0",
-          "text": "줄기"
-        },
-        {
-          "id": "l62-1",
-          "text": "원뿌리"
-        },
-        {
           "id": "l62-2",
           "text": "곁뿌리"
         },
         {
-          "id": "l62-3",
-          "text": "뿌리털"
+          "id": "l62-0",
+          "text": "줄기"
         },
         {
-          "id": "d62",
-          "text": "잎"
+          "id": "d62-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "d62-0",
+          "text": "종피"
+        },
+        {
+          "id": "l62-3",
+          "text": "뿌리털"
         }
       ]
     }
@@ -4232,20 +3514,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-16",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨의 구조가 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
-        {
-          "id": "r63-0",
-          "bbox": {
-            "x": 4,
-            "y": 46,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l63-0"
-        },
         {
           "id": "r63-1",
           "bbox": {
@@ -4255,6 +3527,16 @@
             "height": 16
           },
           "correctCardId": "l63-1"
+        },
+        {
+          "id": "r63-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l63-0"
         },
         {
           "id": "r63-2",
@@ -4269,20 +3551,24 @@
       ],
       "cards": [
         {
-          "id": "l63-0",
-          "text": "종피"
+          "id": "d63-1",
+          "text": "암술"
         },
         {
-          "id": "l63-1",
-          "text": "떡잎"
+          "id": "l63-0",
+          "text": "종피"
         },
         {
           "id": "l63-2",
           "text": "배"
         },
         {
-          "id": "d63",
-          "text": "잎"
+          "id": "l63-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "d63-0",
+          "text": "열매껍질"
         }
       ]
     }
@@ -4292,30 +3578,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-17",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃을 이루는 네 기관의 기능을 하나씩 떠올리며 위치를 맞춰 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r64-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l64-0"
-        },
-        {
-          "id": "r64-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
-            "height": 14
-          },
-          "correctCardId": "l64-1"
-        },
         {
           "id": "r64-2",
           "bbox": {
@@ -4327,6 +3593,16 @@
           "correctCardId": "l64-2"
         },
         {
+          "id": "r64-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l64-0"
+        },
+        {
           "id": "r64-3",
           "bbox": {
             "x": 38,
@@ -4335,28 +3611,42 @@
             "height": 14
           },
           "correctCardId": "l64-3"
+        },
+        {
+          "id": "r64-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l64-1"
         }
       ],
       "cards": [
         {
-          "id": "l64-0",
-          "text": "꽃잎"
-        },
-        {
-          "id": "l64-1",
-          "text": "암술"
-        },
-        {
           "id": "l64-2",
           "text": "수술"
+        },
+        {
+          "id": "d64-0",
+          "text": "턱잎"
         },
         {
           "id": "l64-3",
           "text": "꽃받침"
         },
         {
-          "id": "d64",
-          "text": "잎"
+          "id": "l64-1",
+          "text": "암술"
+        },
+        {
+          "id": "l64-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "d64-1",
+          "text": "떡잎"
         }
       ]
     }
@@ -4366,7 +3656,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-17",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎이 줄기와 이어지는 쪽이 어디인지 먼저 찾아보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -4381,16 +3671,6 @@
           "correctCardId": "l65-0"
         },
         {
-          "id": "r65-1",
-          "bbox": {
-            "x": 46,
-            "y": 20,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l65-1"
-        },
-        {
           "id": "r65-2",
           "bbox": {
             "x": 42,
@@ -4403,20 +3683,16 @@
       ],
       "cards": [
         {
-          "id": "l65-0",
-          "text": "잎몸"
-        },
-        {
-          "id": "l65-1",
-          "text": "잎맥"
+          "id": "d65-0",
+          "text": "떡잎"
         },
         {
           "id": "l65-2",
           "text": "잎자루"
         },
         {
-          "id": "d65",
-          "text": "잎"
+          "id": "l65-0",
+          "text": "잎몸"
         }
       ]
     }
@@ -4426,7 +3702,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-17",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "뿌리를 이루는 부분이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
@@ -4439,6 +3715,16 @@
             "height": 24
           },
           "correctCardId": "l66-0"
+        },
+        {
+          "id": "r66-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l66-3"
         },
         {
           "id": "r66-1",
@@ -4459,38 +3745,32 @@
             "height": 26
           },
           "correctCardId": "l66-2"
-        },
-        {
-          "id": "r66-3",
-          "bbox": {
-            "x": 42,
-            "y": 82,
-            "width": 16,
-            "height": 16
-          },
-          "correctCardId": "l66-3"
         }
       ],
       "cards": [
         {
-          "id": "l66-0",
-          "text": "줄기"
-        },
-        {
           "id": "l66-1",
           "text": "원뿌리"
-        },
-        {
-          "id": "l66-2",
-          "text": "곁뿌리"
         },
         {
           "id": "l66-3",
           "text": "뿌리털"
         },
         {
-          "id": "d66",
-          "text": "잎"
+          "id": "l66-0",
+          "text": "줄기"
+        },
+        {
+          "id": "d66-1",
+          "text": "덩이뿌리"
+        },
+        {
+          "id": "d66-0",
+          "text": "종피"
+        },
+        {
+          "id": "l66-2",
+          "text": "곁뿌리"
         }
       ]
     }
@@ -4500,19 +3780,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-17",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨를 보호하는 부분과 싹이 틀 부분을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
         {
-          "id": "r67-0",
+          "id": "r67-2",
           "bbox": {
-            "x": 4,
-            "y": 46,
+            "x": 43,
+            "y": 43,
             "width": 14,
             "height": 14
           },
-          "correctCardId": "l67-0"
+          "correctCardId": "l67-2"
         },
         {
           "id": "r67-1",
@@ -4523,22 +3803,12 @@
             "height": 16
           },
           "correctCardId": "l67-1"
-        },
-        {
-          "id": "r67-2",
-          "bbox": {
-            "x": 43,
-            "y": 43,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l67-2"
         }
       ],
       "cards": [
         {
-          "id": "l67-0",
-          "text": "종피"
+          "id": "d67-1",
+          "text": "암술"
         },
         {
           "id": "l67-1",
@@ -4549,8 +3819,8 @@
           "text": "배"
         },
         {
-          "id": "d67",
-          "text": "잎"
+          "id": "d67-0",
+          "text": "씨방"
         }
       ]
     }
@@ -4560,7 +3830,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-18",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎에서 유래한 기관이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
@@ -4573,16 +3843,6 @@
             "height": 22
           },
           "correctCardId": "l68-0"
-        },
-        {
-          "id": "r68-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
-            "height": 14
-          },
-          "correctCardId": "l68-1"
         },
         {
           "id": "r68-2",
@@ -4603,28 +3863,42 @@
             "height": 14
           },
           "correctCardId": "l68-3"
+        },
+        {
+          "id": "r68-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l68-1"
         }
       ],
       "cards": [
         {
-          "id": "l68-0",
-          "text": "꽃잎"
-        },
-        {
           "id": "l68-1",
           "text": "암술"
-        },
-        {
-          "id": "l68-2",
-          "text": "수술"
         },
         {
           "id": "l68-3",
           "text": "꽃받침"
         },
         {
-          "id": "d68",
-          "text": "잎"
+          "id": "d68-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "d68-1",
+          "text": "배젖"
+        },
+        {
+          "id": "l68-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l68-2",
+          "text": "수술"
         }
       ]
     }
@@ -4634,20 +3908,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-18",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "물과 양분이 잎 안에서 어떤 길을 따라 퍼지는지 생각해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r69-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l69-0"
-        },
         {
           "id": "r69-1",
           "bbox": {
@@ -4659,32 +3923,32 @@
           "correctCardId": "l69-1"
         },
         {
-          "id": "r69-2",
+          "id": "r69-0",
           "bbox": {
-            "x": 42,
-            "y": 80,
-            "width": 16,
-            "height": 18
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
           },
-          "correctCardId": "l69-2"
+          "correctCardId": "l69-0"
         }
       ],
       "cards": [
-        {
-          "id": "l69-0",
-          "text": "잎몸"
-        },
         {
           "id": "l69-1",
           "text": "잎맥"
         },
         {
-          "id": "l69-2",
-          "text": "잎자루"
+          "id": "d69-1",
+          "text": "곁뿌리"
         },
         {
-          "id": "d69",
-          "text": "잎"
+          "id": "l69-0",
+          "text": "잎몸"
+        },
+        {
+          "id": "d69-0",
+          "text": "뿌리털"
         }
       ]
     }
@@ -4694,30 +3958,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-18",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "물을 흡수하는 곳과 흡수한 물을 위로 보내는 곳을 구분해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r70-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l70-0"
-        },
-        {
-          "id": "r70-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l70-1"
-        },
         {
           "id": "r70-2",
           "bbox": {
@@ -4737,12 +3981,22 @@
             "height": 16
           },
           "correctCardId": "l70-3"
+        },
+        {
+          "id": "r70-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l70-1"
         }
       ],
       "cards": [
         {
-          "id": "l70-0",
-          "text": "줄기"
+          "id": "d70-0",
+          "text": "종피"
         },
         {
           "id": "l70-1",
@@ -4757,8 +4011,8 @@
           "text": "뿌리털"
         },
         {
-          "id": "d70",
-          "text": "잎"
+          "id": "d70-1",
+          "text": "꽃잎"
         }
       ]
     }
@@ -4768,19 +4022,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-18",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "쌍떡잎식물 씨의 양분이 어디에 저장되는지 떠올려 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
         {
-          "id": "r71-0",
+          "id": "r71-2",
           "bbox": {
-            "x": 4,
-            "y": 46,
+            "x": 43,
+            "y": 43,
             "width": 14,
             "height": 14
           },
-          "correctCardId": "l71-0"
+          "correctCardId": "l71-2"
         },
         {
           "id": "r71-1",
@@ -4791,34 +4045,24 @@
             "height": 16
           },
           "correctCardId": "l71-1"
-        },
-        {
-          "id": "r71-2",
-          "bbox": {
-            "x": 43,
-            "y": 43,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l71-2"
         }
       ],
       "cards": [
-        {
-          "id": "l71-0",
-          "text": "종피"
-        },
-        {
-          "id": "l71-1",
-          "text": "떡잎"
-        },
         {
           "id": "l71-2",
           "text": "배"
         },
         {
-          "id": "d71",
-          "text": "잎"
+          "id": "d71-1",
+          "text": "잎몸"
+        },
+        {
+          "id": "d71-0",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "l71-1",
+          "text": "떡잎"
         }
       ]
     }
@@ -4828,20 +4072,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-19",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃가루를 만드는 기관과 꽃가루를 받는 기관을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r72-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l72-0"
-        },
         {
           "id": "r72-1",
           "bbox": {
@@ -4853,14 +4087,14 @@
           "correctCardId": "l72-1"
         },
         {
-          "id": "r72-2",
+          "id": "r72-0",
           "bbox": {
-            "x": 62,
-            "y": 44,
-            "width": 14,
-            "height": 14
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
           },
-          "correctCardId": "l72-2"
+          "correctCardId": "l72-0"
         },
         {
           "id": "r72-3",
@@ -4871,28 +4105,42 @@
             "height": 14
           },
           "correctCardId": "l72-3"
+        },
+        {
+          "id": "r72-2",
+          "bbox": {
+            "x": 62,
+            "y": 44,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l72-2"
         }
       ],
       "cards": [
-        {
-          "id": "l72-0",
-          "text": "꽃잎"
-        },
         {
           "id": "l72-1",
           "text": "암술"
         },
         {
-          "id": "l72-2",
-          "text": "수술"
+          "id": "d72-0",
+          "text": "턱잎"
         },
         {
           "id": "l72-3",
           "text": "꽃받침"
         },
         {
-          "id": "d72",
-          "text": "잎"
+          "id": "l72-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l72-2",
+          "text": "수술"
+        },
+        {
+          "id": "d72-1",
+          "text": "배젖"
         }
       ]
     }
@@ -4902,20 +4150,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-19",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎을 이루는 부분이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r73-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l73-0"
-        },
         {
           "id": "r73-1",
           "bbox": {
@@ -4925,6 +4163,16 @@
             "height": 50
           },
           "correctCardId": "l73-1"
+        },
+        {
+          "id": "r73-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l73-0"
         },
         {
           "id": "r73-2",
@@ -4939,6 +4187,14 @@
       ],
       "cards": [
         {
+          "id": "l73-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d73-1",
+          "text": "꽃받침"
+        },
+        {
           "id": "l73-0",
           "text": "잎몸"
         },
@@ -4947,12 +4203,8 @@
           "text": "잎맥"
         },
         {
-          "id": "l73-2",
-          "text": "잎자루"
-        },
-        {
-          "id": "d73",
-          "text": "잎"
+          "id": "d73-0",
+          "text": "원뿌리"
         }
       ]
     }
@@ -4962,10 +4214,20 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-19",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "지표선을 기준으로 위와 아래에 있는 기관을 먼저 나눠 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
+        {
+          "id": "r74-3",
+          "bbox": {
+            "x": 42,
+            "y": 82,
+            "width": 16,
+            "height": 16
+          },
+          "correctCardId": "l74-3"
+        },
         {
           "id": "r74-0",
           "bbox": {
@@ -4995,27 +4257,9 @@
             "height": 26
           },
           "correctCardId": "l74-2"
-        },
-        {
-          "id": "r74-3",
-          "bbox": {
-            "x": 42,
-            "y": 82,
-            "width": 16,
-            "height": 16
-          },
-          "correctCardId": "l74-3"
         }
       ],
       "cards": [
-        {
-          "id": "l74-0",
-          "text": "줄기"
-        },
-        {
-          "id": "l74-1",
-          "text": "원뿌리"
-        },
         {
           "id": "l74-2",
           "text": "곁뿌리"
@@ -5025,8 +4269,20 @@
           "text": "뿌리털"
         },
         {
-          "id": "d74",
-          "text": "잎"
+          "id": "l74-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l74-0",
+          "text": "줄기"
+        },
+        {
+          "id": "d74-0",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d74-1",
+          "text": "잎맥"
         }
       ]
     }
@@ -5036,10 +4292,20 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-19",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "바깥쪽에서 안쪽으로 가며 구조를 차례로 확인해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
+        {
+          "id": "r75-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l75-2"
+        },
         {
           "id": "r75-0",
           "bbox": {
@@ -5059,34 +4325,28 @@
             "height": 16
           },
           "correctCardId": "l75-1"
-        },
-        {
-          "id": "r75-2",
-          "bbox": {
-            "x": 43,
-            "y": 43,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l75-2"
         }
       ],
       "cards": [
         {
-          "id": "l75-0",
-          "text": "종피"
+          "id": "d75-0",
+          "text": "곁뿌리"
         },
         {
-          "id": "l75-1",
-          "text": "떡잎"
+          "id": "d75-1",
+          "text": "배젖"
         },
         {
           "id": "l75-2",
           "text": "배"
         },
         {
-          "id": "d75",
-          "text": "잎"
+          "id": "l75-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l75-0",
+          "text": "종피"
         }
       ]
     }
@@ -5096,20 +4356,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-20",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "바깥 둘레에서 안쪽 중심으로 가며 기관의 순서를 떠올려 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r76-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l76-0"
-        },
         {
           "id": "r76-1",
           "bbox": {
@@ -5121,16 +4371,6 @@
           "correctCardId": "l76-1"
         },
         {
-          "id": "r76-2",
-          "bbox": {
-            "x": 62,
-            "y": 44,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l76-2"
-        },
-        {
           "id": "r76-3",
           "bbox": {
             "x": 38,
@@ -5139,28 +4379,38 @@
             "height": 14
           },
           "correctCardId": "l76-3"
+        },
+        {
+          "id": "r76-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l76-0"
         }
       ],
       "cards": [
         {
-          "id": "l76-0",
-          "text": "꽃잎"
+          "id": "d76-1",
+          "text": "잎몸"
         },
         {
           "id": "l76-1",
           "text": "암술"
         },
         {
-          "id": "l76-2",
-          "text": "수술"
+          "id": "l76-0",
+          "text": "꽃잎"
         },
         {
           "id": "l76-3",
           "text": "꽃받침"
         },
         {
-          "id": "d76",
-          "text": "잎"
+          "id": "d76-0",
+          "text": "턱잎"
         }
       ]
     }
@@ -5170,7 +4420,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-20",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎의 각 부분이 하는 일을 떠올리며 모양과 연결해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -5193,34 +4443,24 @@
             "height": 50
           },
           "correctCardId": "l77-1"
-        },
-        {
-          "id": "r77-2",
-          "bbox": {
-            "x": 42,
-            "y": 80,
-            "width": 16,
-            "height": 18
-          },
-          "correctCardId": "l77-2"
         }
       ],
       "cards": [
-        {
-          "id": "l77-0",
-          "text": "잎몸"
-        },
         {
           "id": "l77-1",
           "text": "잎맥"
         },
         {
-          "id": "l77-2",
-          "text": "잎자루"
+          "id": "d77-1",
+          "text": "꽃잎"
         },
         {
-          "id": "d77",
-          "text": "잎"
+          "id": "d77-0",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l77-0",
+          "text": "잎몸"
         }
       ]
     }
@@ -5230,20 +4470,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-20",
     "difficultySeed": 3,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "굵기와 갈라지는 방식을 비교해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r78-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l78-0"
-        },
         {
           "id": "r78-1",
           "bbox": {
@@ -5255,14 +4485,14 @@
           "correctCardId": "l78-1"
         },
         {
-          "id": "r78-2",
+          "id": "r78-0",
           "bbox": {
-            "x": 20,
-            "y": 50,
-            "width": 22,
-            "height": 26
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
           },
-          "correctCardId": "l78-2"
+          "correctCardId": "l78-0"
         },
         {
           "id": "r78-3",
@@ -5273,28 +4503,42 @@
             "height": 16
           },
           "correctCardId": "l78-3"
+        },
+        {
+          "id": "r78-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l78-2"
         }
       ],
       "cards": [
         {
-          "id": "l78-0",
-          "text": "줄기"
+          "id": "d78-1",
+          "text": "종피"
         },
         {
           "id": "l78-1",
           "text": "원뿌리"
         },
         {
+          "id": "d78-0",
+          "text": "꽃잎"
+        },
+        {
           "id": "l78-2",
           "text": "곁뿌리"
         },
         {
-          "id": "l78-3",
-          "text": "뿌리털"
+          "id": "l78-0",
+          "text": "줄기"
         },
         {
-          "id": "d78",
-          "text": "잎"
+          "id": "l78-3",
+          "text": "뿌리털"
         }
       ]
     }
@@ -5304,19 +4548,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-20",
     "difficultySeed": 2,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨의 구조가 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
         {
-          "id": "r79-0",
+          "id": "r79-2",
           "bbox": {
-            "x": 4,
-            "y": 46,
+            "x": 43,
+            "y": 43,
             "width": 14,
             "height": 14
           },
-          "correctCardId": "l79-0"
+          "correctCardId": "l79-2"
         },
         {
           "id": "r79-1",
@@ -5327,34 +4571,24 @@
             "height": 16
           },
           "correctCardId": "l79-1"
-        },
-        {
-          "id": "r79-2",
-          "bbox": {
-            "x": 43,
-            "y": 43,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l79-2"
         }
       ],
       "cards": [
         {
-          "id": "l79-0",
-          "text": "종피"
+          "id": "d79-1",
+          "text": "암술"
         },
         {
-          "id": "l79-1",
-          "text": "떡잎"
+          "id": "d79-0",
+          "text": "꽃받침"
         },
         {
           "id": "l79-2",
           "text": "배"
         },
         {
-          "id": "d79",
-          "text": "잎"
+          "id": "l79-1",
+          "text": "떡잎"
         }
       ]
     }
@@ -5364,7 +4598,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-21",
     "difficultySeed": 5,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃이 피기 전 봉오리를 감싸던 기관이 무엇인지 생각해 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
@@ -5377,6 +4611,16 @@
             "height": 22
           },
           "correctCardId": "l80-0"
+        },
+        {
+          "id": "r80-3",
+          "bbox": {
+            "x": 38,
+            "y": 78,
+            "width": 24,
+            "height": 14
+          },
+          "correctCardId": "l80-3"
         },
         {
           "id": "r80-1",
@@ -5397,22 +4641,24 @@
             "height": 14
           },
           "correctCardId": "l80-2"
-        },
-        {
-          "id": "r80-3",
-          "bbox": {
-            "x": 38,
-            "y": 78,
-            "width": 24,
-            "height": 14
-          },
-          "correctCardId": "l80-3"
         }
       ],
       "cards": [
         {
-          "id": "l80-0",
-          "text": "꽃잎"
+          "id": "d80-2",
+          "text": "떡잎"
+        },
+        {
+          "id": "d80-1",
+          "text": "잎자루"
+        },
+        {
+          "id": "d80-0",
+          "text": "턱잎"
+        },
+        {
+          "id": "l80-3",
+          "text": "꽃받침"
         },
         {
           "id": "l80-1",
@@ -5423,12 +4669,8 @@
           "text": "수술"
         },
         {
-          "id": "l80-3",
-          "text": "꽃받침"
-        },
-        {
-          "id": "d80",
-          "text": "잎"
+          "id": "l80-0",
+          "text": "꽃잎"
         }
       ]
     }
@@ -5438,20 +4680,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-21",
     "difficultySeed": 4,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "광합성이 가장 활발한 넓은 면과 물질이 이동하는 통로를 구분해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
-        {
-          "id": "r81-0",
-          "bbox": {
-            "x": 22,
-            "y": 20,
-            "width": 22,
-            "height": 50
-          },
-          "correctCardId": "l81-0"
-        },
         {
           "id": "r81-1",
           "bbox": {
@@ -5471,24 +4703,38 @@
             "height": 18
           },
           "correctCardId": "l81-2"
+        },
+        {
+          "id": "r81-0",
+          "bbox": {
+            "x": 22,
+            "y": 20,
+            "width": 22,
+            "height": 50
+          },
+          "correctCardId": "l81-0"
         }
       ],
       "cards": [
         {
-          "id": "l81-0",
-          "text": "잎몸"
+          "id": "l81-2",
+          "text": "잎자루"
         },
         {
           "id": "l81-1",
           "text": "잎맥"
         },
         {
-          "id": "l81-2",
-          "text": "잎자루"
+          "id": "d81-0",
+          "text": "곁뿌리"
         },
         {
-          "id": "d81",
-          "text": "잎"
+          "id": "d81-1",
+          "text": "꽃받침"
+        },
+        {
+          "id": "l81-0",
+          "text": "잎몸"
         }
       ]
     }
@@ -5498,20 +4744,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-21",
     "difficultySeed": 5,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "흡수 표면적을 넓히는 구조가 뿌리 끝과 어떤 관계인지 생각해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r82-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l82-0"
-        },
         {
           "id": "r82-1",
           "bbox": {
@@ -5523,14 +4759,14 @@
           "correctCardId": "l82-1"
         },
         {
-          "id": "r82-2",
+          "id": "r82-0",
           "bbox": {
-            "x": 20,
-            "y": 50,
-            "width": 22,
-            "height": 26
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
           },
-          "correctCardId": "l82-2"
+          "correctCardId": "l82-0"
         },
         {
           "id": "r82-3",
@@ -5541,6 +4777,16 @@
             "height": 16
           },
           "correctCardId": "l82-3"
+        },
+        {
+          "id": "r82-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l82-2"
         }
       ],
       "cards": [
@@ -5553,16 +4799,24 @@
           "text": "원뿌리"
         },
         {
-          "id": "l82-2",
-          "text": "곁뿌리"
+          "id": "d82-0",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d82-1",
+          "text": "잎맥"
         },
         {
           "id": "l82-3",
           "text": "뿌리털"
         },
         {
-          "id": "d82",
-          "text": "잎"
+          "id": "d82-2",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l82-2",
+          "text": "곁뿌리"
         }
       ]
     }
@@ -5572,19 +4826,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-21",
     "difficultySeed": 4,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨를 보호하는 부분과 싹이 틀 부분을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
         {
-          "id": "r83-0",
+          "id": "r83-2",
           "bbox": {
-            "x": 4,
-            "y": 46,
+            "x": 43,
+            "y": 43,
             "width": 14,
             "height": 14
           },
-          "correctCardId": "l83-0"
+          "correctCardId": "l83-2"
         },
         {
           "id": "r83-1",
@@ -5597,32 +4851,40 @@
           "correctCardId": "l83-1"
         },
         {
-          "id": "r83-2",
+          "id": "r83-0",
           "bbox": {
-            "x": 43,
-            "y": 43,
+            "x": 4,
+            "y": 46,
             "width": 14,
             "height": 14
           },
-          "correctCardId": "l83-2"
+          "correctCardId": "l83-0"
         }
       ],
       "cards": [
         {
-          "id": "l83-0",
-          "text": "종피"
+          "id": "l83-2",
+          "text": "배"
         },
         {
           "id": "l83-1",
           "text": "떡잎"
         },
         {
-          "id": "l83-2",
-          "text": "배"
+          "id": "d83-2",
+          "text": "열매껍질"
         },
         {
-          "id": "d83",
-          "text": "잎"
+          "id": "d83-1",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d83-0",
+          "text": "암술"
+        },
+        {
+          "id": "l83-0",
+          "text": "종피"
         }
       ]
     }
@@ -5632,19 +4894,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-22",
     "difficultySeed": 5,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "곤충을 끌어들이는 기관과 생식에 직접 관여하는 기관을 나눠 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
         {
-          "id": "r84-0",
+          "id": "r84-3",
           "bbox": {
             "x": 38,
-            "y": 8,
+            "y": 78,
             "width": 24,
-            "height": 22
+            "height": 14
           },
-          "correctCardId": "l84-0"
+          "correctCardId": "l84-3"
         },
         {
           "id": "r84-1",
@@ -5667,25 +4929,17 @@
           "correctCardId": "l84-2"
         },
         {
-          "id": "r84-3",
+          "id": "r84-0",
           "bbox": {
             "x": 38,
-            "y": 78,
+            "y": 8,
             "width": 24,
-            "height": 14
+            "height": 22
           },
-          "correctCardId": "l84-3"
+          "correctCardId": "l84-0"
         }
       ],
       "cards": [
-        {
-          "id": "l84-0",
-          "text": "꽃잎"
-        },
-        {
-          "id": "l84-1",
-          "text": "암술"
-        },
         {
           "id": "l84-2",
           "text": "수술"
@@ -5695,8 +4949,24 @@
           "text": "꽃받침"
         },
         {
-          "id": "d84",
-          "text": "잎"
+          "id": "d84-1",
+          "text": "잎자루"
+        },
+        {
+          "id": "l84-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "d84-0",
+          "text": "종피"
+        },
+        {
+          "id": "d84-2",
+          "text": "배젖"
+        },
+        {
+          "id": "l84-1",
+          "text": "암술"
         }
       ]
     }
@@ -5706,7 +4976,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-22",
     "difficultySeed": 4,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎이 줄기와 이어지는 쪽이 어디인지 먼저 찾아보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -5721,16 +4991,6 @@
           "correctCardId": "l85-0"
         },
         {
-          "id": "r85-1",
-          "bbox": {
-            "x": 46,
-            "y": 20,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l85-1"
-        },
-        {
           "id": "r85-2",
           "bbox": {
             "x": 42,
@@ -5739,24 +4999,42 @@
             "height": 18
           },
           "correctCardId": "l85-2"
+        },
+        {
+          "id": "r85-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l85-1"
         }
       ],
       "cards": [
         {
-          "id": "l85-0",
-          "text": "잎몸"
+          "id": "d85-0",
+          "text": "턱잎"
         },
         {
-          "id": "l85-1",
-          "text": "잎맥"
+          "id": "d85-1",
+          "text": "원뿌리"
+        },
+        {
+          "id": "l85-0",
+          "text": "잎몸"
         },
         {
           "id": "l85-2",
           "text": "잎자루"
         },
         {
-          "id": "d85",
-          "text": "잎"
+          "id": "l85-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "d85-2",
+          "text": "떡잎"
         }
       ]
     }
@@ -5766,29 +5044,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-22",
     "difficultySeed": 5,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "쌍떡잎식물 뿌리계의 특징을 떠올려 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
         {
-          "id": "r86-0",
+          "id": "r86-3",
           "bbox": {
             "x": 42,
-            "y": 2,
+            "y": 82,
             "width": 16,
-            "height": 24
+            "height": 16
           },
-          "correctCardId": "l86-0"
-        },
-        {
-          "id": "r86-1",
-          "bbox": {
-            "x": 46,
-            "y": 28,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l86-1"
+          "correctCardId": "l86-3"
         },
         {
           "id": "r86-2",
@@ -5801,36 +5069,54 @@
           "correctCardId": "l86-2"
         },
         {
-          "id": "r86-3",
+          "id": "r86-1",
+          "bbox": {
+            "x": 46,
+            "y": 28,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l86-1"
+        },
+        {
+          "id": "r86-0",
           "bbox": {
             "x": 42,
-            "y": 82,
+            "y": 2,
             "width": 16,
-            "height": 16
+            "height": 24
           },
-          "correctCardId": "l86-3"
+          "correctCardId": "l86-0"
         }
       ],
       "cards": [
         {
-          "id": "l86-0",
-          "text": "줄기"
+          "id": "l86-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "d86-0",
+          "text": "꽃받침"
         },
         {
           "id": "l86-1",
           "text": "원뿌리"
         },
         {
-          "id": "l86-2",
-          "text": "곁뿌리"
+          "id": "l86-0",
+          "text": "줄기"
         },
         {
           "id": "l86-3",
           "text": "뿌리털"
         },
         {
-          "id": "d86",
-          "text": "잎"
+          "id": "d86-1",
+          "text": "잎자루"
+        },
+        {
+          "id": "d86-2",
+          "text": "덩이뿌리"
         }
       ]
     }
@@ -5840,10 +5126,20 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-22",
     "difficultySeed": 4,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "쌍떡잎식물 씨의 양분이 어디에 저장되는지 떠올려 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
+        {
+          "id": "r87-2",
+          "bbox": {
+            "x": 43,
+            "y": 43,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l87-2"
+        },
         {
           "id": "r87-0",
           "bbox": {
@@ -5863,16 +5159,6 @@
             "height": 16
           },
           "correctCardId": "l87-1"
-        },
-        {
-          "id": "r87-2",
-          "bbox": {
-            "x": 43,
-            "y": 43,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l87-2"
         }
       ],
       "cards": [
@@ -5881,16 +5167,20 @@
           "text": "종피"
         },
         {
+          "id": "d87-0",
+          "text": "뿌리털"
+        },
+        {
+          "id": "d87-1",
+          "text": "배젖"
+        },
+        {
           "id": "l87-1",
           "text": "떡잎"
         },
         {
           "id": "l87-2",
           "text": "배"
-        },
-        {
-          "id": "d87",
-          "text": "잎"
         }
       ]
     }
@@ -5900,29 +5190,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-23",
     "difficultySeed": 5,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃을 이루는 네 기관의 기능을 하나씩 떠올리며 위치를 맞춰 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
         {
-          "id": "r88-0",
+          "id": "r88-3",
           "bbox": {
             "x": 38,
-            "y": 8,
+            "y": 78,
             "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l88-0"
-        },
-        {
-          "id": "r88-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
             "height": 14
           },
-          "correctCardId": "l88-1"
+          "correctCardId": "l88-3"
         },
         {
           "id": "r88-2",
@@ -5935,36 +5215,54 @@
           "correctCardId": "l88-2"
         },
         {
-          "id": "r88-3",
+          "id": "r88-1",
           "bbox": {
-            "x": 38,
-            "y": 78,
-            "width": 24,
+            "x": 44,
+            "y": 43,
+            "width": 12,
             "height": 14
           },
-          "correctCardId": "l88-3"
+          "correctCardId": "l88-1"
+        },
+        {
+          "id": "r88-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l88-0"
         }
       ],
       "cards": [
-        {
-          "id": "l88-0",
-          "text": "꽃잎"
-        },
         {
           "id": "l88-1",
           "text": "암술"
         },
         {
-          "id": "l88-2",
-          "text": "수술"
+          "id": "d88-2",
+          "text": "턱잎"
         },
         {
           "id": "l88-3",
           "text": "꽃받침"
         },
         {
-          "id": "d88",
-          "text": "잎"
+          "id": "d88-0",
+          "text": "종피"
+        },
+        {
+          "id": "l88-2",
+          "text": "수술"
+        },
+        {
+          "id": "d88-1",
+          "text": "떡잎"
+        },
+        {
+          "id": "l88-0",
+          "text": "꽃잎"
         }
       ]
     }
@@ -5974,7 +5272,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-23",
     "difficultySeed": 4,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "물과 양분이 잎 안에서 어떤 길을 따라 퍼지는지 생각해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
@@ -5989,16 +5287,6 @@
           "correctCardId": "l89-0"
         },
         {
-          "id": "r89-1",
-          "bbox": {
-            "x": 46,
-            "y": 20,
-            "width": 8,
-            "height": 50
-          },
-          "correctCardId": "l89-1"
-        },
-        {
           "id": "r89-2",
           "bbox": {
             "x": 42,
@@ -6007,24 +5295,38 @@
             "height": 18
           },
           "correctCardId": "l89-2"
+        },
+        {
+          "id": "r89-1",
+          "bbox": {
+            "x": 46,
+            "y": 20,
+            "width": 8,
+            "height": 50
+          },
+          "correctCardId": "l89-1"
         }
       ],
       "cards": [
         {
-          "id": "l89-0",
-          "text": "잎몸"
+          "id": "d89-0",
+          "text": "꽃받침"
         },
         {
           "id": "l89-1",
           "text": "잎맥"
         },
         {
-          "id": "l89-2",
-          "text": "잎자루"
+          "id": "l89-0",
+          "text": "잎몸"
         },
         {
-          "id": "d89",
-          "text": "잎"
+          "id": "d89-1",
+          "text": "뿌리털"
+        },
+        {
+          "id": "l89-2",
+          "text": "잎자루"
         }
       ]
     }
@@ -6034,20 +5336,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-23",
     "difficultySeed": 5,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "뿌리를 이루는 부분이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r90-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l90-0"
-        },
         {
           "id": "r90-1",
           "bbox": {
@@ -6059,16 +5351,6 @@
           "correctCardId": "l90-1"
         },
         {
-          "id": "r90-2",
-          "bbox": {
-            "x": 20,
-            "y": 50,
-            "width": 22,
-            "height": 26
-          },
-          "correctCardId": "l90-2"
-        },
-        {
           "id": "r90-3",
           "bbox": {
             "x": 42,
@@ -6077,28 +5359,56 @@
             "height": 16
           },
           "correctCardId": "l90-3"
+        },
+        {
+          "id": "r90-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l90-0"
+        },
+        {
+          "id": "r90-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l90-2"
         }
       ],
       "cards": [
+        {
+          "id": "l90-3",
+          "text": "뿌리털"
+        },
         {
           "id": "l90-0",
           "text": "줄기"
         },
         {
-          "id": "l90-1",
-          "text": "원뿌리"
+          "id": "d90-2",
+          "text": "잎맥"
+        },
+        {
+          "id": "d90-0",
+          "text": "덩이뿌리"
         },
         {
           "id": "l90-2",
           "text": "곁뿌리"
         },
         {
-          "id": "l90-3",
-          "text": "뿌리털"
+          "id": "l90-1",
+          "text": "원뿌리"
         },
         {
-          "id": "d90",
-          "text": "잎"
+          "id": "d90-1",
+          "text": "잎자루"
         }
       ]
     }
@@ -6108,7 +5418,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-23",
     "difficultySeed": 4,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "바깥쪽에서 안쪽으로 가며 구조를 차례로 확인해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -6123,16 +5433,6 @@
           "correctCardId": "l91-0"
         },
         {
-          "id": "r91-1",
-          "bbox": {
-            "x": 24,
-            "y": 45,
-            "width": 18,
-            "height": 16
-          },
-          "correctCardId": "l91-1"
-        },
-        {
           "id": "r91-2",
           "bbox": {
             "x": 43,
@@ -6141,12 +5441,22 @@
             "height": 14
           },
           "correctCardId": "l91-2"
+        },
+        {
+          "id": "r91-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l91-1"
         }
       ],
       "cards": [
         {
-          "id": "l91-0",
-          "text": "종피"
+          "id": "d91-0",
+          "text": "꽃받침"
         },
         {
           "id": "l91-1",
@@ -6157,8 +5467,16 @@
           "text": "배"
         },
         {
-          "id": "d91",
-          "text": "잎"
+          "id": "d91-2",
+          "text": "뿌리털"
+        },
+        {
+          "id": "l91-0",
+          "text": "종피"
+        },
+        {
+          "id": "d91-1",
+          "text": "곁뿌리"
         }
       ]
     }
@@ -6168,20 +5486,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-24",
     "difficultySeed": 5,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎에서 유래한 기관이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r92-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l92-0"
-        },
         {
           "id": "r92-1",
           "bbox": {
@@ -6211,28 +5519,46 @@
             "height": 14
           },
           "correctCardId": "l92-3"
+        },
+        {
+          "id": "r92-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l92-0"
         }
       ],
       "cards": [
-        {
-          "id": "l92-0",
-          "text": "꽃잎"
-        },
         {
           "id": "l92-1",
           "text": "암술"
         },
         {
-          "id": "l92-2",
-          "text": "수술"
+          "id": "d92-0",
+          "text": "잎맥"
+        },
+        {
+          "id": "d92-1",
+          "text": "배젖"
         },
         {
           "id": "l92-3",
           "text": "꽃받침"
         },
         {
-          "id": "d92",
-          "text": "잎"
+          "id": "d92-2",
+          "text": "잎몸"
+        },
+        {
+          "id": "l92-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "l92-2",
+          "text": "수술"
         }
       ]
     }
@@ -6242,10 +5568,20 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-24",
     "difficultySeed": 4,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎을 이루는 부분이 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
+        {
+          "id": "r93-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l93-2"
+        },
         {
           "id": "r93-0",
           "bbox": {
@@ -6265,16 +5601,6 @@
             "height": 50
           },
           "correctCardId": "l93-1"
-        },
-        {
-          "id": "r93-2",
-          "bbox": {
-            "x": 42,
-            "y": 80,
-            "width": 16,
-            "height": 18
-          },
-          "correctCardId": "l93-2"
         }
       ],
       "cards": [
@@ -6283,16 +5609,20 @@
           "text": "잎몸"
         },
         {
+          "id": "d93-0",
+          "text": "턱잎"
+        },
+        {
           "id": "l93-1",
           "text": "잎맥"
         },
         {
-          "id": "l93-2",
-          "text": "잎자루"
+          "id": "d93-1",
+          "text": "꽃잎"
         },
         {
-          "id": "d93",
-          "text": "잎"
+          "id": "l93-2",
+          "text": "잎자루"
         }
       ]
     }
@@ -6302,19 +5632,19 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-24",
     "difficultySeed": 5,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "물을 흡수하는 곳과 흡수한 물을 위로 보내는 곳을 구분해 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
         {
-          "id": "r94-0",
+          "id": "r94-2",
           "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
           },
-          "correctCardId": "l94-0"
+          "correctCardId": "l94-2"
         },
         {
           "id": "r94-1",
@@ -6327,16 +5657,6 @@
           "correctCardId": "l94-1"
         },
         {
-          "id": "r94-2",
-          "bbox": {
-            "x": 20,
-            "y": 50,
-            "width": 22,
-            "height": 26
-          },
-          "correctCardId": "l94-2"
-        },
-        {
           "id": "r94-3",
           "bbox": {
             "x": 42,
@@ -6345,28 +5665,46 @@
             "height": 16
           },
           "correctCardId": "l94-3"
+        },
+        {
+          "id": "r94-0",
+          "bbox": {
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
+          },
+          "correctCardId": "l94-0"
         }
       ],
       "cards": [
         {
-          "id": "l94-0",
-          "text": "줄기"
+          "id": "l94-3",
+          "text": "뿌리털"
         },
         {
           "id": "l94-1",
           "text": "원뿌리"
         },
         {
+          "id": "d94-1",
+          "text": "종피"
+        },
+        {
+          "id": "d94-2",
+          "text": "잎자루"
+        },
+        {
           "id": "l94-2",
           "text": "곁뿌리"
         },
         {
-          "id": "l94-3",
-          "text": "뿌리털"
+          "id": "l94-0",
+          "text": "줄기"
         },
         {
-          "id": "d94",
-          "text": "잎"
+          "id": "d94-0",
+          "text": "덩이뿌리"
         }
       ]
     }
@@ -6376,7 +5714,7 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-24",
     "difficultySeed": 4,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨의 구조가 아닌 보기부터 걸러 내 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
@@ -6391,16 +5729,6 @@
           "correctCardId": "l95-0"
         },
         {
-          "id": "r95-1",
-          "bbox": {
-            "x": 24,
-            "y": 45,
-            "width": 18,
-            "height": 16
-          },
-          "correctCardId": "l95-1"
-        },
-        {
           "id": "r95-2",
           "bbox": {
             "x": 43,
@@ -6409,24 +5737,42 @@
             "height": 14
           },
           "correctCardId": "l95-2"
+        },
+        {
+          "id": "r95-1",
+          "bbox": {
+            "x": 24,
+            "y": 45,
+            "width": 18,
+            "height": 16
+          },
+          "correctCardId": "l95-1"
         }
       ],
       "cards": [
         {
-          "id": "l95-0",
-          "text": "종피"
+          "id": "d95-1",
+          "text": "곁뿌리"
         },
         {
           "id": "l95-1",
           "text": "떡잎"
         },
         {
-          "id": "l95-2",
-          "text": "배"
+          "id": "l95-0",
+          "text": "종피"
         },
         {
-          "id": "d95",
-          "text": "잎"
+          "id": "d95-0",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d95-2",
+          "text": "열매껍질"
+        },
+        {
+          "id": "l95-2",
+          "text": "배"
         }
       ]
     }
@@ -6436,30 +5782,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-flower-25",
     "difficultySeed": 5,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "꽃가루를 만드는 기관과 꽃가루를 받는 기관을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "flower",
       "regions": [
-        {
-          "id": "r96-0",
-          "bbox": {
-            "x": 38,
-            "y": 8,
-            "width": 24,
-            "height": 22
-          },
-          "correctCardId": "l96-0"
-        },
-        {
-          "id": "r96-1",
-          "bbox": {
-            "x": 44,
-            "y": 43,
-            "width": 12,
-            "height": 14
-          },
-          "correctCardId": "l96-1"
-        },
         {
           "id": "r96-2",
           "bbox": {
@@ -6479,28 +5805,56 @@
             "height": 14
           },
           "correctCardId": "l96-3"
+        },
+        {
+          "id": "r96-1",
+          "bbox": {
+            "x": 44,
+            "y": 43,
+            "width": 12,
+            "height": 14
+          },
+          "correctCardId": "l96-1"
+        },
+        {
+          "id": "r96-0",
+          "bbox": {
+            "x": 38,
+            "y": 8,
+            "width": 24,
+            "height": 22
+          },
+          "correctCardId": "l96-0"
         }
       ],
       "cards": [
         {
-          "id": "l96-0",
-          "text": "꽃잎"
+          "id": "d96-2",
+          "text": "배젖"
         },
         {
           "id": "l96-1",
           "text": "암술"
         },
         {
-          "id": "l96-2",
-          "text": "수술"
+          "id": "d96-0",
+          "text": "떡잎"
         },
         {
           "id": "l96-3",
           "text": "꽃받침"
         },
         {
-          "id": "d96",
-          "text": "잎"
+          "id": "l96-0",
+          "text": "꽃잎"
+        },
+        {
+          "id": "d96-1",
+          "text": "잎맥"
+        },
+        {
+          "id": "l96-2",
+          "text": "수술"
         }
       ]
     }
@@ -6510,10 +5864,20 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-leaf-25",
     "difficultySeed": 4,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "잎의 각 부분이 하는 일을 떠올리며 모양과 연결해 보세요.",
     "problem": {
       "diagramId": "leaf",
       "regions": [
+        {
+          "id": "r97-2",
+          "bbox": {
+            "x": 42,
+            "y": 80,
+            "width": 16,
+            "height": 18
+          },
+          "correctCardId": "l97-2"
+        },
         {
           "id": "r97-0",
           "bbox": {
@@ -6533,19 +5897,21 @@
             "height": 50
           },
           "correctCardId": "l97-1"
-        },
-        {
-          "id": "r97-2",
-          "bbox": {
-            "x": 42,
-            "y": 80,
-            "width": 16,
-            "height": 18
-          },
-          "correctCardId": "l97-2"
         }
       ],
       "cards": [
+        {
+          "id": "d97-2",
+          "text": "떡잎"
+        },
+        {
+          "id": "l97-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "d97-1",
+          "text": "곁뿌리"
+        },
         {
           "id": "l97-0",
           "text": "잎몸"
@@ -6555,12 +5921,8 @@
           "text": "잎맥"
         },
         {
-          "id": "l97-2",
-          "text": "잎자루"
-        },
-        {
-          "id": "d97",
-          "text": "잎"
+          "id": "d97-0",
+          "text": "뿌리털"
         }
       ]
     }
@@ -6570,20 +5932,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-root-25",
     "difficultySeed": 5,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "지표선을 기준으로 위와 아래에 있는 기관을 먼저 나눠 보세요.",
     "problem": {
       "diagramId": "root",
       "regions": [
-        {
-          "id": "r98-0",
-          "bbox": {
-            "x": 42,
-            "y": 2,
-            "width": 16,
-            "height": 24
-          },
-          "correctCardId": "l98-0"
-        },
         {
           "id": "r98-1",
           "bbox": {
@@ -6595,14 +5947,14 @@
           "correctCardId": "l98-1"
         },
         {
-          "id": "r98-2",
+          "id": "r98-0",
           "bbox": {
-            "x": 20,
-            "y": 50,
-            "width": 22,
-            "height": 26
+            "x": 42,
+            "y": 2,
+            "width": 16,
+            "height": 24
           },
-          "correctCardId": "l98-2"
+          "correctCardId": "l98-0"
         },
         {
           "id": "r98-3",
@@ -6613,28 +5965,46 @@
             "height": 16
           },
           "correctCardId": "l98-3"
+        },
+        {
+          "id": "r98-2",
+          "bbox": {
+            "x": 20,
+            "y": 50,
+            "width": 22,
+            "height": 26
+          },
+          "correctCardId": "l98-2"
         }
       ],
       "cards": [
         {
-          "id": "l98-0",
-          "text": "줄기"
-        },
-        {
           "id": "l98-1",
           "text": "원뿌리"
-        },
-        {
-          "id": "l98-2",
-          "text": "곁뿌리"
         },
         {
           "id": "l98-3",
           "text": "뿌리털"
         },
         {
-          "id": "d98",
-          "text": "잎"
+          "id": "l98-0",
+          "text": "줄기"
+        },
+        {
+          "id": "d98-2",
+          "text": "잎자루"
+        },
+        {
+          "id": "l98-2",
+          "text": "곁뿌리"
+        },
+        {
+          "id": "d98-0",
+          "text": "꽃받침"
+        },
+        {
+          "id": "d98-1",
+          "text": "종피"
         }
       ]
     }
@@ -6644,20 +6014,10 @@
     "type": "image-hotspot",
     "unit": "고1-생명과학-식물도해-seed-25",
     "difficultySeed": 4,
-    "hint": "도해의 위치와 기관 기능을 함께 확인",
+    "hint": "씨를 보호하는 부분과 싹이 틀 부분을 먼저 구분해 보세요.",
     "problem": {
       "diagramId": "seed",
       "regions": [
-        {
-          "id": "r99-0",
-          "bbox": {
-            "x": 4,
-            "y": 46,
-            "width": 14,
-            "height": 14
-          },
-          "correctCardId": "l99-0"
-        },
         {
           "id": "r99-1",
           "bbox": {
@@ -6667,6 +6027,16 @@
             "height": 16
           },
           "correctCardId": "l99-1"
+        },
+        {
+          "id": "r99-0",
+          "bbox": {
+            "x": 4,
+            "y": 46,
+            "width": 14,
+            "height": 14
+          },
+          "correctCardId": "l99-0"
         },
         {
           "id": "r99-2",
@@ -6681,20 +6051,28 @@
       ],
       "cards": [
         {
-          "id": "l99-0",
-          "text": "종피"
+          "id": "d99-1",
+          "text": "씨방"
         },
         {
-          "id": "l99-1",
-          "text": "떡잎"
+          "id": "d99-2",
+          "text": "암술"
+        },
+        {
+          "id": "d99-0",
+          "text": "열매껍질"
+        },
+        {
+          "id": "l99-0",
+          "text": "종피"
         },
         {
           "id": "l99-2",
           "text": "배"
         },
         {
-          "id": "d99",
-          "text": "잎"
+          "id": "l99-1",
+          "text": "떡잎"
         }
       ]
     }

@@ -2,18 +2,18 @@
   {
     "id": "gp-draft-001",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 부모가 만드는 생식세포를 먼저 적고, 자손 4칸의 표현형을 세어 보세요.",
     "problem": {
       "p1": "Aa",
       "p2": "Aa",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "꽃 색",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "보라색",
+          "recessive": "흰색"
         }
       ],
       "expectedRatio": [
@@ -25,18 +25,18 @@
   {
     "id": "gp-draft-002",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "대문자 유전자가 하나라도 있으면 우성 표현형이 나타나요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "Bb",
+      "p2": "bb",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "키",
+          "symbol": "B",
+          "dominant": "큰 키",
+          "recessive": "작은 키"
         }
       ],
       "expectedRatio": [
@@ -48,18 +48,18 @@
   {
     "id": "gp-draft-003",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "동형접합 부모는 한 종류의 생식세포만 만들어요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "DD",
+      "p2": "Dd",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "털 색",
+          "symbol": "D",
+          "dominant": "검은 털",
+          "recessive": "갈색 털"
         }
       ],
       "expectedRatio": [
@@ -71,18 +71,41 @@
   {
     "id": "gp-draft-004",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 부모가 만드는 생식세포를 먼저 적고, 자손 4칸의 표현형을 세어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "ee",
+      "p2": "Ee",
+      "traits": [
+        {
+          "name": "날개 모양",
+          "symbol": "E",
+          "dominant": "곧은 날개",
+          "recessive": "굽은 날개"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-005",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성잡종",
+    "difficultySeed": 1,
+    "hint": "대문자 유전자가 하나라도 있으면 우성 표현형이 나타나요.",
+    "problem": {
+      "p1": "FF",
+      "p2": "ff",
       "traits": [
         {
           "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "symbol": "F",
+          "dominant": "노란 씨",
+          "recessive": "초록 씨"
         }
       ],
       "expectedRatio": [
@@ -92,47 +115,24 @@
     }
   },
   {
-    "id": "gp-draft-005",
+    "id": "gp-draft-006",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "동형접합 부모는 한 종류의 생식세포만 만들어요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "Gg",
+      "p2": "Gg",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "씨앗 모양",
+          "symbol": "G",
+          "dominant": "둥근 씨",
+          "recessive": "주름진 씨"
         }
       ],
       "expectedRatio": [
         3,
-        1
-      ]
-    }
-  },
-  {
-    "id": "gp-draft-006",
-    "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
-    "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
-    "problem": {
-      "p1": "Aa",
-      "p2": "aa",
-      "traits": [
-        {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
-        }
-      ],
-      "expectedRatio": [
-        1,
         1
       ]
     }
@@ -140,156 +140,110 @@
   {
     "id": "gp-draft-007",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 부모가 만드는 생식세포를 먼저 적고, 자손 4칸의 표현형을 세어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "hh",
+      "p2": "hh",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꼬투리 색",
+          "symbol": "H",
+          "dominant": "초록 꼬투리",
+          "recessive": "노란 꼬투리"
         }
       ],
       "expectedRatio": [
-        1,
-        0
+        0,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-008",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "대문자 유전자가 하나라도 있으면 우성 표현형이 나타나요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "Rr",
+      "p2": "rr",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꼬투리 모양",
+          "symbol": "R",
+          "dominant": "매끈한 꼬투리",
+          "recessive": "잘록한 꼬투리"
         }
       ],
       "expectedRatio": [
         1,
-        0
+        1
       ]
     }
   },
   {
     "id": "gp-draft-009",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "동형접합 부모는 한 종류의 생식세포만 만들어요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "Tt",
+      "p2": "TT",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꽃 위치",
+          "symbol": "T",
+          "dominant": "잎겨드랑이 꽃",
+          "recessive": "줄기 끝 꽃"
         }
       ],
       "expectedRatio": [
-        3,
-        1
+        1,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-010",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 부모가 만드는 생식세포를 먼저 적고, 자손 4칸의 표현형을 세어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "nn",
+      "p2": "NN",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "눈 색",
+          "symbol": "N",
+          "dominant": "붉은 눈",
+          "recessive": "흰 눈"
         }
       ],
       "expectedRatio": [
         1,
-        1
+        0
       ]
     }
   },
   {
     "id": "gp-draft-011",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "대문자 유전자가 하나라도 있으면 우성 표현형이 나타나요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "Mm",
+      "p2": "Mm",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
-        }
-      ],
-      "expectedRatio": [
-        1,
-        0
-      ]
-    }
-  },
-  {
-    "id": "gp-draft-012",
-    "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
-    "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
-    "problem": {
-      "p1": "AA",
-      "p2": "aa",
-      "traits": [
-        {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
-        }
-      ],
-      "expectedRatio": [
-        1,
-        0
-      ]
-    }
-  },
-  {
-    "id": "gp-draft-013",
-    "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
-    "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
-    "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
-      "traits": [
-        {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "뿔 유무",
+          "symbol": "M",
+          "dominant": "뿔 없음",
+          "recessive": "뿔 있음"
         }
       ],
       "expectedRatio": [
@@ -299,20 +253,66 @@
     }
   },
   {
-    "id": "gp-draft-014",
+    "id": "gp-draft-012",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "동형접합 부모는 한 종류의 생식세포만 만들어요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "ll",
+      "p2": "Ll",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "꼬리 길이",
+          "symbol": "L",
+          "dominant": "긴 꼬리",
+          "recessive": "짧은 꼬리"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-013",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성잡종",
+    "difficultySeed": 1,
+    "hint": "각 부모가 만드는 생식세포를 먼저 적고, 자손 4칸의 표현형을 세어 보세요.",
+    "problem": {
+      "p1": "AA",
+      "p2": "AA",
+      "traits": [
+        {
+          "name": "귀 모양",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "선 귀",
+          "recessive": "처진 귀"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-014",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성잡종",
+    "difficultySeed": 1,
+    "hint": "대문자 유전자가 하나라도 있으면 우성 표현형이 나타나요.",
+    "problem": {
+      "p1": "Bb",
+      "p2": "bb",
+      "traits": [
+        {
+          "name": "잎 가장자리",
+          "symbol": "B",
+          "dominant": "톱니 잎",
+          "recessive": "매끈한 잎"
         }
       ],
       "expectedRatio": [
@@ -324,18 +324,18 @@
   {
     "id": "gp-draft-015",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "동형접합 부모는 한 종류의 생식세포만 만들어요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "DD",
+      "p2": "Dd",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "비늘 색",
+          "symbol": "D",
+          "dominant": "푸른 비늘",
+          "recessive": "은색 비늘"
         }
       ],
       "expectedRatio": [
@@ -347,45 +347,45 @@
   {
     "id": "gp-draft-016",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 부모가 만드는 생식세포를 먼저 적고, 자손 4칸의 표현형을 세어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "Ee",
+      "p2": "Ee",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "더듬이 길이",
+          "symbol": "E",
+          "dominant": "긴 더듬이",
+          "recessive": "짧은 더듬이"
         }
       ],
       "expectedRatio": [
-        1,
-        0
+        3,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-017",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "대문자 유전자가 하나라도 있으면 우성 표현형이 나타나요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "ff",
+      "p2": "Ff",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "껍질 무늬",
+          "symbol": "F",
+          "dominant": "줄무늬",
+          "recessive": "무늬 없음"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
         1
       ]
     }
@@ -393,18 +393,64 @@
   {
     "id": "gp-draft-018",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "동형접합 부모는 한 종류의 생식세포만 만들어요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "GG",
+      "p2": "gg",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "털 길이",
+          "symbol": "G",
+          "dominant": "짧은 털",
+          "recessive": "긴 털"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-019",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성잡종",
+    "difficultySeed": 1,
+    "hint": "각 부모가 만드는 생식세포를 먼저 적고, 자손 4칸의 표현형을 세어 보세요.",
+    "problem": {
+      "p1": "hh",
+      "p2": "hh",
+      "traits": [
+        {
+          "name": "줄기 색",
+          "symbol": "H",
+          "dominant": "자주색 줄기",
+          "recessive": "초록 줄기"
+        }
+      ],
+      "expectedRatio": [
+        0,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-020",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성잡종",
+    "difficultySeed": 1,
+    "hint": "대문자 유전자가 하나라도 있으면 우성 표현형이 나타나요.",
+    "problem": {
+      "p1": "Rr",
+      "p2": "rr",
+      "traits": [
+        {
+          "name": "열매 색",
+          "symbol": "R",
+          "dominant": "빨간 열매",
+          "recessive": "노란 열매"
         }
       ],
       "expectedRatio": [
@@ -414,66 +460,43 @@
     }
   },
   {
-    "id": "gp-draft-019",
-    "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
-    "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
-    "problem": {
-      "p1": "AA",
-      "p2": "Aa",
-      "traits": [
-        {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
-        }
-      ],
-      "expectedRatio": [
-        1,
-        0
-      ]
-    }
-  },
-  {
-    "id": "gp-draft-020",
-    "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
-    "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
-    "problem": {
-      "p1": "AA",
-      "p2": "aa",
-      "traits": [
-        {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
-        }
-      ],
-      "expectedRatio": [
-        1,
-        0
-      ]
-    }
-  },
-  {
     "id": "gp-draft-021",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "동형접합 부모는 한 종류의 생식세포만 만들어요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "Tt",
+      "p2": "TT",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "몸 색",
+          "symbol": "T",
+          "dominant": "회색 몸",
+          "recessive": "흰색 몸"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-022",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성잡종",
+    "difficultySeed": 1,
+    "hint": "각 부모가 만드는 생식세포를 먼저 적고, 자손 4칸의 표현형을 세어 보세요.",
+    "problem": {
+      "p1": "Nn",
+      "p2": "Nn",
+      "traits": [
+        {
+          "name": "부리 모양",
+          "symbol": "N",
+          "dominant": "굽은 부리",
+          "recessive": "곧은 부리"
         }
       ],
       "expectedRatio": [
@@ -483,20 +506,20 @@
     }
   },
   {
-    "id": "gp-draft-022",
+    "id": "gp-draft-023",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "대문자 유전자가 하나라도 있으면 우성 표현형이 나타나요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "mm",
+      "p2": "Mm",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "지느러미 모양",
+          "symbol": "M",
+          "dominant": "둥근 지느러미",
+          "recessive": "뾰족한 지느러미"
         }
       ],
       "expectedRatio": [
@@ -506,43 +529,20 @@
     }
   },
   {
-    "id": "gp-draft-023",
-    "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
-    "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
-    "problem": {
-      "p1": "AA",
-      "p2": "Aa",
-      "traits": [
-        {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
-        }
-      ],
-      "expectedRatio": [
-        1,
-        0
-      ]
-    }
-  },
-  {
     "id": "gp-draft-024",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "동형접합 부모는 한 종류의 생식세포만 만들어요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "ll",
+      "p2": "LL",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "잎 모양",
+          "symbol": "L",
+          "dominant": "넓은 잎",
+          "recessive": "좁은 잎"
         }
       ],
       "expectedRatio": [
@@ -554,41 +554,41 @@
   {
     "id": "gp-draft-025",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 부모가 만드는 생식세포를 먼저 적고, 자손 4칸의 표현형을 세어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "AA",
+      "p2": "AA",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "볏 모양",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "장미 볏",
+          "recessive": "홑 볏"
         }
       ],
       "expectedRatio": [
-        3,
-        1
+        1,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-026",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "대문자 유전자가 하나라도 있으면 우성 표현형이 나타나요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "Bb",
+      "p2": "bb",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "등껍질 색",
+          "symbol": "B",
+          "dominant": "갈색 등껍질",
+          "recessive": "주황 등껍질"
         }
       ],
       "expectedRatio": [
@@ -600,64 +600,18 @@
   {
     "id": "gp-draft-027",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "동형접합 부모는 한 종류의 생식세포만 만들어요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "Dd",
+      "p2": "Dd",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
-        }
-      ],
-      "expectedRatio": [
-        1,
-        0
-      ]
-    }
-  },
-  {
-    "id": "gp-draft-028",
-    "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
-    "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
-    "problem": {
-      "p1": "AA",
-      "p2": "aa",
-      "traits": [
-        {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
-        }
-      ],
-      "expectedRatio": [
-        1,
-        0
-      ]
-    }
-  },
-  {
-    "id": "gp-draft-029",
-    "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
-    "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
-    "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
-      "traits": [
-        {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "깃털 색",
+          "symbol": "D",
+          "dominant": "파란 깃털",
+          "recessive": "흰 깃털"
         }
       ],
       "expectedRatio": [
@@ -667,20 +621,66 @@
     }
   },
   {
-    "id": "gp-draft-030",
+    "id": "gp-draft-028",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-단성잡종",
     "difficultySeed": 1,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 부모가 만드는 생식세포를 먼저 적고, 자손 4칸의 표현형을 세어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "ee",
+      "p2": "ee",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "발톱 길이",
+          "symbol": "E",
+          "dominant": "긴 발톱",
+          "recessive": "짧은 발톱"
+        }
+      ],
+      "expectedRatio": [
+        0,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-029",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성잡종",
+    "difficultySeed": 1,
+    "hint": "대문자 유전자가 하나라도 있으면 우성 표현형이 나타나요.",
+    "problem": {
+      "p1": "FF",
+      "p2": "Ff",
+      "traits": [
+        {
+          "name": "꽃잎 모양",
+          "symbol": "F",
+          "dominant": "둥근 꽃잎",
+          "recessive": "뾰족한 꽃잎"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-030",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-단성잡종",
+    "difficultySeed": 1,
+    "hint": "동형접합 부모는 한 종류의 생식세포만 만들어요.",
+    "problem": {
+      "p1": "gg",
+      "p2": "Gg",
+      "traits": [
+        {
+          "name": "뿌리 굵기",
+          "symbol": "G",
+          "dominant": "굵은 뿌리",
+          "recessive": "가는 뿌리"
         }
       ],
       "expectedRatio": [
@@ -692,22 +692,30 @@
   {
     "id": "gp-draft-031",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "HHRr",
+      "p2": "HHRr",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "알 껍질 색",
+          "symbol": "H",
+          "dominant": "얼룩 알",
+          "recessive": "흰 알"
+        },
+        {
+          "name": "털 색",
+          "symbol": "R",
+          "dominant": "검은 털",
+          "recessive": "갈색 털"
         }
       ],
       "expectedRatio": [
+        3,
         1,
+        0,
         0
       ]
     }
@@ -715,22 +723,30 @@
   {
     "id": "gp-draft-032",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "RRTt",
+      "p2": "RRtt",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "털 모양",
+          "symbol": "R",
+          "dominant": "곱슬 털",
+          "recessive": "곧은 털"
+        },
+        {
+          "name": "날개 모양",
+          "symbol": "T",
+          "dominant": "곧은 날개",
+          "recessive": "굽은 날개"
         }
       ],
       "expectedRatio": [
         1,
+        1,
+        0,
         0
       ]
     }
@@ -738,22 +754,30 @@
   {
     "id": "gp-draft-033",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종-검정교배",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "TtNn",
+      "p2": "ttnn",
       "traits": [
         {
+          "name": "눈 크기",
+          "symbol": "T",
+          "dominant": "큰 눈",
+          "recessive": "작은 눈"
+        },
+        {
           "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "symbol": "N",
+          "dominant": "노란 씨",
+          "recessive": "초록 씨"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -761,44 +785,60 @@
   {
     "id": "gp-draft-034",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "NNmm",
+      "p2": "nnMm",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "열매 모양",
+          "symbol": "N",
+          "dominant": "둥근 열매",
+          "recessive": "긴 열매"
+        },
+        {
+          "name": "씨앗 모양",
+          "symbol": "M",
+          "dominant": "둥근 씨",
+          "recessive": "주름진 씨"
         }
       ],
       "expectedRatio": [
         1,
-        1
+        1,
+        0,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-035",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "MmLL",
+      "p2": "MmLL",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "촉수 색",
+          "symbol": "M",
+          "dominant": "노란 촉수",
+          "recessive": "흰 촉수"
+        },
+        {
+          "name": "꼬투리 색",
+          "symbol": "L",
+          "dominant": "초록 꼬투리",
+          "recessive": "노란 꼬투리"
         }
       ],
       "expectedRatio": [
+        3,
+        0,
         1,
         0
       ]
@@ -807,21 +847,29 @@
   {
     "id": "gp-draft-036",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "LlAA",
+      "p2": "llAA",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "꽃 색",
+          "symbol": "L",
+          "dominant": "보라색",
+          "recessive": "흰색"
+        },
+        {
+          "name": "꼬투리 모양",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "매끈한 꼬투리",
+          "recessive": "잘록한 꼬투리"
         }
       ],
       "expectedRatio": [
+        1,
+        0,
         1,
         0
       ]
@@ -830,22 +878,30 @@
   {
     "id": "gp-draft-037",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "Aabb",
+      "p2": "aaBb",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "키",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "큰 키",
+          "recessive": "작은 키"
+        },
+        {
+          "name": "꽃 위치",
+          "symbol": "B",
+          "dominant": "잎겨드랑이 꽃",
+          "recessive": "줄기 끝 꽃"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -853,91 +909,123 @@
   {
     "id": "gp-draft-038",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "bbDD",
+      "p2": "BbDD",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "털 색",
+          "symbol": "B",
+          "dominant": "검은 털",
+          "recessive": "갈색 털"
+        },
+        {
+          "name": "눈 색",
+          "symbol": "D",
+          "dominant": "붉은 눈",
+          "recessive": "흰 눈"
         }
       ],
       "expectedRatio": [
         1,
-        1
+        0,
+        1,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-039",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "Ddee",
+      "p2": "Ddee",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "날개 모양",
+          "symbol": "D",
+          "dominant": "곧은 날개",
+          "recessive": "굽은 날개"
+        },
+        {
+          "name": "뿔 유무",
+          "symbol": "E",
+          "dominant": "뿔 없음",
+          "recessive": "뿔 있음"
         }
       ],
       "expectedRatio": [
-        1,
-        0
+        0,
+        3,
+        0,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-040",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "Eeff",
+      "p2": "eeff",
       "traits": [
         {
           "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "symbol": "E",
+          "dominant": "노란 씨",
+          "recessive": "초록 씨"
+        },
+        {
+          "name": "꼬리 길이",
+          "symbol": "F",
+          "dominant": "긴 꼬리",
+          "recessive": "짧은 꼬리"
         }
       ],
       "expectedRatio": [
+        0,
         1,
-        0
+        0,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-041",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "ffGg",
+      "p2": "Ffgg",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "씨앗 모양",
+          "symbol": "F",
+          "dominant": "둥근 씨",
+          "recessive": "주름진 씨"
+        },
+        {
+          "name": "귀 모양",
+          "symbol": "G",
+          "dominant": "선 귀",
+          "recessive": "처진 귀"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -945,45 +1033,61 @@
   {
     "id": "gp-draft-042",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "GGHh",
+      "p2": "Gghh",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꼬투리 색",
+          "symbol": "G",
+          "dominant": "초록 꼬투리",
+          "recessive": "노란 꼬투리"
+        },
+        {
+          "name": "잎 가장자리",
+          "symbol": "H",
+          "dominant": "톱니 잎",
+          "recessive": "매끈한 잎"
         }
       ],
       "expectedRatio": [
         1,
-        1
+        1,
+        0,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-043",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "HhRr",
+      "p2": "HHRr",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꼬투리 모양",
+          "symbol": "H",
+          "dominant": "매끈한 꼬투리",
+          "recessive": "잘록한 꼬투리"
+        },
+        {
+          "name": "비늘 색",
+          "symbol": "R",
+          "dominant": "푸른 비늘",
+          "recessive": "은색 비늘"
         }
       ],
       "expectedRatio": [
+        3,
         1,
+        0,
         0
       ]
     }
@@ -991,22 +1095,30 @@
   {
     "id": "gp-draft-044",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "RrTt",
+      "p2": "RRtt",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꽃 위치",
+          "symbol": "R",
+          "dominant": "잎겨드랑이 꽃",
+          "recessive": "줄기 끝 꽃"
+        },
+        {
+          "name": "더듬이 길이",
+          "symbol": "T",
+          "dominant": "긴 더듬이",
+          "recessive": "짧은 더듬이"
         }
       ],
       "expectedRatio": [
         1,
+        1,
+        0,
         0
       ]
     }
@@ -1014,22 +1126,30 @@
   {
     "id": "gp-draft-045",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종-검정교배",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "ttnn",
+      "p2": "TtNn",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "눈 색",
+          "symbol": "T",
+          "dominant": "붉은 눈",
+          "recessive": "흰 눈"
+        },
+        {
+          "name": "껍질 무늬",
+          "symbol": "N",
+          "dominant": "줄무늬",
+          "recessive": "무늬 없음"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -1037,44 +1157,60 @@
   {
     "id": "gp-draft-046",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "NnMM",
+      "p2": "nnMm",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "뿔 유무",
+          "symbol": "N",
+          "dominant": "뿔 없음",
+          "recessive": "뿔 있음"
+        },
+        {
+          "name": "털 길이",
+          "symbol": "M",
+          "dominant": "짧은 털",
+          "recessive": "긴 털"
         }
       ],
       "expectedRatio": [
         1,
-        1
+        0,
+        1,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-047",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "MmLl",
+      "p2": "MmLL",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꼬리 길이",
+          "symbol": "M",
+          "dominant": "긴 꼬리",
+          "recessive": "짧은 꼬리"
+        },
+        {
+          "name": "줄기 색",
+          "symbol": "L",
+          "dominant": "자주색 줄기",
+          "recessive": "초록 줄기"
         }
       ],
       "expectedRatio": [
+        3,
+        0,
         1,
         0
       ]
@@ -1083,21 +1219,29 @@
   {
     "id": "gp-draft-048",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "llAA",
+      "p2": "LlAa",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "귀 모양",
+          "symbol": "L",
+          "dominant": "선 귀",
+          "recessive": "처진 귀"
+        },
+        {
+          "name": "열매 색",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "빨간 열매",
+          "recessive": "노란 열매"
         }
       ],
       "expectedRatio": [
+        1,
+        0,
         1,
         0
       ]
@@ -1106,22 +1250,30 @@
   {
     "id": "gp-draft-049",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종-검정교배",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "AaBb",
+      "p2": "aabb",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "잎 가장자리",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "톱니 잎",
+          "recessive": "매끈한 잎"
+        },
+        {
+          "name": "몸 색",
+          "symbol": "B",
+          "dominant": "회색 몸",
+          "recessive": "흰색 몸"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -1129,22 +1281,30 @@
   {
     "id": "gp-draft-050",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "bbdd",
+      "p2": "Bbdd",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "비늘 색",
+          "symbol": "B",
+          "dominant": "푸른 비늘",
+          "recessive": "은색 비늘"
+        },
+        {
+          "name": "부리 모양",
+          "symbol": "D",
+          "dominant": "굽은 부리",
+          "recessive": "곧은 부리"
         }
       ],
       "expectedRatio": [
+        0,
         1,
+        0,
         1
       ]
     }
@@ -1152,22 +1312,30 @@
   {
     "id": "gp-draft-051",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "DDEe",
+      "p2": "DdEe",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "더듬이 길이",
+          "symbol": "D",
+          "dominant": "긴 더듬이",
+          "recessive": "짧은 더듬이"
+        },
+        {
+          "name": "지느러미 모양",
+          "symbol": "E",
+          "dominant": "둥근 지느러미",
+          "recessive": "뾰족한 지느러미"
         }
       ],
       "expectedRatio": [
+        3,
         1,
+        0,
         0
       ]
     }
@@ -1175,22 +1343,30 @@
   {
     "id": "gp-draft-052",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "EEFf",
+      "p2": "eeff",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "껍질 무늬",
+          "symbol": "E",
+          "dominant": "줄무늬",
+          "recessive": "무늬 없음"
+        },
+        {
+          "name": "잎 모양",
+          "symbol": "F",
+          "dominant": "넓은 잎",
+          "recessive": "좁은 잎"
         }
       ],
       "expectedRatio": [
         1,
+        1,
+        0,
         0
       ]
     }
@@ -1198,22 +1374,30 @@
   {
     "id": "gp-draft-053",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "Ffgg",
+      "p2": "ffGg",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "털 길이",
+          "symbol": "F",
+          "dominant": "짧은 털",
+          "recessive": "긴 털"
+        },
+        {
+          "name": "볏 모양",
+          "symbol": "G",
+          "dominant": "장미 볏",
+          "recessive": "홑 볏"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -1221,44 +1405,60 @@
   {
     "id": "gp-draft-054",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "Gghh",
+      "p2": "GGHh",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "줄기 색",
+          "symbol": "G",
+          "dominant": "자주색 줄기",
+          "recessive": "초록 줄기"
+        },
+        {
+          "name": "등껍질 색",
+          "symbol": "H",
+          "dominant": "갈색 등껍질",
+          "recessive": "주황 등껍질"
         }
       ],
       "expectedRatio": [
         1,
-        1
+        1,
+        0,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-055",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "HhRR",
+      "p2": "HhRr",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "열매 색",
+          "symbol": "H",
+          "dominant": "빨간 열매",
+          "recessive": "노란 열매"
+        },
+        {
+          "name": "깃털 색",
+          "symbol": "R",
+          "dominant": "파란 깃털",
+          "recessive": "흰 깃털"
         }
       ],
       "expectedRatio": [
+        3,
+        0,
         1,
         0
       ]
@@ -1267,21 +1467,29 @@
   {
     "id": "gp-draft-056",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "RrTT",
+      "p2": "rrtt",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "몸 색",
+          "symbol": "R",
+          "dominant": "회색 몸",
+          "recessive": "흰색 몸"
+        },
+        {
+          "name": "발톱 길이",
+          "symbol": "T",
+          "dominant": "긴 발톱",
+          "recessive": "짧은 발톱"
         }
       ],
       "expectedRatio": [
+        1,
+        0,
         1,
         0
       ]
@@ -1290,22 +1498,30 @@
   {
     "id": "gp-draft-057",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "ttNn",
+      "p2": "Ttnn",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "부리 모양",
+          "symbol": "T",
+          "dominant": "굽은 부리",
+          "recessive": "곧은 부리"
+        },
+        {
+          "name": "꽃잎 모양",
+          "symbol": "N",
+          "dominant": "둥근 꽃잎",
+          "recessive": "뾰족한 꽃잎"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -1313,91 +1529,123 @@
   {
     "id": "gp-draft-058",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "nnMM",
+      "p2": "Nnmm",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "지느러미 모양",
+          "symbol": "N",
+          "dominant": "둥근 지느러미",
+          "recessive": "뾰족한 지느러미"
+        },
+        {
+          "name": "뿌리 굵기",
+          "symbol": "M",
+          "dominant": "굵은 뿌리",
+          "recessive": "가는 뿌리"
         }
       ],
       "expectedRatio": [
         1,
-        1
+        0,
+        1,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-059",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "mmLl",
+      "p2": "mmLl",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "잎 모양",
+          "symbol": "M",
+          "dominant": "넓은 잎",
+          "recessive": "좁은 잎"
+        },
+        {
+          "name": "알 껍질 색",
+          "symbol": "L",
+          "dominant": "얼룩 알",
+          "recessive": "흰 알"
         }
       ],
       "expectedRatio": [
-        1,
-        0
+        0,
+        0,
+        3,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-060",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "llAa",
+      "p2": "llaa",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "볏 모양",
+          "symbol": "L",
+          "dominant": "장미 볏",
+          "recessive": "홑 볏"
+        },
+        {
+          "name": "털 모양",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "곱슬 털",
+          "recessive": "곧은 털"
         }
       ],
       "expectedRatio": [
+        0,
+        0,
         1,
-        0
+        1
       ]
     }
   },
   {
     "id": "gp-draft-061",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종-검정교배",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "aabb",
+      "p2": "AaBb",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "등껍질 색",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "갈색 등껍질",
+          "recessive": "주황 등껍질"
+        },
+        {
+          "name": "눈 크기",
+          "symbol": "B",
+          "dominant": "큰 눈",
+          "recessive": "작은 눈"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -1405,45 +1653,61 @@
   {
     "id": "gp-draft-062",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "BBdd",
+      "p2": "BBDd",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "깃털 색",
+          "symbol": "B",
+          "dominant": "파란 깃털",
+          "recessive": "흰 깃털"
+        },
+        {
+          "name": "열매 모양",
+          "symbol": "D",
+          "dominant": "둥근 열매",
+          "recessive": "긴 열매"
         }
       ],
       "expectedRatio": [
         1,
-        1
+        1,
+        0,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-063",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "ddEe",
+      "p2": "DDEe",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "발톱 길이",
+          "symbol": "D",
+          "dominant": "긴 발톱",
+          "recessive": "짧은 발톱"
+        },
+        {
+          "name": "촉수 색",
+          "symbol": "E",
+          "dominant": "노란 촉수",
+          "recessive": "흰 촉수"
         }
       ],
       "expectedRatio": [
+        3,
         1,
+        0,
         0
       ]
     }
@@ -1451,22 +1715,30 @@
   {
     "id": "gp-draft-064",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "eeFf",
+      "p2": "EEff",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꽃잎 모양",
+          "symbol": "E",
+          "dominant": "둥근 꽃잎",
+          "recessive": "뾰족한 꽃잎"
+        },
+        {
+          "name": "꽃 색",
+          "symbol": "F",
+          "dominant": "보라색",
+          "recessive": "흰색"
         }
       ],
       "expectedRatio": [
         1,
+        1,
+        0,
         0
       ]
     }
@@ -1474,22 +1746,30 @@
   {
     "id": "gp-draft-065",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종-검정교배",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "FfGg",
+      "p2": "ffgg",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "뿌리 굵기",
+          "symbol": "F",
+          "dominant": "굵은 뿌리",
+          "recessive": "가는 뿌리"
+        },
+        {
+          "name": "키",
+          "symbol": "G",
+          "dominant": "큰 키",
+          "recessive": "작은 키"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -1497,44 +1777,60 @@
   {
     "id": "gp-draft-066",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "GgHh",
+      "p2": "ggHH",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "알 껍질 색",
+          "symbol": "G",
+          "dominant": "얼룩 알",
+          "recessive": "흰 알"
+        },
+        {
+          "name": "털 색",
+          "symbol": "H",
+          "dominant": "검은 털",
+          "recessive": "갈색 털"
         }
       ],
       "expectedRatio": [
         1,
-        1
+        0,
+        1,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-067",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "Hhrr",
+      "p2": "HhRR",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "털 모양",
+          "symbol": "H",
+          "dominant": "곱슬 털",
+          "recessive": "곧은 털"
+        },
+        {
+          "name": "날개 모양",
+          "symbol": "R",
+          "dominant": "곧은 날개",
+          "recessive": "굽은 날개"
         }
       ],
       "expectedRatio": [
+        3,
+        0,
         1,
         0
       ]
@@ -1543,21 +1839,29 @@
   {
     "id": "gp-draft-068",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "rrTt",
+      "p2": "RrTT",
       "traits": [
         {
+          "name": "눈 크기",
+          "symbol": "R",
+          "dominant": "큰 눈",
+          "recessive": "작은 눈"
+        },
+        {
           "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "symbol": "T",
+          "dominant": "노란 씨",
+          "recessive": "초록 씨"
         }
       ],
       "expectedRatio": [
+        1,
+        0,
         1,
         0
       ]
@@ -1566,22 +1870,30 @@
   {
     "id": "gp-draft-069",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "Ttnn",
+      "p2": "ttNn",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "열매 모양",
+          "symbol": "T",
+          "dominant": "둥근 열매",
+          "recessive": "긴 열매"
+        },
+        {
+          "name": "씨앗 모양",
+          "symbol": "N",
+          "dominant": "둥근 씨",
+          "recessive": "주름진 씨"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -1589,21 +1901,29 @@
   {
     "id": "gp-draft-070",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "nnmm",
+      "p2": "nnMm",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "촉수 색",
+          "symbol": "N",
+          "dominant": "노란 촉수",
+          "recessive": "흰 촉수"
+        },
+        {
+          "name": "꼬투리 색",
+          "symbol": "M",
+          "dominant": "초록 꼬투리",
+          "recessive": "노란 꼬투리"
         }
       ],
       "expectedRatio": [
+        0,
+        0,
         1,
         1
       ]
@@ -1612,22 +1932,30 @@
   {
     "id": "gp-draft-071",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "MMLl",
+      "p2": "mmLl",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꽃 색",
+          "symbol": "M",
+          "dominant": "보라색",
+          "recessive": "흰색"
+        },
+        {
+          "name": "꼬투리 모양",
+          "symbol": "L",
+          "dominant": "매끈한 꼬투리",
+          "recessive": "잘록한 꼬투리"
         }
       ],
       "expectedRatio": [
+        3,
         1,
+        0,
         0
       ]
     }
@@ -1635,22 +1963,30 @@
   {
     "id": "gp-draft-072",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "LLaa",
+      "p2": "LlAa",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "키",
+          "symbol": "L",
+          "dominant": "큰 키",
+          "recessive": "작은 키"
+        },
+        {
+          "name": "꽃 위치",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "잎겨드랑이 꽃",
+          "recessive": "줄기 끝 꽃"
         }
       ],
       "expectedRatio": [
         1,
+        1,
+        0,
         0
       ]
     }
@@ -1658,22 +1994,30 @@
   {
     "id": "gp-draft-073",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "aaBb",
+      "p2": "Aabb",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "털 색",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "검은 털",
+          "recessive": "갈색 털"
+        },
+        {
+          "name": "눈 색",
+          "symbol": "B",
+          "dominant": "붉은 눈",
+          "recessive": "흰 눈"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -1681,44 +2025,60 @@
   {
     "id": "gp-draft-074",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "bbdd",
+      "p2": "BBDd",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "날개 모양",
+          "symbol": "B",
+          "dominant": "곧은 날개",
+          "recessive": "굽은 날개"
+        },
+        {
+          "name": "뿔 유무",
+          "symbol": "D",
+          "dominant": "뿔 없음",
+          "recessive": "뿔 있음"
         }
       ],
       "expectedRatio": [
         1,
-        1
+        1,
+        0,
+        0
       ]
     }
   },
   {
     "id": "gp-draft-075",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "DdEE",
+      "p2": "Ddee",
       "traits": [
         {
           "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "symbol": "D",
+          "dominant": "노란 씨",
+          "recessive": "초록 씨"
+        },
+        {
+          "name": "꼬리 길이",
+          "symbol": "E",
+          "dominant": "긴 꼬리",
+          "recessive": "짧은 꼬리"
         }
       ],
       "expectedRatio": [
+        3,
+        0,
         1,
         0
       ]
@@ -1727,21 +2087,29 @@
   {
     "id": "gp-draft-076",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "Eeff",
+      "p2": "eeFF",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "씨앗 모양",
+          "symbol": "E",
+          "dominant": "둥근 씨",
+          "recessive": "주름진 씨"
+        },
+        {
+          "name": "귀 모양",
+          "symbol": "F",
+          "dominant": "선 귀",
+          "recessive": "처진 귀"
         }
       ],
       "expectedRatio": [
+        1,
+        0,
         1,
         0
       ]
@@ -1750,22 +2118,30 @@
   {
     "id": "gp-draft-077",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종-검정교배",
     "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "ffgg",
+      "p2": "FfGg",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꼬투리 색",
+          "symbol": "F",
+          "dominant": "초록 꼬투리",
+          "recessive": "노란 꼬투리"
+        },
+        {
+          "name": "잎 가장자리",
+          "symbol": "G",
+          "dominant": "톱니 잎",
+          "recessive": "매끈한 잎"
         }
       ],
       "expectedRatio": [
-        3,
+        1,
+        1,
+        1,
         1
       ]
     }
@@ -1773,68 +2149,92 @@
   {
     "id": "gp-draft-078",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "gghh",
+      "p2": "GgHH",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꼬투리 모양",
+          "symbol": "G",
+          "dominant": "매끈한 꼬투리",
+          "recessive": "잘록한 꼬투리"
+        },
+        {
+          "name": "비늘 색",
+          "symbol": "H",
+          "dominant": "푸른 비늘",
+          "recessive": "은색 비늘"
         }
       ],
       "expectedRatio": [
         1,
-        1
-      ]
-    }
-  },
-  {
-    "id": "gp-draft-079",
-    "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
-    "difficultySeed": 3,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
-    "problem": {
-      "p1": "AA",
-      "p2": "Aa",
-      "traits": [
-        {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
-        }
-      ],
-      "expectedRatio": [
+        0,
         1,
         0
       ]
     }
   },
   {
-    "id": "gp-draft-080",
+    "id": "gp-draft-079",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
-    "difficultySeed": 2,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "unit": "고1-생명과학-멘델-양성잡종-검정교배",
+    "difficultySeed": 3,
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "HhRr",
+      "p2": "hhrr",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꽃 위치",
+          "symbol": "H",
+          "dominant": "잎겨드랑이 꽃",
+          "recessive": "줄기 끝 꽃"
+        },
+        {
+          "name": "더듬이 길이",
+          "symbol": "R",
+          "dominant": "긴 더듬이",
+          "recessive": "짧은 더듬이"
         }
       ],
       "expectedRatio": [
         1,
+        1,
+        1,
+        1
+      ]
+    }
+  },
+  {
+    "id": "gp-draft-080",
+    "type": "genetics-punnett",
+    "unit": "고1-생명과학-멘델-양성잡종",
+    "difficultySeed": 2,
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
+    "problem": {
+      "p1": "RRTT",
+      "p2": "RRTT",
+      "traits": [
+        {
+          "name": "눈 색",
+          "symbol": "R",
+          "dominant": "붉은 눈",
+          "recessive": "흰 눈"
+        },
+        {
+          "name": "껍질 무늬",
+          "symbol": "T",
+          "dominant": "줄무늬",
+          "recessive": "무늬 없음"
+        }
+      ],
+      "expectedRatio": [
+        1,
+        0,
+        0,
         0
       ]
     }
@@ -1842,21 +2242,29 @@
   {
     "id": "gp-draft-081",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 5,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "TtNn",
+      "p2": "TtNn",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "뿔 유무",
+          "symbol": "T",
+          "dominant": "뿔 없음",
+          "recessive": "뿔 있음"
+        },
+        {
+          "name": "털 길이",
+          "symbol": "N",
+          "dominant": "짧은 털",
+          "recessive": "긴 털"
         }
       ],
       "expectedRatio": [
+        9,
+        3,
         3,
         1
       ]
@@ -1865,21 +2273,29 @@
   {
     "id": "gp-draft-082",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 4,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "NnMm",
+      "p2": "Nnmm",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꼬리 길이",
+          "symbol": "N",
+          "dominant": "긴 꼬리",
+          "recessive": "짧은 꼬리"
+        },
+        {
+          "name": "줄기 색",
+          "symbol": "M",
+          "dominant": "자주색 줄기",
+          "recessive": "초록 줄기"
         }
       ],
       "expectedRatio": [
+        3,
+        3,
         1,
         1
       ]
@@ -1888,67 +2304,91 @@
   {
     "id": "gp-draft-083",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 5,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "MmLl",
+      "p2": "MmLl",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "귀 모양",
+          "symbol": "M",
+          "dominant": "선 귀",
+          "recessive": "처진 귀"
+        },
+        {
+          "name": "열매 색",
+          "symbol": "L",
+          "dominant": "빨간 열매",
+          "recessive": "노란 열매"
         }
       ],
       "expectedRatio": [
-        1,
-        0
+        9,
+        3,
+        3,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-084",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 4,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "Llaa",
+      "p2": "LlAa",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "잎 가장자리",
+          "symbol": "L",
+          "dominant": "톱니 잎",
+          "recessive": "매끈한 잎"
+        },
+        {
+          "name": "몸 색",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "회색 몸",
+          "recessive": "흰색 몸"
         }
       ],
       "expectedRatio": [
+        3,
+        3,
         1,
-        0
+        1
       ]
     }
   },
   {
     "id": "gp-draft-085",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 5,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "AaBb",
+      "p2": "AaBb",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "비늘 색",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "푸른 비늘",
+          "recessive": "은색 비늘"
+        },
+        {
+          "name": "부리 모양",
+          "symbol": "B",
+          "dominant": "굽은 부리",
+          "recessive": "곧은 부리"
         }
       ],
       "expectedRatio": [
+        9,
+        3,
         3,
         1
       ]
@@ -1957,22 +2397,30 @@
   {
     "id": "gp-draft-086",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 4,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "BbDd",
+      "p2": "bbDd",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "더듬이 길이",
+          "symbol": "B",
+          "dominant": "긴 더듬이",
+          "recessive": "짧은 더듬이"
+        },
+        {
+          "name": "지느러미 모양",
+          "symbol": "D",
+          "dominant": "둥근 지느러미",
+          "recessive": "뾰족한 지느러미"
         }
       ],
       "expectedRatio": [
+        3,
         1,
+        3,
         1
       ]
     }
@@ -1980,67 +2428,91 @@
   {
     "id": "gp-draft-087",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 5,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "DdEe",
+      "p2": "DdEe",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "껍질 무늬",
+          "symbol": "D",
+          "dominant": "줄무늬",
+          "recessive": "무늬 없음"
+        },
+        {
+          "name": "잎 모양",
+          "symbol": "E",
+          "dominant": "넓은 잎",
+          "recessive": "좁은 잎"
         }
       ],
       "expectedRatio": [
-        1,
-        0
+        9,
+        3,
+        3,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-088",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 4,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "eeFf",
+      "p2": "EeFf",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "털 길이",
+          "symbol": "E",
+          "dominant": "짧은 털",
+          "recessive": "긴 털"
+        },
+        {
+          "name": "볏 모양",
+          "symbol": "F",
+          "dominant": "장미 볏",
+          "recessive": "홑 볏"
         }
       ],
       "expectedRatio": [
+        3,
         1,
-        0
+        3,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-089",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 5,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "FfGg",
+      "p2": "FfGg",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "줄기 색",
+          "symbol": "F",
+          "dominant": "자주색 줄기",
+          "recessive": "초록 줄기"
+        },
+        {
+          "name": "등껍질 색",
+          "symbol": "G",
+          "dominant": "갈색 등껍질",
+          "recessive": "주황 등껍질"
         }
       ],
       "expectedRatio": [
+        9,
+        3,
         3,
         1
       ]
@@ -2049,21 +2521,29 @@
   {
     "id": "gp-draft-090",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 4,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "GgHh",
+      "p2": "Gghh",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "열매 색",
+          "symbol": "G",
+          "dominant": "빨간 열매",
+          "recessive": "노란 열매"
+        },
+        {
+          "name": "깃털 색",
+          "symbol": "H",
+          "dominant": "파란 깃털",
+          "recessive": "흰 깃털"
         }
       ],
       "expectedRatio": [
+        3,
+        3,
         1,
         1
       ]
@@ -2072,67 +2552,91 @@
   {
     "id": "gp-draft-091",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 5,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "HhRr",
+      "p2": "HhRr",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "몸 색",
+          "symbol": "H",
+          "dominant": "회색 몸",
+          "recessive": "흰색 몸"
+        },
+        {
+          "name": "발톱 길이",
+          "symbol": "R",
+          "dominant": "긴 발톱",
+          "recessive": "짧은 발톱"
         }
       ],
       "expectedRatio": [
-        1,
-        0
+        9,
+        3,
+        3,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-092",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 4,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "Rrtt",
+      "p2": "RrTt",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "부리 모양",
+          "symbol": "R",
+          "dominant": "굽은 부리",
+          "recessive": "곧은 부리"
+        },
+        {
+          "name": "꽃잎 모양",
+          "symbol": "T",
+          "dominant": "둥근 꽃잎",
+          "recessive": "뾰족한 꽃잎"
         }
       ],
       "expectedRatio": [
+        3,
+        3,
         1,
-        0
+        1
       ]
     }
   },
   {
     "id": "gp-draft-093",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 5,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "TtNn",
+      "p2": "TtNn",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "지느러미 모양",
+          "symbol": "T",
+          "dominant": "둥근 지느러미",
+          "recessive": "뾰족한 지느러미"
+        },
+        {
+          "name": "뿌리 굵기",
+          "symbol": "N",
+          "dominant": "굵은 뿌리",
+          "recessive": "가는 뿌리"
         }
       ],
       "expectedRatio": [
+        9,
+        3,
         3,
         1
       ]
@@ -2141,22 +2645,30 @@
   {
     "id": "gp-draft-094",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 4,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "NnMm",
+      "p2": "nnMm",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "잎 모양",
+          "symbol": "N",
+          "dominant": "넓은 잎",
+          "recessive": "좁은 잎"
+        },
+        {
+          "name": "알 껍질 색",
+          "symbol": "M",
+          "dominant": "얼룩 알",
+          "recessive": "흰 알"
         }
       ],
       "expectedRatio": [
+        3,
         1,
+        3,
         1
       ]
     }
@@ -2164,67 +2676,91 @@
   {
     "id": "gp-draft-095",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 5,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "MmLl",
+      "p2": "MmLl",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "볏 모양",
+          "symbol": "M",
+          "dominant": "장미 볏",
+          "recessive": "홑 볏"
+        },
+        {
+          "name": "털 모양",
+          "symbol": "L",
+          "dominant": "곱슬 털",
+          "recessive": "곧은 털"
         }
       ],
       "expectedRatio": [
-        1,
-        0
+        9,
+        3,
+        3,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-096",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 4,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "llAa",
+      "p2": "LlAa",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "등껍질 색",
+          "symbol": "L",
+          "dominant": "갈색 등껍질",
+          "recessive": "주황 등껍질"
+        },
+        {
+          "name": "눈 크기",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "큰 눈",
+          "recessive": "작은 눈"
         }
       ],
       "expectedRatio": [
+        3,
         1,
-        0
+        3,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-097",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-1",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 5,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "Aa",
+      "p1": "AaBb",
+      "p2": "AaBb",
       "traits": [
         {
-          "name": "씨앗 색",
+          "name": "깃털 색",
           "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "dominant": "파란 깃털",
+          "recessive": "흰 깃털"
+        },
+        {
+          "name": "열매 모양",
+          "symbol": "B",
+          "dominant": "둥근 열매",
+          "recessive": "긴 열매"
         }
       ],
       "expectedRatio": [
+        9,
+        3,
         3,
         1
       ]
@@ -2233,21 +2769,29 @@
   {
     "id": "gp-draft-098",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-2",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 4,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "각 형질마다 대문자가 하나라도 있으면 우성 표현형이에요. 16칸을 차례로 분류해 보세요.",
     "problem": {
-      "p1": "Aa",
-      "p2": "aa",
+      "p1": "BbDd",
+      "p2": "Bbdd",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "발톱 길이",
+          "symbol": "B",
+          "dominant": "긴 발톱",
+          "recessive": "짧은 발톱"
+        },
+        {
+          "name": "촉수 색",
+          "symbol": "D",
+          "dominant": "노란 촉수",
+          "recessive": "흰 촉수"
         }
       ],
       "expectedRatio": [
+        3,
+        3,
         1,
         1
       ]
@@ -2256,46 +2800,62 @@
   {
     "id": "gp-draft-099",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-3",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 5,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "부모마다 가능한 생식세포 조합을 먼저 적어 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "Aa",
+      "p1": "DdEe",
+      "p2": "DdEe",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "꽃잎 모양",
+          "symbol": "D",
+          "dominant": "둥근 꽃잎",
+          "recessive": "뾰족한 꽃잎"
+        },
+        {
+          "name": "꽃 색",
+          "symbol": "E",
+          "dominant": "보라색",
+          "recessive": "흰색"
         }
       ],
       "expectedRatio": [
-        1,
-        0
+        9,
+        3,
+        3,
+        1
       ]
     }
   },
   {
     "id": "gp-draft-100",
     "type": "genetics-punnett",
-    "unit": "고1-생명과학-멘델-단성-4",
+    "unit": "고1-생명과학-멘델-양성잡종",
     "difficultySeed": 4,
-    "hint": "가상 생물에서 대문자는 완전우성, 소문자는 열성이다. 여러 형질은 독립적으로 유전된다.",
+    "hint": "두 형질은 독립적으로 유전돼요. 형질별로 나눠 생각한 뒤 곱해 보세요.",
     "problem": {
-      "p1": "AA",
-      "p2": "aa",
+      "p1": "Eeff",
+      "p2": "EeFf",
       "traits": [
         {
-          "name": "씨앗 색",
-          "symbol": "A",
-          "dominant": "노란색",
-          "recessive": "초록색"
+          "name": "뿌리 굵기",
+          "symbol": "E",
+          "dominant": "굵은 뿌리",
+          "recessive": "가는 뿌리"
+        },
+        {
+          "name": "키",
+          "symbol": "F",
+          "dominant": "큰 키",
+          "recessive": "작은 키"
         }
       ],
       "expectedRatio": [
+        3,
+        3,
         1,
-        0
+        1
       ]
     }
   }

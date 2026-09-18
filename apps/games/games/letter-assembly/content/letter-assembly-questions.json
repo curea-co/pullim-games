@@ -34,8 +34,8 @@
         },
         {
           "id": "d0",
-          "text": "口",
-          "label": "입 구"
+          "text": "石",
+          "label": "돌 석"
         }
       ]
     }
@@ -75,8 +75,8 @@
         },
         {
           "id": "d1",
-          "text": "口",
-          "label": "입 구"
+          "text": "貝",
+          "label": "조개 패"
         }
       ]
     }
@@ -89,9 +89,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "好",
+        "meaning": "좋을 호",
+        "reading": "호"
       },
       "slots": [
         {
@@ -106,18 +106,18 @@
       "cards": [
         {
           "id": "c2a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "女",
+          "label": "여자 녀"
         },
         {
           "id": "c2b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "子",
+          "label": "아들 자"
         },
         {
           "id": "d2",
-          "text": "口",
-          "label": "입 구"
+          "text": "車",
+          "label": "수레 거"
         }
       ]
     }
@@ -130,9 +130,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "信",
+        "meaning": "믿을 신",
+        "reading": "신"
       },
       "slots": [
         {
@@ -147,18 +147,18 @@
       "cards": [
         {
           "id": "c3a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "亻",
+          "label": "사람 인"
         },
         {
           "id": "c3b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "d3",
-          "text": "口",
-          "label": "입 구"
+          "text": "耳",
+          "label": "귀 이"
         }
       ]
     }
@@ -171,9 +171,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "問",
+        "meaning": "물을 문",
+        "reading": "문"
       },
       "slots": [
         {
@@ -188,18 +188,18 @@
       "cards": [
         {
           "id": "c4a",
-          "text": "亻",
-          "label": "사람 인"
+          "text": "門",
+          "label": "문 문"
         },
         {
           "id": "c4b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "口",
+          "label": "입 구"
         },
         {
           "id": "d4",
-          "text": "口",
-          "label": "입 구"
+          "text": "竹",
+          "label": "대 죽"
         }
       ]
     }
@@ -212,9 +212,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "看",
+        "meaning": "볼 간",
+        "reading": "간"
       },
       "slots": [
         {
@@ -229,18 +229,18 @@
       "cards": [
         {
           "id": "c5a",
-          "text": "門",
-          "label": "문 문"
+          "text": "手",
+          "label": "손 수"
         },
         {
           "id": "c5b",
-          "text": "口",
-          "label": "입 구"
+          "text": "目",
+          "label": "눈 목"
         },
         {
           "id": "d5",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -253,9 +253,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "男",
+        "meaning": "사내 남",
+        "reading": "남"
       },
       "slots": [
         {
@@ -270,18 +270,18 @@
       "cards": [
         {
           "id": "c6a",
-          "text": "手",
-          "label": "손 수"
+          "text": "田",
+          "label": "밭 전"
         },
         {
           "id": "c6b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "力",
+          "label": "힘 력"
         },
         {
           "id": "d6",
-          "text": "口",
-          "label": "입 구"
+          "text": "白",
+          "label": "흰 백"
         }
       ]
     }
@@ -294,9 +294,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "江",
+        "meaning": "강 강",
+        "reading": "강"
       },
       "slots": [
         {
@@ -311,18 +311,18 @@
       "cards": [
         {
           "id": "c7a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c7b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "工",
+          "label": "장인 공"
         },
         {
           "id": "d7",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -335,9 +335,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "河",
+        "meaning": "물 하",
+        "reading": "하"
       },
       "slots": [
         {
@@ -352,18 +352,18 @@
       "cards": [
         {
           "id": "c8a",
-          "text": "人",
-          "label": "사람 인"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c8b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "可",
+          "label": "옳을 가"
         },
         {
           "id": "d8",
-          "text": "口",
-          "label": "입 구"
+          "text": "石",
+          "label": "돌 석"
         }
       ]
     }
@@ -376,9 +376,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "海",
+        "meaning": "바다 해",
+        "reading": "해"
       },
       "slots": [
         {
@@ -393,18 +393,18 @@
       "cards": [
         {
           "id": "c9a",
-          "text": "日",
-          "label": "날 일"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c9b",
-          "text": "月",
-          "label": "달 월"
+          "text": "每",
+          "label": "매양 매"
         },
         {
           "id": "d9",
-          "text": "口",
-          "label": "입 구"
+          "text": "貝",
+          "label": "조개 패"
         }
       ]
     }
@@ -417,9 +417,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "村",
+        "meaning": "마을 촌",
+        "reading": "촌"
       },
       "slots": [
         {
@@ -439,13 +439,13 @@
         },
         {
           "id": "c10b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "寸",
+          "label": "마디 촌"
         },
         {
           "id": "d10",
-          "text": "口",
-          "label": "입 구"
+          "text": "車",
+          "label": "수레 거"
         }
       ]
     }
@@ -458,9 +458,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "校",
+        "meaning": "학교 교",
+        "reading": "교"
       },
       "slots": [
         {
@@ -475,18 +475,18 @@
       "cards": [
         {
           "id": "c11a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "木",
+          "label": "나무 목"
         },
         {
           "id": "c11b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "交",
+          "label": "사귈 교"
         },
         {
           "id": "d11",
-          "text": "口",
-          "label": "입 구"
+          "text": "耳",
+          "label": "귀 이"
         }
       ]
     }
@@ -499,9 +499,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "時",
+        "meaning": "때 시",
+        "reading": "시"
       },
       "slots": [
         {
@@ -516,18 +516,18 @@
       "cards": [
         {
           "id": "c12a",
-          "text": "亻",
-          "label": "사람 인"
+          "text": "日",
+          "label": "날 일"
         },
         {
           "id": "c12b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "寺",
+          "label": "절 사"
         },
         {
           "id": "d12",
-          "text": "口",
-          "label": "입 구"
+          "text": "竹",
+          "label": "대 죽"
         }
       ]
     }
@@ -540,9 +540,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "語",
+        "meaning": "말씀 어",
+        "reading": "어"
       },
       "slots": [
         {
@@ -557,18 +557,18 @@
       "cards": [
         {
           "id": "c13a",
-          "text": "門",
-          "label": "문 문"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c13b",
-          "text": "口",
-          "label": "입 구"
+          "text": "吾",
+          "label": "나 오"
         },
         {
           "id": "d13",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -581,9 +581,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "記",
+        "meaning": "기록할 기",
+        "reading": "기"
       },
       "slots": [
         {
@@ -598,18 +598,18 @@
       "cards": [
         {
           "id": "c14a",
-          "text": "手",
-          "label": "손 수"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c14b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "己",
+          "label": "몸 기"
         },
         {
           "id": "d14",
-          "text": "口",
-          "label": "입 구"
+          "text": "白",
+          "label": "흰 백"
         }
       ]
     }
@@ -622,9 +622,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "紙",
+        "meaning": "종이 지",
+        "reading": "지"
       },
       "slots": [
         {
@@ -639,18 +639,18 @@
       "cards": [
         {
           "id": "c15a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "糸",
+          "label": "실 사"
         },
         {
           "id": "c15b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "氏",
+          "label": "성씨 씨"
         },
         {
           "id": "d15",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -663,9 +663,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "姓",
+        "meaning": "성씨 성",
+        "reading": "성"
       },
       "slots": [
         {
@@ -680,18 +680,18 @@
       "cards": [
         {
           "id": "c16a",
-          "text": "人",
-          "label": "사람 인"
+          "text": "女",
+          "label": "여자 녀"
         },
         {
           "id": "c16b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "生",
+          "label": "날 생"
         },
         {
           "id": "d16",
-          "text": "口",
-          "label": "입 구"
+          "text": "石",
+          "label": "돌 석"
         }
       ]
     }
@@ -704,9 +704,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "住",
+        "meaning": "살 주",
+        "reading": "주"
       },
       "slots": [
         {
@@ -721,18 +721,18 @@
       "cards": [
         {
           "id": "c17a",
-          "text": "日",
-          "label": "날 일"
+          "text": "亻",
+          "label": "사람 인"
         },
         {
           "id": "c17b",
-          "text": "月",
-          "label": "달 월"
+          "text": "主",
+          "label": "주인 주"
         },
         {
           "id": "d17",
-          "text": "口",
-          "label": "입 구"
+          "text": "貝",
+          "label": "조개 패"
         }
       ]
     }
@@ -745,9 +745,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "位",
+        "meaning": "자리 위",
+        "reading": "위"
       },
       "slots": [
         {
@@ -762,18 +762,18 @@
       "cards": [
         {
           "id": "c18a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "亻",
+          "label": "사람 인"
         },
         {
           "id": "c18b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "立",
+          "label": "설 립"
         },
         {
           "id": "d18",
-          "text": "口",
-          "label": "입 구"
+          "text": "車",
+          "label": "수레 거"
         }
       ]
     }
@@ -786,9 +786,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "仙",
+        "meaning": "신선 선",
+        "reading": "선"
       },
       "slots": [
         {
@@ -803,18 +803,18 @@
       "cards": [
         {
           "id": "c19a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "亻",
+          "label": "사람 인"
         },
         {
           "id": "c19b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "山",
+          "label": "메 산"
         },
         {
           "id": "d19",
-          "text": "口",
-          "label": "입 구"
+          "text": "耳",
+          "label": "귀 이"
         }
       ]
     }
@@ -827,9 +827,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "地",
+        "meaning": "땅 지",
+        "reading": "지"
       },
       "slots": [
         {
@@ -844,18 +844,18 @@
       "cards": [
         {
           "id": "c20a",
-          "text": "亻",
-          "label": "사람 인"
+          "text": "土",
+          "label": "흙 토"
         },
         {
           "id": "c20b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "也",
+          "label": "어조사 야"
         },
         {
           "id": "d20",
-          "text": "口",
-          "label": "입 구"
+          "text": "竹",
+          "label": "대 죽"
         }
       ]
     }
@@ -868,9 +868,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "秋",
+        "meaning": "가을 추",
+        "reading": "추"
       },
       "slots": [
         {
@@ -885,18 +885,18 @@
       "cards": [
         {
           "id": "c21a",
-          "text": "門",
-          "label": "문 문"
+          "text": "禾",
+          "label": "벼 화"
         },
         {
           "id": "c21b",
-          "text": "口",
-          "label": "입 구"
+          "text": "火",
+          "label": "불 화"
         },
         {
           "id": "d21",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -909,9 +909,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "加",
+        "meaning": "더할 가",
+        "reading": "가"
       },
       "slots": [
         {
@@ -926,18 +926,18 @@
       "cards": [
         {
           "id": "c22a",
-          "text": "手",
-          "label": "손 수"
+          "text": "力",
+          "label": "힘 력"
         },
         {
           "id": "c22b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "口",
+          "label": "입 구"
         },
         {
           "id": "d22",
-          "text": "口",
-          "label": "입 구"
+          "text": "白",
+          "label": "흰 백"
         }
       ]
     }
@@ -950,9 +950,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "功",
+        "meaning": "공 공",
+        "reading": "공"
       },
       "slots": [
         {
@@ -967,8 +967,8 @@
       "cards": [
         {
           "id": "c23a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "工",
+          "label": "장인 공"
         },
         {
           "id": "c23b",
@@ -977,8 +977,8 @@
         },
         {
           "id": "d23",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -991,9 +991,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "松",
+        "meaning": "소나무 송",
+        "reading": "송"
       },
       "slots": [
         {
@@ -1008,18 +1008,18 @@
       "cards": [
         {
           "id": "c24a",
-          "text": "人",
-          "label": "사람 인"
-        },
-        {
-          "id": "c24b",
           "text": "木",
           "label": "나무 목"
         },
         {
+          "id": "c24b",
+          "text": "公",
+          "label": "공평할 공"
+        },
+        {
           "id": "d24",
-          "text": "口",
-          "label": "입 구"
+          "text": "石",
+          "label": "돌 석"
         }
       ]
     }
@@ -1032,9 +1032,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "計",
+        "meaning": "셀 계",
+        "reading": "계"
       },
       "slots": [
         {
@@ -1049,18 +1049,18 @@
       "cards": [
         {
           "id": "c25a",
-          "text": "日",
-          "label": "날 일"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c25b",
-          "text": "月",
-          "label": "달 월"
+          "text": "十",
+          "label": "열 십"
         },
         {
           "id": "d25",
-          "text": "口",
-          "label": "입 구"
+          "text": "貝",
+          "label": "조개 패"
         }
       ]
     }
@@ -1073,9 +1073,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "打",
+        "meaning": "칠 타",
+        "reading": "타"
       },
       "slots": [
         {
@@ -1090,18 +1090,18 @@
       "cards": [
         {
           "id": "c26a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "扌",
+          "label": "손 수"
         },
         {
           "id": "c26b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "丁",
+          "label": "고무래 정"
         },
         {
           "id": "d26",
-          "text": "口",
-          "label": "입 구"
+          "text": "車",
+          "label": "수레 거"
         }
       ]
     }
@@ -1114,9 +1114,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "洗",
+        "meaning": "씻을 세",
+        "reading": "세"
       },
       "slots": [
         {
@@ -1131,18 +1131,18 @@
       "cards": [
         {
           "id": "c27a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c27b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "先",
+          "label": "먼저 선"
         },
         {
           "id": "d27",
-          "text": "口",
-          "label": "입 구"
+          "text": "耳",
+          "label": "귀 이"
         }
       ]
     }
@@ -1155,9 +1155,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "何",
+        "meaning": "어찌 하",
+        "reading": "하"
       },
       "slots": [
         {
@@ -1177,13 +1177,13 @@
         },
         {
           "id": "c28b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "可",
+          "label": "옳을 가"
         },
         {
           "id": "d28",
-          "text": "口",
-          "label": "입 구"
+          "text": "竹",
+          "label": "대 죽"
         }
       ]
     }
@@ -1196,9 +1196,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "和",
+        "meaning": "화할 화",
+        "reading": "화"
       },
       "slots": [
         {
@@ -1213,8 +1213,8 @@
       "cards": [
         {
           "id": "c29a",
-          "text": "門",
-          "label": "문 문"
+          "text": "禾",
+          "label": "벼 화"
         },
         {
           "id": "c29b",
@@ -1223,8 +1223,8 @@
         },
         {
           "id": "d29",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -1237,9 +1237,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "油",
+        "meaning": "기름 유",
+        "reading": "유"
       },
       "slots": [
         {
@@ -1254,18 +1254,18 @@
       "cards": [
         {
           "id": "c30a",
-          "text": "手",
-          "label": "손 수"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c30b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "由",
+          "label": "말미암을 유"
         },
         {
           "id": "d30",
-          "text": "口",
-          "label": "입 구"
+          "text": "冫",
+          "label": "얼음 빙"
         }
       ]
     }
@@ -1278,9 +1278,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "注",
+        "meaning": "부을 주",
+        "reading": "주"
       },
       "slots": [
         {
@@ -1295,18 +1295,18 @@
       "cards": [
         {
           "id": "c31a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c31b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "主",
+          "label": "주인 주"
         },
         {
           "id": "d31",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -1319,9 +1319,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "洋",
+        "meaning": "큰바다 양",
+        "reading": "양"
       },
       "slots": [
         {
@@ -1336,18 +1336,18 @@
       "cards": [
         {
           "id": "c32a",
-          "text": "人",
-          "label": "사람 인"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c32b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "羊",
+          "label": "양 양"
         },
         {
           "id": "d32",
-          "text": "口",
-          "label": "입 구"
+          "text": "冫",
+          "label": "얼음 빙"
         }
       ]
     }
@@ -1360,9 +1360,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "池",
+        "meaning": "못 지",
+        "reading": "지"
       },
       "slots": [
         {
@@ -1377,18 +1377,18 @@
       "cards": [
         {
           "id": "c33a",
-          "text": "日",
-          "label": "날 일"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c33b",
-          "text": "月",
-          "label": "달 월"
+          "text": "也",
+          "label": "어조사 야"
         },
         {
           "id": "d33",
-          "text": "口",
-          "label": "입 구"
+          "text": "貝",
+          "label": "조개 패"
         }
       ]
     }
@@ -1401,9 +1401,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "泳",
+        "meaning": "헤엄칠 영",
+        "reading": "영"
       },
       "slots": [
         {
@@ -1418,18 +1418,18 @@
       "cards": [
         {
           "id": "c34a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c34b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "永",
+          "label": "길 영"
         },
         {
           "id": "d34",
-          "text": "口",
-          "label": "입 구"
+          "text": "冫",
+          "label": "얼음 빙"
         }
       ]
     }
@@ -1442,9 +1442,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "他",
+        "meaning": "다를 타",
+        "reading": "타"
       },
       "slots": [
         {
@@ -1459,18 +1459,18 @@
       "cards": [
         {
           "id": "c35a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "亻",
+          "label": "사람 인"
         },
         {
           "id": "c35b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "也",
+          "label": "어조사 야"
         },
         {
           "id": "d35",
-          "text": "口",
-          "label": "입 구"
+          "text": "耳",
+          "label": "귀 이"
         }
       ]
     }
@@ -1483,9 +1483,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "仁",
+        "meaning": "어질 인",
+        "reading": "인"
       },
       "slots": [
         {
@@ -1505,13 +1505,13 @@
         },
         {
           "id": "c36b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "二",
+          "label": "두 이"
         },
         {
           "id": "d36",
-          "text": "口",
-          "label": "입 구"
+          "text": "彳",
+          "label": "조금 걸을 척"
         }
       ]
     }
@@ -1524,9 +1524,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "件",
+        "meaning": "물건 건",
+        "reading": "건"
       },
       "slots": [
         {
@@ -1541,18 +1541,18 @@
       "cards": [
         {
           "id": "c37a",
-          "text": "門",
-          "label": "문 문"
+          "text": "亻",
+          "label": "사람 인"
         },
         {
           "id": "c37b",
-          "text": "口",
-          "label": "입 구"
+          "text": "牛",
+          "label": "소 우"
         },
         {
           "id": "d37",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -1565,9 +1565,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "材",
+        "meaning": "재목 재",
+        "reading": "재"
       },
       "slots": [
         {
@@ -1582,18 +1582,18 @@
       "cards": [
         {
           "id": "c38a",
-          "text": "手",
-          "label": "손 수"
+          "text": "木",
+          "label": "나무 목"
         },
         {
           "id": "c38b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "才",
+          "label": "재주 재"
         },
         {
           "id": "d38",
-          "text": "口",
-          "label": "입 구"
+          "text": "禾",
+          "label": "벼 화"
         }
       ]
     }
@@ -1606,9 +1606,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "植",
+        "meaning": "심을 식",
+        "reading": "식"
       },
       "slots": [
         {
@@ -1623,18 +1623,18 @@
       "cards": [
         {
           "id": "c39a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "木",
+          "label": "나무 목"
         },
         {
           "id": "c39b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "直",
+          "label": "곧을 직"
         },
         {
           "id": "d39",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -1647,9 +1647,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "柱",
+        "meaning": "기둥 주",
+        "reading": "주"
       },
       "slots": [
         {
@@ -1664,18 +1664,18 @@
       "cards": [
         {
           "id": "c40a",
-          "text": "人",
-          "label": "사람 인"
-        },
-        {
-          "id": "c40b",
           "text": "木",
           "label": "나무 목"
         },
         {
+          "id": "c40b",
+          "text": "主",
+          "label": "주인 주"
+        },
+        {
           "id": "d40",
-          "text": "口",
-          "label": "입 구"
+          "text": "禾",
+          "label": "벼 화"
         }
       ]
     }
@@ -1688,9 +1688,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "相",
+        "meaning": "서로 상",
+        "reading": "상"
       },
       "slots": [
         {
@@ -1705,18 +1705,18 @@
       "cards": [
         {
           "id": "c41a",
-          "text": "日",
-          "label": "날 일"
+          "text": "木",
+          "label": "나무 목"
         },
         {
           "id": "c41b",
-          "text": "月",
-          "label": "달 월"
+          "text": "目",
+          "label": "눈 목"
         },
         {
           "id": "d41",
-          "text": "口",
-          "label": "입 구"
+          "text": "貝",
+          "label": "조개 패"
         }
       ]
     }
@@ -1729,9 +1729,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "暗",
+        "meaning": "어두울 암",
+        "reading": "암"
       },
       "slots": [
         {
@@ -1746,18 +1746,18 @@
       "cards": [
         {
           "id": "c42a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "日",
+          "label": "날 일"
         },
         {
           "id": "c42b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "音",
+          "label": "소리 음"
         },
         {
           "id": "d42",
-          "text": "口",
-          "label": "입 구"
+          "text": "目",
+          "label": "눈 목"
         }
       ]
     }
@@ -1770,9 +1770,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "詩",
+        "meaning": "시 시",
+        "reading": "시"
       },
       "slots": [
         {
@@ -1787,18 +1787,18 @@
       "cards": [
         {
           "id": "c43a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c43b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "寺",
+          "label": "절 사"
         },
         {
           "id": "d43",
-          "text": "口",
-          "label": "입 구"
+          "text": "耳",
+          "label": "귀 이"
         }
       ]
     }
@@ -1811,9 +1811,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "訓",
+        "meaning": "가르칠 훈",
+        "reading": "훈"
       },
       "slots": [
         {
@@ -1828,18 +1828,18 @@
       "cards": [
         {
           "id": "c44a",
-          "text": "亻",
-          "label": "사람 인"
-        },
-        {
-          "id": "c44b",
           "text": "言",
           "label": "말씀 언"
         },
         {
+          "id": "c44b",
+          "text": "川",
+          "label": "내 천"
+        },
+        {
           "id": "d44",
-          "text": "口",
-          "label": "입 구"
+          "text": "音",
+          "label": "소리 음"
         }
       ]
     }
@@ -1852,9 +1852,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "紅",
+        "meaning": "붉을 홍",
+        "reading": "홍"
       },
       "slots": [
         {
@@ -1869,18 +1869,18 @@
       "cards": [
         {
           "id": "c45a",
-          "text": "門",
-          "label": "문 문"
+          "text": "糸",
+          "label": "실 사"
         },
         {
           "id": "c45b",
-          "text": "口",
-          "label": "입 구"
+          "text": "工",
+          "label": "장인 공"
         },
         {
           "id": "d45",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -1893,9 +1893,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "結",
+        "meaning": "맺을 결",
+        "reading": "결"
       },
       "slots": [
         {
@@ -1910,18 +1910,18 @@
       "cards": [
         {
           "id": "c46a",
-          "text": "手",
-          "label": "손 수"
+          "text": "糸",
+          "label": "실 사"
         },
         {
           "id": "c46b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "吉",
+          "label": "길할 길"
         },
         {
           "id": "d46",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -1934,9 +1934,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "妹",
+        "meaning": "누이 매",
+        "reading": "매"
       },
       "slots": [
         {
@@ -1951,18 +1951,18 @@
       "cards": [
         {
           "id": "c47a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "女",
+          "label": "여자 녀"
         },
         {
           "id": "c47b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "未",
+          "label": "아닐 미"
         },
         {
           "id": "d47",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -1975,9 +1975,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "孫",
+        "meaning": "손자 손",
+        "reading": "손"
       },
       "slots": [
         {
@@ -1992,18 +1992,18 @@
       "cards": [
         {
           "id": "c48a",
-          "text": "人",
-          "label": "사람 인"
+          "text": "子",
+          "label": "아들 자"
         },
         {
           "id": "c48b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "系",
+          "label": "이어맬 계"
         },
         {
           "id": "d48",
-          "text": "口",
-          "label": "입 구"
+          "text": "小",
+          "label": "작을 소"
         }
       ]
     }
@@ -2016,9 +2016,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "動",
+        "meaning": "움직일 동",
+        "reading": "동"
       },
       "slots": [
         {
@@ -2033,18 +2033,18 @@
       "cards": [
         {
           "id": "c49a",
-          "text": "日",
-          "label": "날 일"
+          "text": "重",
+          "label": "무거울 중"
         },
         {
           "id": "c49b",
-          "text": "月",
-          "label": "달 월"
+          "text": "力",
+          "label": "힘 력"
         },
         {
           "id": "d49",
-          "text": "口",
-          "label": "입 구"
+          "text": "貝",
+          "label": "조개 패"
         }
       ]
     }
@@ -2057,9 +2057,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "科",
+        "meaning": "과목 과",
+        "reading": "과"
       },
       "slots": [
         {
@@ -2074,18 +2074,18 @@
       "cards": [
         {
           "id": "c50a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "禾",
+          "label": "벼 화"
         },
         {
           "id": "c50b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "斗",
+          "label": "말 두"
         },
         {
           "id": "d50",
-          "text": "口",
-          "label": "입 구"
+          "text": "木",
+          "label": "나무 목"
         }
       ]
     }
@@ -2098,9 +2098,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "城",
+        "meaning": "재 성",
+        "reading": "성"
       },
       "slots": [
         {
@@ -2115,18 +2115,18 @@
       "cards": [
         {
           "id": "c51a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "土",
+          "label": "흙 토"
         },
         {
           "id": "c51b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "成",
+          "label": "이룰 성"
         },
         {
           "id": "d51",
-          "text": "口",
-          "label": "입 구"
+          "text": "耳",
+          "label": "귀 이"
         }
       ]
     }
@@ -2139,9 +2139,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "性",
+        "meaning": "성품 성",
+        "reading": "성"
       },
       "slots": [
         {
@@ -2156,18 +2156,18 @@
       "cards": [
         {
           "id": "c52a",
-          "text": "亻",
-          "label": "사람 인"
+          "text": "忄",
+          "label": "마음 심"
         },
         {
           "id": "c52b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "生",
+          "label": "날 생"
         },
         {
           "id": "d52",
-          "text": "口",
-          "label": "입 구"
+          "text": "小",
+          "label": "작을 소"
         }
       ]
     }
@@ -2180,9 +2180,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "持",
+        "meaning": "가질 지",
+        "reading": "지"
       },
       "slots": [
         {
@@ -2197,18 +2197,18 @@
       "cards": [
         {
           "id": "c53a",
-          "text": "門",
-          "label": "문 문"
+          "text": "扌",
+          "label": "손 수"
         },
         {
           "id": "c53b",
-          "text": "口",
-          "label": "입 구"
+          "text": "寺",
+          "label": "절 사"
         },
         {
           "id": "d53",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -2221,9 +2221,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "味",
+        "meaning": "맛 미",
+        "reading": "미"
       },
       "slots": [
         {
@@ -2238,18 +2238,18 @@
       "cards": [
         {
           "id": "c54a",
-          "text": "手",
-          "label": "손 수"
+          "text": "口",
+          "label": "입 구"
         },
         {
           "id": "c54b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "未",
+          "label": "아닐 미"
         },
         {
           "id": "d54",
-          "text": "口",
-          "label": "입 구"
+          "text": "日",
+          "label": "날 일"
         }
       ]
     }
@@ -2262,9 +2262,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "波",
+        "meaning": "물결 파",
+        "reading": "파"
       },
       "slots": [
         {
@@ -2279,18 +2279,18 @@
       "cards": [
         {
           "id": "c55a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c55b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "皮",
+          "label": "가죽 피"
         },
         {
           "id": "d55",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -2303,9 +2303,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "汗",
+        "meaning": "땀 한",
+        "reading": "한"
       },
       "slots": [
         {
@@ -2320,18 +2320,18 @@
       "cards": [
         {
           "id": "c56a",
-          "text": "人",
-          "label": "사람 인"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c56b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "干",
+          "label": "방패 간"
         },
         {
           "id": "d56",
-          "text": "口",
-          "label": "입 구"
+          "text": "冫",
+          "label": "얼음 빙"
         }
       ]
     }
@@ -2344,9 +2344,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "泣",
+        "meaning": "울 읍",
+        "reading": "읍"
       },
       "slots": [
         {
@@ -2361,18 +2361,18 @@
       "cards": [
         {
           "id": "c57a",
-          "text": "日",
-          "label": "날 일"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c57b",
-          "text": "月",
-          "label": "달 월"
+          "text": "立",
+          "label": "설 립"
         },
         {
           "id": "d57",
-          "text": "口",
-          "label": "입 구"
+          "text": "貝",
+          "label": "조개 패"
         }
       ]
     }
@@ -2385,9 +2385,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "沙",
+        "meaning": "모래 사",
+        "reading": "사"
       },
       "slots": [
         {
@@ -2402,18 +2402,18 @@
       "cards": [
         {
           "id": "c58a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c58b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "少",
+          "label": "적을 소"
         },
         {
           "id": "d58",
-          "text": "口",
-          "label": "입 구"
+          "text": "冫",
+          "label": "얼음 빙"
         }
       ]
     }
@@ -2426,9 +2426,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "仕",
+        "meaning": "섬길 사",
+        "reading": "사"
       },
       "slots": [
         {
@@ -2443,18 +2443,18 @@
       "cards": [
         {
           "id": "c59a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "亻",
+          "label": "사람 인"
         },
         {
           "id": "c59b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "士",
+          "label": "선비 사"
         },
         {
           "id": "d59",
-          "text": "口",
-          "label": "입 구"
+          "text": "耳",
+          "label": "귀 이"
         }
       ]
     }
@@ -2467,9 +2467,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "伐",
+        "meaning": "칠 벌",
+        "reading": "벌"
       },
       "slots": [
         {
@@ -2489,13 +2489,13 @@
         },
         {
           "id": "c60b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "戈",
+          "label": "창 과"
         },
         {
           "id": "d60",
-          "text": "口",
-          "label": "입 구"
+          "text": "彳",
+          "label": "조금 걸을 척"
         }
       ]
     }
@@ -2508,9 +2508,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "使",
+        "meaning": "부릴 사",
+        "reading": "사"
       },
       "slots": [
         {
@@ -2525,18 +2525,18 @@
       "cards": [
         {
           "id": "c61a",
-          "text": "門",
-          "label": "문 문"
+          "text": "亻",
+          "label": "사람 인"
         },
         {
           "id": "c61b",
-          "text": "口",
-          "label": "입 구"
+          "text": "吏",
+          "label": "벼슬아치 리"
         },
         {
           "id": "d61",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -2549,9 +2549,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "例",
+        "meaning": "법식 례",
+        "reading": "례"
       },
       "slots": [
         {
@@ -2566,18 +2566,18 @@
       "cards": [
         {
           "id": "c62a",
-          "text": "手",
-          "label": "손 수"
+          "text": "亻",
+          "label": "사람 인"
         },
         {
           "id": "c62b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "列",
+          "label": "벌일 렬"
         },
         {
           "id": "d62",
-          "text": "口",
-          "label": "입 구"
+          "text": "彳",
+          "label": "조금 걸을 척"
         }
       ]
     }
@@ -2590,9 +2590,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "伏",
+        "meaning": "엎드릴 복",
+        "reading": "복"
       },
       "slots": [
         {
@@ -2607,18 +2607,18 @@
       "cards": [
         {
           "id": "c63a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "亻",
+          "label": "사람 인"
         },
         {
           "id": "c63b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "犬",
+          "label": "개 견"
         },
         {
           "id": "d63",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -2631,9 +2631,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "株",
+        "meaning": "그루 주",
+        "reading": "주"
       },
       "slots": [
         {
@@ -2648,18 +2648,18 @@
       "cards": [
         {
           "id": "c64a",
-          "text": "人",
-          "label": "사람 인"
-        },
-        {
-          "id": "c64b",
           "text": "木",
           "label": "나무 목"
         },
         {
+          "id": "c64b",
+          "text": "朱",
+          "label": "붉을 주"
+        },
+        {
           "id": "d64",
-          "text": "口",
-          "label": "입 구"
+          "text": "禾",
+          "label": "벼 화"
         }
       ]
     }
@@ -2672,9 +2672,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "板",
+        "meaning": "널 판",
+        "reading": "판"
       },
       "slots": [
         {
@@ -2689,18 +2689,18 @@
       "cards": [
         {
           "id": "c65a",
-          "text": "日",
-          "label": "날 일"
+          "text": "木",
+          "label": "나무 목"
         },
         {
           "id": "c65b",
-          "text": "月",
-          "label": "달 월"
+          "text": "反",
+          "label": "돌이킬 반"
         },
         {
           "id": "d65",
-          "text": "口",
-          "label": "입 구"
+          "text": "貝",
+          "label": "조개 패"
         }
       ]
     }
@@ -2713,9 +2713,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "枝",
+        "meaning": "가지 지",
+        "reading": "지"
       },
       "slots": [
         {
@@ -2735,13 +2735,13 @@
         },
         {
           "id": "c66b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "支",
+          "label": "지탱할 지"
         },
         {
           "id": "d66",
-          "text": "口",
-          "label": "입 구"
+          "text": "禾",
+          "label": "벼 화"
         }
       ]
     }
@@ -2754,9 +2754,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "桃",
+        "meaning": "복숭아 도",
+        "reading": "도"
       },
       "slots": [
         {
@@ -2771,18 +2771,18 @@
       "cards": [
         {
           "id": "c67a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "木",
+          "label": "나무 목"
         },
         {
           "id": "c67b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "兆",
+          "label": "억조 조"
         },
         {
           "id": "d67",
-          "text": "口",
-          "label": "입 구"
+          "text": "耳",
+          "label": "귀 이"
         }
       ]
     }
@@ -2795,9 +2795,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "杯",
+        "meaning": "잔 배",
+        "reading": "배"
       },
       "slots": [
         {
@@ -2812,18 +2812,18 @@
       "cards": [
         {
           "id": "c68a",
-          "text": "亻",
-          "label": "사람 인"
+          "text": "木",
+          "label": "나무 목"
         },
         {
           "id": "c68b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "不",
+          "label": "아닐 불"
         },
         {
           "id": "d68",
-          "text": "口",
-          "label": "입 구"
+          "text": "禾",
+          "label": "벼 화"
         }
       ]
     }
@@ -2836,9 +2836,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "映",
+        "meaning": "비칠 영",
+        "reading": "영"
       },
       "slots": [
         {
@@ -2853,18 +2853,18 @@
       "cards": [
         {
           "id": "c69a",
-          "text": "門",
-          "label": "문 문"
+          "text": "日",
+          "label": "날 일"
         },
         {
           "id": "c69b",
-          "text": "口",
-          "label": "입 구"
+          "text": "央",
+          "label": "가운데 앙"
         },
         {
           "id": "d69",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -2877,9 +2877,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "許",
+        "meaning": "허락할 허",
+        "reading": "허"
       },
       "slots": [
         {
@@ -2894,18 +2894,18 @@
       "cards": [
         {
           "id": "c70a",
-          "text": "手",
-          "label": "손 수"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c70b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "午",
+          "label": "낮 오"
         },
         {
           "id": "d70",
-          "text": "口",
-          "label": "입 구"
+          "text": "音",
+          "label": "소리 음"
         }
       ]
     }
@@ -2918,9 +2918,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "評",
+        "meaning": "평할 평",
+        "reading": "평"
       },
       "slots": [
         {
@@ -2935,18 +2935,18 @@
       "cards": [
         {
           "id": "c71a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c71b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "平",
+          "label": "평평할 평"
         },
         {
           "id": "d71",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -2959,9 +2959,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "討",
+        "meaning": "칠 토",
+        "reading": "토"
       },
       "slots": [
         {
@@ -2976,18 +2976,18 @@
       "cards": [
         {
           "id": "c72a",
-          "text": "人",
-          "label": "사람 인"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c72b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "寸",
+          "label": "마디 촌"
         },
         {
           "id": "d72",
-          "text": "口",
-          "label": "입 구"
+          "text": "音",
+          "label": "소리 음"
         }
       ]
     }
@@ -3000,9 +3000,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "試",
+        "meaning": "시험 시",
+        "reading": "시"
       },
       "slots": [
         {
@@ -3017,18 +3017,18 @@
       "cards": [
         {
           "id": "c73a",
-          "text": "日",
-          "label": "날 일"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c73b",
-          "text": "月",
-          "label": "달 월"
+          "text": "式",
+          "label": "법 식"
         },
         {
           "id": "d73",
-          "text": "口",
-          "label": "입 구"
+          "text": "貝",
+          "label": "조개 패"
         }
       ]
     }
@@ -3041,9 +3041,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "課",
+        "meaning": "공부할 과",
+        "reading": "과"
       },
       "slots": [
         {
@@ -3058,18 +3058,18 @@
       "cards": [
         {
           "id": "c74a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c74b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "果",
+          "label": "실과 과"
         },
         {
           "id": "d74",
-          "text": "口",
-          "label": "입 구"
+          "text": "音",
+          "label": "소리 음"
         }
       ]
     }
@@ -3082,9 +3082,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "誠",
+        "meaning": "정성 성",
+        "reading": "성"
       },
       "slots": [
         {
@@ -3099,18 +3099,18 @@
       "cards": [
         {
           "id": "c75a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c75b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "成",
+          "label": "이룰 성"
         },
         {
           "id": "d75",
-          "text": "口",
-          "label": "입 구"
+          "text": "耳",
+          "label": "귀 이"
         }
       ]
     }
@@ -3123,9 +3123,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "級",
+        "meaning": "등급 급",
+        "reading": "급"
       },
       "slots": [
         {
@@ -3140,18 +3140,18 @@
       "cards": [
         {
           "id": "c76a",
-          "text": "亻",
-          "label": "사람 인"
+          "text": "糸",
+          "label": "실 사"
         },
         {
           "id": "c76b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "及",
+          "label": "미칠 급"
         },
         {
           "id": "d76",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -3164,9 +3164,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "給",
+        "meaning": "줄 급",
+        "reading": "급"
       },
       "slots": [
         {
@@ -3181,18 +3181,18 @@
       "cards": [
         {
           "id": "c77a",
-          "text": "門",
-          "label": "문 문"
+          "text": "糸",
+          "label": "실 사"
         },
         {
           "id": "c77b",
-          "text": "口",
-          "label": "입 구"
+          "text": "合",
+          "label": "합할 합"
         },
         {
           "id": "d77",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -3205,9 +3205,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "銅",
+        "meaning": "구리 동",
+        "reading": "동"
       },
       "slots": [
         {
@@ -3222,18 +3222,18 @@
       "cards": [
         {
           "id": "c78a",
-          "text": "手",
-          "label": "손 수"
+          "text": "金",
+          "label": "쇠 금"
         },
         {
           "id": "c78b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "同",
+          "label": "한가지 동"
         },
         {
           "id": "d78",
-          "text": "口",
-          "label": "입 구"
+          "text": "全",
+          "label": "온전할 전"
         }
       ]
     }
@@ -3246,9 +3246,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "針",
+        "meaning": "바늘 침",
+        "reading": "침"
       },
       "slots": [
         {
@@ -3263,18 +3263,18 @@
       "cards": [
         {
           "id": "c79a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "金",
+          "label": "쇠 금"
         },
         {
           "id": "c79b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "十",
+          "label": "열 십"
         },
         {
           "id": "d79",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -3287,9 +3287,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "淡",
+        "meaning": "맑을 담",
+        "reading": "담"
       },
       "slots": [
         {
@@ -3304,18 +3304,18 @@
       "cards": [
         {
           "id": "c80a",
-          "text": "人",
-          "label": "사람 인"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c80b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "炎",
+          "label": "불꽃 염"
         },
         {
           "id": "d80",
-          "text": "口",
-          "label": "입 구"
+          "text": "冫",
+          "label": "얼음 빙"
         }
       ]
     }
@@ -3328,9 +3328,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "湖",
+        "meaning": "호수 호",
+        "reading": "호"
       },
       "slots": [
         {
@@ -3345,18 +3345,18 @@
       "cards": [
         {
           "id": "c81a",
-          "text": "日",
-          "label": "날 일"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c81b",
-          "text": "月",
-          "label": "달 월"
+          "text": "胡",
+          "label": "오랑캐 호"
         },
         {
           "id": "d81",
-          "text": "口",
-          "label": "입 구"
+          "text": "冫",
+          "label": "얼음 빙"
         }
       ]
     }
@@ -3369,9 +3369,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "漁",
+        "meaning": "고기 잡을 어",
+        "reading": "어"
       },
       "slots": [
         {
@@ -3386,18 +3386,18 @@
       "cards": [
         {
           "id": "c82a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c82b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "魚",
+          "label": "물고기 어"
         },
         {
           "id": "d82",
-          "text": "口",
-          "label": "입 구"
+          "text": "冫",
+          "label": "얼음 빙"
         }
       ]
     }
@@ -3410,9 +3410,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "浴",
+        "meaning": "목욕할 욕",
+        "reading": "욕"
       },
       "slots": [
         {
@@ -3427,18 +3427,18 @@
       "cards": [
         {
           "id": "c83a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "氵",
+          "label": "물 수"
         },
         {
           "id": "c83b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "谷",
+          "label": "골 곡"
         },
         {
           "id": "d83",
-          "text": "口",
-          "label": "입 구"
+          "text": "冫",
+          "label": "얼음 빙"
         }
       ]
     }
@@ -3451,9 +3451,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "析",
+        "meaning": "쪼갤 석",
+        "reading": "석"
       },
       "slots": [
         {
@@ -3468,18 +3468,18 @@
       "cards": [
         {
           "id": "c84a",
-          "text": "亻",
-          "label": "사람 인"
+          "text": "木",
+          "label": "나무 목"
         },
         {
           "id": "c84b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "斤",
+          "label": "도끼 근"
         },
         {
           "id": "d84",
-          "text": "口",
-          "label": "입 구"
+          "text": "禾",
+          "label": "벼 화"
         }
       ]
     }
@@ -3492,9 +3492,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "詞",
+        "meaning": "말 사",
+        "reading": "사"
       },
       "slots": [
         {
@@ -3509,18 +3509,18 @@
       "cards": [
         {
           "id": "c85a",
-          "text": "門",
-          "label": "문 문"
+          "text": "言",
+          "label": "말씀 언"
         },
         {
           "id": "c85b",
-          "text": "口",
-          "label": "입 구"
+          "text": "司",
+          "label": "맡을 사"
         },
         {
           "id": "d85",
-          "text": "口",
-          "label": "입 구"
+          "text": "音",
+          "label": "소리 음"
         }
       ]
     }
@@ -3533,9 +3533,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "婚",
+        "meaning": "혼인할 혼",
+        "reading": "혼"
       },
       "slots": [
         {
@@ -3550,18 +3550,18 @@
       "cards": [
         {
           "id": "c86a",
-          "text": "手",
-          "label": "손 수"
+          "text": "女",
+          "label": "여자 녀"
         },
         {
           "id": "c86b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "昏",
+          "label": "어두울 혼"
         },
         {
           "id": "d86",
-          "text": "口",
-          "label": "입 구"
+          "text": "母",
+          "label": "어미 모"
         }
       ]
     }
@@ -3574,9 +3574,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "妙",
+        "meaning": "묘할 묘",
+        "reading": "묘"
       },
       "slots": [
         {
@@ -3591,18 +3591,18 @@
       "cards": [
         {
           "id": "c87a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "女",
+          "label": "여자 녀"
         },
         {
           "id": "c87b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "少",
+          "label": "적을 소"
         },
         {
           "id": "d87",
-          "text": "口",
-          "label": "입 구"
+          "text": "母",
+          "label": "어미 모"
         }
       ]
     }
@@ -3615,9 +3615,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "如",
+        "meaning": "같을 여",
+        "reading": "여"
       },
       "slots": [
         {
@@ -3632,18 +3632,18 @@
       "cards": [
         {
           "id": "c88a",
-          "text": "人",
-          "label": "사람 인"
+          "text": "女",
+          "label": "여자 녀"
         },
         {
           "id": "c88b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "口",
+          "label": "입 구"
         },
         {
           "id": "d88",
-          "text": "口",
-          "label": "입 구"
+          "text": "母",
+          "label": "어미 모"
         }
       ]
     }
@@ -3656,9 +3656,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "助",
+        "meaning": "도울 조",
+        "reading": "조"
       },
       "slots": [
         {
@@ -3673,18 +3673,18 @@
       "cards": [
         {
           "id": "c89a",
-          "text": "日",
-          "label": "날 일"
+          "text": "且",
+          "label": "또 차"
         },
         {
           "id": "c89b",
-          "text": "月",
-          "label": "달 월"
+          "text": "力",
+          "label": "힘 력"
         },
         {
           "id": "d89",
-          "text": "口",
-          "label": "입 구"
+          "text": "目",
+          "label": "눈 목"
         }
       ]
     }
@@ -3697,9 +3697,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "勉",
+        "meaning": "힘쓸 면",
+        "reading": "면"
       },
       "slots": [
         {
@@ -3714,18 +3714,18 @@
       "cards": [
         {
           "id": "c90a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "免",
+          "label": "면할 면"
         },
         {
           "id": "c90b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "力",
+          "label": "힘 력"
         },
         {
           "id": "d90",
-          "text": "口",
-          "label": "입 구"
+          "text": "白",
+          "label": "흰 백"
         }
       ]
     }
@@ -3738,9 +3738,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "利",
+        "meaning": "이로울 리",
+        "reading": "리"
       },
       "slots": [
         {
@@ -3755,18 +3755,18 @@
       "cards": [
         {
           "id": "c91a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "禾",
+          "label": "벼 화"
         },
         {
           "id": "c91b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "刂",
+          "label": "칼 도"
         },
         {
           "id": "d91",
-          "text": "口",
-          "label": "입 구"
+          "text": "木",
+          "label": "나무 목"
         }
       ]
     }
@@ -3779,9 +3779,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "信",
-        "meaning": "믿을 신",
-        "reading": "신"
+        "hanja": "判",
+        "meaning": "판단할 판",
+        "reading": "판"
       },
       "slots": [
         {
@@ -3796,18 +3796,18 @@
       "cards": [
         {
           "id": "c92a",
-          "text": "亻",
-          "label": "사람 인"
+          "text": "半",
+          "label": "반 반"
         },
         {
           "id": "c92b",
-          "text": "言",
-          "label": "말씀 언"
+          "text": "刂",
+          "label": "칼 도"
         },
         {
           "id": "d92",
-          "text": "口",
-          "label": "입 구"
+          "text": "米",
+          "label": "쌀 미"
         }
       ]
     }
@@ -3820,9 +3820,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "問",
-        "meaning": "물을 문",
-        "reading": "문"
+        "hanja": "到",
+        "meaning": "이를 도",
+        "reading": "도"
       },
       "slots": [
         {
@@ -3837,18 +3837,18 @@
       "cards": [
         {
           "id": "c93a",
-          "text": "門",
-          "label": "문 문"
+          "text": "至",
+          "label": "이를 지"
         },
         {
           "id": "c93b",
-          "text": "口",
-          "label": "입 구"
+          "text": "刂",
+          "label": "칼 도"
         },
         {
           "id": "d93",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -3861,9 +3861,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "看",
-        "meaning": "볼 간",
-        "reading": "간"
+        "hanja": "刻",
+        "meaning": "새길 각",
+        "reading": "각"
       },
       "slots": [
         {
@@ -3878,18 +3878,18 @@
       "cards": [
         {
           "id": "c94a",
-          "text": "手",
-          "label": "손 수"
+          "text": "亥",
+          "label": "돼지 해"
         },
         {
           "id": "c94b",
-          "text": "目",
-          "label": "눈 목"
+          "text": "刂",
+          "label": "칼 도"
         },
         {
           "id": "d94",
-          "text": "口",
-          "label": "입 구"
+          "text": "玉",
+          "label": "구슬 옥"
         }
       ]
     }
@@ -3902,9 +3902,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "男",
-        "meaning": "사내 남",
-        "reading": "남"
+        "hanja": "秒",
+        "meaning": "분초 초",
+        "reading": "초"
       },
       "slots": [
         {
@@ -3919,18 +3919,18 @@
       "cards": [
         {
           "id": "c95a",
-          "text": "田",
-          "label": "밭 전"
+          "text": "禾",
+          "label": "벼 화"
         },
         {
           "id": "c95b",
-          "text": "力",
-          "label": "힘 력"
+          "text": "少",
+          "label": "적을 소"
         },
         {
           "id": "d95",
-          "text": "口",
-          "label": "입 구"
+          "text": "木",
+          "label": "나무 목"
         }
       ]
     }
@@ -3943,9 +3943,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "休",
-        "meaning": "쉴 휴",
-        "reading": "휴"
+        "hanja": "燈",
+        "meaning": "등 등",
+        "reading": "등"
       },
       "slots": [
         {
@@ -3960,18 +3960,18 @@
       "cards": [
         {
           "id": "c96a",
-          "text": "人",
-          "label": "사람 인"
+          "text": "火",
+          "label": "불 화"
         },
         {
           "id": "c96b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "登",
+          "label": "오를 등"
         },
         {
           "id": "d96",
-          "text": "口",
-          "label": "입 구"
+          "text": "大",
+          "label": "큰 대"
         }
       ]
     }
@@ -3984,9 +3984,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "明",
-        "meaning": "밝을 명",
-        "reading": "명"
+        "hanja": "悟",
+        "meaning": "깨달을 오",
+        "reading": "오"
       },
       "slots": [
         {
@@ -4001,18 +4001,18 @@
       "cards": [
         {
           "id": "c97a",
-          "text": "日",
-          "label": "날 일"
+          "text": "忄",
+          "label": "마음 심"
         },
         {
           "id": "c97b",
-          "text": "月",
-          "label": "달 월"
+          "text": "吾",
+          "label": "나 오"
         },
         {
           "id": "d97",
-          "text": "口",
-          "label": "입 구"
+          "text": "小",
+          "label": "작을 소"
         }
       ]
     }
@@ -4025,9 +4025,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "林",
-        "meaning": "수풀 림",
-        "reading": "림"
+        "hanja": "忙",
+        "meaning": "바쁠 망",
+        "reading": "망"
       },
       "slots": [
         {
@@ -4042,18 +4042,18 @@
       "cards": [
         {
           "id": "c98a",
-          "text": "木",
-          "label": "나무 목"
+          "text": "忄",
+          "label": "마음 심"
         },
         {
           "id": "c98b",
-          "text": "木",
-          "label": "나무 목"
+          "text": "亡",
+          "label": "망할 망"
         },
         {
           "id": "d98",
-          "text": "口",
-          "label": "입 구"
+          "text": "小",
+          "label": "작을 소"
         }
       ]
     }
@@ -4066,9 +4066,9 @@
     "hint": "완성 한자의 실제 구성 방향과 부수 뜻을 확인",
     "problem": {
       "target": {
-        "hanja": "好",
-        "meaning": "좋을 호",
-        "reading": "호"
+        "hanja": "拾",
+        "meaning": "주울 습",
+        "reading": "습"
       },
       "slots": [
         {
@@ -4083,18 +4083,18 @@
       "cards": [
         {
           "id": "c99a",
-          "text": "女",
-          "label": "여자 여"
+          "text": "扌",
+          "label": "손 수"
         },
         {
           "id": "c99b",
-          "text": "子",
-          "label": "아들 자"
+          "text": "合",
+          "label": "합할 합"
         },
         {
           "id": "d99",
-          "text": "口",
-          "label": "입 구"
+          "text": "才",
+          "label": "재주 재"
         }
       ]
     }

@@ -4,7 +4,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -18,10 +18,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -40,32 +36,24 @@
         {
           "id": "s2",
           "correctCardId": "c0-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c0-3"
         }
       ],
       "cards": [
         {
           "id": "c0-0",
-          "text": "The scientist"
+          "text": "My sister"
         },
         {
           "id": "c0-1",
-          "text": "recorded"
+          "text": "plays"
         },
         {
           "id": "c0-2",
-          "text": "the temperature"
-        },
-        {
-          "id": "c0-3",
-          "text": "carefully"
+          "text": "the violin"
         },
         {
           "id": "d0",
-          "text": "quickly"
+          "text": "playing"
         }
       ]
     }
@@ -75,7 +63,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 동사 + 부사구",
     "problem": {
       "passage": [
         {
@@ -89,10 +77,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -111,32 +95,24 @@
         {
           "id": "s2",
           "correctCardId": "c1-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c1-3"
         }
       ],
       "cards": [
         {
           "id": "c1-0",
-          "text": "Because the road was wet"
+          "text": "The bus"
         },
         {
           "id": "c1-1",
-          "text": "the driver"
+          "text": "arrived"
         },
         {
           "id": "c1-2",
-          "text": "reduced"
-        },
-        {
-          "id": "c1-3",
-          "text": "speed"
+          "text": "at the station"
         },
         {
           "id": "d1",
-          "text": "quickly"
+          "text": "arrive"
         }
       ]
     }
@@ -146,7 +122,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 감각동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -160,10 +136,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -182,32 +154,24 @@
         {
           "id": "s2",
           "correctCardId": "c2-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c2-3"
         }
       ],
       "cards": [
         {
           "id": "c2-0",
-          "text": "The coach"
+          "text": "These cookies"
         },
         {
           "id": "c2-1",
-          "text": "made"
+          "text": "taste"
         },
         {
           "id": "c2-2",
-          "text": "the players"
-        },
-        {
-          "id": "c2-3",
-          "text": "practice"
+          "text": "sweet"
         },
         {
           "id": "d2",
-          "text": "quickly"
+          "text": "sweetly"
         }
       ]
     }
@@ -217,7 +181,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -231,10 +195,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -253,32 +213,24 @@
         {
           "id": "s2",
           "correctCardId": "c3-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c3-3"
         }
       ],
       "cards": [
         {
           "id": "c3-0",
-          "text": "After the bell rang"
+          "text": "Mr. Kim"
         },
         {
           "id": "c3-1",
-          "text": "the students"
+          "text": "teaches"
         },
         {
           "id": "c3-2",
-          "text": "opened"
-        },
-        {
-          "id": "c3-3",
-          "text": "their books"
+          "text": "history"
         },
         {
           "id": "d3",
-          "text": "quickly"
+          "text": "teach"
         }
       ]
     }
@@ -288,7 +240,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + be동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -302,10 +254,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -324,32 +272,24 @@
         {
           "id": "s2",
           "correctCardId": "c4-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c4-3"
         }
       ],
       "cards": [
         {
           "id": "c4-0",
-          "text": "Our team"
+          "text": "The children"
         },
         {
           "id": "c4-1",
-          "text": "gave"
+          "text": "were"
         },
         {
           "id": "c4-2",
-          "text": "the visitors"
-        },
-        {
-          "id": "c4-3",
-          "text": "a map"
+          "text": "hungry"
         },
         {
           "id": "d4",
-          "text": "quickly"
+          "text": "was"
         }
       ]
     }
@@ -359,7 +299,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -373,10 +313,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -395,32 +331,24 @@
         {
           "id": "s2",
           "correctCardId": "c5-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c5-3"
         }
       ],
       "cards": [
         {
           "id": "c5-0",
-          "text": "The scientist"
+          "text": "My father"
         },
         {
           "id": "c5-1",
-          "text": "recorded"
+          "text": "cooked"
         },
         {
           "id": "c5-2",
-          "text": "the temperature"
-        },
-        {
-          "id": "c5-3",
-          "text": "carefully"
+          "text": "dinner"
         },
         {
           "id": "d5",
-          "text": "quickly"
+          "text": "cooking"
         }
       ]
     }
@@ -430,7 +358,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + be동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -444,10 +372,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -466,32 +390,24 @@
         {
           "id": "s2",
           "correctCardId": "c6-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c6-3"
         }
       ],
       "cards": [
         {
           "id": "c6-0",
-          "text": "Because the road was wet"
+          "text": "The movie"
         },
         {
           "id": "c6-1",
-          "text": "the driver"
+          "text": "was"
         },
         {
           "id": "c6-2",
-          "text": "reduced"
-        },
-        {
-          "id": "c6-3",
-          "text": "speed"
+          "text": "boring"
         },
         {
           "id": "d6",
-          "text": "quickly"
+          "text": "boringly"
         }
       ]
     }
@@ -501,7 +417,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사(진행형) + 부사구",
     "problem": {
       "passage": [
         {
@@ -515,10 +431,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -537,32 +449,24 @@
         {
           "id": "s2",
           "correctCardId": "c7-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c7-3"
         }
       ],
       "cards": [
         {
           "id": "c7-0",
-          "text": "The coach"
+          "text": "The dog"
         },
         {
           "id": "c7-1",
-          "text": "made"
+          "text": "is sleeping"
         },
         {
           "id": "c7-2",
-          "text": "the players"
-        },
-        {
-          "id": "c7-3",
-          "text": "practice"
+          "text": "on the sofa"
         },
         {
           "id": "d7",
-          "text": "quickly"
+          "text": "sleep"
         }
       ]
     }
@@ -572,7 +476,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -586,10 +490,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -608,32 +508,24 @@
         {
           "id": "s2",
           "correctCardId": "c8-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c8-3"
         }
       ],
       "cards": [
         {
           "id": "c8-0",
-          "text": "After the bell rang"
+          "text": "We"
         },
         {
           "id": "c8-1",
-          "text": "the students"
+          "text": "visited"
         },
         {
           "id": "c8-2",
-          "text": "opened"
-        },
-        {
-          "id": "c8-3",
-          "text": "their books"
+          "text": "the museum"
         },
         {
           "id": "d8",
-          "text": "quickly"
+          "text": "visiting"
         }
       ]
     }
@@ -643,7 +535,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 감각동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -657,10 +549,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -679,32 +567,24 @@
         {
           "id": "s2",
           "correctCardId": "c9-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c9-3"
         }
       ],
       "cards": [
         {
           "id": "c9-0",
-          "text": "Our team"
+          "text": "She"
         },
         {
           "id": "c9-1",
-          "text": "gave"
+          "text": "looks"
         },
         {
           "id": "c9-2",
-          "text": "the visitors"
-        },
-        {
-          "id": "c9-3",
-          "text": "a map"
+          "text": "happy"
         },
         {
           "id": "d9",
-          "text": "quickly"
+          "text": "happily"
         }
       ]
     }
@@ -714,7 +594,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + 부사구",
     "problem": {
       "passage": [
         {
@@ -728,10 +608,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -750,32 +626,24 @@
         {
           "id": "s2",
           "correctCardId": "c10-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c10-3"
         }
       ],
       "cards": [
         {
           "id": "c10-0",
-          "text": "The scientist"
+          "text": "The baby"
         },
         {
           "id": "c10-1",
-          "text": "recorded"
+          "text": "cried"
         },
         {
           "id": "c10-2",
-          "text": "the temperature"
-        },
-        {
-          "id": "c10-3",
-          "text": "carefully"
+          "text": "all night"
         },
         {
           "id": "d10",
-          "text": "quickly"
+          "text": "crying"
         }
       ]
     }
@@ -785,7 +653,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -799,10 +667,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -821,32 +685,24 @@
         {
           "id": "s2",
           "correctCardId": "c11-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c11-3"
         }
       ],
       "cards": [
         {
           "id": "c11-0",
-          "text": "Because the road was wet"
+          "text": "Tom"
         },
         {
           "id": "c11-1",
-          "text": "the driver"
+          "text": "became"
         },
         {
           "id": "c11-2",
-          "text": "reduced"
-        },
-        {
-          "id": "c11-3",
-          "text": "speed"
+          "text": "a nurse"
         },
         {
           "id": "d11",
-          "text": "quickly"
+          "text": "becoming"
         }
       ]
     }
@@ -856,7 +712,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 전치사구",
     "problem": {
       "passage": [
         {
@@ -870,10 +726,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -892,32 +744,24 @@
         {
           "id": "s2",
           "correctCardId": "c12-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c12-3"
         }
       ],
       "cards": [
         {
           "id": "c12-0",
-          "text": "The coach"
+          "text": "The students"
         },
         {
           "id": "c12-1",
-          "text": "made"
+          "text": "listened"
         },
         {
           "id": "c12-2",
-          "text": "the players"
-        },
-        {
-          "id": "c12-3",
-          "text": "practice"
+          "text": "to the teacher"
         },
         {
           "id": "d12",
-          "text": "quickly"
+          "text": "listens"
         }
       ]
     }
@@ -927,7 +771,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -941,10 +785,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -963,32 +803,24 @@
         {
           "id": "s2",
           "correctCardId": "c13-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c13-3"
         }
       ],
       "cards": [
         {
           "id": "c13-0",
-          "text": "After the bell rang"
+          "text": "My phone"
         },
         {
           "id": "c13-1",
-          "text": "the students"
+          "text": "needs"
         },
         {
           "id": "c13-2",
-          "text": "opened"
-        },
-        {
-          "id": "c13-3",
-          "text": "their books"
+          "text": "a new battery"
         },
         {
           "id": "d13",
-          "text": "quickly"
+          "text": "need"
         }
       ]
     }
@@ -998,7 +830,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 감각동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -1012,10 +844,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1034,32 +862,24 @@
         {
           "id": "s2",
           "correctCardId": "c14-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c14-3"
         }
       ],
       "cards": [
         {
           "id": "c14-0",
-          "text": "Our team"
+          "text": "The soup"
         },
         {
           "id": "c14-1",
-          "text": "gave"
+          "text": "smells"
         },
         {
           "id": "c14-2",
-          "text": "the visitors"
-        },
-        {
-          "id": "c14-3",
-          "text": "a map"
+          "text": "delicious"
         },
         {
           "id": "d14",
-          "text": "quickly"
+          "text": "deliciously"
         }
       ]
     }
@@ -1069,7 +889,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + 부사구",
     "problem": {
       "passage": [
         {
@@ -1083,10 +903,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1105,32 +921,24 @@
         {
           "id": "s2",
           "correctCardId": "c15-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c15-3"
         }
       ],
       "cards": [
         {
           "id": "c15-0",
-          "text": "The scientist"
+          "text": "They"
         },
         {
           "id": "c15-1",
-          "text": "recorded"
+          "text": "live"
         },
         {
           "id": "c15-2",
-          "text": "the temperature"
-        },
-        {
-          "id": "c15-3",
-          "text": "carefully"
+          "text": "in a small town"
         },
         {
           "id": "d15",
-          "text": "quickly"
+          "text": "lives"
         }
       ]
     }
@@ -1140,7 +948,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 동사 + 부사구",
     "problem": {
       "passage": [
         {
@@ -1154,10 +962,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1176,32 +980,24 @@
         {
           "id": "s2",
           "correctCardId": "c16-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c16-3"
         }
       ],
       "cards": [
         {
           "id": "c16-0",
-          "text": "Because the road was wet"
+          "text": "The store"
         },
         {
           "id": "c16-1",
-          "text": "the driver"
+          "text": "opens"
         },
         {
           "id": "c16-2",
-          "text": "reduced"
-        },
-        {
-          "id": "c16-3",
-          "text": "speed"
+          "text": "at nine"
         },
         {
           "id": "d16",
-          "text": "quickly"
+          "text": "opening"
         }
       ]
     }
@@ -1211,7 +1007,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -1225,10 +1021,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1247,32 +1039,24 @@
         {
           "id": "s2",
           "correctCardId": "c17-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c17-3"
         }
       ],
       "cards": [
         {
           "id": "c17-0",
-          "text": "The coach"
+          "text": "Jane"
         },
         {
           "id": "c17-1",
-          "text": "made"
+          "text": "wrote"
         },
         {
           "id": "c17-2",
-          "text": "the players"
-        },
-        {
-          "id": "c17-3",
-          "text": "practice"
+          "text": "a letter"
         },
         {
           "id": "d17",
-          "text": "quickly"
+          "text": "writing"
         }
       ]
     }
@@ -1282,7 +1066,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 감각동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -1296,10 +1080,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1318,32 +1098,24 @@
         {
           "id": "s2",
           "correctCardId": "c18-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c18-3"
         }
       ],
       "cards": [
         {
           "id": "c18-0",
-          "text": "After the bell rang"
+          "text": "The water"
         },
         {
           "id": "c18-1",
-          "text": "the students"
+          "text": "feels"
         },
         {
           "id": "c18-2",
-          "text": "opened"
-        },
-        {
-          "id": "c18-3",
-          "text": "their books"
+          "text": "cold"
         },
         {
           "id": "d18",
-          "text": "quickly"
+          "text": "coldly"
         }
       ]
     }
@@ -1353,7 +1125,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 동사 + 부사구",
     "problem": {
       "passage": [
         {
@@ -1367,10 +1139,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1389,32 +1157,24 @@
         {
           "id": "s2",
           "correctCardId": "c19-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c19-3"
         }
       ],
       "cards": [
         {
           "id": "c19-0",
-          "text": "Our team"
+          "text": "Birds"
         },
         {
           "id": "c19-1",
-          "text": "gave"
+          "text": "fly"
         },
         {
           "id": "c19-2",
-          "text": "the visitors"
-        },
-        {
-          "id": "c19-3",
-          "text": "a map"
+          "text": "south in winter"
         },
         {
           "id": "d19",
-          "text": "quickly"
+          "text": "flies"
         }
       ]
     }
@@ -1424,7 +1184,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -1438,10 +1198,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1460,32 +1216,24 @@
         {
           "id": "s2",
           "correctCardId": "c20-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c20-3"
         }
       ],
       "cards": [
         {
           "id": "c20-0",
-          "text": "The scientist"
+          "text": "My uncle"
         },
         {
           "id": "c20-1",
-          "text": "recorded"
+          "text": "owns"
         },
         {
           "id": "c20-2",
-          "text": "the temperature"
-        },
-        {
-          "id": "c20-3",
-          "text": "carefully"
+          "text": "a bakery"
         },
         {
           "id": "d20",
-          "text": "quickly"
+          "text": "own"
         }
       ]
     }
@@ -1495,7 +1243,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -1509,10 +1257,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1531,32 +1275,24 @@
         {
           "id": "s2",
           "correctCardId": "c21-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c21-3"
         }
       ],
       "cards": [
         {
           "id": "c21-0",
-          "text": "Because the road was wet"
+          "text": "The lesson"
         },
         {
           "id": "c21-1",
-          "text": "the driver"
+          "text": "seemed"
         },
         {
           "id": "c21-2",
-          "text": "reduced"
-        },
-        {
-          "id": "c21-3",
-          "text": "speed"
+          "text": "easy"
         },
         {
           "id": "d21",
-          "text": "quickly"
+          "text": "easily"
         }
       ]
     }
@@ -1566,7 +1302,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -1580,10 +1316,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1602,32 +1334,24 @@
         {
           "id": "s2",
           "correctCardId": "c22-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c22-3"
         }
       ],
       "cards": [
         {
           "id": "c22-0",
-          "text": "The coach"
+          "text": "He"
         },
         {
           "id": "c22-1",
-          "text": "made"
+          "text": "fixed"
         },
         {
           "id": "c22-2",
-          "text": "the players"
-        },
-        {
-          "id": "c22-3",
-          "text": "practice"
+          "text": "the bike"
         },
         {
           "id": "d22",
-          "text": "quickly"
+          "text": "fixing"
         }
       ]
     }
@@ -1637,7 +1361,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + be동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -1651,10 +1375,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1673,32 +1393,24 @@
         {
           "id": "s2",
           "correctCardId": "c23-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c23-3"
         }
       ],
       "cards": [
         {
           "id": "c23-0",
-          "text": "After the bell rang"
+          "text": "The girls"
         },
         {
           "id": "c23-1",
-          "text": "the students"
+          "text": "are"
         },
         {
           "id": "c23-2",
-          "text": "opened"
-        },
-        {
-          "id": "c23-3",
-          "text": "their books"
+          "text": "tired"
         },
         {
           "id": "d23",
-          "text": "quickly"
+          "text": "is"
         }
       ]
     }
@@ -1708,7 +1420,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -1722,10 +1434,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1744,32 +1452,24 @@
         {
           "id": "s2",
           "correctCardId": "c24-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c24-3"
         }
       ],
       "cards": [
         {
           "id": "c24-0",
-          "text": "Our team"
+          "text": "The train"
         },
         {
           "id": "c24-1",
-          "text": "gave"
+          "text": "left"
         },
         {
           "id": "c24-2",
-          "text": "the visitors"
-        },
-        {
-          "id": "c24-3",
-          "text": "a map"
+          "text": "the station"
         },
         {
           "id": "d24",
-          "text": "quickly"
+          "text": "leaving"
         }
       ]
     }
@@ -1779,7 +1479,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -1793,10 +1493,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1815,32 +1511,24 @@
         {
           "id": "s2",
           "correctCardId": "c25-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c25-3"
         }
       ],
       "cards": [
         {
           "id": "c25-0",
-          "text": "The scientist"
+          "text": "Our teacher"
         },
         {
           "id": "c25-1",
-          "text": "recorded"
+          "text": "speaks"
         },
         {
           "id": "c25-2",
-          "text": "the temperature"
-        },
-        {
-          "id": "c25-3",
-          "text": "carefully"
+          "text": "three languages"
         },
         {
           "id": "d25",
-          "text": "quickly"
+          "text": "speak"
         }
       ]
     }
@@ -1850,7 +1538,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -1864,10 +1552,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1886,32 +1570,24 @@
         {
           "id": "s2",
           "correctCardId": "c26-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c26-3"
         }
       ],
       "cards": [
         {
           "id": "c26-0",
-          "text": "Because the road was wet"
+          "text": "The flowers"
         },
         {
           "id": "c26-1",
-          "text": "the driver"
+          "text": "grew"
         },
         {
           "id": "c26-2",
-          "text": "reduced"
-        },
-        {
-          "id": "c26-3",
-          "text": "speed"
+          "text": "tall"
         },
         {
           "id": "d26",
-          "text": "quickly"
+          "text": "grows"
         }
       ]
     }
@@ -1921,7 +1597,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -1935,10 +1611,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -1957,32 +1629,24 @@
         {
           "id": "s2",
           "correctCardId": "c27-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c27-3"
         }
       ],
       "cards": [
         {
           "id": "c27-0",
-          "text": "The coach"
+          "text": "I"
         },
         {
           "id": "c27-1",
-          "text": "made"
+          "text": "found"
         },
         {
           "id": "c27-2",
-          "text": "the players"
-        },
-        {
-          "id": "c27-3",
-          "text": "practice"
+          "text": "my keys"
         },
         {
           "id": "d27",
-          "text": "quickly"
+          "text": "finding"
         }
       ]
     }
@@ -1992,7 +1656,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 동사 + 부사구",
     "problem": {
       "passage": [
         {
@@ -2006,10 +1670,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -2028,32 +1688,24 @@
         {
           "id": "s2",
           "correctCardId": "c28-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c28-3"
         }
       ],
       "cards": [
         {
           "id": "c28-0",
-          "text": "After the bell rang"
+          "text": "The kids"
         },
         {
           "id": "c28-1",
-          "text": "the students"
+          "text": "ran"
         },
         {
           "id": "c28-2",
-          "text": "opened"
-        },
-        {
-          "id": "c28-3",
-          "text": "their books"
+          "text": "to the park"
         },
         {
           "id": "d28",
-          "text": "quickly"
+          "text": "runs"
         }
       ]
     }
@@ -2063,7 +1715,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 1,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -2077,10 +1729,6 @@
         {
           "kind": "blank",
           "slotId": "s2"
-        },
-        {
-          "kind": "blank",
-          "slotId": "s3"
         },
         {
           "kind": "text",
@@ -2099,32 +1747,24 @@
         {
           "id": "s2",
           "correctCardId": "c29-2"
-        },
-        {
-          "id": "s3",
-          "correctCardId": "c29-3"
         }
       ],
       "cards": [
         {
           "id": "c29-0",
-          "text": "Our team"
+          "text": "The sky"
         },
         {
           "id": "c29-1",
-          "text": "gave"
+          "text": "turned"
         },
         {
           "id": "c29-2",
-          "text": "the visitors"
-        },
-        {
-          "id": "c29-3",
-          "text": "a map"
+          "text": "dark"
         },
         {
           "id": "d29",
-          "text": "quickly"
+          "text": "darkly"
         }
       ]
     }
@@ -2134,7 +1774,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + to부정사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -2179,23 +1819,23 @@
       "cards": [
         {
           "id": "c30-0",
-          "text": "The scientist"
+          "text": "I"
         },
         {
           "id": "c30-1",
-          "text": "recorded"
+          "text": "want"
         },
         {
           "id": "c30-2",
-          "text": "the temperature"
+          "text": "to learn"
         },
         {
           "id": "c30-3",
-          "text": "carefully"
+          "text": "Spanish"
         },
         {
           "id": "d30",
-          "text": "quickly"
+          "text": "learning"
         }
       ]
     }
@@ -2205,7 +1845,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 수여동사 + 간접목적어 + 직접목적어",
     "problem": {
       "passage": [
         {
@@ -2250,23 +1890,23 @@
       "cards": [
         {
           "id": "c31-0",
-          "text": "Because the road was wet"
+          "text": "My mom"
         },
         {
           "id": "c31-1",
-          "text": "the driver"
+          "text": "bought"
         },
         {
           "id": "c31-2",
-          "text": "reduced"
+          "text": "me"
         },
         {
           "id": "c31-3",
-          "text": "speed"
+          "text": "a new jacket"
         },
         {
           "id": "d31",
-          "text": "quickly"
+          "text": "buying"
         }
       ]
     }
@@ -2276,7 +1916,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 동명사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -2321,23 +1961,23 @@
       "cards": [
         {
           "id": "c32-0",
-          "text": "The coach"
+          "text": "She"
         },
         {
           "id": "c32-1",
-          "text": "made"
+          "text": "enjoys"
         },
         {
           "id": "c32-2",
-          "text": "the players"
+          "text": "reading"
         },
         {
           "id": "c32-3",
-          "text": "practice"
+          "text": "mystery novels"
         },
         {
           "id": "d32",
-          "text": "quickly"
+          "text": "to read"
         }
       ]
     }
@@ -2347,7 +1987,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 수여동사 + 간접목적어 + 직접목적어",
     "problem": {
       "passage": [
         {
@@ -2392,23 +2032,23 @@
       "cards": [
         {
           "id": "c33-0",
-          "text": "After the bell rang"
+          "text": "The teacher"
         },
         {
           "id": "c33-1",
-          "text": "the students"
+          "text": "showed"
         },
         {
           "id": "c33-2",
-          "text": "opened"
+          "text": "us"
         },
         {
           "id": "c33-3",
-          "text": "their books"
+          "text": "a short video"
         },
         {
           "id": "d33",
-          "text": "quickly"
+          "text": "shown"
         }
       ]
     }
@@ -2418,7 +2058,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 동사 + to부정사 + 부사",
     "problem": {
       "passage": [
         {
@@ -2463,23 +2103,23 @@
       "cards": [
         {
           "id": "c34-0",
-          "text": "Our team"
+          "text": "He"
         },
         {
           "id": "c34-1",
-          "text": "gave"
+          "text": "decided"
         },
         {
           "id": "c34-2",
-          "text": "the visitors"
+          "text": "to study"
         },
         {
           "id": "c34-3",
-          "text": "a map"
+          "text": "abroad"
         },
         {
           "id": "d34",
-          "text": "quickly"
+          "text": "studying"
         }
       ]
     }
@@ -2489,7 +2129,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 부사구",
     "problem": {
       "passage": [
         {
@@ -2534,23 +2174,23 @@
       "cards": [
         {
           "id": "c35-0",
-          "text": "The scientist"
+          "text": "She"
         },
         {
           "id": "c35-1",
-          "text": "recorded"
+          "text": "put"
         },
         {
           "id": "c35-2",
-          "text": "the temperature"
+          "text": "the keys"
         },
         {
           "id": "c35-3",
-          "text": "carefully"
+          "text": "in her bag"
         },
         {
           "id": "d35",
-          "text": "quickly"
+          "text": "putting"
         }
       ]
     }
@@ -2560,7 +2200,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 사역동사 + 목적어 + 목적격보어(동사원형)",
     "problem": {
       "passage": [
         {
@@ -2605,23 +2245,23 @@
       "cards": [
         {
           "id": "c36-0",
-          "text": "Because the road was wet"
+          "text": "My parents"
         },
         {
           "id": "c36-1",
-          "text": "the driver"
+          "text": "let"
         },
         {
           "id": "c36-2",
-          "text": "reduced"
+          "text": "me"
         },
         {
           "id": "c36-3",
-          "text": "speed"
+          "text": "stay up late"
         },
         {
           "id": "d36",
-          "text": "quickly"
+          "text": "to stay up late"
         }
       ]
     }
@@ -2631,7 +2271,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 목적격보어",
     "problem": {
       "passage": [
         {
@@ -2676,23 +2316,23 @@
       "cards": [
         {
           "id": "c37-0",
-          "text": "The coach"
+          "text": "We"
         },
         {
           "id": "c37-1",
-          "text": "made"
+          "text": "painted"
         },
         {
           "id": "c37-2",
-          "text": "the players"
+          "text": "the fence"
         },
         {
           "id": "c37-3",
-          "text": "practice"
+          "text": "white"
         },
         {
           "id": "d37",
-          "text": "quickly"
+          "text": "painting"
         }
       ]
     }
@@ -2702,7 +2342,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 사역동사 + 목적어 + 목적격보어(동사원형)",
     "problem": {
       "passage": [
         {
@@ -2747,23 +2387,23 @@
       "cards": [
         {
           "id": "c38-0",
-          "text": "After the bell rang"
+          "text": "The teacher"
         },
         {
           "id": "c38-1",
-          "text": "the students"
+          "text": "made"
         },
         {
           "id": "c38-2",
-          "text": "opened"
+          "text": "us"
         },
         {
           "id": "c38-3",
-          "text": "their books"
+          "text": "rewrite the essay"
         },
         {
           "id": "d38",
-          "text": "quickly"
+          "text": "rewriting"
         }
       ]
     }
@@ -2773,7 +2413,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 목적격보어",
     "problem": {
       "passage": [
         {
@@ -2818,23 +2458,23 @@
       "cards": [
         {
           "id": "c39-0",
-          "text": "Our team"
+          "text": "The news"
         },
         {
           "id": "c39-1",
-          "text": "gave"
+          "text": "made"
         },
         {
           "id": "c39-2",
-          "text": "the visitors"
+          "text": "him"
         },
         {
           "id": "c39-3",
-          "text": "a map"
+          "text": "sad"
         },
         {
           "id": "d39",
-          "text": "quickly"
+          "text": "sadly"
         }
       ]
     }
@@ -2844,7 +2484,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + that절(주어) + that절(동사 + 보어)",
     "problem": {
       "passage": [
         {
@@ -2889,23 +2529,23 @@
       "cards": [
         {
           "id": "c40-0",
-          "text": "The scientist"
+          "text": "I"
         },
         {
           "id": "c40-1",
-          "text": "recorded"
+          "text": "believe"
         },
         {
           "id": "c40-2",
-          "text": "the temperature"
+          "text": "that the story"
         },
         {
           "id": "c40-3",
-          "text": "carefully"
+          "text": "is true"
         },
         {
           "id": "d40",
-          "text": "quickly"
+          "text": "are"
         }
       ]
     }
@@ -2915,7 +2555,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 수여동사 + 간접목적어 + 직접목적어",
     "problem": {
       "passage": [
         {
@@ -2960,23 +2600,23 @@
       "cards": [
         {
           "id": "c41-0",
-          "text": "Because the road was wet"
+          "text": "Mina"
         },
         {
           "id": "c41-1",
-          "text": "the driver"
+          "text": "sent"
         },
         {
           "id": "c41-2",
-          "text": "reduced"
+          "text": "her friend"
         },
         {
           "id": "c41-3",
-          "text": "speed"
+          "text": "a birthday card"
         },
         {
           "id": "d41",
-          "text": "quickly"
+          "text": "sending"
         }
       ]
     }
@@ -2986,7 +2626,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 관계대명사절 + 동사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -3031,23 +2671,23 @@
       "cards": [
         {
           "id": "c42-0",
-          "text": "The coach"
+          "text": "The boy"
         },
         {
           "id": "c42-1",
-          "text": "made"
+          "text": "who lives next door"
         },
         {
           "id": "c42-2",
-          "text": "the players"
+          "text": "plays"
         },
         {
           "id": "c42-3",
-          "text": "practice"
+          "text": "the drums"
         },
         {
           "id": "d42",
-          "text": "quickly"
+          "text": "play"
         }
       ]
     }
@@ -3057,7 +2697,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 목적격보어",
     "problem": {
       "passage": [
         {
@@ -3102,23 +2742,23 @@
       "cards": [
         {
           "id": "c43-0",
-          "text": "After the bell rang"
+          "text": "My brother"
         },
         {
           "id": "c43-1",
-          "text": "the students"
+          "text": "keeps"
         },
         {
           "id": "c43-2",
-          "text": "opened"
+          "text": "his room"
         },
         {
           "id": "c43-3",
-          "text": "their books"
+          "text": "clean"
         },
         {
           "id": "d43",
-          "text": "quickly"
+          "text": "cleanly"
         }
       ]
     }
@@ -3128,7 +2768,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 관계대명사절 + 동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -3173,23 +2813,23 @@
       "cards": [
         {
           "id": "c44-0",
-          "text": "Our team"
+          "text": "The book"
         },
         {
           "id": "c44-1",
-          "text": "gave"
+          "text": "that I borrowed"
         },
         {
           "id": "c44-2",
-          "text": "the visitors"
+          "text": "was"
         },
         {
           "id": "c44-3",
-          "text": "a map"
+          "text": "very interesting"
         },
         {
           "id": "d44",
-          "text": "quickly"
+          "text": "were"
         }
       ]
     }
@@ -3199,7 +2839,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 수여동사 + 간접목적어 + 직접목적어",
     "problem": {
       "passage": [
         {
@@ -3244,23 +2884,23 @@
       "cards": [
         {
           "id": "c45-0",
-          "text": "The scientist"
+          "text": "The coach"
         },
         {
           "id": "c45-1",
-          "text": "recorded"
+          "text": "told"
         },
         {
           "id": "c45-2",
-          "text": "the temperature"
+          "text": "the team"
         },
         {
           "id": "c45-3",
-          "text": "carefully"
+          "text": "a funny story"
         },
         {
           "id": "d45",
-          "text": "quickly"
+          "text": "telling"
         }
       ]
     }
@@ -3270,7 +2910,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 동사 + 동명사 + 부사절",
     "problem": {
       "passage": [
         {
@@ -3315,23 +2955,23 @@
       "cards": [
         {
           "id": "c46-0",
-          "text": "Because the road was wet"
+          "text": "We"
         },
         {
           "id": "c46-1",
-          "text": "the driver"
+          "text": "stopped"
         },
         {
           "id": "c46-2",
-          "text": "reduced"
+          "text": "talking"
         },
         {
           "id": "c46-3",
-          "text": "speed"
+          "text": "when the teacher came in"
         },
         {
           "id": "d46",
-          "text": "quickly"
+          "text": "talked"
         }
       ]
     }
@@ -3341,7 +2981,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 목적격보어",
     "problem": {
       "passage": [
         {
@@ -3386,23 +3026,23 @@
       "cards": [
         {
           "id": "c47-0",
-          "text": "The coach"
+          "text": "They"
         },
         {
           "id": "c47-1",
-          "text": "made"
+          "text": "named"
         },
         {
           "id": "c47-2",
-          "text": "the players"
+          "text": "their puppy"
         },
         {
           "id": "c47-3",
-          "text": "practice"
+          "text": "Max"
         },
         {
           "id": "d47",
-          "text": "quickly"
+          "text": "naming"
         }
       ]
     }
@@ -3412,7 +3052,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 가주어 + 동사 + 주격보어 + 진주어(to부정사)",
     "problem": {
       "passage": [
         {
@@ -3457,23 +3097,23 @@
       "cards": [
         {
           "id": "c48-0",
-          "text": "After the bell rang"
+          "text": "It"
         },
         {
           "id": "c48-1",
-          "text": "the students"
+          "text": "is"
         },
         {
           "id": "c48-2",
-          "text": "opened"
+          "text": "important"
         },
         {
           "id": "c48-3",
-          "text": "their books"
+          "text": "to exercise every day"
         },
         {
           "id": "d48",
-          "text": "quickly"
+          "text": "exercised"
         }
       ]
     }
@@ -3483,7 +3123,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 부사구",
     "problem": {
       "passage": [
         {
@@ -3528,23 +3168,23 @@
       "cards": [
         {
           "id": "c49-0",
-          "text": "Our team"
+          "text": "I"
         },
         {
           "id": "c49-1",
-          "text": "gave"
+          "text": "left"
         },
         {
           "id": "c49-2",
-          "text": "the visitors"
+          "text": "my umbrella"
         },
         {
           "id": "c49-3",
-          "text": "a map"
+          "text": "on the bus"
         },
         {
           "id": "d49",
-          "text": "quickly"
+          "text": "leaving"
         }
       ]
     }
@@ -3554,7 +3194,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 분사구 + 동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -3599,23 +3239,23 @@
       "cards": [
         {
           "id": "c50-0",
-          "text": "The scientist"
+          "text": "The man"
         },
         {
           "id": "c50-1",
-          "text": "recorded"
+          "text": "sitting by the window"
         },
         {
           "id": "c50-2",
-          "text": "the temperature"
+          "text": "is"
         },
         {
           "id": "c50-3",
-          "text": "carefully"
+          "text": "my uncle"
         },
         {
           "id": "d50",
-          "text": "quickly"
+          "text": "sits"
         }
       ]
     }
@@ -3625,7 +3265,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 수여동사 + 간접목적어 + 직접목적어",
     "problem": {
       "passage": [
         {
@@ -3670,23 +3310,23 @@
       "cards": [
         {
           "id": "c51-0",
-          "text": "Because the road was wet"
+          "text": "Dad"
         },
         {
           "id": "c51-1",
-          "text": "the driver"
+          "text": "cooked"
         },
         {
           "id": "c51-2",
-          "text": "reduced"
+          "text": "us"
         },
         {
           "id": "c51-3",
-          "text": "speed"
+          "text": "a big breakfast"
         },
         {
           "id": "d51",
-          "text": "quickly"
+          "text": "cooking"
         }
       ]
     }
@@ -3696,7 +3336,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 지각동사 + 목적어 + 목적격보어(동사원형)",
     "problem": {
       "passage": [
         {
@@ -3741,23 +3381,23 @@
       "cards": [
         {
           "id": "c52-0",
-          "text": "The coach"
+          "text": "I"
         },
         {
           "id": "c52-1",
-          "text": "made"
+          "text": "heard"
         },
         {
           "id": "c52-2",
-          "text": "the players"
+          "text": "someone"
         },
         {
           "id": "c52-3",
-          "text": "practice"
+          "text": "knock on the door"
         },
         {
           "id": "d52",
-          "text": "quickly"
+          "text": "to knock on the door"
         }
       ]
     }
@@ -3767,7 +3407,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 목적격보어(동사원형)",
     "problem": {
       "passage": [
         {
@@ -3812,23 +3452,23 @@
       "cards": [
         {
           "id": "c53-0",
-          "text": "After the bell rang"
+          "text": "The music"
         },
         {
           "id": "c53-1",
-          "text": "the students"
+          "text": "helped"
         },
         {
           "id": "c53-2",
-          "text": "opened"
+          "text": "me"
         },
         {
           "id": "c53-3",
-          "text": "their books"
+          "text": "relax"
         },
         {
           "id": "d53",
-          "text": "quickly"
+          "text": "relaxing"
         }
       ]
     }
@@ -3838,7 +3478,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 목적격보어(to부정사)",
     "problem": {
       "passage": [
         {
@@ -3883,23 +3523,23 @@
       "cards": [
         {
           "id": "c54-0",
-          "text": "Our team"
+          "text": "She"
         },
         {
           "id": "c54-1",
-          "text": "gave"
+          "text": "asked"
         },
         {
           "id": "c54-2",
-          "text": "the visitors"
+          "text": "me"
         },
         {
           "id": "c54-3",
-          "text": "a map"
+          "text": "to close the window"
         },
         {
           "id": "d54",
-          "text": "quickly"
+          "text": "closing"
         }
       ]
     }
@@ -3909,7 +3549,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 수여동사 + 간접목적어 + 직접목적어",
     "problem": {
       "passage": [
         {
@@ -3954,23 +3594,23 @@
       "cards": [
         {
           "id": "c55-0",
-          "text": "The scientist"
+          "text": "She"
         },
         {
           "id": "c55-1",
-          "text": "recorded"
+          "text": "asked"
         },
         {
           "id": "c55-2",
-          "text": "the temperature"
+          "text": "me"
         },
         {
           "id": "c55-3",
-          "text": "carefully"
+          "text": "a difficult question"
         },
         {
           "id": "d55",
-          "text": "quickly"
+          "text": "asking"
         }
       ]
     }
@@ -3980,7 +3620,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 관계절(목적격 생략) + 감각동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -4025,23 +3665,23 @@
       "cards": [
         {
           "id": "c56-0",
-          "text": "Because the road was wet"
+          "text": "The cake"
         },
         {
           "id": "c56-1",
-          "text": "the driver"
+          "text": "my sister baked"
         },
         {
           "id": "c56-2",
-          "text": "reduced"
+          "text": "tasted"
         },
         {
           "id": "c56-3",
-          "text": "speed"
+          "text": "great"
         },
         {
           "id": "d56",
-          "text": "quickly"
+          "text": "greatly"
         }
       ]
     }
@@ -4051,7 +3691,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 목적격보어",
     "problem": {
       "passage": [
         {
@@ -4096,23 +3736,23 @@
       "cards": [
         {
           "id": "c57-0",
-          "text": "The coach"
+          "text": "The rain"
         },
         {
           "id": "c57-1",
-          "text": "made"
+          "text": "kept"
         },
         {
           "id": "c57-2",
-          "text": "the players"
+          "text": "us"
         },
         {
           "id": "c57-3",
-          "text": "practice"
+          "text": "inside"
         },
         {
           "id": "d57",
-          "text": "quickly"
+          "text": "keeping"
         }
       ]
     }
@@ -4122,7 +3762,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 의문문 + 의문사 + 주어 + 동사(간접의문문)",
     "problem": {
       "passage": [
         {
@@ -4143,7 +3783,7 @@
         },
         {
           "kind": "text",
-          "text": "."
+          "text": "?"
         }
       ],
       "blanks": [
@@ -4167,23 +3807,23 @@
       "cards": [
         {
           "id": "c58-0",
-          "text": "After the bell rang"
+          "text": "Do you know"
         },
         {
           "id": "c58-1",
-          "text": "the students"
+          "text": "where"
         },
         {
           "id": "c58-2",
-          "text": "opened"
+          "text": "the library"
         },
         {
           "id": "c58-3",
-          "text": "their books"
+          "text": "is"
         },
         {
           "id": "d58",
-          "text": "quickly"
+          "text": "does"
         }
       ]
     }
@@ -4193,7 +3833,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 수여동사 + 간접목적어 + 직접목적어",
     "problem": {
       "passage": [
         {
@@ -4238,7 +3878,7 @@
       "cards": [
         {
           "id": "c59-0",
-          "text": "Our team"
+          "text": "Tom"
         },
         {
           "id": "c59-1",
@@ -4246,15 +3886,15 @@
         },
         {
           "id": "c59-2",
-          "text": "the visitors"
+          "text": "his sister"
         },
         {
           "id": "c59-3",
-          "text": "a map"
+          "text": "a pencil"
         },
         {
           "id": "d59",
-          "text": "quickly"
+          "text": "given"
         }
       ]
     }
@@ -4264,7 +3904,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + too + 형용사 + to부정사",
     "problem": {
       "passage": [
         {
@@ -4309,23 +3949,23 @@
       "cards": [
         {
           "id": "c60-0",
-          "text": "The scientist"
+          "text": "He"
         },
         {
           "id": "c60-1",
-          "text": "recorded"
+          "text": "is"
         },
         {
           "id": "c60-2",
-          "text": "the temperature"
+          "text": "too tired"
         },
         {
           "id": "c60-3",
-          "text": "carefully"
+          "text": "to walk home"
         },
         {
           "id": "d60",
-          "text": "quickly"
+          "text": "walking"
         }
       ]
     }
@@ -4335,7 +3975,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 부사구",
     "problem": {
       "passage": [
         {
@@ -4380,23 +4020,23 @@
       "cards": [
         {
           "id": "c61-0",
-          "text": "Because the road was wet"
+          "text": "The heavy snow"
         },
         {
           "id": "c61-1",
-          "text": "the driver"
+          "text": "closed"
         },
         {
           "id": "c61-2",
-          "text": "reduced"
+          "text": "the roads"
         },
         {
           "id": "c61-3",
-          "text": "speed"
+          "text": "for two days"
         },
         {
           "id": "d61",
-          "text": "quickly"
+          "text": "closing"
         }
       ]
     }
@@ -4406,7 +4046,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + too + 형용사 + to부정사",
     "problem": {
       "passage": [
         {
@@ -4451,23 +4091,23 @@
       "cards": [
         {
           "id": "c62-0",
-          "text": "The coach"
+          "text": "The bag"
         },
         {
           "id": "c62-1",
-          "text": "made"
+          "text": "was"
         },
         {
           "id": "c62-2",
-          "text": "the players"
+          "text": "too heavy"
         },
         {
           "id": "c62-3",
-          "text": "practice"
+          "text": "to carry"
         },
         {
           "id": "d62",
-          "text": "quickly"
+          "text": "heavily"
         }
       ]
     }
@@ -4477,7 +4117,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 부사구",
     "problem": {
       "passage": [
         {
@@ -4522,23 +4162,23 @@
       "cards": [
         {
           "id": "c63-0",
-          "text": "After the bell rang"
+          "text": "The guide"
         },
         {
           "id": "c63-1",
-          "text": "the students"
+          "text": "led"
         },
         {
           "id": "c63-2",
-          "text": "opened"
+          "text": "the tourists"
         },
         {
           "id": "c63-3",
-          "text": "their books"
+          "text": "to the palace"
         },
         {
           "id": "d63",
-          "text": "quickly"
+          "text": "leading"
         }
       ]
     }
@@ -4548,7 +4188,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 동사 + to부정사 + 보어",
     "problem": {
       "passage": [
         {
@@ -4593,23 +4233,23 @@
       "cards": [
         {
           "id": "c64-0",
-          "text": "Our team"
+          "text": "My dream"
         },
         {
           "id": "c64-1",
-          "text": "gave"
+          "text": "is"
         },
         {
           "id": "c64-2",
-          "text": "the visitors"
+          "text": "to become"
         },
         {
           "id": "c64-3",
-          "text": "a map"
+          "text": "a pilot"
         },
         {
           "id": "d64",
-          "text": "quickly"
+          "text": "became"
         }
       ]
     }
@@ -4619,7 +4259,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 수여동사 + 간접목적어 + 직접목적어",
     "problem": {
       "passage": [
         {
@@ -4664,23 +4304,23 @@
       "cards": [
         {
           "id": "c65-0",
-          "text": "The scientist"
+          "text": "My friend"
         },
         {
           "id": "c65-1",
-          "text": "recorded"
+          "text": "lent"
         },
         {
           "id": "c65-2",
-          "text": "the temperature"
+          "text": "me"
         },
         {
           "id": "c65-3",
-          "text": "carefully"
+          "text": "her notebook"
         },
         {
           "id": "d65",
-          "text": "quickly"
+          "text": "lending"
         }
       ]
     }
@@ -4690,7 +4330,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어(동명사) + 동명사의 목적어 + 동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -4735,23 +4375,23 @@
       "cards": [
         {
           "id": "c66-0",
-          "text": "Because the road was wet"
+          "text": "Playing"
         },
         {
           "id": "c66-1",
-          "text": "the driver"
+          "text": "computer games"
         },
         {
           "id": "c66-2",
-          "text": "reduced"
+          "text": "is"
         },
         {
           "id": "c66-3",
-          "text": "speed"
+          "text": "my hobby"
         },
         {
           "id": "d66",
-          "text": "quickly"
+          "text": "are"
         }
       ]
     }
@@ -4761,7 +4401,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 목적격보어",
     "problem": {
       "passage": [
         {
@@ -4806,23 +4446,23 @@
       "cards": [
         {
           "id": "c67-0",
-          "text": "The coach"
+          "text": "We"
         },
         {
           "id": "c67-1",
-          "text": "made"
+          "text": "found"
         },
         {
           "id": "c67-2",
-          "text": "the players"
+          "text": "the quiz"
         },
         {
           "id": "c67-3",
-          "text": "practice"
+          "text": "difficult"
         },
         {
           "id": "d67",
-          "text": "quickly"
+          "text": "finds"
         }
       ]
     }
@@ -4832,7 +4472,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 동사 + 동명사 + 목적어·부사",
     "problem": {
       "passage": [
         {
@@ -4877,23 +4517,23 @@
       "cards": [
         {
           "id": "c68-0",
-          "text": "After the bell rang"
+          "text": "I"
         },
         {
           "id": "c68-1",
-          "text": "the students"
+          "text": "remember"
         },
         {
           "id": "c68-2",
-          "text": "opened"
+          "text": "meeting"
         },
         {
           "id": "c68-3",
-          "text": "their books"
+          "text": "her last year"
         },
         {
           "id": "d68",
-          "text": "quickly"
+          "text": "met"
         }
       ]
     }
@@ -4903,7 +4543,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 수여동사 + 간접목적어 + 직접목적어",
     "problem": {
       "passage": [
         {
@@ -4948,23 +4588,23 @@
       "cards": [
         {
           "id": "c69-0",
-          "text": "Our team"
+          "text": "The waiter"
         },
         {
           "id": "c69-1",
-          "text": "gave"
+          "text": "brought"
         },
         {
           "id": "c69-2",
-          "text": "the visitors"
+          "text": "us"
         },
         {
           "id": "c69-3",
-          "text": "a map"
+          "text": "some water"
         },
         {
           "id": "d69",
-          "text": "quickly"
+          "text": "bringing"
         }
       ]
     }
@@ -4974,7 +4614,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 목적격보어(분사)",
     "problem": {
       "passage": [
         {
@@ -5019,23 +4659,23 @@
       "cards": [
         {
           "id": "c70-0",
-          "text": "The scientist"
+          "text": "The police"
         },
         {
           "id": "c70-1",
-          "text": "recorded"
+          "text": "found"
         },
         {
           "id": "c70-2",
-          "text": "the temperature"
+          "text": "the lost child"
         },
         {
           "id": "c70-3",
-          "text": "carefully"
+          "text": "sleeping in the car"
         },
         {
           "id": "d70",
-          "text": "quickly"
+          "text": "slept in the car"
         }
       ]
     }
@@ -5045,7 +4685,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 부사구",
     "problem": {
       "passage": [
         {
@@ -5090,23 +4730,23 @@
       "cards": [
         {
           "id": "c71-0",
-          "text": "Because the road was wet"
+          "text": "Emily"
         },
         {
           "id": "c71-1",
-          "text": "the driver"
+          "text": "hung"
         },
         {
           "id": "c71-2",
-          "text": "reduced"
+          "text": "the picture"
         },
         {
           "id": "c71-3",
-          "text": "speed"
+          "text": "on the wall"
         },
         {
           "id": "d71",
-          "text": "quickly"
+          "text": "hanging"
         }
       ]
     }
@@ -5116,7 +4756,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 주격보어 + to부정사(감정의 원인)",
     "problem": {
       "passage": [
         {
@@ -5161,23 +4801,23 @@
       "cards": [
         {
           "id": "c72-0",
-          "text": "The coach"
+          "text": "She"
         },
         {
           "id": "c72-1",
-          "text": "made"
+          "text": "was"
         },
         {
           "id": "c72-2",
-          "text": "the players"
+          "text": "surprised"
         },
         {
           "id": "c72-3",
-          "text": "practice"
+          "text": "to hear the news"
         },
         {
           "id": "d72",
-          "text": "quickly"
+          "text": "surprisingly"
         }
       ]
     }
@@ -5187,7 +4827,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 목적격보어",
     "problem": {
       "passage": [
         {
@@ -5232,23 +4872,23 @@
       "cards": [
         {
           "id": "c73-0",
-          "text": "After the bell rang"
+          "text": "The loud noise"
         },
         {
           "id": "c73-1",
-          "text": "the students"
+          "text": "made"
         },
         {
           "id": "c73-2",
-          "text": "opened"
+          "text": "the dog"
         },
         {
           "id": "c73-3",
-          "text": "their books"
+          "text": "nervous"
         },
         {
           "id": "d73",
-          "text": "quickly"
+          "text": "nervously"
         }
       ]
     }
@@ -5258,7 +4898,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 관계대명사절 + 동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -5303,23 +4943,23 @@
       "cards": [
         {
           "id": "c74-0",
-          "text": "Our team"
+          "text": "The phone"
         },
         {
           "id": "c74-1",
-          "text": "gave"
+          "text": "that you gave me"
         },
         {
           "id": "c74-2",
-          "text": "the visitors"
+          "text": "is"
         },
         {
           "id": "c74-3",
-          "text": "a map"
+          "text": "broken"
         },
         {
           "id": "d74",
-          "text": "quickly"
+          "text": "break"
         }
       ]
     }
@@ -5329,7 +4969,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 부사구",
     "problem": {
       "passage": [
         {
@@ -5374,23 +5014,23 @@
       "cards": [
         {
           "id": "c75-0",
-          "text": "The scientist"
+          "text": "He"
         },
         {
           "id": "c75-1",
-          "text": "recorded"
+          "text": "wrote"
         },
         {
           "id": "c75-2",
-          "text": "the temperature"
+          "text": "his name"
         },
         {
           "id": "c75-3",
-          "text": "carefully"
+          "text": "on the paper"
         },
         {
           "id": "d75",
-          "text": "quickly"
+          "text": "written"
         }
       ]
     }
@@ -5400,7 +5040,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 명령문 + 동사 + 간접목적어 + 직접목적어(의문사절)",
     "problem": {
       "passage": [
         {
@@ -5445,23 +5085,23 @@
       "cards": [
         {
           "id": "c76-0",
-          "text": "Because the road was wet"
+          "text": "Please"
         },
         {
           "id": "c76-1",
-          "text": "the driver"
+          "text": "tell"
         },
         {
           "id": "c76-2",
-          "text": "reduced"
+          "text": "me"
         },
         {
           "id": "c76-3",
-          "text": "speed"
+          "text": "what happened"
         },
         {
           "id": "d76",
-          "text": "quickly"
+          "text": "happen"
         }
       ]
     }
@@ -5471,7 +5111,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 수여동사 + 간접목적어 + 직접목적어",
     "problem": {
       "passage": [
         {
@@ -5516,23 +5156,23 @@
       "cards": [
         {
           "id": "c77-0",
-          "text": "The coach"
+          "text": "My grandma"
         },
         {
           "id": "c77-1",
-          "text": "made"
+          "text": "told"
         },
         {
           "id": "c77-2",
-          "text": "the players"
+          "text": "me"
         },
         {
           "id": "c77-3",
-          "text": "practice"
+          "text": "an old story"
         },
         {
           "id": "d77",
-          "text": "quickly"
+          "text": "telling"
         }
       ]
     }
@@ -5542,7 +5182,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 3,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어(동명사구) + 동사 + 수량 표현 + 목적어",
     "problem": {
       "passage": [
         {
@@ -5587,23 +5227,23 @@
       "cards": [
         {
           "id": "c78-0",
-          "text": "After the bell rang"
+          "text": "Learning a new language"
         },
         {
           "id": "c78-1",
-          "text": "the students"
+          "text": "takes"
         },
         {
           "id": "c78-2",
-          "text": "opened"
+          "text": "a lot of"
         },
         {
           "id": "c78-3",
-          "text": "their books"
+          "text": "time"
         },
         {
           "id": "d78",
-          "text": "quickly"
+          "text": "take"
         }
       ]
     }
@@ -5613,7 +5253,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 2,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 부사구",
     "problem": {
       "passage": [
         {
@@ -5658,23 +5298,23 @@
       "cards": [
         {
           "id": "c79-0",
-          "text": "Our team"
+          "text": "The students"
         },
         {
           "id": "c79-1",
-          "text": "gave"
+          "text": "carried"
         },
         {
           "id": "c79-2",
-          "text": "the visitors"
+          "text": "the boxes"
         },
         {
           "id": "c79-3",
-          "text": "a map"
+          "text": "to the gym"
         },
         {
           "id": "d79",
-          "text": "quickly"
+          "text": "carries"
         }
       ]
     }
@@ -5684,7 +5324,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 5,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: If + 주어 + 과거동사 + 목적어 + 주어 + 조동사 과거 + 동사원형(가정법 과거)",
     "problem": {
       "passage": [
         {
@@ -5702,6 +5342,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -5724,28 +5368,36 @@
         {
           "id": "s3",
           "correctCardId": "c80-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c80-4"
         }
       ],
       "cards": [
         {
           "id": "c80-0",
-          "text": "The scientist"
+          "text": "If I"
         },
         {
           "id": "c80-1",
-          "text": "recorded"
+          "text": "had"
         },
         {
           "id": "c80-2",
-          "text": "the temperature"
+          "text": "more time,"
         },
         {
           "id": "c80-3",
-          "text": "carefully"
+          "text": "I"
+        },
+        {
+          "id": "c80-4",
+          "text": "would learn the guitar"
         },
         {
           "id": "d80",
-          "text": "quickly"
+          "text": "will learn the guitar"
         }
       ]
     }
@@ -5755,7 +5407,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 4,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 주어 + 관계대명사절 + 동사 + 목적어 + 등위접속 목적어",
     "problem": {
       "passage": [
         {
@@ -5773,6 +5425,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -5795,28 +5451,36 @@
         {
           "id": "s3",
           "correctCardId": "c81-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c81-4"
         }
       ],
       "cards": [
         {
           "id": "c81-0",
-          "text": "Because the road was wet"
+          "text": "The girl"
         },
         {
           "id": "c81-1",
-          "text": "the driver"
+          "text": "who won the race"
         },
         {
           "id": "c81-2",
-          "text": "reduced"
+          "text": "received"
         },
         {
           "id": "c81-3",
-          "text": "speed"
+          "text": "a gold medal"
+        },
+        {
+          "id": "c81-4",
+          "text": "and a trophy"
         },
         {
           "id": "d81",
-          "text": "quickly"
+          "text": "receiving"
         }
       ]
     }
@@ -5826,7 +5490,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 5,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 관계대명사 + 관계절 주어 + 관계절 동사 + 본동사(수동태)",
     "problem": {
       "passage": [
         {
@@ -5844,6 +5508,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -5866,28 +5534,36 @@
         {
           "id": "s3",
           "correctCardId": "c82-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c82-4"
         }
       ],
       "cards": [
         {
           "id": "c82-0",
-          "text": "The coach"
+          "text": "The letter"
         },
         {
           "id": "c82-1",
-          "text": "made"
+          "text": "which"
         },
         {
           "id": "c82-2",
-          "text": "the players"
+          "text": "my grandfather"
         },
         {
           "id": "c82-3",
-          "text": "practice"
+          "text": "wrote"
+        },
+        {
+          "id": "c82-4",
+          "text": "was lost"
         },
         {
           "id": "d82",
-          "text": "quickly"
+          "text": "were lost"
         }
       ]
     }
@@ -5897,7 +5573,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 4,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + to부정사 + 보어",
     "problem": {
       "passage": [
         {
@@ -5915,6 +5591,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -5937,28 +5617,36 @@
         {
           "id": "s3",
           "correctCardId": "c83-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c83-4"
         }
       ],
       "cards": [
         {
           "id": "c83-0",
-          "text": "After the bell rang"
+          "text": "My parents"
         },
         {
           "id": "c83-1",
-          "text": "the students"
+          "text": "want"
         },
         {
           "id": "c83-2",
-          "text": "opened"
+          "text": "me"
         },
         {
           "id": "c83-3",
-          "text": "their books"
+          "text": "to become"
+        },
+        {
+          "id": "c83-4",
+          "text": "a doctor"
         },
         {
           "id": "d83",
-          "text": "quickly"
+          "text": "becoming"
         }
       ]
     }
@@ -5968,7 +5656,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 5,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어·동사 + 보어 + 관계부사 + 관계절 주어 + 관계절 동사",
     "problem": {
       "passage": [
         {
@@ -5986,6 +5674,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6008,28 +5700,36 @@
         {
           "id": "s3",
           "correctCardId": "c84-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c84-4"
         }
       ],
       "cards": [
         {
           "id": "c84-0",
-          "text": "Our team"
+          "text": "This is"
         },
         {
           "id": "c84-1",
-          "text": "gave"
+          "text": "the house"
         },
         {
           "id": "c84-2",
-          "text": "the visitors"
+          "text": "where"
         },
         {
           "id": "c84-3",
-          "text": "a map"
+          "text": "my mother"
+        },
+        {
+          "id": "c84-4",
+          "text": "was born"
         },
         {
           "id": "d84",
-          "text": "quickly"
+          "text": "which"
         }
       ]
     }
@@ -6039,7 +5739,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 4,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 부사절 + 주어 + be동사 + 과거분사(구동사) + 부사구",
     "problem": {
       "passage": [
         {
@@ -6057,6 +5757,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6079,28 +5783,36 @@
         {
           "id": "s3",
           "correctCardId": "c85-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c85-4"
         }
       ],
       "cards": [
         {
           "id": "c85-0",
-          "text": "The scientist"
+          "text": "Because it rained,"
         },
         {
           "id": "c85-1",
-          "text": "recorded"
+          "text": "the game"
         },
         {
           "id": "c85-2",
-          "text": "the temperature"
+          "text": "was"
         },
         {
           "id": "c85-3",
-          "text": "carefully"
+          "text": "put off"
+        },
+        {
+          "id": "c85-4",
+          "text": "until Sunday"
         },
         {
           "id": "d85",
-          "text": "quickly"
+          "text": "puts"
         }
       ]
     }
@@ -6110,7 +5822,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 5,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 양보 접속사 + 부사절 + 주어 + 동사 + 동명사",
     "problem": {
       "passage": [
         {
@@ -6128,6 +5840,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6150,28 +5866,36 @@
         {
           "id": "s3",
           "correctCardId": "c86-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c86-4"
         }
       ],
       "cards": [
         {
           "id": "c86-0",
-          "text": "Because the road was wet"
+          "text": "Although"
         },
         {
           "id": "c86-1",
-          "text": "the driver"
+          "text": "he was tired,"
         },
         {
           "id": "c86-2",
-          "text": "reduced"
+          "text": "he"
         },
         {
           "id": "c86-3",
-          "text": "speed"
+          "text": "kept"
+        },
+        {
+          "id": "c86-4",
+          "text": "working"
         },
         {
           "id": "d86",
-          "text": "quickly"
+          "text": "to work"
         }
       ]
     }
@@ -6181,7 +5905,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 4,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 간접목적어 + 의문사 + 주어·동사(간접의문문)",
     "problem": {
       "passage": [
         {
@@ -6199,6 +5923,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6221,28 +5949,36 @@
         {
           "id": "s3",
           "correctCardId": "c87-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c87-4"
         }
       ],
       "cards": [
         {
           "id": "c87-0",
-          "text": "The coach"
+          "text": "I"
         },
         {
           "id": "c87-1",
-          "text": "made"
+          "text": "asked"
         },
         {
           "id": "c87-2",
-          "text": "the players"
+          "text": "the clerk"
         },
         {
           "id": "c87-3",
-          "text": "practice"
+          "text": "how much"
+        },
+        {
+          "id": "c87-4",
+          "text": "the jacket cost"
         },
         {
           "id": "d87",
-          "text": "quickly"
+          "text": "does"
         }
       ]
     }
@@ -6252,7 +5988,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 5,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 완료 분사구문(Having + 과거분사 + 목적어) + 주어 + 동사",
     "problem": {
       "passage": [
         {
@@ -6270,6 +6006,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6292,28 +6032,36 @@
         {
           "id": "s3",
           "correctCardId": "c88-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c88-4"
         }
       ],
       "cards": [
         {
           "id": "c88-0",
-          "text": "After the bell rang"
+          "text": "Having"
         },
         {
           "id": "c88-1",
-          "text": "the students"
+          "text": "finished"
         },
         {
           "id": "c88-2",
-          "text": "opened"
+          "text": "her homework,"
         },
         {
           "id": "c88-3",
-          "text": "their books"
+          "text": "she"
+        },
+        {
+          "id": "c88-4",
+          "text": "went to bed"
         },
         {
           "id": "d88",
-          "text": "quickly"
+          "text": "finish"
         }
       ]
     }
@@ -6323,7 +6071,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 4,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 주어 + 사역동사 + 목적어 + 목적격보어(동사원형) + 목적어",
     "problem": {
       "passage": [
         {
@@ -6341,6 +6089,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6363,28 +6115,36 @@
         {
           "id": "s3",
           "correctCardId": "c89-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c89-4"
         }
       ],
       "cards": [
         {
           "id": "c89-0",
-          "text": "Our team"
+          "text": "The teacher"
         },
         {
           "id": "c89-1",
-          "text": "gave"
+          "text": "had"
         },
         {
           "id": "c89-2",
-          "text": "the visitors"
+          "text": "the students"
         },
         {
           "id": "c89-3",
-          "text": "a map"
+          "text": "clean"
+        },
+        {
+          "id": "c89-4",
+          "text": "the classroom"
         },
         {
           "id": "d89",
-          "text": "quickly"
+          "text": "to clean"
         }
       ]
     }
@@ -6394,7 +6154,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 5,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + wish + 주어 + 조동사 과거 + 부사구(가정법)",
     "problem": {
       "passage": [
         {
@@ -6412,6 +6172,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6434,28 +6198,36 @@
         {
           "id": "s3",
           "correctCardId": "c90-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c90-4"
         }
       ],
       "cards": [
         {
           "id": "c90-0",
-          "text": "The scientist"
+          "text": "I"
         },
         {
           "id": "c90-1",
-          "text": "recorded"
+          "text": "wish"
         },
         {
           "id": "c90-2",
-          "text": "the temperature"
+          "text": "my dog"
         },
         {
           "id": "c90-3",
-          "text": "carefully"
+          "text": "could talk"
+        },
+        {
+          "id": "c90-4",
+          "text": "to me"
         },
         {
           "id": "d90",
-          "text": "quickly"
+          "text": "can talk"
         }
       ]
     }
@@ -6465,7 +6237,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 4,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 가주어 + 동사 + 보어(of 의미상 주어) + to부정사 + 목적어",
     "problem": {
       "passage": [
         {
@@ -6483,6 +6255,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6505,28 +6281,36 @@
         {
           "id": "s3",
           "correctCardId": "c91-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c91-4"
         }
       ],
       "cards": [
         {
           "id": "c91-0",
-          "text": "Because the road was wet"
+          "text": "It"
         },
         {
           "id": "c91-1",
-          "text": "the driver"
+          "text": "was"
         },
         {
           "id": "c91-2",
-          "text": "reduced"
+          "text": "kind of you"
         },
         {
           "id": "c91-3",
-          "text": "speed"
+          "text": "to help"
+        },
+        {
+          "id": "c91-4",
+          "text": "my grandmother"
         },
         {
           "id": "d91",
-          "text": "quickly"
+          "text": "helping"
         }
       ]
     }
@@ -6536,7 +6320,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 5,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 소유격 관계대명사절 + 동사·보어",
     "problem": {
       "passage": [
         {
@@ -6554,6 +6338,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6576,28 +6364,36 @@
         {
           "id": "s3",
           "correctCardId": "c92-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c92-4"
         }
       ],
       "cards": [
         {
           "id": "c92-0",
-          "text": "The coach"
+          "text": "I"
         },
         {
           "id": "c92-1",
-          "text": "made"
+          "text": "have"
         },
         {
           "id": "c92-2",
-          "text": "the players"
+          "text": "a friend"
         },
         {
           "id": "c92-3",
-          "text": "practice"
+          "text": "whose father"
+        },
+        {
+          "id": "c92-4",
+          "text": "is a pilot"
         },
         {
           "id": "d92",
-          "text": "quickly"
+          "text": "who"
         }
       ]
     }
@@ -6607,7 +6403,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 4,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 관계절(목적격 생략) + 동사 + to부정사 + 보어",
     "problem": {
       "passage": [
         {
@@ -6625,6 +6421,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6647,28 +6447,36 @@
         {
           "id": "s3",
           "correctCardId": "c93-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c93-4"
         }
       ],
       "cards": [
         {
           "id": "c93-0",
-          "text": "After the bell rang"
+          "text": "The man"
         },
         {
           "id": "c93-1",
-          "text": "the students"
+          "text": "I met yesterday"
         },
         {
           "id": "c93-2",
-          "text": "opened"
+          "text": "turned out"
         },
         {
           "id": "c93-3",
-          "text": "their books"
+          "text": "to be"
+        },
+        {
+          "id": "c93-4",
+          "text": "a famous writer"
         },
         {
           "id": "d93",
-          "text": "quickly"
+          "text": "being"
         }
       ]
     }
@@ -6678,7 +6486,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 5,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: It + be동사 + 강조 어구 + that + 나머지 절(강조구문)",
     "problem": {
       "passage": [
         {
@@ -6696,6 +6504,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6718,28 +6530,36 @@
         {
           "id": "s3",
           "correctCardId": "c94-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c94-4"
         }
       ],
       "cards": [
         {
           "id": "c94-0",
-          "text": "Our team"
+          "text": "It"
         },
         {
           "id": "c94-1",
-          "text": "gave"
+          "text": "was"
         },
         {
           "id": "c94-2",
-          "text": "the visitors"
+          "text": "in 2010"
         },
         {
           "id": "c94-3",
-          "text": "a map"
+          "text": "that"
+        },
+        {
+          "id": "c94-4",
+          "text": "we moved to Seoul"
         },
         {
           "id": "d94",
-          "text": "quickly"
+          "text": "what"
         }
       ]
     }
@@ -6749,7 +6569,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-1",
     "difficultySeed": 4,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: carefully",
+    "hint": "문장 구조: 주어 + 동사 + 목적어 + 동명사(spend ~ -ing) + 목적어",
     "problem": {
       "passage": [
         {
@@ -6767,6 +6587,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6789,28 +6613,36 @@
         {
           "id": "s3",
           "correctCardId": "c95-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c95-4"
         }
       ],
       "cards": [
         {
           "id": "c95-0",
-          "text": "The scientist"
+          "text": "She"
         },
         {
           "id": "c95-1",
-          "text": "recorded"
+          "text": "spent"
         },
         {
           "id": "c95-2",
-          "text": "the temperature"
+          "text": "all her money"
         },
         {
           "id": "c95-3",
-          "text": "carefully"
+          "text": "buying"
+        },
+        {
+          "id": "c95-4",
+          "text": "new clothes"
         },
         {
           "id": "d95",
-          "text": "quickly"
+          "text": "bought"
         }
       ]
     }
@@ -6820,7 +6652,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-2",
     "difficultySeed": 5,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: speed",
+    "hint": "문장 구조: 접속사 + 부사절 + 주어 + 과거완료 조동사·부사 + 과거분사",
     "problem": {
       "passage": [
         {
@@ -6838,6 +6670,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6860,28 +6696,36 @@
         {
           "id": "s3",
           "correctCardId": "c96-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c96-4"
         }
       ],
       "cards": [
         {
           "id": "c96-0",
-          "text": "Because the road was wet"
+          "text": "By the time"
         },
         {
           "id": "c96-1",
-          "text": "the driver"
+          "text": "we arrived,"
         },
         {
           "id": "c96-2",
-          "text": "reduced"
+          "text": "the movie"
         },
         {
           "id": "c96-3",
-          "text": "speed"
+          "text": "had already"
+        },
+        {
+          "id": "c96-4",
+          "text": "started"
         },
         {
           "id": "d96",
-          "text": "quickly"
+          "text": "has already"
         }
       ]
     }
@@ -6891,7 +6735,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-3",
     "difficultySeed": 4,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: practice",
+    "hint": "문장 구조: the 비교급 + 주어·동사 + the 비교급 + 주어 + 동사",
     "problem": {
       "passage": [
         {
@@ -6909,6 +6753,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -6931,28 +6779,36 @@
         {
           "id": "s3",
           "correctCardId": "c97-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c97-4"
         }
       ],
       "cards": [
         {
           "id": "c97-0",
-          "text": "The coach"
+          "text": "The more"
         },
         {
           "id": "c97-1",
-          "text": "made"
+          "text": "you practice,"
         },
         {
           "id": "c97-2",
-          "text": "the players"
+          "text": "the better"
         },
         {
           "id": "c97-3",
-          "text": "practice"
+          "text": "you"
+        },
+        {
+          "id": "c97-4",
+          "text": "will play"
         },
         {
           "id": "d97",
-          "text": "quickly"
+          "text": "playing"
         }
       ]
     }
@@ -6962,7 +6818,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-4",
     "difficultySeed": 5,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: books",
+    "hint": "문장 구조: 주어 + 관계부사 + 관계절 + 동사 + 주격보어",
     "problem": {
       "passage": [
         {
@@ -6980,6 +6836,10 @@
         {
           "kind": "blank",
           "slotId": "s3"
+        },
+        {
+          "kind": "blank",
+          "slotId": "s4"
         },
         {
           "kind": "text",
@@ -7002,28 +6862,36 @@
         {
           "id": "s3",
           "correctCardId": "c98-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c98-4"
         }
       ],
       "cards": [
         {
           "id": "c98-0",
-          "text": "After the bell rang"
+          "text": "The reason"
         },
         {
           "id": "c98-1",
-          "text": "the students"
+          "text": "why"
         },
         {
           "id": "c98-2",
-          "text": "opened"
+          "text": "he left"
         },
         {
           "id": "c98-3",
-          "text": "their books"
+          "text": "was"
+        },
+        {
+          "id": "c98-4",
+          "text": "not clear"
         },
         {
           "id": "d98",
-          "text": "quickly"
+          "text": "were"
         }
       ]
     }
@@ -7033,7 +6901,7 @@
     "type": "cloze-multi",
     "unit": "고1-영어-문장구조-5",
     "difficultySeed": 4,
-    "hint": "문장 성분과 연결 관계에 맞게 배치하세요. 마지막 표현: map",
+    "hint": "문장 구조: 조동사 의문문 + 동사 + 간접목적어 + 의문사 + 주어·동사",
     "problem": {
       "passage": [
         {
@@ -7053,8 +6921,12 @@
           "slotId": "s3"
         },
         {
+          "kind": "blank",
+          "slotId": "s4"
+        },
+        {
           "kind": "text",
-          "text": "."
+          "text": "?"
         }
       ],
       "blanks": [
@@ -7073,28 +6945,36 @@
         {
           "id": "s3",
           "correctCardId": "c99-3"
+        },
+        {
+          "id": "s4",
+          "correctCardId": "c99-4"
         }
       ],
       "cards": [
         {
           "id": "c99-0",
-          "text": "Our team"
+          "text": "Can you"
         },
         {
           "id": "c99-1",
-          "text": "gave"
+          "text": "tell"
         },
         {
           "id": "c99-2",
-          "text": "the visitors"
+          "text": "me"
         },
         {
           "id": "c99-3",
-          "text": "a map"
+          "text": "why"
+        },
+        {
+          "id": "c99-4",
+          "text": "you were late"
         },
         {
           "id": "d99",
-          "text": "quickly"
+          "text": "was"
         }
       ]
     }

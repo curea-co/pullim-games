@@ -1165,7 +1165,7 @@
         "has left",
         "will leave"
       ],
-      "correctIndex": 2,
+      "correctIndex": 0,
       "rationale": "버스가 도착한 과거 시점보다 역을 떠난 일이 먼저 일어났으므로 과거완료 had left가 맞다. has left와 will leave는 기준 시점에 맞지 않는다."
     }
   },

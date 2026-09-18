@@ -42,4 +42,13 @@ describe("1700 supplied question cards",()=>{
  });
  it("balances every supplied chemical equation",()=>{for(const c of raw1)expect(isBalanced(c.problem.reactants,c.problem.products),c.id).toBe(true);});
  it("has reachable vector sums",()=>{for(const c of raw15){const p=c.problem; for(const i of [0,1]){expect(p.resultant.components[i],c.id).toBe(p.vectors.reduce((n,v)=>n+v.components[i],0));expect(p.resultant.components[i],c.id).toBeGreaterThanOrEqual(-5);expect(p.resultant.components[i],c.id).toBeLessThanOrEqual(6);}}});
+ it("has distinct choices in choice formats",()=>{for(const c of [...raw3,...raw14]){const ch=c.problem.choices;expect(new Set(ch).size,c.id).toBe(ch.length);}});
+ it("keeps corrected answer keys and non-equivalent distractors",()=>{
+  const eb=raw3.find(c=>c.id==="eb-draft-065")!.problem;expect(eb.choices[eb.correctIndex]).toBe("had left");
+  const bad:Record<string,string>={"mqq-draft-025":"x-2","mqq-draft-033":"4-i²","mqq-draft-098":"√4","mqq-draft-100":"3|x|"};
+  for(const [id,v] of Object.entries(bad))expect(raw14.find(c=>c.id===id)!.problem.choices,id).not.toContain(v);
+ });
+ it("uses real reactions with minimal reachable coefficients",()=>{const gcd=(a:number,b:number):number=>b?gcd(b,a%b):a;for(const c of raw1){const all=[...c.problem.reactants,...c.problem.products];expect(all.some(t=>t.formula==="Hg"||t.formula==="HgCO3"),c.id).toBe(false);expect(all.map(t=>t.coefficient).reduce(gcd),c.id).toBe(1);for(const t of all)expect(t.coefficient,c.id).toBeLessThanOrEqual(9);}});
+ it("matches graph equations and keeps target curves visible",()=>{for(const c of raw13){const p=c.problem;const m=p.targetEquation.replace(/ /g,"").match(/^y=(-?\d*)(?:x|\(x([+-]\d+)\))²([+-]\d+)?$/);expect(m,c.id).not.toBeNull();const a=m![1]===""?1:m![1]==="-"?-1:Number(m![1]);expect([a,m![2]?-Number(m![2]):0,Number(m![3]??0)],c.id).toEqual([p.targetA,p.targetH,p.targetK]);let visible=0;for(let x=-5;x<=5;x+=0.1){const y=p.targetA*(x-p.targetH)**2+p.targetK;if(y>=-3&&y<=9)visible++;}expect(visible,c.id).toBeGreaterThan(10);}});
+ it("has 100 distinct problems per format after removing ids",()=>{const strip=(v:unknown):unknown=>Array.isArray(v)?v.map(strip):v&&typeof v==="object"?Object.fromEntries(Object.entries(v).filter(([k])=>!/^(id|slotId|correctCardId|categoryId)$/.test(k)).map(([k,x])=>[k,strip(x)])):v;for(const b of bundles){const keys=b.raw.map((c:any)=>JSON.stringify(strip(c.problem??c.polynomial)));expect(new Set(keys).size,b.name).toBe(100);}});
 });
